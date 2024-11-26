@@ -440,10 +440,10 @@ a, button, input, select, iframe {
   }
 #header input:focus, #header select:focus {
     outline: none;
-      box-shadow: 0 0 8px rgba(255, 56, 92, 0.8); /* Red outline for focus similar to Airbnb */
+      box-shadow: 0 0 12px rgb(0, 200, 255) /* Red outline for focus similar to Airbnb */
 }
 	  #header input:hover, #header select:hover {
-      box-shadow: 0 0 8px rgba(255, 56, 92, 0.8); /* Red outline for focus similar to Airbnb */
+      box-shadow: 0 0 12px rgb(0, 200, 255) /* Red outline for focus similar to Airbnb */
 }
 #header button {
     justify-content: center; /* Center the header content */
@@ -515,13 +515,13 @@ justify-content: center;
     background-color: #00aaff; /* Darker red on hover */
     box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5); /* Brighter, thinner, blue shadow */
     /*border: 2px solid rgba(0, 115, 255, 0.8);*/ /* Optional: Blue border to make it more pronounced */
-animation: pulseShadow1 0.6s ease-in-out infinite alternate; /* Animation on hover */
+animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
 }
 #header .airbnb-button2:hover {
     background-color: #00aaff; /* Darker red on hover */
     box-shadow: 0 0 12px rgba(0, 255, 38, 0.8), 0 0 4px rgba(0, 255, 21, 0.5); /* Brighter, thinner, blue shadow */
     /*border: 2px solid rgba(0, 115, 255, 0.8);*/ /* Optional: Blue border to make it more pronounced */
-animation: pulseShadow2 0.6s ease-in-out infinite alternate; /* Animation on hover */
+animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
 }
 #likedPostsButton:hover {
   background-color: #00aaff; /* Darker red on hover */
@@ -535,7 +535,7 @@ animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hov
         box-shadow: 0 0 12px rgba(8, 142, 209, 0.8), 0 0 4px rgba(22, 129, 223, 0.5);
     }
     100% {
-      box-shadow: 0 0 12px rgb(0, 217, 255), 0 0 4px rgb(5, 194, 232); /* Brighter, thinner, blue shadow */
+      box-shadow: 0 0 12px rgb(0, 217, 255, 1), 0 0 4px rgba(5, 194, 232, 0.75); /* Brighter, thinner, blue shadow */
     }
 }
 
@@ -544,7 +544,7 @@ animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hov
         box-shadow: 0 0 12px rgba(8, 142, 209, 0.8), 0 0 4px rgba(22, 129, 223, 0.5);
     }
     100% {
-      box-shadow: 0 0 12px rgb(0, 217, 255), 0 0 4px rgb(5, 194, 232); /* Brighter, thinner, blue shadow */
+      box-shadow: 0 0 12px rgb(0, 217, 255, 1), 0 0 4px rgba(5, 194, 232, 0.75); /* Brighter, thinner, blue shadow */
     }
 }
 @keyframes pulseShadow3 {
@@ -552,7 +552,7 @@ animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hov
         box-shadow: 0 0 12px rgba(8, 142, 209, 0.8), 0 0 4px rgba(22, 129, 223, 0.5);
     }
     100% {
-      box-shadow: 0 0 12px rgb(0, 217, 255), 0 0 4px rgb(5, 194, 232); /* Brighter, thinner, blue shadow */
+      box-shadow: 0 0 12px rgb(0, 217, 255, 1), 0 0 4px rgba(5, 194, 232, 0.75); /* Brighter, thinner, blue shadow */
     }
 }
 
@@ -2099,7 +2099,7 @@ crossorigin="anonymous"></script>
 <button id="regionSelectBtn">Region Select</button>
 
 <div id="topLeftLabel">
-  <img src="js/favicon-32x32.png" alt="Profile Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 8px;">
+  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" alt="Profile Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 8px;">
   Latest Flights
   <img src="js/300694_plane-plane-emoji-png-png-download (1).png" alt="Profile Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 8px;">
 </div>
@@ -2445,7 +2445,7 @@ function updateLoginButton(user) {
     if (user) {
         // Show "Logout" when user is logged in
         loginButton.innerHTML = `
-            <img src="js/profile-icon.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;"> Logout`;
+            <img src="js/logged-on-emoji.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;"> Logout`;
     } else {
         // Show "Login" when no user is logged in
         loginButton.innerHTML = `
@@ -3420,12 +3420,12 @@ const inputsAndSelects = header.querySelectorAll('input, select'); // Select all
 inputsAndSelects.forEach((element) => {
   // Add focus style
   element.addEventListener('focus', () => {
-    element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
+    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
     element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
   element.addEventListener('hover', () => {
-    element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
+    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
     element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
@@ -3437,7 +3437,7 @@ inputsAndSelects.forEach((element) => {
 
   // Add hover style
   element.addEventListener('mouseover', () => {
-    element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
+    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
     element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
@@ -3493,13 +3493,13 @@ const inputsAndSelects = header.querySelectorAll('input, select'); // Select all
 inputsAndSelects.forEach((element) => {
   // Add focus style
   element.addEventListener('focus', () => {
-    element.style.boxShadow = '0 0 12px rgba(255, 56, 92, 0.8);';
-    element.style.animation = 'none';
+    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
+    element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
   element.addEventListener('hover', () => {
-    element.style.boxShadow = '0 0 12px rgba(255, 56, 92, 0.8);';
-    element.style.animation = 'none';
+    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
+    element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
   // Remove focus style on blur
@@ -3510,8 +3510,8 @@ inputsAndSelects.forEach((element) => {
 
   // Add hover style
   element.addEventListener('mouseover', () => {
-    element.style.boxShadow = '0 0 12px rgba(255, 56, 92, 0.8);';
-    element.style.animation = 'none';
+    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
+    element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
   // Remove hover style
