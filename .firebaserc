@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "airbnb-navigator"
+    "default": "horizon-flights"
   },
   "targets": {},
   "etags": {}
