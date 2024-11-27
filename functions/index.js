@@ -1,6 +1,9 @@
 const functions = require('firebase-functions'); // Use CommonJS for Firebase Functions
 const express = require('express');
 const puppeteer = require('puppeteer');
+
+process.env.PUPPETEER_CACHE_DIR = '/tmp'; // Set Puppeteer's cache directory to '/tmp'
+
 const cors = require('cors');
 
 const app = express();
@@ -68,9 +71,14 @@ async function scrapeAirbnbPosts(searchUrl) {
       args: ['--no-sandbox',
         '--disable-setuid-sandbox',
         '--window-size=1920,1080',
-        '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--no-zygote',
+        '--single-process', // Run Chrome in single-process mode
+        '--disable-gpu'
       ],
-      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+      executablePath: `${process.env.PUPPETEER_CACHE_DIR}/chrome/mac_arm-131.0.6778.85/chrome`,
     });
     const page = await browser.newPage();
 

@@ -35,7 +35,7 @@
     "GhostCat": "github:GhostCatcg/3d-earth",
     "heroku": "^9.3.2",
     "luxon": "^3.5.0",
-    "puppeteer": "^23.7.0",
+    "puppeteer": "^23.9.0",
     "three": "^0.168.0",
     "three-globe": "^2.34.4"
   },
