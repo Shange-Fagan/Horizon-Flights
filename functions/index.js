@@ -2,7 +2,11 @@ const functions = require('firebase-functions'); // Use CommonJS for Firebase Fu
 const express = require('express');
 const puppeteer = require('puppeteer');
 
-process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer'; // Set Puppeteer's cache directory to '/tmp'
+process.env.PUPPETEER_CACHE_DIR = `${require('os').homedir()}/.cache/puppeteer`;
+// Set Puppeteer's cache directory to '/tmp'
+if (process.env.FIREBASE_CONFIG) {
+  process.env.PUPPETEER_CACHE_DIR = '/tmp';
+}
 
 const cors = require('cors');
 
@@ -61,7 +65,11 @@ app.options('*', corsConfig);
 function waitForTimeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
+  const puppeteerCacheDir = process.env.FIREBASE_CONFIG ? '/tmp' : `${require('os').homedir()}/.cache/puppeteer`;
+  const executablePath = `${puppeteerCacheDir}/chrome/mac_arm-131.0.6778.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`;
+  const chromePath = `${process.env.PUPPETEER_CACHE_DIR}/chrome/mac_arm-131.0.6778.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`;
+  console.log('Using Chrome at:', chromePath);
+  console.log('Puppeteer executablePath:', `${process.env.PUPPETEER_CACHE_DIR}/chrome/mac_arm-131.0.6778.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`);
 
 // Airbnb Scraping based on searchUrl (Original code)
 async function scrapeAirbnbPosts(searchUrl) {
@@ -78,8 +86,11 @@ async function scrapeAirbnbPosts(searchUrl) {
         '--single-process', // Run Chrome in single-process mode
         '--disable-gpu'
       ],
-      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable',
+      executablePath,
     });
+    console.log('PUPPETEER_CACHE_DIR:', process.env.PUPPETEER_CACHE_DIR);
+    console.log('Executable Path:', executablePath);
+
     const page = await browser.newPage();
 
     // Navigate to the Airbnb search results page
