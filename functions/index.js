@@ -1,12 +1,16 @@
 const functions = require('firebase-functions'); // Use CommonJS for Firebase Functions
 const express = require('express');
 const puppeteer = require('puppeteer');
+// Set Puppeteer's cache directory
+process.env.PUPPETEER_CACHE_DIR = '/tmp'; // Use Firebase's writable tmp directory
+const chromePath = './functions/tmp/chrome/mac_arm-131.0.6778.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing';
 
-process.env.PUPPETEER_CACHE_DIR = `${require('os').homedir()}/.cache/puppeteer`;
-// Set Puppeteer's cache directory to '/tmp'
-if (process.env.FIREBASE_CONFIG) {
-  process.env.PUPPETEER_CACHE_DIR = '/tmp';
-}
+// Debugging
+console.log('Using Puppeteer Cache Directory:', process.env.PUPPETEER_CACHE_DIR);
+console.log('Using Chrome Executable Path:', chromePath);
+console.log("Chrome path:", chromePath);
+
+
 
 const cors = require('cors');
 
@@ -65,31 +69,29 @@ app.options('*', corsConfig);
 function waitForTimeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  const puppeteerCacheDir = process.env.FIREBASE_CONFIG ? '/tmp' : `${require('os').homedir()}/.cache/puppeteer`;
-  const executablePath = `${puppeteerCacheDir}/chrome/mac_arm-131.0.6778.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`;
-  const chromePath = `${process.env.PUPPETEER_CACHE_DIR}/chrome/mac_arm-131.0.6778.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`;
-  console.log('Using Chrome at:', chromePath);
-  console.log('Puppeteer executablePath:', `${process.env.PUPPETEER_CACHE_DIR}/chrome/mac_arm-131.0.6778.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`);
+  //const executablePath = `${puppeteerCacheDir}/chrome/mac_arm-131.0.6778.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`;
+  //console.log('Using Chrome at:', chromePath);
+  //console.log('Puppeteer executablePath:', `${process.env.PUPPETEER_CACHE_DIR}/chrome/mac_arm-131.0.6778.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`);
 
 // Airbnb Scraping based on searchUrl (Original code)
 async function scrapeAirbnbPosts(searchUrl) {
+  const browser = await puppeteer.launch({executablePath: '/path/to/Chrome'});
   try {
     const browser = await puppeteer.launch({
       headless: true,
+      executablePath: chromePath,
       args: ['--no-sandbox',
         '--disable-setuid-sandbox',
         '--window-size=1920,1080',
         '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--no-zygote',
-        '--single-process', // Run Chrome in single-process mode
-        '--disable-gpu'
       ],
-      executablePath,
     });
-    console.log('PUPPETEER_CACHE_DIR:', process.env.PUPPETEER_CACHE_DIR);
-    console.log('Executable Path:', executablePath);
+    const fs = require('fs');
+
+    if (!fs.existsSync(chromePath)) {
+      console.error("Chrome binary not found at:", chromePath);
+    }
+    console.log('Chrome path being used:', chromePath);
 
     const page = await browser.newPage();
 
