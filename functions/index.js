@@ -2,7 +2,7 @@ const functions = require('firebase-functions'); // Use CommonJS for Firebase Fu
 const express = require('express');
 const puppeteer = require('puppeteer');
 
-process.env.PUPPETEER_CACHE_DIR = '/tmp'; // Set Puppeteer's cache directory to '/tmp'
+process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer'; // Set Puppeteer's cache directory to '/tmp'
 
 const cors = require('cors');
 
@@ -78,7 +78,7 @@ async function scrapeAirbnbPosts(searchUrl) {
         '--single-process', // Run Chrome in single-process mode
         '--disable-gpu'
       ],
-      executablePath: `${process.env.PUPPETEER_CACHE_DIR}/chrome/mac_arm-131.0.6778.85/chrome`,
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable',
     });
     const page = await browser.newPage();
 

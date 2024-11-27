@@ -440,10 +440,10 @@ a, button, input, select, iframe {
   }
 #header input:focus, #header select:focus {
     outline: none;
-      box-shadow: 0 0 12px rgb(0, 200, 255) /* Red outline for focus similar to Airbnb */
+      box-shadow: 0 0 7px rgb(255, 169, 21) /* Red outline for focus similar to Airbnb */
 }
 	  #header input:hover, #header select:hover {
-      box-shadow: 0 0 12px rgb(0, 200, 255) /* Red outline for focus similar to Airbnb */
+      box-shadow: 0 0 7px rgb(255, 169, 21) /* Red outline for focus similar to Airbnb */
 }
 #header button {
     justify-content: center; /* Center the header content */
@@ -541,15 +541,15 @@ animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hov
 
 @keyframes pulseShadow2 {
   0% {
-        box-shadow: 0 0 12px rgba(8, 142, 209, 0.8), 0 0 4px rgba(22, 129, 223, 0.5);
+        box-shadow: 0 0 7px rgb(0, 221, 255), 0 0 4px rgba(22, 200, 223, 0.5);
     }
     100% {
-      box-shadow: 0 0 12px rgb(0, 217, 255, 1), 0 0 4px rgba(5, 194, 232, 0.75); /* Brighter, thinner, blue shadow */
+      box-shadow: 0 0 7px rgb(0, 217, 255, 1), 0 0 4px rgba(5, 194, 232, 0.75); /* Brighter, thinner, blue shadow */
     }
 }
 @keyframes pulseShadow3 {
   0% {
-        box-shadow: 0 0 12px rgba(8, 142, 209, 0.8), 0 0 4px rgba(22, 129, 223, 0.5);
+        box-shadow: 0 0 12px rgb(0, 242, 255), 0 0 4px rgba(22, 129, 223, 0.5);
     }
     100% {
       box-shadow: 0 0 12px rgb(0, 217, 255, 1), 0 0 4px rgba(5, 194, 232, 0.75); /* Brighter, thinner, blue shadow */
@@ -3421,13 +3421,13 @@ const inputsAndSelects = header.querySelectorAll('input, select'); // Select all
 inputsAndSelects.forEach((element) => {
   // Add focus style
   element.addEventListener('focus', () => {
-    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
-    element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
+    element.style.boxShadow = '0 0 7px rgba(255, 169, 21, 1)';
+    //element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
   element.addEventListener('hover', () => {
-    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
-    element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
+    element.style.boxShadow = '0 0 7px rgba(255, 169, 21, 1)';
+    //element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
   // Remove focus style on blur
@@ -3438,8 +3438,8 @@ inputsAndSelects.forEach((element) => {
 
   // Add hover style
   element.addEventListener('mouseover', () => {
-    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
-    element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
+    element.style.boxShadow = '0 0 7px rgba(255, 169, 21, 1)';
+    //element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
   // Remove hover style
@@ -3494,13 +3494,13 @@ const inputsAndSelects = header.querySelectorAll('input, select'); // Select all
 inputsAndSelects.forEach((element) => {
   // Add focus style
   element.addEventListener('focus', () => {
-    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
-    element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
+    element.style.boxShadow = '0 0 7px rgba(255, 169, 21, 1)';
+    //element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
   element.addEventListener('hover', () => {
-    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
-    element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
+    element.style.boxShadow = '0 0 7px rgba(255, 169, 21, 1)';
+    //element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
   // Remove focus style on blur
@@ -3511,8 +3511,8 @@ inputsAndSelects.forEach((element) => {
 
   // Add hover style
   element.addEventListener('mouseover', () => {
-    //element.style.boxShadow = '0 0 12px rgb(0, 217, 255)';
-    element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
+    element.style.boxShadow = '0 0 7px rgba(255, 169, 21, 1)';
+    //element.style.animation = 'pulseShadow2 0.6s ease-in-out infinite alternate';
   });
 
   // Remove hover style
