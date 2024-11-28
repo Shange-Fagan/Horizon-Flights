@@ -864,7 +864,7 @@ input[type="number"] {
 }
 
 #regionSelectBtn:hover {
-  background-color: rgba(225, 225, 225, 0.35);
+  background-color: rgb(225, 225, 225);
    border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
 }
 	  #regionSelectDropdown {
@@ -2106,7 +2106,7 @@ crossorigin="anonymous"></script>
   <button id="submitRegion">Submit</button>
 </div>
 	<!-- Add this dropdown for price categories -->
-	<select id="priceCategorySelect">
+	<select id="priceCategorySelect"  style="display: none;">
     <optgroup label="Region-Specific Categories">
       <option value="disabled">Sort by (Region)📍</option>
         <option value="popular">Most Popular(in Region)📍</option>
@@ -2115,7 +2115,7 @@ crossorigin="anonymous"></script>
         <option value="expensive">Expensive📍</option>
     </optgroup>
 		</select>
-		<select id="airbnbSelector">
+		<select id="airbnbSelector" style="display: none;">
     <optgroup label="World Categories">
       <option value="disabled">Sort by (Across the World) 🌍</option>
         <option value="general">Most Popular(Across the World)🌍</option>
@@ -2138,9 +2138,8 @@ crossorigin="anonymous"></script>
 <button id="regionSelectBtn">Region Select</button>
 
 <div id="topLeftLabel">
-  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" alt="Profile Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 8px;">
-  Latest Flights
-  <img src="js/300694_plane-plane-emoji-png-png-download (1).png" alt="Profile Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 8px;">
+  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" alt="Profile Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 8px; margin-top: 0px;">Latest Flights
+  <img src="js/300694_plane-plane-emoji-png-png-download (1).png" alt="Profile Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-left: 4px; margin-top: 0px;">
 </div>
 <!-- Tickers -->
   <iframe
@@ -6296,12 +6295,12 @@ const priceMin = 100
     let searchUrl = `https://www.airbnb.com/s/${selectedRegion}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=2&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=&checkout=&adults=&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
     console.log('Generated searchUrl:', searchUrl);
     // Only add price_min and price_max if they have values
-    if (priceMin && priceMin.trim() !== "") {
+    /*if (priceMin && priceMin.trim() !== "") {
         searchUrl += `&price_min=${priceMin}`;
     }
     if (priceMax && priceMax.trim() !== "") {
         searchUrl += `&price_max=${priceMax}`;
-    }
+    }*/
     // Fetch Airbnb posts and display them
     await fetchAirbnbPosts(searchUrl);
     // Function to fetch Airbnb posts from your backend and display them on the webpage
@@ -7505,10 +7504,15 @@ let activeLabel = null; // Keep track of open iframe
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
   //scene.remove(markers);
-	
+	console.log('Selected category:', selectedCategory);
+  console.log('Available categories:', markersDataSets);
+  console.log('Markers Data Sets:', markersDataSets);
 // Set active markers data
   activeMarkersData = markersDataSets[selectedCategory];
-
+  if (!activeMarkersData) {
+    console.error(`No markers data found for category: ${selectedCategory}`);
+    activeMarkersData = []; // Set it to an empty array to prevent further errors
+  }
   // Create new markers for the selected category
   //const markerCount = activeMarkersData.length;
   //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
