@@ -488,6 +488,42 @@ justify-content: center;
   display: flex;
   margin-left: 0px;
 }
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 150px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Dropdown links */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+/* Hover effect for links */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu when the button is clicked */
+.dropdown.show .dropdown-content {
+  display: block;
+}
 
 #likedPostsButton {
   background-color: #00aaff; /* Airbnb red */
@@ -504,7 +540,7 @@ justify-content: center;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#likedPostsButton svg {
+#likedPostsButton img {
   fill: white;
   align-items: center;
 }
@@ -2037,16 +2073,19 @@ crossorigin="anonymous"></script>
   <input type="number" id="price_min" name="price_min" placeholder="Min price (optional)">
   <input type="number" id="price_max" name="price_max" placeholder="Max price (optional)">
   <button id="searchBtn" class="airbnb-button">Search</button>
-
+<!-- Login Button with Dropdown -->
+<div class="dropdown">
   <!-- New Login Button -->
   <button id="loginButton" class="airbnb-button2">
     <img src="js/profile-icon.png" alt="Profile Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 8px;">
+    Login
   </button>
+  <div id="dropdownMenu" class="dropdown-content">
+    <a href="#" id="loginLogoutLink">Login</a>
+  </div>
+</div>
   <button id="likedPostsButton" class="liked-button">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="24px" height="24px">
-      <path fill="none" d="M0 0h24v24H0z"/>
-      <path d="M12.1 21.55l-1.1-1.05C5.4 15.24 2 12.09 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.59-3.4 6.74-8.9 11.99l-1.1 1.06z"/>
-    </svg>
+    <img src="js/heart.png" alt="Liked posts Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 0px; margin-top: 1.5px;">
   </button>
   
 </div>
@@ -2428,6 +2467,7 @@ const firebaseConfig = {
         firebase.auth().signOut().then(() => {
             alert('Logged out successfully.');
             updateLoginButton(null); // Update the button to show "Login"
+            updatelikedPostsButton(null);
         }).catch(error => console.error('Error during logout:', error));
     } else {
         // User is not logged in, handle login
@@ -2436,6 +2476,7 @@ const firebaseConfig = {
             .then(result => {
                 alert(`Logged in as ${result.user.displayName}`);
                 updateLoginButton(result.user); // Update the button to show "Logout"
+                updatelikedPostsButton(result.user);
             }).catch(error => console.error('Login error:', error));
     }
 });
@@ -2453,11 +2494,77 @@ function updateLoginButton(user) {
             <img src="js/profile-icon.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;"> Login`;
     }
 }
+// Update button text based on login state
+function updatelikedPostsButton(user) {
+    const likedPostsButton = document.getElementById('likedPostsButton');
+    if (user) {
+        // Show "Logout" when user is logged in
+        likedPostsButton.innerHTML = `
+            <img src="js/heart-2.png" alt="liked posts Icon" style="width: 24px; height: 24px; margin-right: 0px;">`;
+    } else {
+        // Show "Login" when no user is logged in
+        likedPostsButton.innerHTML = `
+            <img src="js/heart.png" alt="liked posts Icon" style="width: 24px; height: 24px; margin-right: 0px;">`;
+    }
+}
 
 // Set initial button state on page load
 firebase.auth().onAuthStateChanged(user => {
     updateLoginButton(user); // Update button based on current auth state
 });
+
+// Get references to elements
+/*const loginButton = document.getElementById('loginButton');
+const dropdownMenu = document.getElementById('dropdownMenu');
+const loginLogoutLink = document.getElementById('loginLogoutLink');
+
+// Toggle dropdown visibility
+loginButton.addEventListener('click', (event) => {
+  event.stopPropagation(); // Prevent event from bubbling up
+  dropdownMenu.classList.toggle('show');
+});
+
+// Close the dropdown when clicking outside of it
+document.addEventListener('click', () => {
+  dropdownMenu.classList.remove('show');
+});
+
+// Handle login/logout functionality
+loginLogoutLink.addEventListener('click', (event) => {
+  event.preventDefault(); // Prevent default link behavior
+  const user = firebase.auth().currentUser;
+
+  if (user) {
+    // Logout
+    firebase.auth().signOut().then(() => {
+      alert('Logged out successfully.');
+      updateDropdownMenu(null);
+    }).catch(error => console.error('Error during logout:', error));
+  } else {
+    // Login
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+      .then(result => {
+        alert(`Logged in as ${result.user.displayName}`);
+        updateDropdownMenu(result.user);
+      }).catch(error => console.error('Login error:', error));
+  }
+});
+
+// Update dropdown menu based on user state
+function updateDropdownMenu(user) {
+  if (user) {
+    loginLogoutLink.textContent = 'Logout';
+  } else {
+    loginLogoutLink.textContent = 'Login';
+  }
+}
+
+// Set initial dropdown state
+firebase.auth().onAuthStateChanged(user => {
+  updateDropdownMenu(user);
+});*/
+
 
 
 
@@ -5084,7 +5191,6 @@ function showLikedPosts() {
 
 // Add an event listener to the profile button to show liked posts
 document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);
-
 
 document.querySelectorAll('.post-grid').forEach((item, index) => {
     // Make sure `index` matches the corresponding marker
