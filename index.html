@@ -2500,11 +2500,11 @@ function updatelikedPostsButton(user) {
     if (user) {
         // Show "Logout" when user is logged in
         likedPostsButton.innerHTML = `
-            <img src="js/heart-2.png" alt="liked posts Icon" style="width: 24px; height: 24px; margin-right: 0px;">`;
+            <img src="js/heart-2.png" alt="liked posts Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 0px; margin-top: 1.5px;">`;
     } else {
         // Show "Login" when no user is logged in
         likedPostsButton.innerHTML = `
-            <img src="js/heart.png" alt="liked posts Icon" style="width: 24px; height: 24px; margin-right: 0px;">`;
+            <img src="js/heart.png" alt="liked posts Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 0px; margin-top: 1.5px;">`;
     }
 }
 
