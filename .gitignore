@@ -11,3 +11,7 @@ node_modules/
 .DS_Store
 
 /functions/tmp
+
+# Ignore Firebase functions directory
+functions/
+

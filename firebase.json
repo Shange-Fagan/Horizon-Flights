@@ -1,8 +1,10 @@
 {
   "functions": [
     {
-      "source": "functions",
-      "codebase": "default",
+    "source": "functions",
+    "runtime": "nodejs18",
+    "timeoutSeconds": 120,
+    "memory": "512MB",
       "ignore": [
         "node_modules",
         ".git",
