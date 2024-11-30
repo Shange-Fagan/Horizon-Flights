@@ -3310,7 +3310,7 @@ const sphere = new THREE.SphereGeometry(
   //controls.dampingFactor = 0.25;
   controls.enableZoom = true;
   controls.minDistance = 15;
-  controls.maxDistance = 35;
+  controls.maxDistance = 25;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.5;
   controls.enabled = true;
@@ -6277,8 +6277,6 @@ document.getElementById('searchBtn').addEventListener('click', async () => {
     // Pan to the "to" location
     const location = document.getElementById('where').value;
     panToLocation(location);
-    controls.minDistance = 1;
-  controls.maxDistance = 30;
     console.log(panToLocation(location))
 // Add light pillars and wave effects at "from" and "to" locations
 addMarkupPoints(fromLatLng, toLatLng);
