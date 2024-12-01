@@ -317,8 +317,8 @@ a, button, input, select, iframe {
     #toggleButton {
       position: absolute;
       right: 15px;
-      top: 225px;
-      padding: 4.5px 9.5px;
+      top: 191px;
+      padding: 5px 7px;
       font-size: 12px;
       /*background-color: rgba(255, 255, 255, 0.2);*/
       /*border: 1px solid rgba(255, 255, 255, 0.25);*/
@@ -330,6 +330,32 @@ a, button, input, select, iframe {
        background-color: rgba(255, 255, 255, 0.15);
   border-radius: 25px; /* Rounded corners for inputs */
 	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 0px 0px 0px 0px;
+      width: 100px;
+    }
+    #addLightsbutton {
+      position: absolute;
+      right: 15px;
+      top: 217px;
+      padding: 4px 7px;
+      font-size: 12px;
+      /*background-color: rgba(255, 255, 255, 0.2);*/
+      /*border: 1px solid rgba(255, 255, 255, 0.25);*/
+      /*border-radius: 8px;*/
+      color: rgba(255, 255, 255, 0.75);
+      z-index: 22011;
+      cursor: pointer;
+	    border: 0px solid #e0e0e0; /* Border similar to Airbnb */
+       background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 25px; /* Rounded corners for inputs */
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 0px 0px 0px 0px;
+      width: 100px;
+    }
+
+    #addLightsbutton:hover {
+      background-color: rgba(225, 225, 225, 0.35);
+	    border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
     }
 
     #toggleButton:hover {
@@ -365,6 +391,10 @@ a, button, input, select, iframe {
     padding: 12px 0px; /* Reduce padding for a cleaner, compact look */
     /*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);*/ /* Light shadow for depth */
     z-index: 22011;
+}
+#topLeftLabel img {
+  width: 32px; /* Adjust size */
+  vertical-align: middle; /* Align with text */
 }
 
 /* Inputs and dropdowns styling */
@@ -677,7 +707,17 @@ border: 1px solid #e0e0e0;
   border-radius: 5px;
   cursor: pointer;
 }
-
+#loginContainer {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+#closeSignupButton {
+  color: rgba(255, 255, 255, 1);
+  top: 0px;
+}
+#closeButton2 {
+  color: rgba(255, 255, 255, 1);
+  top: 0px;
+}
 .popup-close-btn {
   background-color: #f44a69;
 }
@@ -1019,18 +1059,20 @@ input[type="number"] {
 /* Region Select Button Styling */
 #regionSelectBtn {
   position: absolute;
-  top: 175px; /* Adjusted top position under Cheapest button */
+  top: 165px; /* Adjusted top position under Cheapest button */
   right: 15px;
-  padding: 9px 14px; /* Add more padding for a better look */
+  padding: 5px 7px; /* Add more padding for a better look */
   border: 0px solid #e0e0e0; /* No visible border */
   border-radius: 25px;
-  font-size: 14px; /* Slightly larger font for better readability */
+  font-size: 12px; /* Slightly larger font for better readability */
   cursor: pointer;
   transition: background-color 0.3s ease;
   color: rgba(255, 255, 255, 0.75); /* Keep the light gray text color */
   background-color: rgba(255, 255, 255, 0.15); /* Transparent background with slight white tint */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
   z-index: 22011;
+  border-radius: 0px 0px 0px 0px;
+  width: 100px;
 }
 
 #regionSelectBtn:hover {
@@ -1038,17 +1080,21 @@ input[type="number"] {
    border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
 }
 	  #regionSelectDropdown {
-  padding: 10px;
+  padding: 3px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.15);
   color: rgba(255, 255, 255, 0.75);
-  font-size: 14px;
-  width: 200px; /* Adjust width */
+  font-size: 12px;
+  width: 80px; /* Adjust width */
   position: absolute; /* Adjust positioning */
-  top: 200px; /* Adjust based on your layout */
-  right: 50px; /* Adjust based on your layout */
+  top: 165px; /* Adjust based on your layout */
+  right: 120px; /* Adjust based on your layout */
   z-index: 22011; /* Ensure it is visible above other elements */
+  display: flex;
+  background-position: right 8px;
+background-position-x: 90.5%;
+background-size: 14px;
 }
 	  
 #regionSelectDropdown:hover {
@@ -1109,8 +1155,8 @@ iframe::-webkit-scrollbar {
 	  #newsButton {
     position: absolute;
       right: 15px;
-      top: 263px;
-      padding: 4.5px 9.5px;
+      top: 241px;
+      padding: 4.5px 7px;
       font-size: 12px;
       /*background-color: rgba(255, 255, 255, 0.2);*/
       /*border: 1px solid rgba(255, 255, 255, 0.25);*/
@@ -1124,6 +1170,8 @@ iframe::-webkit-scrollbar {
        background-color: rgba(255, 255, 255, 0.15);
   border-radius: 25px; /* Rounded corners for inputs */
 	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 0px 0px 12px 12px;
+      width: 100px;
 }
 
 #newsButton:hover {
@@ -1314,17 +1362,20 @@ select option {
   position: absolute;
   z-index: 22011;
   display: block;
-  margin-right: 10px;
-  right: 10px;
-  top:130px;
-  padding: 10px 15px;
+  /*margin-right: 10px;*/
+  right: 15px;
+  top:135px;
+  padding: 7px 7px;
   background-color: #f44a69; /* Airbnb red */
   color: white;
   border: none;
-  border-radius: 50px;
+  /*border-radius: 50px;*/
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100px;
+  font-size: 12px;
+  border-radius: 12px 12px 0px 0px;
 }
 
 #clearFiltersBtn:hover {
@@ -1333,6 +1384,12 @@ select option {
 }
 #languageSelect select {
   background-position: right 14px;
+  background-position-x: 90.5%;
+  background-size: 14px;
+}
+
+#regionSelectDropdown select {
+  background-position: right 42px;
   background-position-x: 90.5%;
   background-size: 14px;
 }
@@ -1943,7 +2000,7 @@ overflow: hidden;
   right: 15px;
   width: 80px;
   height: 40px;
-  top: 300px;
+  top: 280px;
   z-index: 22011;
 }
 .theme-switch2 {
@@ -2343,9 +2400,9 @@ crossorigin="anonymous"></script>
   <label class="theme-switch">
     <input type="checkbox" id="themeToggle">
     <span class="slider">
-      <img src="js/trivago-logo.png" alt="Airbnb" style="display: none; left: 16px; justify-content: center; width: 22%; height: 56%;
+      <img src="js/airplane-3.png" alt="Airbnb" style="display: none; left: 14px; justify-content: center; width: 27px; height: 27px;
   align-items: center;" class="logo-airbnb">
-      <img src="js/bookingcom-22.png" alt="Trivago" style="right: 12px; justify-content: center; width: 27%;
+      <img src="js/5-stars.png" alt="Trivago" style="right: 12px; justify-content: center; height: 27px; width: 27px;
   align-items: center;"class="logo-trivago">
     </span>
   </label>
@@ -2440,11 +2497,11 @@ crossorigin="anonymous"></script>
         </div>
         <div class="guest-row">
             <label for="childrenPopup">Children:</label>
-            <input type="number" id="no_of_children" name="childrenPopup" min="0" value="1">
+            <input type="number" id="no_of_children" name="childrenPopup" min="0" value="0">
         </div>
         <div class="guest-row">
             <label for="roomsPopup">Rooms:</label>
-            <input type="number" id="roomsPopup" name="roomsPopup" min="1" value="2">
+            <input type="number" id="roomsPopup" name="roomsPopup" min="1" value="1">
         </div>
         <button id="saveGuests" class="popup-save-btn">Save</button>
         <button id="closePopup" class="popup-close-btn">Close</button>
@@ -2571,8 +2628,8 @@ crossorigin="anonymous"></script>
 <button id="regionSelectBtn">Region Select</button>
 
 <div id="topLeftLabel">
-  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" alt="Profile Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 8px; margin-top: 0px;">Latest Flights
-  <img src="js/300694_plane-plane-emoji-png-png-download (1).png" alt="Profile Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-left: 4px; margin-top: 0px;">
+  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" alt="Profile Icon" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;">Latest Flights
+  <img src="js/300694_plane-plane-emoji-png-png-download (1).png" alt="Profile Icon" style="width: 28px; display:flex; align-items: center; height: 28px; margin-left: 4px; margin-top: 0px;">
 </div>
 <!-- Tickers -->
   <iframe
@@ -2735,7 +2792,8 @@ gl_FragColor = vec4(glowColor, intensity);
 
 
 	
-<button id="toggleButton">Switch to Night</button>
+<button id="toggleButton">Switch theme</button>
+<button id="addLightsbutton">Night Lights</button>
 <button id="newsButton">Latest Airbnbs</button>
   <!-- The iframe containers will be added dynamically -->
   <!-- X Button to close the iframe -->
@@ -2898,6 +2956,11 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
 
 //daymarkerMaterial.set('#00aaff');
     searchBtn.textContent = 'Search';
+    topLeftLabel.innerHTML = `
+  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;" alt="Earth Globe" />
+  Latest Flights 
+  <img src="js/300694_plane-plane-emoji-png-png-download (1).png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-left: 4px; margin-top: 0px;" alt="Plane" />
+`;
   } else {
     //searchBtn.classList.remove('airbnb-button22');
     //searchBtn.classList.add('airbnb-button');
@@ -2920,6 +2983,11 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
 
     //daymarkerMaterial.set('#ff3232');
     searchBtn.textContent = 'Search';
+    topLeftLabel.innerHTML = `
+  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;" alt="Earth Globe" />
+  Latest Hotels 
+  <img src="js/300694_plane-plane-emoji-png-png-download (1).png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-left: 4px; margin-top: 0px;" alt="Plane" />
+`;
   }
 
   // Toggle iframe containers
@@ -2936,6 +3004,9 @@ document.getElementById('themeToggle2').addEventListener('change', (event) => {
   const cityBtn = document.getElementById('cityBtn');
   cityBtn.style.display = "block";
   const countryBtn = document.getElementById('countryBtn');
+  //const locationTypeWrapper = document.createElement('locationTypeWrapper');
+  const locationTypeWrapper = document.createElement('locationTypeWrapper');
+  
   //let currentTicker = document.getElementById('dayTicker');
   if (isChecked) {
     //searchBtn.classList.remove('airbnb-button');
@@ -2954,6 +3025,9 @@ document.getElementById('themeToggle2').addEventListener('change', (event) => {
 //daymarkerMaterial.set('#00aaff');
 countryBtn.style.display = "block";
 cityBtn.style.display = "none";
+locationTypeWrapper.value = 'country'
+console.log(locationTypeWrapper.value)
+
   } else {
     //searchBtn.classList.remove('trivago-button');
     //searchBtn.classList.add('airbnb-button');
@@ -2971,6 +3045,8 @@ cityBtn.style.display = "none";
     //searchBtn.textContent = 'Search';
     countryBtn.style.display = "none";
 cityBtn.style.display = "block";
+locationTypeWrapper.value = 'city'
+console.log(locationTypeWrapper.value)
   }
 
   // Toggle iframe containers
@@ -3051,6 +3127,7 @@ const firebaseConfig = {
 
   // Handle Login/Logout
   // Handle login/logout and show liked posts
+  // Add an event listener to the login button
   document.getElementById('loginButton').addEventListener('click', () => {
     const user = firebase.auth().currentUser;
 
@@ -3062,14 +3139,171 @@ const firebaseConfig = {
             updatelikedPostsButton(null);
         }).catch(error => console.error('Error during logout:', error));
     } else {
-        // User is not logged in, handle login
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-            .then(result => {
-                alert(`Logged in as ${result.user.displayName}`);
-                updateLoginButton(result.user); // Update the button to show "Logout"
-                updatelikedPostsButton(result.user);
-            }).catch(error => console.error('Login error:', error));
+        // Show login modal with options
+        const loginContainer = document.createElement('div');
+        loginContainer.setAttribute('id', 'loginContainer');
+        loginContainer.style.position = 'fixed';
+        loginContainer.style.top = '50%';
+        loginContainer.style.left = '50%';
+        loginContainer.style.transform = 'translate(-50%, -50%)';
+        loginContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.75);';
+        loginContainer.style.padding = '20px';
+        loginContainer.style.borderRadius = '10px';
+        loginContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        loginContainer.style.textAlign = 'center';
+        loginContainer.style.zIndex = '1000';
+
+        // Google Login Button
+        const googleButton = document.createElement('button');
+        googleButton.innerHTML = `
+            <img src="js/transparent-google-logo-google-logo-blue-circle-with-g-1710875609249.png" alt="Google Icon" style="width: 40px; height: 40px; margin-right: 10px;">
+            Continue with Google
+        `;
+        googleButton.style.backgroundColor = '#4285F4';
+        googleButton.style.color = 'white';
+        googleButton.style.border = 'none';
+        googleButton.style.padding = '10px 20px';
+        googleButton.style.borderRadius = '5px';
+        googleButton.style.cursor = 'pointer';
+        googleButton.style.marginBottom = '-4px';
+        googleButton.style.marginTop = '7px';
+        googleButton.style.display = 'flex';
+
+        googleButton.addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider)
+                .then(result => {
+                    alert(`Logged in as ${result.user.displayName}`);
+                    updateLoginButton(result.user);
+                    updatelikedPostsButton(result.user);
+                    document.body.removeChild(loginContainer); // Remove modal
+                })
+                .catch(error => console.error('Login error:', error));
+        });
+
+        // Email/Password Login Form
+        const emailForm = document.createElement('form');
+        emailForm.innerHTML = `
+            <input type="email" id="emailInput" placeholder="Enter your email" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+            <input type="password" id="passwordInput" placeholder="Enter your password" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+            <button type="submit" style="background-color: #FF5A5F; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Login</button>
+        `;
+
+        emailForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('passwordInput').value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(result => {
+                    alert(`Logged in as ${result.user.email}`);
+                    updateLoginButton(result.user);
+                    updatelikedPostsButton(result.user);
+                    document.body.removeChild(loginContainer); // Remove modal
+                })
+                .catch(error => {
+                    console.error('Login error:', error);
+                });
+        });
+
+        // "New to Horizon? Sign up here" Button
+        const signupButton = document.createElement('button');
+        signupButton.innerText = 'New to Horizon? Sign up here';
+        signupButton.style.fontSize = '14px';
+        signupButton.style.color = '#007BFF';
+        signupButton.style.backgroundColor = 'transparent';
+        signupButton.style.border = 'none';
+        signupButton.style.cursor = 'pointer';
+        signupButton.style.marginTop = '10px';
+
+        signupButton.addEventListener('click', () => {
+            // Show sign-up form modal
+            const signupContainer = document.createElement('div');
+            signupContainer.setAttribute('id', 'signupContainer');
+            signupContainer.style.position = 'fixed';
+            signupContainer.style.top = '50%';
+            signupContainer.style.left = '50%';
+            signupContainer.style.transform = 'translate(-50%, -50%)';
+            signupContainer.style.backgroundColor = 'white';
+            signupContainer.style.padding = '20px';
+            signupContainer.style.borderRadius = '10px';
+            signupContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            signupContainer.style.textAlign = 'center';
+            signupContainer.style.zIndex = '1000';
+
+            const signupForm = document.createElement('form');
+            signupForm.innerHTML = `
+                <input type="email" id="signupEmailInput" placeholder="Enter your email" style="display: block; width: 100%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+                <input type="password" id="signupPasswordInput" placeholder="Enter your password" style="display: block; width: 100%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+                <button type="submit" style="background-color: #FF5A5F; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Sign Up</button>
+            `;
+
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const email = document.getElementById('signupEmailInput').value;
+                const password = document.getElementById('signupPasswordInput').value;
+
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(result => {
+                        alert(`Account created for ${result.user.email}`);
+                        updateLoginButton(result.user);
+                        updatelikedPostsButton(result.user);
+                        document.body.removeChild(signupContainer); // Remove sign-up modal
+                        document.body.removeChild(loginContainer); // Remove login modal
+                    })
+                    .catch(err => console.error('Account creation error:', err));
+            });
+
+            // Close Button for Signup Modal
+            const closeSignupButton = document.createElement('span');
+            closeSignupButton.innerHTML = '&times;';
+            closeSignupButton.style.position = 'absolute';
+            closeSignupButton.style.top = '5px';
+            closeSignupButton.style.right = '10px';
+            closeSignupButton.style.cursor = 'pointer';
+            closeSignupButton.style.fontSize = '20px';
+            closeSignupButton.style.color = 'rgba(255, 255, 255, 1);';
+            closeSignupButton.style.top = '0px';
+
+
+
+
+            closeSignupButton.addEventListener('click', () => {
+                document.body.removeChild(signupContainer); // Close sign-up modal
+            });
+
+            signupContainer.appendChild(closeSignupButton);
+            signupContainer.appendChild(signupForm);
+            document.body.appendChild(signupContainer);
+        });
+
+        // Close Button for Login Modal
+        const closeButton2 = document.createElement('span');
+        closeButton2.innerHTML = '&times;';
+        closeButton2.style.position = 'absolute';
+        closeButton2.style.top = '0px';
+        closeButton2.style.color = 'white';
+        closeButton2.style.right = '9px';
+        closeButton2.style.cursor = 'pointer';
+        closeButton2.style.fontSize = '20px';
+
+        closeButton2.addEventListener('click', () => {
+            document.body.removeChild(loginContainer); // Close modal
+        });
+
+        loginContainer.appendChild(closeButton2);
+        loginContainer.appendChild(googleButton);
+        const orText = document.createElement('p');
+        orText.innerText = 'or';
+        orText.style.fontFamily = 'system-ui'; // Set the font family
+        orText.style.color = 'rgba(255, 255, 255, 1)'; // Set the color
+        loginContainer.appendChild(orText); // Append the styled <p> element
+        loginContainer.appendChild(emailForm);
+        loginContainer.appendChild(signupButton);
+
+        document.body.appendChild(loginContainer);
     }
 });
 
@@ -3077,15 +3311,16 @@ const firebaseConfig = {
 function updateLoginButton(user) {
     const loginButton = document.getElementById('loginButton');
     if (user) {
-        // Show "Logout" when user is logged in
         loginButton.innerHTML = `
             <img src="js/profile-icon2.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;"> Logout`;
     } else {
-        // Show "Login" when no user is logged in
         loginButton.innerHTML = `
             <img src="js/profile-icon.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;"> Login`;
     }
 }
+
+
+
 // Update button text based on login state
 function updatelikedPostsButton(user) {
     const likedPostsButton = document.getElementById('likedPostsButton');
@@ -3212,7 +3447,7 @@ document.getElementById('submitRegion').addEventListener('click', () => {
     }
   };
 
-  const stepInterval = setInterval(showNextStep, 10000);
+  const stepInterval = setInterval(showNextStep, 9000);
 
   // Close instructions when "Got It" button is clicked
   gotItBtn.addEventListener('click', () => {
@@ -3250,6 +3485,7 @@ overlay.style.pointerEvents = 'auto'; // Allow interaction if needed
 const earthRadius = 5.1; // Adjust this to match your globe's size
 const textureLoader = new THREE.TextureLoader();
 const dayTexture = textureLoader.load("js/Earth_Diffuse.jpg");
+const LightsTexture = textureLoader.load("js/earth.jpg");
 const bumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
 const normalMap = textureLoader.load('js/Earth_Normal.jpg'); // Use a realistic normal map
 const specularMap = textureLoader.load("js/Earth_Specular.jpg");
@@ -3351,7 +3587,7 @@ const sphere = new THREE.SphereGeometry(
   //controls.dampingFactor = 0.25;
   controls.enableZoom = true;
   controls.minDistance = 15;
-  controls.maxDistance = 25;
+  controls.maxDistance = 30;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.5;
   controls.enabled = true;
@@ -3705,6 +3941,7 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 	  //const daymarkerMaterial = new THREE.Color('#ff3232');
 //const nightmarkerMaterial = new THREE.Color('#FE8C02');
 	  const daymarkerMaterial = new THREE.Color('#ff3232');
+    const lightsmarkerMaterial = new THREE.Color('#D3D3D3');
 const nightmarkerMaterial = new THREE.Color('#FE8C02');
 	  //const daymarkerMaterial = new THREE.Color('#00FF00');
 //const nightmarkerMaterial = new THREE.Color('#FFFFFF');
@@ -4035,6 +4272,8 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
 	// Add Event Listener to the Toggle Button
 	    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 */
+let currentTexture = "night"; // Initialize with the default texture state ("day" or "night")
+let currentmarkerMaterial = "night";
 	  function toggleDayNight() {
   // Ensure `isDay` is properly toggled
   if (isDay) {
@@ -4100,6 +4339,7 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
     // Update globe and scene for night
     //globe2.material.map = nightTexture;
     earthMaterial.uniforms.map.value = nightTexture;
+    currentTexture = "night";
     scene.background = nightbackgroundTexture;
     scene.remove(cloudMesh);  // Remove clouds for night
     //createStars();
@@ -4107,6 +4347,7 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
 
   //markerMaterial.color.set(nightmarkerMaterial);
   markerMaterial.color.set(nightmarkerMaterial);
+  currentmarkerMaterial = "night";
   /*const searchBtn = document.getElementById('searchBtn');
   searchBtn.style.backgroundColor = '#00aaff';
     const regionPopupButton = document.querySelector('#regionPopup button'); // Selects the button inside #regionPopup
@@ -4152,7 +4393,7 @@ inputsAndSelects.forEach((element) => {
   });
 });
     // Update button text to switch back to Day
-    document.getElementById("toggleButton").textContent = "Switch to Day";
+    document.getElementById("toggleButton").textContent = " Switch theme";
   } else {
     // Switching from Night to Day
     if (window.innerWidth <= 768) {  // Mobile device
@@ -4176,10 +4417,12 @@ inputsAndSelects.forEach((element) => {
 
     // Update globe and scene for day
     earthMaterial.uniforms.map.value = dayTexture;
+    currentTexture = "day"; // Update the current texture state
     //globe2.material.map = dayTexture;
     scene.background = daybackgroundTexture;
     //scene.add(cloudMesh);  // Add clouds for day
   markerMaterial.color.set(daymarkerMaterial);
+  currentmarkerMaterial = "day";
   /*const searchBtn = document.getElementById('searchBtn');
   searchBtn.style.backgroundColor = '#00aaff';
     const regionPopupButton = document.querySelector('#regionPopup button'); // Selects the button inside #regionPopup
@@ -4226,7 +4469,7 @@ inputsAndSelects.forEach((element) => {
 });
 
     // Update button text to switch back to Night
-    document.getElementById("toggleButton").textContent = "Switch to Night";
+    document.getElementById("toggleButton").textContent = "Switch back";
   }
 
   // Ensure globe material updates
@@ -4237,6 +4480,59 @@ inputsAndSelects.forEach((element) => {
   isDay = !isDay
   //updateTheme(isDay);
 }
+/*function toggleLightstheme() {
+  earthMaterial.uniforms.map.value = LightsTexture;
+}
+function toggleLightstheme() {
+  if (getElementById('addLightsbutton').isChecked) {
+    earthMaterial.uniforms.map.value = LightsTexture;
+    } else {
+      earthMaterial.uniforms.map.value = LightsTexture;
+        }
+    }*/
+  // Get the button element and check if it's checked  
+ // Define the textures globally
+
+function toggleLightstheme() {
+  // Get the button element
+  const lightsButton = document.getElementById('addLightsbutton');
+
+  if (lightsButton.textContent === "Night lights") {
+    // If the lights button is clicked, overlay the lights texture on top of the current state
+    if (currentTexture === "day") {
+      earthMaterial.uniforms.map.value = LightsTexture; // Apply lights texture (day + lights)
+      console.log("Lights theme activated on day texture");
+    } else if (currentTexture === "night") {
+      earthMaterial.uniforms.map.value = LightsTexture; // Apply lights texture (night + lights)
+      console.log("Lights theme activated on night texture");
+    }
+    markerMaterial.color.set(lightsmarkerMaterial);
+    lightsButton.textContent = "Remove lights";
+  } else {
+    // If the lights button is toggled off, revert to the current texture (day or night)
+    if (currentTexture === "day") {
+      earthMaterial.uniforms.map.value = dayTexture; // Revert to day texture
+      console.log("Reverted to day texture");
+    } else if (currentTexture === "night") {
+      earthMaterial.uniforms.map.value = nightTexture; // Revert to night texture
+      console.log("Reverted to night texture");
+    }
+    if (currentmarkerMaterial === "day") {
+      markerMaterial.color.set(daymarkerMaterial);
+      console.log("Reverted to day texture");
+    } else if (currentmarkerMaterial === "night") {
+      markerMaterial.color.set(nightmarkerMaterial);
+      console.log("Reverted to night texture");
+    }
+    lightsButton.textContent = "Night lights";
+  }
+
+  // Ensure uniforms update
+  earthMaterial.uniforms.map.needsUpdate = true;
+}
+
+// Add Event Listener to the Toggle Button
+document.getElementById('addLightsbutton').addEventListener('click', toggleLightstheme);
 // Add Event Listener to the Toggle Button
 document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 //document.getElementById('toggleButton').addEventListener('click', () => {
@@ -5352,6 +5648,15 @@ document.getElementById('clearFiltersBtn').addEventListener('click', () => {
   document.getElementById('price_min').value = '';
   document.getElementById('price_max').value = '';
   })
+  document.addEventListener('DOMContentLoaded', () => {
+    // Add a 10-second delay before simulating a click on the toggle button
+    setTimeout(() => {
+        const themeToggle2 = document.getElementById('themeToggle2');
+        if (themeToggle2) {
+            themeToggle2.click(); // Simulate a click on the toggle
+        }
+    }, 10000); // 10000 milliseconds = 10 seconds
+});
   // Reset dropdowns (example for region selector)
   const regionSelect = document.getElementById('regionSelect');
   if (regionSelect) regionSelect.selectedIndex = 0;
@@ -5360,6 +5665,7 @@ document.getElementById('clearFiltersBtn').addEventListener('click', () => {
 });
 
 document.getElementById('searchBtn').addEventListener('click', async function () {
+  const fromlocation = document.getElementById('from').value /*covert to skyscanneracceptableurllanguage e.g if 'from' value = 'London' convert to 'lond' as this is acceptbale by the skyscanner url, 'paris' = 'pari' 'etc...';*/
     const location = document.getElementById('where').value;
     const language = document.getElementById('languageSelect').value;
     const location_type = document.getElementById('locationTypeWrapper').value;
@@ -5480,7 +5786,7 @@ const monthlyEndDate = new Date(today.getFullYear(), today.getMonth() + 3, 0); /
 // Format the dates to YYYY-MM-DD
 const monthlyStart = monthlyStartDate.toISOString().split('T')[0];  // First day of current month
 const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of the month 3 months from now
-    let searchUrl = `https://www.booking.com/searchresults.en-gb.html?ss=${location}&efdco=1&label=gen173nr-1BCAEoggI46AdIM1gEaFCIAQGYAQm4AQfIAQ3YAQHoAQGIAgGoAgO4Ar2Go7oGwAIB0gIkMWUyNDY4NTgtMzk0Yy00NTI1LTgzMTUtM2YwYzFkYmIwYTJm2AIF4AIB&sid=cbab34cb05d1292aadca8e577bbd857d&aid=304142&lang=${language}&sb=1&src_elem=sb&src=index&dest_id=-2601889&dest_type=${location_type}&checkin=${checkin}&checkout=${checkout}&group_adults=${guests}&no_rooms=${room_no}&group_children=${no_of_children}#map_opened`;
+    let searchUrl = `https://www.skyscanner.net/transport/flights/${fromlocation}/${location}/241206/241213/?adults=${guests}&adultsv2=${guests}&cabinclass=economy&children=${guests}&childrenv2=&destinationentityid=27539733&inboundaltsenabled=false&infants=0&originentityid=27544008&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=1`;
 
     // Only add price_min and price_max if they have values
     if (priceMin && priceMin.trim() !== "") {
@@ -5991,7 +6297,7 @@ document.querySelectorAll('.post-grid').forEach((item, index) => {
     "colombia": { lat: 4.5709, lng: -74.2973, zoom: 2.7 },
     "venezuela": { lat: 6.4238, lng: -66.5897, zoom: 2.7 }
 };*/
-const locations = {
+/*const locations = {
     "africa": { lat: 10, lng: 20, zoom: 1.4 },
     "europe": { lat: 50, lng: 10, zoom: 1.4 },
     "america": { lat: 40, lng: -100, zoom: 3.3270465054184264 },
@@ -6092,7 +6398,128 @@ const locations = {
     "afghanistan": { lat: 33.9391, lng: 67.7100, zoom: 1.4 },
     "colombia": { lat: 4.5709, lng: -74.2973, zoom: 1.4 },
     "venezuela": { lat: 6.4238, lng: -66.5897, zoom: 1.4 }
+};*/
+const locations = {
+    // Global regions
+    "africa": { lat: 10, lng: 20, zoom: 1.4 },
+    "europe": { lat: 50, lng: 10, zoom: 1.4 },
+    "america": { lat: 40, lng: -100, zoom: 1.4 },
+    "south america": { lat: -10, lng: -55, zoom: 1.4 },
+    "caribbean": { lat: 20, lng: -75, zoom: 1.4 },
+    "asia": { lat: 30, lng: 100, zoom: 1.4 },
+    "world": { lat: 0, lng: 0, zoom: 1.4 },
+
+    // US Cities
+    "hawaii": { lat: 21.3069, lng: -157.8583, zoom: 1.4 },
+    "new york": { lat: 40.7128, lng: -74.0060, zoom: 1.4 },
+    "los angeles": { lat: 34.0522, lng: -118.2437, zoom: 1.4 },
+    "chicago": { lat: 41.8781, lng: -87.6298, zoom: 1.4 },
+    "miami": { lat: 25.7617, lng: -80.1918, zoom: 1.4 },
+    "san francisco": { lat: 37.7749, lng: -122.4194, zoom: 1.4 },
+    "washington dc": { lat: 38.9072, lng: -77.0369, zoom: 1.4 },
+
+    // Canadian Cities
+    "toronto": { lat: 43.651070, lng: -79.347015, zoom: 1.4 },
+    "vancouver": { lat: 49.2827, lng: -123.1207, zoom: 1.4 },
+    "montreal": { lat: 45.5017, lng: -73.5673, zoom: 1.4 },
+
+    // Latin America
+    "rio de janeiro": { lat: -22.9068, lng: -43.1729, zoom: 1.4 },
+    "são paulo": { lat: -23.5505, lng: -46.6333, zoom: 1.4 },
+    "mexico city": { lat: 19.4326, lng: -99.1332, zoom: 1.4 },
+    "buenos aires": { lat: -34.6037, lng: -58.3816, zoom: 1.4 },
+    "lima": { lat: -12.0464, lng: -77.0428, zoom: 1.4 },
+    "santiago": { lat: -33.4489, lng: -70.6693, zoom: 1.4 },
+    "bogota": { lat: 4.7110, lng: -74.0721, zoom: 1.4 },
+    "caracas": { lat: 10.4806, lng: -66.9036, zoom: 1.4 },
+
+    // European Cities
+    "london": { lat: 51.5074, lng: -0.1278, zoom: 1.4 },
+    "paris": { lat: 48.8566, lng: 2.3522, zoom: 1.4 },
+    "berlin": { lat: 52.5200, lng: 13.4050, zoom: 1.4 },
+    "rome": { lat: 41.9028, lng: 12.4964, zoom: 1.4 },
+    "madrid": { lat: 40.4168, lng: -3.7038, zoom: 1.4 },
+    "barcelona": { lat: 41.3851, lng: 2.1734, zoom: 1.4 },
+    "lisbon": { lat: 38.7223, lng: -9.1393, zoom: 1.4 },
+    "amsterdam": { lat: 52.3676, lng: 4.9041, zoom: 1.4 },
+    "athens": { lat: 37.9838, lng: 23.7275, zoom: 1.4 },
+    "vienna": { lat: 48.2082, lng: 16.3738, zoom: 1.4 },
+    "stockholm": { lat: 59.3293, lng: 18.0686, zoom: 1.4 },
+    "copenhagen": { lat: 55.6761, lng: 12.5683, zoom: 1.4 },
+    "dublin": { lat: 53.3498, lng: -6.2603, zoom: 1.4 },
+    "warsaw": { lat: 52.2297, lng: 21.0122, zoom: 1.4 },
+    "zurich": { lat: 47.3769, lng: 8.5417, zoom: 1.4 },
+
+    // Asian Cities
+    "tokyo": { lat: 35.6895, lng: 139.6917, zoom: 1.4 },
+    "beijing": { lat: 39.9042, lng: 116.4074, zoom: 1.4 },
+    "shanghai": { lat: 31.2304, lng: 121.4737, zoom: 1.4 },
+    "bangkok": { lat: 13.7563, lng: 100.5018, zoom: 1.4 },
+    "singapore": { lat: 1.3521, lng: 103.8198, zoom: 1.4 },
+    "hong kong": { lat: 22.3193, lng: 114.1694, zoom: 1.4 },
+    "seoul": { lat: 37.5665, lng: 126.9780, zoom: 1.4 },
+    "kuala lumpur": { lat: 3.1390, lng: 101.6869, zoom: 1.4 },
+    "jakarta": { lat: -6.2088, lng: 106.8456, zoom: 1.4 },
+
+    // Middle East
+    "dubai": { lat: 25.2048, lng: 55.2708, zoom: 1.4 },
+    "doha": { lat: 25.276987, lng: 51.521067, zoom: 1.4 },
+    "istanbul": { lat: 41.0082, lng: 28.9784, zoom: 1.4 },
+
+    // Africa
+    "cape town": { lat: -33.9249, lng: 18.4241, zoom: 1.4 },
+    "nairobi": { lat: -1.2864, lng: 36.8172, zoom: 1.4 },
+    "casablanca": { lat: 33.5731, lng: -7.5898, zoom: 1.4 },
+
+    // Oceania
+    "sydney": { lat: -33.8688, lng: 151.2093, zoom: 1.4 },
+    "melbourne": { lat: -37.8136, lng: 144.9631, zoom: 1.4 },
+    "auckland": { lat: -36.8485, lng: 174.7633, zoom: 1.4 },
+
+    // Islands
+    "jamaica": { lat: 18.1096, lng: -77.2975, zoom: 1.4 },
+    "bahamas": { lat: 25.0343, lng: -77.3963, zoom: 1.4 },
+    "maldives": { lat: 3.2028, lng: 73.2207, zoom: 1.4 },
+    "seychelles": { lat: -4.6796, lng: 55.4920, zoom: 1.4 },
+
+    //countries
+    "jamaica": { lat: 18.1096, lng: -77.2975, zoom: 3 },
+    "united states": { lat: 37.0902, lng: -95.7129, zoom: 1.4 },
+    "canada": { lat: 56.1304, lng: -106.3468, zoom: 1.4 },
+    "mexico": { lat: 23.6345, lng: -102.5528, zoom: 1.4 },
+    "brazil": { lat: -14.2350, lng: -51.9253, zoom: 1.4 },
+    "argentina": { lat: -38.4161, lng: -63.6167, zoom: 1.4 },
+    "united kingdom": { lat: 55.3781, lng: -3.4360, zoom: 1.4 },
+    "france": { lat: 46.6034, lng: 2.2137, zoom: 1.4 },
+    "germany": { lat: 51.1657, lng: 10.4515, zoom: 1.4 },
+    "italy": { lat: 41.8719, lng: 12.5674, zoom: 1.4 },
+    "spain": { lat: 40.4637, lng: -3.7492, zoom: 1.4 },
+    "portugal": { lat: 39.3999, lng: -8.2245, zoom: 1.4 },
+    "russia": { lat: 61.5240, lng: 105.3188, zoom: 1.4 },
+    "china": { lat: 35.8617, lng: 104.1954, zoom: 1.4 },
+    "japan": { lat: 36.2048, lng: 138.2529, zoom: 1.4 },
+    "india": { lat: 20.5937, lng: 78.9629, zoom: 1.4 },
+    "australia": { lat: -25.2744, lng: 133.7751, zoom: 1.4 },
+    "south africa": { lat: -30.5595, lng: 22.9375, zoom: 1.4 },
+    "egypt": { lat: 26.8206, lng: 30.8025, zoom: 1.4 },
+    "nigeria": { lat: 9.0820, lng: 8.6753, zoom: 1.4 },
+    "kenya": { lat: -1.2921, lng: 36.8219, zoom: 1.4 },
+    "south korea": { lat: 35.9078, lng: 127.7669, zoom: 1.4 },
+    "indonesia": { lat: -0.7893, lng: 113.9213, zoom: 1.4 },
+    "saudi arabia": { lat: 23.8859, lng: 45.0792, zoom: 1.4 },
+    "iran": { lat: 32.4279, lng: 53.6880, zoom: 1.4 },
+    "turkey": { lat: 38.9637, lng: 35.2433, zoom: 1.4 },
+    "israel": { lat: 31.0461, lng: 34.8516, zoom: 1.4 },
+    "greece": { lat: 39.0742, lng: 21.8243, zoom: 1.4 },
+    "thailand": { lat: 15.8700, lng: 100.9925, zoom: 1.4 },
+    "vietnam": { lat: 14.0583, lng: 108.2772, zoom: 1.4 },
+    "new zealand": { lat: -40.9006, lng: 174.8860, zoom: 1.4 },
+    "pakistan": { lat: 30.3753, lng: 69.3451, zoom: 1.4 },
+    "afghanistan": { lat: 33.9391, lng: 67.7100, zoom: 1.4 },
+    "colombia": { lat: 4.5709, lng: -74.2973, zoom: 1.4 },
+    "venezuela": { lat: 6.4238, lng: -66.5897, zoom: 1.4 }
 };
+
 
 
 
@@ -6202,13 +6629,26 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders
 function createFlightPath(fromVec, toVec, altitude) {
     const distance = fromVec.distanceTo(toVec); // Calculate the distance between the two points
 
-    // Dynamically adjust the altitude based on distance
-    const adjustedAltitude = distance * 0.2; // Scale altitude to 20% of the distance
-    const midpointAltitude = earthRadius + adjustedAltitude;
+    // Set a threshold for short distances
+    const shortDistanceThreshold = 2.0; // Define a threshold for what constitutes a "short" distance
 
+    // Dynamically adjust the altitude based on distance
+    let adjustedAltitude;
+    if (distance < shortDistanceThreshold) {
+        // For short distances, make the curve less pronounced
+        adjustedAltitude = Math.max(0.25, distance * 0.1); // Scale to 10% of the distance, minimum 1.5
+    } else {
+        // For longer distances, keep the curve more pronounced
+        adjustedAltitude = Math.max(2.5, distance * 0.2); // Scale to 30% of the distance, minimum 5.0
+    }
+
+    const midpointAltitude = earthRadius + adjustedAltitude; // Ensure midpoint altitude is higher than the globe radius
+
+    // Calculate the midpoint and adjust its altitude
     const midPoint = fromVec.clone().lerp(toVec, 0.5); // Calculate the midpoint
     midPoint.setLength(midpointAltitude); // Adjust midpoint altitude
 
+    // Create the curve for the flight path
     const curve = new THREE.QuadraticBezierCurve3(fromVec, midPoint, toVec);
 
     // Create the tube geometry for the path
@@ -6217,8 +6657,11 @@ function createFlightPath(fromVec, toVec, altitude) {
     const flightPath = new THREE.Mesh(pathGeometry, pathMaterial);
 
     scene.add(flightPath);
-    return { flightPath, curve, distance }; // Return distance for scaling the plane
+
+    // Return curve and distance for animations
+    return { flightPath, curve, distance };
 }
+
 
 
 
@@ -6256,8 +6699,21 @@ function animatePlane(plane, pathCurve, duration = 3500, distance) {
 
     animateFlight(); // Start the initial animation
 }
+//let activePlane = null; // Keep track of the active plane
+//let activeCurve = null; // Keep track of the current flight path curve
 
-
+// Ensure other buttons like "Region Select" or "Search" don't stop the animation
+document.getElementById('regionSelectBtn').addEventListener('click', () => {
+    controls.autoRotate = true; // Re-enable auto-rotate for the globe
+    // Ensure plane animation continues (do not reset or interfere with TWEEN)
+    console.log('Region Select clicked. Plane animation continues.');
+});
+// Ensure other buttons like "Region Select" or "Search" don't stop the animation
+document.getElementById('submitRegion').addEventListener('click', () => {
+    controls.autoRotate = true; // Re-enable auto-rotate for the globe
+    // Ensure plane animation continues (do not reset or interfere with TWEEN)
+    console.log('Region Select clicked. Plane animation continues.');
+});
 // When search button is clicked
 document.getElementById('searchBtn').addEventListener('click', async () => {
     // Get selected "from" and "to" locations from the user
@@ -6290,14 +6746,16 @@ document.getElementById('searchBtn').addEventListener('click', async () => {
 
     // Create a flight path and animate the plane
     const { flightPath, curve, distance } = createFlightPath(fromVector, toVector, earthRadius * 1.1);
-
+// Update global references
+//activePlane = plane;
+    //activeCurve = curve;
     // Load and animate the plane
     const loader = new GLTFLoader();
     loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
         const plane = gltf.scene;
         scene.add(plane);
         //plane.scale.set(0.1, 0.1, 0.1);
-
+        //activePlane = plane; 
         // Update plane materials
         plane.traverse((child) => {
             if (child.isMesh) {
@@ -6328,6 +6786,7 @@ addMarkupPoints(fromLatLng, toLatLng);
 
     // Resize and update all markers
     // Resize and update all markers with animation
+// Function to adjust marker sizes dynamically based on zoom level
 Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
     if (markers) {
@@ -6394,7 +6853,28 @@ Object.keys(genericMarkers).forEach(region => {
         console.warn(`No markers found for the region: ${region}`);
     }
 });
-  });
+
+// Function to update marker sizes dynamically as zoomLevel changes
+const updateMarkerSizesWithZoom = (zoomLevel) => {
+    Object.keys(genericMarkers).forEach(region => {
+        const markers = genericMarkers[region];
+
+        if (markers && markers.updatedMeshes) {
+            markers.updatedMeshes.forEach(markerMesh => {
+                // Calculate the new size based on zoom level
+                const baseMarkerSize = 1; // Original size
+                const scaleFactor = zoomLevel * 0.1; // Scale factor
+                const newMarkerSize = baseMarkerSize * scaleFactor;
+
+                // Update marker geometry
+                markerMesh.geometry.dispose(); // Dispose old geometry
+                markerMesh.geometry = new THREE.PlaneGeometry(newMarkerSize, newMarkerSize);
+            });
+        }
+    });
+}; });
+
+// Example: Listening to zoom level changes and updating marker sizes
 // Updated function name to avoid conflict
 function convertLonLatToXYZ(radius, lon, lat) {
   const phi = (90 - lat) * (Math.PI / 180);
@@ -6822,6 +7302,8 @@ function createMarkerMesh(lat, lng) {
 
     // Pan to the selected region
     panToRegion(selectedRegion);
+    // Ensure the active plane animation continues
+  
     //controls.minDistance = 10;
     // Resize and update all markers with animation
 // Resize and update all markers with animation
@@ -6933,7 +7415,7 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
     });*/
     overlay.style.display = 'grid';
     overlay.classList.add('show');
-
+// Ensure the active plane animation continues
     overlay.innerHTML = `
             <div class="spinner-container">
                 <div class="spinner"></div>
@@ -7102,49 +7584,72 @@ document.querySelectorAll('.post-grid').forEach((item, index) => {
     });
 });
   // Iterate through all regions in the genericMarkers object
-Object.keys(genericMarkers).forEach(region => {
+  Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
-
     if (markers) {
-        console.log(`Resizing markers for region: ${region}`);
+        const originalMarkerSize = 1; // Assume original size
+        const targetMarkerSize = 0.5; // Target size (smaller)
+        const animationDuration = 500; // Animation duration in milliseconds
 
-        // Create smaller geometry (target size)
-        const smallerMarkerSize = 0.5; // Target size
-        const originalMarkerSize = 1; // Assuming original size was 0.5
+        // Store the new marker meshes in an array for optional later cleanup
+        const newMarkerMeshes = [];
 
         for (let i = 0; i < markers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
-            const markerMesh = new THREE.Mesh(new THREE.PlaneGeometry(originalMarkerSize, originalMarkerSize), markerMaterial);
+            // Create marker mesh with initial size
+            const markerMesh = new THREE.Mesh(
+                new THREE.PlaneGeometry(originalMarkerSize, originalMarkerSize),
+                markerMaterial
+            );
             markerMesh.applyMatrix4(instanceMatrix);
+            scene.add(markerMesh); // Add marker to scene
+            newMarkerMeshes.push(markerMesh); // Store the marker mesh
 
-            scene.add(markerMesh); // Add the marker to the scene
-
-            // Animate the size reduction of the marker
+            // Animation variables
             let currentSize = originalMarkerSize;
-            const targetSize = smallerMarkerSize;
 
-            const animateResize = () => {
-                currentSize = THREE.MathUtils.lerp(currentSize, targetSize, 0.1); // Smooth transition
-                markerMesh.geometry.dispose(); // Dispose of old geometry
-                markerMesh.geometry = new THREE.PlaneGeometry(currentSize, currentSize); // Update geometry
+            // Function to animate the resizing of markers
+            const animateResize = (duration) => {
+                const startTime = performance.now(); // Capture the start time
 
-                if (Math.abs(currentSize - targetSize) > 0.01) {
-                    requestAnimationFrame(animateResize); // Continue animating until close to target size
-                }
+                const resizeStep = (currentTime) => {
+                    const elapsedTime = currentTime - startTime; // Calculate elapsed time
+                    const progress = Math.min(elapsedTime / duration, 1); // Normalize progress between 0 and 1
+
+                    // Interpolate size based on progress
+                    currentSize = THREE.MathUtils.lerp(originalMarkerSize, targetMarkerSize, progress);
+                    markerMesh.geometry.dispose(); // Dispose of old geometry
+                    markerMesh.geometry = new THREE.PlaneGeometry(currentSize, currentSize); // Update geometry
+
+                    if (progress < 1) {
+                        requestAnimationFrame(resizeStep); // Continue animation if not yet complete
+                    } else {
+                        // Ensure the final size is set
+                        markerMesh.geometry.dispose();
+                        markerMesh.geometry = new THREE.PlaneGeometry(targetMarkerSize, targetMarkerSize);
+                    }
+                };
+
+                requestAnimationFrame(resizeStep); // Start the animation loop
             };
 
-            //animateResize(); // Start the animation
+            // Delay the animation by 5 seconds (5000 ms)
+            setTimeout(() => {
+                animateResize(animationDuration); // Animate resizing after delay
+            }, 3000); // 5-second delay
         }
 
-        // Remove old markers from the scene once resizing begins
-        //scene.remove(markers);
+        // Remove the original markers after the new markers have been added
+        setTimeout(() => {
+            scene.remove(markers);
+            console.log(`Original markers for region ${region} removed.`);
+        }, 3000); // Remove after delay, matching the animation start time
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
-});
-    });
+  }) });
 	  // Load markers based on region and price category
 // Load markers based on region and price category
 async function loadMarkersForRegionAndCategory(region, category) {
@@ -7303,6 +7808,7 @@ const adjustMarkerSizes = (zoomLevel) => {
                 if (!genericMarkers[region].updatedMeshes) {
                     genericMarkers[region].updatedMeshes = [];
                 }
+                scene.remove(markers);
                 genericMarkers[region].updatedMeshes.push(markerMesh);
             }
         } else {
@@ -7397,7 +7903,7 @@ function panToRegion(region) {
     case 'america': 
       position = { x: 0, y: 2.55, z: 4.42 }; 
       //zoomLevel = 2.0;
-      zoomLevel = 3.3270465054184264; 
+      zoomLevel = 2.0; 
       break;
       
     case 'south america': 
@@ -7430,6 +7936,12 @@ function panToRegion(region) {
     console.error('Zoom level is undefined');
     return;
   }
+  // Set the zoom limits with a broader range
+  controls.minDistance = 15; // Allow zooming slightly closer
+  controls.maxDistance = 28; // Allow zooming slightly farther
+
+  // Adjust the target zoom level to avoid aggressive zoom-in
+  controls.targetZoomLevel = zoomLevel;
   // Initial pan based on default zoom level
   executePan(position, zoomLevel);
 }
@@ -8306,14 +8818,8 @@ function openMarkerLabel(data) {
     contentDiv.innerHTML = `
       <div class="loading-spinner" style="pointer-events:none;"></div>
       <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="yes" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
-    <button class="iframeSettingsBtn">
-      <img src=js/three-dots.png" style="width: 16px; height: 16px; margin-top: -7px; margin-left: -12px; class=iframe-settings-btn">
-      <select id="iframeSettings" class="hidden" style="display: none;"
-      <option value="">Airbnb's</option>
-      <option value="">Trivago hotels</option>
-      <option value="">Booking.com hotels</option>
-      </select>
-    </button>`;
+      • • •
+     `;
 
     const iframe = labelDiv.querySelector('iframe');
     const spinner = contentDiv.querySelector('.loading-spinner');
@@ -8360,6 +8866,9 @@ document.getElementById('airbnbSelector').addEventListener('change', function() 
 
 // Load markers for default category on page load
 loadMarkers('general');
+
+controls.minDistance = 15;
+  controls.maxDistance = 30;
 		    
 	 /* let activeLabel = null; // Keep track of the currently open iframe
 
