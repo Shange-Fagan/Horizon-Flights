@@ -60,13 +60,13 @@ app.options('*', corsConfig);
 function waitForTimeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
+  const PORT = process.env.PORT || 3000; // Use the PORT environment variable or default to 3000
 
 // Airbnb Scraping based on searchUrl (Original code)
 async function scrapeAirbnbPosts(searchUrl) {
   try {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: ['--no-sandbox',
         '--disable-setuid-sandbox',
         '--window-size=1920,1080',
@@ -140,17 +140,21 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 const { searchUrl, category } = req.query;
 // Parse the searchUrl to extract the query parameters
 const parsedUrl = new URL(searchUrl);
-const location = parsedUrl.pathname.split('/')[2]; // Extract 'location' from the path
+const fromlocations = parsedUrl.searchParams.get('from'); // Extract 'location' from the path
+const location = parsedUrl.searchParams.get('checkin'); // Extract 'location' from the path
 const checkin = parsedUrl.searchParams.get('checkin');
 const checkout = parsedUrl.searchParams.get('checkout');
 const guests = parsedUrl.searchParams.get('adults');
+const cabinClass = parsedUrl.searchParams.get('cabinClassInput');
+const no_of_children = parsedUrl.searchParams.get('no_of_children'); // Extract 'location' from the path
+
 //const monthly_start = parsedUrl.searchParams.get('monthlyStart');
 //const monthly_end = parsedUrl.searchParams.get('monthlyEnd');
 
 console.log(`Location: ${location}, Checkin: ${checkin}, Checkout: ${checkout}, Guests: ${guests}`);
 
 // Use these parameters to build your final search URL
-let finalSearchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=${guests}&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
+let finalSearchUrl = `https://www.skyscanner.net/transport/flights/${fromlocations}/${location}/241207/241207/?adults=${guests}&adultsv2=${guests}&cabinclass=${cabinClass}&children=${no_of_children}&childrenv2=&destinationentityid=27539733&inboundaltsenabled=false&infants=0&originentityid=27544008&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=1`;
 
 console.log(`Generated URL: ${finalSearchUrl}`);
 //let searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=2&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&adults=${guests}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
@@ -357,7 +361,7 @@ if (closeButton) {
 }
 // Function to scrape pixel positions of Airbnb markers
 async function scrapeAirbnbMapMarkers(searchUrl) {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   // Navigate to Airbnb map page
@@ -564,7 +568,6 @@ console.log('Converted Marker Lat/Lng with Scaling:', markerLatLngs);
   // Send the lat/lng markers as JSON response
   res.json(markerLatLngs);
 });
-const PORT = process.env.PORT || 3000;
 
 // Start the server
 app.listen(PORT, () => {

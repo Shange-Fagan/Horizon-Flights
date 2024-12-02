@@ -66,7 +66,7 @@ function waitForTimeout(ms) {
 async function scrapeAirbnbPosts(searchUrl) {
   try {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: ['--no-sandbox',
         '--disable-setuid-sandbox',
         '--window-size=1920,1080',
@@ -241,7 +241,7 @@ async function simulateMouseDrag(page, startX, startY, endX, endY) {
 }
 // Function to scrape location information from Airbnb and fetch bounds from Google Maps
 async function extractBoundsFromUrl(searchUrl) {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   
@@ -357,7 +357,7 @@ if (closeButton) {
 }
 // Function to scrape pixel positions of Airbnb markers
 async function scrapeAirbnbMapMarkers(searchUrl) {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   // Navigate to Airbnb map page
@@ -564,7 +564,6 @@ console.log('Converted Marker Lat/Lng with Scaling:', markerLatLngs);
   // Send the lat/lng markers as JSON response
   res.json(markerLatLngs);
 });
-const PORT = process.env.PORT || 3000;
 
 // Start the server
 app.listen(PORT, () => {
