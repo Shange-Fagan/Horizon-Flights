@@ -66,7 +66,7 @@ function waitForTimeout(ms) {
 async function scrapeAirbnbPosts(searchUrl) {
   try {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: ['--no-sandbox',
         '--disable-setuid-sandbox',
         '--window-size=1920,1080',
@@ -101,12 +101,21 @@ async function scrapeAirbnbPosts(searchUrl) {
         const imageUrl = imgElement ? imgElement.getAttribute('srcset').split(' ')[0] : '';
         const linkElement = document.querySelectorAll('a[aria-hidden="true"]')[index];
 
+        // Use querySelector for the rating element specifically
+    const ratingElement = document.querySelectorAll('span')[index];
+    let ratingText = null;
+
+    // Filter out the span containing the specific rating pattern
+    if (ratingElement && ratingElement.textContent.includes('out of 5 average')) {
+      ratingText = ratingElement.textContent.match(/[\d.]+(?=\sout of 5 average)/)?.[0]; // Extract only the numeric value
+    }
         return {
           images: imageUrl,
           title: post.innerText,
           subtitle: subtitleElement ? subtitleElement.innerText : null,
           listing_name: subtitleNameElement ? subtitleNameElement.innerText : null,
           listing_price_details: priceElement ? priceElement.innerText : null,
+          rating_out_of_5_stars: ratingElement ? ratingElement.innerText : null,
           link: linkElement ? linkElement.href : null
         };
       });
@@ -241,7 +250,7 @@ async function simulateMouseDrag(page, startX, startY, endX, endY) {
 }
 // Function to scrape location information from Airbnb and fetch bounds from Google Maps
 async function extractBoundsFromUrl(searchUrl) {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true});
   const page = await browser.newPage();
 
   
@@ -357,7 +366,7 @@ if (closeButton) {
 }
 // Function to scrape pixel positions of Airbnb markers
 async function scrapeAirbnbMapMarkers(searchUrl) {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true});
   const page = await browser.newPage();
 
   // Navigate to Airbnb map page

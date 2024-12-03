@@ -414,7 +414,7 @@ a, button, input, select, iframe {
 	color: rgba(255, 255, 255, 0.75);
     width: 95px; /* Set width to auto */
     max-width: max-content; /* Ensure it adjusts based on the placeholder or content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
     white-space: nowrap; /* Prevent wrapping */
     cursor: default;
     /*border-right: 1px solid rgba(255, 255, 255, 0.5); /* Grey line on the left side */
@@ -427,7 +427,7 @@ a, button, input, select, iframe {
     border-radius: 50px; /* Fully rounded corners for inputs */
     margin-right: 10px; /* Spacing between input fields */
     width: 225px; /* Slightly smaller width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
 	color: rgba(255, 255, 255, 0.75);
     width: 85px; /* Set width to auto */
     max-width: max-content; /* Ensure it adjusts based on the placeholder or content */
@@ -464,7 +464,7 @@ a, button, input, select, iframe {
     border-radius: 0 25px 25px 0;
     margin-right: 10px; /* Spacing between input fields */
     width: 220px; /* Slightly smaller width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
 	color: rgba(255, 255, 255, 0.75);
     width: 75px; /* Set width to auto */
     max-width: max-content; /* Ensure it adjusts based on the placeholder or content */
@@ -499,7 +499,7 @@ a, button, input, select, iframe {
     border-radius: 50px; /* Fully rounded corners for inputs */
     margin-right: 14px; /* Spacing between input fields */
     width: 220px; /* Slightly smaller width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
 	color: rgba(255, 255, 255, 0.75);
     width: 70px; /* Set width to auto */
     max-width: max-content; /* Ensure it adjusts based on the placeholder or content */
@@ -650,7 +650,7 @@ header .airbnb-button22 {
 	color: rgba(255, 255, 255, 0.75);
     width: 83px; /* Set width to auto */
     max-width: max-content; /* Ensure it adjusts based on the placeholder or content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
     white-space: nowrap; /* Prevent wrapping */
     cursor: default;
     border-radius: 25px 0px 0px 25px;
@@ -1671,8 +1671,8 @@ overflow: hidden;
   position: absolute;
   top: 135px;
   left: 15px;
-  width: 45%; /* Adjust width as per your requirement */
-  height: 72.5%;
+  width: 49.5%; /* Adjust width as per your requirement */
+  height: 77%;
   padding: 20px;
   border-radius: 15px;
   display: none;
@@ -1767,52 +1767,47 @@ overflow: hidden;
 }*/
 
 /* Rating and other text below the title */
-.post .details {
-  font-size: 0.9rem;
-  color: #333;
+#overlayContainer {
+    display: none;
+    flex-wrap: wrap; /* Ensure posts flow to the next row if there's no space */
+    gap: 10px; /* Space between posts */
+    padding: 10px; /* Padding around the container */
+    row-gap: 250px;
 }
+
 .post {
-  background-color: rgba(255, 255, 255, 0);
-  border-radius: 25px;
-  overflow-y: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  text-align: left;
-  padding: 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    width: 300px; /* Set a fixed width for each post */
+    height: 500px;
+    background-color: #ffffffdb; /* Optional: Add a background color for better visibility */
+    border: 1px solid #ddd; /* Optional: Add a border */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow the container */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visuals */
+    padding: 15px; /* Padding inside the post */
+    /*display: flex;*/
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align elements inside the post */
+    margin-bottom: 20px; /* Space between rows */
+    justify-self: center;
 }
 
-
-    .post img {
-        width: 300px;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 15px;
-    
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 25px;
-  margin-bottom: 10px;
+.post img {
+    width: 100%; /* Make the image take up the full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    border-bottom: 1px solid #ddd; /* Separate image from text */
+    margin-bottom: 10px; /* Add space below the image */
 }
 
-.post h3 {
-  font-size: 1rem;
-  margin: 5px 0;
-}
-
-.post p.details {
-  font-size: 0.9rem;
-  color: #696767;
+.post h3, .post p {
+    margin: 5px 0; /* Ensure consistent spacing */
+    text-align: center; /* Center text */
 }
 
 .post .guest-favorite {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: white;
   color: #ff385c;
   font-weight: bold;
   font-size: 0.8rem;
@@ -1823,12 +1818,13 @@ overflow: hidden;
 .post .view-link {
   background-color: #ff385c;
   color: white;
-  padding: 8px 15px;
+  padding: 16px 70px;
   text-align: center;
   border-radius: 20px;
   margin-top: auto;
   text-decoration: none;
   font-size: 0.9rem;
+  border-radius: 25px 0px 0px 25px;
 }
 
 /* Button or link for each post */
@@ -1845,7 +1841,46 @@ overflow: hidden;
 }*/
 
 .post .view-link:hover {
-  background-color: #e03a56;
+  background-color: #ff385c;
+}
+
+.like-button {
+    margin-top: 10px; /* Space above the button */
+    padding: 16px 20px; /* Add padding for better clickability */
+    background-color: #ff385c; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Round corners */
+    cursor: pointer; /* Change cursor to pointer */
+    font-size: 14px;
+    border-radius: 0 25px 25px 0;
+    padding-bottom: 17px;
+    padding-top:15px;
+}
+
+.like-button:hover {
+    background-color: #ff385c; /* Change color on hover */
+}
+.like-button:hover, .post .view-link:hover {
+      box-shadow: 0 0 9px rgb(252, 22, 68) /* Red outline for focus similar to Airbnb */
+}
+
+
+/* Button or link for each post */
+/*.post .view-link {
+  display: inline-block;
+  margin-top: auto;*/ /* Push link to the bottom */
+  /*padding: 8px 12px;
+  background-color: #ff385c;
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-align: center;
+}*/
+
+.post .view-link:hover {
+  background-color: #ff385c;
 }
 /* Scrollbar customization */
 #overlayContainer::-webkit-scrollbar {
@@ -2129,7 +2164,7 @@ overflow: hidden;
 #countryBtn {
   margin-top: 10px;
   color: rgba(255, 255, 255, 0.75);
-  font-size: 14px;
+  font-size: 16px;
   font-family: system-ui;
 }
 
@@ -2166,7 +2201,7 @@ overflow: hidden;
   background-color: rgba(255, 255, 255, 0.15);
   transition: 0.4s;
   border-radius: 40px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
 }
 .slider2:focus, .slider2:focus {
     outline: none;
@@ -2484,7 +2519,7 @@ crossorigin="anonymous"></script>
 <!-- Instructions Modal -->
 <div id="instructionsOverlay" class="hidden">
   <div class="instruction-step hidden" id="zoomInstruction">
-    <img src="js/pinch-3.png" alt="Scroll Gesture" class="glove-hand">
+    <img src="js/hands.png" alt="Scroll Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 50%; left: 50%;"></div>
     <p class="instruction-text">Use your mouse or trackpad to zoom in and out.</p>
   </div>
@@ -2525,15 +2560,15 @@ crossorigin="anonymous"></script>
   </div>
   
   <!-- Info Section -->
-  <div id="info">Click the markers to show the label</div>
-  <div id="credits">
+  <div id="info" style="display:none">Click the markers to show the label</div>
+  <div id="credits" style="display:none">
     Made by
     <a href="https://www.linkedin.com/in/shange-fagan-bba3a3239/" target="_blank" rel="noopener">Shange Fagan</a>
   </div>
 	<!-- Footer Section -->
   <footer>
-    © 2024 Horizon Flights. All rights reserved. 
-    <a href="https://www.linkedin.com/in/shange-fagan-bba3a3239/" target="_blank">LinkedIn</a> | 
+    © 2024 Horizon Flights. All rights reserved
+    <a href="https://www.linkedin.com/in/shange-fagan-bba3a3239/" target="_blank" style="display: none">LinkedIn</a> | 
     <a href="mailto:yourname@gmail.com?subject=Inquiry&body=Hello, I would like to know more about your services." target="_blank">Contact Us</a>
   </footer>
 
@@ -2546,7 +2581,7 @@ crossorigin="anonymous"></script>
       <input type="checkbox" id="themeToggle2">
       <span class="slider2">
         <img src="js/planet-earth.png" alt="Airbnb" style="display: none; left: 14px; justify-content: center; width: 20%; height: 69%; margin-left:-7px;
-    margin-top:20px; align-items: center;" class="logo-country"><span id="countryBtn" style="display: none; margin-left:42px; margin-top: -36.5px;">Country</span>
+    margin-top:20px; align-items: center;" class="logo-country"><span id="countryBtn" style="display: none; margin-left:37px; margin-top: -36.5px;">Country</span>
         <img src="js/buildings.png" alt="Trivago" style="right: -97px; top: 20px; justify-content: center; width: 24%; height: 80%; margin-right: -7px;
     align-items: center;"class="logo-city"><span id="cityBtn" style="margin-left: 40px; display: none; margin-top: -21px !important;">By City</span>
       </span>
@@ -2737,10 +2772,10 @@ crossorigin="anonymous"></script>
 </div>
 
 <!-- Region Select button -->
-<button id="regionSelectBtn">Region Select</button>
+<button id="regionSelectBtn">Search Region</button>
 
 <div id="topLeftLabel">
-  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" alt="Profile Icon" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;">Search Hotels
+  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" alt="Profile Icon" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;">Horizon Flights
   <img src="js/300694_plane-plane-emoji-png-png-download (1).png" alt="Profile Icon" style="width: 28px; display:flex; align-items: center; height: 28px; margin-left: 4px; margin-top: 0px;">
 </div>
 <!-- Tickers -->
@@ -2774,7 +2809,7 @@ crossorigin="anonymous"></script>
     <iframe
   id="trivagoIframeContainer"
   class="iframe-container"
-  src="https://rss.app/embed/v1/ticker/z6UazOVLva9ltvNS"
+  src="https://rss.app/embed/v1/ticker/3j0jw7ksCqckLNRl"
   frameborder="0"
   sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
 ></iframe>
@@ -5171,6 +5206,7 @@ globe2 = new THREE.Mesh(geometry, earthMaterial);
 
   //globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
+
   createEarthGlow();
   createEarthAperture();
 	 const dummy = new THREE.Object3D();
@@ -5451,43 +5487,33 @@ async function loadDetailedMarkers(regionCoordinates) {
 // Example: Get detailed markers for a region
 // Get detailed markers for a region (can be dynamic or hardcoded)
 // Fetch detailed markers dynamically from an API or backend service
-async function getDetailedMarkersForRegion(region, category) {
+async function getDetailedMarkersForRegion(region) {
   try {
-    // Construct the API URL with proper query parameters
-    const apiUrl = `http://localhost:3000/get-markers?region=${encodeURIComponent(region)}&category=${encodeURIComponent(category)}`;
-
     // Make an API request to fetch the markers data for the specific region
-    const response = await fetch(apiUrl, {
-      method: 'GET', // Use GET for fetching data
-      headers: {
-        'Content-Type': 'application/json', // Specify JSON content
-      },
-      credentials: 'include', // If cookies/credentials are needed
-    });
-
-    // Check if the response is OK (status 200-299)
-    if (!response.ok) {
-      throw new Error(`Failed to fetch markers: ${response.status} ${response.statusText}`);
-    }
-
-    // Parse the JSON response
-    const markerLatLngs = await response.json();
-    console.log('Fetched markers:', markerLatLngs);
-
+    const response = await fetch(`http://localhost:3000/get-markers?region=${region}&category=${category}`, {
+  method: 'GET',
+  credentials: 'include',  // If you need cookies or credentials
+}).then(response => response.json())
+  .then(markerLatLngs => {
     // Assume 'map' is your initialized Google Map or Mapbox map object
-    markerLatLngs.forEach((marker) => {
-      // Add markers to the map
+
+    // Loop through the marker data and add them to the map
+    markerLatLngs.forEach(marker => {
       new Marker({
-        position: { lat: marker.lat, lng: marker.lng }, // Use the lat/lng coordinates
-        map: map, // Attach marker to the map
-        title: marker.title || 'Airbnb Marker', // Optional: Add a title to the marker
+        position: { lat: marker.lat, lng: marker.lng },  // Use the lat/lng coordinates
+        map: map,
+        title: 'Airbnb Marker'
       });
     });
-
-    // Return the fetched markers data
-    return markerLatLngs;
+  })
+  .catch(err => {
+    console.error('Error fetching markers:', err);
+  });
+    // Parse the JSON response to get the markers data
+    const markersData = await response.json(); 
+console.log(response.json());
+    return markersData; // Assuming the response contains an array of markers
   } catch (error) {
-    // Log and handle errors gracefully
     console.error('Error fetching detailed markers for region:', error);
     return []; // Return an empty array if there's an error
   }
@@ -5830,6 +5856,8 @@ document.getElementById('clearFiltersBtn').addEventListener('click', () => {
   document.getElementById('adults').value = '';
   document.getElementById('price_min').value = '';
   document.getElementById('price_max').value = '';
+  const overlay = document.getElementById('overlayContainer');
+    overlay.innerHTML = ''; // Clear previous posts
   const theme2 = document.querySelector('.theme-switch2');
   const theme = document.querySelector('.theme-switch');
   document.addEventListener('DOMContentLoaded', () => {
@@ -5995,7 +6023,7 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
     });*/
 
     // Update spinner text to indicate fetching data
-    updateSpinnerText("Retrieving posts from Airbnb...");
+    updateSpinnerText("Connecting to Airbnb... feel free to browse while you wait!");
 
     // Fetch Airbnb posts and display them
     await fetchAirbnbPosts(searchUrl);
@@ -6006,7 +6034,7 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 	console.log('Generated searchUrl:guests', guests);
 	console.log('Generated searchUrl:priceMin', priceMin);
 	console.log('Generated searchUrl:priceMax', priceMax);
-	console.log('Fetching data from:', `https://api-4uaw7agqwq-uc.a.run.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+	console.log('Fetching data from:', `http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
   hideSpinnerContainer();
 
 });
@@ -6068,7 +6096,7 @@ overlayContainer.addEventListener('click', () => {
 async function fetchAirbnbPosts(searchUrl) {
     try {
         // Update spinner text to indicate scraping started
-        updateSpinnerText("Retrieving posts from Airbnb...please be patient");
+        updateSpinnerText("Connecting to Airbnb... feel free to browse while you wait!");
 
         const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const data = await response.json();
@@ -6287,6 +6315,8 @@ function showLikedPosts() {
         .then(snapshot => {
             const likedPosts = snapshot.docs.map(doc => doc.data());
             if (likedPosts.length > 0) {
+              const overlay = document.getElementById('overlayContainer');
+              overlay.innerHTML = ''; // Clear previous posts
                 populateOverlay(likedPosts); // Display the liked posts
             } else {
                 alert('No liked posts found.');
@@ -6308,13 +6338,13 @@ document.querySelectorAll('.post-grid').forEach((item, index) => {
     // Make sure `index` matches the corresponding marker
     item.addEventListener('mouseover', function() {
         if (markers[index]) {  // Check if the marker exists
-            markers[index].material.color.set(0x00ff00);  // Highlight the marker in green
+            markers[index].material.color.set(0x00aaff);  // Highlight the marker in green
         }
     });
     
     item.addEventListener('mouseout', function() {
         if (markers[index]) {
-            markers[index].material.color.set(0xffffff);  // Reset the color when mouse leaves (default color)
+            markers[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
         }
     });
 
@@ -6813,7 +6843,7 @@ function panToLocation(location) {
 import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
 
 // Adjust distance handling in `createFlightPath` and Plane Animation
-function createFlightPath(fromVec, toVec, altitude) {
+/*function createFlightPath(fromVec, toVec, altitude) {
     const distance = fromVec.distanceTo(toVec); // Calculate the distance between the two points
 
     // Set a threshold for short distances
@@ -6847,8 +6877,29 @@ function createFlightPath(fromVec, toVec, altitude) {
 
     // Return curve and distance for animations
     return { flightPath, curve, distance };
-}
+}*/
+// Create the flight path curve
+// Adjust distance handling in `createFlightPath` and Plane Animation
+function createFlightPath(fromVec, toVec, altitude) {
+    const distance = fromVec.distanceTo(toVec); // Calculate the distance between the two points
 
+    // Dynamically adjust the altitude based on distance
+    const adjustedAltitude = distance * 0.5; // Scale altitude to 20% of the distance
+    const midpointAltitude = earthRadius + adjustedAltitude;
+
+    const midPoint = fromVec.clone().lerp(toVec, 0.5); // Calculate the midpoint
+    midPoint.setLength(midpointAltitude); // Adjust midpoint altitude
+
+    const curve = new THREE.QuadraticBezierCurve3(fromVec, midPoint, toVec);
+
+    // Create the tube geometry for the path
+    const pathGeometry = new THREE.TubeGeometry(curve, 64, 0.02, 8, false);
+    const pathMaterial = new THREE.MeshBasicMaterial({ color: 0x46dff0 });
+    const flightPath = new THREE.Mesh(pathGeometry, pathMaterial);
+
+    scene.add(flightPath);
+    return { flightPath, curve, distance }; // Return distance for scaling the plane
+}
 
 
 
@@ -6933,16 +6984,14 @@ document.getElementById('searchBtn').addEventListener('click', async () => {
 
     // Create a flight path and animate the plane
     const { flightPath, curve, distance } = createFlightPath(fromVector, toVector, earthRadius * 1.1);
-// Update global references
-//activePlane = plane;
-    //activeCurve = curve;
+
     // Load and animate the plane
     const loader = new GLTFLoader();
     loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
         const plane = gltf.scene;
         scene.add(plane);
         //plane.scale.set(0.1, 0.1, 0.1);
-        //activePlane = plane; 
+
         // Update plane materials
         plane.traverse((child) => {
             if (child.isMesh) {
@@ -7042,24 +7091,49 @@ Object.keys(genericMarkers).forEach(region => {
 });
 
 // Function to update marker sizes dynamically as zoomLevel changes
-const updateMarkerSizesWithZoom = (zoomLevel) => {
-    Object.keys(genericMarkers).forEach(region => {
-        const markers = genericMarkers[region];
+Object.keys(genericMarkers).forEach(region => {
+    const markers = genericMarkers[region];
+    if (markers) {
+        const originalMarkerSize = 1; // Assume original size was 0.5
+        const targetMarkerSize = 0.5; // Target size (smaller)
 
-        if (markers && markers.updatedMeshes) {
-            markers.updatedMeshes.forEach(markerMesh => {
-                // Calculate the new size based on zoom level
-                const baseMarkerSize = 1; // Original size
-                const scaleFactor = zoomLevel * 0.1; // Scale factor
-                const newMarkerSize = baseMarkerSize * scaleFactor;
+        for (let i = 0; i < markers.count; i++) {
+            const instanceMatrix = new THREE.Matrix4();
+            markers.getMatrixAt(i, instanceMatrix);
 
-                // Update marker geometry
-                markerMesh.geometry.dispose(); // Dispose old geometry
-                markerMesh.geometry = new THREE.PlaneGeometry(newMarkerSize, newMarkerSize);
-            });
+            // Create marker mesh with initial size
+            const markerMesh = new THREE.Mesh(new THREE.PlaneGeometry(originalMarkerSize, originalMarkerSize), markerMaterial);
+            markerMesh.applyMatrix4(instanceMatrix);
+            scene.add(markerMesh); // Add marker to scene
+
+            // Animation variables
+            let currentSize = originalMarkerSize;
+
+            // Function to animate the resizing of markers
+            const animateResize = () => {
+                currentSize = THREE.MathUtils.lerp(currentSize, targetMarkerSize, 0.1); // Smoothly interpolate size
+                markerMesh.geometry.dispose(); // Dispose of old geometry
+                markerMesh.geometry = new THREE.PlaneGeometry(currentSize, currentSize); // Update geometry
+
+                if (Math.abs(currentSize - targetMarkerSize) > 0.01) {
+                    requestAnimationFrame(animateResize); // Continue animation until target size is reached
+                } else {
+                    // Ensure final size is set
+                    markerMesh.geometry.dispose();
+                    markerMesh.geometry = new THREE.PlaneGeometry(targetMarkerSize, targetMarkerSize);
+                }
+            };
+
+            animateResize(); // Start the animation
         }
-    });
-}; });
+
+        // Remove old markers from the scene once resizing begins
+        scene.remove(markers);
+        genericMarkers[region] = markers; // Update the genericMarkers object with resized markers
+    } else {
+        console.warn(`No markers found for the region: ${region}`);
+    }
+}); });
 
 // Example: Listening to zoom level changes and updating marker sizes
 // Updated function name to avoid conflict
@@ -7074,7 +7148,7 @@ function convertLonLatToXYZ(radius, lon, lat) {
   return { x, y, z };
 }
 function createWaveMesh(options) {
-  const geometry = new THREE.PlaneBufferGeometry(1, 1); // Default plane geometry in XOY plane
+  const geometry = new THREE.PlaneBufferGeometry(0.9, 0.9); // Default plane geometry in XOY plane
   const texture = textures.aperture;
 
   const material = new THREE.MeshBasicMaterial({
@@ -7341,34 +7415,9 @@ async function fetchMarkers(location, category) {
     let searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=2&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&adults=${guests}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
 
     // Fetch markers from your backend
-    try {
-  // Make a fetch request to the API with the encoded searchUrl
-  const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
-    method: 'GET', // Specify the method (GET for fetching data)
-    headers: {
-      'Content-Type': 'application/json', // Specify the content type as JSON
-    },
-  });
-
-  // Check if the response is successful (status 200-299)
-  if (!response.ok) {
-    throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
-  }
-// Extract posts and markers from the response
-const data = await response.json();
-
-// Extract 'markers' from the parsed data
-const markers = data.markers || [];
-console.log('Fetched markers:', markers);
-
-  // Return or use the markers as needed
-  return markers;
-} catch (error) {
-  // Log the error for debugging
-  console.error('Error fetching and parsing data:', error);
-  return []; // Return an empty array if an error occurs
-}
-
+    const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+    // Extract posts and markers from the response
+    const { markers } = await response.json(); 
     console.log("Fetched markers:", markers);  // Log the response to check its format
 
     if (!Array.isArray(markers)) {
@@ -7379,15 +7428,22 @@ console.log('Fetched markers:', markers);
     addMarkersToGlobe(markers);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
-    return []; // Return an empty array if an error occurs
   }
 }
 
 // Function to add markers to the globe
 function addMarkersToGlobe(markers) {
   markers.forEach(marker => {
-    const { lat, lng } = marker;
+    // Extract latitude and longitude
+    let { lat, lng } = marker;
 
+    // Add a small random offset to lat/lng to spread out the markers
+    const offsetFactor = 0.2; // Adjust this factor as needed for more/less spread
+    lat += (Math.random() - 10) * offsetFactor; // Random offset for latitude
+    lng += (Math.random() -10) * offsetFactor; // Random offset for longitude
+
+    // Optionally adjust longitude specifically for centering (e.g., for France)
+    lng -= 5; 
     // Convert lat/lng to 3D vector just like the flight path
     const markerVector = latLngToVector3(lat, lng, earthRadius);
 
@@ -7406,9 +7462,9 @@ function addMarkersToGlobe(markers) {
 }
 // Function to create marker mesh for the globe
 function createMarkerMesh(lat, lng) {
-  const markerGeometry = new THREE.PlaneGeometry(0.25, 0.25);
+  const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
   const markerMaterial =  new THREE.MeshBasicMaterial({
-    color: 0xff385c,
+    color: 0x00ff00,
     side: THREE.DoubleSide,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
@@ -7498,65 +7554,42 @@ function createMarkerMesh(lat, lng) {
 Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
     if (markers) {
-        const originalMarkerSize = 1; // Assume original size
+        const originalMarkerSize = 1; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
-        const animationDuration = 500; // Animation duration in milliseconds
-
-        // Store the new marker meshes in an array for optional later cleanup
-        const newMarkerMeshes = [];
 
         for (let i = 0; i < markers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
             // Create marker mesh with initial size
-            const markerMesh = new THREE.Mesh(
-                new THREE.PlaneGeometry(originalMarkerSize, originalMarkerSize),
-                markerMaterial
-            );
+            const markerMesh = new THREE.Mesh(new THREE.PlaneGeometry(originalMarkerSize, originalMarkerSize), markerMaterial);
             markerMesh.applyMatrix4(instanceMatrix);
             scene.add(markerMesh); // Add marker to scene
-            newMarkerMeshes.push(markerMesh); // Store the marker mesh
 
             // Animation variables
             let currentSize = originalMarkerSize;
 
             // Function to animate the resizing of markers
-            const animateResize = (duration) => {
-                const startTime = performance.now(); // Capture the start time
+            const animateResize = () => {
+                currentSize = THREE.MathUtils.lerp(currentSize, targetMarkerSize, 0.1); // Smoothly interpolate size
+                markerMesh.geometry.dispose(); // Dispose of old geometry
+                markerMesh.geometry = new THREE.PlaneGeometry(currentSize, currentSize); // Update geometry
 
-                const resizeStep = (currentTime) => {
-                    const elapsedTime = currentTime - startTime; // Calculate elapsed time
-                    const progress = Math.min(elapsedTime / duration, 1); // Normalize progress between 0 and 1
-
-                    // Interpolate size based on progress
-                    currentSize = THREE.MathUtils.lerp(originalMarkerSize, targetMarkerSize, progress);
-                    markerMesh.geometry.dispose(); // Dispose of old geometry
-                    markerMesh.geometry = new THREE.PlaneGeometry(currentSize, currentSize); // Update geometry
-
-                    if (progress < 1) {
-                        requestAnimationFrame(resizeStep); // Continue animation if not yet complete
-                    } else {
-                        // Ensure the final size is set
-                        markerMesh.geometry.dispose();
-                        markerMesh.geometry = new THREE.PlaneGeometry(targetMarkerSize, targetMarkerSize);
-                    }
-                };
-
-                requestAnimationFrame(resizeStep); // Start the animation loop
+                if (Math.abs(currentSize - targetMarkerSize) > 0.01) {
+                    requestAnimationFrame(animateResize); // Continue animation until target size is reached
+                } else {
+                    // Ensure final size is set
+                    markerMesh.geometry.dispose();
+                    markerMesh.geometry = new THREE.PlaneGeometry(targetMarkerSize, targetMarkerSize);
+                }
             };
 
-            // Delay the animation by 5 seconds (5000 ms)
-            setTimeout(() => {
-                animateResize(animationDuration); // Animate resizing after delay
-            }, 3000); // 5-second delay
+            animateResize(); // Start the animation
         }
 
-        // Remove the original markers after the new markers have been added
-        setTimeout(() => {
-            scene.remove(markers);
-            console.log(`Original markers for region ${region} removed.`);
-        }, 3000); // Remove after delay, matching the animation start time
+        // Remove old markers from the scene once resizing begins
+        scene.remove(markers);
+        genericMarkers[region] = markers; // Update the genericMarkers object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
@@ -7642,9 +7675,10 @@ const priceMin = 100
     await fetchAirbnbPosts(searchUrl);
     // Function to fetch Airbnb posts from your backend and display them on the webpage
 async function fetchAirbnbPosts(searchUrl) {
+
     try {
         // Update spinner text to indicate scraping started
-        updateSpinnerText("Displaying posts...");
+        updateSpinnerText("Fetching posts from Airbnb... Displaying posts...");
 
         const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const data = await response.json();
@@ -7687,7 +7721,7 @@ populateOverlay(posts2);
     }
 }
 
-        function populateOverlay(posts2) {
+function populateOverlay(posts2) {
     const overlay = document.getElementById('overlayContainer');
     overlay.innerHTML = ''; // Clear previous posts
 
@@ -7697,7 +7731,7 @@ populateOverlay(posts2);
 
         // Add image
         const img = document.createElement('img');
-        img.src = post.image || ''; // Use default image if not provided
+        img.src = post.images || ''; // Use default image if not provided
         img.alt = post.title || 'Airbnb Listing';
 
         // Add title
@@ -7731,6 +7765,12 @@ populateOverlay(posts2);
         viewLink.textContent = 'View Listing';
         viewLink.classList.add('view-link');
 
+        // Add Like button
+        const likeButton = document.createElement('button');
+        likeButton.textContent = '♥ Like';
+        likeButton.classList.add('like-button');
+        likeButton.addEventListener('click', () => saveToLikes(post));
+
         // Append elements to the postDiv
         postDiv.appendChild(img);
         postDiv.appendChild(title);
@@ -7739,11 +7779,13 @@ populateOverlay(posts2);
         postDiv.appendChild(pricePerNight);
         postDiv.appendChild(rating);
         postDiv.appendChild(viewLink);
+        postDiv.appendChild(likeButton);
 
         // Append the postDiv to the overlay
         overlay.appendChild(postDiv);
     });
 }
+
 
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -7751,17 +7793,72 @@ populateOverlay(posts2);
         updateSpinnerText("Error fetching Airbnb listings. Please try again.");
     }
 }
+
+function saveToLikes(post) {
+    const user = firebase.auth().currentUser;
+
+    if (!user) {
+        alert('Please log in to like a post.');
+        return;
+    }
+
+    const db = getFirestore();
+    const userLikesRef = doc(db, `likes/${user.uid}/${post.id}`);
+
+    setDoc(userLikesRef, post)
+        .then(() => {
+            alert('Post added to your likes!');
+        })
+        .catch(error => {
+            console.error('Error saving liked post:', error);
+        });
+}
+
+function showLikedPosts() {
+    const user = firebase.auth().currentUser;
+
+    if (!user) {
+        alert('Please log in to view your liked posts.');
+        return;
+    }
+
+    const db = getFirestore();
+    const userLikesRef = collection(db, `likes/${user.uid}`);
+
+    getDocs(userLikesRef)
+        .then(snapshot => {
+            const likedPosts = snapshot.docs.map(doc => doc.data());
+            if (likedPosts.length > 0) {
+              const overlay = document.getElementById('overlayContainer');
+              overlay.innerHTML = ''; // Clear previous posts
+                populateOverlay(likedPosts); // Display the liked posts
+            } else {
+                alert('No liked posts found.');
+            }
+        })
+        .catch(error => {
+            console.error('Error retrieving liked posts:', error);
+        });
+}
+
+
+
+
+
+// Add an event listener to the profile button to show liked posts
+document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);
+
 document.querySelectorAll('.post-grid').forEach((item, index) => {
     // Make sure `index` matches the corresponding marker
     item.addEventListener('mouseover', function() {
         if (markers[index]) {  // Check if the marker exists
-            markers[index].material.color.set(0x00ff00);  // Highlight the marker in green
+            markers[index].material.color.set(0x00aaff);  // Highlight the marker in green
         }
     });
     
     item.addEventListener('mouseout', function() {
         if (markers[index]) {
-            markers[index].material.color.set(0xffffff);  // Reset the color when mouse leaves (default color)
+            markers[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
         }
     });
 
@@ -7775,69 +7872,46 @@ document.querySelectorAll('.post-grid').forEach((item, index) => {
   Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
     if (markers) {
-        const originalMarkerSize = 1; // Assume original size
+        const originalMarkerSize = 1; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
-        const animationDuration = 500; // Animation duration in milliseconds
-
-        // Store the new marker meshes in an array for optional later cleanup
-        const newMarkerMeshes = [];
 
         for (let i = 0; i < markers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
             // Create marker mesh with initial size
-            const markerMesh = new THREE.Mesh(
-                new THREE.PlaneGeometry(originalMarkerSize, originalMarkerSize),
-                markerMaterial
-            );
+            const markerMesh = new THREE.Mesh(new THREE.PlaneGeometry(originalMarkerSize, originalMarkerSize), markerMaterial);
             markerMesh.applyMatrix4(instanceMatrix);
             scene.add(markerMesh); // Add marker to scene
-            newMarkerMeshes.push(markerMesh); // Store the marker mesh
 
             // Animation variables
             let currentSize = originalMarkerSize;
 
             // Function to animate the resizing of markers
-            const animateResize = (duration) => {
-                const startTime = performance.now(); // Capture the start time
+            const animateResize = () => {
+                currentSize = THREE.MathUtils.lerp(currentSize, targetMarkerSize, 0.1); // Smoothly interpolate size
+                markerMesh.geometry.dispose(); // Dispose of old geometry
+                markerMesh.geometry = new THREE.PlaneGeometry(currentSize, currentSize); // Update geometry
 
-                const resizeStep = (currentTime) => {
-                    const elapsedTime = currentTime - startTime; // Calculate elapsed time
-                    const progress = Math.min(elapsedTime / duration, 1); // Normalize progress between 0 and 1
-
-                    // Interpolate size based on progress
-                    currentSize = THREE.MathUtils.lerp(originalMarkerSize, targetMarkerSize, progress);
-                    markerMesh.geometry.dispose(); // Dispose of old geometry
-                    markerMesh.geometry = new THREE.PlaneGeometry(currentSize, currentSize); // Update geometry
-
-                    if (progress < 1) {
-                        requestAnimationFrame(resizeStep); // Continue animation if not yet complete
-                    } else {
-                        // Ensure the final size is set
-                        markerMesh.geometry.dispose();
-                        markerMesh.geometry = new THREE.PlaneGeometry(targetMarkerSize, targetMarkerSize);
-                    }
-                };
-
-                requestAnimationFrame(resizeStep); // Start the animation loop
+                if (Math.abs(currentSize - targetMarkerSize) > 0.01) {
+                    requestAnimationFrame(animateResize); // Continue animation until target size is reached
+                } else {
+                    // Ensure final size is set
+                    markerMesh.geometry.dispose();
+                    markerMesh.geometry = new THREE.PlaneGeometry(targetMarkerSize, targetMarkerSize);
+                }
             };
 
-            // Delay the animation by 5 seconds (5000 ms)
-            setTimeout(() => {
-                animateResize(animationDuration); // Animate resizing after delay
-            }, 3000); // 5-second delay
+            animateResize(); // Start the animation
         }
 
-        // Remove the original markers after the new markers have been added
-        setTimeout(() => {
-            scene.remove(markers);
-            console.log(`Original markers for region ${region} removed.`);
-        }, 3000); // Remove after delay, matching the animation start time
+        // Remove old markers from the scene once resizing begins
+        scene.remove(markers);
+        genericMarkers[region] = markers; // Update the genericMarkers object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
-  }) });
+}); });
 	  // Load markers based on region and price category
 // Load markers based on region and price category
 async function loadMarkersForRegionAndCategory(region, category) {
@@ -7892,6 +7966,13 @@ async function fetchMarkers(region, category) {
 function addMarkersToGlobe(markers) {
   markers.forEach(marker => {
     const { lat, lng } = marker;
+    // Add a small random offset to lat/lng to spread out the markers
+    const offsetFactor = 0.2; // Adjust this factor as needed for more/less spread
+    lat += (Math.random() - 0.5) * offsetFactor; // Random offset for latitude
+    lng += (Math.random() - 0.5) * offsetFactor; // Random offset for longitude
+
+    // Optionally adjust longitude specifically for centering (e.g., for France)
+    lng -= 5; 
     const markerMesh = createMarkerMesh(lat, lng);
     scene.add(markerMesh);
   });
@@ -7899,9 +7980,9 @@ function addMarkersToGlobe(markers) {
 
 // Function to create marker mesh for the globe
 function createMarkerMesh(lat, lng) {
-  const markerGeometry = new THREE.PlaneGeometry(0.25, 0.25);
+  const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
   const markerMaterial =  new THREE.MeshBasicMaterial({
-    color: 0xff385c,
+    color: 0x00ff00,
     side: THREE.DoubleSide,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
@@ -7964,76 +8045,19 @@ function createMarkerMesh(lat, lng) {
 };
 });
 // Function to adjust marker sizes dynamically based on zoom level
-const adjustMarkerSizes = (zoomLevel) => {
-    // Iterate through all regions in the genericMarkers object
-    Object.keys(genericMarkers).forEach(region => {
-        const markers = genericMarkers[region];
-
-        if (markers) {
-            console.log(`Adjusting markers for region: ${region}`);
-
-            // Define marker size scaling based on zoom level
-            const baseMarkerSize = 1; // Original size at zoomLevel = 1
-            const scaleFactor = zoomLevel * 0.1; // Scale factor (adjust this as needed)
-
-            const newMarkerSize = baseMarkerSize * scaleFactor; // Compute size based on zoom level
-
-            for (let i = 0; i < markers.count; i++) {
-                const instanceMatrix = new THREE.Matrix4();
-                markers.getMatrixAt(i, instanceMatrix);
-
-                // Create marker mesh
-                const markerMesh = new THREE.Mesh(
-                    new THREE.PlaneGeometry(newMarkerSize, newMarkerSize),
-                    markerMaterial
-                );
-                markerMesh.applyMatrix4(instanceMatrix);
-
-                // Add the marker to the scene
-                scene.add(markerMesh);
-
-                // Store a reference to the marker for future updates
-                if (!genericMarkers[region].updatedMeshes) {
-                    genericMarkers[region].updatedMeshes = [];
-                }
-                scene.remove(markers);
-                genericMarkers[region].updatedMeshes.push(markerMesh);
-            }
-        } else {
-            console.warn(`No markers found for the region: ${region}`);
-        }
-    });
-};
 
 // Function to update marker sizes dynamically as zoomLevel changes
-const updateMarkerSizesWithZoom = (zoomLevel) => {
-    Object.keys(genericMarkers).forEach(region => {
-        const markers = genericMarkers[region];
 
-        if (markers && markers.updatedMeshes) {
-            markers.updatedMeshes.forEach(markerMesh => {
-                // Calculate the new size based on zoom level
-                const baseMarkerSize = 1; // Original size
-                const scaleFactor = zoomLevel * 0.1; // Scale factor
-                const newMarkerSize = baseMarkerSize * scaleFactor;
-
-                // Update marker geometry
-                markerMesh.geometry.dispose(); // Dispose old geometry
-                markerMesh.geometry = new THREE.PlaneGeometry(newMarkerSize, newMarkerSize);
-            });
-        }
-    });
-};
 
 // Example: Listening to zoom level changes and updating marker sizes
 let zoomLevel = 1; // Default zoom level
 
 // Simulate zoom level change (replace with actual zoom level logic)
-setInterval(() => {
-    zoomLevel = Math.random() * 3 + 1; // Random zoom level between 1 and 4
-    console.log(`Updating markers for zoomLevel: ${zoomLevel}`);
-    updateMarkerSizesWithZoom(zoomLevel);
-}, 2000); // Adjust every 2 seconds
+//setInterval(() => {
+    //zoomLevel = Math.random() * 3 + 1; // Random zoom level between 1 and 4
+    //console.log(`Updating markers for zoomLevel: ${zoomLevel}`);
+    //updateMarkerSizesWithZoom(zoomLevel);
+//}, 2000); // Adjust every 2 seconds
 
 function getMarkersDataForPopularListings(region) {
     // Example logic: Fetch the popular listings for the specified region
