@@ -1,0 +1,31 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore environment files
+*.env
+
+# Ignore macOS system files
+.DS_Store
+
+/functions/tmp
+
+# Ignore Firebase functions directory
+
+google-cloud-cli-430.0.0-darwin-arm.tar.gz
+google-cloud-sdk-441.0.0-darwin-x86_64.tar.gz
+google-cloud-sdk/bin/anthoscli
+
+google-cloud-cli-430.0.0-darwin-arm.tar.gz
+google-cloud-sdk-441.0.0-darwin-x86_64.tar.gz
+google-cloud-sdk/bin/anthoscli
+# Ignore Google Cloud files
+google-cloud-cli-*.tar.gz
+google-cloud-sdk/
+google-cloud-sdk-*.tar.gz
+google-cloud-sdk-441.0.0-darwin-x86_64.tar.gz
+google-cloud-sdk/data/
+google-cloud-sdk/bin/
+google-cloud-sdk/data/cli/
