@@ -5189,7 +5189,7 @@ function toggleLightstheme2() {
       console.log("clouds added activated on day texture");
     } else if (currentTexture === "night") {
       scene.add(cloudMesh2); // Apply lights texture (night + lights)
-      scene.add(cloudMesh);
+      //scene.add(cloudMesh);
       console.log("clouds added activated on night texture");
     }
     //markerMaterial.color.set(lightsmarkerMaterial);
@@ -5202,7 +5202,6 @@ function toggleLightstheme2() {
       earthMaterial.uniforms.map.value = dayTexture; // Revert to day texture
       console.log("Reverted to day texture");
     } else if (currentTexture === "night") {
-      scene.remove(cloudMesh);
       scene.remove(cloudMesh2); // Apply lights texture (day + lights)
       earthMaterial.uniforms.map.value = nightTexture; // Revert to night texture
       console.log("Reverted to night texture");

@@ -1,7 +1,7 @@
 process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer'; // Set Puppeteer cache directory to /tmp
 const functions = require('firebase-functions'); // Use CommonJS for Firebase Functions
 const express = require('express');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const cors = require('cors');
 const path = require('path');
 const chromium = require('chrome-aws-lambda'); // Install this: npm install chrome-aws-lambda
