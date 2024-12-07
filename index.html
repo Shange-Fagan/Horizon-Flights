@@ -1363,7 +1363,50 @@ background-size: 10px; *//* Adjust this as needed */
   cursor: pointer;
   z-index: 22011;
 }
+div[id^="priceCategorySelect-"] select {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    padding: 4.5px 9.5px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 0;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 22011;
+}
+div[id^="airbnbSelector-"] select {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    padding: 4.5px 9.5px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 0;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 22011;
+}
+select[id^="airbnbSelector-"] {
+    display: none;
+    position: absolute;
+    top: 350px !important;
+    right: 30px !important;
+}
+select[id^="priceCategorySelect-"] {
+    display: none;
+    position: absolute;
+    top: 380px !important;
+    right: 30px !important;
+}
+
+
 	  #airbnbSelector {
+      display: none;
   appearance: none; /* Remove default appearance */
   -webkit-appearance: none; /* For Safari */
   position: absolute;
@@ -1406,6 +1449,7 @@ select:focus {
 }
 
 #priceCategorySelect {
+  display: none;
   appearance: none; /* Remove default appearance */
   -webkit-appearance: none; /* For Safari */
   position: absolute;
@@ -1426,6 +1470,20 @@ select:focus {
   cursor: pointer;
   z-index: 22011;
   width: 133px;
+}
+#toggleAirbnbPrices {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.0);
+  top: 264px; /* Adjusted top position under Cheapest button */
+  right: 15px;
+  padding: 5px 7px; /* Add more padding for a better look */
+  border: 0px solid rgba(255, 255, 255, 0.0); /* No visible border */
+  border-radius: 25px;
+  font-size: 12px; /* Slightly larger font for better readability */
+  cursor: pointer;
+  color: rgba(255, 255, 255, 1); /* Keep the light gray text color */
+  z-index: 22012;
+  
 }
 /* Style the dropdown options */
 select option {
@@ -2907,7 +2965,7 @@ crossorigin="anonymous"></script>
     Cabin Class: 
   </span>
   <div>
-    <button id="cycleDown" style="margin-right: 0px; position: relative; right: -98px; padding-top: 0; background-color: rgba(255, 255, 255, 0.15); color: white; border: 1.5px solid rgba(225, 225, 225, 0); cursor: pointer; padding: 2.5px; border-radius: 0px 0px 50px 0px; top: 6px; margin-right: 13px; padding-top: 0.5px; display:flex;">
+    <button id="cycleDown" style="margin-right: 0px; position: relative; right: -98px; padding-top: 0; background-color: rgba(255, 255, 255, 0.15); color: white; border: 1.5px solid rgba(225, 225, 225, 0); cursor: pointer; padding: 2.5px; border-radius: 0px 0px 50px 0px; top: 6px; margin-right: 13px; padding-top: 0.5px;">
       &#8595;
     </button>
     <input id="cabinClassInput" type="text" value="Economy" readonly
@@ -3031,8 +3089,11 @@ crossorigin="anonymous"></script>
   </select>
   <button id="submitRegion">Submit</button>
 </div>
+<button id="toggleAirbnbPrices" style="font-size: 7px; letter-spacing: 1px; display: none;">
+  ● ● ●
+</button>
 	<!-- Add this dropdown for price categories -->
-	<select id="priceCategorySelect"  style="display: none;">
+	<select id="priceCategorySelect" style="display:none;">
     <optgroup label="Region-Specific Categories">
       <option value="disabled">Sort by (Region)📍</option>
         <option value="popular">Most Popular(in Region)📍</option>
@@ -3041,7 +3102,7 @@ crossorigin="anonymous"></script>
         <option value="expensive">Expensive📍</option>
     </optgroup>
 		</select>
-		<select id="airbnbSelector" style="display: none;">
+		<select id="airbnbSelector" style="display:none;">
     <optgroup label="World Categories">
       <option value="disabled">Sort by (Across the World) 🌍</option>
         <option value="general">Most Popular(Across the World)🌍</option>
@@ -3050,7 +3111,6 @@ crossorigin="anonymous"></script>
         <option value="expensive">Most Expensive🌍</option>
     </optgroup>
 </select>
-
 
 
 <div id="confirmationMessage" style="display: none;">
@@ -4037,7 +4097,7 @@ const earthRadius = 5.1; // Adjust this to match your globe's size
 const textureLoader = new THREE.TextureLoader();
 const dayTexture = textureLoader.load("js/Earth_Diffuse.jpg");
 const LightsTexture = textureLoader.load("js/earth.jpg");
-const bumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+const bumpMap = textureLoader.load("js/Earth-16K-Bump.png");
 const normalMap = textureLoader.load('js/Earth_Normal.jpg'); // Use a realistic normal map
 const specularMap = textureLoader.load("js/Earth_Specular.jpg");
 const earthMaterial = new THREE.ShaderMaterial({
@@ -4669,9 +4729,9 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
   //const bumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
   //const specularMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png");
 	  //const specularMap = textureLoader.load("js/Earth_Specular.jpg");
-const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+const dayBumpMap = textureLoader.load("js/Earth-16K-Bump.png");
 	  //const normalMap = textureLoader.load('js/Earth_Normal.jpg'); // Use a realistic normal map
-const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+const nightBumpMap = textureLoader.load("js/Earth-16K-Bump.png");
 
 	  //const textureLoader = new THREE.TextureLoader();
 
@@ -5494,7 +5554,7 @@ const markersData = [
   { id: 6, region: 'asia', position: [5.1, 0.9, 3], iframeSrc: "https://rss.app/embed/v1/list/pUeauCbzsXuVe3eC" },
   { id: 7, region: 'japan', position: [5.1, 0.9, 4], iframeSrc: "https://rss.app/embed/v1/list/d6hKxeycgIlya2NK" },
   { id: 8, region: 'carribbean', position: [5.1, 1.2, 0.2], iframeSrc: "https://rss.app/embed/v1/list/qvlJz8EBa0yKiH2i" },
-  { id: 9, region: 'uk', position: [5.1, 0.6, 1.45], iframeSrc: "https://rss.app/embed/v1/list/VQIhB1FM0tC17q5Y" },
+  { id: 9, region: 'uk', position: [5.1, 0.64, 1.55], iframeSrc: "https://rss.app/embed/v1/list/VQIhB1FM0tC17q5Y" },
 ];
 /*const genericMarkers = [
   { id: 1, position: [5.1, 1.2, 1.5], region: 'africa' },
@@ -8591,7 +8651,31 @@ function createMarkerMesh(lat, lng) {
        scene.remove(markers);
     });
 
+    document.getElementById('toggleAirbnbPrices').addEventListener('click', function (event) {
+  event.stopPropagation(); // Prevent click propagation to document
+  const priceCategorySelect = document.getElementById('priceCategorySelect');
+  const airbnbSelector = document.getElementById('airbnbSelector');
 
+  // Toggle visibility of the dropdowns
+  const isPriceVisible = priceCategorySelect.style.display === 'block';
+  priceCategorySelect.style.display = isPriceVisible ? 'none' : 'block';
+
+  const isAirbnbVisible = airbnbSelector.style.display === 'block';
+  airbnbSelector.style.display = isAirbnbVisible ? 'none' : 'block';
+});
+
+// Function to hide dropdowns when clicking outside
+document.addEventListener('click', function (event) {
+  const priceCategorySelect = document.getElementById('priceCategorySelect');
+  const airbnbSelector = document.getElementById('airbnbSelector');
+
+  if (priceCategorySelect && !priceCategorySelect.contains(event.target)) {
+    priceCategorySelect.style.display = 'none';
+  }
+  if (airbnbSelector && !airbnbSelector.contains(event.target)) {
+    airbnbSelector.style.display = 'none';
+  }
+});
 	  document.addEventListener("DOMContentLoaded", function() {
 
   // Add event listener to the submit button
@@ -10100,11 +10184,92 @@ function openMarkerLabel(data) {
   const contentDiv = labelDiv.querySelector('.content');
 
   if (!contentDiv.querySelector('iframe')) {
+    // Inject the inner HTML content
     contentDiv.innerHTML = `
       <div class="loading-spinner" style="pointer-events:none;"></div>
-      <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="yes" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
-     `;
+      <iframe 
+        src="${data.iframeSrc}" 
+        frameborder="0" 
+        width="275" 
+        height="249" 
+        scrolling="yes" 
+        allowfullscreen="true" 
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" 
+        loading="eager">
+      </iframe>
+      <button id="toggleAirbnbPrices-${data.id}" style="
+        font-size: 10px; 
+        letter-spacing: 1px; 
+        position: absolute; 
+        top: 330px; 
+        right: 75px; 
+        background: none; 
+        border: none; 
+        color: rgba(255, 255, 255, 0.9); 
+        cursor: pointer;">
+        ● ● ●
+      </button>
+      <select id="priceCategorySelect-${data.id}" style=
+      "display:none;"
+      "top: 350px !important;"
+      "right:30px !important;"
+      >
+        <optgroup label="Region-Specific Categories">
+          <option value="disabled">Sort by (Region)📍</option>
+          <option value="popular">Most Popular (in Region)📍</option>
+          <option value="cheapest">Cheapest📍</option>
+          <option value="midPrice">Mid Price📍</option>
+          <option value="expensive">Expensive📍</option>
+        </optgroup>
+      </select>
+      <select id="airbnbSelector-${data.id}" style=
+      "display:none;"
+      "top: 350px !important;"
+      "right:30px !important;"
+      >
+        <optgroup label="World Categories">
+          <option value="disabled">Sort by (Across the World) 🌍</option>
+          <option value="general">Most Popular (Across the World)🌍</option>
+          <option value="cheapest">Cheapest🌍</option>
+          <option value="midPrice">Mid Price🌍</option>
+          <option value="expensive">Most Expensive🌍</option>
+        </optgroup>
+      </select>
+    `;
+// Get references to the toggle button and dropdowns
+const toggleButton = document.getElementById(`toggleAirbnbPrices-${data.id}`);
+    const priceCategorySelect = document.getElementById(`priceCategorySelect-${data.id}`);
+    const airbnbSelector = document.getElementById(`airbnbSelector-${data.id}`);
 
+    // Add click event to toggle both dropdowns
+    toggleButton.addEventListener('click', function (event) {
+      event.stopPropagation(); // Prevent click propagation to the document
+
+      // Toggle dropdown visibility
+      const priceSelectVisible = priceCategorySelect.style.display === 'block';
+      const airbnbSelectVisible = airbnbSelector.style.display === 'block';
+
+      priceCategorySelect.style.display = priceSelectVisible ? 'none' : 'block';
+      airbnbSelector.style.display = airbnbSelectVisible ? 'none' : 'block';
+    });
+
+    // Close both dropdowns when clicking outside
+    document.addEventListener('click', function (event) {
+      if (
+        priceCategorySelect &&
+        !priceCategorySelect.contains(event.target) &&
+        event.target !== toggleButton
+      ) {
+        priceCategorySelect.style.display = 'none';
+      }
+      if (
+        airbnbSelector &&
+        !airbnbSelector.contains(event.target) &&
+        event.target !== toggleButton
+      ) {
+        airbnbSelector.style.display = 'none';
+      }
+    });
     const iframe = labelDiv.querySelector('iframe');
     const spinner = contentDiv.querySelector('.loading-spinner');
 
