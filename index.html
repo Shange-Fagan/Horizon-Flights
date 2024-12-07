@@ -357,6 +357,30 @@ a, button, input, select, iframe {
       background-color: rgba(225, 225, 225, 0.35);
 	    border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
     }
+    #addLightsbutton2 {
+      position: absolute;
+      right: 15px;
+      top: 241px;
+      padding: 4px 7px;
+      font-size: 12px;
+      /*background-color: rgba(255, 255, 255, 0.2);*/
+      /*border: 1px solid rgba(255, 255, 255, 0.25);*/
+      /*border-radius: 8px;*/
+      color: rgba(255, 255, 255, 0.75);
+      z-index: 22011;
+      cursor: pointer;
+	    border: 0px solid #e0e0e0; /* Border similar to Airbnb */
+       background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 25px; /* Rounded corners for inputs */
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 0px 0px 0px 0px;
+      width: 100px;
+    }
+
+    #addLightsbutton2:hover {
+      background-color: rgba(225, 225, 225, 0.35);
+	    border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
+    }
 
     #toggleButton:hover {
       background-color: rgba(225, 225, 225, 0.35);
@@ -1234,7 +1258,7 @@ iframe::-webkit-scrollbar {
 	  #newsButton {
     position: absolute;
       right: 15px;
-      top: 241px;
+      top: 265px;
       padding: 4.5px 7px;
       font-size: 12px;
       /*background-color: rgba(255, 255, 255, 0.2);*/
@@ -2217,7 +2241,7 @@ overflow: hidden;
   right: 15px;
   width: 80px;
   height: 40px;
-  top: 280px;
+  top: 300px;
   z-index: 22011;
 }
 .theme-switch2 {
@@ -2867,12 +2891,12 @@ crossorigin="anonymous"></script>
   <div class="instruction-step hidden" id="dragInstruction">
     <img src="js/more.png" alt="Drag Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 60%; left: 55%;"></div>
-    <p class="instruction-text">Click the three dots under each widget to filter by cheapest, average, and expensive airbnb's in each region</p>
+    <p class="instruction-text">Click the three dots under each widget to filter by cheapest, average, and most expensive airbnb's</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/right-arrow.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
-    <p class="instruction-text">Click the buttons on the side to switch between day and night theme or explore options</p>
+    <p class="instruction-text">Click the buttons on the side to switch between day and night theme</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/toggle-4.png" alt="Button Click" class="glove-hand">
@@ -2895,7 +2919,7 @@ crossorigin="anonymous"></script>
     <p class="instruction-text">Login to view saved and liked posts</p>
   </div>
 <div class="instruction-step hidden" id="themeInstruction">
-<button id="gotItBtn" style="top: 50%;left: 40%;" class="got-it-button hidden">Got it!</button>
+<button id="gotItBtn" style="top: 50%;left: 35%;" class="got-it-button hidden">Got it!</button>
 </div>
 </div>
 
@@ -3295,6 +3319,7 @@ gl_FragColor = vec4(glowColor, intensity);
 	
 <button id="toggleButton">Switch theme</button>
 <button id="addLightsbutton">Night Lights</button>
+<button id="addLightsbutton2">Atmosphere</button>
 <button id="newsButton">Latest Airbnbs</button>
   <!-- The iframe containers will be added dynamically -->
   <!-- X Button to close the iframe -->
@@ -4070,6 +4095,8 @@ document.getElementById('submitRegion').addEventListener('click', () => {
     instructionsOverlay.classList.add('hidden'); // Hide instructions overlay
     gotItBtn.classList.add('hidden'); // Hide "Got It" button
     clearInterval(stepInterval); // Stop cycling steps
+    const selectedRegion = document.getElementById('regionSelect').value;
+    panToRegion(selectedRegion);
     controls.autoRotate = true; // Resume autorotation
     const confirmationMessage = document.getElementById('confirmationMessage');
     confirmationMessage.style.display = 'none'; // Show confirmation message
@@ -4441,20 +4468,21 @@ function animateCameraPan(x, y, z, zoomLevel) {
 //const earthRadius = 5.1; // Adjust this to match your globe's size
 //const textureLoader = new THREE.TextureLoader();
 
-	  /*const cloudTexture2 = textureLoader.load("js/Earth_Cloud.jpg");
+	  const cloudTexture2 = textureLoader.load("js/Earth_Cloud.jpg");
 	  const cloudGeometry = new THREE.SphereGeometry(earthRadius * 1.005, 64, 64);
 const cloudMaterial2 = new THREE.MeshPhongMaterial({
   map: cloudTexture2, // Use a high-quality cloud texture with transparency
   transparent: true,
-  opacity: 0.4 // Adjust for subtle effect
+  color: new THREE.Color('#FFFFFF'),
+  opacity: 0.44 // Adjust for subtle effect
 });
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
-scene.add(cloudMesh2);
+//scene.add(cloudMesh2);
 function animateClouds() {
-    cloudMesh2.rotation.y += 0.001; // Adjust rotation speed
+    cloudMesh2.rotation.y += 0.00027; // Adjust rotation speed
     requestAnimationFrame(animateClouds);
 }
-animateClouds();*/
+animateClouds();
 
 	  
 /*document.getElementById('searchBtn').addEventListener('click', () => {
@@ -5149,6 +5177,52 @@ function toggleLightstheme() {
 
 // Add Event Listener to the Toggle Button
 document.getElementById('addLightsbutton').addEventListener('click', toggleLightstheme);
+function toggleLightstheme2() {
+  // Get the button element
+  const lightsButton = document.getElementById('addLightsbutton2');
+
+  if (lightsButton.textContent === "Atmosphere") {
+    // If the lights button is clicked, overlay the lights texture on top of the current state
+    if (currentTexture === "day") {
+      scene.add(cloudMesh2); // Apply lights texture (day + lights)
+      scene.add(cloudMesh);
+      console.log("clouds added activated on day texture");
+    } else if (currentTexture === "night") {
+      scene.add(cloudMesh2); // Apply lights texture (night + lights)
+      scene.add(cloudMesh);
+      console.log("clouds added activated on night texture");
+    }
+    //markerMaterial.color.set(lightsmarkerMaterial);
+    lightsButton.textContent = "Undo";
+  } else {
+    // If the lights button is toggled off, revert to the current texture (day or night)
+    if (currentTexture === "day") {
+      scene.remove(cloudMesh2); // Apply lights texture (day + lights)
+      scene.remove(cloudMesh);
+      earthMaterial.uniforms.map.value = dayTexture; // Revert to day texture
+      console.log("Reverted to day texture");
+    } else if (currentTexture === "night") {
+      scene.remove(cloudMesh);
+      scene.remove(cloudMesh2); // Apply lights texture (day + lights)
+      earthMaterial.uniforms.map.value = nightTexture; // Revert to night texture
+      console.log("Reverted to night texture");
+    }
+    if (currentmarkerMaterial === "day") {
+      markerMaterial.color.set(daymarkerMaterial);
+      console.log("Reverted to day texture");
+    } else if (currentmarkerMaterial === "night") {
+      markerMaterial.color.set(nightmarkerMaterial);
+      console.log("Reverted to night texture");
+    }
+    lightsButton.textContent = "Atmosphere";
+  }
+
+  // Ensure uniforms update
+  earthMaterial.uniforms.map.needsUpdate = true;
+}
+
+// Add Event Listener to the Toggle Button
+document.getElementById('addLightsbutton2').addEventListener('click', toggleLightstheme2);
 // Add Event Listener to the Toggle Button
 document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 //document.getElementById('toggleButton').addEventListener('click', () => {
@@ -10207,7 +10281,7 @@ function openMarkerLabel(data) {
         letter-spacing: 1px; 
         position: absolute; 
         top: 330px; 
-        right: 75px; 
+        right: 85px; 
         background: none; 
         border: none; 
         color: #C7D5DD; 
