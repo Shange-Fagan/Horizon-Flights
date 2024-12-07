@@ -2857,12 +2857,17 @@ crossorigin="anonymous"></script>
   <div class="instruction-step hidden" id="dragInstruction">
     <img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 60%; left: 55%;"></div>
-    <p class="instruction-text">Click the yellow buttons to view the latest airbnbs in each region</p>
+    <p class="instruction-text">Click the yellow buttons to view the latest airbnb's in each region</p>
   </div>
   <div class="instruction-step hidden" id="dragInstruction">
     <img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 60%; left: 55%;"></div>
     <p class="instruction-text">Click outside the yellow buttons to close the airbnb widgets</p>
+  </div>
+  <div class="instruction-step hidden" id="dragInstruction">
+    <img src="js/more.png" alt="Drag Gesture" class="glove-hand">
+    <div class="pulsating-dot" style="top: 60%; left: 55%;"></div>
+    <p class="instruction-text">Click the three dots under each widget to filter by cheapest, average, and expensive airbnb's in each region</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/right-arrow.png" alt="Button Click" class="glove-hand">
@@ -2877,7 +2882,7 @@ crossorigin="anonymous"></script>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/seo-and-web.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
-    <p class="instruction-text">Use the search bar to search for cities and countries with added flight mapping or use the select region button to search by region</p>
+    <p class="instruction-text">Use the search bar to search for cities and countries with flight mapping!</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/page-refresh.png" alt="Button Click" class="glove-hand">
@@ -2890,7 +2895,7 @@ crossorigin="anonymous"></script>
     <p class="instruction-text">Login to view saved and liked posts</p>
   </div>
 <div class="instruction-step hidden" id="themeInstruction">
-<button id="gotItBtn" style="top: 50%;left: 50%;" class="got-it-button hidden">Got it!</button>
+<button id="gotItBtn" style="top: 50%;left: 40%;" class="got-it-button hidden">Got it!</button>
 </div>
 </div>
 
@@ -3131,7 +3136,7 @@ crossorigin="anonymous"></script>
   <iframe
     id="dayTicker"
     class="iframe-container"
-    src="https://rss.app/embed/v1/ticker/3j0jw7ksCqckLNRl"
+    src="https://rss.app/embed/v1/ticker/7meuCqBliDWnAAaA"
     frameborder="0"
     sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
   ></iframe>
@@ -3429,7 +3434,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 10000); // 10000 milliseconds = 10 seconds
 });
 
-  const cabinClasses = ["Economy","Business"];
+  const cabinClasses = ["Economy"," Premium", "Business", "1st Class"];
   let currentIndex = 0;
 
   const cabinClassInput = document.getElementById("cabinClassInput");
@@ -10205,7 +10210,7 @@ function openMarkerLabel(data) {
         right: 75px; 
         background: none; 
         border: none; 
-        color: rgba(255, 255, 255, 0.9); 
+        color: #C7D5DD; 
         cursor: pointer;">
         ● ● ●
       </button>

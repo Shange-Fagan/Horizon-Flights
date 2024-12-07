@@ -274,7 +274,7 @@ try {
   console.log('Cabin class received:', cabinClass);
 
   // Select the Business Class checkbox if needed
-  if (cabinClass === 'business') {
+  if (cabinClass === 'business' || cabinClass === 'first class') {
     const businessClassCheckboxSelector = '.mewtwo-passengers-flight_type__checkbox'; // Update based on the actual selector
     await page.waitForSelector(businessClassCheckboxSelector, { visible: true }); // Wait for the checkbox to be visible
 
