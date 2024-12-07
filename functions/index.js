@@ -5,6 +5,8 @@ const puppeteer = require('puppeteer-core');
 const cors = require('cors');
 const path = require('path');
 const chromium = require('chrome-aws-lambda'); // Install this: npm install chrome-aws-lambda
+const axios = require('axios');
+
 
 const app = express();
 
@@ -101,7 +103,35 @@ function waitForTimeout(ms) {
     }
   }
   
-
+  exports.getCityData = functions.https.onRequest(async (req, res) => {
+    const GEO_NAMES_USERNAME = "shange"; // Replace with your username
+    const countryCode = req.query.countryCode || "NG"; // Default to Nigeria if not provided
+    const maxRows = req.query.maxRows || 10;
+  
+    const url = `http://api.geonames.org/searchJSON`;
+  
+    try {
+      const response = await axios.get(url, {
+        params: {
+          country: countryCode,
+          maxRows,
+          featureClass: "P", // Populated places
+          username: GEO_NAMES_USERNAME,
+        },
+      });
+  
+      const cities = response.data.geonames.map((city) => ({
+        name: city.name,
+        lat: parseFloat(city.lat),
+        lng: parseFloat(city.lng),
+      }));
+  
+      res.json({ country: countryCode, cities });
+    } catch (error) {
+      console.error("Error fetching city data:", error);
+      res.status(500).json({ error: "Failed to fetch city data." });
+    }
+  });
 // Route to scrape flight data
 app.get("/scrape-flights", async (req, res) => {
   const queryParams = new URLSearchParams(req.query.url.substring(req.query.url.indexOf('?') + 1));
