@@ -2906,7 +2906,7 @@ crossorigin="anonymous"></script>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/seo-and-web.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
-    <p class="instruction-text">Use the search bar to search for cities and countries with flight mapping!</p>
+    <p class="instruction-text">Use the search bar to search for cities and countries with flight mapping+</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/page-refresh.png" alt="Button Click" class="glove-hand">
@@ -5958,7 +5958,7 @@ async function loadDetailedMarkers(regionCoordinates) {
 async function getDetailedMarkersForRegion(region) {
   try {
     // Make an API request to fetch the markers data for the specific region
-    const response = await fetch(`https://api-4uaw7agqwq-uc.a.run.app/get-markers?region=${region}&category=${category}`, {
+    const response = await fetch(`https://api-173542786157.us-central1.run.app/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
 }).then(response => response.json())
@@ -6517,7 +6517,7 @@ console.log("Requesting URL:", url);
 	console.log('Generated searchUrl:checkout', returnDate);
 	console.log('Generated searchUrl:guests', passengers);
 	console.log('Generated searchUrl:cabinClass', cabinClass);
-	console.log('Fetching data from:', `https://api-4uaw7agqwq-uc.a.run.app/scrape-flights?url=${encodeURIComponent(url)}`);
+	console.log('Fetching data from:', `https://api-173542786157.us-central1.run.app/scrape-flights?url=${encodeURIComponent(url)}`);
   hideSpinnerContainer();
   console.log("Formatted Departure Date:", departureDate);
 console.log("Formatted Return Date:", returnDate);
@@ -6529,7 +6529,7 @@ async function fetchFlightPosts(url) {
         // Update spinner text to indicate scraping started
         updateSpinnerText("Scanning through the net to find the best flights and deals available... please be patient🙏🏽 feel free to browse while you wait!");
 
-        const response = await fetch(`https://api-4uaw7agqwq-uc.a.run.app/scrape-flights?url=${encodeURIComponent(url)}`);
+        const response = await fetch(`https://api-173542786157.us-central1.run.app/scrape-flights?url=${encodeURIComponent(url)}`);
         const data = await response.json();
 
         // Ensure that 'flights' is an array before processing
@@ -6917,7 +6917,7 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 	console.log('Generated searchUrl:guests', guests);
 	console.log('Generated searchUrl:priceMin', priceMin);
 	console.log('Generated searchUrl:priceMax', priceMax);
-	console.log('Fetching data from:', `https://api-4uaw7agqwq-uc.a.run.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+	console.log('Fetching data from:', `https://api-173542786157.us-central1.run.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
   hideSpinnerContainer();
 
 });
@@ -6981,7 +6981,7 @@ async function fetchAirbnbPosts(searchUrl) {
         // Update spinner text to indicate scraping started
         updateSpinnerText("Retrieving posts from Airbnb... please be patient🙏🏽 feel free to browse while you wait!");
 
-        const response = await fetch(`https://api-4uaw7agqwq-uc.a.run.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+        const response = await fetch(`https://api-173542786157.us-central1.run.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
          const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
@@ -9099,7 +9099,7 @@ async function fetchMarkers(location, category) {
     let searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=2&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&adults=${guests}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
 
     // Fetch markers from your backend
-    const response = await fetch(`https://api-4uaw7agqwq-uc.a.run.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+    const response = await fetch(`https://api-173542786157.us-central1.run.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
     // Extract posts and markers from the response
     const { markers } = await response.json(); 
     console.log("Fetched markers:", markers);  // Log the response to check its format
@@ -9396,7 +9396,7 @@ async function fetchAirbnbPosts(searchUrl) {
         // Update spinner text to indicate scraping started
         updateSpinnerText("Fetching posts from Airbnb... please be patient🙏🏽 feel free to browse while you wait!");
 
-        const response = await fetch(`https://api-4uaw7agqwq-uc.a.run.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+        const response = await fetch(`https://api-173542786157.us-central1.run.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
          const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
@@ -9636,13 +9636,13 @@ async function loadMarkersForRegionAndCategory(region, category) {
         updateSpinnerText("Fetching listings for " + region + "...");
 
         // Fetch the listings data from your backend based on region and category
-        const response = await fetch(`https://api-4uaw7agqwq-uc.a.run.app/get-markers?region=${region}&category=${category}`, {
+        const response = await fetch(`https://api-173542786157.us-central1.run.app/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
 });
         const markersData = await response.json();  // Assuming the backend returns a JSON array of markers
         console.log(`Fetching markers from: ${url}`);
-	    console.log(`Fetching markers from: https://api-4uaw7agqwq-uc.a.run.app/get-markers?region=${region}&category=${category}`);
+	    console.log(`Fetching markers from: https://api-173542786157.us-central1.run.app/get-markers?region=${region}&category=${category}`);
 
         // Clear the existing markers before adding new ones
         clearExistingMarkers();
@@ -9658,7 +9658,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
 
         // Update spinner text once loading is complete
         updateSpinnerText("Listings loaded for " + region);
-	    console.log(`Fetching markers from: https://api-4uaw7agqwq-uc.a.run.app/get-markers?region=${region}&category=${category}`);
+	    console.log(`Fetching markers from: https://api-173542786157.us-central1.run.app/get-markers?region=${region}&category=${category}`);
 
 
     } catch (error) {
@@ -9668,7 +9668,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
 }
 async function fetchMarkers(region, category) {
   try {
-    const response = await fetch(`https://api-4uaw7agqwq-uc.a.run.app/get-markers?region=${region}&category=${category}`);
+    const response = await fetch(`https://api-173542786157.us-central1.run.app/get-markers?region=${region}&category=${category}`);
     const markers = await response.json();
      // Clear the existing markers before adding new ones
      clearExistingMarkers();
@@ -10771,7 +10771,7 @@ function openMarkerLabel(data) {
         right: 85px; 
         background: none; 
         border: none; 
-        color: #C7D5DD; 
+        color: #ffffff; 
         cursor: pointer;">
         ● ● ●
       </button>
