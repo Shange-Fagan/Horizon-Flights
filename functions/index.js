@@ -70,14 +70,22 @@ app.use(corsConfig);*/
 //app.options('*', corsConfig);
 
 // Configure CORS options
+const allowedOrigin = process.env.ACCESS_CONTROL_ALLOW_ORIGIN;
+
 const corsOptions = {
-  origin: 'https://horizonflights.org', // Restrict to specific origin
-  methods: ['GET', 'POST', 'OPTIONS'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-  optionsSuccessStatus: 204 // For legacy browsers
+  origin: (origin, callback) => {
+    if (origin === allowedOrigin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Set to true if you need cookies/auth tokens
 };
 
-// Apply CORS to all routes
+// Apply CORS middleware
 app.use(cors(corsOptions));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://horizonflights.org'); // Specific domain
