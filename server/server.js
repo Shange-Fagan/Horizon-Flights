@@ -3,7 +3,12 @@ const express = require('express');
 const puppeteer = require('puppeteer');
 const cors = require('cors');
 const path = require('path');
+const axios = require('axios');
+const puppeteerExtra = require('puppeteer-extra');
+const puppeteerExtraPluginStealth = require('puppeteer-extra-plugin-stealth');
 
+// Add the stealth plugin to puppeteer-extra
+puppeteerExtra.use(puppeteerExtraPluginStealth());
 const app = express();
 
 //const cors = require('cors')({ origin: true });
@@ -86,6 +91,75 @@ function waitForTimeout(ms) {
     }
   }
   
+  // Function to solve reCAPTCHA using 2Captcha
+
+async function solveRecaptcha(page) {
+  // Find the CAPTCHA iframe
+  const captchaIframe = await page.$('iframe[src*="recaptcha/api2/anchor"]');
+  
+  if (!captchaIframe) {
+    console.error("No CAPTCHA iframe found!");
+    return;
+  }
+
+  // Extract the iframe URL (which contains the site key)
+  const captchaUrl = await captchaIframe.evaluate(frame => frame.src);
+  
+  // Extract the site key from the URL
+  const urlParams = new URLSearchParams(captchaUrl.split('?')[1]);
+  const siteKey = urlParams.get('k');  // Site key is in the 'k' parameter
+  
+  console.log("Captcha URL:", captchaUrl);
+  console.log("Site Key:", siteKey);
+
+  // Make sure the siteKey is extracted correctly
+  if (!siteKey) {
+    console.error("Failed to extract site key.");
+    return;
+  }
+
+  // Define the action parameter (action can be customized based on your page context)
+  const action = 'flights_submit'; // You can customize this based on the actual action happening on the page, like 'login' or 'search'
+  console.log("Action set to:", action);
+
+  // Use 2Captcha API to solve the CAPTCHA
+  try {
+    const response = await axios.post('http://2captcha.com/in.php', {
+      key: '16c0c7f393fd4c7dba5da76441c5a008',  // Replace with your 2Captcha API key
+      method: 'userrecaptcha',
+      googlekey: siteKey,
+      pageurl: captchaUrl,
+      data: {
+        action: action,  // Action parameter is required
+      }
+    });
+
+    const captchaId = response.data.split('|')[1];
+    console.log("Captcha ID:", captchaId);
+
+    // Wait for the CAPTCHA solution from 2Captcha
+    const result = await axios.get(`http://2captcha.com/res.php?key=16c0c7f393fd4c7dba5da76441c5a008&id=${captchaId}`);
+    
+    if (result.data.includes('OK')) {
+      const captchaSolution = result.data.split('|')[1];
+      console.log("Captcha solved:", captchaSolution);
+
+      // Inject the solution into the reCAPTCHA response field
+      await page.evaluate((solution) => {
+        document.getElementById('g-recaptcha-response').innerText = solution;
+      }, captchaSolution);
+
+      // Click the search button after solving CAPTCHA
+      const searchButtonSelector = '.mewtwo-flights-submit_button.mewtwo-flights-submit_button--new'; // Make sure the selector is correct
+      await page.click(searchButtonSelector);
+      console.log("Search button clicked after solving CAPTCHA.");
+    } else {
+      console.error("Failed to solve CAPTCHA:", result.data);
+    }
+  } catch (error) {
+    console.error("Error solving CAPTCHA:", error);
+  }
+}
 
 // Route to scrape flight data
 app.get("/scrape-flights", async (req, res) => {
@@ -117,7 +191,17 @@ console.log("Parsed Parameters:");
   console.log("Generated URL:", url);
 
   // Launch Puppeteer
-  const browser = await puppeteer.launch({ headless: true });
+  // Launch Puppeteer with stealth mode enabled
+  const browser = await puppeteerExtra.launch({
+    headless: true,  // Set to false if you want to see the browser for debugging
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-web-security',
+      '--allow-running-insecure-content',
+      '--disable-features=IsolateOrigins,site-per-process'
+    ]
+  });
   const page = await browser.newPage();
 
   // Navigate to Trivago Flights main page
@@ -153,9 +237,7 @@ console.log(`Entered "${from}" as the from location.`);
   console.log(`Entered "${to}" as the destination city.`);
   await new Promise(resolve => setTimeout(resolve, 5000));
 
-  // Input "Departure Date"
-  await page.click('input[placeholder="Depart date"]'); // Use the actual selector
-   // Function to select a specific date by clicking the calendar cell
+  // Function to select a specific date by clicking the calendar cell
 async function selectDate(page, date) {
   const dateSelector = '.mewtwo-datepicker-table'; // Calendar table container class
   const dateCellSelector = `td[data-date="${date}"]`; // Dynamic selector for the specific date
@@ -173,6 +255,8 @@ async function selectDate(page, date) {
 
   console.log(`Selected date: ${date}`);
 }
+  // Input "Departure Date"
+  await page.click('input[placeholder="Depart date"]'); // Use the actual selector
 await selectDate(page, departureDate);
   console.log(`Selected "${departureDate}" as the departure date.`);
   await new Promise(resolve => setTimeout(resolve, 5000));
@@ -279,18 +363,32 @@ try {
   await page.waitForSelector(searchButtonSelector, { visible: true }); // Wait for the button to be visible
 
   await page.click(searchButtonSelector);
+  await new Promise(resolve => setTimeout(resolve, 35000));
+
+await new Promise(resolve => setTimeout(resolve, 5000));
+const currentUrlBeforeSearch = page.url();
+// Capture HTML content to check if reCAPTCHA is present
+const pageContent = await page.content();
+console.log(pageContent);  // This logs the HTML content of the page to the console.
+console.log("Current URL before pressing the search button:", currentUrlBeforeSearch);
+ // Check if CAPTCHA is present
+ /*const captchaFrame = await page.$('iframe[src*="recaptcha"]');
+ if (captchaFrame) {
+   console.log("CAPTCHA detected, solving...");
+   await solveRecaptcha(page, captchaFrame);
+ }*/
+  //await page.click(searchButtonSelector);  // After solving the CAPTCHA, click the search button
   console.log('Search button clicked.');
 } catch (error) {
   console.error('Error handling cabin class or clicking search button:', error);
 }
 
-await new Promise(resolve => setTimeout(resolve, 35000));
+await new Promise(resolve => setTimeout(resolve, 15000));
 
-await new Promise(resolve => setTimeout(resolve, 5000));
 // Wait for the flight results container to load
 // Wait for the tickets container to load
-await page.waitForSelector('.tickets-container.js-tickets-container', { timeout: 30000 });
-
+await page.waitForSelector('.tickets-container.js-tickets-container', { timeout: 60000 });
+await page.screenshot({ path: 'screenshot-before-search.png' });
 // Scrape flight data for all tickets
 const results = await page.evaluate(() => {
   const flights = [];
@@ -873,6 +971,11 @@ console.log('Converted Marker Lat/Lng with Scaling:', markerLatLngs);
   res.json(markerLatLngs);
 });
 const PORT = process.env.PORT || 3000;
+try {
+  console.log(require.resolve('../util/incremental-id-generator.js'));
+} catch (error) {
+  console.error('Error resolving module:', error.message);
+}
 
 // Start the server
 app.listen(PORT, () => {

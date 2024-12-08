@@ -6,7 +6,11 @@ const cors = require('cors');
 const path = require('path');
 const chromium = require('chrome-aws-lambda'); // Install this: npm install chrome-aws-lambda
 const axios = require('axios');
+const puppeteerExtra = require('puppeteer-extra');
+const puppeteerExtraPluginStealth = require('puppeteer-extra-plugin-stealth');
 
+// Add the stealth plugin to puppeteer-extra
+puppeteerExtra.use(puppeteerExtraPluginStealth());
 
 const app = express();
 
@@ -162,10 +166,17 @@ console.log("Parsed Parameters:");
   console.log("Generated URL:", url);
 
   // Launch Puppeteer
-  const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: await chromium.executablePath,
-      headless: chromium.headless,
+  // Launch Puppeteer with stealth mode enabled
+  const browser = await puppeteerExtra.launch({
+    executablePath: await chromium.executablePath,
+    headless: chromium.headless,  // Set to false if you want to see the browser for debugging
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-web-security',
+      '--allow-running-insecure-content',
+      '--disable-features=IsolateOrigins,site-per-process'
+    ]
   });
   const page = await browser.newPage();
 
@@ -202,9 +213,7 @@ console.log(`Entered "${from}" as the from location.`);
   console.log(`Entered "${to}" as the destination city.`);
   await new Promise(resolve => setTimeout(resolve, 5000));
 
-  // Input "Departure Date"
-  await page.click('input[placeholder="Depart date"]'); // Use the actual selector
-   // Function to select a specific date by clicking the calendar cell
+  // Function to select a specific date by clicking the calendar cell
 async function selectDate(page, date) {
   const dateSelector = '.mewtwo-datepicker-table'; // Calendar table container class
   const dateCellSelector = `td[data-date="${date}"]`; // Dynamic selector for the specific date
@@ -222,6 +231,8 @@ async function selectDate(page, date) {
 
   console.log(`Selected date: ${date}`);
 }
+  // Input "Departure Date"
+  await page.click('input[placeholder="Depart date"]'); // Use the actual selector
 await selectDate(page, departureDate);
   console.log(`Selected "${departureDate}" as the departure date.`);
   await new Promise(resolve => setTimeout(resolve, 5000));
@@ -304,7 +315,7 @@ try {
   console.log('Cabin class received:', cabinClass);
 
   // Select the Business Class checkbox if needed
-  if (cabinClass === 'business' || cabinClass === 'first class') {
+  if (cabinClass === 'business') {
     const businessClassCheckboxSelector = '.mewtwo-passengers-flight_type__checkbox'; // Update based on the actual selector
     await page.waitForSelector(businessClassCheckboxSelector, { visible: true }); // Wait for the checkbox to be visible
 
@@ -328,18 +339,32 @@ try {
   await page.waitForSelector(searchButtonSelector, { visible: true }); // Wait for the button to be visible
 
   await page.click(searchButtonSelector);
+  await new Promise(resolve => setTimeout(resolve, 35000));
+
+await new Promise(resolve => setTimeout(resolve, 5000));
+const currentUrlBeforeSearch = page.url();
+// Capture HTML content to check if reCAPTCHA is present
+const pageContent = await page.content();
+console.log(pageContent);  // This logs the HTML content of the page to the console.
+console.log("Current URL before pressing the search button:", currentUrlBeforeSearch);
+ // Check if CAPTCHA is present
+ /*const captchaFrame = await page.$('iframe[src*="recaptcha"]');
+ if (captchaFrame) {
+   console.log("CAPTCHA detected, solving...");
+   await solveRecaptcha(page, captchaFrame);
+ }*/
+  //await page.click(searchButtonSelector);  // After solving the CAPTCHA, click the search button
   console.log('Search button clicked.');
 } catch (error) {
   console.error('Error handling cabin class or clicking search button:', error);
 }
 
-await new Promise(resolve => setTimeout(resolve, 35000));
+await new Promise(resolve => setTimeout(resolve, 15000));
 
-await new Promise(resolve => setTimeout(resolve, 5000));
 // Wait for the flight results container to load
 // Wait for the tickets container to load
-await page.waitForSelector('.tickets-container.js-tickets-container', { timeout: 30000 });
-
+await page.waitForSelector('.tickets-container.js-tickets-container', { timeout: 60000 });
+await page.screenshot({ path: 'screenshot-before-search.png' });
 // Scrape flight data for all tickets
 const results = await page.evaluate(() => {
   const flights = [];
