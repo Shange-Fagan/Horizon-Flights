@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 }));
 app.options('*', cors()); // Enable preflight across all routes
 */
-/*const corsConfig = cors({
+const corsConfig = cors({
   origin: [
       'http://localhost:5001', // Emulator
       'http://127.0.0.1:5001', // IP-based localhost
@@ -57,50 +57,28 @@ app.options('*', cors()); // Enable preflight across all routes
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // Enable cookies/credentials if required
-});*/
+});
+app.options('*', cors()); // Enable preflight across all routes
+
 /*const corsConfig = cors({
   origin: true, // Allow requests from any origin
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // Enable cookies/credentials if required
-});
-app.use(corsConfig);*/
+});*/
+app.use(corsConfig);
 
 // Handling pre-flight requests
-//app.options('*', corsConfig);
+app.options('*', corsConfig);
 
-// Configure CORS options
-const allowedOrigin = process.env.ACCESS_CONTROL_ALLOW_ORIGIN;
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (origin === allowedOrigin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // Set to true if you need cookies/auth tokens
-};
-
-// Apply CORS middleware
-app.use(cors(corsOptions));
+// Custom CORS Headers (ensure these are being applied to all routes)
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://horizonflights.org'); // Specific domain
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true'); // Needed if cookies/auth tokens are passed
-
-  if (req.method === 'OPTIONS') {
-    res.status(204).send(''); // Preflight request response
-    return;
-  }
-
-  next();
+    res.set('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.set('Access-Control-Allow-Credentials', 'true');
+    next();
 });
-
 
 function waitForTimeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -193,7 +171,7 @@ console.log("Parsed Parameters:");
   // Launch Puppeteer with stealth mode enabled
   const browser = await puppeteerExtra.launch({
     executablePath: await chromium.executablePath,
-    headless: chromium.headless,  // Set to false if you want to see the browser for debugging
+      headless: chromium.headless,  // Set to false if you want to see the browser for debugging
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
