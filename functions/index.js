@@ -58,25 +58,28 @@ app.options('*', cors()); // Enable preflight across all routes
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // Enable cookies/credentials if required
 });*/
-const corsConfig = cors({
+/*const corsConfig = cors({
   origin: true, // Allow requests from any origin
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // Enable cookies/credentials if required
 });
-app.use(corsConfig);
+app.use(corsConfig);*/
 
 // Handling pre-flight requests
-app.options('*', corsConfig);
+//app.options('*', corsConfig);
 
-// Custom CORS Headers (ensure these are being applied to all routes)
-app.use((req, res, next) => {
-    res.set('Access-Control-Allow-Origin', req.headers.origin || '*');
-    res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.set('Access-Control-Allow-Credentials', 'true');
-    next();
-});
+// Configure CORS options
+const corsOptions = {
+  origin: 'https://horizonflights.org', // Restrict to specific origin
+  methods: ['GET', 'POST', 'OPTIONS'], // Allowed HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  optionsSuccessStatus: 204 // For legacy browsers
+};
+
+// Apply CORS to all routes
+app.use(cors(corsOptions));
+
 
 function waitForTimeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

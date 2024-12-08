@@ -7,7 +7,7 @@
       "PUPPETEER_CACHE_DIR": "/tmp/puppeteer"
     },
       "timeoutSeconds": 120,
-      "memory": "1GB",
+      "memory": "2GB",
       "ignore": [
         "node_modules",
         ".git",
