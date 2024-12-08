@@ -79,6 +79,19 @@ const corsOptions = {
 
 // Apply CORS to all routes
 app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://horizonflights.org'); // Specific domain
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true'); // Needed if cookies/auth tokens are passed
+
+  if (req.method === 'OPTIONS') {
+    res.status(204).send(''); // Preflight request response
+    return;
+  }
+
+  next();
+});
 
 
 function waitForTimeout(ms) {
