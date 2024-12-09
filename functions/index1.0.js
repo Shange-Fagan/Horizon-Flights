@@ -613,6 +613,7 @@ console.log('Converted Marker Lat/Lng with Scaling:', markerLatLngs);
 // Start the server
 //app.listen(PORT, () => {
   //console.log(`Server is running on port ${PORT}`);
-//});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 // Wrap Express app as Firebase Cloud Function
-exports.api = functions.https.onRequest(app);
+//exports.api = functions.https.onRequest(app);
