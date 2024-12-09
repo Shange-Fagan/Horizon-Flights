@@ -58,8 +58,6 @@ const corsConfig = cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // Enable cookies/credentials if required
 });
-app.options('*', cors()); // Enable preflight across all routes
-
 /*const corsConfig = cors({
   origin: true, // Allow requests from any origin
   methods: ['GET', 'POST'],
@@ -67,10 +65,6 @@ app.options('*', cors()); // Enable preflight across all routes
   credentials: true, // Enable cookies/credentials if required
 });*/
 app.use(corsConfig);
-
-// Handling pre-flight requests
-app.options('*', corsConfig);
-
 // Custom CORS Headers (ensure these are being applied to all routes)
 app.use((req, res, next) => {
     res.set('Access-Control-Allow-Origin', req.headers.origin || '*');
