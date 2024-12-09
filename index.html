@@ -1074,7 +1074,7 @@ input[type="number"] {
   background-color: rgba(255, 255, 255, 0.15);
   padding: 45px 55px; /* Increase padding for more breathing space */
   border-radius: 15px; /* Slightly more rounded corners */
-  z-index: 22010; /* Ensure it appears above all other elements */
+  z-index: 22012; /* Ensure it appears above all other elements */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow for better separation */
   backdrop-filter: blur(10px); /* Apply background blur effect */
   text-align: center; /* Center the text and elements inside the popup */
@@ -2785,6 +2785,107 @@ crossorigin="anonymous"></script>
   box-shadow: 0 0 5px rgba(0, 120, 215, 0.5);
   outline: none;
 }
+#carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  bottom: -10px;
+  z-index: 22011;
+  background-color: rgba(255, 255, 255, 0.0); /* Optional */
+}
+
+.carousel {
+  display: flex;
+  width: max-content;  /* Allow the carousel to be wide enough for all items */
+  animation: scroll 60s linear infinite; /* Continuous scrolling */
+}
+
+.carousel-item {
+  min-width: 600px; /* Adjust to match your desired width */
+  max-height: 120px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.carousel img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Optional */
+}
+
+/* Keyframes for continuous scrolling */
+@keyframes scroll {
+  0% {
+    transform: translateX(0); /* Start at the beginning */
+  }
+  100% {
+    transform: translateX(-100%); /* Scroll full width of all items */
+  }
+}
+
+.carousel-container a {
+  display: block;  /* Make the whole image clickable */
+}
+
+.carousel-buttons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: none;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.carousel-buttons button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.carousel-buttons button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.carousel-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+  position:fixed;
+  background-color: rgba(255,255,255,0.0);
+  top: 120px;
+  z-index: 22011;
+  left: 0px;
+}
+
+#minimizeCarouselBtn {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.75);
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  border-radius: 0px 0px 15px 15px;
+  z-index:22011;
+}
+
+#minimizeCarouselBtn:hover {
+  background-color: rgba(225, 225, 225, 0.35);
+}
+
+.carousel-container {
+  transition: height 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.carousel-container.hidden {
+  height: 0;
+  opacity: 0;
+}
+
 
 </style>
 <script>
@@ -2796,6 +2897,48 @@ crossorigin="anonymous"></script>
 
 </head>
 <body>
+  <div class="carousel-header">
+    <button id="minimizeCarouselBtn">Minimize Ads</button>
+  </div>
+  <div id="carousel-container" style="display: flex;">
+    <div class="carousel">
+      <!-- Advertiser 1 Address Hotels-->
+      <div class="carousel-item">
+        <a href="https://www.anrdoezrs.net/click-101312981-16944928?url=https%3A%2F%2Fwww.addresshotels.com%2Fen%2F">
+          <img src="js/Screenshot 2024-12-09 at 14.07.42.png" alt="Advertiser 1">
+        </a>
+      </div>
+  
+      <!-- Advertiser 2 Vida Hotels-->
+      <div class="carousel-item">
+        <a href="https://www.tkqlhce.com/click-101312981-16978427?url=https%3A%2F%2Fwww.vidahotels.com%2Fen%2F">
+          <img src="js/Screenshot 2024-12-09 at 14.12.35.png" alt="Advertiser 2">
+        </a>
+      </div>
+  
+      <!-- Advertiser 3 Travel Up-->
+      <div class="carousel-item">
+        <a href="https://www.tkqlhce.com/click-101312981-15488597?url=https%3A%2F%2Fwww.travelup.com%2Fen-gb">
+          <img src="js/Screenshot 2024-12-09 at 14.15.30.png"style=" height: 83px; width: 650px;" alt="Advertiser 3">
+        </a>
+      </div>
+  
+      <!-- Advertiser 4 Rexing-->
+      <div class="carousel-item">
+        <a href="https://www.dpbolvw.net/click-101312981-14000405?url=https%3A%2F%2Fwww.rexingusa.com%2F%3Fsrsltid%3DAfmBOopQTSipJZiie7zY23n5SsOGVXgil3GahX4szeaNXrR4XAsit4l8">
+          <img src="js/blue_rexinglogo_hd-e1622158390594.png"  style="width: 460px; height: 84px;" alt="Advertiser 3">
+        </a>
+      </div>
+      <!-- Advertiser 5 Lumary-->
+      <div class="carousel-item">
+        <a href="https://www.jdoqocy.com/click-101312981-15890503?url=https%3A%2F%2Fwww.lumarysmart.com%2F">
+          <img src="js/ads.png" style="display: flex; height: 100px; width: 230px; margin-top: -10px; margin-bottom: 0px;" alt="Advertiser 3">
+        </a>
+      </div>      
+      <!-- Add more advertisers as needed -->
+    </div>
+  </div>
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -2872,7 +3015,7 @@ crossorigin="anonymous"></script>
   <div class="instruction-step hidden" id="zoomInstruction">
     <img src="js/hands.png" alt="Scroll Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 50%; left: 50%;"></div>
-    <p class="instruction-text">Welcome to Horizon Flights! Use your mouse or trackpad to zoom in and out</p>
+    <p class="instruction-text">Welcome to Horizon Flights! <br> Use your mouse or trackpad to zoom in and out</p>
   </div>
   <div class="instruction-step hidden" id="dragInstruction">
     <img src="js/left-click.png" alt="Drag Gesture" class="glove-hand">
@@ -2907,7 +3050,7 @@ crossorigin="anonymous"></script>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/seo-and-web.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
-    <p class="instruction-text">Use the search bar to search for cities and countries with flight mapping</p>
+    <p class="instruction-text">Use the search bar to search for cities and countries with flight mapping!</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/page-refresh.png" alt="Button Click" class="glove-hand">
@@ -3398,6 +3541,63 @@ function getFormattedDate() {
 
 // Set the placeholder to today's date
 checkinInput.placeholder = getFormattedDate();
+document.addEventListener('DOMContentLoaded', function () {
+  const carousel = document.querySelector('.carousel');
+  const carouselItems = document.querySelectorAll('.carousel-item');
+  const totalItems = carouselItems.length;
+
+  let currentIndex2 = 0;
+
+  // Clone the first and last items for seamless scrolling
+  const firstItem = carouselItems[0].cloneNode(true);
+  const lastItem = carouselItems[totalItems - 1].cloneNode(true);
+
+  // Append clones to the carousel
+  carousel.appendChild(firstItem);
+  carousel.insertBefore(lastItem, carouselItems[0]);
+
+  // Adjust carousel width to fit all items
+  carousel.style.width = `${(totalItems + 2) * 600}px`; // Adjust 600px to match your item width
+  carousel.style.transform = `translateX(-600px)`; // Start position (skip the clone)
+
+  function showNextSlide() {
+    currentIndex2++;
+    carousel.style.transition = 'transform 0.5s ease';
+    carousel.style.transform = `translateX(-${(currentIndex2 + 1) * 600}px)`;
+
+    // Reset position when reaching the cloned last item
+    if (currentIndex2 === totalItems) {
+      setTimeout(() => {
+        carousel.style.transition = 'none';
+        carousel.style.transform = `translateX(-600px)`; // Back to real first item
+        currentIndex2 = 0;
+      }, 500); // Match the transition duration
+    }
+  }
+
+  // Automatically slide every 3 seconds
+  setInterval(showNextSlide, 3000);
+});
+
+
+function toggleCarousel() {
+  const carouselContainer = document.getElementById('carousel-container');
+  const minimizeButton = document.getElementById('minimizeCarouselBtn');
+
+  if (carouselContainer.style.display === 'none') {
+    // Show the carousel
+    carouselContainer.style.display = 'flex';
+    minimizeButton.textContent = 'Minimize Ads';
+  } else {
+    // Hide the carousel
+    carouselContainer.style.display = 'none';
+    minimizeButton.textContent = 'Maximize Ads';
+  }
+}
+document.getElementById('minimizeCarouselBtn').addEventListener('click', function() {
+  toggleCarousel()
+});
+
 	  // Hide the spinner after globe and scene are ready
 //window.addEventListener('load', () => {
   //document.getElementById('loadingSpinner').style.display = 'none';
@@ -5661,7 +5861,7 @@ const markersData = [
   { id: 21, region: 'egypt', position: [5.1, 1.1, 2.025], iframeSrc: "https://rss.app/embed/v1/list/dNzK558Uc07XY3qe" },
   { id: 22, region: 'kenya', position: [5.1, 1.59, 2.2], iframeSrc: "https://rss.app/embed/v1/list/mQwcXheQrGddKUw8" },
   { id: 23, region: 'south africa', position: [5.1, 2.0, 2.05], iframeSrc: "https://rss.app/embed/v1/list/dF7qmzHegY5myQzX" },
-  { id: 24, region: 'saudi arabia', position: [5.1, 1.15, 2.35],iframeSrc: "https://rss.app/embed/v1/list/hCTLYTAdcGvC39sN" },
+  { id: 24, class:"iframe-saudi",region: 'saudi arabia', position: [5.1, 1.15, 2.35],iframeSrc: "https://rss.app/embed/v1/list/Lf7XMimoFVElTq81" },
 ];
 /*const genericMarkers = [
   { id: 1, position: [5.1, 1.2, 1.5], region: 'africa' },
@@ -10928,6 +11128,20 @@ function setupMarkerInteraction() {
 function openMarkerLabel(data) {
   const labelDiv = document.getElementById(`label-${data.id}`);
   const contentDiv = labelDiv.querySelector('.content');
+// Wait until the element is created in the DOM
+setTimeout(() => {
+    const saudiIframe = document.querySelector(".iframe-saudi");
+    if (saudiIframe) {
+      saudiIframe.innerHTML = `
+        <a href="https://www.tkqlhce.com/click-101312981-16949818" target="_top">
+          The earlier you book, the more you save – up to 25% savings on stays
+        </a>
+        <img src="https://www.tqlkg.com/image-101312981-16949818" width="1" height="1" border="0"/>
+      `;
+    } else {
+      console.error("The iframe-saudi element does not exist yet!");
+    }
+  }, 500); // Adjust the timeout as needed to ensure the DOM is updated
 
   if (!contentDiv.querySelector('iframe')) {
     // Inject the inner HTML content
@@ -10951,7 +11165,7 @@ function openMarkerLabel(data) {
         right: 85px; 
         background: none; 
         border: none; 
-        color: #ffffff; 
+        color: rgba(255, 255, 255, 0.35); 
         cursor: pointer;">
         ● ● ●
       </button>
