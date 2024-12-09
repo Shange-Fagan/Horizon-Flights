@@ -1,10 +1,18 @@
+//process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer'; // Set Puppeteer cache directory to /tmp
 const functions = require('firebase-functions'); // Use CommonJS for Firebase Functions
 const express = require('express');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const cors = require('cors');
+const path = require('path');
+const chromium = require('chrome-aws-lambda'); // Install this: npm install chrome-aws-lambda
+const axios = require('axios');
+const puppeteerExtra = require('puppeteer-extra');
+const puppeteerExtraPluginStealth = require('puppeteer-extra-plugin-stealth');
+
+// Add the stealth plugin to puppeteer-extra
+puppeteerExtra.use(puppeteerExtraPluginStealth());
 
 const app = express();
-const path = require('path');
 
 //const cors = require('cors')({ origin: true });
 // Middleware
@@ -38,49 +46,375 @@ app.options('*', cors()); // Enable preflight across all routes
 */
 const corsConfig = cors({
   origin: [
-    'http://localhost:5001', // Emulator
-    'http://127.0.0.1:5001', // IP-based localhost
-    'http://localhost:4000', // Emulator UI
-    'https://shange-fagan.github.io', // GitHub Pages
-    'https://airbnbexplorer.com', // Custom domain
-    'https://api-omx7tvjdea-uc.a.run.app', // Cloud Run API
+      'http://localhost:5001', // Emulator
+      'http://127.0.0.1:5001', // IP-based localhost
+      'http://localhost:4000', // Emulator UI
+      'https://shange-fagan.github.io', // GitHub Pages
+      'https://airbnbexplorer.com', // Custom domain
+      'https://api-omx7tvjdea-uc.a.run.app', // Cloud Run API
+      'https://horizonflights.org', // Production domain
   ],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Enable cookies/credentials if required
 });
+/*const corsConfig = cors({
+  origin: true, // Allow requests from any origin
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Enable cookies/credentials if required
+});*/
 app.use(corsConfig);
-app.options('*', (req, res) => {
+// Custom CORS Headers (ensure these are being applied to all routes)
+app.use((req, res, next) => {
     res.set('Access-Control-Allow-Origin', req.headers.origin || '*');
-    res.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.set('Access-Control-Allow-Credentials', 'true');
-    res.status(200).end();
-  });
-app.options('*', corsConfig);
+    next();
+});
+
 function waitForTimeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  const PORT = process.env.PORT || 3000; // Use the PORT environment variable or default to 3000
 
+  async function navigateToPageWithRetry(page, url, maxRetries = 3) {
+    let attempt = 0;
+  
+    while (attempt < maxRetries) {
+        try {
+            console.log(`Attempt ${attempt + 1} to load the page.`);
+            // Navigate to the URL with an extended timeout
+            await page.goto(url, {
+                waitUntil: 'networkidle2',
+                timeout: 60000 // Set timeout to 60 seconds
+            });
+            console.log("Page loaded successfully.");
+            return; // Exit the function if successful
+        } catch (error) {
+            attempt++;
+            console.warn(`Attempt ${attempt} failed: ${error.message}`);
+            if (attempt >= maxRetries) {
+                console.error("Failed to load the page after multiple attempts.");
+                throw error; // Rethrow the error if max retries are exceeded
+            }
+            console.log("Retrying...");
+        }
+    }
+  }
+  
+  exports.getCityData = functions.https.onRequest(async (req, res) => {
+    const GEO_NAMES_USERNAME = "shange"; // Replace with your username
+    const countryCode = req.query.countryCode || "NG"; // Default to Nigeria if not provided
+    const maxRows = req.query.maxRows || 10;
+  
+    const url = `http://api.geonames.org/searchJSON`;
+  
+    try {
+      const response = await axios.get(url, {
+        params: {
+          country: countryCode,
+          maxRows,
+          featureClass: "P", // Populated places
+          username: GEO_NAMES_USERNAME,
+        },
+      });
+  
+      const cities = response.data.geonames.map((city) => ({
+        name: city.name,
+        lat: parseFloat(city.lat),
+        lng: parseFloat(city.lng),
+      }));
+  
+      res.json({ country: countryCode, cities });
+    } catch (error) {
+      console.error("Error fetching city data:", error);
+      res.status(500).json({ error: "Failed to fetch city data." });
+    }
+  });
+// Route to scrape flight data
+app.get("/scrape-flights", async (req, res) => {
+  const queryParams = new URLSearchParams(req.query.url.substring(req.query.url.indexOf('?') + 1));
+const from = queryParams.get('from');
+const to = queryParams.get('to');
+const departureDate = queryParams.get('departureDate');
+const returnDate = queryParams.get('returnDate');
+const passengers = queryParams.get('passengers');
+const cabinClass = queryParams.get('cabinClass');
+
+console.log("Parsed Parameters:");
+    console.log("From:", from);
+    console.log("To:", to);
+    console.log("Departure Date:", departureDate);
+    console.log("Return Date:", returnDate);
+    console.log("Passengers:", passengers);
+    console.log("Cabin Class:", cabinClass);
+
+  console.log("Query parameters received:", req.query);
+  if (!from || !to) {
+    console.error("Missing 'from' or 'to' query parameters.");
+    res.status(400).json({ error: "'from' and 'to' parameters are required" });
+    return;
+}
+  try {
+    const url = `https://www.trivagoflight.in/flights/`;
+
+  console.log("Generated URL:", url);
+
+  // Launch Puppeteer
+  // Launch Puppeteer with stealth mode enabled
+  const browser = await puppeteerExtra.launch({
+    executablePath: await chromium.executablePath,
+      headless: chromium.headless,  // Set to false if you want to see the browser for debugging
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-web-security',
+      '--allow-running-insecure-content',
+      '--disable-features=IsolateOrigins,site-per-process'
+    ]
+  });
+  const page = await browser.newPage();
+
+  // Navigate to Trivago Flights main page
+  // Navigate to the Airbnb search results page
+  await navigateToPageWithRetry(page, url);
+
+
+  await page.setViewport({ width: 1280, height: 720 });
+  // Wait for results to load
+await new Promise(resolve => setTimeout(resolve, 5000));
+console.log('Waited for 10 seconds to load results.');
+  // Define the selector for the input field
+const fromInputSelector = 'input[placeholder="Origin"]'; // Replace with your actual selector
+
+// Use page.evaluate to clear the input field
+await page.evaluate((selector) => {
+  const input = document.querySelector(selector);
+  if (input) {
+    input.value = ''; // Clear the input field programmatically
+    input.dispatchEvent(new Event('input', { bubbles: true })); // Trigger input event to ensure UI updates
+  }
+}, fromInputSelector);
+
+// Type the new "From" value
+await page.type(fromInputSelector,(from)); // Replace 'London' with your desired value
+console.log(`Entered "${from}" as the from location.`);
+
+  await new Promise(resolve => setTimeout(resolve, 5000));
+
+  // Input "To" field
+  await page.click('input[placeholder="Destination"]'); // Use the actual selector
+  await page.keyboard.type(to); // Type the "To" value
+  console.log(`Entered "${to}" as the destination city.`);
+  await new Promise(resolve => setTimeout(resolve, 5000));
+
+  // Function to select a specific date by clicking the calendar cell
+async function selectDate(page, date) {
+  const dateSelector = '.mewtwo-datepicker-table'; // Calendar table container class
+  const dateCellSelector = `td[data-date="${date}"]`; // Dynamic selector for the specific date
+
+  // Wait for the calendar table to appear
+  await page.waitForSelector(dateSelector);
+
+  // Click on the date cell
+  await page.evaluate((selector) => {
+    const dateCell = document.querySelector(selector);
+    if (dateCell) {
+      dateCell.click(); // Simulate a click on the desired date
+    }
+  }, dateCellSelector);
+
+  console.log(`Selected date: ${date}`);
+}
+  // Input "Departure Date"
+  await page.click('input[placeholder="Depart date"]'); // Use the actual selector
+await selectDate(page, departureDate);
+  console.log(`Selected "${departureDate}" as the departure date.`);
+  await new Promise(resolve => setTimeout(resolve, 5000));
+
+  // Define the coordinates of the blank part of the page (adjust as per your page layout)
+const blankPartX = 200; // X coordinate of the blank space
+const blankPartY = 500; // Y coordinate of the blank space
+
+// Click the blank part of the page
+// Select a blank part of the page by a safe selector (for example, the body or a specific div with no functionality)
+const clickAwaySelector =  '.TPWL-header-content'
+await page.waitForSelector(clickAwaySelector, { visible: true });
+// Click the passenger selection button
+await page.evaluate((selector) => {
+  const button = document.querySelector(selector);
+  if (button) {
+    button.click();
+  }
+}, clickAwaySelector);
+console.log('Clicked on the blank part of the page to ensure proper date selection.');
+await new Promise(resolve => setTimeout(resolve, 5000));
+
+  // Input "Return Date"
+  await page.click('input[placeholder="Return date"]'); // Use the actual selector
+  await selectDate(page, returnDate);
+  console.log(`Selected "${returnDate}" as the return date.`);
+  await new Promise(resolve => setTimeout(resolve, 5000));
+
+  // Wait for the page to load and target the passenger selection button
+const passengerButtonSelector = '.mewtwo-flights-trip_class-wrapper'; // Button to open the passenger modal
+await page.waitForSelector(passengerButtonSelector, { visible: true });
+
+// Click the passenger selection button
+await page.evaluate((selector) => {
+  const button = document.querySelector(selector);
+  if (button) {
+    button.click();
+  }
+}, passengerButtonSelector);
+console.log('Clicked the passenger selection button.');
+
+// Ensure the modal is fully opened (add a delay if necessary)
+await new Promise(resolve => setTimeout(resolve, 5000));
+// Wait for the page to load and target the passenger selection button
+// Wait for the page to load and target the passenger selection button
+
+// Selector for the "Add Passenger" button
+const incrementPassengersSelector = '.mewtwo-popup-ages-counter__plus';
+await page.waitForSelector(incrementPassengersSelector, { visible: true });
+
+// Increment passenger count to the desired number
+const passengersToAdd = passengers - 1; // Number of passengers to add (current passengers - 1)
+for (let i = 0; i < passengersToAdd; i++) {
+  await page.evaluate((selector) => {
+    const button = document.querySelector(selector);
+    if (button) {
+      button.click();
+    }
+  }, incrementPassengersSelector);
+  console.log(`Added passenger ${i + 1}`);
+}
+
+console.log('Incremented the passenger count.');
+
+
+
+// Select a blank part of the page by a safe selector (for example, the body or a specific div with no functionality)
+await page.waitForSelector(clickAwaySelector, { visible: true });
+// Click the passenger selection button
+await page.evaluate((selector) => {
+  const button = document.querySelector(selector);
+  if (button) {
+    button.click();
+  }
+}, clickAwaySelector);
+console.log('Clicked on the blank part of the page to ensure proper date selection.');
+
+try {
+  // Log the cabin class for debugging
+  console.log('Cabin class received:', cabinClass);
+
+  // Select the Business Class checkbox if needed
+  if (cabinClass === 'business') {
+    const businessClassCheckboxSelector = '.mewtwo-passengers-flight_type__checkbox'; // Update based on the actual selector
+    await page.waitForSelector(businessClassCheckboxSelector, { visible: true }); // Wait for the checkbox to be visible
+
+    const isChecked = await page.evaluate((selector) => {
+      const checkbox = document.querySelector(selector);
+      return checkbox ? checkbox.checked : false; // Ensure checkbox exists before checking
+    }, businessClassCheckboxSelector);
+
+    if (!isChecked) {
+      await page.click(businessClassCheckboxSelector); // Check the Business Class box
+      console.log('Selected Business Class.');
+    } else {
+      console.log('Business Class already selected.');
+    }
+  } else {
+    console.log('Economy Class selected by default.');
+  }
+
+  // Proceed to click the search button
+  const searchButtonSelector = '.mewtwo-flights-submit_button.mewtwo-flights-submit_button--new'; // Ensure the selector is correct
+  await page.waitForSelector(searchButtonSelector, { visible: true }); // Wait for the button to be visible
+
+  await page.click(searchButtonSelector);
+  await new Promise(resolve => setTimeout(resolve, 35000));
+
+await new Promise(resolve => setTimeout(resolve, 5000));
+const currentUrlBeforeSearch = page.url();
+// Capture HTML content to check if reCAPTCHA is present
+const pageContent = await page.content();
+console.log(pageContent);  // This logs the HTML content of the page to the console.
+console.log("Current URL before pressing the search button:", currentUrlBeforeSearch);
+ // Check if CAPTCHA is present
+ /*const captchaFrame = await page.$('iframe[src*="recaptcha"]');
+ if (captchaFrame) {
+   console.log("CAPTCHA detected, solving...");
+   await solveRecaptcha(page, captchaFrame);
+ }*/
+  //await page.click(searchButtonSelector);  // After solving the CAPTCHA, click the search button
+  console.log('Search button clicked.');
+} catch (error) {
+  console.error('Error handling cabin class or clicking search button:', error);
+}
+
+await new Promise(resolve => setTimeout(resolve, 15000));
+
+// Wait for the flight results container to load
+// Wait for the tickets container to load
+await page.waitForSelector('.tickets-container.js-tickets-container', { timeout: 60000 });
+await page.screenshot({ path: 'screenshot-before-search.png' });
+// Scrape flight data for all tickets
+const results = await page.evaluate(() => {
+  const flights = [];
+  
+  // Query all tickets with `role="ticket-container"`
+  const ticketItems = document.querySelectorAll('[role="ticket-container"]');
+  
+  ticketItems.forEach((item) => {
+    const airline = item.querySelector('.ticket-action__main_proposal')?.innerText || "N/A";
+    const departureTime = item.querySelector('.flight.flight--depart .flight-brief-departure .flight-brief-time')?.innerText || "N/A";
+    const returnTime = item.querySelector('.flight.flight--return .flight-brief-departure .flight-brief-time')?.innerText || "N/A";
+    const layoverTime = item.querySelector('.flight-brief-layovers__flight_time')?.innerText || "N/A";
+    const price = item.querySelector('.currency_font.currency_font--usd')?.innerText || "N/A";
+    const link = item.querySelector('.ticket-action-button-deeplink.ticket-action-button-deeplink--')?.href || "N/A";
+
+    flights.push({
+      airline,
+      departureTime,
+      returnTime,
+      layoverTime,
+      price,
+      link,
+    });
+  });
+
+  return flights;
+});
+
+console.log("Scraped flight results:", results);
+
+// Close the browser
+await browser.close();
+
+
+    // Return scraped data
+    res.json({ success: true, flights: results });
+  } catch (error) {
+    console.error("Error scraping flights:", error);
+    res.status(500).json({ success: false, error: "Failed to scrape flights" });
+  }
+});
 // Airbnb Scraping based on searchUrl (Original code)
 async function scrapeAirbnbPosts(searchUrl) {
   try {
     const browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--window-size=1920,1080',
-        '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-      ],
-      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
     });
     const page = await browser.newPage();
 
     // Navigate to the Airbnb search results page
-    await page.goto(searchUrl, {
-      waitUntil: 'networkidle2',
-      timeout: 120000
-    });
+    await navigateToPageWithRetry(page, searchUrl);
+
   
     await page.setRequestInterception(true);
     page.on('request', (request) => {
@@ -100,16 +434,27 @@ async function scrapeAirbnbPosts(searchUrl) {
         const imgElement = document.querySelectorAll('picture source[srcset]')[index];
         const imageUrl = imgElement ? imgElement.getAttribute('srcset').split(' ')[0] : '';
         const linkElement = document.querySelectorAll('a[aria-hidden="true"]')[index];
+        const ratingElement = document.querySelectorAll('.t1a9j9y7.atm_da_1ko3t4y.atm_dm_kb7nvz.atm_fg_h9n0ih.dir.dir-ltr')[index];
+
+        // Extract and clean the price
+    const listingPriceDetails = priceElement?.textContent?.trim() || '';
+    const priceMatch = listingPriceDetails.match(/£\d+/); // Extract only the first number with £
+    const cleanedPrice = priceMatch ? priceMatch[0] : 'N/A';
+
+    // Extract and clean the rating text to display only "4.91 out of 5"
+    const ratingDetails = ratingElement?.textContent || '';
+    const cleanedRating = ratingDetails.match(/[\d.]+\sout\s(of)\s5/)?.[0] || 'N/A'; // Extract only "4.91 out of 5"
 
         return {
           images: imageUrl,
           title: post.innerText,
           subtitle: subtitleElement ? subtitleElement.innerText : null,
           listing_name: subtitleNameElement ? subtitleNameElement.innerText : null,
-          listing_price_details: priceElement ? priceElement.innerText : null,
+          listing_price_details: cleanedPrice ? cleanedPrice : null,
+          rating_out_of_5_stars: cleanedRating ? cleanedRating : null,
           link: linkElement ? linkElement.href : null
         };
-      });
+    });
       return postElements;
     });
     await browser.close();
@@ -140,21 +485,17 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 const { searchUrl, category } = req.query;
 // Parse the searchUrl to extract the query parameters
 const parsedUrl = new URL(searchUrl);
-const fromlocations = parsedUrl.searchParams.get('from'); // Extract 'location' from the path
-const location = parsedUrl.searchParams.get('checkin'); // Extract 'location' from the path
+const location = parsedUrl.pathname.split('/')[2]; // Extract 'location' from the path
 const checkin = parsedUrl.searchParams.get('checkin');
 const checkout = parsedUrl.searchParams.get('checkout');
 const guests = parsedUrl.searchParams.get('adults');
-const cabinClass = parsedUrl.searchParams.get('cabinClassInput');
-const no_of_children = parsedUrl.searchParams.get('no_of_children'); // Extract 'location' from the path
-
 //const monthly_start = parsedUrl.searchParams.get('monthlyStart');
 //const monthly_end = parsedUrl.searchParams.get('monthlyEnd');
 
 console.log(`Location: ${location}, Checkin: ${checkin}, Checkout: ${checkout}, Guests: ${guests}`);
 
 // Use these parameters to build your final search URL
-let finalSearchUrl = `https://www.skyscanner.net/transport/flights/${fromlocations}/${location}/241207/241207/?adults=${guests}&adultsv2=${guests}&cabinclass=${cabinClass}&children=${no_of_children}&childrenv2=&destinationentityid=27539733&inboundaltsenabled=false&infants=0&originentityid=27544008&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=1`;
+let finalSearchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=${guests}&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
 
 console.log(`Generated URL: ${finalSearchUrl}`);
 //let searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=2&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&adults=${guests}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
@@ -243,13 +584,51 @@ async function simulateMouseDrag(page, startX, startY, endX, endY) {
   // Simulate mouse up (release the click)
   await page.mouse.up();
 }
+
+async function clickAcceptCookiesButton(page) {
+  try {
+      // Retrieve all buttons and their text
+      const buttons = await page.$$eval('button', (btns) => btns.map((btn) => btn.textContent.trim()));
+
+      // Find the index of the "Accept all" button
+      const acceptCookiesButtonIndex = buttons.findIndex((button) =>
+          button.toLowerCase().includes('accept all')
+      );
+
+      if (acceptCookiesButtonIndex !== -1) {
+          // Construct a selector based on the button's position in the DOM
+          const buttonSelector = `button:nth-of-type(${acceptCookiesButtonIndex + 1})`;
+
+          // Wait for the button and click it
+          await page.waitForSelector(buttonSelector, { timeout: 30000 });
+          const button = await page.$(buttonSelector);
+
+          if (button) {
+              await button.click();
+              console.log("Clicked 'Accept Cookies' button.");
+          } else {
+              console.warn("'Accept Cookies' button not found.");
+          }
+      } else {
+          console.warn("'Accept Cookies' button text not found.");
+      }
+  } catch (error) {
+      console.error("Error clicking 'Accept Cookies' button:", error.message);
+  }
+}
+
 // Function to scrape location information from Airbnb and fetch bounds from Google Maps
 async function extractBoundsFromUrl(searchUrl) {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+  });
   const page = await browser.newPage();
 
   
-  await page.goto(searchUrl, { waitUntil: 'networkidle2' }); // Wait for the page to be fully loaded
+  // Call the retry function to navigate to the page
+  await navigateToPageWithRetry(page, searchUrl);
   await page.evaluate(() => {
   // Select the popup container
 const popup = document.querySelector('div.c8qah1m.atm_9s_11p5wf0.atm_h_1h6ojuz');
@@ -286,15 +665,18 @@ if (closeButton) {
   const buttons = await page.$$eval('button', buttons => 
     buttons.map(button => button.innerText.trim())
   );
-  const acceptCookiesButtonIndex = buttons.findIndex(button => button.includes('Accept all'))
+  const acceptCookiesButtonIndex = buttons.findIndex(button => button.includes('Accept all'));
 
-  if (acceptCookiesButtonIndex !== -1) {
+  /*if (acceptCookiesButtonIndex !== -1) {
     // Click on the button that contains 'Show map' text
     const buttonsSelector = await page.$$('button');
     console.log('Clicking "Accept Cookies" button');
     await buttonsSelector[acceptCookiesButtonIndex].click();
     await waitForTimeout(5000); // Wait for the map to load after clicking
-  }
+  }*/
+ // Click the "Accept Cookies" button
+ await clickAcceptCookiesButton(page);
+
   const showMapButtonIndex = buttons.findIndex(button => button.includes('Show map'));
   
   if (showMapButtonIndex !== -1) {
@@ -302,7 +684,7 @@ if (closeButton) {
     const buttonsSelector = await page.$$('button');
     console.log('Clicking "Show map" button');
     await buttonsSelector[showMapButtonIndex].click();
-    await waitForTimeout(5000); // Wait for the map to load after clicking
+    await waitForTimeout(30000); // Wait for the map to load after clicking
   } else {
     console.log('Could not find "Show map" button.');
   }
@@ -312,10 +694,10 @@ if (closeButton) {
   await page.waitForSelector('div[data-testid="map/GoogleMap"]', { visible: true });
 
   // Simulate dragging the map (start and end coordinates)
-  await simulateMouseDrag(page, 600, 400, 605, 415); // Adjust coordinates based on map size
-  await simulateMouseDrag(page, 605, 415, 600, 415);
-  await simulateMouseDrag(page, 600, 415, 610, 415);
-  await simulateMouseDrag(page, 600, 415, 610, 430);
+  await simulateMouseDrag(page, 300, 200, 305, 215); // Adjust coordinates based on map size
+  await simulateMouseDrag(page, 305, 215, 300, 215);
+  await simulateMouseDrag(page, 300, 215, 310, 215);
+  await simulateMouseDrag(page, 300, 215, 310, 230);
   // Wait for the map to update
   await waitForTimeout(5000);
 
@@ -361,11 +743,15 @@ if (closeButton) {
 }
 // Function to scrape pixel positions of Airbnb markers
 async function scrapeAirbnbMapMarkers(searchUrl) {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+  });
   const page = await browser.newPage();
 
   // Navigate to Airbnb map page
-  await page.goto(searchUrl, { waitUntil: 'networkidle2' });
+  await navigateToPageWithRetry(page, searchUrl);
   await page.evaluate(() => {
   // Select the popup container
 const popup = document.querySelector('div.c8qah1m.atm_9s_11p5wf0.atm_h_1h6ojuz');
@@ -425,10 +811,10 @@ if (closeButton) {
     console.log('Could not find "Show map" button.');
   }
 // Simulate dragging the map (start and end coordinates)
-await simulateMouseDrag(page, 600, 400, 605, 415); // Adjust coordinates based on map size
-await simulateMouseDrag(page, 605, 415, 600, 415);
-await simulateMouseDrag(page, 600, 415, 610, 415);
-await simulateMouseDrag(page, 600, 415, 610, 430);
+await simulateMouseDrag(page, 300, 200, 305, 215); // Adjust coordinates based on map size
+await simulateMouseDrag(page, 305, 215, 300, 215);
+await simulateMouseDrag(page, 300, 215, 310, 215);
+await simulateMouseDrag(page, 300, 215, 310, 230);
 // Wait for the map to update
 await waitForTimeout(5000);
 
@@ -568,10 +954,7 @@ console.log('Converted Marker Lat/Lng with Scaling:', markerLatLngs);
   // Send the lat/lng markers as JSON response
   res.json(markerLatLngs);
 });
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 // Wrap Express app as Firebase Cloud Function
 //exports.api = functions.https.onRequest(app);
