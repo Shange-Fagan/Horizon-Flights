@@ -22,6 +22,13 @@ app.use(express.json());
 
 // Serve static files from the public directory
 //app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files from the 'horizon-flights' directory
+app.use(express.static(path.join(__dirname, '..')));  // Adjust the path to the root of your repo
+
+// Handle routing for the home page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'index.html'));  // Adjust path to your index.html
+});
 
 // Handle the root route
 app.get('/', (req, res) => {
@@ -951,4 +958,7 @@ console.log('Converted Marker Lat/Lng with Scaling:', markerLatLngs);
   res.json(markerLatLngs);
 });
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Start the server
+app.listen(10000, () => {
+  console.log('Server running on port 10000');
+});
