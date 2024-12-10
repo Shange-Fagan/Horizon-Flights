@@ -46,10 +46,7 @@ app.options('*', cors()); // Enable preflight across all routes
 const corsConfig = cors({
   origin: [
       'http://localhost:5001', // Emulator
-      'http://127.0.0.1:5001', // IP-based localhost
-      'http://localhost:4000', // Emulator UI
       'https://shange-fagan.github.io', // GitHub Pages
-      'https://airbnbexplorer.com', // Custom domain
       'https://api-omx7tvjdea-uc.a.run.app', // Cloud Run API
       'https://horizonflights.org', // Production domain
   ],
