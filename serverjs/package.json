@@ -4,7 +4,8 @@
     "description": "A backend for scraping with Puppeteer",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js"
+        "start": "node index.js",
+        "postinstall": "npm install puppeteer-core --unsafe-perm=true"
     },
     "dependencies": {
         "axios": "^0.26.1",
