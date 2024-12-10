@@ -1,0 +1,21 @@
+{
+    "name": "puppeteer-backend",
+    "version": "1.0.0",
+    "description": "A backend for scraping with Puppeteer",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "axios": "^0.26.1",
+        "chrome-aws-lambda": "^10.0.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "puppeteer-core": "^10.1.0",
+        "puppeteer-extra": "^3.1.0",
+        "puppeteer-extra-plugin-stealth": "^2.8.0"
+    },
+    "engines": {
+        "node": "16.x"
+    }
+}

@@ -1,4 +1,3 @@
-//process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer'; // Set Puppeteer cache directory to /tmp
 const functions = require('firebase-functions'); // Use CommonJS for Firebase Functions
 const express = require('express');
 const puppeteer = require('puppeteer-core');
@@ -956,5 +955,3 @@ console.log('Converted Marker Lat/Lng with Scaling:', markerLatLngs);
 });
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-// Wrap Express app as Firebase Cloud Function
-//exports.api = functions.https.onRequest(app);
