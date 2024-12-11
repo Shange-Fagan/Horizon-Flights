@@ -56,6 +56,7 @@ const corsConfig = cors({
       'https://shange-fagan.github.io', // GitHub Pages
       'https://api-omx7tvjdea-uc.a.run.app', // Cloud Run API
       'https://horizonflights.org', // Production domain
+      'http://localhost:10000',
   ],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -167,7 +168,7 @@ console.log("Parsed Parameters:");
   // Launch Puppeteer
   // Launch Puppeteer with stealth mode enabled
   const browser = await puppeteerExtra.launch({
-    executablePath: await chromium.executablePath,
+    executablePath: process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
       headless: chromium.headless,  // Set to false if you want to see the browser for debugging
     args: [
       '--no-sandbox',
@@ -410,7 +411,7 @@ async function scrapeAirbnbPosts(searchUrl) {
   try {
     const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: await chromium.executablePath,
+      executablePath: process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
       headless: chromium.headless,
     });
     const page = await browser.newPage();
@@ -624,7 +625,7 @@ async function clickAcceptCookiesButton(page) {
 async function extractBoundsFromUrl(searchUrl) {
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: await chromium.executablePath,
+      executablePath: process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
       headless: chromium.headless,
   });
   const page = await browser.newPage();
@@ -748,7 +749,7 @@ if (closeButton) {
 async function scrapeAirbnbMapMarkers(searchUrl) {
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: await chromium.executablePath,
+      executablePath: process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
       headless: chromium.headless,
   });
   const page = await browser.newPage();
