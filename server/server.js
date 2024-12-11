@@ -18,7 +18,7 @@ const app = express();
   methods: ['GET', 'POST']
 }));*/
 app.use(cors({
-  origin: ['http://localhost:5001', 'https://shange-fagan.github.io', 'https://stirring-man-fitting.ngrok-free.app/', 'https://horizonflights.org'], // Allowed origins
+  origin: ['http://localhost:5001', 'https://shange-fagan.github.io', 'https://horizonflights.org'], // Allowed origins
   methods: ['GET', 'POST', 'OPTIONS'], // Allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
   credentials: true, // Allow credentials (optional)
