@@ -31,7 +31,6 @@
     "@octokit/rest": "^18.12.0",
     "axios": "^1.7.7",
     "chrome-aws-lambda": "10.1.0",
-    "cors": "^2.8.5",
     "express": "^4.21.1",
     "firebase": "^11.0.2",
     "GhostCat": "github:GhostCatcg/3d-earth",

@@ -4,7 +4,6 @@ const axios = require('axios');
 const puppeteerExtra = require('puppeteer-extra');
 const puppeteerExtraPluginStealth = require('puppeteer-extra-plugin-stealth');
 const express = require('express');
-const cors = require('cors');
 const app = express();
 
 /*app.use(cors({
@@ -17,13 +16,13 @@ const app = express();
 ],
   methods: ['GET', 'POST']
 }));*/
-app.use(cors({
-  origin: ['http://localhost:5001', 'https://shange-fagan.github.io', 'https://horizonflights.org'], // Allowed origins
-  methods: ['GET', 'POST', 'OPTIONS'], // Allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-  credentials: true, // Allow credentials (optional)
-}));
-app.options('*', cors()); // Enable preflight requests
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 
 app.get('/', (req, res) => res.send('Server is working!'));
 
@@ -1022,12 +1021,6 @@ console.log('Converted Marker Lat/Lng with Scaling:', markerLatLngs);
   res.json(markerLatLngs);
 });
 const PORT = process.env.PORT || 3000;
-try {
-  console.log(require.resolve('../util/incremental-id-generator.js'));
-} catch (error) {
-  console.error('Error resolving module:', error.message);
-}
-
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
