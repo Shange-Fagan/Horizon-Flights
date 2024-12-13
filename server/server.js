@@ -1,10 +1,14 @@
-const puppeteer = require('puppeteer');
+//process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer';
+const puppeteer = require('puppeteer-core');
 const path = require('path');
 const axios = require('axios');
 const puppeteerExtra = require('puppeteer-extra');
 const puppeteerExtraPluginStealth = require('puppeteer-extra-plugin-stealth');
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const functions = require('firebase-functions'); // Use CommonJS for Firebase Functions
+const chromium = require('chrome-aws-lambda'); // Install this: npm install chrome-aws-lambda
 
 /*app.use(cors({
   origin: [
@@ -16,14 +20,18 @@ const app = express();
 ],
   methods: ['GET', 'POST']
 }));*/
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+/*app.use(cors({
+    origin: [
+        'https://horizonflights.org/',
+        'http://localhost:5001',
+    ],
+  methods: ['GET', 'POST'], // Specify allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+  credentials: true, // Enable cookies/credentials if required
+}));*/
+app.use(cors({ origin: 'https://horizonflights.org' }));
 
-
+app.options('*', cors()); // Enable preflight across all routes
 app.get('/', (req, res) => res.send('Server is working!'));
 
 // Start the server
@@ -242,8 +250,9 @@ console.log("Parsed Parameters:");
 
   // Launch Puppeteer
   // Launch Puppeteer with stealth mode enabled
-  const browser = await puppeteerExtra.launch({
-    headless: true,  // Set to false if you want to see the browser for debugging
+  const browser = await chromium.puppeteer.launch({
+    executablePath: await chromium.executablePath,
+    headless: true, // or false for debugging
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -483,7 +492,11 @@ await browser.close();
 // Airbnb Scraping based on searchUrl (Original code)
 async function scrapeAirbnbPosts(searchUrl) {
   try {
-    const browser = await puppeteer.launch({ headless: true,  args: ['--no-sandbox', '--disable-setuid-sandbox'],});
+    const browser = await chromium.puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: await chromium.executablePath,
+      headless: true, // or false for debugging
+    });
     const page = await browser.newPage();
 
     // Navigate to the Airbnb search results page
@@ -693,7 +706,11 @@ async function clickAcceptCookiesButton(page) {
 
 // Function to scrape location information from Airbnb and fetch bounds from Google Maps
 async function extractBoundsFromUrl(searchUrl) {
-  const browser = await puppeteer.launch({ headless: true,  args: ['--no-sandbox', '--disable-setuid-sandbox'],});
+  const browser = await chromium.puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: await chromium.executablePath,
+      headless: true, // or false for debugging
+    });
   const page = await browser.newPage();
 
   
@@ -813,7 +830,11 @@ if (closeButton) {
 }
 // Function to scrape pixel positions of Airbnb markers
 async function scrapeAirbnbMapMarkers(searchUrl) {
-  const browser = await puppeteer.launch({ headless: true,  args: ['--no-sandbox', '--disable-setuid-sandbox'],});
+  const browser = await chromium.puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: await chromium.executablePath,
+      headless: true, // or false for debugging
+    });
   const page = await browser.newPage();
 
   // Navigate to Airbnb map page
