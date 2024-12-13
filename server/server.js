@@ -20,7 +20,7 @@ const chromium = require('chrome-aws-lambda'); // Install this: npm install chro
 ],
   methods: ['GET', 'POST']
 }));*/
-app.use(cors({
+/*app.use(cors({
     origin: [
         'https://horizonflights.org/',
         'http://localhost:5001',
@@ -28,7 +28,8 @@ app.use(cors({
   methods: ['GET', 'POST'], // Specify allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
   credentials: true, // Enable cookies/credentials if required
-}));
+}));*/
+app.use(cors({ origin: 'https://horizonflights.org' }));
 
 app.options('*', cors()); // Enable preflight across all routes
 app.get('/', (req, res) => res.send('Server is working!'));
