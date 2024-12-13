@@ -2243,7 +2243,7 @@ overflow: hidden;
   right: 15px;
   width: 80px;
   height: 40px;
-  top: 328px;
+  top: 350px;
   z-index: 22011;
 }
 .theme-switch2 {
@@ -2818,8 +2818,22 @@ crossorigin="anonymous"></script>
   z-index: 22011;
   background-color: rgba(255, 255, 255, 0.0); /* Optional */
 }
+#carousel-container2 {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  bottom: -2.5px;
+  z-index: 22011;
+  background-color: rgba(255, 255, 255, 0.0); /* Optional */
+}
 
 .carousel {
+  display: flex;
+  width: max-content;  /* Allow the carousel to be wide enough for all items */
+  animation: scroll 60s linear infinite; /* Continuous scrolling */
+}
+
+.carousel2 {
   display: flex;
   width: max-content;  /* Allow the carousel to be wide enough for all items */
   animation: scroll 60s linear infinite; /* Continuous scrolling */
@@ -2833,7 +2847,20 @@ crossorigin="anonymous"></script>
   text-align: center;
 }
 
+.carousel-item2 {
+  min-width: 600px; /* Adjust to match your desired width */
+  max-height: 120px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
 .carousel img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Optional */
+}
+.carousel2 img {
   width: 100%;
   height: auto;
   border-radius: 8px; /* Optional */
@@ -2853,7 +2880,20 @@ crossorigin="anonymous"></script>
   display: block;  /* Make the whole image clickable */
 }
 
+.carousel-container2 a {
+  display: block;  /* Make the whole image clickable */
+}
+
 .carousel-buttons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: none;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.carousel2-buttons {
   position: absolute;
   top: 50%;
   width: 100%;
@@ -2871,7 +2911,19 @@ crossorigin="anonymous"></script>
   cursor: pointer;
 }
 
+.carousel2-buttons button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+}
+
 .carousel-buttons button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.carousel2-buttons button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 .carousel-header {
@@ -2895,7 +2947,7 @@ crossorigin="anonymous"></script>
   cursor: pointer;
   border-radius: 4px;
   font-size: 12px;
-  border-radius: 0px 0px 12px 12px;
+  border-radius: 0px 0px 0px 0px;
   z-index:22011;
       right: 15px;
       top: 191px;
@@ -2906,6 +2958,39 @@ crossorigin="anonymous"></script>
 }
 
 #minimizeCarouselBtn:hover {
+  background-color: rgba(225, 225, 225, 0.35);
+}
+.carousel-header2 {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+  position:fixed;
+  background-color: rgba(255,255,255,0.0);
+  top: 120px;
+  z-index: 22011;
+  left: 0px;
+  right: 15px;
+      top: 316px;
+}
+#showPromoCodesBtn {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.75);
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  border-radius: 0px 0px 12px 12px;
+  z-index:22011;
+      right: 15px;
+      top: 191px;
+      padding: 5px 7px;
+      font-size: 12px;
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 100px;
+}
+
+#showPromoCodesBtn:hover {
   background-color: rgba(225, 225, 225, 0.35);
 }
 
@@ -2932,6 +3017,9 @@ crossorigin="anonymous"></script>
 <body>
   <div class="carousel-header">
     <button id="minimizeCarouselBtn">Minimize Ads</button>
+  </div>
+  <div class="carousel-header2">
+    <button id="showPromoCodesBtn">Promo Codes</button>
   </div>
   <div id="carousel-container" style="display: flex;">
     <div class="carousel">
@@ -2964,6 +3052,45 @@ crossorigin="anonymous"></script>
       </div>
       <!-- Advertiser 5 Lumary-->
       <div class="carousel-item">
+        <a href="https://www.jdoqocy.com/click-101312981-15890503?url=https%3A%2F%2Fwww.lumarysmart.com%2F" target="_blank">
+          <img src="js/ads.png" style="display: flex; height: 100px; width: 230px; margin-top: -10px; margin-bottom: 0px;" alt="Advertiser 3">
+        </a>
+      </div>      
+      <!-- Add more advertisers as needed -->
+    </div>
+  </div>
+
+  <div id="carousel-container2" style="display: none">
+    <div class="carousel2">
+      <!-- Advertiser 1 Address Hotels-->
+      <div class="carousel-item2">
+        <a href="https://www.anrdoezrs.net/click-101312981-16944928?url=https%3A%2F%2Fwww.addresshotels.com%2Fen%2F" target="_blank">
+          <img src="js/Screenshot 2024-12-13 at 18.18.34.png" alt="Advertiser 1">
+        </a>
+      </div>
+  
+      <!-- Advertiser 2 Vida Hotels-->
+      <div class="carousel-item2">
+        <a href="https://www.tkqlhce.com/click-101312981-16978427?url=https%3A%2F%2Fwww.vidahotels.com%2Fen%2F" target="_blank">
+          <img src="js/Screenshot 2024-12-13 at 16.56.32.png" alt="Advertiser 2">
+        </a>
+      </div>
+  
+      <!-- Advertiser 3 Travel Up-->
+      <div class="carousel-item2">
+        <a href="https://www.tkqlhce.com/click-101312981-15488597?url=https%3A%2F%2Fwww.travelup.com%2Fen-gb"target="_blank">
+          <img src="js/Screenshot 2024-12-13 at 18.03.21.png"style=" height: 98px; width: 600px;" alt="Advertiser 3" >
+        </a>
+      </div>
+  
+      <!-- Advertiser 4 Rexing-->
+      <div class="carousel-item2">
+        <a href="https://www.dpbolvw.net/click-101312981-14000405?url=https%3A%2F%2Fwww.rexingusa.com%2F%3Fsrsltid%3DAfmBOopQTSipJZiie7zY23n5SsOGVXgil3GahX4szeaNXrR4XAsit4l8" target="_blank">
+          <img src="js/blue_rexinglogo_hd-e1622158390594.png"  style="width: 460px; height: 84px;" alt="Advertiser 3">
+        </a>
+      </div>
+      <!-- Advertiser 5 Lumary-->
+      <div class="carousel-item2">
         <a href="https://www.jdoqocy.com/click-101312981-15890503?url=https%3A%2F%2Fwww.lumarysmart.com%2F" target="_blank">
           <img src="js/ads.png" style="display: flex; height: 100px; width: 230px; margin-top: -10px; margin-bottom: 0px;" alt="Advertiser 3">
         </a>
@@ -3569,7 +3696,7 @@ function getFormattedDate() {
 
 // Set the placeholder to today's date
 checkinInput.placeholder = getFormattedDate();
-document.addEventListener('DOMContentLoaded', function () {
+/*document.addEventListener('DOMContentLoaded', function () {
   const carousel = document.querySelector('.carousel');
   const carouselItems = document.querySelectorAll('.carousel-item');
   const totalItems = carouselItems.length;
@@ -3624,7 +3751,84 @@ function toggleCarousel() {
 }
 document.getElementById('minimizeCarouselBtn').addEventListener('click', function() {
   toggleCarousel()
+});*/
+// Add event listener for DOM content loaded
+document.addEventListener('DOMContentLoaded', function () {
+  const carousel1 = document.querySelector('.carousel');
+  const carousel2 = document.querySelector('.carousel2');
+  const carouselItems = document.querySelectorAll('.carousel-item');
+  const totalItems = carouselItems.length;
+  let currentIndex2 = 0;
+
+  // Clone first and last items for seamless scrolling for carousel 1
+  const firstItem = carouselItems[0].cloneNode(true);
+  const lastItem = carouselItems[totalItems - 1].cloneNode(true);
+
+  // Append clones to carousel 1
+  carousel1.appendChild(firstItem);
+  carousel1.insertBefore(lastItem, carouselItems[0]);
+
+  // Adjust carousel width to fit all items
+  carousel1.style.width = `${(totalItems + 2) * 600}px`; // Adjust 600px to match item width
+  carousel1.style.transform = `translateX(-600px)`; // Start position (skip the clone)
+
+  function showNextSlide() {
+    currentIndex2++;
+    carousel1.style.transition = 'transform 0.5s ease';
+    carousel1.style.transform = `translateX(-${(currentIndex2 + 1) * 600}px)`;
+
+    // Reset position when reaching the cloned last item
+    if (currentIndex2 === totalItems) {
+      setTimeout(() => {
+        carousel1.style.transition = 'none';
+        carousel1.style.transform = `translateX(-600px)`; // Back to real first item
+        currentIndex2 = 0;
+      }, 500); // Match transition duration
+    }
+  }
+
+  // Automatically slide every 3 seconds for carousel 1
+  setInterval(showNextSlide, 3000);
+
+  // Add toggle logic between carousel1 and carousel2
+  const showPromoCodesBtn = document.getElementById('showPromoCodesBtn');
+  const carouselContainer1 = document.getElementById('carousel-container');
+  const carouselContainer2 = document.getElementById('carousel-container2');
+
+  showPromoCodesBtn.addEventListener('click', function () {
+    if (carouselContainer1.style.display !== 'none') {
+      // Switch to carousel 2 (Promo Codes View)
+      carouselContainer1.style.display = 'none';
+      carouselContainer2.style.display = 'flex';
+      showPromoCodesBtn.textContent = 'Hide Codes';
+    } else {
+      // Switch back to carousel 1 (Regular Ads View)
+      carouselContainer1.style.display = 'flex';
+      carouselContainer2.style.display = 'none';
+      showPromoCodesBtn.textContent = 'Promo Codes';
+    }
+  });
+
+  // Add minimize button logic
+  const minimizeButton = document.getElementById('minimizeCarouselBtn');
+  minimizeButton.addEventListener('click', function () {
+    if (carouselContainer1.style.display !== 'none' || carouselContainer2.style.display !== 'none') {
+      // Hide both carousels
+      carouselContainer1.style.display = 'none';
+      carouselContainer2.style.display = 'none';
+      minimizeButton.textContent = 'Maximize Ads';
+    } else {
+      // Show the appropriate carousel (default is carousel 1)
+      if (showPromoCodesBtn.textContent === 'Hide Promo Codes') {
+        carouselContainer2.style.display = 'flex';
+      } else {
+        carouselContainer1.style.display = 'flex';
+      }
+      minimizeButton.textContent = 'Minimize Ads';
+    }
+  });
 });
+
 
 	  // Hide the spinner after globe and scene are ready
 //window.addEventListener('load', () => {
