@@ -1,31 +1,36 @@
-const puppeteer = require('puppeteer');
+//process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer';
+const puppeteer = require('puppeteer-core');
 const path = require('path');
 const axios = require('axios');
 const puppeteerExtra = require('puppeteer-extra');
-const cors = require('cors')
 const puppeteerExtraPluginStealth = require('puppeteer-extra-plugin-stealth');
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const functions = require('firebase-functions'); // Use CommonJS for Firebase Functions
+const chromium = require('chrome-aws-lambda'); // Install this: npm install chrome-aws-lambda
 
-app.use(cors({
+/*app.use(cors({
   origin: [
     'http://localhost:5001', // local testing html page
     'https://shange-fagan.github.io', // GitHub Pages
     'https://horizonflights.org', // Production domain
     'http://localhost:3000', // local testing html backend
+    'https://b4a4-136-148-37-26.ngrok-free.app'
 ],
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST']
+}));*/
+app.use(cors({
+    origin: [
+        'https://horizonflights.org/',
+        'http://localhost:5001',
+    ],
+  methods: ['GET', 'POST'], // Specify allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
   credentials: true, // Enable cookies/credentials if required
 }));
-/*const cors = require('cors')({
-  origin: 'https://yourdomain.com', // Replace with your actual domain
-  methods: ['GET', 'POST'], // Specify allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
-});*/
 
-
-
+app.options('*', cors()); // Enable preflight across all routes
 app.get('/', (req, res) => res.send('Server is working!'));
 
 // Start the server
@@ -112,105 +117,6 @@ function waitForTimeout(ms) {
         }
     }
   }
-  
-  // Function to solve reCAPTCHA using 2Captcha
-
-async function solveRecaptcha(page) {
-  // Find the CAPTCHA iframe
-  const captchaIframe = await page.$('iframe[src*="recaptcha/api2/anchor"]');
-  
-  if (!captchaIframe) {
-    console.error("No CAPTCHA iframe found!");
-    return;
-  }
-
-  // Extract the iframe URL (which contains the site key)
-  const captchaUrl = await captchaIframe.evaluate(frame => frame.src);
-  
-  // Extract the site key from the URL
-  const urlParams = new URLSearchParams(captchaUrl.split('?')[1]);
-  const siteKey = urlParams.get('k');  // Site key is in the 'k' parameter
-  
-  console.log("Captcha URL:", captchaUrl);
-  console.log("Site Key:", siteKey);
-
-  // Make sure the siteKey is extracted correctly
-  if (!siteKey) {
-    console.error("Failed to extract site key.");
-    return;
-  }
-
-  // Define the action parameter (action can be customized based on your page context)
-  const action = 'flights_submit'; // You can customize this based on the actual action happening on the page, like 'login' or 'search'
-  console.log("Action set to:", action);
-
-  // Use 2Captcha API to solve the CAPTCHA
-  try {
-    const response = await axios.post('http://2captcha.com/in.php', {
-      key: '16c0c7f393fd4c7dba5da76441c5a008',  // Replace with your 2Captcha API key
-      method: 'userrecaptcha',
-      googlekey: siteKey,
-      pageurl: captchaUrl,
-      data: {
-        action: action,  // Action parameter is required
-      }
-    });
-
-    const captchaId = response.data.split('|')[1];
-    console.log("Captcha ID:", captchaId);
-
-    // Wait for the CAPTCHA solution from 2Captcha
-    const result = await axios.get(`http://2captcha.com/res.php?key=16c0c7f393fd4c7dba5da76441c5a008&id=${captchaId}`);
-    
-    if (result.data.includes('OK')) {
-      const captchaSolution = result.data.split('|')[1];
-      console.log("Captcha solved:", captchaSolution);
-
-      // Inject the solution into the reCAPTCHA response field
-      await page.evaluate((solution) => {
-        document.getElementById('g-recaptcha-response').innerText = solution;
-      }, captchaSolution);
-
-      // Click the search button after solving CAPTCHA
-      const searchButtonSelector = '.mewtwo-flights-submit_button.mewtwo-flights-submit_button--new'; // Make sure the selector is correct
-      await page.click(searchButtonSelector);
-      console.log("Search button clicked after solving CAPTCHA.");
-    } else {
-      console.error("Failed to solve CAPTCHA:", result.data);
-    }
-  } catch (error) {
-    console.error("Error solving CAPTCHA:", error);
-  }
-}
-app.get('/getCityData', (req, res) => {
-  const GEO_NAMES_USERNAME = "shange"; // Replace with your username
-  const countryCode = req.query.countryCode || "NG"; // Default to Nigeria if not provided
-  const maxRows = req.query.maxRows || 10;
-
-  const url = `http://api.geonames.org/searchJSON`;
-
-  try {
-    const response = axios.get(url, {
-      params: {
-        country: countryCode,
-        maxRows,
-        featureClass: "P", // Populated places
-        username: GEO_NAMES_USERNAME,
-      },
-    });
-
-    const cities = response.data.geonames.map((city) => ({
-      name: city.name,
-      lat: parseFloat(city.lat),
-      lng: parseFloat(city.lng),
-    }));
-
-    res.json({ country: countryCode, cities });
-  } catch (error) {
-    console.error("Error fetching city data:", error);
-    res.status(500).json({ error: "Failed to fetch city data." });
-  }
-});
 
 // Route to scrape flight data
 app.get("/scrape-flights", async (req, res) => {
@@ -245,7 +151,8 @@ console.log("Parsed Parameters:");
   // Launch Puppeteer
   // Launch Puppeteer with stealth mode enabled
   const browser = await puppeteerExtra.launch({
-    headless: true,  // Set to false if you want to see the browser for debugging
+    executablePath: await chromium.executablePath,
+    headless: true, // or false for debugging
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -420,8 +327,6 @@ try {
 await new Promise(resolve => setTimeout(resolve, 5000));
 const currentUrlBeforeSearch = page.url();
 // Capture HTML content to check if reCAPTCHA is present
-const pageContent = await page.content();
-console.log(pageContent);  // This logs the HTML content of the page to the console.
 console.log("Current URL before pressing the search button:", currentUrlBeforeSearch);
  // Check if CAPTCHA is present
  /*const captchaFrame = await page.$('iframe[src*="recaptcha"]');
@@ -485,7 +390,11 @@ await browser.close();
 // Airbnb Scraping based on searchUrl (Original code)
 async function scrapeAirbnbPosts(searchUrl) {
   try {
-    const browser = await puppeteer.launch({ headless: true,  args: ['--no-sandbox', '--disable-setuid-sandbox'],});
+    const browser = await chromium.puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: await chromium.executablePath,
+      headless: true, // or false for debugging
+    });
     const page = await browser.newPage();
 
     // Navigate to the Airbnb search results page
@@ -695,7 +604,11 @@ async function clickAcceptCookiesButton(page) {
 
 // Function to scrape location information from Airbnb and fetch bounds from Google Maps
 async function extractBoundsFromUrl(searchUrl) {
-  const browser = await puppeteer.launch({ headless: true,  args: ['--no-sandbox', '--disable-setuid-sandbox'],});
+  const browser = await chromium.puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: await chromium.executablePath,
+      headless: true, // or false for debugging
+    });
   const page = await browser.newPage();
 
   
@@ -815,7 +728,11 @@ if (closeButton) {
 }
 // Function to scrape pixel positions of Airbnb markers
 async function scrapeAirbnbMapMarkers(searchUrl) {
-  const browser = await puppeteer.launch({ headless: true,  args: ['--no-sandbox', '--disable-setuid-sandbox'],});
+  const browser = await chromium.puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: await chromium.executablePath,
+      headless: true, // or false for debugging
+    });
   const page = await browser.newPage();
 
   // Navigate to Airbnb map page
