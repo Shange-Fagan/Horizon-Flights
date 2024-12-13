@@ -6194,7 +6194,6 @@ async function getDetailedMarkersForRegion(region) {
     const response = await fetch(`http://localhost:3000/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
-  mode: 'no-cors',
 }).then(response => response.json())
   .then(markerLatLngs => {
     // Assume 'map' is your initialized Google Map or Mapbox map object
@@ -6763,9 +6762,7 @@ async function fetchFlightPosts(url) {
         // Update spinner text to indicate scraping started
         updateSpinnerText("Scanning through the net to find the best flights and deals available... please be patient🙏🏽 feel free to browse while you wait!");
 
-        const response = await fetch(`http://localhost:3000/scrape-flights?url=${encodeURIComponent(url)}`, {
-          mode: 'no-cors',
-        });
+        const response = await fetch(`http://localhost:3000/scrape-flights?url=${encodeURIComponent(url)}`);
         const data = await response.json();
 
         // Ensure that 'flights' is an array before processing
@@ -7230,9 +7227,7 @@ async function fetchAirbnbPosts(searchUrl) {
         // Update spinner text to indicate scraping started
         updateSpinnerText("Retrieving posts from Airbnb... please be patient🙏🏽 feel free to browse while you wait!");
 
-        const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
-          mode: 'no-cors',
-        });
+        const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
          const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
@@ -8792,9 +8787,7 @@ document.querySelector('#searchBtn:not(.airbnb-button22)').addEventListener('cli
   // Fetch and update LocationsFixed dynamically
   async function fetchAndUpdateLocations() {
         try {
-          const response = await fetch('http://localhost:3000/getCityData', {
-            mode: 'no-cors',
-          });
+          const response = await fetch('http://localhost:3000/getCityData');
             if (!response.ok) {
                 throw new Error(`Failed to fetch location data: ${response.status}`);
             }
@@ -9006,9 +8999,7 @@ document.querySelector('#searchBtn.airbnb-button22').addEventListener('click', a
   // Fetch and update LocationsFixed dynamically
   async function fetchAndUpdateLocations() {
         try {
-          const response = await fetch('http://localhost:3000/getCityData', {
-            mode: 'no-cors',
-          });
+          const response = await fetch('http://localhost:3000/getCityData');
             if (!response.ok) {
                 throw new Error(`Failed to fetch location data: ${response.status}`);
             }
@@ -9496,9 +9487,7 @@ async function fetchMarkers(location, category) {
     let searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=2&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&adults=${guests}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
 
     // Fetch markers from your backend
-    const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
-      mode: 'no-cors',
-    });
+    const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
     // Extract posts and markers from the response
     const { markers } = await response.json(); 
     console.log("Fetched markers:", markers);  // Log the response to check its format
@@ -9795,9 +9784,7 @@ async function fetchAirbnbPosts(searchUrl) {
         // Update spinner text to indicate scraping started
         updateSpinnerText("Fetching posts from Airbnb... please be patient🙏🏽 feel free to browse while you wait!");
 
-        const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
-          mode: 'no-cors',
-        });
+        const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
          const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
@@ -10040,8 +10027,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
         const response = await fetch(`http://localhost:3000/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
-  mode: 'no-cors',
-});
+    });
         const markersData = await response.json();  // Assuming the backend returns a JSON array of markers
         console.log(`Fetching markers from: ${url}`);
 	    console.log(`Fetching markers from: http://localhost:3000/get-markers?region=${region}&category=${category}`);
@@ -10070,9 +10056,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
 }
 async function fetchMarkers(region, category) {
   try {
-    const response = await fetch(`http://localhost:3000/get-markers?region=${region}&category=${category}`, {
-      mode: 'no-cors',
-    });
+    const response = await fetch(`http://localhost:3000/get-markers?region=${region}&category=${category}`);
     const markers = await response.json();
      // Clear the existing markers before adding new ones
      clearExistingMarkers();
