@@ -2,25 +2,27 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 const axios = require('axios');
 const puppeteerExtra = require('puppeteer-extra');
+const cors = require('cors')
 const puppeteerExtraPluginStealth = require('puppeteer-extra-plugin-stealth');
 const express = require('express');
 const app = express();
 
-/*app.use(cors({
+app.use(cors({
   origin: [
     'http://localhost:5001', // local testing html page
     'https://shange-fagan.github.io', // GitHub Pages
     'https://horizonflights.org', // Production domain
     'http://localhost:3000', // local testing html backend
-    'https://b4a4-136-148-37-26.ngrok-free.app'
 ],
-  methods: ['GET', 'POST']
-}));*/
-const cors = require('cors')({
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+  credentials: true, // Enable cookies/credentials if required
+}));
+/*const cors = require('cors')({
   origin: 'https://yourdomain.com', // Replace with your actual domain
   methods: ['GET', 'POST'], // Specify allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
-});
+});*/
 
 
 
