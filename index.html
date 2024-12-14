@@ -6230,7 +6230,7 @@ globe2 = new THREE.Mesh(geometry, earthMaterial);
       );
     },
   });
-    const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+    let markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 // Function to load generic markers
 function loadGenericMarkers(markersData) {
   // Check if the scene, marker data, and necessary variables are available
@@ -6291,7 +6291,7 @@ if (window.innerWidth <= 768) {
 }
 
 // Creating Markers
-const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+let markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 
 const dummy = new THREE.Object3D();
 markersData.forEach((data, index) => {
@@ -7598,7 +7598,8 @@ function populateOverlay(posts2) {
     overlay2.innerHTML = ''; // Clear previous listings
     overlay2.style.display = 'none';
 
-    posts2.forEach(post => {
+    
+    posts2.forEach((post, index) => {
         const postDiv = document.createElement('div');
         postDiv.classList.add('post');
 
@@ -7615,22 +7616,13 @@ function populateOverlay(posts2) {
         const subtitle = document.createElement('p');
         subtitle.textContent = post.subtitle || 'No subtitle available';
 
-        // Extract and separate price details
+        // Add price details
         const priceDetails = document.createElement('p');
-        priceDetails.textContent = `Price: ${post.listing_price_details} per night`|| 'N/A';
-        //const priceInfo = extractPriceInfo(priceDetails);
-
-        // Add total price
-        //const price = document.createElement('p');
-        //price.textContent = `Total Price: ${priceInfo.totalPrice || 'N/A'}`;
-
-        // Add price per night
-        //const pricePerNight = document.createElement('p');
-        //pricePerNight.textContent = `Price per Night: ${priceInfo.pricePerNight || 'N/A'}`;
+        priceDetails.textContent = `Price: ${post.listing_price_details} per night` || 'N/A';
 
         // Add rating
         const rating = document.createElement('p');
-        rating.textContent = `Rating: ★${post.rating_out_of_5_stars} stars`|| 'N/A';
+        rating.textContent = `Rating: ★${post.rating_out_of_5_stars} stars` || 'N/A';
 
         // Add "View Listing" link
         const viewLink = document.createElement('a');
@@ -7656,9 +7648,21 @@ function populateOverlay(posts2) {
 
         // Append the postDiv to the overlay
         overlay.appendChild(postDiv);
+
+        // Map postDiv to marker events
+        postDiv.addEventListener('mouseover', () => {
+            if (markers[index]) {
+                markers[index].material.color.set(0x00aaff); // Highlight marker
+            }
+        });
+
+        postDiv.addEventListener('mouseout', () => {
+            if (markers[index]) {
+                markers[index].material.color.set(0xffffff); // Reset marker color
+            }
+        });
     });
 }
-
 
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -7670,30 +7674,29 @@ function populateOverlay(posts2) {
 
 
 
-
 // Add an event listener to the profile button to show liked posts
 document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);
 
-document.querySelectorAll('.post-grid').forEach((item, index) => {
-    // Make sure `index` matches the corresponding marker
-    item.addEventListener('mouseover', function() {
-        if (markers[index]) {  // Check if the marker exists
-            markers[index].material.color.set(0x00aaff);  // Highlight the marker in green
-        }
-    });
-    
-    item.addEventListener('mouseout', function() {
+document.querySelectorAll('.post').forEach((post, index) => {
+    post.addEventListener('mouseover', function () {
         if (markers[index]) {
-            markers[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
+            markers[index].material.color.set(0x00aaff); // Highlight the marker in blue
         }
     });
 
-    item.addEventListener('click', function() {
+    post.addEventListener('mouseout', function () {
         if (markers[index]) {
-            markers[index].material.color.set(0xffffff);  // Set the marker color to red on click
+            markers[index].material.color.set(0xffffff); // Reset the color when the mouse leaves
+        }
+    });
+
+    post.addEventListener('click', function () {
+        if (markers[index]) {
+            markers[index].material.color.set(0x00ff00); // Set the marker to green on click
         }
     });
 });
+
 
 	  // A lookup table for example (you can expand this)
 // Lookup table with expanded locations, including Jamaica
@@ -9715,7 +9718,7 @@ async function fetchMarkers(location, category) {
     console.error("Failed to fetch markers:", error);
   }
 }
-
+ markers = []; // Ensure markers array is globally accessible
 // Function to add markers to the globe
 function addMarkersToGlobe(markers) {
   markers.forEach(marker => {
@@ -9723,8 +9726,8 @@ function addMarkersToGlobe(markers) {
     let { lat, lng } = marker;
 
     // Apply offsets for shifting down and left
-    const latOffset = -10; // Adjust this value for downward movement
-    const lngOffset = 10; // Adjust this value for leftward movement
+    const latOffset = -2; // Adjust this value for downward movement
+    const lngOffset = -10; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
 
@@ -9750,6 +9753,7 @@ function addMarkersToGlobe(markers) {
 
     // Add the marker to the scene
     scene.add(markerMesh);
+    markers[index] = markerMesh; // Store the marker in the array
   });
 }
 
@@ -10046,7 +10050,7 @@ function populateOverlay(posts2) {
     const overlay = document.getElementById('overlayContainer');
     overlay.innerHTML = ''; // Clear previous posts
 
-    posts2.forEach(post => {
+    posts2.forEach((post, index) => {
         const postDiv = document.createElement('div');
         postDiv.classList.add('post');
 
@@ -10063,22 +10067,13 @@ function populateOverlay(posts2) {
         const subtitle = document.createElement('p');
         subtitle.textContent = post.subtitle || 'No subtitle available';
 
-        // Extract and separate price details
+        // Add price details
         const priceDetails = document.createElement('p');
-        priceDetails.textContent = `Price: ${post.listing_price_details} per night`|| 'N/A';
-        //const priceInfo = extractPriceInfo(priceDetails);
-
-        // Add total price
-        //const price = document.createElement('p');
-        //price.textContent = `Total Price: ${priceInfo.totalPrice || 'N/A'}`;
-
-        // Add price per night
-        //const pricePerNight = document.createElement('p');
-        //pricePerNight.textContent = `Price per Night: ${priceInfo.pricePerNight || 'N/A'}`;
+        priceDetails.textContent = `Price: ${post.listing_price_details} per night` || 'N/A';
 
         // Add rating
         const rating = document.createElement('p');
-        rating.textContent = `Rating: ★${post.rating_out_of_5_stars} stars`|| 'N/A';
+        rating.textContent = `Rating: ★${post.rating_out_of_5_stars} stars` || 'N/A';
 
         // Add "View Listing" link
         const viewLink = document.createElement('a');
@@ -10104,9 +10099,21 @@ function populateOverlay(posts2) {
 
         // Append the postDiv to the overlay
         overlay.appendChild(postDiv);
+
+        // Map postDiv to marker events
+        postDiv.addEventListener('mouseover', () => {
+            if (markers[index]) {
+                markers[index].material.color.set(0x00aaff); // Highlight marker
+            }
+        });
+
+        postDiv.addEventListener('mouseout', () => {
+            if (markers[index]) {
+                markers[index].material.color.set(0xffffff); // Reset marker color
+            }
+        });
     });
 }
-
 
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -10169,26 +10176,26 @@ function showLikedPosts() {
 // Add an event listener to the profile button to show liked posts
 document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);
 
-document.querySelectorAll('.post-grid').forEach((item, index) => {
-    // Make sure `index` matches the corresponding marker
-    item.addEventListener('mouseover', function() {
-        if (markers[index]) {  // Check if the marker exists
-            markers[index].material.color.set(0x00aaff);  // Highlight the marker in green
-        }
-    });
-    
-    item.addEventListener('mouseout', function() {
+document.querySelectorAll('.post').forEach((post, index) => {
+    post.addEventListener('mouseover', function () {
         if (markers[index]) {
-            markers[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
+            markers[index].material.color.set(0x00aaff); // Highlight the marker in blue
         }
     });
 
-    item.addEventListener('click', function() {
+    post.addEventListener('mouseout', function () {
         if (markers[index]) {
-            markers[index].material.color.set(0xffffff);  // Set the marker color to red on click
+            markers[index].material.color.set(0xffffff); // Reset the color when the mouse leaves
+        }
+    });
+
+    post.addEventListener('click', function () {
+        if (markers[index]) {
+            markers[index].material.color.set(0x00ff00); // Set the marker to green on click
         }
     });
 });
+
   // Iterate through all regions in the genericMarkers object
   Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
