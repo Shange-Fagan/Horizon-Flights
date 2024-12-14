@@ -9912,6 +9912,7 @@ Object.keys(genericMarkers).forEach(region => {
     }
 });
   })})
+
 // Always visible region select button
 document.getElementById('regionSelectBtn').style.display = 'block';
 document.getElementById('regionSelectBtn').addEventListener('click', function () {
@@ -9930,11 +9931,11 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
     this.insertAdjacentElement('afterend', regionSelect);
     regionSelect.style.display = 'block';
     regionSelect.addEventListener('change', async function () {
-      const selectedRegion = document.getElementById('regionSelect').value;
+      let selectedRegion = this.value;
       const selectedCategory = document.getElementById('priceCategorySelect').value;
 	// Load appropriate markers for the selected region and category
     //loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
-    fetchMarkers(selectedRegion);
+    fetchMarkers(selectedRegion, selectedCategory);
       panToRegion(selectedRegion);
       console.log("Region button clicked. Resizing all markers.");
       const overlay = document.getElementById('overlayContainer');
