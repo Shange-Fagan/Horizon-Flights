@@ -6230,7 +6230,7 @@ globe2 = new THREE.Mesh(geometry, earthMaterial);
       );
     },
   });
-    let markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+    const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 // Function to load generic markers
 function loadGenericMarkers(markersData) {
   // Check if the scene, marker data, and necessary variables are available
@@ -6291,7 +6291,7 @@ if (window.innerWidth <= 768) {
 }
 
 // Creating Markers
-let markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 
 const dummy = new THREE.Object3D();
 markersData.forEach((data, index) => {
@@ -7651,14 +7651,14 @@ function populateOverlay(posts2) {
 
         // Map postDiv to marker events
         postDiv.addEventListener('mouseover', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00aaff); // Highlight marker
+            if (markers3[index]) {
+                markers3[index].material.color.set(0x00aaff); // Highlight marker
             }
         });
 
         postDiv.addEventListener('mouseout', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0xffffff); // Reset marker color
+            if (markers3[index]) {
+                markers3[index].material.color.set(0xffffff); // Reset marker color
             }
         });
     });
@@ -7679,20 +7679,20 @@ document.getElementById('likedPostsButton').addEventListener('click', showLikedP
 
 document.querySelectorAll('.post').forEach((post, index) => {
     post.addEventListener('mouseover', function () {
-        if (markers[index]) {
-            markers[index].material.color.set(0x00aaff); // Highlight the marker in blue
+        if (markers3[index]) {
+            markers3[index].material.color.set(0x00aaff); // Highlight the marker in blue
         }
     });
 
     post.addEventListener('mouseout', function () {
-        if (markers[index]) {
-            markers[index].material.color.set(0xffffff); // Reset the color when the mouse leaves
+        if (markers3[index]) {
+            markers3[index].material.color.set(0xffffff); // Reset the color when the mouse leaves
         }
     });
 
     post.addEventListener('click', function () {
-        if (markers[index]) {
-            markers[index].material.color.set(0x00ff00); // Set the marker to green on click
+        if (markers3[index]) {
+            markers3[index].material.color.set(0x00ff00); // Set the marker to green on click
         }
     });
 });
@@ -9718,7 +9718,7 @@ async function fetchMarkers(location, category) {
     console.error("Failed to fetch markers:", error);
   }
 }
- markers = []; // Ensure markers array is globally accessible
+ const markers3 = []; // Ensure markers array is globally accessible
 // Function to add markers to the globe
 function addMarkersToGlobe(markers) {
   markers.forEach(marker => {
@@ -9753,7 +9753,7 @@ function addMarkersToGlobe(markers) {
 
     // Add the marker to the scene
     scene.add(markerMesh);
-    markers[index] = markerMesh; // Store the marker in the array
+    markers3[index] = markerMesh; // Store the marker in the array
   });
 }
 
@@ -10102,14 +10102,14 @@ function populateOverlay(posts2) {
 
         // Map postDiv to marker events
         postDiv.addEventListener('mouseover', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00aaff); // Highlight marker
+            if (markers3[index]) {
+                markers3[index].material.color.set(0x00aaff); // Highlight marker
             }
         });
 
         postDiv.addEventListener('mouseout', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0xffffff); // Reset marker color
+            if (markers3[index]) {
+                markers3[index].material.color.set(0xffffff); // Reset marker color
             }
         });
     });
@@ -10178,20 +10178,20 @@ document.getElementById('likedPostsButton').addEventListener('click', showLikedP
 
 document.querySelectorAll('.post').forEach((post, index) => {
     post.addEventListener('mouseover', function () {
-        if (markers[index]) {
-            markers[index].material.color.set(0x00aaff); // Highlight the marker in blue
+        if (markers3[index]) {
+            markers3[index].material.color.set(0x00aaff); // Highlight the marker in blue
         }
     });
 
     post.addEventListener('mouseout', function () {
-        if (markers[index]) {
-            markers[index].material.color.set(0xffffff); // Reset the color when the mouse leaves
+        if (markers3[index]) {
+            markers3[index].material.color.set(0xffffff); // Reset the color when the mouse leaves
         }
     });
 
     post.addEventListener('click', function () {
-        if (markers[index]) {
-            markers[index].material.color.set(0x00ff00); // Set the marker to green on click
+        if (markers3[index]) {
+            markers3[index].material.color.set(0x00ff00); // Set the marker to green on click
         }
     });
 });
