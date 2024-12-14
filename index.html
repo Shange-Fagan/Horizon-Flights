@@ -574,7 +574,7 @@ a, button, input, select, iframe {
   background-color: rgba(225, 225, 225, 0.0);
   border: 0px solid rgba(225, 225, 225, 0.75);
   border-radius: 50px;
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 #languageSelect {
   width: 124px;
@@ -7247,6 +7247,11 @@ document.getElementById('likedPostsButton').addEventListener('click', showLikedP
 
 // Add event listener for the flight search button
 document.querySelector('#searchBtn:not(.airbnb-button22)').addEventListener('click', async function () {
+  const carouselContainer1 = document.getElementById('carousel-container');
+  const carouselContainer2 = document.getElementById('carousel-container2');
+  
+  carouselContainer1.style.display = 'none';
+  carouselContainer2.style.display = 'none';
     console.log("Airbnb search button clicked.");
     // Your flight search logic here
     const location = document.getElementById('where').value;
@@ -9208,7 +9213,11 @@ Object.keys(genericMarkers).forEach(region => {
     }
 }); });
 document.querySelector('#searchBtn.airbnb-button22').addEventListener('click', async function () {
+  const carouselContainer1 = document.getElementById('carousel-container');
+  const carouselContainer2 = document.getElementById('carousel-container2');
 
+  carouselContainer1.style.display = 'none';
+  carouselContainer2.style.display = 'none';
     // Get selected "from" and "to" locations from the user
     const fromInput = document.getElementById('from').value;
     const toInput = document.getElementById('where').value;
