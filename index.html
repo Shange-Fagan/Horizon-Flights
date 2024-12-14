@@ -9930,7 +9930,7 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
     this.insertAdjacentElement('afterend', regionSelect);
     regionSelect.style.display = 'block';
     regionSelect.addEventListener('change', async function () {
-      let selectedRegion = this.value;
+      const selectedRegion = document.getElementById('regionSelect').value;
       const selectedCategory = document.getElementById('priceCategorySelect-').value;
 	// Load appropriate markers for the selected region and category
     //loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
