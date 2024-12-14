@@ -9931,7 +9931,7 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
     regionSelect.style.display = 'block';
     regionSelect.addEventListener('change', async function () {
       const selectedRegion = document.getElementById('regionSelect').value;
-      const selectedCategory = document.getElementById('priceCategorySelect-').value;
+      const selectedCategory = document.getElementById('priceCategorySelect').value;
 	// Load appropriate markers for the selected region and category
     //loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
     fetchMarkers(selectedRegion, selectedCategory);
