@@ -3271,7 +3271,7 @@ crossorigin="anonymous"></script>
     <img src="js/exit.png" alt="Calendar Icon" class="calendar-icon"style="width: 17px; height: 17px;">
 </div>
 <div class="date-picker-wrapper">
-  <input type="text" id="checkout" class="flatpickr-input" placeholder="Departure date">
+  <input type="text" id="checkout" class="flatpickr-input" placeholder="Check-out date">
   <img src="js/calendar-icon2.png" alt="Calendar Icon" class="calendar-icon2">
 </div>
   <div id="guestSelector" style="position: relative;">
@@ -3359,7 +3359,7 @@ crossorigin="anonymous"></script>
       </label>
     </div>
     <input type="text" id="checkin" name="checkin" placeholder="Check-in date">
-    <input type="text" id="checkout" name="checkout" placeholder="Departure date">
+    <input type="text" id="checkout" name="checkout" placeholder="Check-out date">
     <div id="guestSelector" style="position: relative; display: none">
       <input type="number" id="adults" name="adults" placeholder="Add guests">
       <button id="openGuestPopup" class="guest-popup-btn" style="margin-right: 8px;">+</button>
@@ -9719,8 +9719,8 @@ function addMarkersToGlobe(markers) {
     let { lat, lng } = marker;
 
     // Apply offsets for shifting down and left
-    const latOffset = 0; // Adjust this value for downward movement
-    const lngOffset = -12; // Adjust this value for leftward movement
+    const latOffset = -15; // Adjust this value for downward movement
+    const lngOffset = -50; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
 
