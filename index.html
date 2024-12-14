@@ -1889,19 +1889,22 @@ overflow: hidden;
 #overlayContainer {
     display: none;
     flex-wrap: wrap; /* Ensure posts flow to the next row if there's no space */
-    gap: 10px; /* Space between posts */
+    gap: 17px; /* Space between posts */
     padding: 10px; /* Padding around the container */
-    row-gap: 245px;
+    row-gap: 246px;
 }
 #overlayContainer2 {
     display: none;
     flex-wrap: wrap; /* Ensure posts flow to the next row if there's no space */
-    gap: 10px; /* Space between posts */
+    gap: 15px; /* Space between posts */
     /*padding: 10px; /* Padding around the container */
     row-gap: 0px;
 }
 
 .post {
+    position: relative;
+    top: 7px;
+    left: 5px;
     width: 300px; /* Set a fixed width for each post */
     height: 500px;
     background-color: #ffffffdb; /* Optional: Add a background color for better visibility */
