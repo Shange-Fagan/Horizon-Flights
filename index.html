@@ -9934,7 +9934,7 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
       const selectedCategory = document.getElementById('priceCategorySelect').value;
 	// Load appropriate markers for the selected region and category
     //loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
-    fetchMarkers(selectedRegion, selectedCategory);
+    fetchMarkers(selectedRegion);
       panToRegion(selectedRegion);
       console.log("Region button clicked. Resizing all markers.");
       const overlay = document.getElementById('overlayContainer');
