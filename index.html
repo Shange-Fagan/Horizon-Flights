@@ -10501,12 +10501,6 @@ function panToRegion(region) {
   }
   console.log(`Center position for ${region}:`, position);
 
-  console.log(`Center position for ${region}:`, position);
-
-// Fetch markers and pass the center position
-const selectedCategory = document.getElementById('priceCategorySelect').value;
-fetchMarkers(region, selectedCategory, position)
-  .catch(error => console.error('Failed to fetch markers:', error));
   // Ensure zoomLevel is properly set
   if (typeof zoomLevel === 'undefined') {
     console.error('Zoom level is undefined');
