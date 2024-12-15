@@ -6875,7 +6875,7 @@ document.getElementById('closeBtn').addEventListener('click', function () {
     // Show spinner and transition to split screen mode
     /*const leftContainer = document.getElementById('left-container');*/
     const globeContainer = document.getElementById('globeContainer');
-    const overlay = document.getElementById('overlayContainer2');
+    const overlay2 = document.getElementById('overlayContainer2');
     // Check if the overlayContainer exists
     if (!overlay) {
         console.error("Overlay container not found!");
@@ -6889,10 +6889,10 @@ document.getElementById('closeBtn').addEventListener('click', function () {
         overlay.style.display = 'grid';
         overlay.classList.add('show');
     });*/
-    overlay.style.display = 'grid';
-    overlay.classList.add('show');
+    overlay2.style.display = 'grid';
+    overlay2.classList.add('show');
     
-        overlay.innerHTML = `
+        overlay2.innerHTML = `
             <div class="spinner-container">
                 <div class="spinner"></div>
                 <p class="spinner-text">Starting the process...</p>
