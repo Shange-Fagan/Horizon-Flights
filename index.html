@@ -9916,6 +9916,11 @@ Object.keys(genericMarkers).forEach(region => {
 // Always visible region select button
 document.getElementById('regionSelectBtn').style.display = 'block';
 document.getElementById('regionSelectBtn').addEventListener('click', function () {
+  const carouselContainer1 = document.getElementById('carousel-container');
+  const carouselContainer2 = document.getElementById('carousel-container2');
+
+  carouselContainer1.style.display = 'none';
+  carouselContainer2.style.display = 'none';
   if (!document.getElementById('regionSelectDropdown')) {
     let regionSelect = document.createElement('select');
     regionSelect.id = 'regionSelectDropdown';
