@@ -10290,43 +10290,47 @@ async function fetchMarkers(region, category) {
     const markers = await response.json();
      // Clear the existing markers before adding new ones
      clearExistingMarkers();
-    addMarkersToGlobe(markers);  // Call the function to add markers
+     addMarkersToGlobe(markers, centerPosition);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
 
 function addMarkersToGlobe(markers, centerPosition) {
-    const { x: centerX, y: centerY, z: centerZ } = centerPosition; // XYZ center of region
+    if (!centerPosition) {
+        console.error('Center position is undefined!');
+        return;
+    }
+
+    const { x: centerX, y: centerY, z: centerZ } = centerPosition; // Center XYZ of the selected region
 
     markers.forEach(marker => {
-        // Get the lat/lng of the Airbnb post
+        // Assume each marker has lat/lng
         const { lat, lng } = marker;
 
-        // Convert the marker's lat/lng to XYZ coordinates
+        // Convert lat/lng to XYZ coordinates
         const markerVector = latLngToVector3(lat, lng, earthRadius);
 
-        // Adjust the marker's position relative to the center XYZ
+        // Adjust marker position relative to the center XYZ
         const adjustedX = markerVector.x - centerX;
         const adjustedY = markerVector.y - centerY;
         const adjustedZ = markerVector.z - centerZ;
 
-        // Log the marker position for debugging
-        console.log(`Marker XYZ: x=${adjustedX}, y=${adjustedY}, z=${adjustedZ}`);
+        // Log for debugging
+        console.log(`Marker Position Adjusted: x=${adjustedX}, y=${adjustedY}, z=${adjustedZ}`);
 
-        // Create a marker mesh for the Airbnb post
+        // Create marker mesh and place it on the globe
         const markerMesh = createMarkerMesh();
-
-        // Set the marker's adjusted 3D position on the globe
         markerMesh.position.set(adjustedX, adjustedY, adjustedZ);
 
-        // Ensure the marker faces outward from the globe
+        // Ensure the marker faces outward
         markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
 
-        // Add the marker to the scene
+        // Add marker to the scene
         scene.add(markerMesh);
     });
 }
+
 
 
 
@@ -10495,6 +10499,14 @@ function panToRegion(region) {
       break;
     default: return;
   }
+  console.log(`Center position for ${region}:`, position);
+
+  console.log(`Center position for ${region}:`, position);
+
+// Fetch markers and pass the center position
+const selectedCategory = document.getElementById('priceCategorySelect').value;
+fetchMarkers(region, selectedCategory, position)
+  .catch(error => console.error('Failed to fetch markers:', error));
   // Ensure zoomLevel is properly set
   if (typeof zoomLevel === 'undefined') {
     console.error('Zoom level is undefined');
