@@ -9717,41 +9717,45 @@ async function fetchMarkers(location, category) {
 }
 
 // Function to add markers to the globe
-function addMarkersToGlobe(markers) {
-  markers.forEach(marker => {
-    // Extract latitude and longitude
-    let { lat, lng } = marker;
+function addMarkersToGlobe(markers, centerLocation) {
+    // Get lat/lng of the center location
+    const centerCoords = Locationsfixed[centerLocation];
 
-    // Apply offsets for shifting down and left
-    const latOffset = -2; // Adjust this value for downward movement
-    const lngOffset = -10; // Adjust this value for leftward movement
-    lat += latOffset;
-    lng += lngOffset;
+    if (!centerCoords) {
+        console.error('Center location not found in Locationsfixed.');
+        return;
+    }
 
-    // Optional: Add random offset for slight spread of markers
-    const randomOffsetFactor = 7; // Adjust for more/less spread
-    lat += (Math.random() - 0.5) * randomOffsetFactor;
-    lng += (Math.random() - 0.5) * randomOffsetFactor;
+    const { lat: centerLat, lng: centerLng } = centerCoords;
 
-    // Log the adjusted values for debugging
-    console.log(`Adjusted Marker Position: lat=${lat}, lng=${lng}`);
+    markers.forEach(marker => {
+        // Get the lat/lng of the Airbnb post
+        const { lat, lng } = marker;
 
-    // Convert lat/lng to 3D vector
-    const markerVector = latLngToVector3(lat, lng, earthRadius);
+        // Compute the relative position (no offsets applied)
+        const adjustedLat = centerLat + (lat - centerLat);
+        const adjustedLng = centerLng + (lng - centerLng);
 
-    // Create the marker mesh
-    const markerMesh = createMarkerMesh();
+        // Log the calculated lat/lng for debugging
+        console.log(`Marker Position: lat=${adjustedLat}, lng=${adjustedLng}`);
 
-    // Set the marker position based on the 3D vector
-    markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
+        // Convert lat/lng to 3D vector
+        const markerVector = latLngToVector3(adjustedLat, adjustedLng, earthRadius);
 
-    // Ensure the marker faces outward from the globe
-    markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
+        // Create a marker mesh for the Airbnb post
+        const markerMesh = createMarkerMesh();
 
-    // Add the marker to the scene
-    scene.add(markerMesh);
-  });
+        // Set the marker's 3D position on the globe
+        markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
+
+        // Ensure the marker faces outward from the globe
+        markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
+
+        // Add the marker to the scene
+        scene.add(markerMesh);
+    });
 }
+
 
 // Function to create marker mesh for the globe
 function createMarkerMesh(lat, lng) {
@@ -10281,6 +10285,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
     }
 }
 async function fetchMarkers(region, category) {
+  const centerPosition = panToRegion(region);  // Get the center position from panToRegion
   try {
     const response = await fetch(`https://0d44-136-148-37-2.ngrok-free.app/get-markers?region=${region}&category=${category}`, {
       headers: {
@@ -10297,12 +10302,13 @@ async function fetchMarkers(region, category) {
 }
 
 function addMarkersToGlobe(markers, centerPosition) {
-    if (!centerPosition) {
-        console.error('Center position is undefined!');
-        return;
-    }
+  if (!centerPosition) {
+    console.error('Center position is undefined!');
+    return;
+  }
 
-    const { x: centerX, y: centerY, z: centerZ } = centerPosition; // Center XYZ of the selected region
+  const { x: centerX, y: centerY, z: centerZ } = centerPosition;
+    // Center XYZ of the selected region
 
     markers.forEach(marker => {
         // Assume each marker has lat/lng
@@ -10500,7 +10506,7 @@ function panToRegion(region) {
     default: return;
   }
   console.log(`Center position for ${region}:`, position);
-
+  return position;
   // Ensure zoomLevel is properly set
   if (typeof zoomLevel === 'undefined') {
     console.error('Zoom level is undefined');
