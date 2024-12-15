@@ -8883,7 +8883,7 @@ function convertLonLatToXYZ(radius, lon, lat) {
 }*/
 
 function panToLocation(location) {
-    const normalizedLocation = normalizeLocation(location);
+    const normalizedLocation = normalizeLocation(Locationsfixed);
     const coords = Locationsfixed[normalizedLocation];
     
     if (coords) {
@@ -9717,7 +9717,7 @@ async function fetchMarkers(location, category) {
 }
 
 // Function to add markers to the globe
-function addMarkersToGlobe(markers) {
+/*function addMarkersToGlobe(markers) {
   markers.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
@@ -9751,6 +9751,44 @@ function addMarkersToGlobe(markers) {
     // Add the marker to the scene
     scene.add(markerMesh);
   });
+}*/
+function addMarkersToGlobe(markers, centerLocation) {
+    // Get lat/lng of the center location
+    const centerCoords = Locationsfixed[centerLocation];
+
+    if (!centerCoords) {
+        console.error('Center location not found in Locationsfixed.');
+        return;
+    }
+
+    const { lat: centerLat, lng: centerLng } = centerCoords;
+
+    markers.forEach(marker => {
+        // Get the lat/lng of the Airbnb post
+        const { lat, lng } = marker;
+
+        // Compute the relative position (no offsets applied)
+        const adjustedLat = centerLat + (lat - centerLat);
+        const adjustedLng = centerLng + (lng - centerLng);
+
+        // Log the calculated lat/lng for debugging
+        console.log(`Marker Position: lat=${adjustedLat}, lng=${adjustedLng}`);
+
+        // Convert lat/lng to 3D vector
+        const markerVector = latLngToVector3(adjustedLat, adjustedLng, earthRadius);
+
+        // Create a marker mesh for the Airbnb post
+        const markerMesh = createMarkerMesh();
+
+        // Set the marker's 3D position on the globe
+        markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
+
+        // Ensure the marker faces outward from the globe
+        markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
+
+        // Add the marker to the scene
+        scene.add(markerMesh);
+    });
 }
 
 // Function to create marker mesh for the globe
