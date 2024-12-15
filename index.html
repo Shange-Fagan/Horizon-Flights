@@ -10292,24 +10292,39 @@ async function fetchMarkers(region, category) {
 }
 
 // Function to add markers to the globe
+// Function to add markers to the globe
 function addMarkersToGlobe(markers) {
   markers.forEach(marker => {
-    const { lat, lng } = marker;
+    // Extract latitude and longitude
+    let { lat, lng } = marker;
+
     // Apply offsets for shifting down and left
-    const latOffset = -15; // Adjust this value for downward movement
-    const lngOffset = -50; // Adjust this value for leftward movement
+    const latOffset = -2; // Adjust this value for downward movement
+    const lngOffset = -10; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
 
     // Optional: Add random offset for slight spread of markers
-    const randomOffsetFactor = 0.2; // Adjust for more/less spread
+    const randomOffsetFactor = 7; // Adjust for more/less spread
     lat += (Math.random() - 0.5) * randomOffsetFactor;
     lng += (Math.random() - 0.5) * randomOffsetFactor;
 
     // Log the adjusted values for debugging
     console.log(`Adjusted Marker Position: lat=${lat}, lng=${lng}`);
 
-    const markerMesh = createMarkerMesh(lat, lng);
+    // Convert lat/lng to 3D vector
+    const markerVector = latLngToVector3(lat, lng, earthRadius);
+
+    // Create the marker mesh
+    const markerMesh = createMarkerMesh();
+
+    // Set the marker position based on the 3D vector
+    markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
+
+    // Ensure the marker faces outward from the globe
+    markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
+
+    // Add the marker to the scene
     scene.add(markerMesh);
   });
 }
