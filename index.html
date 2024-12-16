@@ -2267,11 +2267,12 @@ overflow: hidden;
     right: 63.9% !important;
   }
   #overlayContainer {
-    width: 32.5% !important;
+    width: 50% !important;
     padding-top: 22px !important;
     row-gap: 260 !important;
     height: 87% !important;
     gap: 0px !important;
+    grid-auto-rows: minmax(548px, auto) !important;
   }
   #overlayContainer .post {
     top: 0px !important;
@@ -2288,7 +2289,7 @@ overflow: hidden;
     right: 135px !important;
   }
   #overlayContainer2 {
-    width: 32.5% !important;
+    width: 50% !important;
     height: 87% !important;
   }
   .theme-switch2 {
@@ -9783,7 +9784,7 @@ function addMarkersToGlobe(markers) {
     let { lat, lng } = marker;
 
     // Apply offsets for shifting down and left
-    const latOffset = -2; // Adjust this value for downward movement
+    const latOffset = -10; // Adjust this value for downward movement
     const lngOffset = -25; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
@@ -10364,7 +10365,7 @@ function addMarkersToGlobe(markers) {
     let { lat, lng } = marker;
 
     // Apply offsets for shifting down and left
-    const latOffset = -2; // Adjust this value for downward movement
+    const latOffset = -10; // Adjust this value for downward movement
     const lngOffset = -25; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
