@@ -5615,7 +5615,7 @@ function toggleLightstheme() {
   // Get the button element
   const lightsButton = document.getElementById('addLightsbutton');
 
-  if (lightsButton.textContent === "Night lights") {
+  if (lightsButton.textContent === "Night Lights") {
     // If the lights button is clicked, overlay the lights texture on top of the current state
     if (currentTexture === "day") {
       earthMaterial.uniforms.map.value = LightsTexture; // Apply lights texture (day + lights)
@@ -5642,7 +5642,7 @@ function toggleLightstheme() {
       markerMaterial.color.set(nightmarkerMaterial);
       console.log("Reverted to night texture");
     }
-    lightsButton.textContent = "Night lights";
+    lightsButton.textContent = "Night Lights";
   }
 
   // Ensure uniforms update
