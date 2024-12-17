@@ -1778,7 +1778,7 @@ overflow: hidden;
 /* Overlay container to hold posts, sits on the left side of the screen */
 #overlayContainer {
   position: fixed;
-  top: 135px;
+  top: 146px;
   left: 15px;
   width: 49.5%; /* Adjust width as per your requirement */
   height: 77%;
@@ -2277,17 +2277,17 @@ margin-right: -53px;
 }
 /* Larger Apple desktops (iMac) */
 @media (min-width: 1440px) {
+  #overlayContainer .post {
+top: -8px !important;
+left: -8px !important;
+}
   #overlayContainer {
     width: 50% !important;
     padding-top: 22px !important;
     row-gap: 260 !important;
     height: 77% !important;
     gap: 0px !important;
-    grid-auto-rows: minmax(548px, auto) !important;
-  }
-  #overlayContainer .post {
-    top: 0px !important;
-    left: 0px !important;
+    grid-auto-rows: minmax(560px, auto) !important;
   }
   .post .view-link {
     padding: 17px 57px !important;
