@@ -2268,12 +2268,6 @@ overflow: hidden;
 }
 /* Larger Apple desktops (iMac) */
 @media (min-width: 1440px) {
-  .calendar-icon {
-    right: 53.5% !important;
-  }
-  .calendar-icon2 {
-    right: 63.9% !important;
-  }
   #overlayContainer {
     width: 50% !important;
     padding-top: 22px !important;
@@ -2752,9 +2746,10 @@ input[type="date"]::-webkit-datetime-edit {
     font-size: 18px; /* Adjust size */
     color: white; /* Icon color (if using font-based icons) */
     pointer-events: none; /* Prevent the icon from blocking clicks on the input */
+    margin-left: 110px;
+margin-top: -90px;
 }
 .calendar-icon2 {
-    position: absolute;
     width: 20px;
     height:22px;
     top: 50%; /* Center vertically */
@@ -2763,7 +2758,7 @@ input[type="date"]::-webkit-datetime-edit {
     font-size: 18px; /* Adjust size */
     color: white; /* Icon color (if using font-based icons) */
     pointer-events: none; /* Prevent the icon from blocking clicks on the input */
-    flex: 1;
+    flex: 1 !important;
 }
 .calendar-icon {
     width: 20px;
@@ -2811,12 +2806,6 @@ crossorigin="anonymous"></script>
 }
 .windows-style .theme-switch2 {
   left: 15%;
-}
-.windows-style .calendar-icon2 {
-    right: 47.3%; /* Adjust distance from input field */
-}
-.windows-style .calendar-icon {
-    right: 37.3%; /* Adjust distance from input field */
 }
 .windows-style button:hover {
   background-color: #005a9e; /* Darker blue for hover state */
@@ -3295,11 +3284,11 @@ crossorigin="anonymous"></script>
   </div>
   <div class="date-picker-wrapper">
     <input type="text" id="checkin" class="flatpickr-input" placeholder="Check-in date">
-    <img src="js/exit.png" alt="Calendar Icon" class="calendar-icon"style="width: 17px; height: 17px;">
+    <img src="js/calendar-icon2.png" alt="Calendar Icon" class="calendar-icon"style="width: 17px; height: 17px;">
 </div>
 <div class="date-picker-wrapper">
   <input type="text" id="checkout" class="flatpickr-input" placeholder="Departure date">
-  <img src="js/calendar-icon2.png" alt="Calendar Icon" class="calendar-icon2">
+  <img src="js/exit.png" alt="Calendar Icon" class="calendar-icon2">
 </div>
   <div id="guestSelector" style="position: relative;">
     <input type="number" id="adults" name="adults" placeholder="Add guests">
