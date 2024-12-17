@@ -499,6 +499,7 @@ a, button, input, select, iframe {
   }
   /* Styling for other inputs (optional) */
 #checkin {
+  display: flex;
   font-size: 16px; /* Slightly smaller font size */
     padding: 10px 15px; /* Padding inside inputs */
     border: 0px solid #ddd; /* Light gray border */
@@ -513,8 +514,12 @@ a, button, input, select, iframe {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     white-space: nowrap; /* Prevent wrapping */
     cursor: default;
+    align-items: center;
+justify-content: space-between;
+position: relative;
   }
   #checkout {
+    display: flex;
   font-size: 16px; /* Slightly smaller font size */
     padding: 10px 15px; /* Padding inside inputs */
     border: 0px solid #ddd; /* Light gray border */
@@ -529,6 +534,9 @@ a, button, input, select, iframe {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     white-space: nowrap; /* Prevent wrapping */
     cursor: default;
+    align-items: center;
+justify-content: space-between;
+position: relative;
   }
   /* Styling for other inputs (optional) */
 #price_min, #price_max {
@@ -2267,7 +2275,7 @@ overflow: hidden;
     right: 63.9% !important;
   }
   #overlayContainer {
-    width: 48% !important;
+    width: 50% !important;
     padding-top: 22px !important;
     row-gap: 260 !important;
     height: 77% !important;
@@ -2736,7 +2744,6 @@ input[type="date"]::-webkit-datetime-edit {
 }
 
 .calendar-icon {
-    position: absolute;
     width: 20px;
     height:22px;
     top: 50%; /* Center vertically */
@@ -2756,9 +2763,9 @@ input[type="date"]::-webkit-datetime-edit {
     font-size: 18px; /* Adjust size */
     color: white; /* Icon color (if using font-based icons) */
     pointer-events: none; /* Prevent the icon from blocking clicks on the input */
+    flex: 1;
 }
 .calendar-icon {
-    position: absolute;
     width: 20px;
     height:22px;
     top: 50%; /* Center vertically */
@@ -2767,6 +2774,7 @@ input[type="date"]::-webkit-datetime-edit {
     font-size: 18px; /* Adjust size */
     color: white; /* Icon color (if using font-based icons) */
     pointer-events: none; /* Prevent the icon from blocking clicks on the input */
+    flex: 1;
 }
 
 </style>
