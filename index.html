@@ -7644,7 +7644,7 @@ function populateOverlay(posts2) {
     overlay2.innerHTML = ''; // Clear previous listings
     overlay2.style.display = 'none';
 
-    posts2.forEach(post => {
+    posts2.forEach((post, index) => {
         const postDiv = document.createElement('div');
         postDiv.classList.add('post');
 
@@ -10214,7 +10214,7 @@ function populateOverlay(posts2) {
     const overlay = document.getElementById('overlayContainer');
     overlay.innerHTML = ''; // Clear previous posts
 
-    posts2.forEach(post => {
+    posts2.forEach((post, index) => {
         const postDiv = document.createElement('div');
         postDiv.classList.add('post');
 
