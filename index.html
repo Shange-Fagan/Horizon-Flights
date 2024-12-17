@@ -7702,6 +7702,17 @@ function populateOverlay(posts2) {
 
         // Append the postDiv to the overlay
         overlay.appendChild(postDiv);
+        // Map post to marker events
+        postDiv.addEventListener('mouseover', () => {
+            if (markers[index]) {
+                markers[index].material.color.set(0x00aaff);
+            }
+        });
+
+        postDiv.addEventListener('mouseout', () => {
+            if (markers[index]) {
+                markers[index].material.color.set(0x00ff00);
+            } });
     });
 }
 
@@ -7736,7 +7747,7 @@ document.querySelectorAll('.post-grid').forEach((item, index) => {
 
     item.addEventListener('click', function() {
         if (markers[index]) {
-            markers[index].material.color.set(0xffffff);  // Set the marker color to red on click
+            markers[index].material.color.set(0x87CEFA);  // Set the marker color to red on click
         }
     });
 });
@@ -9864,10 +9875,10 @@ async function fetchMarkers(location, category) {
     console.error("Failed to fetch markers:", error);
   }
 }
-
+const markers3 = []; // Ensure markers array is globally accessible
 // Function to add markers to the globe
-function addMarkersToGlobe(markers) {
-  markers.forEach(marker => {
+function addMarkersToGlobe(posts2) {
+  markers3.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
 
@@ -9899,6 +9910,7 @@ function addMarkersToGlobe(markers) {
 
     // Add the marker to the scene
     scene.add(markerMesh);
+    markers3[index] = markerMesh; // Store the marker in the array
   });
 }
 
@@ -10259,6 +10271,17 @@ function populateOverlay(posts2) {
 
         // Append the postDiv to the overlay
         overlay.appendChild(postDiv);
+        // Map post to marker events
+        postDiv.addEventListener('mouseover', () => {
+            if (markers[index]) {
+                markers[index].material.color.set(0x00aaff);
+            }
+        });
+
+        postDiv.addEventListener('mouseout', () => {
+            if (markers[index]) {
+                markers[index].material.color.set(0x00ff00);
+            } });
     });
 }
 
@@ -10340,7 +10363,7 @@ document.querySelectorAll('.post-grid').forEach((item, index) => {
 
     item.addEventListener('click', function() {
         if (markers[index]) {
-            markers[index].material.color.set(0xffffff);  // Set the marker color to red on click
+            markers[index].material.color.set(0x87CEFA);  // Set the marker color to red on click
         }
     });
 });
@@ -10444,11 +10467,11 @@ async function fetchMarkers(region, category) {
     console.error("Failed to fetch markers:", error);
   }
 }
-
+const markers3 = []; // Ensure markers array is globally accessible
 // Function to add markers to the globe
 // Function to add markers to the globe
-function addMarkersToGlobe(markers) {
-  markers.forEach(marker => {
+function addMarkersToGlobe(posts2) {
+  markers3.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
 
@@ -10480,6 +10503,7 @@ function addMarkersToGlobe(markers) {
 
     // Add the marker to the scene
     scene.add(markerMesh);
+    markers3[index] = markerMesh; // Store the marker in the array
   });
 }
 // Function to create marker mesh for the globe
