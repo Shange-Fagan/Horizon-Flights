@@ -2262,7 +2262,7 @@ margin-right: -53px;
   right: 15px;
   width: 80px;
   height: 40px;
-  top: 368.5px;
+  top: 344.5px;
   z-index: 22011;
 }
 .theme-switch2 {
@@ -7705,14 +7705,14 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
         postDiv.addEventListener('mouseover', () => {
-            if (markers3[index]) {
-                markers3[index].material.color.set(0x00aaff);
+            if (markers[index]) {
+                markers[index].material.color.set(0x00aaff);
             }
         });
 
         postDiv.addEventListener('mouseout', () => {
-            if (markers3[index]) {
-                markers3[index].material.color.set(0x00ff00);
+            if (markers[index]) {
+                markers[index].material.color.set(0x00ff00);
             } });
     });
 }
@@ -7735,20 +7735,20 @@ document.getElementById('likedPostsButton').addEventListener('click', showLikedP
 document.querySelectorAll('.post-grid').forEach((item, index) => {
     // Make sure `index` matches the corresponding marker
     item.addEventListener('mouseover', function() {
-        if (markers3[index]) {  // Check if the marker exists
-            markers3[index].material.color.set(0x00aaff);  // Highlight the marker in green
+        if (markers[index]) {  // Check if the marker exists
+            markers[index].material.color.set(0x00aaff);  // Highlight the marker in green
         }
     });
     
     item.addEventListener('mouseout', function() {
-        if (markers3[index]) {
-            markers3[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
+        if (markers[index]) {
+            markers[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
         }
     });
 
     item.addEventListener('click', function() {
-        if (markers3[index]) {
-            markers3[index].material.color.set(0x87CEFA);  // Set the marker color to red on click
+        if (markers[index]) {
+            markers[index].material.color.set(0x87CEFA);  // Set the marker color to red on click
         }
     });
 });
@@ -9864,23 +9864,22 @@ async function fetchMarkers(location, category) {
     },
     });
     // Extract posts and markers from the response
-    const { markers3 } = await response.json(); 
-    console.log("Fetched markers:", markers3);  // Log the response to check its format
+    const { markers } = await response.json(); 
+    console.log("Fetched markers:", markers);  // Log the response to check its format
 
-    if (!Array.isArray(markers3)) {
+    if (!Array.isArray(markers)) {
       throw new Error('Expected markers to be an array');
     }
     // Clear existing markers and add new ones
     clearExistingMarkers();
-    addMarkersToGlobe(markers3);  // Call the function to add markers
+    addMarkersToGlobe(markers);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
-const markers3 = []; // Ensure markers array is globally accessible
 // Function to add markers to the globe
 function addMarkersToGlobe(markers) {
-  markers3.forEach(marker => {
+  markers.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
 
@@ -9912,7 +9911,7 @@ function addMarkersToGlobe(markers) {
 
     // Add the marker to the scene
     scene.add(markerMesh);
-    markers3[index] = markerMesh; // Store the marker in the array
+    markers[index] = markerMesh; // Store the marker in the array
   });
 }
 
@@ -10275,14 +10274,14 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
         postDiv.addEventListener('mouseover', () => {
-            if (markers3[index]) {
-                markers3[index].material.color.set(0x00aaff);
+            if (markers[index]) {
+                markers[index].material.color.set(0x00aaff);
             }
         });
 
         postDiv.addEventListener('mouseout', () => {
-            if (markers3[index]) {
-                markers3[index].material.color.set(0x00ff00);
+            if (markers[index]) {
+                markers[index].material.color.set(0x00ff00);
             } });
     });
 }
@@ -10352,20 +10351,20 @@ document.getElementById('likedPostsButton').addEventListener('click', showLikedP
 document.querySelectorAll('.post-grid').forEach((item, index) => {
     // Make sure `index` matches the corresponding marker
     item.addEventListener('mouseover', function() {
-        if (markers3[index]) {  // Check if the marker exists
-            markers3[index].material.color.set(0x00aaff);  // Highlight the marker in green
+        if (markers[index]) {  // Check if the marker exists
+            markers[index].material.color.set(0x00aaff);  // Highlight the marker in green
         }
     });
     
     item.addEventListener('mouseout', function() {
-        if (markers3[index]) {
-            markers3[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
+        if (markers[index]) {
+            markers[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
         }
     });
 
     item.addEventListener('click', function() {
-        if (markers3[index]) {
-            markers3[index].material.color.set(0x87CEFA);  // Set the marker color to red on click
+        if (markers[index]) {
+            markers[index].material.color.set(0x87CEFA);  // Set the marker color to red on click
         }
     });
 });
@@ -10461,10 +10460,10 @@ async function fetchMarkers(region, category) {
         'ngrok-skip-browser-warning': 'true',
     },
     });
-    const markers3 = await response.json();
+    const markers = await response.json();
      // Clear the existing markers before adding new ones
      clearExistingMarkers();
-    addMarkersToGlobe(markers3);  // Call the function to add markers
+    addMarkersToGlobe(markers);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
@@ -10472,7 +10471,7 @@ async function fetchMarkers(region, category) {
 // Function to add markers to the globe
 // Function to add markers to the globe
 function addMarkersToGlobe(markers) {
-  markers3.forEach(marker => {
+  markers.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
 
@@ -10504,7 +10503,7 @@ function addMarkersToGlobe(markers) {
 
     // Add the marker to the scene
     scene.add(markerMesh);
-    markers3[index] = markerMesh; // Store the marker in the array
+    markers[index] = markerMesh; // Store the marker in the array
   });
 }
 // Function to create marker mesh for the globe
