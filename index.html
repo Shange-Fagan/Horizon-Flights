@@ -2301,7 +2301,7 @@ left: -8px !important;
     right: 135px !important;
   }
   #overlayContainer2 {
-    width: 50% !important;
+    width: 40% !important;
     height: 79% !important;
   }
   #header {
@@ -9879,7 +9879,7 @@ async function fetchMarkers(location, category) {
 }
 const markers3 = []; // Ensure markers array is globally accessible
 // Function to add markers to the globe
-function addMarkersToGlobe(posts2) {
+function addMarkersToGlobe(markers) {
   markers3.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
@@ -10469,10 +10469,9 @@ async function fetchMarkers(region, category) {
     console.error("Failed to fetch markers:", error);
   }
 }
-const markers3 = []; // Ensure markers array is globally accessible
 // Function to add markers to the globe
 // Function to add markers to the globe
-function addMarkersToGlobe(posts2) {
+function addMarkersToGlobe(markers) {
   markers3.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
