@@ -7732,7 +7732,7 @@ function populateOverlay(posts2) {
 // Add an event listener to the profile button to show liked posts
 document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);
 
-document.querySelectorAll('.post-grid').forEach((item, index) => {
+document.querySelectorAll('.post .view-link').forEach((item, index) => {
     // Make sure `index` matches the corresponding marker
     item.addEventListener('mouseover', function() {
         if (markers[index]) {  // Check if the marker exists
@@ -10347,7 +10347,7 @@ function showLikedPosts() {
 // Add an event listener to the profile button to show liked posts
 document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);
 
-document.querySelectorAll('.post-grid').forEach((item, index) => {
+document.querySelectorAll('.post .view-link').forEach((item, index) => {
     // Make sure `index` matches the corresponding marker
     item.addEventListener('mouseover', function() {
         if (markers[index]) {  // Check if the marker exists
