@@ -7705,14 +7705,14 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
         postDiv.addEventListener('mouseover', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00aaff);
+            if (markers3[index]) {
+                markers3[index].material.color.set(0x00aaff);
             }
         });
 
         postDiv.addEventListener('mouseout', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00ff00);
+            if (markers3[index]) {
+                markers3[index].material.color.set(0x00ff00);
             } });
     });
 }
@@ -7735,20 +7735,20 @@ document.getElementById('likedPostsButton').addEventListener('click', showLikedP
 document.querySelectorAll('.post-grid').forEach((item, index) => {
     // Make sure `index` matches the corresponding marker
     item.addEventListener('mouseover', function() {
-        if (markers[index]) {  // Check if the marker exists
-            markers[index].material.color.set(0x00aaff);  // Highlight the marker in green
+        if (markers3[index]) {  // Check if the marker exists
+            markers3[index].material.color.set(0x00aaff);  // Highlight the marker in green
         }
     });
     
     item.addEventListener('mouseout', function() {
-        if (markers[index]) {
-            markers[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
+        if (markers3[index]) {
+            markers3[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
         }
     });
 
     item.addEventListener('click', function() {
-        if (markers[index]) {
-            markers[index].material.color.set(0x87CEFA);  // Set the marker color to red on click
+        if (markers3[index]) {
+            markers3[index].material.color.set(0x87CEFA);  // Set the marker color to red on click
         }
     });
 });
@@ -9864,22 +9864,22 @@ async function fetchMarkers(location, category) {
     },
     });
     // Extract posts and markers from the response
-    const { markers } = await response.json(); 
-    console.log("Fetched markers:", markers);  // Log the response to check its format
+    const { markers3 } = await response.json(); 
+    console.log("Fetched markers:", markers3);  // Log the response to check its format
 
-    if (!Array.isArray(markers)) {
+    if (!Array.isArray(markers3)) {
       throw new Error('Expected markers to be an array');
     }
     // Clear existing markers and add new ones
     clearExistingMarkers();
-    addMarkersToGlobe(markers);  // Call the function to add markers
+    addMarkersToGlobe(markers3);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
 const markers3 = []; // Ensure markers array is globally accessible
 // Function to add markers to the globe
-function addMarkersToGlobe(markers) {
+function addMarkersToGlobe(posts2) {
   markers3.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
@@ -10275,14 +10275,14 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
         postDiv.addEventListener('mouseover', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00aaff);
+            if (markers3[index]) {
+                markers3[index].material.color.set(0x00aaff);
             }
         });
 
         postDiv.addEventListener('mouseout', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00ff00);
+            if (markers3[index]) {
+                markers3[index].material.color.set(0x00ff00);
             } });
     });
 }
@@ -10352,20 +10352,20 @@ document.getElementById('likedPostsButton').addEventListener('click', showLikedP
 document.querySelectorAll('.post-grid').forEach((item, index) => {
     // Make sure `index` matches the corresponding marker
     item.addEventListener('mouseover', function() {
-        if (markers[index]) {  // Check if the marker exists
-            markers[index].material.color.set(0x00aaff);  // Highlight the marker in green
+        if (markers3[index]) {  // Check if the marker exists
+            markers3[index].material.color.set(0x00aaff);  // Highlight the marker in green
         }
     });
     
     item.addEventListener('mouseout', function() {
-        if (markers[index]) {
-            markers[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
+        if (markers3[index]) {
+            markers3[index].material.color.set(0x00ff00);  // Reset the color when mouse leaves (default color)
         }
     });
 
     item.addEventListener('click', function() {
-        if (markers[index]) {
-            markers[index].material.color.set(0x87CEFA);  // Set the marker color to red on click
+        if (markers3[index]) {
+            markers3[index].material.color.set(0x87CEFA);  // Set the marker color to red on click
         }
     });
 });
@@ -10461,17 +10461,17 @@ async function fetchMarkers(region, category) {
         'ngrok-skip-browser-warning': 'true',
     },
     });
-    const markers = await response.json();
+    const markers3 = await response.json();
      // Clear the existing markers before adding new ones
      clearExistingMarkers();
-    addMarkersToGlobe(markers);  // Call the function to add markers
+    addMarkersToGlobe(markers3);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
 // Function to add markers to the globe
 // Function to add markers to the globe
-function addMarkersToGlobe(markers) {
+function addMarkersToGlobe(posts2) {
   markers3.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
