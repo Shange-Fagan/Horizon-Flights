@@ -9879,7 +9879,7 @@ async function fetchMarkers(location, category) {
 }
 const markers3 = []; // Ensure markers array is globally accessible
 // Function to add markers to the globe
-function addMarkersToGlobe(posts2) {
+function addMarkersToGlobe(markers) {
   markers3.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
@@ -10471,7 +10471,7 @@ async function fetchMarkers(region, category) {
 }
 // Function to add markers to the globe
 // Function to add markers to the globe
-function addMarkersToGlobe(posts2) {
+function addMarkersToGlobe(markers) {
   markers3.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
