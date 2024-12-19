@@ -2768,6 +2768,63 @@ margin-bottom: 6px;
     margin-left: 105.9px;
 margin-top: -90px;
 }
+.marker-widget {
+    position: absolute;
+    z-index: 1000;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 250px;
+    max-height: 300px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.marker-widget img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.marker-widget h3 {
+    font-size: 16px;
+    margin: 10px 0 5px;
+    color: #007BFF;
+}
+
+.marker-widget p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.marker-widget .view-link {
+    text-decoration: none;
+    color: #fff;
+    background: #007BFF;
+    padding: 8px 12px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.marker-widget .widget-close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #aaa;
+    transition: color 0.3s ease;
+}
+
+.marker-widget .widget-close-btn:hover {
+    color: #ff0000;
+}
 
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5689710336620898"
@@ -7539,7 +7596,15 @@ async function fetchAirbnbPosts(searchUrl) {
          const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
 
         console.log('Fetched posts:', data);
+// Map posts2 data to marker format
+const markers = posts2.map((post, index) => ({
+            lat: post.lat || (Math.random() * 180 - 90), // Random lat if missing
+            lng: post.lng || (Math.random() * 360 - 180), // Random lng if missing
+            posts: post, // Attach Airbnb post data
+        }));
 
+        // Add markers to the globe
+        addMarkersToGlobe(markers);
         // Update spinner text to indicate posts fetched
         updateSpinnerText("Displaying fetched listings...");
 // Call populateOverlay to display posts
@@ -9873,13 +9938,13 @@ async function fetchMarkers(location, category) {
     }
     // Clear existing markers and add new ones
     clearExistingMarkers();
-    addMarkersToGlobe(markers);  // Call the function to add markers
+    //addMarkersToGlobe(markers);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
 // Function to add markers to the globe
-function addMarkersToGlobe(markers) {
+/*function addMarkersToGlobe(markers) {
   markers.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
@@ -9910,11 +9975,88 @@ function addMarkersToGlobe(markers) {
     // Ensure the marker faces outward from the globe
     markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
 
+    markerMesh.innerHTML = fetchAirbnbPosts.posts2
     // Add the marker to the scene
     scene.add(markerMesh);
   });
-}
+}*/
+function addMarkersToGlobe(markers) {
+    markers.forEach(markerData => {
+        const { lat, lng, posts } = markerData;
 
+        // Apply offsets for shifting down and left
+        const latOffset = -10; // Adjust this value for downward movement
+        const lngOffset = -26.5; // Adjust this value for leftward movement
+        lat += latOffset;
+        lng += lngOffset;
+
+        // Optional: Add random offset for slight spread of markers
+        const randomOffsetFactor = 7; // Adjust for more/less spread
+        lat += (Math.random() - 0.5) * randomOffsetFactor;
+        lng += (Math.random() - 0.5) * randomOffsetFactor;
+
+        // Convert lat/lng to 3D vector
+        const markerVector = latLngToVector3(lat, lng, earthRadius);
+
+        // Create a marker mesh (green for fetched Airbnb posts)
+        const markerMesh = createMarkerMesh(0x00ff00); // Green color
+
+        // Set marker position based on 3D vector
+        markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
+
+        // Ensure the marker faces outward from the globe
+        markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
+
+        // Attach posts data to the marker
+        markerMesh.userData = { posts };
+
+        // Add click interaction to display widget
+        markerMesh.addEventListener("click", (event) => {
+            if (posts) {
+                displayPostWidget(posts, event); // Pass post data and event for widget placement
+            }
+        });
+
+        // Add the marker to the scene
+        scene.add(markerMesh);
+    });
+}
+function displayPostWidget(post, event) {
+    // Remove any existing widget
+    const existingWidget = document.querySelector(".marker-widget");
+    if (existingWidget) {
+        existingWidget.remove();
+    }
+
+    // Create the widget container
+    const widget = document.createElement("div");
+    widget.classList.add("marker-widget");
+
+    // Add post details
+    widget.innerHTML = `
+        <div class="widget-content">
+            <img src="${post.images || "default-image.jpg"}" alt="${post.title || "No Title"}" />
+            <h3>${post.title || "No Title Available"}</h3>
+            <p>Price: ${post.listing_price_details || "N/A"} per night</p>
+            <p>Rating: ★${post.rating_out_of_5_stars || "N/A"}</p>
+            <a href="${post.link || "#"}" target="_blank" class="view-link">View Listing</a>
+        </div>
+        <button class="widget-close-btn">✖</button>
+    `;
+
+    // Add close button functionality
+    widget.querySelector(".widget-close-btn").addEventListener("click", () => {
+        widget.remove();
+    });
+
+    // Position the widget based on the mouse event
+    const { clientX, clientY } = event;
+    widget.style.left = `${clientX + 10}px`;
+    widget.style.top = `${clientY + 10}px`;
+
+    // Add the widget to the document
+    document.body.appendChild(widget);
+}
 // Function to create marker mesh for the globe
 function createMarkerMesh(lat, lng) {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
