@@ -5501,27 +5501,8 @@ let currentmarkerMaterial = "night";
   //markerMaterial.color.set(nightmarkerMaterial);
   markerMaterial.color.set(nightmarkerMaterial);
   currentmarkerMaterial = "night";
-  const posts = document.querySelectorAll('.post');
-  // Loop through each post and apply styles
-posts.forEach(post => {
-  posts.style.position = 'relative';
-  posts.style.top = '5px';
-  posts.style.left = '5px';
-  posts.style.width = '300px';
-  posts.style.height = '500px';
-  posts.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-  posts.style.color = 'white';
-  posts.style.border = '1px solid #ddd';
-  posts.style.borderRadius = '8px';
-  posts.style.overflow = 'hidden';
-  posts.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-  posts.style.padding = '15px';
-    /* display: flex; */
-    posts.style.flexDirection = 'column';
-    posts.style.alignItems = 'center';
-    posts.style.marginBottom = '20px';
-    posts.style.justifySelf = 'center';
-});
+  // Switching from Day to Night
+  handleThemeChange("night");
   /*const searchBtn = document.getElementById('searchBtn');
   searchBtn.style.backgroundColor = '#00aaff';
     const regionPopupButton = document.querySelector('#regionPopup button'); // Selects the button inside #regionPopup
@@ -5597,27 +5578,8 @@ inputsAndSelects.forEach((element) => {
     //scene.add(cloudMesh);  // Add clouds for day
   markerMaterial.color.set(daymarkerMaterial);
   currentmarkerMaterial = "day";
-  const posts = document.querySelectorAll('.post');
-  // Loop through each post and apply styles
-posts.forEach(post => {
-  posts.style.position = 'relative';
-  posts.style.top = '5px';
-  posts.style.left = '5px';
-  posts.style.width = '300px';
-  posts.style.height = '500px';
-  posts.style.backgroundColor = '#ffffffdb;';
-  posts.style.color = 'white';
-  posts.style.border = '1px solid #ddd';
-  posts.style.borderRadius = '8px';
-  posts.style.overflow = 'hidden';
-  posts.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-  posts.style.padding = '15px';
-    /* display: flex; */
-    posts.style.flexDirection = 'column';
-    posts.style.alignItems = 'center';
-    posts.style.marginBottom = '20px';
-    posts.style.justifySelf = 'center';
-});
+ // Switching from Night to Day
+ handleThemeChange("day");
   /*const searchBtn = document.getElementById('searchBtn');
   searchBtn.style.backgroundColor = '#00aaff';
     const regionPopupButton = document.querySelector('#regionPopup button'); // Selects the button inside #regionPopup
@@ -5675,6 +5637,49 @@ inputsAndSelects.forEach((element) => {
   isDay = !isDay
   //updateTheme(isDay);
 }
+function handleThemeChange(theme) {
+  const posts = document.querySelectorAll(".post");
+
+  // Define styles for each theme
+  const themeStyles = {
+    day: {
+      backgroundColor: "#ffffffdb",
+      color: "black",
+      boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+      borderColor: "#ddd",
+    },
+    night: {
+      backgroundColor: "rgba(255, 255, 255, 0.15)",
+      color: "white",
+      boxShadow: "0 2px 5px rgba(0, 0, 0, 0.3)",
+      borderColor: "#444",
+    },
+  };
+
+  // Get the appropriate styles based on the theme
+  const styles = themeStyles[theme];
+
+  // Apply styles to each post
+  posts.forEach(post => {
+    post.style.position = "relative";
+    post.style.top = "5px";
+    post.style.left = "5px";
+    post.style.width = "300px";
+    post.style.height = "500px";
+    post.style.backgroundColor = styles.backgroundColor;
+    post.style.color = styles.color;
+    post.style.border = `1px solid ${styles.borderColor}`;
+    post.style.borderRadius = "8px";
+    post.style.overflow = "hidden";
+    post.style.boxShadow = styles.boxShadow;
+    post.style.padding = "15px";
+    post.style.flexDirection = "column";
+    post.style.alignItems = "center";
+    post.style.marginBottom = "20px";
+    post.style.justifySelf = "center";
+  });
+}
+
 /*function toggleLightstheme() {
   earthMaterial.uniforms.map.value = LightsTexture;
 }
