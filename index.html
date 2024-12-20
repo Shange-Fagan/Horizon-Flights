@@ -9920,7 +9920,7 @@ async function fetchMarkers(location, category) {
     }
     // Clear existing markers and add new ones
     clearExistingMarkers();
-    addMarkersToGlobe(markers);  // Call the function to add markers
+    //addMarkersToGlobe(markers);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
@@ -10583,7 +10583,7 @@ async function fetchMarkers(region, category) {
     const markers = await response.json();
      // Clear the existing markers before adding new ones
      clearExistingMarkers();
-    addMarkersToGlobe(markers);  // Call the function to add markers
+    //addMarkersToGlobe(markers);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
