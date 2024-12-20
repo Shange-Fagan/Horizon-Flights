@@ -4326,7 +4326,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
   // Initialize Firebase Authentication
-  const auth = firebase.auth();
+const auth = getAuth(app);
 
   // Handle Login/Logout
   // Handle login/logout and show liked posts
