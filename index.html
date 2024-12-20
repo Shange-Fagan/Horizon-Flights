@@ -2768,6 +2768,20 @@ margin-bottom: 6px;
     margin-left: 105.9px;
 margin-top: -90px;
 }
+#mobileWarning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffcc00; /* Yellow for attention */
+    color: #333;
+    text-align: center;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
 
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5689710336620898"
@@ -3302,7 +3316,9 @@ margin-bottom: 1px;
     <a href="https://www.linkedin.com/in/shange-fagan-bba3a3239/" target="_blank" style="display: none">LinkedIn</a> | 
     <a href="mailto:yourname@gmail.com?subject=Inquiry&body=Hello, I would like to know more about your services." target="_blank">Contact Us</a>
   </footer>
-
+  <div id="mobileWarning" style="display: none;">
+    <p>This webpage works best on a desktop (Windows or Mac). Please revisit using a desktop device for the optimal experience. Thank you!</p>
+</div>
 <div id="header">
   <input type="text" id="from" name="travel_from" placeholder="Where from?">
   <input type="text" id="where" name="destination" placeholder="Where to?">
@@ -3890,6 +3906,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+function showMobileWarning() {
+    const mobileWarning = document.getElementById("mobileWarning");
+
+    // Detect if the user is on a mobile device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        mobileWarning.style.display = "block";
+        // Optionally, disable other content
+        document.body.style.overflow = "hidden"; // Prevent scrolling
+    }
+}
+
+// Run the function after the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", showMobileWarning);
 
 
 	  // Hide the spinner after globe and scene are ready
@@ -4259,6 +4290,10 @@ document.addEventListener('click', function (event) {
 
   // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBP9WtBgIHmpavBQHnG0LxXcyfK7GM5_Q4",
   authDomain: "horizon-flights.firebaseapp.com",
