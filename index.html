@@ -2770,10 +2770,10 @@ margin-top: -90px;
 }
 #mobileWarning {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
-    background-color: #ffcc00; /* Yellow for attention */
+    background-color: #00aaff; /* Yellow for attention */
     color: #333;
     text-align: center;
     padding: 15px;
@@ -3924,6 +3924,7 @@ function showMobileWarning() {
         const newsButton = document.getElementById('newsButton');
         const minimizeCarouselBtn = document.getElementById('minimizeCarouselBtn');
         const carouselContainer = document.getElementById('carousel-container');
+        const loadingScreen = document.getElementById('loadingScreen');
         iframe.style.display = "none";
         submitRegion.style.display = "none";
         clearFiltersBtn.style.display = "none";
@@ -3934,6 +3935,8 @@ function showMobileWarning() {
         newsButton.style.display = "none";
         minimizeCarouselBtn.style.display = "none";
         carouselContainer.style.display = "none";
+        loadingScreen.style.display = "none";
+
         // Optionally, disable other content
         document.body.style.overflow = "hidden"; // Prevent scrolling
     }
