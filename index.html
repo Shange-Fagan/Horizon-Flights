@@ -4291,6 +4291,26 @@ document.addEventListener('click', function (event) {
 
   // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+/*const firebaseConfig = {
+  apiKey: "AIzaSyBP9WtBgIHmpavBQHnG0LxXcyfK7GM5_Q4",
+  authDomain: "horizon-flights.firebaseapp.com",
+  projectId: "horizon-flights",
+  storageBucket: "horizon-flights.firebasestorage.app",
+  messagingSenderId: "173542786157",
+  appId: "1:173542786157:web:073fb82c209555d9432b64",
+  measurementId: "G-4KJF5LVT0R"
+};
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Initialize Firebase Authentication
+  const auth = firebase.auth();
+*/
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBP9WtBgIHmpavBQHnG0LxXcyfK7GM5_Q4",
   authDomain: "horizon-flights.firebaseapp.com",
@@ -4306,7 +4326,7 @@ const firebaseConfig = {
 
   // Initialize Firebase Authentication
   const auth = firebase.auth();
-
+  const db = getFirestore(app);
   // Handle Login/Logout
   // Handle login/logout and show liked posts
   // Add an event listener to the login button
@@ -7346,7 +7366,6 @@ function saveToLikes(post) {
             console.error('Error saving liked post:', error);
         });
 }
-
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 function showLikedPosts() {
