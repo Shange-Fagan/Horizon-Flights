@@ -4310,8 +4310,17 @@ document.addEventListener('click', function (event) {
 
   // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+/*import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithPopup,
+    GoogleAuthProvider,
+    signOut,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBP9WtBgIHmpavBQHnG0LxXcyfK7GM5_Q4",
   authDomain: "horizon-flights.firebaseapp.com",
@@ -4541,7 +4550,155 @@ function updatelikedPostsButton(user) {
 // Set initial button state on page load
 firebase.auth().onAuthStateChanged(user => {
     updateLoginButton(user); // Update button based on current auth state
+});*/
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithPopup,
+    GoogleAuthProvider,
+    signOut,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBP9WtBgIHmpavBQHnG0LxXcyfK7GM5_Q4",
+    authDomain: "horizon-flights.firebaseapp.com",
+    projectId: "horizon-flights",
+    storageBucket: "horizon-flights.appspot.com",
+    messagingSenderId: "173542786157",
+    appId: "1:173542786157:web:073fb82c209555d9432b64",
+    measurementId: "G-4KJF5LVT0R"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase Authentication
+const auth = getAuth(app);
+
+// Handle Login/Logout when the login button is clicked
+document.getElementById("loginButton").addEventListener("click", () => {
+    const user = auth.currentUser;
+
+    if (user) {
+        // User is logged in, handle logout
+        signOut(auth)
+            .then(() => {
+                alert("Logged out successfully.");
+                updateLoginButton(null); // Update the button to show "Login"
+                updatelikedPostsButton(null);
+            })
+            .catch((error) => console.error("Error during logout:", error));
+    } else {
+        // Show login modal with options
+        const loginContainer = document.createElement("div");
+        loginContainer.setAttribute("id", "loginContainer");
+        loginContainer.style.position = "fixed";
+        loginContainer.style.top = "50%";
+        loginContainer.style.left = "50%";
+        loginContainer.style.transform = "translate(-50%, -50%)";
+        loginContainer.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+        loginContainer.style.padding = "20px";
+        loginContainer.style.borderRadius = "10px";
+        loginContainer.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+        loginContainer.style.textAlign = "center";
+        loginContainer.style.zIndex = "22012";
+
+        // Google Login Button
+        const googleButton = document.createElement("button");
+        googleButton.innerHTML = `
+            <img src="js/transparent-google-logo-google-logo-blue-circle-with-g-1710875609249.png" alt="Google Icon" style="width: 40px; height: 40px; margin-right: 10px;">
+            Continue with Google
+        `;
+        googleButton.style.backgroundColor = "#4285F4";
+        googleButton.style.color = "white";
+        googleButton.style.border = "none";
+        googleButton.style.padding = "10px 20px";
+        googleButton.style.borderRadius = "5px";
+        googleButton.style.cursor = "pointer";
+        googleButton.style.marginBottom = "-4px";
+        googleButton.style.marginTop = "7px";
+        googleButton.style.display = "flex";
+
+        googleButton.addEventListener("click", () => {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    alert(`Logged in as ${result.user.displayName}`);
+                    updateLoginButton(result.user);
+                    updatelikedPostsButton(result.user);
+                    document.body.removeChild(loginContainer); // Remove modal
+                })
+                .catch((error) => console.error("Login error:", error));
+        });
+
+        // Email/Password Login Form
+        const emailForm = document.createElement("form");
+        emailForm.innerHTML = `
+            <input type="email" id="emailInput" placeholder="Enter your email" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+            <input type="password" id="passwordInput" placeholder="Enter your password" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+            <button type="submit" id="emailLoginButton" style="background-color: #00aaff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Login</button>
+        `;
+
+        emailForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("emailInput").value;
+            const password = document.getElementById("passwordInput").value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((result) => {
+                    alert(`Logged in as ${result.user.email}`);
+                    updateLoginButton(result.user);
+                    updatelikedPostsButton(result.user);
+                    document.body.removeChild(loginContainer); // Remove modal
+                })
+                .catch((error) => {
+                    console.error("Login error:", error);
+                });
+        });
+
+        // Append elements to the login modal
+        loginContainer.appendChild(googleButton);
+        loginContainer.appendChild(document.createElement("br"));
+        loginContainer.appendChild(emailForm);
+        document.body.appendChild(loginContainer);
+    }
 });
+
+// Update Login Button State
+function updateLoginButton(user) {
+    const loginButton = document.getElementById("loginButton");
+    if (user) {
+        loginButton.innerHTML = `
+            <img src="js/profile-icon2.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;"> Logout`;
+    } else {
+        loginButton.innerHTML = `
+            <img src="js/profile-icon.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;"> Login`;
+    }
+}
+
+// Update Liked Posts Button State
+function updatelikedPostsButton(user) {
+    const likedPostsButton = document.getElementById("likedPostsButton");
+    if (user) {
+        likedPostsButton.innerHTML = `
+            <img src="js/heart-2.png" alt="Liked Posts Icon" style="width: 24px; display: flex; align-items: center; height: 24px; margin-right: 0px; margin-top: 1.5px;">`;
+    } else {
+        likedPostsButton.innerHTML = `
+            <img src="js/heart.png" alt="Liked Posts Icon" style="width: 24px; display: flex; align-items: center; height: 24px; margin-right: 0px; margin-top: 1.5px;">`;
+    }
+}
+
+// Track Authentication State Changes
+onAuthStateChanged(auth, (user) => {
+    updateLoginButton(user); // Update button state based on auth state
+    updatelikedPostsButton(user);
+});
+
 
 // Get references to elements
 /*const loginButton = document.getElementById('loginButton');
@@ -7346,7 +7503,7 @@ document.head.appendChild(style);
 
 
 
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+/*import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 function saveToLikes(post) {
     const user = firebase.auth().currentUser;
@@ -7405,7 +7562,74 @@ function showLikedPosts() {
 
 
 // Add an event listener to the profile button to show liked posts
-document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);
+document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);*/
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+const db = getFirestore(app);
+
+function saveToLikes(post) {
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("Please log in to like a post.");
+        return;
+    }
+
+    // Create a Firestore document reference for the user's liked post
+    const userLikesRef = doc(db, `likes/${user.uid}/posts/${post.id}`);
+
+    // Save the post data in Firestore
+    setDoc(userLikesRef, post)
+        .then(() => {
+            alert("Post added to your likes!");
+        })
+        .catch((error) => {
+            console.error("Error saving liked post:", error);
+        });
+}
+function showLikedPosts() {
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("Please log in to view your liked posts.");
+        return;
+    }
+
+    // Reference the user's liked posts collection
+    const userLikesRef = collection(db, `likes/${user.uid}/posts`);
+
+    // Retrieve all documents in the user's liked posts collection
+    getDocs(userLikesRef)
+        .then((snapshot) => {
+            const likedPosts = snapshot.docs.map((doc) => doc.data());
+
+            if (likedPosts.length > 0) {
+                const overlay = document.getElementById("overlayContainer");
+                const overlay2 = document.getElementById("overlayContainer2");
+
+                overlay.innerHTML = ""; // Clear previous posts
+                overlay2.innerHTML = ""; // Clear previous posts
+                overlay2.style.display = "none";
+
+                populateFlightOverlay(likedPosts); // Display the liked posts
+            } else {
+                alert("No liked posts found.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error retrieving liked posts:", error);
+        });
+}
+document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
+
 
 // Add event listener for the flight search button
 document.querySelector('#searchBtn:not(.airbnb-button22)').addEventListener('click', async function () {
@@ -10467,7 +10691,7 @@ function populateOverlay(posts2) {
     }
 }
 
-function saveToLikes(post) {
+/*function saveToLikes(post) {
     const user = firebase.auth().currentUser;
 
     if (!user) {
@@ -10520,6 +10744,62 @@ function showLikedPosts() {
 
 // Add an event listener to the profile button to show liked posts
 document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);
+*/
+
+function saveToLikes(post) {
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("Please log in to like a post.");
+        return;
+    }
+
+    // Create a Firestore document reference for the user's liked post
+    const userLikesRef = doc(db, `likes/${user.uid}/posts/${post.id}`);
+
+    // Save the post data in Firestore
+    setDoc(userLikesRef, post)
+        .then(() => {
+            alert("Post added to your likes!");
+        })
+        .catch((error) => {
+            console.error("Error saving liked post:", error);
+        });
+}
+function showLikedPosts() {
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("Please log in to view your liked posts.");
+        return;
+    }
+
+    // Reference the user's liked posts collection
+    const userLikesRef = collection(db, `likes/${user.uid}/posts`);
+
+    // Retrieve all documents in the user's liked posts collection
+    getDocs(userLikesRef)
+        .then((snapshot) => {
+            const likedPosts = snapshot.docs.map((doc) => doc.data());
+
+            if (likedPosts.length > 0) {
+                const overlay = document.getElementById("overlayContainer");
+                const overlay2 = document.getElementById("overlayContainer2");
+
+                overlay.innerHTML = ""; // Clear previous posts
+                overlay2.innerHTML = ""; // Clear previous posts
+                overlay2.style.display = "none";
+
+                populateFlightOverlay(likedPosts); // Display the liked posts
+            } else {
+                alert("No liked posts found.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error retrieving liked posts:", error);
+        });
+}
+document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
 
 document.querySelectorAll('.post .view-link').forEach((item, index) => {
     // Make sure `index` matches the corresponding marker
