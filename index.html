@@ -3914,6 +3914,26 @@ function showMobileWarning() {
 
     if (isMobile) {
         mobileWarning.style.display = "block";
+        const iframe = document.getElementById('mobileTicker');
+        const submitRegion = document.getElementById('regionPopup');
+        const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+        const regionSelect = document.getElementById('regionSelectBtn');
+        const toggleButton = document.getElementById('toggleButton');
+        const addLightsbutton = document.getElementById('addLightsbutton');
+        const addLightsbutton2 = document.getElementById('addLightsbutton2');
+        const newsButton = document.getElementById('newsButton');
+        const minimizeCarouselBtn = document.getElementById('minimizeCarouselBtn');
+        const carouselContainer = document.getElementById('carousel-container');
+        iframe.style.display = "none";
+        submitRegion.style.display = "none";
+        clearFiltersBtn.style.display = "none";
+        regionSelect.style.display = "none";
+        toggleButton.style.display = "none";
+        addLightsbutton.style.display = "none";
+        addLightsbutton2.style.display = "none";
+        newsButton.style.display = "none";
+        minimizeCarouselBtn.style.display = "none";
+        carouselContainer.style.display = "none";
         // Optionally, disable other content
         document.body.style.overflow = "hidden"; // Prevent scrolling
     }
