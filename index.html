@@ -7727,7 +7727,7 @@ function saveToLikes(post) {
     }
 
     // Create a Firestore document reference for the user's liked post
-    const userLikesRef = collection(db, `likes/${user.uid}`);
+    const userLikesRef = doc(db, `likes/${user.uid}/posts/${post.id}`);
 
     // Save the post data in Firestore
     setDoc(userLikesRef, post)
@@ -10833,8 +10833,8 @@ function populateOverlay(posts2) {
         updateSpinnerText("Error fetching Airbnb listings. Please try again.");
     }
 }
-/*
-function saveToLikes(post) {
+
+/*function saveToLikes(post) {
     const user = firebase.auth().currentUser;
 
     if (!user) {
@@ -10888,6 +10888,7 @@ function showLikedPosts() {
 // Add an event listener to the profile button to show liked posts
 document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);
 */
+
 function saveToLikes(post) {
     const user = auth.currentUser;
 
@@ -10896,9 +10897,8 @@ function saveToLikes(post) {
         return;
     }
 
-    const db = getFirestore(app);
     // Create a Firestore document reference for the user's liked post
-    const userLikesRef = collection(db, `likes/${user.uid}`);
+    const userLikesRef = doc(db, `likes/${user.uid}/posts/${post.id}`);
 
     // Save the post data in Firestore
     setDoc(userLikesRef, post)
