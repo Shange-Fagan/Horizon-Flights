@@ -6105,7 +6105,7 @@ function toggleLightstheme2() {
       console.log("clouds added activated on night texture");
     }
     //markerMaterial.color.set(lightsmarkerMaterial);
-    lightsButton.textContent = "Undo";
+    lightsButton.textContent = "Remove atmosphere";
   } else {
     // If the lights button is toggled off, revert to the current texture (day or night)
     if (currentTexture === "day") {
@@ -7758,11 +7758,11 @@ function showLikedPosts() {
                 const overlay = document.getElementById("overlayContainer");
                 const overlay2 = document.getElementById("overlayContainer2");
 
-                overlay.innerHTML = ""; // Clear previous posts
-                overlay2.innerHTML = ""; // Clear previous posts
-                overlay2.style.display = "none";
+                //overlay.innerHTML = ""; // Clear previous posts
+                //overlay2.innerHTML = ""; // Clear previous posts
+                //overlay2.style.display = "none";
 
-                populateFlightOverlay(likedPosts); // Display the liked posts
+                populateOverlay(likedPosts); // Display the liked posts
             } else {
                 alert("No liked posts found.");
             }
@@ -10933,7 +10933,7 @@ function showLikedPosts() {
                 overlay2.innerHTML = ""; // Clear previous posts
                 overlay2.style.display = "none";
 
-                populateFlightOverlay(likedPosts); // Display the liked posts
+                populateOverlay(likedPosts); // Display the liked posts
             } else {
                 alert("No liked posts found.");
             }
