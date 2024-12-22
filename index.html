@@ -2318,7 +2318,7 @@ left: -8px !important;
   }
   #overlayContainer {
     left: 18px !important;
-    width: 50% !important;
+    width: 50%;
   }
 }
 
@@ -3286,7 +3286,7 @@ margin-bottom: 1px;
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/page-refresh.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
-    <p class="instruction-text">Clear Filters or refresh the page to refresh the search bar</p>
+    <p class="instruction-text">click Clear Filters to clear the search bar and hide search results or please refresh the page to perform a new search</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/login--2.png" alt="Button Click" class="glove-hand">
@@ -7517,7 +7517,7 @@ function populateFlightOverlay(flights) {
         const header = document.createElement('div');
         header.classList.add('flight-header');
         const logo = document.createElement('img');
-        logo.src = airlineLogos[flight.airline] || airlineLogos["N/A"];
+        logo.src = `${flight.airlineImg || "N/A"}`;
         logo.alt = `${flight.airline} logo`;
         logo.classList.add('airline-logo');
 
@@ -7586,7 +7586,7 @@ style.innerHTML = `
     color: #fff;
     font-family: system-ui;
     position: relative;
-margin-right: -50%;
+margin-right: -50px;
   }
 
   .flight-time-departure, .flight-time-arrival {
