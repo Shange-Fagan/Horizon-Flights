@@ -2302,8 +2302,8 @@ left: -8px !important;
     right: 135px !important;
   }
   #overlayContainer2 {
-    width: 50% !important;
-    height: 79% !important;
+    width: 50%;
+    height: 79%;
   }
   #header {
     justify-content: center; /* Center header for desktops */
@@ -3317,7 +3317,7 @@ margin-bottom: 1px;
     <a href="mailto:yourname@gmail.com?subject=Inquiry&body=Hello, I would like to know more about your services." target="_blank">Contact Us</a>
   </footer>
   <div id="mobileWarning" style="display: none;">
-    <p>This webpage works best on a desktop (Windows or Mac). Please revisit using a desktop device for the optimal experience. Thank you!</p>
+    <p>This webpage works best on a desktop (Windows or Mac). We're currently working on making this webpage mobile friendly but for now - Please revisit using a desktop device for the optimal experience. Thank you!</p>
 </div>
 <div id="header">
   <input type="text" id="from" name="travel_from" placeholder="Where from?">
@@ -7586,7 +7586,7 @@ style.innerHTML = `
     color: #fff;
     font-family: system-ui;
     position: relative;
-margin-right: -60%;
+margin-right: -50%;
   }
 
   .flight-time-departure, .flight-time-arrival {
@@ -7718,7 +7718,7 @@ import {
 
 const db = getFirestore(app);
 
-function saveToLikes(post) {
+/*function saveToLikes(post) {
     const user = auth.currentUser;
 
     if (!user) {
@@ -7737,8 +7737,57 @@ function saveToLikes(post) {
         .catch((error) => {
             console.error("Error saving liked post:", error);
         });
+}*/
+function populatelikedpostsOverlay(likedPosts) {
+    const overlay = document.getElementById("overlayContainer");
+    overlay.innerHTML = ""; // Clear previous posts
+
+    likedPosts.forEach(post => {
+        const postDiv = document.createElement("div");
+        postDiv.classList.add("post");
+
+        postDiv.innerHTML = `
+            <div>
+                <img src="${post.images}" alt="${post.listing_name}" style="width: 100%; border-radius: 8px;">
+            </div>
+            <div>
+                <h3>${post.title}</h3>
+                <p>${post.subtitle}</p>
+                <p>Price: ${post.listing_price_details}</p>
+                <p>Rating: ${post.rating_out_of_5_stars}</p>
+                <a href="${post.link}" target="_blank" class="view-link">View Listing</a>
+            </div>
+        `;
+
+        overlay.appendChild(postDiv);
+    });
 }
-function showLikedPosts() {
+
+function saveToLikes(post) {
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("Please log in to like a post.");
+        return;
+    }
+
+    // Ensure post has a unique ID
+    const postId = post.id || `post_${Date.now()}`;
+
+    // Create a Firestore document reference for the user's liked post
+    const userLikesRef = doc(db, `likes/${user.uid}/posts/${postId}`);
+
+    // Save the post data in Firestore
+    setDoc(userLikesRef, { ...post, id: postId }) // Add the generated ID to the post
+        .then(() => {
+            alert("Post added to your likes!");
+        })
+        .catch((error) => {
+            console.error("Error saving liked post:", error);
+        });
+}
+
+/*function showLikedPosts() {
     const user = auth.currentUser;
 
     if (!user) {
@@ -7770,7 +7819,36 @@ function showLikedPosts() {
         .catch((error) => {
             console.error("Error retrieving liked posts:", error);
         });
+}*/
+function showLikedPosts() {
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("Please log in to view your liked posts.");
+        return;
+    }
+
+    // Reference the user's liked posts collection
+    const userLikesRef = collection(db, `likes/${user.uid}/posts`);
+
+    // Retrieve all documents in the user's liked posts collection
+    getDocs(userLikesRef)
+        .then((snapshot) => {
+            const likedPosts = snapshot.docs.map((doc) => doc.data());
+
+            if (likedPosts.length > 0) {
+                const overlay = document.getElementById("overlayContainer");
+                overlay.innerHTML = ""; // Clear previous posts
+                populatelikedpostsOverlay(likedPosts); // Display the liked posts
+            } else {
+                alert("No liked posts found.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error retrieving liked posts:", error);
+        });
 }
+
 document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
 
 
@@ -10889,7 +10967,7 @@ function showLikedPosts() {
 document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);
 */
 
-function saveToLikes(post) {
+/*function saveToLikes(post) {
     const user = auth.currentUser;
 
     if (!user) {
@@ -10941,7 +11019,59 @@ function showLikedPosts() {
         .catch((error) => {
             console.error("Error retrieving liked posts:", error);
         });
+}*/
+function saveToLikes(post) {
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("Please log in to like a post.");
+        return;
+    }
+
+    // Ensure post has a unique ID
+    const postId = post.id || `post_${Date.now()}`;
+
+    // Create a Firestore document reference for the user's liked post
+    const userLikesRef = doc(db, `likes/${user.uid}/posts/${postId}`);
+
+    // Save the post data in Firestore
+    setDoc(userLikesRef, { ...post, id: postId }) // Add the generated ID to the post
+        .then(() => {
+            alert("Post added to your likes!");
+        })
+        .catch((error) => {
+            console.error("Error saving liked post:", error);
+        });
 }
+function showLikedPosts() {
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("Please log in to view your liked posts.");
+        return;
+    }
+
+    // Reference the user's liked posts collection
+    const userLikesRef = collection(db, `likes/${user.uid}/posts`);
+
+    // Retrieve all documents in the user's liked posts collection
+    getDocs(userLikesRef)
+        .then((snapshot) => {
+            const likedPosts = snapshot.docs.map((doc) => doc.data());
+
+            if (likedPosts.length > 0) {
+                const overlay = document.getElementById("overlayContainer");
+                overlay.innerHTML = ""; // Clear previous posts
+                populatelikedpostsOverlay(likedPosts); // Display the liked posts
+            } else {
+                alert("No liked posts found.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error retrieving liked posts:", error);
+        });
+}
+
 document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
 
 document.querySelectorAll('.post .view-link').forEach((item, index) => {
