@@ -4268,7 +4268,7 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
     document.getElementById("trivagoIframeContainer").style.display = "none";
     // Hide the Trivago iframe
     currentTicker.style.display = "none";
-        currentTicker = document.getElementById("dayTicker"); // Set current ticker to Day ticker
+        currentTicker = document.getElementById("trivagoIframeContainer"); // Set current ticker to Day ticker
         currentTicker.style.display = "block";
     Array.from(trivagoLogos).forEach(logo => logo.style.display = "block");
     Array.from(airbnbLogos).forEach(logo => logo.style.display = "none");
