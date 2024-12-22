@@ -7520,12 +7520,14 @@ function populateFlightOverlay(flights) {
         logo.src = `${flight.airlineImg || "N/A"}`;
         logo.alt = `${flight.airline} logo`;
         logo.classList.add('airline-logo');
+        logo.style.width = '70px';
+        logo.style.height = '30px';
 
-        const airline = document.createElement('h3');
-        airline.textContent = flight.airline || 'Unknown Airline';
+        //const airline = document.createElement('h3');
+        //airline.textContent = flight.airline || 'Unknown Airline';
 
         header.appendChild(logo);
-        header.appendChild(airline);
+        //header.appendChild(airline);
 
         // Flight details
         const details = document.createElement('div');
