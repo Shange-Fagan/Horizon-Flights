@@ -6170,6 +6170,13 @@ function toggleChristmasTheme() {
   // Get the button element
   const toggleChristmasThemeBtn = document.getElementById('toggleChristmastheme');
 
+  // Guard against missing globeViz element
+  const globeViz = document.getElementById('globeViz');
+  if (!globeViz) {
+    console.error("Element with ID 'globeViz' not found.");
+    return;
+  }
+
   if (toggleChristmasThemeBtn.textContent === "Christmas") {
     // Remove the current globe
     scene.remove(globe2);
@@ -6180,14 +6187,14 @@ function toggleChristmasTheme() {
     const globeColors = [
       'js/b01b2e_solid_color_background_icolorpalette.png', // Red globe texture
       'js/2a8fbd_solid_color_background_icolorpalette.png', // Blue globe texture
-      'js/3c8d0d_solid_color_background_icolorpalette.png' // Green globe texture
+      'js/3c8d0d_solid_color_background_icolorpalette.png'  // Green globe texture
     ];
 
     // Fetch and add the Christmas-themed globe
     fetch('../datasets/ne_110m_admin_0_countries.geojson')
       .then((res) => res.json())
       .then((countries) => {
-        const christmasGlobe = new Globe(document.getElementById('globeViz'))
+        const christmasGlobe = new Globe(globeViz)
           .globeImageUrl(globeColors[currentColorIndex]) // Start with the first color
           .hexPolygonsData(countries.features)
           .hexPolygonResolution(3)
@@ -6209,7 +6216,7 @@ function toggleChristmasTheme() {
           console.log(`Globe color changed to: ${globeColors[currentColorIndex]}`);
         }, 2000);
 
-        // Stop changing colors when the theme is removed
+        // Store the interval ID so it can be cleared later
         toggleChristmasThemeBtn.setAttribute('data-color-interval', colorInterval);
 
         console.log("Christmas theme added");
@@ -6218,10 +6225,9 @@ function toggleChristmasTheme() {
     // Update the button text
     toggleChristmasThemeBtn.textContent = "Remove";
   } else {
-    // Clear the globe container
-    const globeViz = document.getElementById('globeViz');
+    // Clear the globe container safely
     while (globeViz.firstChild) {
-      globeViz.removeChild(globeViz.firstChild); // Remove all children (e.g., Christmas globe)
+      globeViz.removeChild(globeViz.firstChild);
     }
 
     // Add back the default globe
@@ -6244,9 +6250,11 @@ function toggleChristmasTheme() {
 }
 
 // Add Event Listener to the Toggle Button
-document
-  .getElementById('toggleChristmastheme')
-  .addEventListener('click', toggleChristmasTheme);
+document.addEventListener('DOMContentLoaded', () => {
+  document
+    .getElementById('toggleChristmastheme')
+    .addEventListener('click', toggleChristmasTheme);
+});
 
 
 // Add Event Listener to the Toggle Button
