@@ -6210,10 +6210,14 @@ function toggleChristmasTheme() {
           .hexPolygonColor(() => '#FFD700') // Gold color for polygons
 
           // Set globe size to match globe2
-        christmasGlobe.scale.set(1, 1, 1); // Use the same scale as `globe2`
+        // Match the size of the original globe
+        christmasGlobe
+          .threeObject() // Retrieve the underlying THREE.Object3D instance
+          .scale.set(globe2.scale.x, globe2.scale.y, globe2.scale.z);
         christmasGlobe.geometry = christmasGeometry;
         // Add the Christmas globe to the scene
-        scene.add(christmasGlobe);
+        // Add the Christmas globe to the scene
+        scene.add(christmasGlobe.threeObject());
 
         // Toggle globe colors every 2 seconds (or any preferred interval)
         const colorInterval = setInterval(() => {
