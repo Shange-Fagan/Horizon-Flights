@@ -3610,7 +3610,6 @@ margin-bottom: 1px;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.3.0/luxon.min.js"></script>
 <script src="//unpkg.com/globe.gl"></script>
-<div id="globeViz" style="width: 100%; height: 100%;"></div>
 <!-- Firebase App (the core Firebase SDK) -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 
@@ -3742,7 +3741,7 @@ gl_FragColor = vec4(glowColor, intensity);
     }
   });
 </script>
-
+<div id="globeViz"></div>
   <!-- Scripts -->
   <!-- Include Three.js and other dependencies here -->
 
@@ -6173,12 +6172,9 @@ function toggleChristmasTheme() {
 
   // Guard against missing globeViz element
   const globeViz = document.getElementById('globeViz');
-  if (!globeViz) {
-    console.error("Element with ID 'globeViz' not found.");
-    return;
-  }
 
   if (toggleChristmasThemeBtn.textContent === "Christmas") {
+    // If the toggleChristmasThemeBtn button is clicked,
     // Remove the current globe
     scene.remove(globe2);
 
@@ -6202,10 +6198,6 @@ function toggleChristmasTheme() {
           .hexPolygonMargin(0.3)
           .hexPolygonUseDots(true)
           .hexPolygonColor(() => '#FFD700') // Gold color for polygons
-          .hexPolygonLabel(({ properties: d }) => `
-            <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
-            Population: <i>${d.POP_EST}</i>
-          `);
 
         // Add the Christmas globe to the scene
         scene.add(christmasGlobe);
