@@ -381,6 +381,25 @@ a, button, input, select, iframe {
       background-color: rgba(225, 225, 225, 0.35);
 	    border-color: #00aaff; /* Red border on hover for consistency with Airbnb style */
     }
+    #toggleChristmastheme {
+      position: absolute;
+      right: 15px;
+      top: 326px;
+      padding: 4px 7px;
+      font-size: 12px;
+      /*background-color: rgba(255, 255, 255, 0.2);*/
+      /*border: 1px solid rgba(255, 255, 255, 0.25);*/
+      /*border-radius: 8px;*/
+      color: rgba(255, 255, 255, 0.75);
+      z-index: 22011;
+      cursor: pointer;
+	    border: 0px solid #e0e0e0; /* Border similar to Airbnb */
+       background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 25px; /* Rounded corners for inputs */
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 0px 0px 12px 12px;
+      width: 100px;
+    }
 
     #toggleButton:hover {
       background-color: rgba(225, 225, 225, 0.35);
@@ -2263,7 +2282,7 @@ margin-right: -53px;
   right: 15px;
   width: 80px;
   height: 40px;
-  top: 344.5px;
+  top: 356.5px;
   z-index: 22011;
 }
 .theme-switch2 {
@@ -2971,7 +2990,7 @@ crossorigin="anonymous"></script>
   cursor: pointer;
   border-radius: 4px;
   font-size: 12px;
-  border-radius: 0px 0px 12px 12px;
+  border-radius: 0px 0px 0px 0px;
   z-index:22011;
       right: 15px;
       top: 206px;
@@ -3589,11 +3608,13 @@ margin-bottom: 1px;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.3.0/luxon.min.js"></script>
+<script src="//unpkg.com/globe.gl"></script>
 <!-- Firebase App (the core Firebase SDK) -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 
 <!-- Firebase Authentication -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
 
 <script>
   // Function to toggle the visibility of the region select dropdown when clicking the button
@@ -3697,6 +3718,7 @@ gl_FragColor = vec4(glowColor, intensity);
 <button id="toggleButton">Day Theme</button>
 <button id="addLightsbutton">Night Lights</button>
 <button id="addLightsbutton2">Atmosphere</button>
+<button id="toggleChristmastheme">Christmas Theme</button>
 <button id="newsButton">Latest Airbnbs</button>
   <!-- The iframe containers will be added dynamically -->
   <!-- X Button to close the iframe -->
@@ -6143,6 +6165,57 @@ function toggleLightstheme2() {
 
 // Add Event Listener to the Toggle Button
 document.getElementById('addLightsbutton2').addEventListener('click', toggleLightstheme2);
+function toggleChristmasTheme() {
+  // Get the button element
+  const toggleChristmasThemeBtn = document.getElementById('toggleChristmastheme');
+
+  if (toggleChristmasThemeBtn.textContent === "Christmas Theme") {
+    // Remove the current globe
+    scene.remove(globe2);
+
+    // Fetch and add the Christmas-themed globe
+    fetch('../datasets/ne_110m_admin_0_countries.geojson')
+      .then((res) => res.json())
+      .then((countries) => {
+        const christmasGlobe = new Globe(document.getElementById('globeViz'))
+          .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
+          .hexPolygonsData(countries.features)
+          .hexPolygonResolution(3)
+          .hexPolygonMargin(0.3)
+          .hexPolygonUseDots(true)
+          .hexPolygonColor(() => '#FFD700') // Gold color
+          .hexPolygonLabel(({ properties: d }) => `
+            <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
+            Population: <i>${d.POP_EST}</i>
+          `);
+
+        scene.add(christmasGlobe);
+        console.log("Christmas theme added");
+      });
+
+    // Update the button text
+    toggleChristmasThemeBtn.textContent = "Remove";
+  } else {
+    // Clear the globe container
+    const globeViz = document.getElementById('globeViz');
+    while (globeViz.firstChild) {
+      globeViz.removeChild(globeViz.firstChild); // Remove the Christmas globe
+    }
+
+    // Add back the default globe
+    scene.add(globe2);
+
+    // Update the button text
+    toggleChristmasThemeBtn.textContent = "Christmas Theme";
+  }
+
+  // Ensure uniforms update
+  earthMaterial.uniforms.map.needsUpdate = true;
+}
+
+// Add Event Listener to the Toggle Button
+document.getElementById('toggleChristmastheme').addEventListener('click', toggleChristmasTheme);
+
 // Add Event Listener to the Toggle Button
 document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 //document.getElementById('toggleButton').addEventListener('click', () => {
