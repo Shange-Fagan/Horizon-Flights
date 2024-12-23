@@ -3718,7 +3718,7 @@ gl_FragColor = vec4(glowColor, intensity);
 <button id="toggleButton">Day Theme</button>
 <button id="addLightsbutton">Night Lights</button>
 <button id="addLightsbutton2">Atmosphere</button>
-<button id="toggleChristmastheme">Christmas Theme</button>
+<button id="toggleChristmastheme">Christmas</button>
 <button id="newsButton">Latest Airbnbs</button>
   <!-- The iframe containers will be added dynamically -->
   <!-- X Button to close the iframe -->
@@ -6169,7 +6169,7 @@ function toggleChristmasTheme() {
   // Get the button element
   const toggleChristmasThemeBtn = document.getElementById('toggleChristmastheme');
 
-  if (toggleChristmasThemeBtn.textContent === "Christmas Theme") {
+  if (toggleChristmasThemeBtn.textContent === "Remove") {
     // Remove the current globe
     scene.remove(globe2);
 
@@ -6233,7 +6233,7 @@ function toggleChristmasTheme() {
     }
 
     // Update the button text
-    toggleChristmasThemeBtn.textContent = "Christmas Theme";
+    toggleChristmasThemeBtn.textContent = "Christmas";
   }
 
   // Ensure uniforms update (if required by your material)
