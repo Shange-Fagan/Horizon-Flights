@@ -6173,23 +6173,44 @@ function toggleChristmasTheme() {
     // Remove the current globe
     scene.remove(globe2);
 
+    let currentColorIndex = 0; // Start with the first color
+
+    // Array of globe colors (or image URLs if using textures)
+    const globeColors = [
+      'js/b01b2e_solid_color_background_icolorpalette.png', // Red globe texture
+      'js/2a8fbd_solid_color_background_icolorpalette.png', // Blue globe texture
+      'js/3c8d0d_solid_color_background_icolorpalette.png' // Green globe texture
+    ];
+
     // Fetch and add the Christmas-themed globe
     fetch('../datasets/ne_110m_admin_0_countries.geojson')
       .then((res) => res.json())
       .then((countries) => {
         const christmasGlobe = new Globe(document.getElementById('globeViz'))
-          .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
+          .globeImageUrl(globeColors[currentColorIndex]) // Start with the first color
           .hexPolygonsData(countries.features)
           .hexPolygonResolution(3)
           .hexPolygonMargin(0.3)
           .hexPolygonUseDots(true)
-          .hexPolygonColor(() => '#FFD700') // Gold color
+          .hexPolygonColor(() => '#FFD700') // Gold color for polygons
           .hexPolygonLabel(({ properties: d }) => `
             <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
             Population: <i>${d.POP_EST}</i>
           `);
 
+        // Add the Christmas globe to the scene
         scene.add(christmasGlobe);
+
+        // Toggle globe colors every 2 seconds (or any preferred interval)
+        const colorInterval = setInterval(() => {
+          currentColorIndex = (currentColorIndex + 1) % globeColors.length; // Cycle colors
+          christmasGlobe.globeImageUrl(globeColors[currentColorIndex]);
+          console.log(`Globe color changed to: ${globeColors[currentColorIndex]}`);
+        }, 2000);
+
+        // Stop changing colors when the theme is removed
+        toggleChristmasThemeBtn.setAttribute('data-color-interval', colorInterval);
+
         console.log("Christmas theme added");
       });
 
@@ -6199,22 +6220,33 @@ function toggleChristmasTheme() {
     // Clear the globe container
     const globeViz = document.getElementById('globeViz');
     while (globeViz.firstChild) {
-      globeViz.removeChild(globeViz.firstChild); // Remove the Christmas globe
+      globeViz.removeChild(globeViz.firstChild); // Remove all children (e.g., Christmas globe)
     }
 
     // Add back the default globe
     scene.add(globe2);
 
+    // Clear the color interval to stop toggling colors
+    const colorInterval = toggleChristmasThemeBtn.getAttribute('data-color-interval');
+    if (colorInterval) {
+      clearInterval(colorInterval);
+    }
+
     // Update the button text
     toggleChristmasThemeBtn.textContent = "Christmas Theme";
   }
 
-  // Ensure uniforms update
-  earthMaterial.uniforms.map.needsUpdate = true;
+  // Ensure uniforms update (if required by your material)
+  if (earthMaterial?.uniforms?.map) {
+    earthMaterial.uniforms.map.needsUpdate = true;
+  }
 }
 
 // Add Event Listener to the Toggle Button
-document.getElementById('toggleChristmastheme').addEventListener('click', toggleChristmasTheme);
+document
+  .getElementById('toggleChristmastheme')
+  .addEventListener('click', toggleChristmasTheme);
+
 
 // Add Event Listener to the Toggle Button
 document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
