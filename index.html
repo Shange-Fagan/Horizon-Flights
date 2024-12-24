@@ -4486,7 +4486,11 @@ function toggleCruiseBtn() {
 
         Array.from(airbnbLogos).forEach(logo => logo.style.display = "block");
         Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
-        airbnbLogos.style.img.src = "js/cruise.png";
+        Array.from(airbnbLogos).forEach(logo => {
+    if (logo.tagName === "IMG") {
+        logo.src = "js/cruise.png"; // Set the source of the image
+    }
+});
         themeswitch.style.backgroundColor = "#20B2AA";
         searchBtn.style.backgroundColor = '#20B2AA';
     loginButton.style.backgroundColor = '#20B2AA';
@@ -4548,7 +4552,11 @@ function toggleCruiseBtn() {
     // Hide all Airbnb logos
   Array.from(airbnbLogos).forEach(logo => logo.style.display = "block");
   Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
-  airbnbLogos.style.img.src = "js/hotel-7.png";
+  Array.from(airbnbLogos).forEach(logo => {
+    if (logo.tagName === "IMG") {
+        logo.src = "js/hotel-7.png"; // Set the source of the image
+    }
+});
     document.getElementById("trivagoIframeContainer").style.display = "block";
     searchBtn.style.backgroundColor = '#00aaff';
     loginButton.style.backgroundColor = '#00aaff';
