@@ -699,6 +699,12 @@ top: 10px;
     transition: all 0.3s ease; /* Smooth transition */
     animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
 }
+#searchBtn.airbnb-button23:hover {
+    background-color: #007BFF; /* Blue background color */
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.5); /* Blue box shadow */
+    transition: all 0.3s ease; /* Smooth transition */
+    animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
+}
 
 
 #header .airbnb-button2 {
@@ -969,6 +975,12 @@ border: 1px solid #e0e0e0;
 animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
 }
 header .airbnb-button22:hover {
+    background-color: #00aaff !important;/* Darker red on hover */
+    box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5); /* Brighter, thinner, blue shadow */
+    /*border: 2px solid rgba(0, 115, 255, 0.8);*/ /* Optional: Blue border to make it more pronounced */
+animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
+}
+header .airbnb-button23:hover {
     background-color: #00aaff !important;/* Darker red on hover */
     box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5); /* Brighter, thinner, blue shadow */
     /*border: 2px solid rgba(0, 115, 255, 0.8);*/ /* Optional: Blue border to make it more pronounced */
@@ -2592,6 +2604,20 @@ left: -8px !important;
     background-color: #00aaff;
   }
 .airbnb-button22 {
+  background-color: #003580; /* Airbnb red color */
+    border: none;
+    padding: 10px 20px; /* Slightly smaller padding */
+    border-radius: 50px; /* Fully rounded button */
+    color: white;
+    font-size: 16px;
+    margin-left: 17.9px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 115, 187, 0.4), 0 1px 3px rgba(0, 115, 187, 0.12); /* Initial shadow */
+    cursor: default;
+}
+.airbnb-button23 {
   background-color: #003580; /* Airbnb red color */
     border: none;
     padding: 10px 20px; /* Slightly smaller padding */
@@ -4595,6 +4621,7 @@ function toggleCruiseBtn() {
     searchBtn.style.display = "flex";
     searchBtn.textContent = 'Search';
     searchBtn22.style.display = "none";
+    searchBtn23.style.display = "none";
     topLeftLabel.innerHTML = `
   <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;" alt="Earth Globe" />
   Search Hotels
