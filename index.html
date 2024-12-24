@@ -4509,7 +4509,7 @@ function toggleCruiseBtn() {
   const gotItBtn = document.getElementById('gotItBtn');
   const calendaricon2 = document.querySelector('.calendar-icon2');
   const calendaricon = document.querySelector('.calendar-icon');
-  const themeswitch = document.querySelector('.theme-switch');
+  const themeswitch = document.querySelector('.slider');
 
   // Get the button element
   const toggleCruiseBtn = document.getElementById('cruisesBtn');
@@ -4594,6 +4594,7 @@ function toggleCruiseBtn() {
     }
 });
     document.getElementById("trivagoIframeContainer").style.display = "block";
+    themeswitch.style.backgroundColor = "#00aaff";
     searchBtn.style.backgroundColor = '#00aaff';
     loginButton.style.backgroundColor = '#00aaff';
     topLeftLabel.style.backgroundColor = '#00aaff';
