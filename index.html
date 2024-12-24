@@ -699,6 +699,12 @@ top: 10px;
     transition: all 0.3s ease; /* Smooth transition */
     animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
 }
+#searchBtn.airbnb-button23:hover {
+    background-color: #007BFF; /* Blue background color */
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.5); /* Blue box shadow */
+    transition: all 0.3s ease; /* Smooth transition */
+    animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
+}
 
 
 #header .airbnb-button2 {
@@ -763,6 +769,16 @@ justify-content: center;
   display: block;
 }
 #cabinClassContainer {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+#cruiselengthBtnContainer {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+#cruiselineBtnContainer {
   display: none;
   align-items: center;
   justify-content: center;
@@ -959,6 +975,12 @@ border: 1px solid #e0e0e0;
 animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
 }
 header .airbnb-button22:hover {
+    background-color: #00aaff !important;/* Darker red on hover */
+    box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5); /* Brighter, thinner, blue shadow */
+    /*border: 2px solid rgba(0, 115, 255, 0.8);*/ /* Optional: Blue border to make it more pronounced */
+animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
+}
+header .airbnb-button23:hover {
     background-color: #00aaff !important;/* Darker red on hover */
     box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5); /* Brighter, thinner, blue shadow */
     /*border: 2px solid rgba(0, 115, 255, 0.8);*/ /* Optional: Blue border to make it more pronounced */
@@ -2595,6 +2617,20 @@ left: -8px !important;
     box-shadow: 0 4px 8px rgba(0, 115, 187, 0.4), 0 1px 3px rgba(0, 115, 187, 0.12); /* Initial shadow */
     cursor: default;
 }
+.airbnb-button23 {
+  background-color: #003580; /* Airbnb red color */
+    border: none;
+    padding: 10px 20px; /* Slightly smaller padding */
+    border-radius: 50px; /* Fully rounded button */
+    color: white;
+    font-size: 16px;
+    margin-left: 17.9px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 115, 187, 0.4), 0 1px 3px rgba(0, 115, 187, 0.12); /* Initial shadow */
+    cursor: default;
+}
 .hidden {
   display: none;
 }
@@ -3430,11 +3466,11 @@ margin-bottom: 1px;
   <input type="text" id="checkout" class="flatpickr-input" placeholder="Departure date">
   <img src="js/exit.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
-<div>
+<div id="cruiselengthBtnContainer">
   <input type="text" id="cruiselength" class="flatpickr-input" placeholder="Cruise length">
   <img src="js/clock.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
-<div>
+<div id="cruiselineBtnContainer">
   <input type="text" id="cruiseline" class="flatpickr-input" placeholder="Cruise line">
   <img src="js/cruise.png" alt="Calendar Icon" class="calendar-icon3"style="width: 17px; height: 17px;">
 </div>
@@ -4473,7 +4509,7 @@ function toggleCruiseBtn() {
   const gotItBtn = document.getElementById('gotItBtn');
   const calendaricon2 = document.querySelector('.calendar-icon2');
   const calendaricon = document.querySelector('.calendar-icon');
-  const themeswitch = document.querySelector('.theme-switch');
+  const themeswitch = document.querySelector('.slider');
 
   // Get the button element
   const toggleCruiseBtn = document.getElementById('cruisesBtn');
@@ -4486,7 +4522,11 @@ function toggleCruiseBtn() {
 
         Array.from(airbnbLogos).forEach(logo => logo.style.display = "block");
         Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
-        airbnbLogos.style.img.src = "js/cruise.png";
+        Array.from(airbnbLogos).forEach(logo => {
+    if (logo.tagName === "IMG") {
+        logo.src = "js/cruise.png"; // Set the source of the image
+    }
+});
         themeswitch.style.backgroundColor = "#20B2AA";
         searchBtn.style.backgroundColor = '#20B2AA';
     loginButton.style.backgroundColor = '#20B2AA';
@@ -4548,8 +4588,13 @@ function toggleCruiseBtn() {
     // Hide all Airbnb logos
   Array.from(airbnbLogos).forEach(logo => logo.style.display = "block");
   Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
-  airbnbLogos.style.img.src = "js/hotel-7.png";
+  Array.from(airbnbLogos).forEach(logo => {
+    if (logo.tagName === "IMG") {
+        logo.src = "js/hotel-7.png"; // Set the source of the image
+    }
+});
     document.getElementById("trivagoIframeContainer").style.display = "block";
+    themeswitch.style.backgroundColor = "#00aaff";
     searchBtn.style.backgroundColor = '#00aaff';
     loginButton.style.backgroundColor = '#00aaff';
     topLeftLabel.style.backgroundColor = '#00aaff';
@@ -4577,6 +4622,7 @@ function toggleCruiseBtn() {
     searchBtn.style.display = "flex";
     searchBtn.textContent = 'Search';
     searchBtn22.style.display = "none";
+    searchBtn23.style.display = "none";
     topLeftLabel.innerHTML = `
   <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;" alt="Earth Globe" />
   Search Hotels
@@ -8756,7 +8802,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
 
     // Load and animate the cruise ship
     const loader = new GLTFLoader();
-    loader.load('js/cruise_ship_model/scene.gltf', function (gltf) {
+    loader.load('js/yatch__ii/scene.gltf', function (gltf) {
         const ship = gltf.scene;
         scene.add(ship);
 
