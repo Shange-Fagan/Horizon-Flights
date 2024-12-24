@@ -767,16 +767,6 @@ justify-content: center;
   align-items: center;
   justify-content: center;
 }
-#cruiselengthBtnContainer {
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-#cruiselineBtnContainer {
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
 
 #cabinClassLabel {
   font-size: 16px; /* Slightly smaller font size */
@@ -3440,11 +3430,11 @@ margin-bottom: 1px;
   <input type="text" id="checkout" class="flatpickr-input" placeholder="Departure date">
   <img src="js/exit.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
-<div id="cruiselengthBtnContainer">
+<div style="display: none">
   <input type="text" id="cruiselength" class="flatpickr-input" placeholder="Cruise length">
   <img src="js/clock.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
-<div id="cruiselineBtnContainer">
+<div style="display: none">
   <input type="text" id="cruiseline" class="flatpickr-input" placeholder="Cruise line">
   <img src="js/cruise.png" alt="Calendar Icon" class="calendar-icon3"style="width: 17px; height: 17px;">
 </div>
@@ -4595,7 +4585,6 @@ function toggleCruiseBtn() {
     searchBtn.style.display = "flex";
     searchBtn.textContent = 'Search';
     searchBtn22.style.display = "none";
-    searchBtn23.style.display = "none";
     topLeftLabel.innerHTML = `
   <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;" alt="Earth Globe" />
   Search Hotels
