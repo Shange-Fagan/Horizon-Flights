@@ -3103,7 +3103,7 @@ margin-bottom: 1px;
      crossorigin="anonymous"></script>
 </head>
 <body>
-  <div id="globeViz"></div>
+  <div id="globeViz" style="display:none"></div>
   <div class="carousel-header">
     <button id="minimizeCarouselBtn">Minimize Ads</button>
   </div>
@@ -6183,7 +6183,7 @@ function toggleChristmasTheme() {
     scene.remove(globe2);
 
     let currentColorIndex = 0; // Start with the first color
-
+    globeViz.style.display = 'block';
     // Array of globe colors (or image URLs if using textures)
     const globeColors = [
       'js/Red_Christmas_Texture_Darkened_1920x1080.png', // Red globe texture
@@ -6216,7 +6216,6 @@ function toggleChristmasTheme() {
             // Alternate between golden shades for a dynamic effect
             return Math.random() > 0.5 ? '#FFD700' : '#DAA520';
           })
-
             // Access controls and enable auto-rotation
         const controls = christmasGlobe.controls();
         controls.autoRotate = true; // Enable auto-rotation
@@ -6248,7 +6247,7 @@ function toggleChristmasTheme() {
     while (globeViz.firstChild) {
       globeViz.removeChild(globeViz.firstChild);
     }
-
+    globeViz.style.display = 'none';
     // Add back the default globe
     scene.add(globe2);
 
