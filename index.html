@@ -8398,7 +8398,7 @@ async function fetchCruisePosts(url) {
         updateSpinnerText("Displaying fetched cruises listings...");
         
         // Call populateFlightOverlay to display flights
-        populateFlightOverlay(cruises);
+        populateCruisesOverlay(cruises);
 
     } catch (error) {
         console.error('Error fetching cruises:', error);
@@ -8407,7 +8407,7 @@ async function fetchCruisePosts(url) {
     }
 }
 // Function to fetch Airbnb posts from your backend and display them on the webpage
-function populateFlightOverlay(cruises) {
+function populateCruisesOverlay(cruises) {
     const overlay = document.getElementById('overlayContainer2');
     overlay.innerHTML = ''; // Clear previous listings
 
