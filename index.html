@@ -3430,11 +3430,11 @@ margin-bottom: 1px;
   <input type="text" id="checkout" class="flatpickr-input" placeholder="Departure date">
   <img src="js/exit.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
-<div style="display: none">
+<div>
   <input type="text" id="cruiselength" class="flatpickr-input" placeholder="Cruise length">
   <img src="js/clock.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
-<div style="display: none">
+<div>
   <input type="text" id="cruiseline" class="flatpickr-input" placeholder="Cruise line">
   <img src="js/cruise.png" alt="Calendar Icon" class="calendar-icon3"style="width: 17px; height: 17px;">
 </div>
@@ -4486,11 +4486,7 @@ function toggleCruiseBtn() {
 
         Array.from(airbnbLogos).forEach(logo => logo.style.display = "block");
         Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
-        Array.from(airbnbLogos).forEach(logo => {
-    if (logo.tagName === "IMG") {
-        logo.src = "js/cruise.png"; // Set the source of the image
-    }
-});
+        airbnbLogos.style.img.src = "js/cruise.png";
         themeswitch.style.backgroundColor = "#20B2AA";
         searchBtn.style.backgroundColor = '#20B2AA';
     loginButton.style.backgroundColor = '#20B2AA';
@@ -4552,11 +4548,7 @@ function toggleCruiseBtn() {
     // Hide all Airbnb logos
   Array.from(airbnbLogos).forEach(logo => logo.style.display = "block");
   Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
-  Array.from(airbnbLogos).forEach(logo => {
-    if (logo.tagName === "IMG") {
-        logo.src = "js/hotel-7.png"; // Set the source of the image
-    }
-});
+  airbnbLogos.style.img.src = "js/hotel-7.png";
     document.getElementById("trivagoIframeContainer").style.display = "block";
     searchBtn.style.backgroundColor = '#00aaff';
     loginButton.style.backgroundColor = '#00aaff';
