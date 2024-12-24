@@ -402,27 +402,6 @@ a, button, input, select, iframe {
       width: 100px;
     }
 
-    #cruisesBtn {
-      position: absolute;
-      right: 15px;
-      top: 326px;
-      height:25px;
-      padding: 4px 7px;
-      font-size: 12px;
-      /*background-color: rgba(255, 255, 255, 0.2);*/
-      /*border: 1px solid rgba(255, 255, 255, 0.25);*/
-      /*border-radius: 8px;*/
-      color: rgba(255, 255, 255, 0.75);
-      z-index: 22011;
-      cursor: pointer;
-	    border: 0px solid #e0e0e0; /* Border similar to Airbnb */
-       background-color: rgba(255, 255, 255, 0.15);
-  border-radius: 25px; /* Rounded corners for inputs */
-	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      border-radius: 0px 0px 12px 12px;
-      width: 100px;
-    }
-
     #toggleButton:hover {
       background-color: rgba(225, 225, 225, 0.35);
 	    border-color: #00aaff; /* Red border on hover for consistency with Airbnb style */
@@ -582,48 +561,6 @@ justify-content: space-between;
 position: relative;
 top: 10px;
   }
-  #cruiselength {
-    display: flex;
-  font-size: 16px; /* Slightly smaller font size */
-    padding: 10px 15px; /* Padding inside inputs */
-    border: 0px solid #ddd; /* Light gray border */
-    /*background-color: rgba(255, 255, 255, 0.15);*/
-    border-radius: 50px; /* Fully rounded corners for inputs */
-    margin-right: 14px; /* Spacing between input fields */
-    /*width: 220px;*/ /* Slightly smaller width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
-	/*color: rgba(255, 255, 255, 0.75);*/
-    width: 125px; /* Set width to auto */
-    /*max-width: max-content;*/ /* Ensure it adjusts based on the placeholder or content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    white-space: nowrap; /* Prevent wrapping */
-    cursor: default;
-    align-items: center;
-justify-content: space-between;
-position: relative;
-top: 10px;
-  }
-  #cruiseline {
-    display: flex;
-  font-size: 16px; /* Slightly smaller font size */
-    padding: 10px 15px; /* Padding inside inputs */
-    border: 0px solid #ddd; /* Light gray border */
-    /*background-color: rgba(255, 255, 255, 0.15);*/
-    border-radius: 50px; /* Fully rounded corners for inputs */
-    margin-right: 28px; /* Spacing between input fields */
-    /*width: 220px;*/ /* Slightly smaller width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
-	/*color: rgba(255, 255, 255, 0.75);*/
-    width: 125px; /* Set width to auto */
-    /*max-width: max-content;*/ /* Ensure it adjusts based on the placeholder or content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    white-space: nowrap; /* Prevent wrapping */
-    cursor: default;
-    align-items: center;
-justify-content: space-between;
-position: relative;
-top: 10px;
-  }
   /* Styling for other inputs (optional) */
 #price_min, #price_max {
   font-size: 16px; /* Slightly smaller font size */
@@ -699,12 +636,6 @@ top: 10px;
     transition: all 0.3s ease; /* Smooth transition */
     animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
 }
-#searchBtn.airbnb-button23:hover {
-    background-color: #007BFF; /* Blue background color */
-    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.5); /* Blue box shadow */
-    transition: all 0.3s ease; /* Smooth transition */
-    animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
-}
 
 
 #header .airbnb-button2 {
@@ -769,16 +700,6 @@ justify-content: center;
   display: block;
 }
 #cabinClassContainer {
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-#cruiselengthBtnContainer {
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-#cruiselineBtnContainer {
   display: none;
   align-items: center;
   justify-content: center;
@@ -975,12 +896,6 @@ border: 1px solid #e0e0e0;
 animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
 }
 header .airbnb-button22:hover {
-    background-color: #00aaff !important;/* Darker red on hover */
-    box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5); /* Brighter, thinner, blue shadow */
-    /*border: 2px solid rgba(0, 115, 255, 0.8);*/ /* Optional: Blue border to make it more pronounced */
-animation: pulseShadow3 0.6s ease-in-out infinite alternate; /* Animation on hover */
-}
-header .airbnb-button23:hover {
     background-color: #00aaff !important;/* Darker red on hover */
     box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5); /* Brighter, thinner, blue shadow */
     /*border: 2px solid rgba(0, 115, 255, 0.8);*/ /* Optional: Blue border to make it more pronounced */
@@ -2617,20 +2532,6 @@ left: -8px !important;
     box-shadow: 0 4px 8px rgba(0, 115, 187, 0.4), 0 1px 3px rgba(0, 115, 187, 0.12); /* Initial shadow */
     cursor: default;
 }
-.airbnb-button23 {
-  background-color: #003580; /* Airbnb red color */
-    border: none;
-    padding: 10px 20px; /* Slightly smaller padding */
-    border-radius: 50px; /* Fully rounded button */
-    color: white;
-    font-size: 16px;
-    margin-left: 17.9px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 115, 187, 0.4), 0 1px 3px rgba(0, 115, 187, 0.12); /* Initial shadow */
-    cursor: default;
-}
 .hidden {
   display: none;
 }
@@ -3466,14 +3367,6 @@ margin-bottom: 1px;
   <input type="text" id="checkout" class="flatpickr-input" placeholder="Departure date">
   <img src="js/exit.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
-<div id="cruiselengthBtnContainer">
-  <input type="text" id="cruiselength" class="flatpickr-input" placeholder="Cruise length">
-  <img src="js/clock.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
-</div>
-<div id="cruiselineBtnContainer">
-  <input type="text" id="cruiseline" class="flatpickr-input" placeholder="Cruise line">
-  <img src="js/cruise.png" alt="Calendar Icon" class="calendar-icon3"style="width: 17px; height: 17px;">
-</div>
   <div id="guestSelector" style="position: relative;">
     <input type="number" id="adults" name="adults" placeholder="Add guests">
     <button id="openGuestPopup" class="guest-popup-btn" style="margin-right: 8px; display: none">+</button>
@@ -3526,7 +3419,6 @@ margin-bottom: 1px;
 </button>
   <button id="searchBtn" class="airbnb-button">Search</button>
   <button id="searchBtn" class="airbnb-button22" style="display:none">Search</button>
-  <button id="searchBtn" class="airbnb-button23" style="display:none">Search</button>
 <!-- Login Button with Dropdown -->
 <div class="dropdown">
   <!-- New Login Button -->
@@ -3832,9 +3724,7 @@ gl_FragColor = vec4(glowColor, intensity);
 <button id="toggleButton">Day Theme</button>
 <button id="addLightsbutton">Night Lights</button>
 <button id="addLightsbutton2">Atmosphere</button>
-<button id="toggleChristmastheme" style="display:none">Christmas</button>
-
-<button id="cruisesBtn">Cruises</button>
+<button id="toggleChristmastheme">Christmas</button>
 <button id="newsButton">Latest Airbnbs</button>
   <!-- The iframe containers will be added dynamically -->
   <!-- X Button to close the iframe -->
@@ -4392,8 +4282,6 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
     calendaricon.style.right="47.3%";
     document.getElementById("cabinClassContainer").style.display = "none";
     document.getElementById("cabinClassContainer").style.display = "none";
-    document.getElementById("cruiselength").style.display = "none";
-    document.getElementById("cruiseline").style.display = "none";
     document.getElementById("price_min").style.display = "flex";
     document.getElementById("price_max").style.display = "flex";
     header.style.padding= "9px 0px";
@@ -4439,8 +4327,6 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
     calendaricon.style.right="48%";
     document.getElementById("cabinClassContainer").style.display = "flex"
     document.getElementById("cabinClassContainer").style.display = "flex";
-    document.getElementById("cruiselength").style.display = "none";
-    document.getElementById("cruiseline").style.display = "none";
     document.getElementById("price_min").style.display = "none";
     document.getElementById("price_max").style.display = "none";
     document.getElementById("guestPopup").style.top = "300px";
@@ -4488,155 +4374,6 @@ guestPopup.appendChild(div);
   // Toggle iframe containers
   //document.getElementById('dayTicker').classList.toggle('hidden', isChecked);
   //document.getElementById('trivagoIframeContainer').classList.toggle('hidden', !isChecked);
-});
-function toggleCruiseBtn() {
-  const airbnbLogos = document.getElementsByClassName("logo-airbnb");
-  const trivagoLogos = document.getElementsByClassName("logo-trivago");
-  // Toggle search bar button style
-  const searchBtn = document.querySelector('.airbnb-button');
-  const searchBtn22 = document.querySelector('.airbnb-button22');
-  const searchBtn23 = document.querySelector('.airbnb-button23');
-  const regionPopupbutton = document.getElementById('submitRegion');
-  const loginButton = document.getElementById('loginButton');
-  const likedPostsButton = document.getElementById('likedPostsButton');
-  const topLeftLabel = document.getElementById('topLeftLabel');
-  const popupSavebtn = document.querySelector('.popup-save-btn');
-  const popupClosebtn = document.querySelector('.popup-close-btn');
-  const clearFiltersBtn = document.getElementById('clearFiltersBtn');
-  const header = document.getElementById('header');
-  const header2 = document.querySelector('header2');
-  const theme = document.querySelector('.theme-switch2');
-  const gotItBtn = document.getElementById('gotItBtn');
-  const calendaricon2 = document.querySelector('.calendar-icon2');
-  const calendaricon = document.querySelector('.calendar-icon');
-  const themeswitch = document.querySelector('.slider');
-
-  // Get the button element
-  const toggleCruiseBtn = document.getElementById('cruisesBtn');
-
-  if (toggleCruiseBtn.textContent === "Cruises") {
-    // If the toggleCruiseBtn button is clicked,
-    currentTicker.style.display = "none";
-        currentTicker = document.getElementById("trivagoIframeContainer"); // Set current ticker to Trivago iframe
-        currentTicker.style.display = "block";
-
-        Array.from(airbnbLogos).forEach(logo => logo.style.display = "block");
-        Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
-        Array.from(airbnbLogos).forEach(logo => {
-    if (logo.tagName === "IMG") {
-        logo.src = "js/cruise.png"; // Set the source of the image
-    }
-});
-        themeswitch.style.backgroundColor = "#20B2AA";
-        searchBtn.style.backgroundColor = '#20B2AA';
-    loginButton.style.backgroundColor = '#20B2AA';
-    topLeftLabel.style.backgroundColor = '#20B2AA';
-    likedPostsButton.style.backgroundColor = '#20B2AA';
-    regionPopupbutton.style.backgroundColor = '#20B2AA';
-    popupSavebtn.style.backgroundColor = '#20B2AA';
-    gotItBtn.style.backgroundColor = '#20B2AA';
-    popupClosebtn.style.backgroundColor = '#00CED1';
-    clearFiltersBtn.style.backgroundColor = '#20B2AA';
-    header.style.display = "flex";
-    document.getElementById("cabinClassContainer").style.display = "none";
-    document.getElementById("cabinClassContainer").style.display = "none";
-    document.getElementById("price_min").style.display = "none";
-    document.getElementById("price_max").style.display = "none";
-    document.getElementById("cruiselength").style.display = "block";
-    document.getElementById("checkout").style.display = "none";
-    document.getElementById("adults").style.display = "none";
-    document.getElementById("cruiseline").style.display = "block";
-    header.style.padding= "9px 0px";
-    searchBtn23.style.display = "flex";
-    searchBtn23.textContent = 'Search';
-    searchBtn.style.display = "none";
-    searchBtn22.style.display = "none";
-    topLeftLabel.innerHTML = `
-  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;" alt="Earth Globe" />
-  Search Cruises
-  <img src="js/300694_plane-plane-emoji-png-png-download (1).png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-left: 4px; margin-top: 0px;" alt="Plane" />
-`;
-      
-    // Update the button text
-    toggleCruiseBtn.textContent = "Remove";
-  } else {
-    const airbnbLogos = document.getElementsByClassName("logo-airbnb");
-  const trivagoLogos = document.getElementsByClassName("logo-trivago");
-  // Toggle search bar button style
-  const searchBtn = document.querySelector('.airbnb-button');
-  const searchBtn22 = document.querySelector('.airbnb-button22');
-  const regionPopupbutton = document.getElementById('submitRegion');
-  const loginButton = document.getElementById('loginButton');
-  const likedPostsButton = document.getElementById('likedPostsButton');
-  const topLeftLabel = document.getElementById('topLeftLabel');
-  const popupSavebtn = document.querySelector('.popup-save-btn');
-  const popupClosebtn = document.querySelector('.popup-close-btn');
-  const clearFiltersBtn = document.getElementById('clearFiltersBtn');
-  const header = document.getElementById('header');
-  const header2 = document.querySelector('header2');
-  const theme = document.querySelector('.theme-switch2');
-  const gotItBtn = document.getElementById('gotItBtn');
-  const calendaricon2 = document.querySelector('.calendar-icon2');
-  const calendaricon = document.querySelector('.calendar-icon');
-  const themeswitch = document.querySelector('.theme-switch');
-//searchBtn.classList.remove('airbnb-button');
-    //searchBtn.classList.add('airbnb-button22');
-    // Hide the day ticker
-    currentTicker.style.display = "none";
-        currentTicker = document.getElementById("trivagoIframeContainer"); // Set current ticker to Trivago iframe
-        currentTicker.style.display = "block";
-    // Hide all Airbnb logos
-  Array.from(airbnbLogos).forEach(logo => logo.style.display = "block");
-  Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
-  Array.from(airbnbLogos).forEach(logo => {
-    if (logo.tagName === "IMG") {
-        logo.src = "js/hotel-7.png"; // Set the source of the image
-    }
-});
-    document.getElementById("trivagoIframeContainer").style.display = "block";
-    themeswitch.style.backgroundColor = "#00aaff";
-    searchBtn.style.backgroundColor = '#00aaff';
-    loginButton.style.backgroundColor = '#00aaff';
-    topLeftLabel.style.backgroundColor = '#00aaff';
-    likedPostsButton.style.backgroundColor = '#00aaff';
-    regionPopupbutton.style.backgroundColor = '#00aaff';
-    popupSavebtn.style.backgroundColor = '#00aaff';
-    gotItBtn.style.backgroundColor = '#00aaff';
-    popupClosebtn.style.backgroundColor = '#003580';
-    clearFiltersBtn.style.backgroundColor = '#00aaff';
-    header.style.display = "flex";
-    calendaricon2.style.right="59.25%";
-    calendaricon.style.right="47.3%";
-    document.getElementById("cabinClassContainer").style.display = "none";
-    document.getElementById("cabinClassContainer").style.display = "none";
-    document.getElementById("cruiselength").style.display = "none";
-    document.getElementById("cruiseline").style.display = "none";
-    document.getElementById("price_min").style.display = "flex";
-    document.getElementById("price_max").style.display = "flex";
-    header.style.padding= "9px 0px";
-
-    // Append the div to the parent container
-    document.getElementById("header").querySelector("#guestPopup").style.top = "275px";
-    theme.style.left = "25.8%";
-//daymarkerMaterial.set('#00aaff');
-    searchBtn.style.display = "flex";
-    searchBtn.textContent = 'Search';
-    searchBtn22.style.display = "none";
-    searchBtn23.style.display = "none";
-    topLeftLabel.innerHTML = `
-  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;" alt="Earth Globe" />
-  Search Hotels
-  <img src="js/300694_plane-plane-emoji-png-png-download (1).png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-left: 4px; margin-top: 0px;" alt="Plane" />
-`;
-    // Update the button text
-    toggleCruiseBtn.textContent = "Cruises";
-  }
-};
-// Add Event Listener to the Toggle Button
-document.addEventListener('DOMContentLoaded', () => {
-  document
-    .getElementById('cruisesBtn')
-    .addEventListener('click', toggleCruiseBtn);
 });
 document.getElementById('themeToggle2').addEventListener('change', (event) => {
   const isChecked = event.target.checked;
@@ -6479,7 +6216,7 @@ function toggleChristmasTheme() {
             // Alternate between golden shades for a dynamic effect
             return Math.random() > 0.5 ? '#FFD700' : '#DAA520';
           })
-          .backgroundColor('#000033') // Set background color to blue
+          .backgroundColor('#87CEEB') // Set background color to blue
             // Access controls and enable auto-rotation
         const controls = christmasGlobe.controls();
         controls.autoRotate = true; // Enable auto-rotation
@@ -8116,7 +7853,14 @@ function showLikedPosts() {
 
 // Add an event listener to the profile button to show liked posts
 document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);*/
+import {
+    doc,
+    setDoc,
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
+const db = getFirestore(app);
 
 /*function saveToLikes(post) {
     const user = auth.currentUser;
@@ -8251,702 +7995,9 @@ function showLikedPosts() {
 
 document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
 
-// Add event listener for the Airbnb search button
-document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', async function () {
-  console.log("Cruise search button clicked");
-    // Your Airbnb search logic here
-     const from = document.getElementById('from').value;
-    const to = document.getElementById('where').value;
-    const departureDate = document.getElementById('checkin').value;
-    const cruiseLength = document.getElementById('cruiselength').value;
-    const cruiseLine = document.getElementById('cruiseline').value;
-    /*const inputs = document.querySelectorAll('#header input');
-    inputs.forEach(input => {
-        input.style.color = 'darkgrey';  // Change placeholder text to dark grey
-    });*/
-    //document.getElementById('header').style.backgroundColor = 'white';  // Change header background to white
-	
-    // Show the close button
-    document.getElementById('closeBtn').style.display = 'flex';
-    let missingFields = []; // Initialize the array to track missing fields
 
-    if (!from) missingFields.push('From location');
-if (!to) missingFields.push('To location');
-if (!departureDate) missingFields.push('Departure date');
-if (!cruiseLength) missingFields.push('Return date');
-if (!cruiseLine) missingFields.push('Passengers');
-
-if (missingFields.length > 0) {
-    alert(`Please fill out the following fields: ${missingFields.join(', ')}`);
-    return;
-}
-
-// JavaScript to close the left-container and show the Three.js canvas
-// Function to handle the close button click
-document.getElementById('closeBtn').addEventListener('click', function () {
-    // Hide the close button and the left container
-    document.getElementById('closeBtn').style.display = 'none';
-    document.getElementById('overlayContainer2').style.display = 'none';
-});
-
-
-    // Show spinner and transition to split screen mode
-    /*const leftContainer = document.getElementById('left-container');*/
-    const globeContainer = document.getElementById('globeContainer');
-    const overlay = document.getElementById('overlayContainer2');
-    // Check if the overlayContainer exists
-    if (!overlay) {
-        console.error("Overlay container not found!");
-        return;
-    }
-    // Log to confirm the visibility change
-    console.log("Displaying overlay...");
-
-    // Use requestAnimationFrame to force a repaint
-    /*requestAnimationFrame(() => {
-        overlay.style.display = 'grid';
-        overlay.classList.add('show');
-    });*/
-    overlay.style.display = 'grid';
-    overlay.classList.add('show');
-    
-        overlay.innerHTML = `
-            <div class="spinner-container">
-                <div class="spinner"></div>
-                <p class="spinner-text">Starting the process...</p>
-            </div>
-        `;
-        function hideSpinnerContainer() {
-    const spinnerContainer = document.querySelector('.spinner-container');
-    if (spinnerContainer) {
-        spinnerContainer.style.display = 'none';  // Hide the spinner container
-    }
-}
-
-  
-    // Show the spinner inside the left container
-    /*leftContainer.innerHTML = `
-        <div class="spinner-container">
-            <div class="spinner"></div>
-            <p class="spinner-text">Starting the process...</p>
-        </div>
-    `;
-    leftContainer.style.display = 'block'; // Ensure the left container is visible
-    
-
-    // Shrink the globe-container to take only half the screen
-    globeContainer.classList.add('split');
-    leftContainer.classList.add('show'); // Show the left container
-	// Switch to split-screen layout
-    leftContainer.style.width = '50%';
-    globeContainer.style.width = '50%';*/
-
-    // Call the resize function for Three.js
-    //resizeThreeJS(); // Ensure Three.js canvas is resized properly
-
-	// Ensure Three.js globe resizes after the DOM update is complete
-    //setTimeout(resizeThreeJS, 500); // Delay to ensure layout transition has completed
-
-	// Function to resize the Three.js globe
-    /*function resizeThreeJS() {
-        if (window.renderer && window.camera) {
-            const newWidth = globeContainer.clientWidth;
-            const newHeight = globeContainer.clientHeight;
-            window.renderer.setSize(newWidth, newHeight);
-            window.camera.aspect = newWidth / newHeight;
-            window.camera.updateProjectionMatrix();
-        }
-    }*/
-
-    // Update the spinner text to indicate visiting Airbnb
-    updateSpinnerText("Searching flights...");
-
-    // Generate the Airbnb search URL
-    // Base URL for Airbnb search
-    // Construct the initial Airbnb URL (without map bounds)
-  // Get today's date
-const today = new Date();
-const tomorrow = new Date();
-tomorrow.setDate(today.getDate() + 1);
- // Get the first day of the current month
-const monthlyStartDate = new Date(today.getFullYear(), today.getMonth(), 1);
-
-// Get the end date three months from the current month
-const monthlyEndDate = new Date(today.getFullYear(), today.getMonth() + 3, 0); // 0 gives the last day of the previous month
-// Format the dates to YYYY-MM-DD
-const monthlyStart = monthlyStartDate.toISOString().split('T')[0];  // First day of current month
-const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of the month 3 months from now
-const url = `/scrape-cruises?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&departureDate=${encodeURIComponent(departureDate)}&cruiseLength=${encodeURIComponent(cruiseLength)}&cruiseLine=${encodeURIComponent(cruiseLine)}`;
-
-console.log("Requesting URL:", url);
-
-
-
-    // Only add price_min and price_max if they have values
-    /*if (priceMin && priceMin.trim() !== "") {
-        searchUrl += `&price_min=${priceMin}`;
-    }
-    if (priceMax && priceMax.trim() !== "") {
-        searchUrl += `&price_max=${priceMax}`;
-    }*/
-    // Debug the search URL (you can remove this after confirming it works)
-    console.log('Generated searchUrl:', url);
-
-	// Disable globe interactions when the left container is scrolled
-    /*overlay.addEventListener('mouseenter', () => {
-        globeContainer.classList.add('disable-interaction');
-    });
-
-    overlay.addEventListener('mouseleave', () => {
-        globeContainer.classList.remove('disable-interaction');
-    });*/
-
-    // Update spinner text to indicate fetching data
-    updateSpinnerText("We’re comparing great cruise deals for you... Hang tight! Feel free to browse while we find your perfect trip.");
-
-    // Fetch Airbnb posts and display them
-    await fetchCruisePosts(url);
-	console.log('Generated searchUrl:', url);
-  console.log('Generated searchUrl:fromlocation', from);
-	console.log('Generated searchUrl:location', to);
-	console.log('Generated searchUrl:checkin', departureDate);
-	console.log('Generated searchUrl:cruiseLength', cruiseLength);
-	console.log('Generated searchUrl:cruiseLine', cruiseLine);
-	console.log('Fetching data from:', `https://0d44-136-148-37-2.ngrok-free.app/scrape-flights?url=${encodeURIComponent(url)}`);
-  hideSpinnerContainer();
-  console.log("Formatted Departure Date:", departureDate);
-console.log("Formatted Return Date:", cruiseLine);
-
-
-});
-async function fetchCruisePosts(url) {
-    try {
-        // Update spinner text to indicate scraping started
-        updateSpinnerText("We’re comparing great cruise deals for you... Hang tight! Feel free to browse while we find your perfect trip.");
-
-        const response = await fetch(`https://0d44-136-148-37-2.ngrok-free.app/scrape-cruises?url=${encodeURIComponent(url)}`, {
-          headers: {
-        'ngrok-skip-browser-warning': 'true',
-    },
-        });
-        const data = await response.json();
-
-        // Ensure that 'flights' is an array before processing
-        const cruises = Array.isArray(data.cruises) ? data.cruises : [];
-        console.log('Fetched cruises:', data);
-
-        // Update spinner text to indicate flights fetched
-        updateSpinnerText("Displaying fetched cruises listings...");
-        
-        // Call populateFlightOverlay to display flights
-        populateCruisesOverlay(cruises);
-
-    } catch (error) {
-        console.error('Error fetching cruises:', error);
-        // Update spinner text to indicate an error occurred
-        updateSpinnerText("Error fetching cruises listings. Please try again.");
-    }
-}
-// Function to fetch Airbnb posts from your backend and display them on the webpage
-function populateCruisesOverlay(cruises) {
-    const overlay = document.getElementById('overlayContainer2');
-    overlay.innerHTML = ''; // Clear previous listings
-
-    const airlineLogos = {
-        "EasyJet": "js/EasyJet_logo.svg.png",
-        "British Airways": "js/British_Airways_Logo.svg.png",
-        "Air France": "js/Air_France_Logo.svg.png",
-        "BudgetAir.co.uk": "js/262149.png",
-        "Wingie": "js/wingie.png",
-        "Gotogate": "js/20220806061656!GoToGate_Logo.png",
-        "Turna.com": "js/logo-cizgili_wgfwyw.png",
-        "Kissandfly.com": "js/kissandfly_white.png",
-        "Kiwi.com": "js/kiwi-flights-logo-symbol.png",
-        "Lufthansa": "js/Lufthansa_Logo_2018.svg.png",
-        "N/A": "js/Screenshot 2024-12-04 at 23.38.35.png" // Default logo
-    };
-
-    cruises.forEach(cruise => {
-        const flightDiv = document.createElement('div');
-        flightDiv.classList.add('flight-card');
-
-        // Flight time prominently in the middle
-        const flightTime = document.createElement('div');
-        flightTime.classList.add('flight-time');
-        flightTime.innerHTML = `
-            <span class="flight-time-departure">${flight.departureTime || 'N/A'}</span>
-            <span class="flight-time-arrow">-----------------></span>
-            <span class="flight-time-arrival">${flight.returnTime || 'N/A'}</span>
-        `;
-
-        // Airline header
-        const header = document.createElement('div');
-        header.classList.add('flight-header');
-        const logo = document.createElement('img');
-        logo.src = `${flight.airlineImg || "N/A"}`;
-        logo.alt = `${flight.airline} logo`;
-        logo.classList.add('airline-logo');
-        logo.style.width = '175px';
-        logo.style.height = '52px';
-
-        //const airline = document.createElement('p');
-        //airline.textContent = flight.airline || 'Unknown Airline';
-
-        header.appendChild(logo);
-        //header.appendChild(airline);
-
-        // Flight details
-        const details = document.createElement('div');
-        details.classList.add('flight-details');
-        const layover = document.createElement('p');
-        layover.textContent = `Layover: ${flight.layoverTime || 'N/A'}`;
-
-        const price = document.createElement('p');
-        price.textContent = `Price: $${flight.price || 'N/A'}`;
-
-        details.appendChild(layover);
-        details.appendChild(price);
-
-        // Book Button
-        const bookButton = document.createElement('a');
-        bookButton.href = flight.link || '#';
-        bookButton.target = '_blank';
-        bookButton.textContent = 'Book Now';
-        bookButton.classList.add('book-button');
-
-        // Assemble Card
-        flightDiv.appendChild(flightTime);
-        flightDiv.appendChild(header);
-        flightDiv.appendChild(details);
-        flightDiv.appendChild(bookButton);
-
-        overlay.appendChild(flightDiv);
-    });
-}
-
-// Inject updated CSS
-const cruisePoststyle = document.createElement('style');
-cruisePoststyle.innerHTML = `
-  .flight-card {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background: #fff;
-    background: rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255);
-    margin: 15px 0;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 700px;
-    height: 125px;
-  }
-
-  .flight-time {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    padding-top: 20px;
-    font-weight: bold;
-    margin-bottom: -40px;
-    color: #fff;
-    font-family: system-ui;
-    position: relative;
-margin-right: -320px;
-  }
-
-  .flight-time-departure, .flight-time-arrival {
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  .flight-time-arrow {
-    margin: 0 10px;
-    font-size: 18px;
-    color: #00aaff;
-  }
-
-  .flight-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-left: -10px;
-    font-family: system-ui;
-  }
-
-  .airline-logo {
-    width: 50px;
-    height: auto;
-    margin-right: 15px;
-  }
-
-  .flight-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    border-top: 1px dashed #ddd;
-    padding-top: 10px;
-    font-family: system-ui;
-  }
-
-  .book-button {
-    display: inline-block;
-    padding: 10px 15px;
-    color: white;
-    background: #00aaff;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    align-self: flex-end;
-    margin-top: -130px;
-    font--family: system-ui !important;
-  }
-
-  .book-button:hover {
-    background: #003580;
-    background: #00ebff;
-    background: #59c2f6;
-    background: #00aaff;
-  }
-`;
-document.head.appendChild(cruisePoststyle);
-
-
-
-
-/*import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-
-function saveToLikes(post) {
-    const user = firebase.auth().currentUser;
-
-    if (!user) {
-        alert('Please log in to like a post.');
-        return;
-    }
-
-    const db = getFirestore();
-    const userLikesRef = doc(db, `likes/${user.uid}/${post.id}`);
-
-    setDoc(userLikesRef, post)
-        .then(() => {
-            alert('Post added to your likes!');
-        })
-        .catch(error => {
-            console.error('Error saving liked post:', error);
-        });
-}
-
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-
-function showLikedPosts() {
-    const user = firebase.auth().currentUser;
-
-    if (!user) {
-        alert('Please log in to view your liked posts.');
-        return;
-    }
-
-    const db = getFirestore();
-    const userLikesRef = collection(db, `likes/${user.uid}`);
-
-    getDocs(userLikesRef)
-        .then(snapshot => {
-            const likedPosts = snapshot.docs.map(doc => doc.data());
-            if (likedPosts.length > 0) {
-              const overlay = document.getElementById('overlayContainer');
-              const overlay2 = document.getElementById('overlayContainer2');
-              overlay.innerHTML = ''; // Clear previous posts
-              overlay2.innerHTML = ''; // Clear previous posts
-              overlay2.style.display = 'none';
-              populateFlightOverlay(likedPosts); // Display the liked posts
-            } else {
-                alert('No liked posts found.');
-            }
-        })
-        .catch(error => {
-            console.error('Error retrieving liked posts:', error);
-        });
-}
-
-
-
-
-
-// Add an event listener to the profile button to show liked posts
-document.getElementById('likedPostsButton').addEventListener('click', showLikedPosts);*/
-import {
-    doc,
-    setDoc,
-    collection,
-    getDocs
-} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-
-const db = getFirestore(app);
-
-/*function saveToLikes(post) {
-    const user = auth.currentUser;
-
-    if (!user) {
-        alert("Please log in to like a post.");
-        return;
-    }
-
-    // Create a Firestore document reference for the user's liked post
-    const userLikesRef = doc(db, `likes/${user.uid}/posts/${post.id}`);
-
-    // Save the post data in Firestore
-    setDoc(userLikesRef, post)
-        .then(() => {
-            alert("Post added to your likes!");
-        })
-        .catch((error) => {
-            console.error("Error saving liked post:", error);
-        });
-}*/
-
-document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
-import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
-
-// Function to create the cruise path as a dotted line
-function createCruisePath(fromVec, toVec, altitude) {
-    const distance = fromVec.distanceTo(toVec);
-
-    // Dynamically adjust altitude for cruise path
-    const adjustedAltitude = distance * 0.5;
-    const midpointAltitude = earthRadius + adjustedAltitude;
-
-    const midPoint = fromVec.clone().lerp(toVec, 0.5); // Calculate the midpoint
-    midPoint.setLength(midpointAltitude); // Adjust midpoint altitude
-
-    const curve = new THREE.QuadraticBezierCurve3(fromVec, midPoint, toVec);
-
-    // Create dotted line material and geometry
-    const points = curve.getPoints(50);
-    const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-    const dashedMaterial = new THREE.LineDashedMaterial({
-        color: 0xFFD700, // Golden color for Christmas theme
-        dashSize: 0.1,   // Length of dashes
-        gapSize: 0.05    // Length of gaps
-    });
-
-    const cruisePath = new THREE.Line(lineGeometry, dashedMaterial);
-    cruisePath.computeLineDistances(); // Required for dashed lines
-
-    scene.add(cruisePath);
-    return { cruisePath, curve, distance };
-}
-
-// Function to animate the cruise ship along the curve
-function animateCruiseShip(ship, pathCurve, duration = 8000, distance) {
-    let progress = { t: 0 };
-
-    // Dynamically scale the ship size based on the distance
-    const minScale = 0.1; // Minimum scale
-    const maxScale = 0.3; // Maximum scale
-    const shipScale = THREE.MathUtils.lerp(minScale, maxScale, Math.min(distance / 10, 1));
-    ship.scale.set(shipScale, shipScale, shipScale);
-
-    function animatePath() {
-        new TWEEN.Tween(progress)
-            .to({ t: 1 }, duration) // Duration of the cruise (in milliseconds)
-            .onUpdate(() => {
-                const point = pathCurve.getPointAt(progress.t);
-                ship.position.set(point.x, point.y, point.z);
-
-                const tangent = pathCurve.getTangentAt(progress.t).normalize();
-                const normal = ship.position.clone().normalize(); // Globe is centered at (0,0,0)
-                const up = normal.clone();
-
-                ship.lookAt(ship.position.clone().add(tangent));
-                ship.up.copy(up); // Align the ship's "up" vector with the globe's surface
-                ship.updateMatrixWorld();
-            })
-            .onComplete(() => {
-                progress.t = 0; // Reset to loop the animation
-                animatePath(); // Restart the animation
-            })
-            .start();
-    }
-
-    animatePath(); // Start the animation
-}
-
-// Updated event listener for the search button
-document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', async function () {
-    const fromInput = document.getElementById('from').value;
-    const toInput = document.getElementById('where').value;
-
-    const fromLocation = findClosestLocation(fromInput);
-    const toLocation = findClosestLocation(toInput);
-
-    if (!Locationsfixed[fromLocation] || !Locationsfixed[toLocation]) {
-        console.error('Invalid locations selected.');
-        alert('Could not find one or both locations. Please try again.');
-        return;
-    }
-
-    controls.autoRotate = true;
-
-    const fromLatLng = Locationsfixed[fromLocation];
-    const toLatLng = Locationsfixed[toLocation];
-
-    // Convert lat/lng to 3D vectors
-    const fromVector = latLngToVector3(fromLatLng.lat, fromLatLng.lng, earthRadius);
-    const toVector = latLngToVector3(toLatLng.lat, toLatLng.lng, earthRadius);
-
-    // Create a cruise path and animate the cruise ship
-    const { cruisePath, curve, distance } = createCruisePath(fromVector, toVector, earthRadius * 1.1);
-
-    // Load and animate the cruise ship
-    const loader = new GLTFLoader();
-    loader.load('js/yatch__ii/scene.gltf', function (gltf) {
-        const ship = gltf.scene;
-        scene.add(ship);
-
-        // Scale and update ship materials
-        ship.traverse((child) => {
-            if (child.isMesh) {
-                child.material.color.set(0x87CEEB); // Light blue for the ship
-            }
-        });
-
-        // Animate the ship along the cruise path
-        animateCruiseShip(ship, curve, 10000, distance);
-    });
-
-    // Pan to the "to" location
-    const tolocation = document.getElementById('where').value;
-    const fromlocation = document.getElementById('from').value;
-    panToLocation(toInput);
-    // Optional: Add a delay and pan to the "to" location
-    //setTimeout(() => panToLocation(tolocation), 2500);
-    console.log(panToLocation(toInput))
-// Add light pillars and wave effects at "from" and "to" locations
-addMarkupPoints(fromLatLng, toLatLng);
-    console.log('markupPointGroup added to globe2:', addMarkupPoints);
-    // Fetch and update markers based on the selected category
-    const selectedCategory = document.getElementById('priceCategorySelect').value;
-    fetchMarkers(location, selectedCategory);
-
-    // Resize and update all markers
-    // Resize and update all markers with animation
-// Function to adjust marker sizes dynamically based on zoom level
-Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
-    if (markers) {
-        const originalMarkerSize = 1; // Assume original size
-        const targetMarkerSize = 0.5; // Target size (smaller)
-        const animationDuration = 500; // Animation duration in milliseconds
-
-        // Store the new marker meshes in an array for optional later cleanup
-        const newMarkerMeshes = [];
-
-        for (let i = 0; i < markers.count; i++) {
-            const instanceMatrix = new THREE.Matrix4();
-            markers.getMatrixAt(i, instanceMatrix);
-
-            // Create marker mesh with initial size
-            const markerMesh = new THREE.Mesh(
-                new THREE.PlaneGeometry(originalMarkerSize, originalMarkerSize),
-                markerMaterial
-            );
-            markerMesh.applyMatrix4(instanceMatrix);
-            scene.add(markerMesh); // Add marker to scene
-            newMarkerMeshes.push(markerMesh); // Store the marker mesh
-
-            // Animation variables
-            let currentSize = originalMarkerSize;
-
-            // Function to animate the resizing of markers
-            const animateResize = (duration) => {
-                const startTime = performance.now(); // Capture the start time
-
-                const resizeStep = (currentTime) => {
-                    const elapsedTime = currentTime - startTime; // Calculate elapsed time
-                    const progress = Math.min(elapsedTime / duration, 1); // Normalize progress between 0 and 1
-
-                    // Interpolate size based on progress
-                    currentSize = THREE.MathUtils.lerp(originalMarkerSize, targetMarkerSize, progress);
-                    markerMesh.geometry.dispose(); // Dispose of old geometry
-                    markerMesh.geometry = new THREE.PlaneGeometry(currentSize, currentSize); // Update geometry
-
-                    if (progress < 1) {
-                        requestAnimationFrame(resizeStep); // Continue animation if not yet complete
-                    } else {
-                        // Ensure the final size is set
-                        markerMesh.geometry.dispose();
-                        markerMesh.geometry = new THREE.PlaneGeometry(targetMarkerSize, targetMarkerSize);
-                    }
-                };
-
-                requestAnimationFrame(resizeStep); // Start the animation loop
-            };
-
-            // Delay the animation by 5 seconds (5000 ms)
-            setTimeout(() => {
-                animateResize(animationDuration); // Animate resizing after delay
-            }, 3000); // 5-second delay
-        }
-
-        // Remove the original markers after the new markers have been added
-        setTimeout(() => {
-            scene.remove(markers);
-            console.log(`Original markers for region ${region} removed.`);
-        }, 3000); // Remove after delay, matching the animation start time
-    } else {
-        console.warn(`No markers found for the region: ${region}`);
-    }
-});
-
-// Function to update marker sizes dynamically as zoomLevel changes
-Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
-    if (markers) {
-        const originalMarkerSize = 1; // Assume original size was 0.5
-        const targetMarkerSize = 0.5; // Target size (smaller)
-
-        for (let i = 0; i < markers.count; i++) {
-            const instanceMatrix = new THREE.Matrix4();
-            markers.getMatrixAt(i, instanceMatrix);
-
-            // Create marker mesh with initial size
-            const markerMesh = new THREE.Mesh(new THREE.PlaneGeometry(originalMarkerSize, originalMarkerSize), markerMaterial);
-            markerMesh.applyMatrix4(instanceMatrix);
-            scene.add(markerMesh); // Add marker to scene
-
-            // Animation variables
-            let currentSize = originalMarkerSize;
-
-            // Function to animate the resizing of markers
-            const animateResize = () => {
-                currentSize = THREE.MathUtils.lerp(currentSize, targetMarkerSize, 0.1); // Smoothly interpolate size
-                markerMesh.geometry.dispose(); // Dispose of old geometry
-                markerMesh.geometry = new THREE.PlaneGeometry(currentSize, currentSize); // Update geometry
-
-                if (Math.abs(currentSize - targetMarkerSize) > 0.01) {
-                    requestAnimationFrame(animateResize); // Continue animation until target size is reached
-                } else {
-                    // Ensure final size is set
-                    markerMesh.geometry.dispose();
-                    markerMesh.geometry = new THREE.PlaneGeometry(targetMarkerSize, targetMarkerSize);
-                }
-            };
-
-            animateResize(); // Start the animation
-        }
-
-        // Remove old markers from the scene once resizing begins
-        scene.remove(markers);
-        genericMarkers[region] = markers; // Update the genericMarkers object with resized markers
-    } else {
-        console.warn(`No markers found for the region: ${region}`);
-    }
-}); });
 // Add event listener for the flight search button
-document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))').addEventListener('click', async function () {
+document.querySelector('#searchBtn:not(.airbnb-button22)').addEventListener('click', async function () {
   const carouselContainer1 = document.getElementById('carousel-container');
   const carouselContainer2 = document.getElementById('carousel-container2');
   
@@ -10729,7 +9780,7 @@ function panToLocation(location) {
 // Step 1: Function to create a 3D vector from latitude and longitude
 // Convert Lat/Lng to 3D Vector
 
-//import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
+import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
 
 // Adjust distance handling in `createFlightPath` and Plane Animation
 /*function createFlightPath(fromVec, toVec, altitude) {
@@ -10842,7 +9893,7 @@ document.getElementById('submitRegion').addEventListener('click', () => {
     console.log('Region Select clicked. Plane animation continues.');
 });
 // When search button is clicked
-document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))').addEventListener('click', async function () {
+document.querySelector('#searchBtn:not(.airbnb-button22)').addEventListener('click', async function () {
 
     // Get selected "from" and "to" locations from the user
     const fromInput = document.getElementById('from').value;
