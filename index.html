@@ -8484,8 +8484,8 @@ function populateCruisesOverlay(cruises) {
 }
 
 // Inject updated CSS
-const style = document.createElement('style');
-style.innerHTML = `
+const cruisePoststyle = document.createElement('style');
+cruisePoststyle.innerHTML = `
   .flight-card {
     display: flex;
     flex-direction: column;
@@ -8571,7 +8571,7 @@ margin-right: -320px;
     background: #00aaff;
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(cruisePoststyle);
 
 
 
