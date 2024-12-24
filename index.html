@@ -4509,7 +4509,7 @@ function toggleCruiseBtn() {
   const gotItBtn = document.getElementById('gotItBtn');
   const calendaricon2 = document.querySelector('.calendar-icon2');
   const calendaricon = document.querySelector('.calendar-icon');
-  const themeswitch = document.querySelector('.slider');
+  const themeswitch = document.querySelector('.theme-switch');
 
   // Get the button element
   const toggleCruiseBtn = document.getElementById('cruisesBtn');
@@ -4594,7 +4594,6 @@ function toggleCruiseBtn() {
     }
 });
     document.getElementById("trivagoIframeContainer").style.display = "block";
-    themeswitch.style.backgroundColor = "#00aaff";
     searchBtn.style.backgroundColor = '#00aaff';
     loginButton.style.backgroundColor = '#00aaff';
     topLeftLabel.style.backgroundColor = '#00aaff';
@@ -8802,7 +8801,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
 
     // Load and animate the cruise ship
     const loader = new GLTFLoader();
-    loader.load('js/yatch__ii/scene.gltf', function (gltf) {
+    loader.load('js/cruise_ship_model/scene.gltf', function (gltf) {
         const ship = gltf.scene;
         scene.add(ship);
 
