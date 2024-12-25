@@ -3471,7 +3471,7 @@ margin-bottom: 1px;
 </div>
 <div id="cruiselineBtnContainer">
   <input type="text" id="cruiseline" class="flatpickr-input" placeholder="Cruise line">
-  <img src="js/cruise.png" alt="Calendar Icon" class="calendar-icon3"style="width: 17px; height: 17px;">
+  <img src="js/cruise.png" alt="Calendar Icon" class="calendar-icon3"style="width: 22px; height: 22px;">
 </div>
   <div id="guestSelector" style="position: relative;">
     <input type="number" id="adults" name="adults" placeholder="Add guests">
@@ -4508,6 +4508,9 @@ function toggleCruiseBtn() {
   const calendaricon = document.querySelector('.calendar-icon');
   const themeswitch = document.querySelector('.slider');
   const calendarIcon2 = document.querySelector('.calendar-icon2');
+  const calendaricon3 = document.querySelector('.calendar-icon3');
+  const checkoutDateBtn = document.getElementById('checkout');
+
   // Get the button element
   const toggleCruiseBtn = document.getElementById('cruisesBtn');
 
@@ -4533,6 +4536,9 @@ Array.from(airbnbLogos).forEach(logo => {
 });
         themeswitch.style.backgroundColor = "#20B2AA";
         calendarIcon2.style.display = "none";
+        calendaricon3.style.marginLeft = "124px";
+        calendaricon3.style.display = "flex";
+        calendaricon3.style.marginTop = "-20px";
         searchBtn.style.backgroundColor = '#20B2AA';
     loginButton.style.backgroundColor = '#20B2AA';
     topLeftLabel.style.backgroundColor = '#20B2AA';
@@ -4547,10 +4553,11 @@ Array.from(airbnbLogos).forEach(logo => {
     document.getElementById("cabinClassContainer").style.display = "none";
     document.getElementById("price_min").style.display = "none";
     document.getElementById("price_max").style.display = "none";
-    document.getElementById("cruiselength").style.display = "flex";
+    document.getElementById("cruiselength").style.display = "";
     document.getElementById("checkout").style.display = "none";
     document.getElementById("adults").style.display = "none";
-    document.getElementById("cruiseline").style.display = "flex";
+    document.getElementById("cruiseline").style.display = "";
+    document.getElementById("cruiseline").style.marginTop = "18px";
     header.style.padding= "9px 0px";
     searchBtn23.style.display = "flex";
     searchBtn23.textContent = 'Search';
@@ -4621,6 +4628,7 @@ Array.from(airbnbLogos).forEach(logo => {
     header.style.display = "flex";
     calendaricon2.style.right="59.25%";
     calendaricon.style.right="47.3%";
+    document.getElementById("checkout").style.display = "flex";
     document.getElementById("cabinClassContainer").style.display = "none";
     document.getElementById("cabinClassContainer").style.display = "none";
     document.getElementById("cruiselength").style.display = "none";
