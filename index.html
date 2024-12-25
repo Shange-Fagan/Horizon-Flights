@@ -581,6 +581,48 @@ justify-content: space-between;
 position: relative;
 top: 10px;
   }
+  #cruiselength {
+    display: flex;
+  font-size: 16px; /* Slightly smaller font size */
+    padding: 10px 15px; /* Padding inside inputs */
+    border: 0px solid #ddd; /* Light gray border */
+    /*background-color: rgba(255, 255, 255, 0.15);*/
+    border-radius: 50px; /* Fully rounded corners for inputs */
+    margin-right: 14px; /* Spacing between input fields */
+    /*width: 220px;*/ /* Slightly smaller width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+	/*color: rgba(255, 255, 255, 0.75);*/
+    width: 125px; /* Set width to auto */
+    /*max-width: max-content;*/ /* Ensure it adjusts based on the placeholder or content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    white-space: nowrap; /* Prevent wrapping */
+    cursor: default;
+    align-items: center;
+justify-content: space-between;
+position: relative;
+top: 10px;
+  }
+  #cruiseline {
+    display: flex;
+  font-size: 16px; /* Slightly smaller font size */
+    padding: 10px 15px; /* Padding inside inputs */
+    border: 0px solid #ddd; /* Light gray border */
+    /*background-color: rgba(255, 255, 255, 0.15);*/
+    border-radius: 50px; /* Fully rounded corners for inputs */
+    margin-right: 28px; /* Spacing between input fields */
+    /*width: 220px;*/ /* Slightly smaller width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+	/*color: rgba(255, 255, 255, 0.75);*/
+    width: 125px; /* Set width to auto */
+    /*max-width: max-content;*/ /* Ensure it adjusts based on the placeholder or content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    white-space: nowrap; /* Prevent wrapping */
+    cursor: default;
+    align-items: center;
+justify-content: space-between;
+position: relative;
+top: 10px;
+  }
   /* Styling for other inputs (optional) */
 #price_min, #price_max {
   font-size: 16px; /* Slightly smaller font size */
@@ -726,6 +768,16 @@ justify-content: center;
   display: block;
 }
 #cabinClassContainer {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+#cruiselengthBtnContainer {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+#cruiselineBtnContainer {
   display: none;
   align-items: center;
   justify-content: center;
@@ -3413,6 +3465,14 @@ margin-bottom: 1px;
   <input type="text" id="checkout" class="flatpickr-input" placeholder="Departure date">
   <img src="js/exit.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
+<div id="cruiselengthBtnContainer">
+  <input type="text" id="cruiselength" class="flatpickr-input" placeholder="Cruise length">
+  <img src="js/clock.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
+</div>
+<div id="cruiselineBtnContainer">
+  <input type="text" id="cruiseline" class="flatpickr-input" placeholder="Cruise line">
+  <img src="js/cruise.png" alt="Calendar Icon" class="calendar-icon3"style="width: 17px; height: 17px;">
+</div>
   <div id="guestSelector" style="position: relative;">
     <input type="number" id="adults" name="adults" placeholder="Add guests">
     <button id="openGuestPopup" class="guest-popup-btn" style="margin-right: 8px; display: none">+</button>
@@ -4333,6 +4393,7 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
     document.getElementById("cabinClassContainer").style.display = "none";
     document.getElementById("price_min").style.display = "flex";
     document.getElementById("price_max").style.display = "flex";
+    document.getElementById("cruiselength").style.display = "none";
     header.style.padding= "9px 0px";
 
     // Append the div to the parent container
@@ -4374,6 +4435,7 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
     clearFiltersBtn.style.backgroundColor = '#003580';
     calendaricon2.style.right="59.9%";
     calendaricon.style.right="48%";
+    document.getElementById("cruiselength").style.display = "none";
     document.getElementById("cabinClassContainer").style.display = "flex"
     document.getElementById("cabinClassContainer").style.display = "flex";
     document.getElementById("price_min").style.display = "none";
