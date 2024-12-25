@@ -3466,13 +3466,52 @@ margin-bottom: 1px;
   <img src="js/exit.png" id="Icon"alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
 <div id="cruiselengthBtnContainer">
-  <input type="text" id="cruiselength" class="flatpickr-input" placeholder="Cruise length">
-  <img src="js/clock.png" id="cruiselengthicon"alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
+  <select id="cruiselength" class="flatpickr-input">
+    <option value="" disabled selected>Cruise length</option>
+    <option value="1-2 Nights">1-2 Nights</option>
+    <option value="3-5 Nights">3-5 Nights</option>
+    <option value="6-8 Nights">6-8 Nights</option>
+    <option value="9-11 Nights">9-11 Nights</option>
+    <option value="12+ Nights">12+ Nights</option>
+  </select>
+  <img src="js/clock.png" id="cruiselengthicon" alt="Calendar Icon" class="calendar-icon2" style="width: 17px; height: 17px;">
 </div>
+
 <div id="cruiselineBtnContainer">
-  <input type="text" id="cruiseline" class="flatpickr-input" placeholder="Cruise line">
-  <img src="js/cruise.png" alt="Calendar Icon" class="calendar-icon3"style="width: 22px; height: 22px;">
+  <select id="cruiseline" class="flatpickr-input">
+    <option value="" disabled selected>Cruise line</option>
+    <option value="All Cruise Lines">All Cruise Lines</option>
+    <option value="AmaWaterways">AmaWaterways</option>
+    <option value="American Cruise Lines">American Cruise Lines</option>
+    <option value="Avalon Waterways">Avalon Waterways</option>
+    <option value="Azamara Cruises">Azamara Cruises</option>
+    <option value="Carnival Cruise Lines">Carnival Cruise Lines</option>
+    <option value="Celebrity Cruises">Celebrity Cruises</option>
+    <option value="Costa Cruises">Costa Cruises</option>
+    <option value="Crystal Cruises">Crystal Cruises</option>
+    <option value="Cunard">Cunard</option>
+    <option value="Disney Cruise Line">Disney Cruise Line</option>
+    <option value="Explora Journeys">Explora Journeys</option>
+    <option value="Holland America Line">Holland America Line</option>
+    <option value="Hurtigruten Cruises">Hurtigruten Cruises</option>
+    <option value="MSC Cruises">MSC Cruises</option>
+    <option value="Norwegian Cruise Line">Norwegian Cruise Line</option>
+    <option value="Oceania Cruises">Oceania Cruises</option>
+    <option value="Ponant">Ponant</option>
+    <option value="Princess Cruises">Princess Cruises</option>
+    <option value="Regent Seven Seas Cruises">Regent Seven Seas Cruises</option>
+    <option value="Royal Caribbean">Royal Caribbean</option>
+    <option value="Silversea Cruises">Silversea Cruises</option>
+    <option value="The Yachts of Seabourn">The Yachts of Seabourn</option>
+    <option value="Uniworld River Cruises">Uniworld River Cruises</option>
+    <option value="Viking Ocean Cruises">Viking Ocean Cruises</option>
+    <option value="Viking River Cruises">Viking River Cruises</option>
+    <option value="Virgin Voyages">Virgin Voyages</option>
+    <option value="Windstar Cruises">Windstar Cruises</option>
+  </select>
+  <img src="js/cruise.png" alt="Calendar Icon" class="calendar-icon3" style="width: 22px; height: 22px;">
 </div>
+
   <div id="guestSelector" style="position: relative;">
     <input type="number" id="adults" name="adults" placeholder="Add guests">
     <button id="openGuestPopup" class="guest-popup-btn" style="margin-right: 8px; display: none">+</button>
