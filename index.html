@@ -4586,10 +4586,19 @@ Array.from(airbnbLogos).forEach(logo => {
     document.getElementById('themeToggle').addEventListener('change', (event) => {
       const isChecked = event.target.checked;
   if (isChecked) {
+    Array.from(airbnbLogos).forEach(logo => {
+    if (logo.tagName === "IMG") {
+        logo.src = "js/hotel-7.png"; // Set the source of the image
+    }
+});
+    themeswitch.style.backgroundColor = "#00aaff";
     searchBtn23.style.display = "none";
   } else {
+    document.getElementById("cruiselengthBtnContainer").style.display = "none";
+    document.getElementById("cruiselineBtnContainer").style.display = "none";
+    checkoutDateBtn.style.display = "flex";
     themeswitch.style.backgroundColor = "#003580";
-    searchBtn23.style.display = "none";
+    searchBtn23.style.display = "none"
   }
 });
   } else {
