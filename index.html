@@ -4507,7 +4507,7 @@ function toggleCruiseBtn() {
   const calendaricon2 = document.querySelector('.calendar-icon2');
   const calendaricon = document.querySelector('.calendar-icon');
   const themeswitch = document.querySelector('.slider');
-
+  const calendarIcon2 = document.querySelector('.calendar-icon2');
   // Get the button element
   const toggleCruiseBtn = document.getElementById('cruisesBtn');
 
@@ -4525,9 +4525,10 @@ function toggleCruiseBtn() {
     }
 });
         themeswitch.style.backgroundColor = "#20B2AA";
-	  themeswitch.style.height = "28.5px";
+        themeswitch.style.height = "28.5px";
         themeswitch.style.width = "28.5px";
         themeswitch.style.left = "11px";
+        calendarIcon2.style.display = "none";
         searchBtn.style.backgroundColor = '#20B2AA';
     loginButton.style.backgroundColor = '#20B2AA';
     topLeftLabel.style.backgroundColor = '#20B2AA';
@@ -4542,10 +4543,10 @@ function toggleCruiseBtn() {
     document.getElementById("cabinClassContainer").style.display = "none";
     document.getElementById("price_min").style.display = "none";
     document.getElementById("price_max").style.display = "none";
-    document.getElementById("cruiselength").style.display = "block";
+    document.getElementById("cruiselength").style.display = "flex";
     document.getElementById("checkout").style.display = "none";
     document.getElementById("adults").style.display = "none";
-    document.getElementById("cruiseline").style.display = "block";
+    document.getElementById("cruiseline").style.display = "flex";
     header.style.padding= "9px 0px";
     searchBtn23.style.display = "flex";
     searchBtn23.textContent = 'Search';
@@ -4596,9 +4597,10 @@ function toggleCruiseBtn() {
 });
     document.getElementById("trivagoIframeContainer").style.display = "block";
     themeswitch.style.backgroundColor = "#00aaff";
-	  themeswitch.style.height = "32px";
+    themeswitch.style.height = "32px";
     themeswitch.style.width = "32px";
         themeswitch.style.left = "9px";
+        calendarIcon2.style.display = "flex";
     searchBtn.style.backgroundColor = '#00aaff';
     loginButton.style.backgroundColor = '#00aaff';
     topLeftLabel.style.backgroundColor = '#00aaff';
