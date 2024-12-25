@@ -8832,10 +8832,10 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders
 
 // Function to create the cruise path as a dotted line on the globe's surface
 function createCruisePath(fromVec, toVec) {
-    const points = [];
-    const segments = 50; // Number of segments for the curve
+    const segments = 200; // Increase the number of segments for more dots
 
-    // Generate points for a curve along the globe's surface
+    // Generate points for a curve along the globe’s surface
+    const points = [];
     for (let i = 0; i <= segments; i++) {
         const t = i / segments; // Interpolation factor
         const intermediate = fromVec.clone().lerp(toVec, t).normalize().multiplyScalar(earthRadius); // On surface
@@ -8847,9 +8847,9 @@ function createCruisePath(fromVec, toVec) {
     const dashedMaterial = new THREE.LineDashedMaterial({
         //color: 0xFFD700,  // Golden color
         color: 0x46dff0,  // Light blue color
-        dashSize: 0.5,    // Dash length
-        gapSize: 0.25,    // Gap length
-        linewidth: 3,     // Thicker line
+        dashSize: 0.2,    // Length of dashes (smaller for more dots)
+        gapSize: 0.1,     // Length of gaps (adjust for more frequent dots)
+        linewidth: 5      // Thicker line
     });
 
     // Create the cruise path
@@ -8859,7 +8859,6 @@ function createCruisePath(fromVec, toVec) {
 
     return { cruisePath, curve: null, distance: fromVec.distanceTo(toVec) };
 }
-
 // Function to animate the cruise ship along the dotted line
 function animateCruiseShip(ship, points, duration = 8000) {
     let progress = { t: 0 };
@@ -8916,7 +8915,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
 
     // Load and animate the cruise ship
     const loader = new GLTFLoader();
-    loader.load('js/yatch_ii/scene.gltf', function (gltf) {
+    loader.load('./yatch__ii/scene.gltf', function (gltf) {
         const ship = gltf.scene;
         scene.add(ship);
 
