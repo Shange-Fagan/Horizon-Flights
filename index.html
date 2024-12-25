@@ -3463,7 +3463,7 @@ margin-bottom: 1px;
 </div>
 <div class="date-picker-wrapper">
   <input type="text" id="checkout" class="flatpickr-input" placeholder="Departure date">
-  <img src="js/exit.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
+  <img src="js/exit.png" id="Icon"alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
 <div id="cruiselengthBtnContainer">
   <input type="text" id="cruiselength" class="flatpickr-input" placeholder="Cruise length">
@@ -4513,6 +4513,8 @@ function toggleCruiseBtn() {
   const cruiselinebtn = document.getElementById('cruiseline');
   const languageSelectBtn = document.querySelector('.languageSelect-btn');
   const cruiseLengthIcon = document.getElementById('cruiselengthicon');
+  const departdateIcon = document.getElementById('Icon');
+
   // Get the button element
   const toggleCruiseBtn = document.getElementById('cruisesBtn');
 
@@ -4591,14 +4593,22 @@ Array.from(airbnbLogos).forEach(logo => {
         logo.src = "js/hotel-7.png"; // Set the source of the image
     }
 });
+checkoutDateBtn.style.display = "flex";
     themeswitch.style.backgroundColor = "#00aaff";
     searchBtn23.style.display = "none";
+    checkoutDateBtn.style.marginTop = "-3.9px";
+    departdateIcon.style.display = "flex";
+    languageSelectBtn.style.paddingLeft = "7.5px";
+
   } else {
     document.getElementById("cruiselengthBtnContainer").style.display = "none";
     document.getElementById("cruiselineBtnContainer").style.display = "none";
     checkoutDateBtn.style.display = "flex";
     themeswitch.style.backgroundColor = "#003580";
     searchBtn23.style.display = "none"
+    checkoutDateBtn.style.marginTop = "-3.9px";
+    departdateIcon.style.display = "flex";
+    languageSelectBtn.style.paddingLeft = "7.5px";
   }
 });
   } else {
