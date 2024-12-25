@@ -4571,6 +4571,15 @@ Array.from(airbnbLogos).forEach(logo => {
       
     // Update the button text
     toggleCruiseBtn.textContent = "Remove";
+    document.getElementById('themeToggle').addEventListener('change', (event) => {
+      const isChecked = event.target.checked;
+  if (isChecked) {
+    searchBtn23.style.display = "none";
+  } else {
+    themeswitch.style.backgroundColor = "#003580";
+    searchBtn23.style.display = "none";
+  }
+});
   } else {
     const airbnbLogos = document.getElementsByClassName("logo-airbnb");
   const trivagoLogos = document.getElementsByClassName("logo-trivago");
