@@ -8831,25 +8831,23 @@ document.getElementById("likedPostsButton").addEventListener("click", showLikedP
 import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
 
 // Function to create the cruise path as a dotted line on the globe's surface
-function createCruisePath(fromVec, toVec) {
-    const segments = 200; // Increase the number of segments for more dots
-
-    // Generate points for a curve along the globe’s surface
+        function createCruisePath(fromVec, toVec) {
+    const segments = 200; // Increase for more dots
     const points = [];
     for (let i = 0; i <= segments; i++) {
-        const t = i / segments; // Interpolation factor
-        const intermediate = fromVec.clone().lerp(toVec, t).normalize().multiplyScalar(earthRadius); // On surface
-        points.push(intermediate);
+        const t = i / segments;
+        const intermediate = fromVec.clone().lerp(toVec, t).normalize().multiplyScalar(earthRadius);
+        points.push(intermediate); // Ensure these are THREE.Vector3 objects
     }
 
     // Create geometry and line material
     const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
     const dashedMaterial = new THREE.LineDashedMaterial({
         //color: 0xFFD700,  // Golden color
-        color: 0x46dff0,  // Light blue color
-        dashSize: 0.2,    // Length of dashes (smaller for more dots)
-        gapSize: 0.1,     // Length of gaps (adjust for more frequent dots)
-        linewidth: 5      // Thicker line
+        color: 0x46dff0,  // Light blue
+        dashSize: 0.2,
+        gapSize: 0.1,
+        linewidth: 5, // Thicker line
     });
 
     // Create the cruise path
@@ -8857,7 +8855,7 @@ function createCruisePath(fromVec, toVec) {
     cruisePath.computeLineDistances(); // Required for dashed lines
     scene.add(cruisePath);
 
-    return { cruisePath, points };
+    return { cruisePath, points, distance: fromVec.distanceTo(toVec) };
 }
 
 // Function to animate the cruise ship along the dotted line
@@ -8866,19 +8864,18 @@ function animateCruiseShip(ship, points, duration = 8000) {
 
     function animatePath() {
         new TWEEN.Tween(progress)
-            .to({ t: 1 }, duration) // Duration of the animation
+            .to({ t: 1 }, duration)
             .onUpdate(() => {
                 const index = Math.floor(progress.t * (points.length - 1));
                 const point = points[index];
+                const nextPoint = points[Math.min(index + 1, points.length - 1)];
 
-                if (point) {
+                if (point && nextPoint) {
                     ship.position.set(point.x, point.y, point.z);
 
                     // Align ship orientation with the path
-                    const nextIndex = Math.min(index + 1, points.length - 1);
-                    const nextPoint = points[nextIndex];
                     const tangent = nextPoint.clone().sub(point).normalize();
-                    const normal = point.clone().normalize(); // Up vector
+                    const normal = point.clone().normalize();
                     ship.lookAt(ship.position.clone().add(tangent));
                     ship.up.copy(normal);
                 }
@@ -8892,6 +8889,7 @@ function animateCruiseShip(ship, points, duration = 8000) {
 
     animatePath(); // Start the animation
 }
+
 
 // Updated event listener for the search button
 // Event listener for the search button
