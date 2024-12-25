@@ -8830,71 +8830,65 @@ document.getElementById('likedPostsButton').addEventListener('click', showLikedP
 document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
 import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
 
-// Function to create the cruise path as a dotted line
-function createCruisePath(fromVec, toVec, altitude) {
-    const distance = fromVec.distanceTo(toVec);
+// Function to create the cruise path as a dotted line on the globe's surface
+function createCruisePath(fromVec, toVec) {
+    const points = [];
+    const segments = 50; // Number of segments for the curve
 
-    // Dynamically adjust altitude for cruise path
-    const adjustedAltitude = distance * 0.5;
-    const midpointAltitude = earthRadius + adjustedAltitude;
+    // Generate points for a curve along the globe's surface
+    for (let i = 0; i <= segments; i++) {
+        const t = i / segments; // Interpolation factor
+        const intermediate = fromVec.clone().lerp(toVec, t).normalize().multiplyScalar(earthRadius); // On surface
+        points.push(intermediate);
+    }
 
-    const midPoint = fromVec.clone().lerp(toVec, 0.5); // Calculate the midpoint
-    midPoint.setLength(midpointAltitude); // Adjust midpoint altitude
-
-    const curve = new THREE.QuadraticBezierCurve3(fromVec, midPoint, toVec);
-
-    // Create dotted line material and geometry
-    const points = curve.getPoints(50);
+    // Create geometry and line material
     const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
     const dashedMaterial = new THREE.LineDashedMaterial({
-        color: 0xFFD700, // Golden color for Christmas theme
-        dashSize: 0.1,   // Length of dashes
-        gapSize: 0.05    // Length of gaps
+        //color: 0xFFD700,  // Golden color
+        color: 0x46dff0,  // Light blue color
+        dashSize: 0.5,    // Dash length
+        gapSize: 0.25,    // Gap length
+        linewidth: 3,     // Thicker line
     });
 
+    // Create the cruise path
     const cruisePath = new THREE.Line(lineGeometry, dashedMaterial);
     cruisePath.computeLineDistances(); // Required for dashed lines
-
     scene.add(cruisePath);
-    return { cruisePath, curve, distance };
+
+    return { cruisePath, curve: null, distance: fromVec.distanceTo(toVec) };
 }
 
-// Function to animate the cruise ship along the curve
-function animateCruiseShip(ship, pathCurve, duration = 8000, distance) {
+// Function to animate the cruise ship along the dotted line
+function animateCruiseShip(ship, points, duration = 8000) {
     let progress = { t: 0 };
-
-    // Dynamically scale the ship size based on the distance
-    const minScale = 0.1; // Minimum scale
-    const maxScale = 0.3; // Maximum scale
-    const shipScale = THREE.MathUtils.lerp(minScale, maxScale, Math.min(distance / 10, 1));
-    ship.scale.set(shipScale, shipScale, shipScale);
 
     function animatePath() {
         new TWEEN.Tween(progress)
-            .to({ t: 1 }, duration) // Duration of the cruise (in milliseconds)
+            .to({ t: 1 }, duration) // Duration of the animation
             .onUpdate(() => {
-                const point = pathCurve.getPointAt(progress.t);
+                const index = Math.floor(progress.t * (points.length - 1));
+                const point = points[index];
                 ship.position.set(point.x, point.y, point.z);
 
-                const tangent = pathCurve.getTangentAt(progress.t).normalize();
-                const normal = ship.position.clone().normalize(); // Globe is centered at (0,0,0)
-                const up = normal.clone();
-
+                // Align ship orientation with the path
+                const tangent = points[Math.min(index + 1, points.length - 1)].clone().sub(point).normalize();
+                const normal = point.clone().normalize(); // Up vector
                 ship.lookAt(ship.position.clone().add(tangent));
-                ship.up.copy(up); // Align the ship's "up" vector with the globe's surface
-                ship.updateMatrixWorld();
+                ship.up.copy(normal);
             })
             .onComplete(() => {
-                progress.t = 0; // Reset to loop the animation
-                animatePath(); // Restart the animation
+                progress.t = 0; // Loop the animation
+                animatePath();
             })
             .start();
     }
 
     animatePath(); // Start the animation
 }
-
 // Updated event listener for the search button
+// Event listener for the search button
 document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', async function () {
     const fromInput = document.getElementById('from').value;
     const toInput = document.getElementById('where').value;
@@ -8917,35 +8911,30 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
     const fromVector = latLngToVector3(fromLatLng.lat, fromLatLng.lng, earthRadius);
     const toVector = latLngToVector3(toLatLng.lat, toLatLng.lng, earthRadius);
 
-    // Create a cruise path and animate the cruise ship
-    const { cruisePath, curve, distance } = createCruisePath(fromVector, toVector, earthRadius * 1.1);
+    // Create the cruise path
+    const { cruisePath, curve, distance } = createCruisePath(fromVector, toVector);
 
     // Load and animate the cruise ship
     const loader = new GLTFLoader();
-    loader.load('js/yatch__ii/scene.gltf', function (gltf) {
+    loader.load('./yatch__ii/scene.gltf', function (gltf) {
         const ship = gltf.scene;
         scene.add(ship);
 
-        // Scale and update ship materials
+        // Scale and style the ship
         ship.traverse((child) => {
             if (child.isMesh) {
                 child.material.color.set(0x87CEEB); // Light blue for the ship
             }
         });
 
-        // Animate the ship along the cruise path
-        animateCruiseShip(ship, curve, 10000, distance);
+        // Animate the ship along the path
+        animateCruiseShip(ship, cruisePath.geometry.attributes.position.array, 10000);
     });
 
-    // Pan to the "to" location
-    const tolocation = document.getElementById('where').value;
-    const fromlocation = document.getElementById('from').value;
+    // Additional actions
     panToLocation(toInput);
-    // Optional: Add a delay and pan to the "to" location
-    //setTimeout(() => panToLocation(tolocation), 2500);
-    console.log(panToLocation(toInput))
-// Add light pillars and wave effects at "from" and "to" locations
-addMarkupPoints(fromLatLng, toLatLng);
+    addMarkupPoints(fromLatLng, toLatLng);
+    console.log('Cruise animation initialized');
     console.log('markupPointGroup added to globe2:', addMarkupPoints);
     // Fetch and update markers based on the selected category
     const selectedCategory = document.getElementById('priceCategorySelect').value;
