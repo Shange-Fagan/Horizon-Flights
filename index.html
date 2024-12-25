@@ -4554,26 +4554,9 @@ Array.from(airbnbLogos).forEach(logo => {
         cruiseLengthIcon.style.position = "relative";
         cruiseLengthIcon.style.left = "-172px";
         cruiseLengthIcon.style.top = "64px";
-        daymarkerMaterial = new THREE.Color('#20B2AA');
-        nightmarkerMaterial = new THREE.Color('#20B2AA');
+        let daymarkerMaterial = new THREE.Color('#20B2AA');
+        let nightmarkerMaterial = new THREE.Color('#20B2AA');
         searchBtn.style.backgroundColor = '#20B2AA';
-        // Add event listener for mouseover (hover)
-loginButton.addEventListener('mouseover', () => {
-    loginButton.style.backgroundColor = '#00CED1';
-});
-
-// Add event listener for mouseout (unhover)
-loginButton.addEventListener('mouseout', () => {
-    loginButton.style.backgroundColor = '#20B2AA'; // Revert to default
-});
-likedPostsButton.addEventListener('mouseover', () => {
-    loginButton.style.backgroundColor = '#00CED1';
-});
-
-// Add event listener for mouseout (unhover)
-likedPostsButton.addEventListener('mouseout', () => {
-    loginButton.style.backgroundColor = '#20B2AA'; // Revert to default
-});
     loginButton.style.backgroundColor = '#20B2AA';
     topLeftLabel.style.backgroundColor = '#20B2AA';
     likedPostsButton.style.backgroundColor = '#20B2AA';
@@ -4619,8 +4602,6 @@ checkoutDateBtn.style.display = "flex";
     checkoutDateBtn.style.marginTop = "-3.9px";
     departdateIcon.style.display = "flex";
     languageSelectBtn.style.paddingLeft = "7.5px";
-    daymarkerMaterial = new THREE.Color('#00BFFF');
-        nightmarkerMaterial = new THREE.Color('#00BFFF');
 
   } else {
     document.getElementById("cruiselengthBtnContainer").style.display = "none";
@@ -4631,8 +4612,6 @@ checkoutDateBtn.style.display = "flex";
     checkoutDateBtn.style.marginTop = "-3.9px";
     departdateIcon.style.display = "flex";
     languageSelectBtn.style.paddingLeft = "7.5px";
-    daymarkerMaterial = new THREE.Color('#00BFFF');
-        nightmarkerMaterial = new THREE.Color('#00BFFF');
   }
 });
   } else {
@@ -4680,8 +4659,8 @@ Array.from(airbnbLogos).forEach(logo => {
     document.getElementById("trivagoIframeContainer").style.display = "block";
     themeswitch.style.backgroundColor = "#00aaff";
         calendarIcon2.style.display = "flex";
-        daymarkerMaterial = new THREE.Color('#00BFFF');
-        nightmarkerMaterial = new THREE.Color('#00BFFF');
+        let daymarkerMaterial = new THREE.Color('#00BFFF');
+        let nightmarkerMaterial = new THREE.Color('#00BFFF');
     searchBtn.style.backgroundColor = '#00aaff';
     loginButton.style.backgroundColor = '#00aaff';
     topLeftLabel.style.backgroundColor = '#00aaff';
@@ -5838,9 +5817,9 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
  // const nightmarkerMaterial = '#FE8C02';
 	  //const daymarkerMaterial = new THREE.Color('#ff3232');
 //const nightmarkerMaterial = new THREE.Color('#FE8C02');
-	  const daymarkerMaterial = new THREE.Color('#00BFFF');
-    const lightsmarkerMaterial = new THREE.Color('#00eeff');
-const nightmarkerMaterial = new THREE.Color('#00BFFF');
+	  let daymarkerMaterial = new THREE.Color('#00BFFF');
+    let lightsmarkerMaterial = new THREE.Color('#00eeff');
+let nightmarkerMaterial = new THREE.Color('#00BFFF');
 	  //const daymarkerMaterial = new THREE.Color('#00FF00');
 //const nightmarkerMaterial = new THREE.Color('#FFFFFF');
 
