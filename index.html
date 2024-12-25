@@ -3467,7 +3467,7 @@ margin-bottom: 1px;
 </div>
 <div id="cruiselengthBtnContainer">
   <input type="text" id="cruiselength" class="flatpickr-input" placeholder="Cruise length">
-  <img src="js/clock.png" alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
+  <img src="js/clock.png" id="cruiselengthicon"alt="Calendar Icon" class="calendar-icon2"style="width: 17px; height: 17px;">
 </div>
 <div id="cruiselineBtnContainer">
   <input type="text" id="cruiseline" class="flatpickr-input" placeholder="Cruise line">
@@ -4364,7 +4364,6 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
 
 
 
-
   //let currentTicker = document.getElementById('dayTicker');
   if (isChecked) {
     //searchBtn.classList.remove('airbnb-button');
@@ -4510,7 +4509,10 @@ function toggleCruiseBtn() {
   const calendarIcon2 = document.querySelector('.calendar-icon2');
   const calendaricon3 = document.querySelector('.calendar-icon3');
   const checkoutDateBtn = document.getElementById('checkout');
-
+  const cruiselengthbtn = document.getElementById('cruiselength');
+  const cruiselinebtn = document.getElementById('cruiseline');
+  const languageSelectBtn = document.querySelector('.languageSelect-btn');
+  const cruiseLengthIcon = document.getElementById('cruiselengthicon');
   // Get the button element
   const toggleCruiseBtn = document.getElementById('cruisesBtn');
 
@@ -4536,9 +4538,19 @@ Array.from(airbnbLogos).forEach(logo => {
 });
         themeswitch.style.backgroundColor = "#20B2AA";
         calendarIcon2.style.display = "none";
-        calendaricon3.style.marginLeft = "124px";
+        calendaricon3.style.marginLeft = "-72px";
         calendaricon3.style.display = "flex";
-        calendaricon3.style.marginTop = "-20px";
+        calendaricon3.style.marginTop = "-17px";
+        cruiselengthbtn.style.marginTop = "-18px";
+        cruiselinebtn.style.marginTop = "-35px";
+        cruiselinebtn.style.marginLeft = "-150px";
+        languageSelectBtn.style.paddingLeft = "27.5px";
+        calendaricon3.style.paddingLeft = "14px";
+        cruiseLengthIcon.style.width = "20px";
+        cruiseLengthIcon.style.height = "20px";
+        cruiseLengthIcon.style.position = "relative";
+        cruiseLengthIcon.style.left = "-172px";
+        cruiseLengthIcon.style.top = "64px";
         searchBtn.style.backgroundColor = '#20B2AA';
     loginButton.style.backgroundColor = '#20B2AA';
     topLeftLabel.style.backgroundColor = '#20B2AA';
