@@ -8921,11 +8921,11 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
 
     // Load and animate the yacht model
     const loader = new GLTFLoader();
-    loader.load('js/low-poly_yatch_animation/scene.gltf', function (gltf) {
+    loader.load('js/yatch/scene.gltf', function (gltf) {
         const ship = gltf.scene;
         scene.add(ship);
         // Scale down the ship to an appropriate size
-        const shipScale = 1; // Adjust this value to control the size
+        const shipScale = 0.3; // Adjust this value to control the size
             ship.scale.set(shipScale, shipScale, shipScale);
         // Scale and update ship materials
         ship.traverse((child) => {
