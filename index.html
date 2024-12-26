@@ -8923,7 +8923,9 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
     loader.load('js/yatch_ii/scene.gltf', function (gltf) {
         const ship = gltf.scene;
         scene.add(ship);
-
+        // Scale down the ship to an appropriate size
+        const shipScale = 0.03; // Adjust this value to control the size
+            ship.scale.set(shipScale, shipScale, shipScale);
         // Scale and update ship materials
         ship.traverse((child) => {
             if (child.isMesh) {
