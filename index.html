@@ -8831,31 +8831,32 @@ document.getElementById("likedPostsButton").addEventListener("click", showLikedP
 import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
 
 // Function to create the cruise path as a dotted line on the globe's surface
-        function createCruisePath(fromVec, toVec) {
-    const segments = 200; // Increase for more dots
-    const points = [];
+function createCruisePath(fromVec, toVec) {
+    const segments = 200; // Number of segments for the dotted line
+    const points = []; // Array to hold points along the path
+
+    // Generate points for the cruise path along the globe’s surface
     for (let i = 0; i <= segments; i++) {
-        const t = i / segments;
+        const t = i / segments; // Interpolation factor
         const intermediate = fromVec.clone().lerp(toVec, t).normalize().multiplyScalar(earthRadius);
-        points.push(intermediate); // Ensure these are THREE.Vector3 objects
+        points.push(intermediate); // Ensure the points are on the globe's surface
     }
 
-    // Create geometry and line material
+    // Create geometry for the dotted line
     const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
     const dashedMaterial = new THREE.LineDashedMaterial({
-        //color: 0xFFD700,  // Golden color
-        color: 0x46dff0,  // Light blue
-        dashSize: 0.2,
-        gapSize: 0.1,
-        linewidth: 5, // Thicker line
+      //color: 0xFFD700,  // Golden color
+        color: 0x46dff0, // Light blue color
+        dashSize: 0.2,  // Length of dashes
+        gapSize: 0.1,   // Length of gaps
+        linewidth: 5,   // Thickness of the line
     });
 
-    // Create the cruise path
     const cruisePath = new THREE.Line(lineGeometry, dashedMaterial);
     cruisePath.computeLineDistances(); // Required for dashed lines
     scene.add(cruisePath);
 
-    return { cruisePath, points, distance: fromVec.distanceTo(toVec) };
+    return { cruisePath, points }; // Return the path and points
 }
 
 // Function to animate the cruise ship along the dotted line
@@ -8864,7 +8865,7 @@ function animateCruiseShip(ship, points, duration = 8000) {
 
     function animatePath() {
         new TWEEN.Tween(progress)
-            .to({ t: 1 }, duration)
+            .to({ t: 1 }, duration) // Duration of the animation
             .onUpdate(() => {
                 const index = Math.floor(progress.t * (points.length - 1));
                 const point = points[index];
@@ -8875,7 +8876,7 @@ function animateCruiseShip(ship, points, duration = 8000) {
 
                     // Align ship orientation with the path
                     const tangent = nextPoint.clone().sub(point).normalize();
-                    const normal = point.clone().normalize();
+                    const normal = point.clone().normalize(); // Up vector
                     ship.lookAt(ship.position.clone().add(tangent));
                     ship.up.copy(normal);
                 }
@@ -8889,7 +8890,6 @@ function animateCruiseShip(ship, points, duration = 8000) {
 
     animatePath(); // Start the animation
 }
-
 
 // Updated event listener for the search button
 // Event listener for the search button
@@ -8916,23 +8916,23 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
     const toVector = latLngToVector3(toLatLng.lat, toLatLng.lng, earthRadius);
 
     // Create the cruise path
-    const { cruisePath, curve, distance } = createCruisePath(fromVector, toVector);
+    const { cruisePath, points } = createCruisePath(fromVector, toVector);
 
-    // Load and animate the cruise ship
+    // Load and animate the yacht model
     const loader = new GLTFLoader();
     loader.load('js/yatch_ii/scene.gltf', function (gltf) {
         const ship = gltf.scene;
         scene.add(ship);
 
-        // Scale and style the ship
+        // Scale and update ship materials
         ship.traverse((child) => {
             if (child.isMesh) {
                 child.material.color.set(0x87CEEB); // Light blue for the ship
             }
         });
 
-        // Animate the ship along the path
-        animateCruiseShip(ship, cruisePath.geometry.attributes.position.array, 10000);
+        // Animate the ship along the cruise path
+        animateCruiseShip(ship, points, 10000);
     });
 
     // Additional actions
