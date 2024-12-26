@@ -8877,17 +8877,8 @@ function animateCruiseShip(ship, points, duration = 8000) {
                     // Align ship orientation with the path
                     const tangent = nextPoint.clone().sub(point).normalize();
                     const normal = point.clone().normalize(); // Up vector
-
-                    // Adjust ship orientation explicitly to face forward and remain upright
-                    const quaternion = new THREE.Quaternion().setFromUnitVectors(
-                        new THREE.Vector3(0, 0, 1), // Default forward direction
-                        tangent
-                    );
-
-                    ship.setRotationFromQuaternion(quaternion);
-
-                    // Ensure the ship remains upright
-                    ship.rotateX(Math.PI / 2); // Adjust for upright orientation
+                    ship.lookAt(ship.position.clone().add(tangent));
+                    ship.up.copy(normal);
                 }
             })
             .onComplete(() => {
@@ -8899,7 +8890,6 @@ function animateCruiseShip(ship, points, duration = 8000) {
 
     animatePath(); // Start the animation
 }
-
 
 // Updated event listener for the search button
 // Event listener for the search button
@@ -8936,6 +8926,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         // Scale down the ship to an appropriate size
         const shipScale = 0.7; // Adjust this value to control the size
             ship.scale.set(shipScale, shipScale, shipScale);
+            ship.rotation.y = Math.PI / 2; // Rotate 90 degrees to face forward
         // Scale and update ship materials
         ship.traverse((child) => {
             if (child.isMesh) {
