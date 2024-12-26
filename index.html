@@ -8924,16 +8924,15 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         const ship = gltf.scene;
         scene.add(ship);
         // Scale down the ship to an appropriate size
-        const shipScale = 0.7; // Adjust this value to control the size
+        const shipScale = 0.4; // Adjust this value to control the size
             ship.scale.set(shipScale, shipScale, shipScale);
-            ship.rotation.x = Math.PI / 2; // Rotate 90 degrees to face forward
         // Scale and update ship materials
         ship.traverse((child) => {
             if (child.isMesh) {
                 //child.material.color.set(0x87CEEB); // Light blue for the ship
             }
         });
-
+        ship.rotation.y = Math.PI / 2; // Rotate 90 degrees to face forward
         // Animate the ship along the cruise path
         animateCruiseShip(ship, points, 10000);
     });
