@@ -8832,40 +8832,31 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders
 
 // Function to create the cruise path as a dotted line on the globe's surface
 function createCruisePath(fromVec, toVec) {
-    const segments = 200; // Increase the number of segments for smoother curves
+    const segments = 200; // Number of segments for the dotted line
+    const points = []; // Array to hold points along the path
 
-    // Generate points for the cruise path along the globe's surface
-    const points = [];
+    // Generate points for the cruise path along the globe’s surface
     for (let i = 0; i <= segments; i++) {
         const t = i / segments; // Interpolation factor
-        const intermediate = fromVec.clone().lerp(toVec, t).normalize().multiplyScalar(earthRadius); // On surface
-        points.push(intermediate);
+        const intermediate = fromVec.clone().lerp(toVec, t).normalize().multiplyScalar(earthRadius);
+        points.push(intermediate); // Ensure the points are on the globe's surface
     }
 
-    // Create a curve path
-    const curve = new THREE.CatmullRomCurve3(points);
-
-    // Create the tube geometry for a thick rectangular dashed effect
-    const pathGeometry = new THREE.TubeGeometry(curve, 100, 0.05, 4, false); // Adjust radius (0.05) for thickness
-    const pathMaterial = new THREE.MeshBasicMaterial({
-        //color: 0xFFD700,  // Golden color
-        color: 0x46dff0,  // Light blue
-        wireframe: false,
-    });
-
-    // Add dashed effect
+    // Create geometry for the dotted line
+    const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
     const dashedMaterial = new THREE.LineDashedMaterial({
-        color: 0x46dff0,
-        dashSize: 0.2,    // Length of each dash
-        gapSize: 0.1,     // Length of gaps between dashes
-        linewidth: 2,     // Thickness of the dashed line
+      //color: 0xFFD700,  // Golden color
+        color: 0x46dff0, // Light blue color
+        dashSize: 0.2,  // Length of dashes
+        gapSize: 0.1,   // Length of gaps
+        linewidth: 100,   // Thickness of the line
     });
 
-    // Create the path mesh
-    const cruisePath = new THREE.Mesh(pathGeometry, pathMaterial);
+    const cruisePath = new THREE.Line(lineGeometry, dashedMaterial);
+    cruisePath.computeLineDistances(); // Required for dashed lines
     scene.add(cruisePath);
 
-    return { cruisePath, curve, distance: fromVec.distanceTo(toVec) };
+    return { cruisePath, points }; // Return the path and points
 }
 
 
