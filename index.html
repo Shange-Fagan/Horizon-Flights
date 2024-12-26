@@ -8849,7 +8849,7 @@ function createCruisePath(fromVec, toVec) {
         color: 0x46dff0, // Light blue color
         dashSize: 0.2,  // Length of dashes
         gapSize: 0.1,   // Length of gaps
-        linewidth: 100,   // Thickness of the line
+        linewidth: 30,   // Thickness of the line
     });
 
     const cruisePath = new THREE.Line(lineGeometry, dashedMaterial);
@@ -8858,7 +8858,6 @@ function createCruisePath(fromVec, toVec) {
 
     return { cruisePath, points }; // Return the path and points
 }
-
 
 // Function to animate the cruise ship along the dotted line
 function animateCruiseShip(ship, points, duration = 8000) {
@@ -8921,11 +8920,11 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
 
     // Load and animate the yacht model
     const loader = new GLTFLoader();
-    loader.load('js/yatch/scene.gltf', function (gltf) {
+    loader.load('js/yatch_i_second_edition/scene.gltf', function (gltf) {
         const ship = gltf.scene;
         scene.add(ship);
         // Scale down the ship to an appropriate size
-        const shipScale = 0.3; // Adjust this value to control the size
+        const shipScale = 0.01; // Adjust this value to control the size
             ship.scale.set(shipScale, shipScale, shipScale);
         // Scale and update ship materials
         ship.traverse((child) => {
