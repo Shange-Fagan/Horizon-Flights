@@ -8860,6 +8860,7 @@ function createCruisePath(fromVec, toVec) {
 }
 
 // Function to animate the cruise ship along the dotted line
+// Function to animate the cruise ship along the dotted line
 function animateCruiseShip(ship, points, duration = 8000) {
     let progress = { t: 0 };
 
@@ -8877,8 +8878,18 @@ function animateCruiseShip(ship, points, duration = 8000) {
                     // Align ship orientation with the path
                     const tangent = nextPoint.clone().sub(point).normalize();
                     const normal = point.clone().normalize(); // Up vector
-                    ship.lookAt(ship.position.clone().add(tangent));
-                    ship.up.copy(normal);
+                    const up = normal.clone();
+
+                    // Rotate the ship to face forward (90 degrees adjustment)
+                    const rotationAxis = new THREE.Vector3();
+                    rotationAxis.crossVectors(up, tangent).normalize();
+                    const quaternion = new THREE.Quaternion().setFromUnitVectors(
+                        new THREE.Vector3(0, 1, 0), // Initial ship orientation (upwards)
+                        tangent
+                    );
+                    ship.setRotationFromQuaternion(quaternion);
+
+                    ship.up.copy(normal); // Maintain alignment with globe surface
                 }
             })
             .onComplete(() => {
@@ -8890,6 +8901,7 @@ function animateCruiseShip(ship, points, duration = 8000) {
 
     animatePath(); // Start the animation
 }
+
 
 // Updated event listener for the search button
 // Event listener for the search button
@@ -8924,7 +8936,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         const ship = gltf.scene;
         scene.add(ship);
         // Scale down the ship to an appropriate size
-        const shipScale = 0.5; // Adjust this value to control the size
+        const shipScale = 0.1; // Adjust this value to control the size
             ship.scale.set(shipScale, shipScale, shipScale);
         // Scale and update ship materials
         ship.traverse((child) => {
