@@ -8926,7 +8926,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         // Scale down the ship to an appropriate size
         const shipScale = 0.7; // Adjust this value to control the size
             ship.scale.set(shipScale, shipScale, shipScale);
-            ship.rotation.y = Math.PI / 2; // Rotate 90 degrees to face forward
+            ship.rotation.x = Math.PI / 2; // Rotate 90 degrees to face forward
         // Scale and update ship materials
         ship.traverse((child) => {
             if (child.isMesh) {
