@@ -4038,10 +4038,65 @@ document.getElementById("loginButton").addEventListener("click", () => {
                 });
         });
 
+        // "New to Horizon? Sign up here" Button
+        const signupButton = document.createElement("button");
+        signupButton.innerText = "New to Horizon? Sign up here";
+        signupButton.style.fontSize = "14px";
+        signupButton.style.color = "#007BFF";
+        signupButton.style.backgroundColor = "transparent";
+        signupButton.style.border = "none";
+        signupButton.style.cursor = "pointer";
+        signupButton.style.marginTop = "10px";
+
+        signupButton.addEventListener("click", () => {
+            // Show sign-up modal
+            const signupContainer = document.createElement("div");
+            signupContainer.setAttribute("id", "signupContainer");
+            signupContainer.style.position = "fixed";
+            signupContainer.style.top = "50%";
+            signupContainer.style.left = "50%";
+            signupContainer.style.transform = "translate(-50%, -50%)";
+            signupContainer.style.backgroundColor = "white";
+            signupContainer.style.padding = "20px";
+            signupContainer.style.borderRadius = "10px";
+            signupContainer.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+            signupContainer.style.textAlign = "center";
+            signupContainer.style.zIndex = "1000";
+
+            const signupForm = document.createElement("form");
+            signupForm.innerHTML = `
+                <input type="email" id="signupEmailInput" placeholder="Enter your email" style="display: block; width: 100%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+                <input type="password" id="signupPasswordInput" placeholder="Enter your password" style="display: block; width: 100%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+                <button type="submit" style="background-color: #FF5A5F; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Sign Up</button>
+            `;
+
+            signupForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const email = document.getElementById("signupEmailInput").value;
+                const password = document.getElementById("signupPasswordInput").value;
+
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((result) => {
+                        alert(`Account created for ${result.user.email}`);
+                        updateLoginButton(result.user);
+                        updatelikedPostsButton(result.user);
+                        document.body.removeChild(signupContainer); // Remove sign-up modal
+                        document.body.removeChild(loginContainer); // Remove login modal
+                    })
+                    .catch((err) => console.error("Account creation error:", err));
+            });
+
+            signupContainer.appendChild(signupForm);
+            document.body.appendChild(signupContainer);
+        });
+
         // Append elements to the login modal
         loginContainer.appendChild(googleButton);
         loginContainer.appendChild(document.createElement("br"));
         loginContainer.appendChild(emailForm);
+        loginContainer.appendChild(signupButton);
+
         document.body.appendChild(loginContainer);
     }
 });
@@ -4057,6 +4112,7 @@ function updateLoginButton(user) {
             <img src="js/profile-icon.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;"> Login`;
     }
 }
+
 
 // Update Liked Posts Button State
 function updatelikedPostsButton(user) {
