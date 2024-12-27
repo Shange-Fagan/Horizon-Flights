@@ -4576,7 +4576,7 @@ function toggleCruiseBtn() {
         Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
         Array.from(airbnbLogos).forEach(logo => {
     if (logo.tagName === "IMG") {
-        logo.src = "js/cruise-1.png"; // Set the source of the image
+        logo.src = "js/cruise-2.png"; // Set the source of the image
     }
 });
 Array.from(airbnbLogos).forEach(logo => {
@@ -8831,6 +8831,7 @@ document.getElementById("likedPostsButton").addEventListener("click", showLikedP
 import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
 
 // Function to create the cruise path as a dotted line on the globe's surface
+// Function to create the cruise path as a dotted line on the globe's surface
 function createCruisePath(fromVec, toVec) {
     const segments = 200; // Number of segments for the dotted line
     const points = []; // Array to hold points along the path
@@ -8845,11 +8846,10 @@ function createCruisePath(fromVec, toVec) {
     // Create geometry for the dotted line
     const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
     const dashedMaterial = new THREE.LineDashedMaterial({
-      //color: 0xFFD700,  // Golden color
         color: 0x46dff0, // Light blue color
         dashSize: 0.2,  // Length of dashes
         gapSize: 0.1,   // Length of gaps
-        linewidth: 30,   // Thickness of the line
+        linewidth: 30,  // Thickness of the line
     });
 
     const cruisePath = new THREE.Line(lineGeometry, dashedMaterial);
@@ -8877,8 +8877,10 @@ function animateCruiseShip(ship, points, duration = 8000) {
                     // Align ship orientation with the path
                     const tangent = nextPoint.clone().sub(point).normalize();
                     const normal = point.clone().normalize(); // Up vector
+                    const up = normal.clone();
+
                     ship.lookAt(ship.position.clone().add(tangent));
-                    ship.up.copy(normal);
+                    ship.up.copy(up);
                 }
             })
             .onComplete(() => {
@@ -8891,7 +8893,6 @@ function animateCruiseShip(ship, points, duration = 8000) {
     animatePath(); // Start the animation
 }
 
-// Updated event listener for the search button
 // Event listener for the search button
 document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', async function () {
     const fromInput = document.getElementById('from').value;
@@ -8923,19 +8924,25 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
     loader.load('js/yatch_i_second_edition/scene.gltf', function (gltf) {
         const ship = gltf.scene;
         scene.add(ship);
+
         // Scale down the ship to an appropriate size
         const shipScale = 0.2; // Adjust this value to control the size
-            ship.scale.set(shipScale, shipScale, shipScale);
-        // Scale and update ship materials
+        ship.scale.set(shipScale, shipScale, shipScale);
+
+        // Rotate the ship to face forward along the path
+        ship.rotation.y = Math.PI / 2; // Rotate 90 degrees forward
+
+        // Make the ship completely white
         ship.traverse((child) => {
             if (child.isMesh) {
-                //child.material.color.set(0x87CEEB); // Light blue for the ship
+                child.material.color.set(0xffffff); // Set to white
             }
         });
-        ship.rotation.y = Math.PI / 4; // Rotate 90 degrees to face forward
+
         // Animate the ship along the cruise path
         animateCruiseShip(ship, points, 10000);
     });
+
 
     // Additional actions
     panToLocation(toInput);
