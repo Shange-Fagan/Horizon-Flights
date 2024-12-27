@@ -4682,7 +4682,7 @@ function toggleCruiseBtn() {
         Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
         Array.from(airbnbLogos).forEach(logo => {
     if (logo.tagName === "IMG") {
-        logo.src = "js/cruise-4.png"; // Set the source of the image
+        logo.src = "js/cruise-1.png"; // Set the source of the image
     }
 });
 guestsBtn.style.display = "none";
@@ -9040,7 +9040,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
 
     // Load and animate the yacht model
     const loader = new GLTFLoader();
-    loader.load('js/yatch_i_second_edition/scene.gltf', function (gltf) {
+    loader.load('js/yatch_ii/scene.gltf', function (gltf) {
         const ship = gltf.scene;
         scene.add(ship);
 
