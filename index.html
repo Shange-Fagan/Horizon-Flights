@@ -8998,7 +8998,7 @@ function animateCruiseShip(ship, points, duration = 8000) {
                     ship.up.copy(up);
 
                     // Rotate the ship to face forward
-                    ship.rotation.x += Math.PI / 2; // Adjust for 90-degree orientation
+                    ship.rotation.y += Math.PI / 2; // Adjust for 90-degree orientation
                 }
             })
             .onComplete(() => {
@@ -9045,7 +9045,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         scene.add(ship);
 
         // Scale down the ship to an appropriate size
-        const shipScale = 0.2; // Adjust this value to control the size
+        const shipScale = 0.00125; // Adjust this value to control the size
         ship.scale.set(shipScale, shipScale, shipScale);
 
         // Rotate the ship to face forward along the path
@@ -9054,7 +9054,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         // Make the ship completely white
         ship.traverse((child) => {
             if (child.isMesh) {
-                child.material.color.set(0xffffff); // Set to white
+                //child.material.color.set(0xffffff); // Set to white
             }
         });
 
