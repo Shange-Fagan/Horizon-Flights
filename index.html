@@ -8885,6 +8885,9 @@ function animateCruiseShip(ship, points, duration = 8000) {
 
                     ship.lookAt(ship.position.clone().add(tangent));
                     ship.up.copy(up);
+
+                    // Rotate the ship to face forward
+                    ship.rotation.y += Math.PI / 2; // Adjust for 90-degree orientation
                 }
             })
             .onComplete(() => {
@@ -8896,6 +8899,7 @@ function animateCruiseShip(ship, points, duration = 8000) {
 
     animatePath(); // Start the animation
 }
+
 
 // Event listener for the search button
 document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', async function () {
