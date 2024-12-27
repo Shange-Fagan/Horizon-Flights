@@ -9054,7 +9054,9 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         // Make the ship completely white
         // Traverse through the 3D model and update all materials to white
         ship.traverse((child) => {
-        if (child.isMesh) {
+    if (child.isMesh) {
+        // Check if the material corresponds to "material_4"
+        if (child.material.name === "material_4") {
             // Clone the original material to preserve specific details
             const originalMaterial = child.material.clone();
             
@@ -9066,14 +9068,16 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
                 originalMaterial.color = new THREE.Color(0xffffff); // Set to white
             }
             
-            // Keep metallic and roughness factors as is for a realistic look
+            // Optionally adjust metallic and roughness factors for realism
             originalMaterial.metalness = originalMaterial.metalness || 0.5; 
             originalMaterial.roughness = originalMaterial.roughness || 0.5;
 
             // Assign the updated material to the mesh
             child.material = originalMaterial;
         }
-    });
+    }
+});
+
         // Animate the ship along the cruise path
         animateCruiseShip(ship, points, 10000);
     });
