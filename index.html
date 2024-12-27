@@ -9052,12 +9052,16 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         //ship.rotation.y = Math.PI / 2; // Rotate 90 degrees forward
 
         // Make the ship completely white
+        // Traverse through the 3D model and update all materials to white
         ship.traverse((child) => {
-            if (child.isMesh) {
-                //child.material.color.set(0xffffff); // Set to white
-            }
-        });
-
+        if (child.isMesh) {
+            child.material = new THREE.MeshStandardMaterial({
+                color: 0xffffff, // White color
+                roughness: 0.5,  // Adjust roughness for material realism
+                metalness: 0.1,  // Adjust metalness for material realism
+            });
+        }
+      });
         // Animate the ship along the cruise path
         animateCruiseShip(ship, points, 10000);
     });
