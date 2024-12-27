@@ -4562,6 +4562,8 @@ function toggleCruiseBtn() {
   const languageSelectBtn = document.querySelector('.languageSelect-btn');
   const cruiseLengthIcon = document.getElementById('cruiselengthicon');
   const departdateIcon = document.getElementById('Icon');
+  const guestsBtn = document.getElementById('adults');
+
 
   // Get the button element
   const toggleCruiseBtn = document.getElementById('cruisesBtn');
@@ -4644,6 +4646,7 @@ Array.from(airbnbLogos).forEach(logo => {
     }
 });
 checkoutDateBtn.style.display = "flex";
+guestsBtn.style.display = "flex";
     themeswitch.style.backgroundColor = "#00aaff";
     searchBtn23.style.display = "none";
     checkoutDateBtn.style.marginTop = "-3.9px";
@@ -8846,6 +8849,7 @@ function createCruisePath(fromVec, toVec) {
     // Create geometry for the dotted line
     const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
     const dashedMaterial = new THREE.LineDashedMaterial({
+        //color: 0xFFD700,  // Golden color
         color: 0x46dff0, // Light blue color
         dashSize: 0.2,  // Length of dashes
         gapSize: 0.1,   // Length of gaps
