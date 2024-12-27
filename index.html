@@ -3988,11 +3988,11 @@ document.getElementById("loginButton").addEventListener("click", () => {
         const closeButton = document.createElement("span");
         closeButton.innerHTML = "&times;";
         closeButton.style.position = "absolute";
-        closeButton.style.top = "10px";
-        closeButton.style.right = "15px";
+        closeButton.style.top = "0px";
+        closeButton.style.right = "7px";
         closeButton.style.cursor = "pointer";
         closeButton.style.fontSize = "20px";
-        closeButton.style.color = "#333";
+        closeButton.style.color = "#FFFFFF";
         closeButton.addEventListener("click", () => {
             document.body.removeChild(loginContainer); // Close modal
         });
@@ -4031,8 +4031,9 @@ document.getElementById("loginButton").addEventListener("click", () => {
         const orText = document.createElement("p");
         orText.innerText = "or";
         orText.style.fontSize = "16px";
-        orText.style.color = "#333";
+        orText.style.color = "#FFFFFF";
         orText.style.margin = "10px 0";
+        orText.style.fontFamily = "system-ui";
 
         // Email/Password Login Form
         const emailForm = document.createElement("form");
@@ -4090,9 +4091,9 @@ document.getElementById("loginButton").addEventListener("click", () => {
 
             const signupForm = document.createElement("form");
             signupForm.innerHTML = `
-                <input type="email" id="signupEmailInput" placeholder="Enter your email" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
-                <input type="password" id="signupPasswordInput" placeholder="Enter your password" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
-                <button type="submit" style="background-color: #FF5A5F; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Sign Up</button>
+                <input type="email" id="signupEmailInput" placeholder="Enter your email" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-left: -1.5%;" required>
+                <input type="password" id="signupPasswordInput" placeholder="Enter your password" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-left: -1.5%;" required>
+                <button type="submit" style="background-color: #00aaff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Sign Up</button>
             `;
 
             signupForm.addEventListener("submit", (e) => {
@@ -4117,11 +4118,11 @@ document.getElementById("loginButton").addEventListener("click", () => {
             const closeSignupButton = document.createElement("span");
             closeSignupButton.innerHTML = "&times;";
             closeSignupButton.style.position = "absolute";
-            closeSignupButton.style.top = "10px";
-            closeSignupButton.style.right = "15px";
+            closeSignupButton.style.top = "2.5px";
+            closeSignupButton.style.right = "10px";
             closeSignupButton.style.cursor = "pointer";
             closeSignupButton.style.fontSize = "20px";
-            closeSignupButton.style.color = "#333";
+            closeSignupButton.style.color = "#FFFFFF";
             closeSignupButton.addEventListener("click", () => {
                 document.body.removeChild(signupContainer);
                 loginContainer.style.display = "block"; // Show login form again
