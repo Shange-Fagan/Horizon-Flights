@@ -1,6 +1,1 @@
-<script>start("/Users/shangefagan/Airbnb-Assistant/js/yatch_ii/");</script>
-<script>onHasParentDirectory();</script>
-<script>addRow("textures","textures",1,384,"384 B",1735057814,"24/12/2024, 16:30:14");</script>
-<script>addRow("license.txt","license.txt",0,648,"648 B",1735057814,"24/12/2024, 16:30:14");</script>
-<script>addRow("scene.bin","scene.bin",0,291292,"284 kB",1735057814,"24/12/2024, 16:30:14");</script>
-<script>addRow("scene.gltf","scene.gltf",0,24561,"24.0 kB",1735319588,"27/12/2024, 17:13:08");</script>
+
