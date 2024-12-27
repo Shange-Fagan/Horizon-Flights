@@ -1,0 +1,11 @@
+Model Information:
+* title:	Yatch_II
+* source:	https://sketchfab.com/3d-models/yatch-ii-150d3f0ae5454708b420b1a273abc3a2
+* author:	dannzjs (https://sketchfab.com/dannzjs)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Yatch_II" (https://sketchfab.com/3d-models/yatch-ii-150d3f0ae5454708b420b1a273abc3a2) by dannzjs (https://sketchfab.com/dannzjs) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
