@@ -8998,7 +8998,7 @@ function animateCruiseShip(ship, points, duration = 8000) {
                     ship.up.copy(up);
 
                     // Rotate the ship to face forward
-                    ship.rotation.y += Math.PI / 2; // Adjust for 90-degree orientation
+                    ship.rotation.x += Math.PI / 2; // Adjust for 90-degree orientation
                 }
             })
             .onComplete(() => {
