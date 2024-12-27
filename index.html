@@ -4155,6 +4155,12 @@ function updateLoginButton(user) {
     }
 }
 
+//Track Authentication State Changes
+onAuthStateChanged(auth, (user) => {
+    updateLoginButton(user); // Update button state based on auth state
+    updatelikedPostsButton(user);
+});
+
 
 // Update Liked Posts Button State
 function updatelikedPostsButton(user) {
