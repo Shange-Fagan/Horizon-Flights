@@ -3977,13 +3977,12 @@ document.getElementById("loginButton").addEventListener("click", () => {
         loginContainer.style.top = "50%";
         loginContainer.style.left = "50%";
         loginContainer.style.transform = "translate(-50%, -50%)";
-        loginContainer.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+        loginContainer.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
         loginContainer.style.padding = "20px";
         loginContainer.style.borderRadius = "10px";
         loginContainer.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
         loginContainer.style.textAlign = "center";
         loginContainer.style.zIndex = "22012";
-        loginContainer.style.width = "300px";
 
         // Close Button
         const closeButton = document.createElement("span");
@@ -4028,19 +4027,11 @@ document.getElementById("loginButton").addEventListener("click", () => {
                 .catch((error) => console.error("Login error:", error));
         });
 
-        // "or" separator
-        const orText = document.createElement("p");
-        orText.innerText = "or";
-        orText.style.margin = "10px 0";
-        orText.style.fontSize = "16px";
-        orText.style.color = "#555";
-        orText.style.fontFamily = "Arial, sans-serif";
-
         // Email/Password Login Form
         const emailForm = document.createElement("form");
         emailForm.innerHTML = `
-            <input type="email" id="emailInput" placeholder="Enter your email" style="display: block; width: 90%; margin: 10px auto; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
-            <input type="password" id="passwordInput" placeholder="Enter your password" style="display: block; width: 90%; margin: 10px auto; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+            <input type="email" id="emailInput" placeholder="Enter your email" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+            <input type="password" id="passwordInput" placeholder="Enter your password" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
             <button type="submit" id="emailLoginButton" style="background-color: #00aaff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Login</button>
         `;
 
@@ -4062,7 +4053,14 @@ document.getElementById("loginButton").addEventListener("click", () => {
                 });
         });
 
-        // "New to Horizon? Sign up here" Button
+        // Add "or" separator
+        const orText = document.createElement("p");
+        orText.innerText = "or";
+        orText.style.fontSize = "16px";
+        orText.style.color = "#333";
+        orText.style.margin = "10px 0";
+
+        // Signup Button
         const signupButton = document.createElement("button");
         signupButton.innerText = "New to Horizon? Sign up here";
         signupButton.style.fontSize = "14px";
@@ -4073,19 +4071,76 @@ document.getElementById("loginButton").addEventListener("click", () => {
         signupButton.style.marginTop = "10px";
 
         signupButton.addEventListener("click", () => {
-            // Redirect to sign-up modal or logic
-            alert("Redirecting to sign-up functionality...");
+            // Hide the login form
+            loginContainer.style.display = "none";
+
+            // Show signup form
+            const signupContainer = document.createElement("div");
+            signupContainer.setAttribute("id", "signupContainer");
+            signupContainer.style.position = "fixed";
+            signupContainer.style.top = "50%";
+            signupContainer.style.left = "50%";
+            signupContainer.style.transform = "translate(-50%, -50%)";
+            signupContainer.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+            signupContainer.style.padding = "20px";
+            signupContainer.style.borderRadius = "10px";
+            signupContainer.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+            signupContainer.style.textAlign = "center";
+            signupContainer.style.zIndex = "22013"; // Higher z-index than login form
+
+            const signupForm = document.createElement("form");
+            signupForm.innerHTML = `
+                <input type="email" id="signupEmailInput" placeholder="Enter your email" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+                <input type="password" id="signupPasswordInput" placeholder="Enter your password" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+                <button type="submit" style="background-color: #FF5A5F; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Sign Up</button>
+            `;
+
+            signupForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const email = document.getElementById("signupEmailInput").value;
+                const password = document.getElementById("signupPasswordInput").value;
+
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((result) => {
+                        alert(`Account created for ${result.user.email}`);
+                        updateLoginButton(result.user);
+                        updatelikedPostsButton(result.user);
+                        document.body.removeChild(signupContainer); // Remove signup modal
+                    })
+                    .catch((error) => {
+                        console.error("Signup error:", error);
+                    });
+            });
+
+            // Close button for signup form
+            const closeSignupButton = document.createElement("span");
+            closeSignupButton.innerHTML = "&times;";
+            closeSignupButton.style.position = "absolute";
+            closeSignupButton.style.top = "10px";
+            closeSignupButton.style.right = "15px";
+            closeSignupButton.style.cursor = "pointer";
+            closeSignupButton.style.fontSize = "20px";
+            closeSignupButton.style.color = "#333";
+            closeSignupButton.addEventListener("click", () => {
+                document.body.removeChild(signupContainer);
+                loginContainer.style.display = "block"; // Show login form again
+            });
+
+            signupContainer.appendChild(closeSignupButton);
+            signupContainer.appendChild(signupForm);
+            document.body.appendChild(signupContainer);
         });
 
         // Append elements to the login modal
         loginContainer.appendChild(googleButton);
-        loginContainer.appendChild(orText);
+        loginContainer.appendChild(orText); // Add "or" text
         loginContainer.appendChild(emailForm);
         loginContainer.appendChild(signupButton);
-
         document.body.appendChild(loginContainer);
     }
 });
+
 
 // Update Login Button State
 function updateLoginButton(user) {
