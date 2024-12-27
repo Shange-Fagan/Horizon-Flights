@@ -9055,13 +9055,25 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         // Traverse through the 3D model and update all materials to white
         ship.traverse((child) => {
         if (child.isMesh) {
-            child.material = new THREE.MeshStandardMaterial({
-                color: 0xffffff, // White color
-                roughness: 0.5,  // Adjust roughness for material realism
-                metalness: 0.1,  // Adjust metalness for material realism
-            });
+            // Clone the original material to preserve specific details
+            const originalMaterial = child.material.clone();
+            
+            // Update the base color to white while keeping other properties
+            if (originalMaterial.map) {
+                originalMaterial.color.set(0xffffff); // Set base color to white
+                originalMaterial.map.encoding = THREE.sRGBEncoding; // Preserve textures
+            } else {
+                originalMaterial.color = new THREE.Color(0xffffff); // Set to white
+            }
+            
+            // Keep metallic and roughness factors as is for a realistic look
+            originalMaterial.metalness = originalMaterial.metalness || 0.5; 
+            originalMaterial.roughness = originalMaterial.roughness || 0.5;
+
+            // Assign the updated material to the mesh
+            child.material = originalMaterial;
         }
-      });
+    });
         // Animate the ship along the cruise path
         animateCruiseShip(ship, points, 10000);
     });
