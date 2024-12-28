@@ -9060,7 +9060,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         scene.add(ship);
 
         // Scale down the ship to an appropriate size
-        const shipScale = 0.02; // Adjust this value to control the size
+        const shipScale = 0.01; // Adjust this value to control the size
         ship.scale.set(shipScale, shipScale, shipScale);
 
         // Rotate the ship to face forward along the path
@@ -9068,30 +9068,32 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
 
         // Make the ship completely white
         // Traverse through the 3D model and update all materials to white
+        // Traverse through the 3D model and update all materials to white
         ship.traverse((child) => {
     if (child.isMesh) {
-        // Check if the material corresponds to "material_4"
-        if (child.material.name === "material_4") {
-            // Clone the original material to preserve specific details
-            const originalMaterial = child.material.clone();
-            
-            // Update the base color to white while keeping other properties
-            if (originalMaterial.map) {
-                originalMaterial.color.set(0xffffff); // Set base color to white
-                originalMaterial.map.encoding = THREE.sRGBEncoding; // Preserve textures
-            } else {
-                originalMaterial.color = new THREE.Color(0xffffff); // Set to white
-            }
-            
-            // Optionally adjust metallic and roughness factors for realism
-            originalMaterial.metalness = originalMaterial.metalness || 0.5; 
-            originalMaterial.roughness = originalMaterial.roughness || 0.5;
+        // Retain original materials for specific named materials
+        const materialNamesToKeep = [
+            "material_1",
+            "material_2",
+            "material_3",
+            "material_6",
+            "material_8"
+        ];
 
-            // Assign the updated material to the mesh
-            child.material = originalMaterial;
+        if (materialNamesToKeep.includes(child.material.name)) {
+            // Do nothing, keep the original material
+            return;
         }
+
+        // For all other materials, apply the white material
+        child.material = new THREE.MeshStandardMaterial({
+            color: 0xffffff, // White color
+            roughness: 0.5,  // Adjust roughness for material realism
+            metalness: 0.1,  // Adjust metalness for material realism
+        });
     }
 });
+
 
         // Animate the ship along the cruise path
         animateCruiseShip(ship, points, 10000);
