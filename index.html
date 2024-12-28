@@ -678,7 +678,7 @@ background-color: rgba(255,255,255,0.15);
 #languageSelect {
   width: 124px;
   top: 75px;
-  right: 17.6%;
+  right: 26.3%;
   border-radius: 24px;
   height: 35px;
 }
@@ -2415,7 +2415,7 @@ left: -8px !important;
     right: 135px !important;
   }
   #overlayContainer2 {
-    width: 50%;
+    width: 44%;
     height: 79%;
   }
   #header {
@@ -3418,7 +3418,7 @@ margin-bottom: 1px;
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/page-refresh.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
-    <p class="instruction-text">Clear Filters to clear the search bar and hide search results or refresh the page to perform a new search</p>
+    <p class="instruction-text">Refresh the page to perform a new search</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/login--2.png" alt="Button Click" class="glove-hand">
@@ -4631,6 +4631,21 @@ guestPopup.appendChild(div);
  Search Flights
   <img src="js/300694_plane-plane-emoji-png-png-download (1).png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-left: 4px; margin-top: 0px;" alt="Plane" />
 `;
+if (toggleCruiseBtn.textContent === "Cruises") {
+    // Add the event listener for the toggle change
+document.addEventListener('DOMContentLoaded', () => {
+    // Add a 10-second delay before simulating a click on the toggle button
+    setTimeout(() => {
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.click(); // Simulate a click on the toggle
+        }
+    }, 3000); // 10000 milliseconds = 10 seconds
+});
+  } else {
+    
+  }
+
   }
 
   // Toggle iframe containers
@@ -8282,7 +8297,7 @@ margin-right: -320px;
     background: #003580;
     background: #00ebff;
     background: #59c2f6;
-    background: #00aaff;
+    background: #62caf6;
   }
 `;
 document.head.appendChild(style);
@@ -9045,7 +9060,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         scene.add(ship);
 
         // Scale down the ship to an appropriate size
-        const shipScale = 0.025; // Adjust this value to control the size
+        const shipScale = 0.02; // Adjust this value to control the size
         ship.scale.set(shipScale, shipScale, shipScale);
 
         // Rotate the ship to face forward along the path
