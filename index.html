@@ -8968,7 +8968,7 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders
 // Function to create the cruise path as a dotted line on the globe's surface
 // Function to create the cruise path as a dotted line on the globe's surface
 function createCruisePath(fromVec, toVec) {
-    const segments = 200; // Number of segments for the path
+    const segments = 200; // Number of segments for the dotted line
     const points = []; // Array to hold points along the path
 
     // Generate points for the cruise path along the globe’s surface
@@ -8978,27 +8978,22 @@ function createCruisePath(fromVec, toVec) {
         points.push(intermediate); // Ensure the points are on the globe's surface
     }
 
-    // Create a curve from the points
-    const curve = new THREE.CatmullRomCurve3(points);
-    curve.closed = false; // Open curve
-
-    // Create tube geometry for a thick path
-    const tubeGeometry = new THREE.TubeGeometry(curve, segments, 0.05, 16, false);
-
-    // Create material for the tube
-    const tubeMaterial = new THREE.MeshStandardMaterial({
+    // Create geometry for the dotted line
+    const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+    const dashedMaterial = new THREE.LineDashedMaterial({
+        //color: 0xFFD700,  // Golden color
         color: 0x46dff0, // Light blue color
-        transparent: true,
-        opacity: 0.8,
+        dashSize: 0.125,  // Length of dashes
+        gapSize: 0.075,   // Length of gaps
+        linewidth: 100030,  // Thickness of the line
     });
 
-    // Create the tube mesh
-    const cruisePath = new THREE.Mesh(tubeGeometry, tubeMaterial);
-    scene.add(cruisePath); // Add the path to the scene
+    const cruisePath = new THREE.Line(lineGeometry, dashedMaterial);
+    cruisePath.computeLineDistances(); // Required for dashed lines
+    scene.add(cruisePath);
 
     return { cruisePath, points }; // Return the path and points
 }
-
 
 
 
