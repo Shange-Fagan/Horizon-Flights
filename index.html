@@ -3926,7 +3926,7 @@ gl_FragColor = vec4(glowColor, intensity);
 //import { RenderPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/postprocessing/RenderPass.js?v=1';
 //import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/postprocessing/UnrealBloomPass.js?v=1';
 //import  Luxon from 'https://cdnjs.cloudflare.com/ajax/libs/luxon/3.3.0/luxon.min.js'; //(if using modules)
-
+import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline';
 // Scene Setup
   const scene = new THREE.Scene();
   /*const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);*/
@@ -8966,7 +8966,7 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders
 
 // Function to create the cruise path as a dotted line on the globe's surface
 // Function to create the cruise path as a dotted line on the globe's surface
-function createCruisePath(fromVec, toVec) {
+/*function createCruisePath(fromVec, toVec) {
     const segments = 200; // Number of segments for the dotted line
     const points = []; // Array to hold points along the path
 
@@ -8992,7 +8992,37 @@ function createCruisePath(fromVec, toVec) {
     scene.add(cruisePath);
 
     return { cruisePath, points }; // Return the path and points
+}*/
+function createCruisePath(fromVec, toVec) {
+    const segments = 200; // Number of segments for the path
+    const points = []; // Array to hold points along the path
+
+    // Generate points for the cruise path along the globe’s surface
+    for (let i = 0; i <= segments; i++) {
+        const t = i / segments; // Interpolation factor
+        const intermediate = fromVec.clone().lerp(toVec, t).normalize().multiplyScalar(earthRadius);
+        points.push(intermediate); // Ensure the points are on the globe's surface
+    }
+
+    // Use MeshLine for thicker paths
+    const line = new MeshLine();
+    line.setPoints(points.flat()); // Flatten the array of points
+
+    const lineMaterial = new MeshLineMaterial({
+        color: 0x46dff0,
+        lineWidth: 0.02, // Adjust line width
+        dashArray: 0.2, // Length of dashes
+        dashRatio: 0.5, // Gap ratio
+        transparent: true,
+        opacity: 0.8,
+    });
+
+    const cruisePath = new THREE.Mesh(line, lineMaterial);
+    scene.add(cruisePath);
+
+    return { cruisePath, points }; // Return the path and points
 }
+
 
 // Function to animate the cruise ship along the dotted line
 function animateCruiseShip(ship, points, duration = 8000) {
