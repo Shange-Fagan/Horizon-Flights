@@ -9000,16 +9000,41 @@ function createCruisePath(fromVec, toVec) {
     const segments = 200; // Number of segments for the path
     const points = []; // Array to hold points along the path
 
+    // Ensure fromVec and toVec are valid
+    if (!fromVec || !toVec || !(fromVec instanceof THREE.Vector3) || !(toVec instanceof THREE.Vector3)) {
+        console.error("Invalid fromVec or toVec", fromVec, toVec);
+        return;
+    }
+
+    // Ensure earthRadius is valid
+    if (!isFinite(earthRadius)) {
+        console.error("Invalid earthRadius", earthRadius);
+        return;
+    }
+
     // Generate points for the cruise path along the globe’s surface
     for (let i = 0; i <= segments; i++) {
         const t = i / segments; // Interpolation factor
-        const intermediate = fromVec.clone().lerp(toVec, t).normalize().multiplyScalar(earthRadius);
-        points.push(intermediate); // Ensure the points are on the globe's surface
+        const intermediate = fromVec.clone().lerp(toVec, t);
+
+        if (intermediate.length() === 0) {
+            console.error("Zero-length vector detected", intermediate);
+        } else {
+            intermediate.normalize().multiplyScalar(earthRadius);
+            points.push(intermediate); // Ensure the points are on the globe's surface
+        }
+    }
+
+    // Flatten the array of points and validate
+    const flattenedPoints = points.flat();
+    if (flattenedPoints.some((p) => !isFinite(p.x) || !isFinite(p.y) || !isFinite(p.z))) {
+        console.error("Invalid points detected in flattenedPoints", flattenedPoints);
+        return;
     }
 
     // Use MeshLine for thicker paths
     const line = new MeshLine();
-    line.setPoints(points.flat()); // Flatten the array of points
+    line.setPoints(flattenedPoints);
 
     const lineMaterial = new MeshLineMaterial({
         color: 0x46dff0,
@@ -9025,6 +9050,7 @@ function createCruisePath(fromVec, toVec) {
 
     return { cruisePath, points }; // Return the path and points
 }
+
 
 
 // Function to animate the cruise ship along the dotted line
