@@ -8967,8 +8967,8 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders
 
 // Function to create the cruise path as a dotted line on the globe's surface
 // Function to create the cruise path as a dotted line on the globe's surface
-/*function createCruisePath(fromVec, toVec) {
-    const segments = 200; // Number of segments for the dotted line
+function createCruisePath(fromVec, toVec) {
+    const segments = 200; // Number of segments for the path
     const points = []; // Array to hold points along the path
 
     // Generate points for the cruise path along the globe’s surface
@@ -8978,78 +8978,27 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders
         points.push(intermediate); // Ensure the points are on the globe's surface
     }
 
-    // Create geometry for the dotted line
-    const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-    const dashedMaterial = new THREE.LineDashedMaterial({
-        //color: 0xFFD700,  // Golden color
+    // Create a curve from the points
+    const curve = new THREE.CatmullRomCurve3(points);
+    curve.closed = false; // Open curve
+
+    // Create tube geometry for a thick path
+    const tubeGeometry = new THREE.TubeGeometry(curve, segments, 0.05, 16, false);
+
+    // Create material for the tube
+    const tubeMaterial = new THREE.MeshStandardMaterial({
         color: 0x46dff0, // Light blue color
-        dashSize: 0.125,  // Length of dashes
-        gapSize: 0.075,   // Length of gaps
-        linewidth: 1030,  // Thickness of the line
-    });
-
-    const cruisePath = new THREE.Line(lineGeometry, dashedMaterial);
-    cruisePath.computeLineDistances(); // Required for dashed lines
-    scene.add(cruisePath);
-
-    return { cruisePath, points }; // Return the path and points
-}*/
-//import { MeshLine, MeshLineMaterial } from './js/THREE.MeshLine.js';
-
-function createCruisePath(fromVec, toVec) {
-    const segments = 200; // Number of segments for the path
-    const points = []; // Array to hold points along the path
-
-    // Ensure fromVec and toVec are valid
-    if (!fromVec || !toVec || !(fromVec instanceof THREE.Vector3) || !(toVec instanceof THREE.Vector3)) {
-        console.error("Invalid fromVec or toVec", fromVec, toVec);
-        return;
-    }
-
-    // Ensure earthRadius is valid
-    if (!isFinite(earthRadius)) {
-        console.error("Invalid earthRadius", earthRadius);
-        return;
-    }
-
-    // Generate points for the cruise path along the globe’s surface
-    for (let i = 0; i <= segments; i++) {
-        const t = i / segments; // Interpolation factor
-        const intermediate = fromVec.clone().lerp(toVec, t);
-
-        if (intermediate.length() === 0) {
-            console.error("Zero-length vector detected", intermediate);
-        } else {
-            intermediate.normalize().multiplyScalar(earthRadius);
-            points.push(intermediate); // Ensure the points are on the globe's surface
-        }
-    }
-
-    // Flatten the array of points and validate
-    const flattenedPoints = points.flat();
-    if (flattenedPoints.some((p) => !isFinite(p.x) || !isFinite(p.y) || !isFinite(p.z))) {
-        console.error("Invalid points detected in flattenedPoints", flattenedPoints);
-        return;
-    }
-
-    // Use MeshLine for thicker paths
-    const line = new MeshLine();
-    line.setPoints(flattenedPoints);
-
-    const lineMaterial = new MeshLineMaterial({
-        color: 0x46dff0,
-        lineWidth: 0.02, // Adjust line width
-        dashArray: 0.2, // Length of dashes
-        dashRatio: 0.5, // Gap ratio
         transparent: true,
         opacity: 0.8,
     });
 
-    const cruisePath = new THREE.Mesh(line, lineMaterial);
-    scene.add(cruisePath);
+    // Create the tube mesh
+    const cruisePath = new THREE.Mesh(tubeGeometry, tubeMaterial);
+    scene.add(cruisePath); // Add the path to the scene
 
     return { cruisePath, points }; // Return the path and points
 }
+
 
 
 
