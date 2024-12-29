@@ -8977,9 +8977,9 @@ function createCruisePath(fromVec, toVec) {
     const dashedMaterial = new THREE.LineDashedMaterial({
         //color: 0xFFD700,  // Golden color
         color: 0x46dff0, // Light blue color
-        dashSize: 0.2,  // Length of dashes
-        gapSize: 0.1,   // Length of gaps
-        linewidth: 30,  // Thickness of the line
+        dashSize: 0.125,  // Length of dashes
+        gapSize: 0.075,   // Length of gaps
+        linewidth: 130,  // Thickness of the line
     });
 
     const cruisePath = new THREE.Line(lineGeometry, dashedMaterial);
@@ -9060,7 +9060,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
         scene.add(ship);
 
         // Scale down the ship to an appropriate size
-        const shipScale = 0.025; // Adjust this value to control the size
+        const shipScale = 0.02; // Adjust this value to control the size
         ship.scale.set(shipScale, shipScale, shipScale);
 
         // Rotate the ship to face forward along the path
