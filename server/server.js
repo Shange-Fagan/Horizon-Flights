@@ -321,11 +321,11 @@ try {
   // Proceed to click the search button
   const searchButtonSelector = '.mewtwo-flights-submit_button.mewtwo-flights-submit_button--new'; // Ensure the selector is correct
   await page.waitForSelector(searchButtonSelector, { visible: true }); // Wait for the button to be visible
-
+  await page.screenshot({ path: 'screenshot-before-searchbtn.png' });
   await page.click(searchButtonSelector);
-  await new Promise(resolve => setTimeout(resolve, 35000));
+  //await new Promise(resolve => setTimeout(resolve, 35000));
 
-await new Promise(resolve => setTimeout(resolve, 5000));
+//await new Promise(resolve => setTimeout(resolve, 5000));
 const currentUrlBeforeSearch = page.url();
 // Capture HTML content to check if reCAPTCHA is present
 console.log("Current URL before pressing the search button:", currentUrlBeforeSearch);
@@ -356,6 +356,7 @@ const results = await page.evaluate(() => {
   
   ticketItems.forEach((item) => {
     const airline = item.querySelector('.ticket-action__main_proposal')?.innerText || "N/A";
+    const airlineImg = item.querySelector('img.ticket-action-airline__logo.ticket-action-airline__logo--not_mobile')?.getAttribute('src') 
     const departureTime = item.querySelector('.flight.flight--depart .flight-brief-departure .flight-brief-time')?.innerText || "N/A";
     const returnTime = item.querySelector('.flight.flight--return .flight-brief-departure .flight-brief-time')?.innerText || "N/A";
     const layoverTime = item.querySelector('.flight-brief-layovers__flight_time')?.innerText || "N/A";
@@ -364,6 +365,7 @@ const results = await page.evaluate(() => {
 
     flights.push({
       airline,
+      airlineImg,
       departureTime,
       returnTime,
       layoverTime,
@@ -388,6 +390,95 @@ await browser.close();
     res.status(500).json({ success: false, error: "Failed to scrape flights" });
   }
 });
+
+app.get("/scrape-cruises", async (req, res) => {
+  const { url2 } = req.query || ''; // Ensure the URL is defined
+
+  // Parse query parameters
+  const queryParams = new URLSearchParams(url2.split('?')[1]);
+  const destination = queryParams.get('to');
+  let departureDate = queryParams.get('checkin'); // Convert checkin to departure date format
+  const cruiseLength = queryParams.get('cruiselength');
+  const cruiseLine = queryParams.get('cruiseline');
+
+  console.log("Parsed Parameters:");
+  console.log("Destination:", destination);
+  console.log("Departure Date:", departureDate);
+  console.log("Cruise Length:", cruiseLength);
+  console.log("Cruise Line:", cruiseLine);
+
+  if (!destination || !departureDate) {
+    console.error("Missing 'destination' or 'departureDate' parameters.");
+    res.status(400).json({ error: "'destination' and 'departureDate' parameters are required" });
+    return;
+  }
+
+  // Format departureDate (e.g., December 2024)
+  try {
+    const date = new Date(departureDate); // Assuming ISO format YYYY-MM-DD
+    departureDate = `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
+  } catch (err) {
+    console.error("Error formatting date:", err);
+    res.status(400).json({ error: "Invalid 'checkin' date format. Use YYYY-MM-DD." });
+    return;
+  }
+
+  try {
+    const baseUrl = `https://www.priceline.com/cruises`;
+
+    console.log("Generated URL:", baseUrl);
+
+    // Launch Puppeteer with Stealth Mode
+    const browser = await puppeteer.launch({
+      executablePath: await chromium.executablePath,
+      headless: false, // Set to false for debugging
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-web-security',
+        '--allow-running-insecure-content',
+        '--disable-features=IsolateOrigins,site-per-process'
+      ]
+    });
+    const page = await browser.newPage();
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+
+    // Input search parameters
+    if (destination) await page.type('#destination', destination);
+    if (departureDate) await page.type('#departure-date', departureDate);
+    if (cruiseLength) await page.select('#cruise-length', cruiseLength);
+    if (cruiseLine) await page.select('#cruise-line', cruiseLine);
+
+    // Trigger the search
+    await page.click('#search-btn');
+    await page.waitForSelector('.results-container', { timeout: 10000 }); // Wait for results to load
+
+    // Scrape cruise data
+    const results = await page.evaluate(() => {
+      const cruises = [];
+      document.querySelectorAll('.result-item').forEach(item => {
+        const name = item.querySelector('.cruise-name')?.textContent.trim() || 'Unknown Cruise';
+        const price = item.querySelector('.cruise-price')?.textContent.trim() || 'Price Not Available';
+        const details = item.querySelector('.cruise-details')?.textContent.trim() || 'Details Not Available';
+        const link = item.querySelector('a')?.href || '#';
+        cruises.push({ name, price, details, link });
+      });
+      return cruises;
+    });
+
+    console.log("Scraped cruise search results:", results);
+
+    // Close the browser
+    await browser.close();
+
+    // Return scraped data
+    res.json({ success: true, cruises: results });
+  } catch (error) {
+    console.error("Error scraping cruises:", error);
+    res.status(500).json({ success: false, error: "Failed to scrape cruises" });
+  }
+});
+
 // Airbnb Scraping based on searchUrl (Original code)
 async function scrapeAirbnbPosts(searchUrl) {
   try {
@@ -419,7 +510,10 @@ async function scrapeAirbnbPosts(searchUrl) {
         // Select only the first image from the listing carousel
         const imgElement = document.querySelectorAll('picture source[srcset]')[index];
         const imageUrl = imgElement ? imgElement.getAttribute('srcset').split(' ')[0] : '';
-        const linkElement = document.querySelectorAll('a[aria-hidden="true"]')[index];
+        // Fetch the correct hyperlink for each post
+    const postCardElement = post.closest('[data-testid="card-container"]'); // Narrow down to the parent card
+    const linkElement = postCardElement ? postCardElement.querySelector('a[aria-hidden="true"]') : null;
+        //const linkElement = document.querySelectorAll('a[aria-hidden="true"]')[index];
         const ratingElement = document.querySelectorAll('.t1a9j9y7.atm_da_1ko3t4y.atm_dm_kb7nvz.atm_fg_h9n0ih.dir.dir-ltr')[index];
 
         // Extract and clean the price
