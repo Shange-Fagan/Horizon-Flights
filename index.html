@@ -9103,10 +9103,7 @@ function loadCruiseShip() {
         obj.scale.multiplyScalar(0.9); // Scale down by 1%
         // Add the ship to the scene
         scene.add(obj);
-      });
-    }
-
-    console.log("Ship size:", obj.scale);
+        console.log("Ship size:", obj.scale);
 
         obj.traverse((child) => {
             if (child.isMesh) {
@@ -9120,11 +9117,12 @@ function loadCruiseShip() {
 
 
         // Animate the ship
-        loadCruiseShip();
         animateCruiseShip(obj, points, 10000);
     });
+      });
+    }
 
-
+    loadCruiseShip();
 
 
     // Additional actions
