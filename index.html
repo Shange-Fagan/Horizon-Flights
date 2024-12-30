@@ -9070,7 +9070,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
     // Function to load and apply textures to the model
 function loadCruiseShip() {
     const loader = new OBJLoader();
-    const textureLoader = new TextureLoader();
+    const textureLoader = new THREE.TextureLoader();
 
     // Path to the OBJ file
     loader.load('./js/cruise_ship/LargeCruiseShip.obj', (obj) => {
