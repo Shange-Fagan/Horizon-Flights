@@ -8642,7 +8642,7 @@ const monthlyEndDate = new Date(today.getFullYear(), today.getMonth() + 3, 0); /
 // Format the dates to YYYY-MM-DD
 const monthlyStart = monthlyStartDate.toISOString().split('T')[0];  // First day of current month
 const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of the month 3 months from now
-const url = `/scrape-cruises?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&departureDate=${encodeURIComponent(departureDate)}&cruiseLength=${encodeURIComponent(cruiseLength)}&cruiseLine=${encodeURIComponent(cruiseLine)}`;
+const url2 = `/scrape-cruises?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&departureDate=${encodeURIComponent(departureDate)}&cruiseLength=${encodeURIComponent(cruiseLength)}&cruiseLine=${encodeURIComponent(cruiseLine)}`;
 
 console.log("Requesting URL:", url);
 
@@ -8671,26 +8671,26 @@ console.log("Requesting URL:", url);
     updateSpinnerText("We’re comparing great cruise deals for you... Hang tight! Feel free to browse while we find your perfect trip.");
 
     // Fetch Airbnb posts and display them
-    await fetchCruisePosts(url);
-	console.log('Generated searchUrl:', url);
+    await fetchCruisePosts(url2);
+	console.log('Generated searchUrl:', url2);
   console.log('Generated searchUrl:fromlocation', from);
 	console.log('Generated searchUrl:location', to);
 	console.log('Generated searchUrl:checkin', departureDate);
 	console.log('Generated searchUrl:cruiseLength', cruiseLength);
 	console.log('Generated searchUrl:cruiseLine', cruiseLine);
-	console.log('Fetching data from:', `https://45e3-2a02-c7c-3945-5100-a023-ffbe-337d-86e1.ngrok-free.app/scrape-flights?url=${encodeURIComponent(url)}`);
+	console.log('Fetching data from:', `https://45e3-2a02-c7c-3945-5100-a023-ffbe-337d-86e1.ngrok-free.app/scrape-flights?url=${encodeURIComponent(url2)}`);
   hideSpinnerContainer();
   console.log("Formatted Departure Date:", departureDate);
 console.log("Formatted Return Date:", cruiseLine);
 
 
 });
-async function fetchCruisePosts(url) {
+async function fetchCruisePosts(url2) {
     try {
         // Update spinner text to indicate scraping started
         updateSpinnerText("We’re comparing great cruise deals for you... Hang tight! Feel free to browse while we find your perfect trip.");
 
-        const response = await fetch(`https://45e3-2a02-c7c-3945-5100-a023-ffbe-337d-86e1.ngrok-free.app/scrape-cruises?url=${encodeURIComponent(url)}`, {
+        const response = await fetch(`https://45e3-2a02-c7c-3945-5100-a023-ffbe-337d-86e1.ngrok-free.app/scrape-cruises?url=${encodeURIComponent(url2)}`, {
           headers: {
         'ngrok-skip-browser-warning': 'true',
     },
