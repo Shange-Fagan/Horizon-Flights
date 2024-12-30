@@ -8969,6 +8969,7 @@ document.getElementById('likedPostsButton').addEventListener('click', showLikedP
 document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
 import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/OBJLoader.js';
 import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/MTLLoader.js';
+import { TextureLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/TextureLoader.js';
 
 // Function to create the cruise path as a dotted line on the globe's surface
 // Function to create the cruise path as a dotted line on the globe's surface
@@ -9067,44 +9068,61 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
     const { cruisePath, points } = createCruisePath(fromVector, toVector);
 
     // Load and animate the yacht model
-    // Load and animate the yacht model
-    const mtlLoader = new MTLLoader();
-mtlLoader.load('js/uploads-files-3023526-LargeCruiseShip.mtl', function (materials) {
-    materials.preload();
-
-    // Pass materials to the OBJLoader
+    // Function to load and apply textures to the model
+function loadCruiseShip() {
     const loader = new OBJLoader();
-    loader.setMaterials(materials);
-    loader.load('js/uploads-files-3023526-LargeCruiseShip.obj', function (obj) {
-        const ship = obj;
-        scene.add(ship);
+    const textureLoader = new TextureLoader();
 
-        // Scale, rotate, and traverse as before
-        const shipScale = 0.01;
-        ship.scale.set(shipScale, shipScale, shipScale);
-        ship.rotation.y = Math.PI / 2;
-        // Apply scale directly
-    ship.scale.multiplyScalar(0.9); // Scale down by 1%
-    scene.add(ship);
+    // Path to the OBJ file
+    loader.load('./js/cruise_ship/LargeCruiseShip.obj', (obj) => {
+        // Load and apply the textures
+        const diffuseTexture = textureLoader.load('./js/cruise_ship/textures/LCS_Diffuse.png');
+        const normalTexture = textureLoader.load('./js/cruise_ship/textures/LCS_Nrm.png');
+        const roughnessTexture = textureLoader.load('./js/cruise_ship/textures/LCS_Roughness.png');
+        const transparencyTexture = textureLoader.load('./js/cruise_ship/textures/LCS_Transparency_Diffuse.png');
 
-    console.log("Ship size:", ship.scale);
+        obj.traverse((child) => {
+            if (child.isMesh) {
+                child.material = new THREE.MeshStandardMaterial({
+                    map: diffuseTexture, // Apply diffuse texture
+                    normalMap: normalTexture, // Apply normal map
+                    roughnessMap: roughnessTexture, // Apply roughness map
+                    alphaMap: transparencyTexture, // Apply transparency map
+                    transparent: true, // Enable transparency
+                    roughness: 0.5, // Adjust for realism
+                    metalness: 0.1, // Adjust for realism
+                });
+            }
+        });
 
-        ship.traverse((child) => {
+        // Scale the ship to fit the scene
+        const shipScale = 0.01; // Adjust the scale
+        obj.scale.set(shipScale, shipScale, shipScale);
+              //obj.rotation.y = Math.PI / 2;
+                // Apply scale directly
+        obj.scale.multiplyScalar(0.9); // Scale down by 1%
+        // Add the ship to the scene
+        scene.add(obj);
+      });
+    }
+
+    console.log("Ship size:", obj.scale);
+
+        obj.traverse((child) => {
             if (child.isMesh) {
                 // Retain original materials or update to white
             }
         });
-        ship.traverse((child) => {
+        obj.traverse((child) => {
     if (child.isMesh) {
         //child.scale.set(shipScale, shipScale, shipScale);
     }
-});
 
 
         // Animate the ship
-        animateCruiseShip(ship, points, 10000);
+        loadCruiseShip();
+        animateCruiseShip(obj, points, 10000);
     });
-});
 
 
 
