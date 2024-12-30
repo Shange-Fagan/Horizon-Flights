@@ -3779,6 +3779,7 @@ margin-bottom: 1px;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.3.0/luxon.min.js"></script>
 <script src="//unpkg.com/globe.gl"></script>
 <script src="./js/THREE.MeshLine.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/OBJLoader.js"></script>
 <!-- Firebase App (the core Firebase SDK) -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 
@@ -8966,7 +8967,8 @@ document.getElementById('likedPostsButton').addEventListener('click', showLikedP
 }*/
 
 document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
-import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
+import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/OBJLoader.js';
+import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/MTLLoader.js';
 
 // Function to create the cruise path as a dotted line on the globe's surface
 // Function to create the cruise path as a dotted line on the globe's surface
@@ -9065,50 +9067,35 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
     const { cruisePath, points } = createCruisePath(fromVector, toVector);
 
     // Load and animate the yacht model
-    const loader = new GLTFLoader();
-    loader.load('./yatch_ii/scene.gltf', function (gltf) {
-        const ship = gltf.scene;
+    // Load and animate the yacht model
+    const mtlLoader = new MTLLoader();
+mtlLoader.load('js/uploads-files-3023526-LargeCruiseShip.mtl', function (materials) {
+    materials.preload();
+
+    // Pass materials to the OBJLoader
+    const loader = new OBJLoader();
+    loader.setMaterials(materials);
+    loader.load('js/uploads-files-3023526-LargeCruiseShip.obj', function (obj) {
+        const ship = obj;
         scene.add(ship);
 
-        // Scale down the ship to an appropriate size
-        const shipScale = 0.03; // Adjust this value to control the size
+        // Scale, rotate, and traverse as before
+        const shipScale = 1;
         ship.scale.set(shipScale, shipScale, shipScale);
+        ship.rotation.y = Math.PI / 2;
 
-        // Rotate the ship to face forward along the path
-        //ship.rotation.y = Math.PI / 2; // Rotate 90 degrees forward
-
-        // Make the ship completely white
-        // Traverse through the 3D model and update all materials to white
-        // Traverse through the 3D model and update all materials to white
         ship.traverse((child) => {
-    if (child.isMesh) {
-        // Retain original materials for specific named materials
-        const materialNamesToKeep = [
-            "material_1",
-            "material_2",
-            "material_3",
-            "material_6",
-            "material_8"
-        ];
-
-        if (materialNamesToKeep.includes(child.material.name)) {
-            // Do nothing, keep the original material
-            return;
-        }
-
-        // For all other materials, apply the white material
-        child.material = new THREE.MeshStandardMaterial({
-            //color: 0xffffff, // White color
-            roughness: 0.5,  // Adjust roughness for material realism
-            metalness: 0.1,  // Adjust metalness for material realism
+            if (child.isMesh) {
+                // Retain original materials or update to white
+            }
         });
-    }
+
+        // Animate the ship
+        animateCruiseShip(ship, points, 10000);
+    });
 });
 
 
-        // Animate the ship along the cruise path
-        animateCruiseShip(ship, points, 10000);
-    });
 
 
     // Additional actions
