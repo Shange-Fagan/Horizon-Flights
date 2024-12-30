@@ -678,7 +678,7 @@ background-color: rgba(255,255,255,0.15);
 #languageSelect {
   width: 124px;
   top: 75px;
-  right: 26.3%;
+  right: 26.3% !important;
   border-radius: 24px;
   height: 35px;
 }
@@ -9080,15 +9080,26 @@ mtlLoader.load('js/uploads-files-3023526-LargeCruiseShip.mtl', function (materia
         scene.add(ship);
 
         // Scale, rotate, and traverse as before
-        const shipScale = 0.0075;
+        const shipScale = 0.01;
         ship.scale.set(shipScale, shipScale, shipScale);
         ship.rotation.y = Math.PI / 2;
+        // Apply scale directly
+    ship.scale.multiplyScalar(0.9); // Scale down by 1%
+    scene.add(ship);
+
+    console.log("Ship size:", ship.scale);
 
         ship.traverse((child) => {
             if (child.isMesh) {
                 // Retain original materials or update to white
             }
         });
+        ship.traverse((child) => {
+    if (child.isMesh) {
+        //child.scale.set(shipScale, shipScale, shipScale);
+    }
+});
+
 
         // Animate the ship
         animateCruiseShip(ship, points, 10000);
