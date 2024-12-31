@@ -2431,7 +2431,7 @@ left: -8px !important;
   }
   #overlayContainer {
     left: 18px !important;
-    width: 50%;
+    width: 54%;
   }
 }
 
@@ -5532,13 +5532,13 @@ document.getElementById('submitRegion').addEventListener('click', () => {
     controls.autoRotate = true; // Resume autorotation
     const confirmationMessage = document.getElementById('confirmationMessage');
     confirmationMessage.style.display = 'none'; // Show confirmation message
-    if (animatePlane) {
+    if (animatePlane(plane, curve, 5000, distance)) {
         // Ensure the animation is running
-        animatePlane.start();
+        animatePlane(plane, curve, 5000, distance).start();
     }
-    if (animateCruiseShip) {
+    if (loadCruiseShip()) {
         // Ensure the animation is running
-        animateCruiseShip.start();
+        loadCruiseShip().start();
     }
     setTimeout(() => {
       confirmationMessage.style.display = 'none';
@@ -12140,13 +12140,13 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
       carouselContainer1.style.display = 'none';
       carouselContainer2.style.display = 'none';
       let selectedRegion = this.value;
-      if (animatePlane) {
+      if (animatePlane(plane, curve, 5000, distance)) {
         // Ensure the animation is running
-        animatePlane.start();
+        animatePlane(plane, curve, 5000, distance).start();
     }
-    if (animateCruiseShip) {
+    if (loadCruiseShip()) {
         // Ensure the animation is running
-        animateCruiseShip.start();
+        loadCruiseShip().start();
     }
       const selectedCategory = document.getElementById('priceCategorySelect').value;
 	// Load appropriate markers for the selected region and category
