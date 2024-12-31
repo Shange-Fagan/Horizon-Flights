@@ -9396,7 +9396,8 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
     });*/
 
     // Update spinner text to indicate fetching data
-    updateSpinnerText("We’re searching for the best hotel deals for you... Sit back and browse while we find your perfect stay!🙏🏽");
+    updateSpinnerText(`We’re searching for the best hotel deals for you… 🙌 Sit back, relax, and browse while we find your perfect stay! 🏨✨<br>
+    Thank you for your patience! 🙏🏽`);
 
     // Fetch Airbnb posts and display them
     await fetchAirbnbPosts(searchUrl);
@@ -9469,7 +9470,8 @@ overlayContainer.addEventListener('click', () => {
 async function fetchAirbnbPosts(searchUrl) {
     try {
         // Update spinner text to indicate scraping started
-        updateSpinnerText("We’re searching for the best hotel deals for you... Sit back and browse while we find your perfect stay!🙏🏽");
+        updateSpinnerText(`We’re searching for the best hotel deals for you… 🙌 Sit back, relax, and browse while we find your perfect stay! 🏨✨<br>
+    Thank you for your patience! 🙏🏽`);
 
         const response = await fetch(`https://45e3-2a02-c7c-3945-5100-a023-ffbe-337d-86e1.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
           headers: {
@@ -12179,7 +12181,8 @@ async function fetchAirbnbPosts(searchUrl) {
 
     try {
         // Update spinner text to indicate scraping started
-        updateSpinnerText("We’re searching for the best hotel deals for you... Sit back and browse while we find your perfect stay!🙏🏽");
+        updateSpinnerText(`We’re searching for the best hotel deals for you… 🙌 Sit back, relax, and browse while we find your perfect stay! 🏨✨<br>
+    Thank you for your patience! 🙏🏽`);
 
         const response = await fetch(`https://45e3-2a02-c7c-3945-5100-a023-ffbe-337d-86e1.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
           headers: {
