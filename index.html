@@ -5521,7 +5521,14 @@ document.getElementById('submitRegion').addEventListener('click', () => {
     controls.autoRotate = true; // Resume autorotation
     const confirmationMessage = document.getElementById('confirmationMessage');
     confirmationMessage.style.display = 'none'; // Show confirmation message
-
+    if (animatePlane) {
+        // Ensure the animation is running
+        animatePlane.start();
+    }
+    if (animateCruiseShip) {
+        // Ensure the animation is running
+        animateCruiseShip.start();
+    }
     setTimeout(() => {
       confirmationMessage.style.display = 'none';
     }, 20000); // Hide confirmation message after 20 seconds
@@ -9038,6 +9045,7 @@ function animateCruiseShip(ship, points, duration = 8000) {
                 progress.t = 0; // Loop the animation
                 animatePath();
             })
+            .repeat(Infinity) // Keep the animation running
             .start();
     }
 
@@ -11131,6 +11139,7 @@ function animatePlane(plane, pathCurve, duration = 3500, distance) {
                 progress.t = 0; // Reset to loop the animation
                 animateFlight(); // Restart the flight animation
             })
+            .repeat(Infinity) // Keep the animation running
             .start();
     }
 
@@ -11151,6 +11160,8 @@ document.getElementById('submitRegion').addEventListener('click', () => {
     // Ensure plane animation continues (do not reset or interfere with TWEEN)
     console.log('Region Select clicked. Plane animation continues.');
 });
+let animatePlane;
+let animateCruiseShip;
 // When search button is clicked
 document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))').addEventListener('click', async function () {
 
@@ -12120,6 +12131,14 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
       carouselContainer1.style.display = 'none';
       carouselContainer2.style.display = 'none';
       let selectedRegion = this.value;
+      if (animatePlane) {
+        // Ensure the animation is running
+        animatePlane.start();
+    }
+    if (animateCruiseShip) {
+        // Ensure the animation is running
+        animateCruiseShip.start();
+    }
       const selectedCategory = document.getElementById('priceCategorySelect').value;
 	// Load appropriate markers for the selected region and category
     //loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
