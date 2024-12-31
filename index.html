@@ -8581,6 +8581,17 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
     const departureDate = document.getElementById('checkin').value;
     const cruiseLength = document.getElementById('cruiselength').value;
     const cruiseLine = document.getElementById('cruiseline').value;
+    console.log('From:', from);
+console.log('To:', to);
+console.log('Departure Date:', departureDate);
+console.log('Cruise Length:', cruiseLength);
+console.log('Cruise Line:', cruiseLine);
+if (!cruiseLength) {
+    console.error("Cruise length is not selected.");
+}
+if (!cruiseLine) {
+    console.error("Cruise line is not selected.");
+}
     /*const inputs = document.querySelectorAll('#header input');
     inputs.forEach(input => {
         input.style.color = 'darkgrey';  // Change placeholder text to dark grey
