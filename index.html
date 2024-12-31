@@ -3191,7 +3191,14 @@ flex: 1;
             padding: 1.5px 2.5px !important; /* Safari-specific padding */
         }
     }
+}.safari #cycleUp {
+    padding: 1.5px 2.5px !important;
 }
+
+.safari #cycleDown {
+    padding: 1.5px 2.5px !important;
+}
+
 
 #cycleDown {
   margin-right: 0px;
@@ -3976,6 +3983,10 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication
 const auth = getAuth(app);
+
+if (navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("Chrome")) {
+    document.documentElement.classList.add('safari');
+}
 
 // Handle Login/Logout when the login button is clicked
 document.getElementById("loginButton").addEventListener("click", () => {
