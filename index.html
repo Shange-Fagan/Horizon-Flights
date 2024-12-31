@@ -8408,6 +8408,7 @@ const db = getFirestore(app);
 }*/
 function populatelikedpostsOverlay(likedPosts) {
     const overlay = document.getElementById("overlayContainer");
+    overlay.style.display = "grid";
     overlay.innerHTML = ""; // Clear previous posts
 
     likedPosts.forEach(post => {
