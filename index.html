@@ -3479,7 +3479,27 @@ margin-bottom: 1px;
 </div>
 <div id="header">
   <input type="text" id="from" name="travel_from" placeholder="Where from?">
-  <input type="text" id="where" name="destination" placeholder="Where to?">
+  <div id="destinationContainer">
+    <!-- Default input for non-cruise modes -->
+    <input type="text" id="where" name="destination" placeholder="Where to?" />
+  
+    <!-- Dropdown for cruise mode -->
+    <select id="cruiseDestinations" name="destination" style="display: none;">
+      <option value="" disabled selected>Select a destination</option>
+      <option value="Hawaii">Hawaii</option>
+      <option value="Bermuda">Bermuda</option>
+      <option value="Canada/New England/NY">Canada/New England/NY</option>
+      <option value="Caribbean - All">Caribbean - All</option>
+      <option value="Caribbean - Eastern">Caribbean - Eastern</option>
+      <option value="Caribbean - Southern">Caribbean - Southern</option>
+      <option value="Caribbean - Western">Caribbean - Western</option>
+      <option value="Europe - All">Europe - All</option>
+      <option value="Europe - Mediterranean - All">Europe - Mediterranean - All</option>
+      <option value="Alaska - All">Alaska - All</option>
+      <option value="South Pacific - Tahiti">South Pacific - Tahiti</option>
+      <option value="World Cruise">World Cruise</option>
+    </select>
+  </div>
   <!-- Checkbox for Location Type (City or Country) -->
   <div class="toggle-container2">
     <label class="theme-switch2">
@@ -3619,27 +3639,7 @@ margin-bottom: 1px;
 
 <div id="header2" style="display: none;">
     <input type="text" id="from" name="travel_from" placeholder="Where from?">
-    <div id="destinationContainer">
-      <!-- Default input for non-cruise modes -->
-      <input type="text" id="where" name="destination" placeholder="Where to?" />
-    
-      <!-- Dropdown for cruise mode -->
-      <select id="cruiseDestinations" name="destination" style="display: none;">
-        <option value="" disabled selected>Select a destination</option>
-        <option value="Hawaii">Hawaii</option>
-        <option value="Bermuda">Bermuda</option>
-        <option value="Canada/New England/NY">Canada/New England/NY</option>
-        <option value="Caribbean - All">Caribbean - All</option>
-        <option value="Caribbean - Eastern">Caribbean - Eastern</option>
-        <option value="Caribbean - Southern">Caribbean - Southern</option>
-        <option value="Caribbean - Western">Caribbean - Western</option>
-        <option value="Europe - All">Europe - All</option>
-        <option value="Europe - Mediterranean - All">Europe - Mediterranean - All</option>
-        <option value="Alaska - All">Alaska - All</option>
-        <option value="South Pacific - Tahiti">South Pacific - Tahiti</option>
-        <option value="World Cruise">World Cruise</option>
-      </select>
-    </div>
+    <input type="text" id="where" name="destination" placeholder="Where to?">
     <!-- Checkbox for Location Type (City or Country) -->
     <div class="toggle-container2">
       <label class="theme-switch2">
