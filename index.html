@@ -543,6 +543,7 @@ a, button, input, select, iframe {
     padding: 10px 15px; /* Padding inside inputs */
     position: relative;
     right: 146px;
+    top: 0px !important;
     border: 0px solid #ddd; /* Light gray border */
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 50px; /* Fully rounded corners for inputs */
@@ -551,11 +552,13 @@ a, button, input, select, iframe {
     width: 220px; /* Slightly smaller width */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
 	color: rgba(255, 255, 255, 0.75);
-    width: 75px; /* Set width to auto */
+    width: 105px; /* Set width to auto */
     max-width: max-content; /* Ensure it adjusts based on the placeholder or content */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     white-space: nowrap; /* Prevent wrapping */
     cursor: default;
+    background: none;
+background-color: rgba(255,255,255,0.15);
     /*border-left: 1px solid rgba(255, 255, 255, 0.5); /* Grey line on the left side */
   }
   /* Styling for other inputs (optional) */
@@ -8623,7 +8626,7 @@ document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', a
   console.log("Cruise search button clicked");
     // Your Airbnb search logic here
      const from = document.getElementById('from').value;
-    const to = document.getElementById('where').value;
+    const to = document.getElementById('cruiseDestinations').value;
     const departureDate = document.getElementById('checkin').value;
     const cruiseLength = document.getElementById('cruiselength').value;
     const cruiseLine = document.getElementById('cruiseline').value;
