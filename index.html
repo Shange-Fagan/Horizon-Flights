@@ -9161,7 +9161,7 @@ function animateCruiseShip(ship, points, duration = 8000) {
 // Event listener for the search button
 document.querySelector('#searchBtn.airbnb-button23').addEventListener('click', async function () {
     const fromInput = document.getElementById('from').value;
-    const toInput = document.getElementById('where').value;
+    const toInput = document.getElementById('cruiseDestinations').value;
 
     const fromLocation = findClosestLocation(fromInput);
     const toLocation = findClosestLocation(toInput);
