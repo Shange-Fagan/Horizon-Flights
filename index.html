@@ -538,6 +538,26 @@ a, button, input, select, iframe {
     cursor: default;
     /*border-left: 1px solid rgba(255, 255, 255, 0.5); /* Grey line on the left side */
   }
+  #cruiseDestinations {
+  font-size: 16px; /* Slightly smaller font size */
+    padding: 10px 15px; /* Padding inside inputs */
+    position: relative;
+    right: 146px;
+    border: 0px solid #ddd; /* Light gray border */
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50px; /* Fully rounded corners for inputs */
+    border-radius: 0 25px 25px 0;
+    margin-right: 10px; /* Spacing between input fields */
+    width: 220px; /* Slightly smaller width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+	color: rgba(255, 255, 255, 0.75);
+    width: 75px; /* Set width to auto */
+    max-width: max-content; /* Ensure it adjusts based on the placeholder or content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    white-space: nowrap; /* Prevent wrapping */
+    cursor: default;
+    /*border-left: 1px solid rgba(255, 255, 255, 0.5); /* Grey line on the left side */
+  }
   /* Styling for other inputs (optional) */
 #checkin {
   display: flex;
@@ -4764,7 +4784,7 @@ Array.from(airbnbLogos).forEach(logo => {
 });
         themeswitch.style.backgroundColor = "#20B2AA";
         cruiseDropdown.style.display = "block"; // Show dropdown for cruise destinations
-    destinationInput.style.display = "block"; // Hide text input for destination
+    destinationInput.style.display = "none"; // Hide text input for destination
         calendarIcon2.style.display = "none";
         calendaricon3.style.marginLeft = "-86px";
         calendaricon3.style.display = "flex";
