@@ -3619,7 +3619,27 @@ margin-bottom: 1px;
 
 <div id="header2" style="display: none;">
     <input type="text" id="from" name="travel_from" placeholder="Where from?">
-    <input type="text" id="where" name="destination" placeholder="Where to?">
+    <div id="destinationContainer">
+      <!-- Default input for non-cruise modes -->
+      <input type="text" id="where" name="destination" placeholder="Where to?" />
+    
+      <!-- Dropdown for cruise mode -->
+      <select id="cruiseDestinations" name="destination" style="display: none;">
+        <option value="" disabled selected>Select a destination</option>
+        <option value="Hawaii">Hawaii</option>
+        <option value="Bermuda">Bermuda</option>
+        <option value="Canada/New England/NY">Canada/New England/NY</option>
+        <option value="Caribbean - All">Caribbean - All</option>
+        <option value="Caribbean - Eastern">Caribbean - Eastern</option>
+        <option value="Caribbean - Southern">Caribbean - Southern</option>
+        <option value="Caribbean - Western">Caribbean - Western</option>
+        <option value="Europe - All">Europe - All</option>
+        <option value="Europe - Mediterranean - All">Europe - Mediterranean - All</option>
+        <option value="Alaska - All">Alaska - All</option>
+        <option value="South Pacific - Tahiti">South Pacific - Tahiti</option>
+        <option value="World Cruise">World Cruise</option>
+      </select>
+    </div>
     <!-- Checkbox for Location Type (City or Country) -->
     <div class="toggle-container2">
       <label class="theme-switch2">
@@ -4714,6 +4734,8 @@ function toggleCruiseBtn() {
   const cruiseLengthIcon = document.getElementById('cruiselengthicon');
   const departdateIcon = document.getElementById('Icon');
   const guestsBtn = document.getElementById('adults');
+  const destinationInput = document.getElementById('where'); // Text input for destination
+  const cruiseDropdown = document.getElementById('cruiseDestinations'); // Dropdown for cruise mode
 
 
   // Get the button element
@@ -4741,6 +4763,8 @@ Array.from(airbnbLogos).forEach(logo => {
     }
 });
         themeswitch.style.backgroundColor = "#20B2AA";
+        cruiseDropdown.style.display = "block"; // Show dropdown for cruise destinations
+    destinationInput.style.display = "none"; // Hide text input for destination
         calendarIcon2.style.display = "none";
         calendaricon3.style.marginLeft = "-86px";
         calendaricon3.style.display = "flex";
@@ -4868,6 +4892,8 @@ Array.from(airbnbLogos).forEach(logo => {
 });
     document.getElementById("trivagoIframeContainer").style.display = "block";
     themeswitch.style.backgroundColor = "#00aaff";
+    cruiseDropdown.style.display = "none"; // Hide dropdown for cruise destinations
+    destinationInput.style.display = "block"; // Show text input for destination
         calendarIcon2.style.display = "flex";
         //daymarkerMaterial = new THREE.Color('#00BFFF');
         //nightmarkerMaterial = new THREE.Color('#00BFFF');
