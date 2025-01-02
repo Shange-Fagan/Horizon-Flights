@@ -5467,7 +5467,7 @@ let isDay = true; // Track whether it's currently day or night
   isDay = !isDay;
 }); // This closes the addEventListener function correctly
 */
-	  document.getElementById('newsButton').addEventListener('click', function() {
+	  /*document.getElementById('newsButton').addEventListener('click', function() {
   const newsOverlayDay = document.getElementById('newsOverlay');
   const newsOverlayNight = document.getElementById('newsOverlaynighttheme');
   const closeNewsButton = document.getElementById('closeNewsButton');
@@ -5484,7 +5484,63 @@ let isDay = true; // Track whether it's currently day or night
   // Display the close button in both cases
   closeNewsButton.style.display = 'flex';
 
-	  });
+	  });*/
+    document.getElementById('newsButton').addEventListener('click', function () {
+    const newsOverlay = document.getElementById('newsOverlay');
+    const closeNewsButton = document.getElementById('closeNewsButton');
+    
+    // Set the content dynamically
+    newsOverlay.innerHTML = `
+        <div class="blog-container" style="padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto;">
+            <h1>Top 10 Hotels in São Paulo for Under £100</h1>
+            <p>Looking for a luxurious yet affordable stay in São Paulo? Here’s our curated list of budget-friendly hotels where comfort meets affordability. Perfect for solo travelers, couples, or families!</p>
+            
+            <h2>1. Hotel Fasano São Paulo</h2>
+            <img src="js/hotel-fasano-rio-de-janeiro.jpg" alt="Hotel Fasano São Paulo" style="width: 100%; height: auto; border-radius: 10px;">
+            <p>Stay in the heart of São Paulo with rooms starting at just £95. Enjoy a rooftop pool, world-class dining, and exceptional hospitality.</p>
+            <p><a href="https://www.booking.com/hotel-fasano" target="_blank" style="color: blue; text-decoration: underline;">Book now on Booking.com</a></p>
+
+            <h2>2. Selina Madalena São Paulo</h2>
+            <img src="js/selina-coworking-madalena-building.jpg" alt="Selina Madalena São Paulo" style="width: 100%; height: auto; border-radius: 10px;">
+            <p>Trendy, vibrant, and budget-friendly. Rooms start at £60, offering coworking spaces and a buzzing social scene.</p>
+            <p><a href="https://www.hostelworld.com/selina-madalena" target="_blank" style="color: blue; text-decoration: underline;">Check prices on Hostelworld</a></p>
+
+            <h3>Other Noteworthy Hotels:</h3>
+            <ul>
+                <li><strong>Renaissance São Paulo Hotel</strong> – £90/night. 
+                    <a href="https://www.marriott.com/renaissance-sp" target="_blank" style="color: blue; text-decoration: underline;">Book on Marriott</a>
+                </li>
+                <li><strong>Mercure São Paulo Jardins</strong> – £75/night. 
+                    <a href="https://www.booking.com/mercure-jardins" target="_blank" style="color: blue; text-decoration: underline;">Reserve on Booking.com</a>
+                </li>
+                <li><strong>Radisson Paulista</strong> – £80/night. 
+                    <a href="https://www.radisson.com/paulista" target="_blank" style="color: blue; text-decoration: underline;">View deals on Radisson</a>
+                </li>
+            </ul>
+
+            <h2>Why São Paulo?</h2>
+            <p>São Paulo offers a dynamic mix of culture, food, and vibrant nightlife. Staying at these budget-friendly hotels ensures you can explore more while spending less on accommodations.</p>
+            
+            <h2>Ready to Book?</h2>
+            <p>Don’t wait! These deals won’t last long. Click the links to book your perfect stay in São Paulo.</p>
+        </div>
+    `;
+
+    // Show the overlay and close button
+    newsOverlay.style.display = 'flex';
+    closeNewsButton.style.display = 'flex';
+});
+
+// Close button functionality
+document.getElementById('closeNewsButton').addEventListener('click', function () {
+    const newsOverlay = document.getElementById('newsOverlay');
+    const closeNewsButton = document.getElementById('closeNewsButton');
+    
+    // Hide the overlay and close button
+    newsOverlay.style.display = 'none';
+    closeNewsButton.style.display = 'none';
+});
+
 		  
 	
   //const selectedRegion = document.getElementById('regionSelect').value;
