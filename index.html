@@ -1306,7 +1306,7 @@ iframe::-webkit-scrollbar {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.3);
+    background:none;
     /*background-color: rgba(0, 0, 0, 0.8);*/
     /*display: flex;*/
     display: none;  
@@ -1316,7 +1316,7 @@ iframe::-webkit-scrollbar {
   }
 	  #newsOverlaynighttheme {
     position: absolute;
-    top: 0;
+    top: 90px;
     left: 0;
     width: 100vw;
     height: 100vh;
@@ -5491,7 +5491,7 @@ let isDay = true; // Track whether it's currently day or night
     
     // Set the content dynamically
     newsOverlay.innerHTML = `
-        <div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; max-height: 80%;">
+        <div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; position: relative; top: 65px; max-height: 74%;">
             <h1 style="margin-bottom: 20px; color: rgba(255, 255, 255, 1);">Top 10 Hotels in São Paulo for Under £100</h1>
             <p style="margin-bottom: 20px;">Looking for a luxurious yet affordable stay in São Paulo? Here’s our curated list of budget-friendly hotels where comfort meets affordability. Perfect for solo travelers, couples, or families!</p>
             
@@ -5540,7 +5540,6 @@ document.getElementById('closeNewsButton').addEventListener('click', function ()
     newsOverlay.style.display = 'none';
     closeNewsButton.style.display = 'none';
 });
-
 
 
 		  
