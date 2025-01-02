@@ -5491,33 +5491,38 @@ let isDay = true; // Track whether it's currently day or night
     
     // Set the content dynamically
     newsOverlay.innerHTML = `
-        <div style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 1200px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; max-height: 80vh; display: flex; flex-wrap: wrap; gap: 20px;">
-            <div style="flex: 1 1 calc(50% - 20px); text-align: center; background: rgba(255, 255, 255, 0.2); padding: 10px; border-radius: 8px;">
-                <img src="js/hotel-fasano-rio-de-janeiro.jpg" alt="Hotel Fasano São Paulo" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 10px;">
-                <h3 style="color: rgba(255, 255, 255, 1); margin: 10px 0;">Hotel Fasano São Paulo</h3>
-                <p style="font-size: 14px;">Stay in the heart of São Paulo with rooms starting at just £95. Enjoy a rooftop pool, world-class dining, and exceptional hospitality.</p>
-                <p><a href="https://www.booking.com/hotel-fasano" target="_blank" style="color: rgba(255, 255, 255, 1); text-decoration: underline;">Book now on Booking.com</a></p>
-            </div>
-            <div style="flex: 1 1 calc(50% - 20px); text-align: center; background: rgba(255, 255, 255, 0.2); padding: 10px; border-radius: 8px;">
-                <img src="js/selina-coworking-madalena-building.jpg" alt="Selina Madalena São Paulo" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 10px;">
-                <h3 style="color: rgba(255, 255, 255, 1); margin: 10px 0;">Selina Madalena São Paulo</h3>
-                <p style="font-size: 14px;">Trendy, vibrant, and budget-friendly. Rooms start at £60, offering coworking spaces and a buzzing social scene.</p>
-                <p><a href="https://www.hostelworld.com/selina-madalena" target="_blank" style="color: rgba(255, 255, 255, 1); text-decoration: underline;">Check prices on Hostelworld</a></p>
-            </div>
-            <div style="flex: 1 1 100%; text-align: center; margin-top: 20px;">
-                <h3 style="color: rgba(255, 255, 255, 1); margin-bottom: 10px;">Other Noteworthy Hotels:</h3>
-                <ul style="list-style: none; padding: 0; font-size: 14px; color: rgba(255, 255, 255, 1);">
-                    <li style="margin-bottom: 10px;"><strong>Renaissance São Paulo Hotel</strong> – £90/night. 
-                        <a href="https://www.marriott.com/renaissance-sp" target="_blank" style="color: rgba(255, 255, 255, 1); text-decoration: underline;">Book on Marriott</a>
-                    </li>
-                    <li style="margin-bottom: 10px;"><strong>Mercure São Paulo Jardins</strong> – £75/night. 
-                        <a href="https://www.booking.com/mercure-jardins" target="_blank" style="color: rgba(255, 255, 255, 1); text-decoration: underline;">Reserve on Booking.com</a>
-                    </li>
-                    <li style="margin-bottom: 10px;"><strong>Radisson Paulista</strong> – £80/night. 
-                        <a href="https://www.radisson.com/paulista" target="_blank" style="color: rgba(255, 255, 255, 1); text-decoration: underline;">View deals on Radisson</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; max-height: 80%;">
+            <h1 style="margin-bottom: 20px; color: rgba(255, 255, 255, 1);">Top 10 Hotels in São Paulo for Under £100</h1>
+            <p style="margin-bottom: 20px;">Looking for a luxurious yet affordable stay in São Paulo? Here’s our curated list of budget-friendly hotels where comfort meets affordability. Perfect for solo travelers, couples, or families!</p>
+            
+            <h2 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">1. Hotel Fasano São Paulo</h2>
+            <img src="js/hotel-fasano-rio-de-janeiro.jpg" alt="Hotel Fasano São Paulo" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px;">
+            <p style="margin-bottom: 15px;">Stay in the heart of São Paulo with rooms starting at just £95. Enjoy a rooftop pool, world-class dining, and exceptional hospitality.</p>
+            <p style="margin-bottom: 30px;"><a href="https://www.booking.com/hotel-fasano" target="_blank" style="color: rgba(255, 255, 255, 1); text-decoration: underline;">Book now on Booking.com</a></p>
+
+            <h2 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">2. Selina Madalena São Paulo</h2>
+            <img src="js/selina-coworking-madalena-building.jpg" alt="Selina Madalena São Paulo" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px;">
+            <p style="margin-bottom: 15px;">Trendy, vibrant, and budget-friendly. Rooms start at £60, offering coworking spaces and a buzzing social scene.</p>
+            <p style="margin-bottom: 30px;"><a href="https://www.hostelworld.com/selina-madalena" target="_blank" style="color: rgba(255, 255, 255, 1); text-decoration: underline;">Check prices on Hostelworld</a></p>
+
+            <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Other Noteworthy Hotels:</h3>
+            <ul style="margin-left: 20px; margin-bottom: 30px;">
+                <li style="margin-bottom: 10px; color: rgba(255, 255, 255, 1);"><strong>Renaissance São Paulo Hotel</strong> – £90/night. 
+                    <a href="https://www.marriott.com/renaissance-sp" target="_blank" style="color: rgba(255, 255, 255, 1); text-decoration: underline;">Book on Marriott</a>
+                </li>
+                <li style="margin-bottom: 10px; color: rgba(255, 255, 255, 1);"><strong>Mercure São Paulo Jardins</strong> – £75/night. 
+                    <a href="https://www.booking.com/mercure-jardins" target="_blank" style="color: rgba(255, 255, 255, 1); text-decoration: underline;">Reserve on Booking.com</a>
+                </li>
+                <li style="margin-bottom: 10px; color: rgba(255, 255, 255, 1);"><strong>Radisson Paulista</strong> – £80/night. 
+                    <a href="https://www.radisson.com/paulista" target="_blank" style="color: rgba(255, 255, 255, 1); text-decoration: underline;">View deals on Radisson</a>
+                </li>
+            </ul>
+
+            <h2 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Why São Paulo?</h2>
+            <p style="margin-bottom: 30px;">São Paulo offers a dynamic mix of culture, food, and vibrant nightlife. Staying at these budget-friendly hotels ensures you can explore more while spending less on accommodations.</p>
+            
+            <h2 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Ready to Book?</h2>
+            <p style="margin-bottom: 30px;">Don’t wait! These deals won’t last long. Click the links to book your perfect stay in São Paulo.</p>
         </div>
     `;
 
