@@ -1,4 +1,4 @@
-x<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -3440,27 +3440,7 @@ margin-bottom: 1px;
 </div>
 <div id="header">
   <input type="text" id="from" name="travel_from" placeholder="Where from?">
-  <div id="destinationContainer">
-    <!-- Default input for non-cruise modes -->
-    <input type="text" id="where" name="destination" placeholder="Where to?" />
-  
-    <!-- Dropdown for cruise mode -->
-    <select id="cruiseDestinations" name="destination" style="display: none;">
-      <option value="" disabled selected>Where to?</option>
-      <option value="Hawaii">Hawaii</option>
-      <option value="Bermuda">Bermuda</option>
-      <option value="Canada/New England/NY">Canada/New England/NY</option>
-      <option value="Caribbean - All">Caribbean - All</option>
-      <option value="Caribbean - Eastern">Caribbean - Eastern</option>
-      <option value="Caribbean - Southern">Caribbean - Southern</option>
-      <option value="Caribbean - Western">Caribbean - Western</option>
-      <option value="Europe - All">Europe - All</option>
-      <option value="Europe - Mediterranean - All">Europe - Mediterranean - All</option>
-      <option value="Alaska - All">Alaska - All</option>
-      <option value="South Pacific - Tahiti">South Pacific - Tahiti</option>
-      <option value="World Cruise">World Cruise</option>
-    </select>
-  </div>
+  <input type="text" id="where" name="destination" placeholder="Where to?">
   <!-- Checkbox for Location Type (City or Country) -->
   <div class="toggle-container2">
     <label class="theme-switch2">
@@ -4339,7 +4319,7 @@ function showMobileDesktopView() {
         newsButton.style.display = "none";
         minimizeCarouselBtn.style.display = "block";
         minimizeCarouselBtn.style.top = "55px";
-	minimizeCarouselBtn.style.right = "0px";
+        minimizeCarouselBtn.style.right = "0px";
         carouselContainer.style.display = "none";
         nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
         // Optionally, disable other content
