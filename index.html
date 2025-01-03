@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+x<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -2856,7 +2856,7 @@ margin-bottom: 6px;
     margin-left: 105.9px;
 margin-top: -90px;
 }
-#mobileWarning {
+#mobileDesktopView {
     position: fixed;
     top: 50%;
     left: 0px;
@@ -3435,7 +3435,7 @@ margin-bottom: 1px;
     <a href="https://www.linkedin.com/in/shange-fagan-bba3a3239/" target="_blank" style="display: none">LinkedIn</a> | 
     <a href="mailto:yourname@gmail.com?subject=Inquiry&body=Hello, I would like to know more about your services." target="_blank">Contact Us</a>
   </footer>
-  <div id="mobileWarning" style="display: none;">
+  <div id="mobileDesktopView" style="display: none;">
     <p>This webpage works best on a desktop (Windows or Mac). We're currently working on making this webpage mobile friendly but for now - Please revisit using a desktop device for the optimal experience. Thank you!</p>
 </div>
 <div id="header">
@@ -4302,14 +4302,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-function showMobileWarning() {
-    const mobileWarning = document.getElementById("mobileWarning");
+function showMobileDesktopView() {
+    const mobileDesktopView = document.getElementById("mobileDesktopView");
 
     // Detect if the user is on a mobile device
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
-        mobileWarning.style.display = "none";
+      mobileDesktopView.style.display = "none";
         const iframe = document.getElementById('mobileTicker');
         const daythemeiframe = document.getElementById('dayTicker');
         const nightthemeiframe = document.getElementById('nightTicker');
@@ -4338,6 +4338,7 @@ function showMobileWarning() {
         addLightsbutton2.style.display = "none";
         newsButton.style.display = "none";
         minimizeCarouselBtn.style.display = "block";
+        minimizeCarouselBtn.style.top = "55px";
         carouselContainer.style.display = "none";
         nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
         // Optionally, disable other content
@@ -4346,7 +4347,7 @@ function showMobileWarning() {
 }
 
 // Run the function after the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", showMobileWarning);
+document.addEventListener("DOMContentLoaded", showMobileDesktopView);
 
 
 	  // Hide the spinner after globe and scene are ready
