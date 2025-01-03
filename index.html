@@ -4314,6 +4314,7 @@ function showMobileWarning() {
         const daythemeiframe = document.getElementById('dayTicker');
         const nightthemeiframe = document.getElementById('nightTicker');
         const trivagoIframeContainer = document.getElementById('trivagoIframeContainer');
+        const searchTicker = document.getElementById('searchTicker');
         const submitRegion = document.getElementById('regionPopup');
         const clearFiltersBtn = document.getElementById('clearFiltersBtn');
         const regionSelect = document.getElementById('regionSelectBtn');
@@ -4327,7 +4328,8 @@ function showMobileWarning() {
         iframe.style.display = "none";
         daythemeiframe.style.display = "none";
         nightthemeiframe.style.display = "none";
-        trivagoIframeContainer.style.display = "none";
+        trivagoIframeContainer.style.display = "block";
+        searchTicker.style.display = "none";
         submitRegion.style.display = "none";
         clearFiltersBtn.style.display = "none";
         regionSelect.style.display = "none";
@@ -4345,7 +4347,6 @@ function showMobileWarning() {
 
 // Run the function after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", showMobileWarning);
-
 
 	  // Hide the spinner after globe and scene are ready
 //window.addEventListener('load', () => {
