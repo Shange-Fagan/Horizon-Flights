@@ -4309,8 +4309,10 @@ function showMobileWarning() {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
-        mobileWarning.style.display = "block";
+        mobileWarning.style.display = "none";
         const iframe = document.getElementById('mobileTicker');
+        const daythemeiframe = document.getElementById('dayTicker');
+        const nightthemeiframe = document.getElementById('nightTicker');
         const submitRegion = document.getElementById('regionPopup');
         const clearFiltersBtn = document.getElementById('clearFiltersBtn');
         const regionSelect = document.getElementById('regionSelectBtn');
@@ -4321,16 +4323,19 @@ function showMobileWarning() {
         const minimizeCarouselBtn = document.getElementById('minimizeCarouselBtn');
         const carouselContainer = document.getElementById('carousel-container');
         const loadingScreen = document.getElementById('loadingScreen');
-        iframe.style.display = "none";
+        iframe.style.display = "block";
+        daythemeiframe.style.display = "none";
+        nightthemeiframe.style.display = "none";
         submitRegion.style.display = "none";
         clearFiltersBtn.style.display = "none";
         regionSelect.style.display = "none";
-        toggleButton.style.display = "none";
+        toggleButton.style.display = "block";
         addLightsbutton.style.display = "none";
         addLightsbutton2.style.display = "none";
         newsButton.style.display = "none";
         minimizeCarouselBtn.style.display = "none";
         carouselContainer.style.display = "none";
+        nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
         // Optionally, disable other content
         document.body.style.overflow = "hidden"; // Prevent scrolling
     }
