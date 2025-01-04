@@ -4305,7 +4305,7 @@ function showMobileDesktopView() {
         const minimizeCarouselBtn = document.querySelector('.carousel-header');
         const carouselContainer = document.getElementById('carousel-container');
         const loadingScreen = document.getElementById('loadingScreen');
-        iframe.style.display = "none !important";
+        iframe.style.display = "block";
         daythemeiframe.style.display = "none";
         nightthemeiframe.style.display = "none";
         trivagoIframeContainer.style.display = "none";
@@ -4322,6 +4322,7 @@ function showMobileDesktopView() {
         minimizeCarouselBtn.style.right = "0px";
         carouselContainer.style.display = "none";
         nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+        dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
         // Optionally, disable other content
         document.body.style.overflow = "hidden"; // Prevent scrolling
     }
@@ -5270,7 +5271,7 @@ overlay.style.pointerEvents = 'auto'; // Allow interaction if needed
 
 const earthRadius = 5.1; // Adjust this to match your globe's size
 const textureLoader = new THREE.TextureLoader();
-const dayTexture = textureLoader.load("js/Earth_Diffuse.jpg");
+let dayTexture = textureLoader.load("js/Earth_Diffuse.jpg");
 const LightsTexture = textureLoader.load("js/earth.jpg");
 const bumpMap = textureLoader.load("js/Earth-16K-Bump.png");
 const normalMap = textureLoader.load('js/Earth_Normal.jpg'); // Use a realistic normal map
