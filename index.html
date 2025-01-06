@@ -2861,16 +2861,20 @@ margin-top: -90px;
     top: 50%;
     left: 0px;
     width: 100%;
-    background-color: #00aaff; /* Yellow for attention */
-    color: #333;
+    background-color: rgba(255, 255, 255, 0.15); /* Yellow for attention */
+    color: rgba(255, 255, 255, 0.75);
     text-align: center;
     padding: 15px;
     font-size: 16px;
     font-weight: bold;
     z-index: 999999;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 15px; /* Slightly more rounded corners */
 }
-
+.close-btn {
+  top:0;
+  right:0;
+}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5689710336620898"
 crossorigin="anonymous"></script>
@@ -3436,7 +3440,8 @@ margin-bottom: 1px;
     <a href="mailto:yourname@gmail.com?subject=Inquiry&body=Hello, I would like to know more about your services." target="_blank">Contact Us</a>
   </footer>
   <div id="mobileDesktopView" style="display: none;">
-    <p>This webpage works best on a desktop (Windows or Mac). We're currently working on making this webpage mobile friendly but for now - Please revisit using a desktop device for the optimal experience. Thank you!</p>
+    <button class="close-btn" onclick="closeNotification()">×</button>
+    <p>This webpage works best on a desktop (Windows or Mac). For the best experience and full features as seen on TikTok, please use a desktop device. We're currently working on making this webpage mobile friendly but for now - Please revisit using a desktop device for the optimal experience. Thank you!</p>
 </div>
 <div id="header">
   <input type="text" id="from" name="travel_from" placeholder="Where from?">
@@ -4289,7 +4294,11 @@ function showMobileDesktopView() {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
-      mobileDesktopView.style.display = "none";
+      mobileDesktopView.style.display = "block";
+      // Close button function
+    function closeNotification() {
+      document.getElementById('mobileDesktopView').style.display = 'none';
+    }
         const iframe = document.getElementById('mobileTicker');
         const daythemeiframe = document.getElementById('dayTicker');
         const nightthemeiframe = document.getElementById('nightTicker');
