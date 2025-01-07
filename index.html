@@ -2859,7 +2859,7 @@ margin-top: -90px;
 #mobileDesktopView {
     position: fixed;
     top: 40%;
-    left: 0px;
+    left: 15px;
     width: 85%;
     background-color: rgba(255, 255, 255, 0.15); /* Yellow for attention */
     color: rgba(255, 255, 255, 0.75);
@@ -2872,8 +2872,8 @@ margin-top: -90px;
     border-radius: 15px; /* Slightly more rounded corners */
 }
 .close-btn {
-  top:0;
-  right:0;
+  top: 40%;
+  right:15px;
 }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5689710336620898"
@@ -6146,14 +6146,14 @@ let currentmarkerMaterial = "night";
     if (window.innerWidth <= 768) {  // Mobile device
       document.getElementById("nightTicker").style.display = "none";
       document.getElementById("dayTicker").style.display = "none";
-      document.getElementById("mobileTicker").style.display = "block";
+      document.getElementById("mobileTicker").style.display = "none";
     } else {  // Desktop
       //document.getElementById("dayTicker").style.display = "none";
       //document.getElementById("nightTicker").style.display = "block";
       console.log("Switching to Night Mode");
         if (currentTicker === document.getElementById("dayTicker")) {
             currentTicker.style.display = "none"; // Keep the current ticker visible
-            document.getElementById("nightTicker").style.display = "block";
+            document.getElementById("nightTicker").style.display = "none";
         }
       document.getElementById("mobileTicker").style.display = "none";
     }
