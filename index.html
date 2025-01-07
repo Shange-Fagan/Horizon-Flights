@@ -3449,7 +3449,7 @@ margin-bottom: 1px;
     <a href="mailto:yourname@gmail.com?subject=Inquiry&body=Hello, I would like to know more about your services." target="_blank">Contact Us</a>
   </footer>
   <div id="mobileDesktopView" style="display: none;">
-    <button class="close-btn2" onclick="closeNotification()">×</button>
+    <button class="close-btn2">×</button>
     <p>This webpage works best on a desktop (Windows or Mac). For the best experience and full features as seen on TikTok, please use a desktop device. We're currently working on making this webpage mobile friendly but for now - Please revisit using a desktop device for the optimal experience. Thank you!</p>
 </div>
 <div id="header">
@@ -4304,10 +4304,14 @@ function showMobileDesktopView() {
 
     if (isMobile) {
       mobileDesktopView.style.display = "block";
-      // Close button function
-    function closeNotification() {
-      mobileDesktopView.style.display = "none";
-    }
+    // Close button functionality
+document.querySelector('.close-btn2').addEventListener('click', function () {
+    const closeNewsButton = document.getElementById('.close-btn2');
+    
+    // Hide the overlay and close button
+    mobileDesktopView.style.display = 'none';
+    closeNewsButton.style.display = 'none';
+});
     const topLeftLabel = document.getElementById('topLeftLabel');
         const iframe = document.getElementById('mobileTicker');
         const daythemeiframe = document.getElementById('dayTicker');
