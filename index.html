@@ -2871,9 +2871,10 @@ margin-top: -90px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 15px; /* Slightly more rounded corners */
 }
-.close-btn {
+.close-btn2 {
   top: 40%;
-  right:200px;
+  right:15px;
+  color: rgba(251, 251, 251, 0.75)
 }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5689710336620898"
@@ -3445,7 +3446,7 @@ margin-bottom: 1px;
     <a href="mailto:yourname@gmail.com?subject=Inquiry&body=Hello, I would like to know more about your services." target="_blank">Contact Us</a>
   </footer>
   <div id="mobileDesktopView" style="display: none;">
-    <button class="close-btn" onclick="closeNotification()">×</button>
+    <button class="close-btn2" onclick="closeNotification()">×</button>
     <p>This webpage works best on a desktop (Windows or Mac). For the best experience and full features as seen on TikTok, please use a desktop device. We're currently working on making this webpage mobile friendly but for now - Please revisit using a desktop device for the optimal experience. Thank you!</p>
 </div>
 <div id="header">
@@ -4299,10 +4300,10 @@ function showMobileDesktopView() {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
-      mobileDesktopView.style.display = "none";
+      mobileDesktopView.style.display = "block";
       // Close button function
     function closeNotification() {
-      document.getElementById('mobileDesktopView').style.display = 'block';
+      document.getElementById('mobileDesktopView').style.display = 'none';
     }
     const topLeftLabel = document.getElementById('topLeftLabel');
         const iframe = document.getElementById('mobileTicker');
