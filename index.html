@@ -2858,9 +2858,9 @@ margin-top: -90px;
 }
 #mobileDesktopView {
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 0px;
-    width: 100%;
+    width: 85%;
     background-color: rgba(255, 255, 255, 0.15); /* Yellow for attention */
     color: rgba(255, 255, 255, 0.75);
     text-align: center;
@@ -4304,6 +4304,7 @@ function showMobileDesktopView() {
     function closeNotification() {
       document.getElementById('mobileDesktopView').style.display = 'none';
     }
+    const topLeftLabel = document.getElementById('topLeftLabel');
         const iframe = document.getElementById('mobileTicker');
         const daythemeiframe = document.getElementById('dayTicker');
         const nightthemeiframe = document.getElementById('nightTicker');
@@ -4319,7 +4320,12 @@ function showMobileDesktopView() {
         const minimizeCarouselBtn = document.querySelector('.carousel-header');
         const carouselContainer = document.getElementById('carousel-container');
         const loadingScreen = document.getElementById('loadingScreen');
-        iframe.style.display = "block";
+        topLeftLabel.innerHTML = `
+  <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;" alt="Earth Globe" />
+ Search Flights
+  <img src="js/300694_plane-plane-emoji-png-png-download (1).png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-left: 4px; margin-top: 0px;" alt="Plane" />
+`;
+        iframe.style.display = "none";
         daythemeiframe.style.display = "none";
         nightthemeiframe.style.display = "none";
         trivagoIframeContainer.style.display = "none";
