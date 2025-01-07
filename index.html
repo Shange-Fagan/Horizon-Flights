@@ -2859,7 +2859,7 @@ margin-top: -90px;
 #mobileDesktopView {
     position: fixed;
     top: 40%;
-    left: 15px;
+    left: 12px;
     width: 85%;
     background-color: rgba(255, 255, 255, 0.15); /* Yellow for attention */
     color: rgba(255, 255, 255, 0.75);
@@ -2873,7 +2873,7 @@ margin-top: -90px;
 }
 .close-btn {
   top: 40%;
-  right:15px;
+  right:200px;
 }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5689710336620898"
@@ -4299,10 +4299,10 @@ function showMobileDesktopView() {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
-      mobileDesktopView.style.display = "block";
+      mobileDesktopView.style.display = "none";
       // Close button function
     function closeNotification() {
-      document.getElementById('mobileDesktopView').style.display = 'none';
+      document.getElementById('mobileDesktopView').style.display = 'block';
     }
     const topLeftLabel = document.getElementById('topLeftLabel');
         const iframe = document.getElementById('mobileTicker');
@@ -4322,7 +4322,7 @@ function showMobileDesktopView() {
         const loadingScreen = document.getElementById('loadingScreen');
         topLeftLabel.innerHTML = `
   <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;" alt="Earth Globe" />
- Search Flights
+  Search Hotels
   <img src="js/300694_plane-plane-emoji-png-png-download (1).png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-left: 4px; margin-top: 0px;" alt="Plane" />
 `;
         iframe.style.display = "none";
