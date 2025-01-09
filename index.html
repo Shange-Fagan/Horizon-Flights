@@ -3953,6 +3953,7 @@ gl_FragColor = vec4(glowColor, intensity);
   camera.position.set(20, 0.5, 15).setLength(25);
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 import {
     getAuth,
     onAuthStateChanged,
@@ -3976,10 +3977,22 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
+const database = getDatabase(app);
 // Initialize Firebase Authentication
 const auth = getAuth(app);
+function submitEmail(event) {
+  event.preventDefault(); // Prevent page refresh
+  const email = document.getElementById("emailInput").value;
 
+  // Push email to Firebase
+  push(ref(database, 'mailingList'), { email: email })
+    .then(() => {
+      console.log(`Email ${email} successfully added to the database.`);
+    })
+    .catch((error) => {
+      console.error("Error storing email: ", error);
+    });
+}
 if (navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("Chrome")) {
     document.documentElement.classList.add('safari');
 }
@@ -4170,13 +4183,13 @@ document.getElementById("loginButton").addEventListener("click", () => {
     }
 });
 // Handle form submission
-function submitEmail(event) {
+/*(function submitEmail(event) {
   event.preventDefault();
   const email = document.getElementById("emailInput").value;
   alert(`Thank you for signing up, ${email}!`);
   closePopup();
   // Add logic to send email to your marketing system
-}
+}*/
 
 
 // Update Login Button State
