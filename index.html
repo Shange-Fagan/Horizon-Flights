@@ -3953,8 +3953,7 @@ gl_FragColor = vec4(glowColor, intensity);
   camera.position.set(20, 0.5, 15).setLength(25);
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
-import {
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";import {
     getAuth,
     onAuthStateChanged,
     signInWithPopup,
@@ -3977,24 +3976,25 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+// Initialize Firestore
+const db = getFirestore(app);
+
 // Initialize Firebase Authentication
 const auth = getAuth(app);
+
+  // Submit email to Firestore
 function submitEmail(event) {
   event.preventDefault(); // Prevent page refresh
   const email = document.getElementById("emailInput").value;
 
-  // Push email to Firebase
-  push(ref(database, 'mailingList'), { email: email })
+  // Add email to Firestore collection
+  addDoc(collection(db, "mailingList"), { email: email })
     .then(() => {
-      console.log(`Email ${email} successfully added to the database.`);
+      console.log(`Email ${email} successfully added to Firestore.`);
     })
     .catch((error) => {
-      console.error("Error storing email: ", error);
+      console.error("Error storing email in Firestore: ", error);
     });
-}
-if (navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("Chrome")) {
-    document.documentElement.classList.add('safari');
 }
 
 // Handle Login/Logout when the login button is clicked
@@ -8283,9 +8283,6 @@ import {
     collection,
     getDocs
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-
-const db = getFirestore(app);
-
 /*function saveToLikes(post) {
     const user = auth.currentUser;
 
