@@ -3991,7 +3991,7 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
   // Submit email to Firestore
-document.querySelector(".popup-submit-btn").addEventListener("click", function(event) {
+  document.querySelector(".popup-submit-btn").addEventListener("click", function (event) {
     event.preventDefault(); // Prevent default form submission behavior
 
     // Collect the email value from the input field
@@ -4003,10 +4003,16 @@ document.querySelector(".popup-submit-btn").addEventListener("click", function(e
         return;
     }
 
-    // Add email to Firestore collection
-    addDoc(collection(db, "mailingList"), { email: email })
+    // Ensure the email is stored uniquely
+    const postId = `email_${Date.now()}`; // Generate a unique ID based on the timestamp
+
+    // Create a Firestore document reference for the email
+    const mailingList = doc(db, "EmailList", postId);
+
+    // Save the email data in Firestore
+    setDoc(mailingList, { email: email, id: postId }) // Save the email and unique ID
         .then(() => {
-            console.log(`Email ${email} successfully added to Firestore.`);
+            alert(`Email ${email} successfully added to Firestore.`);
             // Show a success message to the user
             alert("Thank you for subscribing!");
             // Reset the input field
@@ -4018,6 +4024,7 @@ document.querySelector(".popup-submit-btn").addEventListener("click", function(e
             alert("There was an error submitting your email. Please try again later.");
         });
 });
+
 
 
 
