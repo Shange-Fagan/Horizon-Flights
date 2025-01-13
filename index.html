@@ -3227,6 +3227,16 @@ flex: 1;
 .safari #cycleDown {
     padding: 1.25px 2.5px !important;
 }
+@media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) {
+        #cycleUp {
+            padding: 1.5px 2.5px !important; /* Safari-specific padding */
+        }
+        #cycleDown {
+            padding: 1.5px 2.5px !important; /* Safari-specific padding */
+        }
+    }
+}
 
 
 #cycleDown {
@@ -3968,6 +3978,9 @@ const firebaseConfig = {
     appId: "1:173542786157:web:073fb82c209555d9432b64",
     measurementId: "G-4KJF5LVT0R"
 };
+if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome')) {
+    document.body.classList.add('safari');
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
