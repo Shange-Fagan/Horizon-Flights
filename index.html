@@ -4012,7 +4012,7 @@ const auth = getAuth(app);
     // Save the email data in Firestore
     setDoc(mailingList, { email: email, id: postId }) // Save the email and unique ID
         .then(() => {
-            alert(`Email ${email} successfully added to Firestore.`);
+            alert(`Email ${email} successfully added to Mailing list!.`);
             // Show a success message to the user
             alert("Thank you for subscribing!");
             // Reset the input field
