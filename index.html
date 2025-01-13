@@ -3978,15 +3978,15 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
   // Submit email to Firestore
-  document.querySelector(".popup-submit-btn").addEventListener("click", function(event) {
+document.querySelector(".popup-submit-btn").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent default form submission behavior
 
     // Collect the email value from the input field
-    const email = document.getElementById("emailInput").value;
+    const email = document.getElementById("emailInput").value.trim();
 
     // Validate the email (optional, for better user experience)
-    if (!email || !email.includes("@")) {
-        console.error("Please enter a valid email.");
+    if (!email || !/\S+@\S+\.\S+/.test(email)) { // Basic email regex validation
+        alert("Please enter a valid email address.");
         return;
     }
 
@@ -3994,14 +3994,18 @@ const auth = getAuth(app);
     addDoc(collection(db, "mailingList"), { email: email })
         .then(() => {
             console.log(`Email ${email} successfully added to Firestore.`);
+            // Show a success message to the user
+            alert("Thank you for subscribing!");
+            // Reset the input field
+            document.getElementById("emailInput").value = "";
         })
         .catch((error) => {
             console.error("Error storing email in Firestore: ", error);
+            // Show an error message to the user
+            alert("There was an error submitting your email. Please try again later.");
         });
-
-    // Optional: Reset the input field or show a success message
-    document.getElementById("emailInput").value = "Thank you!🙏🏽";
 });
+
 
 
 // Handle Login/Logout when the login button is clicked
