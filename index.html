@@ -11139,7 +11139,7 @@ function openMarkerLabel2(data) {
 function createMarkerMesh(lat, lng) {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
   const markerMaterial =  new THREE.MeshBasicMaterial({
-    color: 0x007BFF,
+    color: 0xcaf0f8,
     side: THREE.DoubleSide,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
@@ -11840,7 +11840,7 @@ function addMarkersToGlobe(markers) {
 function createMarkerMesh(lat, lng) {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
   const markerMaterial =  new THREE.MeshBasicMaterial({
-    color: 0x007BFF,
+    color: 0xcaf0f8,
     side: THREE.DoubleSide,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
