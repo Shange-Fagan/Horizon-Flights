@@ -4012,7 +4012,7 @@ const auth = getAuth(app);
     // Save the email data in Firestore
     setDoc(mailingList, { email: email, id: postId }) // Save the email and unique ID
         .then(() => {
-            alert(`Email ${email} successfully added to Mailing list!.`);
+            alert(`Email ${email} successfully added to Mailing list!`);
             // Show a success message to the user
             alert("Thank you for subscribing!");
             // Reset the input field
@@ -7542,7 +7542,7 @@ console.log(`Camera moving to: x=${x}, y=${y}, z=${z}`);
       .onComplete(() => {
         console.log(`Fetching and displaying detailed markers for region: ${region}`);
         // Fetch and display detailed markers for the selected region
-        //fetchMarkers(region);
+        fetchMarkers(region);
 
         // Hide the current region's marker
         if (genericMarkers[region]) {
@@ -10437,7 +10437,7 @@ addMarkupPoints(fromLatLng, toLatLng);
     console.log('markupPointGroup added to globe2:', addMarkupPoints);
     // Fetch and update markers based on the selected category
     const selectedCategory = document.getElementById('priceCategorySelect').value;
-    //fetchMarkers(location, selectedCategory);
+    fetchMarkers(location, selectedCategory);
 
     // Resize and update all markers
     // Resize and update all markers with animation
@@ -10626,7 +10626,7 @@ addMarkupPoints(fromLatLng, toLatLng);
     console.log('markupPointGroup added to globe2:', addMarkupPoints);
     // Fetch and update markers based on the selected category
     const selectedCategory = document.getElementById('priceCategorySelect').value;
-    //fetchMarkers(location, selectedCategory);
+    fetchMarkers(location, selectedCategory);
 
     // Resize and update all markers
     // Resize and update all markers with animation
@@ -11338,8 +11338,8 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
       let selectedRegion = this.value;
       const selectedCategory = document.getElementById('priceCategorySelect').value;
 	// Load appropriate markers for the selected region and category
-    //loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
-    //fetchMarkers(selectedRegion, selectedCategory);
+    loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
+    fetchMarkers(selectedRegion, selectedCategory);
       panToRegion(selectedRegion);
       console.log("Region button clicked. Resizing all markers.");
       const overlay = document.getElementById('overlayContainer');
