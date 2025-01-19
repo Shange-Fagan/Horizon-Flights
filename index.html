@@ -3491,7 +3491,7 @@ margin-bottom: 1px;
     <p class="instruction-text">Sign Up for Exclusive Offers! Subscribe to our email list and get access to exclusive promotions and deals.</p>
     <form id="emailForm" onsubmit="submitEmail(event)">
       <input style="justify-content: center; justify-items: center; align-items: center;"type="email" id="emailInput" placeholder="Enter your email" required />
-      <button style="justify-content: center; justify-items: center; align-items: center; margin-left: 40px;"type="submit" class="popup-submit-btn">Sign Up</button>
+      <button style="justify-content: center; justify-items: center; align-items: center; margin-left: 42.5px;"type="submit" class="popup-submit-btn">Sign Up</button>
     </form>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
@@ -10428,7 +10428,7 @@ addMarkupPoints(fromLatLng, toLatLng);
 Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
     if (markers) {
-        const originalMarkerSize = 1; // Assume original size
+        const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
         const animationDuration = 500; // Animation duration in milliseconds
 
@@ -10496,7 +10496,7 @@ Object.keys(genericMarkers).forEach(region => {
 Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
     if (markers) {
-        const originalMarkerSize = 1; // Assume original size was 0.5
+        const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
         for (let i = 0; i < markers.count; i++) {
@@ -10617,7 +10617,7 @@ addMarkupPoints(fromLatLng, toLatLng);
 Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
     if (markers) {
-        const originalMarkerSize = 1; // Assume original size
+        const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
         const animationDuration = 500; // Animation duration in milliseconds
 
@@ -10685,7 +10685,7 @@ Object.keys(genericMarkers).forEach(region => {
 Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
     if (markers) {
-        const originalMarkerSize = 1; // Assume original size was 0.5
+        const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
         for (let i = 0; i < markers.count; i++) {
@@ -11139,7 +11139,7 @@ function openMarkerLabel2(data) {
 function createMarkerMesh(lat, lng) {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
   const markerMaterial =  new THREE.MeshBasicMaterial({
-    color: 0x00eaff,
+    color: 0x00ff00,
     side: THREE.DoubleSide,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
@@ -11253,7 +11253,7 @@ document.addEventListener('click', function (event) {
 Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
     if (markers) {
-        const originalMarkerSize = 1; // Assume original size was 0.5
+        const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
         for (let i = 0; i < markers.count; i++) {
@@ -11703,7 +11703,7 @@ document.querySelectorAll('.post .view-link').forEach((item, index) => {
   Object.keys(genericMarkers).forEach(region => {
     const markers = genericMarkers[region];
     if (markers) {
-        const originalMarkerSize = 1; // Assume original size was 0.5
+        const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
         for (let i = 0; i < markers.count; i++) {
@@ -11840,7 +11840,7 @@ function addMarkersToGlobe(markers) {
 function createMarkerMesh(lat, lng) {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
   const markerMaterial =  new THREE.MeshBasicMaterial({
-    color: 0x00eaff,
+    color: 0x00ff00,
     side: THREE.DoubleSide,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
