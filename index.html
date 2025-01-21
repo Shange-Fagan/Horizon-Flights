@@ -11090,12 +11090,12 @@ function setupMarkerInteraction2() {
       }
 
       // Otherwise, proceed to open the clicked marker
-      openMarkerLabel(data);
+      openMarkerLabel2(data);
     }
   });
 }
 
-function openMarkerLabel(data) {
+function openMarkerLabel2(data) {
   const labelDiv = document.getElementById(`label-${data.id}`);
   const contentDiv = labelDiv.querySelector('.content');
   if (!contentDiv.querySelector('.post')) {
