@@ -11025,6 +11025,8 @@ async function fetchMarkers(location, category) {
     console.error("Failed to fetch markers:", error);
   }
 }
+let activeMarkersData2 = markers; // Default to markersData
+let activeLabel2 = null; // Keep track of open iframe
 // Function to add markers to the globe
 function addMarkersToGlobe(markers) {
   markers.forEach(marker => {
@@ -11062,7 +11064,6 @@ function addMarkersToGlobe(markers) {
     setupMarkerInteraction2();
   });
 }
-let activeLabel2 = null; // Keep track of open iframe
 // Set up marker click event
 function setupMarkerInteraction2() {
   window.addEventListener('pointerdown', (event) => {
@@ -11095,7 +11096,58 @@ function openMarkerLabel2(data) {
 // Wait until the element is created in the DOM
   if (!contentDiv.querySelector('div')) {
     // Inject the inner HTML content
-    contentDiv.innerHTML = fetchAirbnbPosts.posts2
+    contentDiv.innerHTML = `
+      <div class="loading-spinner" style="pointer-events:none;"></div>
+      <iframe 
+        src="${data.iframeSrc}" 
+        frameborder="0" 
+        width="275" 
+        height="249" 
+        scrolling="yes" 
+        allowfullscreen="true" 
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" 
+        loading="eager">
+      </iframe>
+      <button id="toggleAirbnbPrices-${data.id}" style="
+        font-size: 10px; 
+        letter-spacing: 1px; 
+        position: absolute; 
+        top: 330px; 
+        right: 85px; 
+        background: none; 
+        border: none; 
+        color: rgba(255, 255, 255, 0.35); 
+        cursor: pointer;
+        display: none;">
+        ● ● ●
+      </button>
+      <select id="priceCategorySelect-${data.id}" style=
+      "display:none;"
+      "top: 350px !important;"
+      "right:30px !important;"
+      >
+        <optgroup label="Region-Specific Categories">
+          <option value="disabled">Sort by (Region)📍</option>
+          <option value="popular">Most Popular (in Region)📍</option>
+          <option value="cheapest">Cheapest📍</option>
+          <option value="midPrice">Mid Price📍</option>
+          <option value="expensive">Expensive📍</option>
+        </optgroup>
+      </select>
+      <select id="airbnbSelector-${data.id}" style=
+      "display:none;"
+      "top: 350px !important;"
+      "right:30px !important;"
+      >
+        <optgroup label="World Categories">
+          <option value="disabled">Sort by (Across the World) 🌍</option>
+          <option value="general">Most Popular (Across the World)🌍</option>
+          <option value="cheapest">Cheapest🌍</option>
+          <option value="midPrice">Mid Price🌍</option>
+          <option value="expensive">Most Expensive🌍</option>
+        </optgroup>
+      </select>
+    `;
 
     const iframe = labelDiv.querySelector('div');
     const spinner = contentDiv.querySelector('.loading-spinner');
