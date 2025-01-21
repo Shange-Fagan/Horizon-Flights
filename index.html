@@ -8118,10 +8118,12 @@ function populateFlightOverlay(flights) {
         const logo = document.createElement('img');
         logo.src = `${flight.airlineImg || "N/A"}`;
         logo.alt = `${flight.airline} logo`;
+        if (logo.src.endsWith('.svg')) {
+          logo.src = logo.src.replace('.svg', '.png');
         logo.classList.add('airline-logo');
         logo.style.width = '175px';
         logo.style.height = '52px';
-
+        }
         //const airline = document.createElement('p');
         //airline.textContent = flight.airline || 'Unknown Airline';
 
@@ -11015,9 +11017,10 @@ async function fetchMarkers(location, category) {
     },
     });
     // Extract posts and markers from the response
-  let { markers2 } = await response.json(); 
-    console.log("Fetched markers:", markers2);  // Log the response to check its format
-
+    const jsonResponse = await response.json();    console.log("Fetched markers:", markers2);  // Log the response to check its format
+// Destructure `markers` from the response, with a fallback to an empty array
+const { markers2: fetchedMarkers = [] } = jsonResponse;
+    markers2 = fetchedMarkers;
     if (!Array.isArray(markers2)) {
       throw new Error('Expected markers to be an array');
     }
