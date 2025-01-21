@@ -8116,14 +8116,22 @@ function populateFlightOverlay(flights) {
         const header = document.createElement('div');
         header.classList.add('flight-header');
         const logo = document.createElement('img');
-        logo.src = `${flight.airlineImg || "N/A"}`;
         logo.alt = `${flight.airline} logo`;
-        if (logo.src.endsWith('.svg')) {
-          logo.src = logo.src.replace('.svg', '.png');
+
+        // Check if the source ends with `.svg`
+        if (flight.airlineImg.endsWith('.svg')) {
+          const filename = flight.airline.toLowerCase().replace(/\s+/g, '-');
+          
+          // Request your server to convert the SVG to PNG
+          logo.src = `/convert-svg?url=${encodeURIComponent(flight.airlineImg)}&filename=${filename}`;
+        } else {
+          // Use the original image if it's not an SVG
+          logo.src = flight.airlineImg || "N/A";
+        }
+
         logo.classList.add('airline-logo');
         logo.style.width = '175px';
         logo.style.height = '52px';
-        }
         //const airline = document.createElement('p');
         //airline.textContent = flight.airline || 'Unknown Airline';
 
