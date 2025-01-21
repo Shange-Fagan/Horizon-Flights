@@ -11031,25 +11031,6 @@ let activeMarkersData2 = markers; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
 const labelsContainer2 = document.getElementById('labels-container');
   let mouseActivityTimeout2; // Timeout to resume autorotation after user interaction
-  // Mouse Activity Event Listeners
-function stopAutoRotateOnUserInteraction() {
-    controls.autoRotate = false;
-
-    // Clear any existing timeout
-    clearTimeout(mouseActivityTimeout2);
-
-    // Resume autorotation after 5 seconds of inactivity (adjust as needed)
-    mouseActivityTimeout2 = setTimeout(() => {
-            controls.autoRotate = true;
-    }, 2000); // 5 seconds of no mouse activity
-}
-
-// Stop autorotate on user interaction (mouse and touch)
-//window.addEventListener('mousemove', stopAutoRotateOnUserInteraction);
-window.addEventListener('mousedown', stopAutoRotateOnUserInteraction);
-//window.addEventListener('mouseup', stopAutoRotateOnUserInteraction);
-window.addEventListener('touchstart', stopAutoRotateOnUserInteraction);
-window.addEventListener('touchend', stopAutoRotateOnUserInteraction);
   // Create Labels
   markers.forEach((data) => {
   // Create Label Div
