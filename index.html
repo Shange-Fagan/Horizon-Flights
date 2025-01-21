@@ -8450,6 +8450,7 @@ function showLikedPosts() {
 
 document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
 // Add event listener for the flight search button
+let posts2 = []; // Declare globally to store fetched Airbnb posts
 document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))').addEventListener('click', async function () {
   const carouselContainer1 = document.getElementById('carousel-container');
   const carouselContainer2 = document.getElementById('carousel-container2');
@@ -8682,10 +8683,11 @@ async function fetchAirbnbPosts(searchUrl) {
         });
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
-         const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
+         posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
 
         console.log('Fetched posts:', data);
-
+// Return posts2 for further processing
+return posts2;
         // Update spinner text to indicate posts fetched
         updateSpinnerText("Displaying fetched listings...");
 // Call populateOverlay to display posts
@@ -11061,9 +11063,11 @@ function addMarkersToGlobe(markers) {
 
     // Add the marker to the scene
     scene.add(markerMesh);
+    // Attach posts to marker data
     setupMarkerInteraction2();
   });
 }
+// Set up marker click event
 // Set up marker click event
 function setupMarkerInteraction2() {
   window.addEventListener('pointerdown', (event) => {
@@ -11077,87 +11081,106 @@ function setupMarkerInteraction2() {
 
     if (intersects.length > 0) {
       const instanceId = intersects[0].instanceId;
-      const data = fetchMarkers.markers[instanceId];
+      const data = activeMarkersData2[instanceId];
 
       // Check if this label is already active and close it
       if (activeLabel2 && activeLabel2 === document.getElementById(`label-${data.id}`)) {
-        closeIframe2(event); // Close if clicking on the same active label
+        closeIframe(event); // Close if clicking on the same active label
         return;
       }
 
       // Otherwise, proceed to open the clicked marker
-      openMarkerLabel2(data);
+      openMarkerLabel(data);
     }
   });
 }
-function openMarkerLabel2(data) {
+
+function openMarkerLabel(data) {
   const labelDiv = document.getElementById(`label-${data.id}`);
   const contentDiv = labelDiv.querySelector('.content');
-// Wait until the element is created in the DOM
-  if (!contentDiv.querySelector('div')) {
-    // Inject the inner HTML content
-    contentDiv.innerHTML = `
-      <div class="loading-spinner" style="pointer-events:none;"></div>
-      <iframe 
-        src="${data.iframeSrc}" 
-        frameborder="0" 
-        width="275" 
-        height="249" 
-        scrolling="yes" 
-        allowfullscreen="true" 
-        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" 
-        loading="eager">
-      </iframe>
-      <button id="toggleAirbnbPrices-${data.id}" style="
-        font-size: 10px; 
-        letter-spacing: 1px; 
-        position: absolute; 
-        top: 330px; 
-        right: 85px; 
-        background: none; 
-        border: none; 
-        color: rgba(255, 255, 255, 0.35); 
-        cursor: pointer;
-        display: none;">
-        ● ● ●
-      </button>
-      <select id="priceCategorySelect-${data.id}" style=
-      "display:none;"
-      "top: 350px !important;"
-      "right:30px !important;"
-      >
-        <optgroup label="Region-Specific Categories">
-          <option value="disabled">Sort by (Region)📍</option>
-          <option value="popular">Most Popular (in Region)📍</option>
-          <option value="cheapest">Cheapest📍</option>
-          <option value="midPrice">Mid Price📍</option>
-          <option value="expensive">Expensive📍</option>
-        </optgroup>
-      </select>
-      <select id="airbnbSelector-${data.id}" style=
-      "display:none;"
-      "top: 350px !important;"
-      "right:30px !important;"
-      >
-        <optgroup label="World Categories">
-          <option value="disabled">Sort by (Across the World) 🌍</option>
-          <option value="general">Most Popular (Across the World)🌍</option>
-          <option value="cheapest">Cheapest🌍</option>
-          <option value="midPrice">Mid Price🌍</option>
-          <option value="expensive">Most Expensive🌍</option>
-        </optgroup>
-      </select>
-    `;
+  if (!contentDiv.querySelector('.post')) {
+    // Clear the content first
+    contentDiv.innerHTML = '<div class="loading-spinner" style="pointer-events:none;"></div>';
 
-    const iframe = labelDiv.querySelector('div');
+    // Dynamically populate content with fetched posts
+    const posts = posts2 || []; // Assuming data.posts contains the Airbnb posts
+    if (posts.length > 0) {
+      posts.forEach((post, index) => {
+        const postDiv = document.createElement('div');
+        postDiv.classList.add('post');
+
+        // Add image
+        const img = document.createElement('img');
+        img.src = post.images || ''; // Default to empty string if no image
+        img.alt = post.title || 'Airbnb Listing';
+
+        // Add title
+        const title = document.createElement('h3');
+        title.textContent = post.title || 'No title available';
+
+        // Add subtitle
+        const subtitle = document.createElement('p');
+        subtitle.textContent = post.subtitle || 'No subtitle available';
+
+        // Add price details
+        const priceDetails = document.createElement('p');
+        priceDetails.textContent = `Price: ${post.listing_price_details || 'N/A'} per night`;
+
+        // Add rating
+        const rating = document.createElement('p');
+        rating.textContent = `Rating: ★${post.rating_out_of_5_stars || 'N/A'}`;
+
+        // Add "View Listing" link
+        const viewLink = document.createElement('a');
+        viewLink.href = post.link || '#';
+        viewLink.target = '_blank';
+        viewLink.textContent = 'View Listing';
+        viewLink.classList.add('view-link');
+
+        // Add Like button
+        const likeButton = document.createElement('button');
+        likeButton.textContent = '🤍 Like';
+        likeButton.classList.add('like-button');
+        likeButton.addEventListener('click', () => saveToLikes(post));
+
+        // Append elements to the postDiv
+        postDiv.appendChild(img);
+        postDiv.appendChild(title);
+        postDiv.appendChild(subtitle);
+        postDiv.appendChild(priceDetails);
+        postDiv.appendChild(rating);
+        postDiv.appendChild(viewLink);
+        postDiv.appendChild(likeButton);
+
+        // Append postDiv to contentDiv
+        contentDiv.appendChild(postDiv);
+
+        // Highlight marker on hover
+        postDiv.addEventListener('mouseover', () => {
+          if (markers[index]) {
+            markers[index].material.color.set(0x00aaff); // Highlight marker in blue
+          }
+        });
+
+        // Reset marker color on mouse out
+        postDiv.addEventListener('mouseout', () => {
+          if (markers[index]) {
+            markers[index].material.color.set(0x00ff00); // Reset marker to green
+          }
+        });
+      });
+    } else {
+      contentDiv.innerHTML = '<p>No listings found for this marker.</p>';
+    }
+
+    // Remove the spinner
     const spinner = contentDiv.querySelector('.loading-spinner');
-
-    iframe.addEventListener('load', () => {
+    if (spinner) {
       spinner.style.display = 'none';
-      iframe.style.pointerEvents = 'all';
-    });
+    }
   }
 
+  // Activate the label and disable globe interactions
   labelDiv.classList.add('active');
   controls.autoRotate = false;
   controls.enabled = false;
@@ -11171,18 +11194,17 @@ function openMarkerLabel2(data) {
   activeLabel2 = labelDiv;
 
   // Add global listener for closing
-  document.addEventListener('pointerdown', closeIframe2);
+  document.addEventListener('pointerdown', closeMarkerLabel);
 }
 
-	// Function to close the active iframe if clicked outside
-  function closeIframe2(event) {
+function closeMarkerLabel(event) {
   if (activeLabel2 && !activeLabel2.contains(event.target)) {
     activeLabel2.classList.remove('active');
     controls.autoRotate = true;
     controls.enabled = true;
-    renderer.domElement.style.pointerEvents = 'all'; // Re-enable interaction with the globe
+    renderer.domElement.style.pointerEvents = 'all';
 
-    // Reset the active label, but keep it available for re-clicking
+    // Reset the active label
     activeLabel2 = null;
   }
 }
@@ -11447,10 +11469,11 @@ async function fetchAirbnbPosts(searchUrl) {
         });
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
-         const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
+         posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
 
         console.log('Fetched posts:', data);
-
+// Return posts2 for further processing
+return posts2;
         // Update spinner text to indicate posts fetched
         updateSpinnerText("Displaying fetched listings...");
 // Call populateOverlay to display posts
