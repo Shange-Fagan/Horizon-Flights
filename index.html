@@ -10981,7 +10981,8 @@ baseMesh.scale.set(size, size, size);
   // Add all markup points to the main Earth group
   globe2.add(markupPointGroup);
 }
-  
+  let markers2 = []; // Empty array initially
+
 async function fetchMarkers(location, category) {
       try {
         const location = document.getElementById('where').value;
@@ -11014,25 +11015,31 @@ async function fetchMarkers(location, category) {
     },
     });
     // Extract posts and markers from the response
-    const { markers } = await response.json(); 
-    console.log("Fetched markers:", markers);  // Log the response to check its format
+  let { markers2 } = await response.json(); 
+    console.log("Fetched markers:", markers2);  // Log the response to check its format
 
-    if (!Array.isArray(markers)) {
+    if (!Array.isArray(markers2)) {
       throw new Error('Expected markers to be an array');
     }
     // Clear existing markers and add new ones
     clearExistingMarkers();
-    addMarkersToGlobe(markers);  // Call the function to add markers
+    addMarkersToGlobe(markers2);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
-let activeMarkersData2 = markers; // Default to markersData
+let activeMarkersData2 = markers2; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
 const labelsContainer2 = document.getElementById('labels-container');
   let mouseActivityTimeout2; // Timeout to resume autorotation after user interaction
-  // Create Labels
-  markers.forEach((data) => {
+  if (markers2.length === 0) {
+    console.log("No markers available yet.");
+} else {
+    markers2.forEach((data) => {
+        // Logic to create labels or handle markers
+    });
+}
+  markers2.forEach((data) => {
   // Create Label Div
   const labelDiv = document.createElement('div');
   labelDiv.className = 'marker-label';
@@ -11082,8 +11089,8 @@ contentDiv.style.zIndex = '22009'; // Adjust the value as needed
   });
 });
 // Function to add markers to the globe
-function addMarkersToGlobe(markers) {
-  markers.forEach(marker => {
+function addMarkersToGlobe(markers2) {
+  markers2.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
 
@@ -11209,15 +11216,15 @@ function openMarkerLabel2(data) {
 
         // Highlight marker on hover
         postDiv.addEventListener('mouseover', () => {
-          if (markers[index]) {
-            markers[index].material.color.set(0x00aaff); // Highlight marker in blue
+          if (markers2[index]) {
+            markers2[index].material.color.set(0x00aaff); // Highlight marker in blue
           }
         });
 
         // Reset marker color on mouse out
         postDiv.addEventListener('mouseout', () => {
-          if (markers[index]) {
-            markers[index].material.color.set(0x00ff00); // Reset marker to green
+          if (markers2[index]) {
+            markers2[index].material.color.set(0x00ff00); // Reset marker to green
           }
         });
       });
