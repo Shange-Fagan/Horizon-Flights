@@ -11025,7 +11025,6 @@ async function fetchMarkers(location, category) {
     // Extract posts and markers from the response
     const jsonResponse = await response.json();    console.log("Fetched markers:", markers);  // Log the response to check its format
 // Destructure `markers` from the response, with a fallback to an empty array
-let markers = []; // Empty array initially
 const { markers: fetchedMarkers = [] } = jsonResponse;
     markers = fetchedMarkers;
     if (!Array.isArray(markers)) {
