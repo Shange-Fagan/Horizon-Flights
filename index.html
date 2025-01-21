@@ -11029,6 +11029,77 @@ async function fetchMarkers(location, category) {
 }
 let activeMarkersData2 = markers; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
+const labelsContainer2 = document.getElementById('labels-container');
+  let mouseActivityTimeout2; // Timeout to resume autorotation after user interaction
+  // Mouse Activity Event Listeners
+function stopAutoRotateOnUserInteraction() {
+    controls.autoRotate = false;
+
+    // Clear any existing timeout
+    clearTimeout(mouseActivityTimeout2);
+
+    // Resume autorotation after 5 seconds of inactivity (adjust as needed)
+    mouseActivityTimeout2 = setTimeout(() => {
+            controls.autoRotate = true;
+    }, 2000); // 5 seconds of no mouse activity
+}
+
+// Stop autorotate on user interaction (mouse and touch)
+//window.addEventListener('mousemove', stopAutoRotateOnUserInteraction);
+window.addEventListener('mousedown', stopAutoRotateOnUserInteraction);
+//window.addEventListener('mouseup', stopAutoRotateOnUserInteraction);
+window.addEventListener('touchstart', stopAutoRotateOnUserInteraction);
+window.addEventListener('touchend', stopAutoRotateOnUserInteraction);
+  // Create Labels
+  markers.forEach((data) => {
+  // Create Label Div
+  const labelDiv = document.createElement('div');
+  labelDiv.className = 'marker-label';
+  labelDiv.id = `label-${data.id}`;
+// Set the z-index
+labelDiv.style.zIndex = '22009'; // Adjust the value as needed
+  // Close Button
+  const closeButton = document.createElement('button');
+  closeButton.className = 'close-button';
+  closeButton.innerText = '×';
+  labelDiv.appendChild(closeButton);
+  
+  // Close Button Event Listener
+  closeButton.addEventListener('click', (event) => {
+    console.log('Close button clicked'); // Check if this appears in the console
+    event.stopPropagation(); // Stop the event from propagating up the DOM
+    labelDiv.classList.remove('active');
+    
+    // Resume globe autorotation when the label is closed
+    controls.autoRotate = true;
+    
+    // Re-enable the OrbitControls
+    controls.enabled = true;
+  });
+
+  // Content Div
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'content';
+  labelDiv.appendChild(contentDiv);
+// Set the z-index
+contentDiv.style.zIndex = '22009'; // Adjust the value as needed
+  // Append to Labels Container
+  labelsContainer.appendChild(labelDiv);
+
+  // CSS2DObject
+  const labelObject = new CSS2DObject(labelDiv);
+  labelObject.position.copy(data.worldPosition);
+  scene.add(labelObject);
+
+  // Store label object for interaction
+  data.labelObject = labelObject;
+  labelDiv.addEventListener('mousedown', (event) => {
+    event.stopPropagation();
+  });
+  labelDiv.addEventListener('touchstart', (event) => {
+    event.stopPropagation();
+  });
+});
 // Function to add markers to the globe
 function addMarkersToGlobe(markers) {
   markers.forEach(marker => {
