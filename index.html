@@ -11013,7 +11013,7 @@ async function fetchMarkers(location, category) {
     },
     });
     // Extract posts and markers from the response
-    const jsonResponse = await response.json();    console.log("Fetched markers:", markers);  // Log the response to check its format
+    const jsonResponse = await response.json();    console.log("Fetched markers:", markers2);  // Log the response to check its format
 // Destructure `markers` from the response, with a fallback to an empty array
 const { markers2: fetchedMarkers = [] } = jsonResponse;
     markers2 = fetchedMarkers;
