@@ -8121,6 +8121,7 @@ function populateFlightOverlay(flights) {
         logo.classList.add('airline-logo');
         logo.style.width = '175px';
         logo.style.height = '52px';
+
         //const airline = document.createElement('p');
         //airline.textContent = flight.airline || 'Unknown Airline';
 
@@ -8234,7 +8235,7 @@ margin-right: -320px;
     font-weight: bold;
     align-self: flex-end;
     margin-top: -130px;
-    font-family: -apple-system;
+    font--family: system-ui !important;
   }
 
   .book-button:hover {
@@ -8449,7 +8450,6 @@ function showLikedPosts() {
 
 document.getElementById("likedPostsButton").addEventListener("click", showLikedPosts);
 // Add event listener for the flight search button
-let posts2 = []; // Declare globally to store fetched Airbnb posts
 document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))').addEventListener('click', async function () {
   const carouselContainer1 = document.getElementById('carousel-container');
   const carouselContainer2 = document.getElementById('carousel-container2');
@@ -8682,11 +8682,10 @@ async function fetchAirbnbPosts(searchUrl) {
         });
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
-         posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
+         const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
 
         console.log('Fetched posts:', data);
-// Return posts2 for further processing
-return posts2;
+
         // Update spinner text to indicate posts fetched
         updateSpinnerText("Displaying fetched listings...");
 // Call populateOverlay to display posts
@@ -10980,7 +10979,7 @@ baseMesh.scale.set(size, size, size);
   // Add all markup points to the main Earth group
   globe2.add(markupPointGroup);
 }
-let markers2 = []; // Declare and initialise markers
+  
 async function fetchMarkers(location, category) {
       try {
         const location = document.getElementById('where').value;
@@ -11013,83 +11012,24 @@ async function fetchMarkers(location, category) {
     },
     });
     // Extract posts and markers from the response
-    const jsonResponse = await response.json();    console.log("Fetched markers:", markers2);  // Log the response to check its format
-// Destructure `markers` from the response, with a fallback to an empty array
-const { markers2: fetchedMarkers = [] } = jsonResponse;
-    markers2 = fetchedMarkers;
-    if (!Array.isArray(markers2)) {
+    const { markers } = await response.json(); 
+    console.log("Fetched markers:", markers);  // Log the response to check its format
+
+    if (!Array.isArray(markers)) {
       throw new Error('Expected markers to be an array');
     }
     // Clear existing markers and add new ones
     clearExistingMarkers();
-    addMarkersToGlobe(markers2);  // Call the function to add markers
+    addMarkersToGlobe(markers);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
-let activeMarkersData2 = markers2; // Default to markersData
+let activeMarkersData2 = markers; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
-const labelsContainer2 = document.getElementById('labels-container');
-  let mouseActivityTimeout2; // Timeout to resume autorotation after user interaction
-  if (markers2.length === 0) {
-    console.log("No markers available yet.");
-} else {
-    markers2.forEach((data) => {
-        // Logic to create labels or handle markers
-    });
-}
-  markers2.forEach((data) => {
-  // Create Label Div
-  const labelDiv = document.createElement('div');
-  labelDiv.className = 'marker-label';
-  labelDiv.id = `label-${data.id}`;
-// Set the z-index
-labelDiv.style.zIndex = '22009'; // Adjust the value as needed
-  // Close Button
-  const closeButton = document.createElement('button');
-  closeButton.className = 'close-button';
-  closeButton.innerText = '×';
-  labelDiv.appendChild(closeButton);
-  
-  // Close Button Event Listener
-  closeButton.addEventListener('click', (event) => {
-    console.log('Close button clicked'); // Check if this appears in the console
-    event.stopPropagation(); // Stop the event from propagating up the DOM
-    labelDiv.classList.remove('active');
-    
-    // Resume globe autorotation when the label is closed
-    controls.autoRotate = true;
-    
-    // Re-enable the OrbitControls
-    controls.enabled = true;
-  });
-
-  // Content Div
-  const contentDiv = document.createElement('div');
-  contentDiv.className = 'content';
-  labelDiv.appendChild(contentDiv);
-// Set the z-index
-contentDiv.style.zIndex = '22009'; // Adjust the value as needed
-  // Append to Labels Container
-  labelsContainer.appendChild(labelDiv);
-
-  // CSS2DObject
-  const labelObject = new CSS2DObject(labelDiv);
-  labelObject.position.copy(data.worldPosition);
-  scene.add(labelObject);
-
-  // Store label object for interaction
-  data.labelObject = labelObject;
-  labelDiv.addEventListener('mousedown', (event) => {
-    event.stopPropagation();
-  });
-  labelDiv.addEventListener('touchstart', (event) => {
-    event.stopPropagation();
-  });
-});
 // Function to add markers to the globe
 function addMarkersToGlobe(markers) {
-  markers2.forEach(marker => {
+  markers.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
 
@@ -11121,11 +11061,9 @@ function addMarkersToGlobe(markers) {
 
     // Add the marker to the scene
     scene.add(markerMesh);
-    // Attach posts to marker data
     setupMarkerInteraction2();
   });
 }
-// Set up marker click event
 // Set up marker click event
 function setupMarkerInteraction2() {
   window.addEventListener('pointerdown', (event) => {
@@ -11133,17 +11071,17 @@ function setupMarkerInteraction2() {
     pointer.y = -(event.clientY / innerHeight) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
 
-    const intersects = raycaster.intersectObject(markers2).filter((m) => {
+    const intersects = raycaster.intersectObject(markers).filter((m) => {
       return m.uv.subScalar(0.5).length() * 2 < 0.25;
     });
 
     if (intersects.length > 0) {
       const instanceId = intersects[0].instanceId;
-      const data = activeMarkersData2[instanceId];
+      const data = fetchMarkers.markers[instanceId];
 
       // Check if this label is already active and close it
       if (activeLabel2 && activeLabel2 === document.getElementById(`label-${data.id}`)) {
-        closeIframe(event); // Close if clicking on the same active label
+        closeIframe2(event); // Close if clicking on the same active label
         return;
       }
 
@@ -11152,93 +11090,23 @@ function setupMarkerInteraction2() {
     }
   });
 }
-
 function openMarkerLabel2(data) {
   const labelDiv = document.getElementById(`label-${data.id}`);
   const contentDiv = labelDiv.querySelector('.content');
-  if (!contentDiv.querySelector('.post')) {
-    // Clear the content first
-    contentDiv.innerHTML = '<div class="loading-spinner" style="pointer-events:none;"></div>';
+// Wait until the element is created in the DOM
+  if (!contentDiv.querySelector('div')) {
+    // Inject the inner HTML content
+    contentDiv.innerHTML = fetchAirbnbPosts.posts2
 
-    // Dynamically populate content with fetched posts
-    const posts = posts2 || []; // Assuming data.posts contains the Airbnb posts
-    if (posts.length > 0) {
-      posts.forEach((post, index) => {
-        const postDiv = document.createElement('div');
-        postDiv.classList.add('post');
-
-        // Add image
-        const img = document.createElement('img');
-        img.src = post.images || ''; // Default to empty string if no image
-        img.alt = post.title || 'Airbnb Listing';
-
-        // Add title
-        const title = document.createElement('h3');
-        title.textContent = post.title || 'No title available';
-
-        // Add subtitle
-        const subtitle = document.createElement('p');
-        subtitle.textContent = post.subtitle || 'No subtitle available';
-
-        // Add price details
-        const priceDetails = document.createElement('p');
-        priceDetails.textContent = `Price: ${post.listing_price_details || 'N/A'} per night`;
-
-        // Add rating
-        const rating = document.createElement('p');
-        rating.textContent = `Rating: ★${post.rating_out_of_5_stars || 'N/A'}`;
-
-        // Add "View Listing" link
-        const viewLink = document.createElement('a');
-        viewLink.href = post.link || '#';
-        viewLink.target = '_blank';
-        viewLink.textContent = 'View Listing';
-        viewLink.classList.add('view-link');
-
-        // Add Like button
-        const likeButton = document.createElement('button');
-        likeButton.textContent = '🤍 Like';
-        likeButton.classList.add('like-button');
-        likeButton.addEventListener('click', () => saveToLikes(post));
-
-        // Append elements to the postDiv
-        postDiv.appendChild(img);
-        postDiv.appendChild(title);
-        postDiv.appendChild(subtitle);
-        postDiv.appendChild(priceDetails);
-        postDiv.appendChild(rating);
-        postDiv.appendChild(viewLink);
-        postDiv.appendChild(likeButton);
-
-        // Append postDiv to contentDiv
-        contentDiv.appendChild(postDiv);
-
-        // Highlight marker on hover
-        postDiv.addEventListener('mouseover', () => {
-          if (markers2[index]) {
-            markers2[index].material.color.set(0x00aaff); // Highlight marker in blue
-          }
-        });
-
-        // Reset marker color on mouse out
-        postDiv.addEventListener('mouseout', () => {
-          if (markers2[index]) {
-            markers2[index].material.color.set(0x00ff00); // Reset marker to green
-          }
-        });
-      });
-    } else {
-      contentDiv.innerHTML = '<p>No listings found for this marker.</p>';
-    }
-
-    // Remove the spinner
+    const iframe = labelDiv.querySelector('div');
     const spinner = contentDiv.querySelector('.loading-spinner');
-    if (spinner) {
+
+    iframe.addEventListener('load', () => {
       spinner.style.display = 'none';
-    }
+      iframe.style.pointerEvents = 'all';
+    });
   }
 
-  // Activate the label and disable globe interactions
   labelDiv.classList.add('active');
   controls.autoRotate = false;
   controls.enabled = false;
@@ -11252,17 +11120,18 @@ function openMarkerLabel2(data) {
   activeLabel2 = labelDiv;
 
   // Add global listener for closing
-  document.addEventListener('pointerdown', closeMarkerLabel);
+  document.addEventListener('pointerdown', closeIframe2);
 }
 
-function closeMarkerLabel(event) {
+	// Function to close the active iframe if clicked outside
+  function closeIframe2(event) {
   if (activeLabel2 && !activeLabel2.contains(event.target)) {
     activeLabel2.classList.remove('active');
     controls.autoRotate = true;
     controls.enabled = true;
-    renderer.domElement.style.pointerEvents = 'all';
+    renderer.domElement.style.pointerEvents = 'all'; // Re-enable interaction with the globe
 
-    // Reset the active label
+    // Reset the active label, but keep it available for re-clicking
     activeLabel2 = null;
   }
 }
@@ -11527,11 +11396,10 @@ async function fetchAirbnbPosts(searchUrl) {
         });
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
-         posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
+         const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
 
         console.log('Fetched posts:', data);
-// Return posts2 for further processing
-return posts2;
+
         // Update spinner text to indicate posts fetched
         updateSpinnerText("Displaying fetched listings...");
 // Call populateOverlay to display posts
