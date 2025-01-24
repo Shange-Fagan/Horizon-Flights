@@ -8108,7 +8108,7 @@ function populateFlightOverlay(flights) {
         flightTime.classList.add('flight-time');
         flightTime.innerHTML = `
             <span class="flight-time-departure">${flight.departureTime || 'N/A'}</span>
-            <span class="flight-time-arrow">-----------------></span>
+            <span class="flight-time-arrow">--------------------------></span>
             <span class="flight-time-arrival">${flight.returnTime || 'N/A'}</span>
         `;
 
@@ -8187,7 +8187,7 @@ style.innerHTML = `
     color: #fff;
     font-family: system-ui;
     position: relative;
-margin-right: -320px;
+margin-right: -270px;
   }
 
   .flight-time-departure, .flight-time-arrival {
