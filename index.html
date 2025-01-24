@@ -8135,7 +8135,7 @@ function populateFlightOverlay(flights) {
         airline.textContent = `Airline: ${flight.airline || 'N/A'}`;
 
         const price = document.createElement('p');
-        price.textContent = `Price: $${flight.price || 'N/A'}`;
+        price.textContent = `Price: ${flight.price || 'N/A'}`;
 
         details.appendChild(layover);
         details.appendChild(price);
