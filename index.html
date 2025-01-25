@@ -8132,7 +8132,7 @@ function populateFlightOverlay(flights) {
         const details = document.createElement('div');
         details.classList.add('flight-details');
         const airline = document.createElement('p');
-        airline.textContent = `Airline: ${flight.airline || 'N/A'}`;
+        airline.textContent = `${flight.airline || 'N/A'}`;
 
         const price = document.createElement('p');
         price.textContent = `Price: ${flight.price || 'N/A'}`;
