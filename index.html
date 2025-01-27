@@ -8511,20 +8511,30 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
 	
     // Show the close button
     //document.getElementById('closeBtn').style.display = 'flex';
-    const menuButton = document.querySelector('.menuButton'); // Select the first element with the class 'menuButton'
-const dropdownMenu = document.getElementById('dropdownMenu'); // Select the dropdown menu
+    document.addEventListener('DOMContentLoaded', () => {
+  const menuButton = document.getElementById('menuButton');
+  const dropdownMenu = document.getElementById('dropdownMenu');
 
-if (menuButton) {
-  menuButton.style.display = 'flex'; // Set the display property
-} else {
-  console.error("Menu button not found.");
-}
+  if (!menuButton) {
+    console.error("Menu button with ID 'menuButton' not found.");
+    return;
+  }
+  if (!dropdownMenu) {
+    console.error("Dropdown menu with ID 'dropdownMenu' not found.");
+    return;
+  }
 
-if (dropdownMenu) {
-  dropdownMenu.style.display = 'flex'; // Set the display property
-} else {
-  console.error("Dropdown menu not found.");
-}
+  console.log("Menu button found:", menuButton);
+  console.log("Dropdown menu found:", dropdownMenu);
+
+  // Add your event listener logic here
+  menuButton.addEventListener('click', () => {
+    const currentDisplay = window.getComputedStyle(dropdownMenu).display;
+    dropdownMenu.style.display = currentDisplay === 'none' ? 'block' : 'none';
+    console.log("Dropdown menu toggled. New display:", dropdownMenu.style.display);
+  });
+});
+
 
 
 
