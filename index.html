@@ -8523,31 +8523,7 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
     //document.getElementById('overlayContainer').style.display = 'none';
 //});
 
-// Toggle dropdown menu visibility
-const menuButton = document.getElementById('menuButton');
-const dropdownMenu = document.getElementById('dropdownMenu');
-
-menuButton.addEventListener('click', () => {
-  dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
-});
-
-// Close the dropdown if clicked outside
-document.addEventListener('click', (event) => {
-  if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-    dropdownMenu.style.display = 'none';
-  }
-});
-// Handle dropdown options
-document.getElementById('airbnbOption').addEventListener('click', () => {
-  dropdownMenu.style.display = 'none'; // Close the dropdown
-  fetchAirbnbPosts(searchUrl);// Load Airbnb posts
-});
-
-document.getElementById('expediaOption').addEventListener('click', () => {
-  dropdownMenu.style.display = 'none'; // Close the dropdown
-  //displayExpediaPosts(); // Load Expedia posts
-});
-    // Show spinner and transition to split screen mode
+// Show spinner and transition to split screen mode
     /*const leftContainer = document.getElementById('left-container');*/
     const globeContainer = document.getElementById('globeContainer');
     const overlay = document.getElementById('overlayContainer');
@@ -8673,6 +8649,29 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 	console.log('Fetching data from:', `https://0c1c-136-148-37-3.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
   hideSpinnerContainer();
 
+});
+const menuButton = document.getElementById('menuButton');
+const dropdownMenu = document.getElementById('dropdownMenu');
+
+menuButton.addEventListener('click', () => {
+  dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+});
+
+// Close the dropdown if clicked outside
+document.addEventListener('click', (event) => {
+  if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+    dropdownMenu.style.display = 'none';
+  }
+});
+// Handle dropdown options
+document.getElementById('airbnbOption').addEventListener('click', () => {
+  dropdownMenu.style.display = 'none'; // Close the dropdown
+  fetchAirbnbPosts(searchUrl);// Load Airbnb posts
+});
+
+document.getElementById('expediaOption').addEventListener('click', () => {
+  dropdownMenu.style.display = 'none'; // Close the dropdown
+  //displayExpediaPosts(); // Load Expedia posts
 });
 //const overlayContainer = document.getElementById('overlayContainer');
 //const dragHandle = document.querySelector('.drag-handle');
