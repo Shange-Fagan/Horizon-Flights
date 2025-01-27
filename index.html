@@ -1918,6 +1918,28 @@ overflow: hidden;
   margin: 2px 0;
   border-radius: 2px;
 }
+#dropdownMenu button:hover {
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+.menu-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#dropdownMenu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 
 /* Styling for individual posts */
 /*.post {
@@ -3376,7 +3398,16 @@ margin-bottom: 1px;
             Drag to minimize or maximize
         </div>
         
-    
+    <!-- Vertical three-dots button -->
+  <div class="menu-container" style="position: absolute; top: 10px; right: 10px;">
+    <button id="menuButton" style="border: none; background: transparent; cursor: pointer;">
+      &#x22EE; <!-- Vertical three-dots icon -->
+    </button>
+    <div id="dropdownMenu" style="display: none; position: absolute; right: 0; background: white; border: 1px solid lightgray; border-radius: 5px; z-index: 1000;">
+      <button id="airbnbOption" style="display: block; width: 100%; padding: 10px; border: none; background: none; text-align: left;">Airbnb Posts</button>
+      <button id="expediaOption" style="display: block; width: 100%; padding: 10px; border: none; background: none; text-align: left;">Expedia Posts</button>
+    </div>
+  </div>
     <button id="closeBtn" style="display: block;"class="close-btn">X</button>
     <div class="drag-handle" style="display: block;">
       <div class="line" style="display: block;"></div>
@@ -8492,7 +8523,30 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
     //document.getElementById('overlayContainer').style.display = 'none';
 //});
 
+// Toggle dropdown menu visibility
+const menuButton = document.getElementById('menuButton');
+const dropdownMenu = document.getElementById('dropdownMenu');
 
+menuButton.addEventListener('click', () => {
+  dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+});
+
+// Close the dropdown if clicked outside
+document.addEventListener('click', (event) => {
+  if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+    dropdownMenu.style.display = 'none';
+  }
+});
+// Handle dropdown options
+document.getElementById('airbnbOption').addEventListener('click', () => {
+  dropdownMenu.style.display = 'none'; // Close the dropdown
+  fetchAirbnbPosts(searchUrl);// Load Airbnb posts
+});
+
+document.getElementById('expediaOption').addEventListener('click', () => {
+  dropdownMenu.style.display = 'none'; // Close the dropdown
+  //displayExpediaPosts(); // Load Expedia posts
+});
     // Show spinner and transition to split screen mode
     /*const leftContainer = document.getElementById('left-container');*/
     const globeContainer = document.getElementById('globeContainer');
