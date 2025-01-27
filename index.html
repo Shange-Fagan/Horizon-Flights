@@ -8375,6 +8375,8 @@ import {
 function populatelikedpostsOverlay(likedPosts) {
     const overlay = document.getElementById("overlayContainer");
     overlay.style.display = "grid";
+    overlay.style.width= '46%';
+    overlay.style.height= '75%';
     overlay.innerHTML = ""; // Clear previous posts
 
     likedPosts.forEach(post => {
