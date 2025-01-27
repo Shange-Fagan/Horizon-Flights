@@ -8511,11 +8511,25 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
 	
     // Show the close button
     //document.getElementById('closeBtn').style.display = 'flex';
-    const menuButton = document.querySelector('.menuButton');
+    const menuButtons = document.querySelectorAll('.menuButton'); // Get all elements with the class 'menuButton'
 const dropdownMenu = document.getElementById('dropdownMenu');
 
-menuButton.style.display = 'flex';
-dropdownMenu.style.display = 'flex';
+// Check if any menu buttons are found
+if (menuButtons.length > 0) {
+  menuButtons.forEach((menuButton) => {
+    menuButton.style.display = 'flex'; // Set the display property for each button
+  });
+} else {
+  console.error("No elements with class 'menuButton' found.");
+}
+
+// Check if the dropdown menu exists
+if (dropdownMenu) {
+  dropdownMenu.style.display = 'flex';
+} else {
+  console.error("Dropdown menu element not found.");
+}
+
 
 	
     // Ensure all required fields are filled out
