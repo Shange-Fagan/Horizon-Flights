@@ -8511,29 +8511,6 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
 	
     // Show the close button
     //document.getElementById('closeBtn').style.display = 'flex';
-    document.addEventListener('DOMContentLoaded', () => {
-  const menuButton = document.getElementById('menuButton');
-  const dropdownMenu = document.getElementById('dropdownMenu');
-
-  if (!menuButton) {
-    console.error("Menu button with ID 'menuButton' not found.");
-    return;
-  }
-  if (!dropdownMenu) {
-    console.error("Dropdown menu with ID 'dropdownMenu' not found.");
-    return;
-  }
-
-  console.log("Menu button found:", menuButton);
-  console.log("Dropdown menu found:", dropdownMenu);
-
-  // Add your event listener logic here
-  menuButton.addEventListener('click', () => {
-    const currentDisplay = window.getComputedStyle(dropdownMenu).display;
-    dropdownMenu.style.display = currentDisplay === 'none' ? 'block' : 'none';
-    console.log("Dropdown menu toggled. New display:", dropdownMenu.style.display);
-  });
-});
 
 
 
@@ -8679,19 +8656,42 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
   hideSpinnerContainer();
 
 });
-const menuButton = document.getElementById('menuButton');
-const dropdownMenu = document.getElementById('dropdownMenu');
+document.addEventListener('DOMContentLoaded', () => {
+  const menuButton = document.getElementById('menuButton'); // Select the menu button
+  const dropdownMenu = document.getElementById('dropdownMenu'); // Select the dropdown menu
 
-menuButton.addEventListener('click', () => {
-  dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
-});
-
-// Close the dropdown if clicked outside
-document.addEventListener('click', (event) => {
-  if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-    dropdownMenu.style.display = 'none';
+  // Check if the menu button exists
+  if (!menuButton) {
+    console.error("Menu button with ID 'menuButton' not found in the DOM.");
+    return; // Exit the script if the button doesn't exist
   }
+
+  // Check if the dropdown menu exists
+  if (!dropdownMenu) {
+    console.error("Dropdown menu with ID 'dropdownMenu' not found in the DOM.");
+    return; // Exit the script if the menu doesn't exist
+  }
+
+  console.log("Menu button found:", menuButton);
+  console.log("Dropdown menu found:", dropdownMenu);
+
+  // Add click event listener to toggle the dropdown menu
+  menuButton.addEventListener('click', () => {
+    console.log("Menu button clicked.");
+    const currentDisplay = window.getComputedStyle(dropdownMenu).display;
+    dropdownMenu.style.display = currentDisplay === 'none' ? 'block' : 'none';
+    console.log("Dropdown menu toggled. New display:", dropdownMenu.style.display);
+  });
+
+  // Optional: Close the dropdown menu if clicking outside of it
+  document.addEventListener('click', (event) => {
+    if (event.target !== menuButton && !dropdownMenu.contains(event.target)) {
+      dropdownMenu.style.display = 'none'; // Hide the dropdown menu
+      console.log("Clicked outside. Dropdown menu closed.");
+    }
+  });
 });
+
 // Handle dropdown options
 document.getElementById('airbnbOption').addEventListener('click', () => {
   dropdownMenu.style.display = 'none'; // Close the dropdown
