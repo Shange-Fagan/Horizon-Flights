@@ -4575,13 +4575,13 @@ setTimeout(() => {
         if (themeToggle2) {
             themeToggle2.click(); // Simulate a click on the toggle
         }
-    }, 10000); // 10000 milliseconds = 10 seconds
+    }, 1000); // 10000 milliseconds = 10 seconds
 });
 // Add the event listener for the toggle change
 document.addEventListener('DOMContentLoaded', () => {
     // Add a 10-second delay before simulating a click on the toggle button
     setTimeout(() => {
-        const themeToggle = document.getElementById('submitRegion');
+        const themeToggle = document.getElementById('regionPopup');
         if (themeToggle) {
             themeToggle.style.display = "none"; // Simulate a click on the toggle
         }
@@ -4603,7 +4603,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         const toggleButton = document.getElementById('toggleButton');
         if (toggleButton) {
-          toggleButton.click(); // Simulate a click on the toggle
+          //toggleButton.click(); // Simulate a click on the toggle
         }
     }, 10000); // 10000 milliseconds = 10 seconds
 });
@@ -5676,16 +5676,37 @@ let isDay = true; // Track whether it's currently day or night
     
     // Set the content dynamically
     newsOverlay.innerHTML = `
-        <div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; position: relative; top: 65px; max-height: 74%;">
+<div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; position: relative; top: 65px; max-height: 74%;">
     <h2 style="margin-bottom: 20px; color: rgba(255, 255, 255, 1);">The Best Beaches in the Caribbean and How to Get There</h2>
     <img src="js/caribbean-beaches--.jpg" alt="Caribbean Beaches" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px;">
-    <p style="margin-bottom: 20px;">Crystal clear waters, white sand, and tropical vibes – find out how to visit the best Caribbean beaches affordably.</p>
+    <p style="margin-bottom: 20px;">The Caribbean is home to some of the most stunning beaches in the world, offering crystal-clear waters, golden sands, and vibrant culture. Here are the **top beaches to visit** and tips on how to get there affordably.</p>
 
-    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Grace Bay, Turks & Caicos</h3>
-    <p style="margin-bottom: 15px;">Voted the world’s best beach, with affordable flights via Miami or Toronto.</p>
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">1. Grace Bay, Turks & Caicos</h3>
+    <p style="margin-bottom: 15px;">Consistently voted the **world’s best beach**, Grace Bay offers **powdery white sands** and turquoise waters that look like they belong in a dream. It's perfect for snorkeling, kayaking, or simply relaxing under a beach umbrella.</p>
+    <p style="margin-bottom: 15px;">✈️ **How to Get There:** Fly into **Providenciales International Airport (PLS)**. Affordable flights are available from **Miami, Toronto, and New York** with airlines like American Airlines and JetBlue.</p>
+    <p style="margin-bottom: 15px;">🏨 **Budget Tip:** Stay at guesthouses or smaller resorts just a short walk from the main beach to save money.</p>
 
-    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Seven Mile Beach, Jamaica</h3>
-    <p style="margin-bottom: 15px;">Relax on golden sands while staying at budget-friendly beachfront resorts.</p>
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">2. Seven Mile Beach, Jamaica</h3>
+    <p style="margin-bottom: 15px;">Located in Negril, **Seven Mile Beach** is a tropical paradise with **golden sands, gentle waves**, and plenty of activities like paddleboarding and catamaran cruises. The laid-back vibe makes it a favorite for solo travelers and families alike.</p>
+    <p style="margin-bottom: 15px;">✈️ **How to Get There:** Fly into **Montego Bay’s Sangster International Airport (MBJ)**, then take a **1.5-hour scenic drive** to Negril.</p>
+    <p style="margin-bottom: 15px;">🏨 **Budget Tip:** Book an all-inclusive resort during the **off-season (May-November)** for discounts of up to 40%.</p>
+
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">3. Eagle Beach, Aruba</h3>
+    <p style="margin-bottom: 15px;">Known for its **soft sands and iconic Divi Divi trees**, Eagle Beach offers a mix of tranquility and adventure. Popular activities include windsurfing, snorkeling, and sunset sailing cruises.</p>
+    <p style="margin-bottom: 15px;">✈️ **How to Get There:** Fly into **Queen Beatrix International Airport (AUA)**, with direct flights from major hubs like Miami, Amsterdam, and Bogota.</p>
+    <p style="margin-bottom: 15px;">🏨 **Budget Tip:** Stay in **Airbnbs or smaller boutique hotels** near Eagle Beach for a more affordable stay.</p>
+
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">4. Playa Flamenco, Puerto Rico</h3>
+    <p style="margin-bottom: 15px;">Located on the island of Culebra, **Playa Flamenco** boasts calm, clear waters perfect for swimming and snorkeling. Its unique feature? Rusted WWII tanks that now serve as fascinating photo ops along the shore.</p>
+    <p style="margin-bottom: 15px;">✈️ **How to Get There:** Fly into **San Juan’s Luis Muñoz Marín International Airport (SJU)**, then take a **ferry or short flight** to Culebra.</p>
+    <p style="margin-bottom: 15px;">🏨 **Budget Tip:** Plan a **day trip** to Culebra from the main island to save on accommodations.</p>
+
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">5. Pink Sands Beach, Bahamas</h3>
+    <p style="margin-bottom: 15px;">Famous for its **soft pink-hued sands**, this unique beach on Harbour Island offers a secluded and romantic escape. The pink color comes from microscopic coral insects called foraminifera.</p>
+    <p style="margin-bottom: 15px;">✈️ **How to Get There:** Fly into **North Eleuthera Airport (ELH)**, then take a **10-minute water taxi** to Harbour Island.</p>
+    <p style="margin-bottom: 15px;">🏨 **Budget Tip:** Visit during the shoulder season (April or November) for lower rates on boutique hotels.</p>
+
+    <p style="margin-top: 30px;"><strong>Conclusion:</strong> Whether you’re looking for relaxation or adventure, the Caribbean offers **beaches for every type of traveler**. Use these tips to plan your dream beach getaway while keeping your budget in check!</p>
 </div>
     `;
 
