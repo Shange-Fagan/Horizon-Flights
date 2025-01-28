@@ -4575,13 +4575,13 @@ setTimeout(() => {
         if (themeToggle2) {
             themeToggle2.click(); // Simulate a click on the toggle
         }
-    }, 10000); // 10000 milliseconds = 10 seconds
+    }, 1000); // 10000 milliseconds = 10 seconds
 });
 // Add the event listener for the toggle change
 document.addEventListener('DOMContentLoaded', () => {
     // Add a 10-second delay before simulating a click on the toggle button
     setTimeout(() => {
-        const themeToggle = document.getElementById('submitRegion');
+        const themeToggle = document.getElementById('regionPopup');
         if (themeToggle) {
             themeToggle.style.display = "none"; // Simulate a click on the toggle
         }
@@ -5676,16 +5676,42 @@ let isDay = true; // Track whether it's currently day or night
     
     // Set the content dynamically
     newsOverlay.innerHTML = `
-        <div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; position: relative; top: 65px; max-height: 74%;">
+<div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; position: relative; top: 65px; max-height: 74%;">
     <h2 style="margin-bottom: 20px; color: rgba(255, 255, 255, 1);">Affordable Winter Getaways Around the World</h2>
     <img src="js/winter-getaways-.jpg" alt="Winter Getaways" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px;">
-    <p style="margin-bottom: 20px;">Escape the cold or embrace it! Here are the best budget-friendly winter holiday destinations for 2025.</p>
+    <p style="margin-bottom: 20px;">Winter doesn’t have to mean staying indoors or breaking the bank. Whether you want to **embrace the snow** or escape to a **milder climate**, these budget-friendly destinations are perfect for 2025 travelers.</p>
 
-    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Lisbon, Portugal</h3>
-    <p style="margin-bottom: 15px;">Enjoy a mild winter climate, stunning architecture, and delicious pastries for under <strong>£50 a day</strong>.</p>
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">1. Lisbon, Portugal</h3>
+    <p style="margin-bottom: 15px;">**Lisbon** is a stunning winter escape with its mild climate, vibrant streets, and rich culture. Even during winter, the city offers plenty of sunshine, making it ideal for strolling through **historic neighborhoods** or sipping coffee at charming outdoor cafes.</p>
+    <p style="margin-bottom: 15px;">🏰 **Top Experience:** Visit the **Belém Tower**, ride the iconic **Tram 28**, and explore the **Alfama district** for breathtaking views.</p>
+    <p style="margin-bottom: 15px;">🍮 **Budget Tip:** Indulge in **pastéis de nata** (custard tarts) and traditional Portuguese meals at local eateries for under **£10**.</p>
+    <p style="margin-bottom: 15px;">💰 **Average Daily Budget:** £40-£50, including accommodation, meals, and public transport.</p>
 
-    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Bansko, Bulgaria</h3>
-    <p style="margin-bottom: 15px;">Ski passes start from <strong>£20 per day</strong>, making it one of Europe’s most affordable winter wonderlands.</p>
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">2. Bansko, Bulgaria</h3>
+    <p style="margin-bottom: 15px;">For skiing on a budget, **Bansko** is hard to beat. Nestled in the **Pirin Mountains**, this charming ski town offers **affordable accommodations** and activities, making it one of Europe’s top winter destinations.</p>
+    <p style="margin-bottom: 15px;">⛷️ **Top Experience:** Hit the slopes with **ski passes starting from £20 per day**, or relax in the town’s many **hot mineral baths** after a day of adventure.</p>
+    <p style="margin-bottom: 15px;">🍲 **Budget Tip:** Try traditional Bulgarian dishes like **banitsa** (cheese pastry) and **sach** (grilled meat and vegetables) at local taverns for just a few pounds.</p>
+    <p style="margin-bottom: 15px;">💰 **Average Daily Budget:** £30-£40, including ski rentals and meals.</p>
+
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">3. Kraków, Poland</h3>
+    <p style="margin-bottom: 15px;">**Kraków** transforms into a magical winter wonderland during the colder months. The city’s **Christmas markets**, rich history, and cozy cafes make it an enchanting destination for travelers on a budget.</p>
+    <p style="margin-bottom: 15px;">🎄 **Top Experience:** Wander through the **Main Market Square**, enjoy mulled wine, and take a day trip to the stunning **Wieliczka Salt Mine**.</p>
+    <p style="margin-bottom: 15px;">🍽️ **Budget Tip:** Dine on hearty Polish dishes like **pierogi** (dumplings) and **żurek** (sour rye soup) for less than £5 at local milk bars.</p>
+    <p style="margin-bottom: 15px;">💰 **Average Daily Budget:** £35-£45, including meals and attractions.</p>
+
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">4. Tenerife, Spain</h3>
+    <p style="margin-bottom: 15px;">If you’re looking to escape the cold entirely, **Tenerife** offers warm weather, stunning beaches, and volcanic landscapes. As one of the **Canary Islands**, it’s a year-round destination with plenty of budget-friendly accommodations and activities.</p>
+    <p style="margin-bottom: 15px;">🏖️ **Top Experience:** Hike **Mount Teide**, relax on **Playa de las Teresitas**, or take a boat tour to spot dolphins and whales.</p>
+    <p style="margin-bottom: 15px;">🍹 **Budget Tip:** Stay in small guesthouses or apartments, and enjoy tapas at local bars for affordable meals.</p>
+    <p style="margin-bottom: 15px;">💰 **Average Daily Budget:** £45-£55, including transportation and food.</p>
+
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">5. Québec City, Canada</h3>
+    <p style="margin-bottom: 15px;">For a true winter escape, **Québec City** offers snowy charm with its **European-style streets, ice skating rinks**, and winter carnivals. It’s a cozy destination for travelers looking to embrace the season.</p>
+    <p style="margin-bottom: 15px;">⛸️ **Top Experience:** Explore the enchanting **Old Québec**, skate on outdoor rinks, and visit the famous **Hôtel de Glace** (Ice Hotel).</p>
+    <p style="margin-bottom: 15px;">🍁 **Budget Tip:** Take advantage of free outdoor activities and public events during the city’s **Winter Carnival.**</p>
+    <p style="margin-bottom: 15px;">💰 **Average Daily Budget:** £50-£60, depending on activities and accommodations.</p>
+
+    <p style="margin-top: 30px;"><strong>Conclusion:</strong> Whether you’re chasing sunshine or snow, these **affordable winter getaways** offer incredible experiences without breaking the bank. Start planning your 2025 adventure today!</p>
 </div>
     `;
 
