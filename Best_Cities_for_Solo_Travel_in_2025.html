@@ -4575,13 +4575,13 @@ setTimeout(() => {
         if (themeToggle2) {
             themeToggle2.click(); // Simulate a click on the toggle
         }
-    }, 10000); // 10000 milliseconds = 10 seconds
+    }, 1000); // 10000 milliseconds = 10 seconds
 });
 // Add the event listener for the toggle change
 document.addEventListener('DOMContentLoaded', () => {
     // Add a 10-second delay before simulating a click on the toggle button
     setTimeout(() => {
-        const themeToggle = document.getElementById('submitRegion');
+        const themeToggle = document.getElementById('regionPopup');
         if (themeToggle) {
             themeToggle.style.display = "none"; // Simulate a click on the toggle
         }
@@ -5676,16 +5676,37 @@ let isDay = true; // Track whether it's currently day or night
     
         // Set the content dynamically
         newsOverlay.innerHTML = `
-            <div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; position: relative; top: 65px; max-height: 74%;">
-        <h2 style="margin-bottom: 20px; color: rgba(255, 255, 255, 1);">Best Cities for Solo Travel in 2025</h2>
-        <img src="js/solo-travel-cities--.jpg" alt="Solo Travel" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px;">
-        <p style="margin-bottom: 20px;">From Tokyo to Lisbon, explore the safest and most exciting cities for solo travelers in 2025.</p>
+<div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; position: relative; top: 65px; max-height: 74%;">
+    <h2 style="margin-bottom: 20px; color: rgba(255, 255, 255, 1);">Best Cities for Solo Travel in 2025</h2>
+    <img src="js/solo-travel-cities--.jpg" alt="Solo Travel" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px;">
+    <p style="margin-bottom: 20px;">Solo travel is an enriching experience that allows you to discover new places at your own pace. From bustling cities to serene escapes, these destinations are **perfect for solo adventurers in 2025**.</p>
 
-    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Kyoto, Japan</h3>
-    <p style="margin-bottom: 15px;">Explore ancient temples, peaceful gardens, and vibrant street food markets, perfect for solo explorers.</p>
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">1. Kyoto, Japan</h3>
+    <p style="margin-bottom: 15px;">**Kyoto**, with its blend of tradition and modernity, is a haven for solo travelers. Wander through **peaceful temples**, visit historic shrines, and indulge in **authentic Japanese cuisine**.</p>
+    <p style="margin-bottom: 15px;">🌸 **Top Experience:** Explore the iconic **Arashiyama Bamboo Grove** and take a stroll along the **Philosopher’s Path** during cherry blossom season.</p>
+    <p style="margin-bottom: 15px;">🍣 **Budget Tip:** Grab a bento box or try conveyor-belt sushi for an affordable and delicious meal.</p>
 
-    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Amsterdam, Netherlands</h3>
-    <p style="margin-bottom: 15px;">Bike-friendly, great public transport, and plenty of hostels for meeting fellow travelers.</p>
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">2. Amsterdam, Netherlands</h3>
+    <p style="margin-bottom: 15px;">Known for its **bike-friendly streets**, vibrant culture, and welcoming locals, Amsterdam is a dream for solo explorers. The city's excellent public transport and **safe environment** make getting around a breeze.</p>
+    <p style="margin-bottom: 15px;">🚲 **Top Experience:** Rent a bike and explore the city like a local. Don’t miss the **Van Gogh Museum** and the historic **Anne Frank House**.</p>
+    <p style="margin-bottom: 15px;">🍻 **Budget Tip:** Visit the city’s famous **brown cafés** for affordable drinks and a cozy atmosphere.</p>
+
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">3. Lisbon, Portugal</h3>
+    <p style="margin-bottom: 15px;">Lisbon offers a mix of **historic charm and modern vibrance**, making it a great choice for solo travelers. From cobblestone streets to breathtaking viewpoints, there’s plenty to explore.</p>
+    <p style="margin-bottom: 15px;">🏰 **Top Experience:** Ride the **Tram 28** to take in the city’s iconic sights, including **São Jorge Castle** and **Alfama** district.</p>
+    <p style="margin-bottom: 15px;">🍷 **Budget Tip:** Enjoy a glass of **Portuguese wine** or a traditional **pastel de nata** at a local café for under €5.</p>
+
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">4. Melbourne, Australia</h3>
+    <p style="margin-bottom: 15px;">With its **vibrant arts scene**, endless coffee shops, and welcoming atmosphere, Melbourne is a haven for solo adventurers. The city is known for its street art, lively markets, and amazing day trips.</p>
+    <p style="margin-bottom: 15px;">🎨 **Top Experience:** Explore the **laneways of Melbourne** filled with street art or visit the famous **Queen Victoria Market**.</p>
+    <p style="margin-bottom: 15px;">🚇 **Budget Tip:** Take advantage of the **free tram zone** to explore the city centre without spending a cent!</p>
+
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">5. Reykjavik, Iceland</h3>
+    <p style="margin-bottom: 15px;">For those seeking an otherworldly adventure, Reykjavik is a **safe and magical destination**. From geysers and glaciers to hot springs, Iceland offers a unique solo travel experience.</p>
+    <p style="margin-bottom: 15px;">🔥 **Top Experience:** Take a dip in the **Blue Lagoon** and chase the **Northern Lights** in winter.</p>
+    <p style="margin-bottom: 15px;">💡 **Budget Tip:** Use the city’s **public geothermal pools** for a relaxing experience at a fraction of the cost of private spas.</p>
+
+    <p style="margin-top: 30px;"><strong>Conclusion:</strong> Solo travel in 2025 is all about **freedom and discovery**. Whether you prefer the serene streets of Kyoto or the bustling vibe of Amsterdam, these cities are perfect for solo adventurers. Pack your bags and let the journey begin!</p>
 </div>
     `;
 
