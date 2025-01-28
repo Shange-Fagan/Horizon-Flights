@@ -4568,7 +4568,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 10000); // 10000 milliseconds = 10 seconds
 });
-
+// Add the event listener for the toggle change
+document.addEventListener('DOMContentLoaded', () => {
+setTimeout(() => {
+      const themeToggle2 = document.getElementById('newsButton');
+        if (themeToggle2) {
+            themeToggle2.click(); // Simulate a click on the toggle
+        }
+    }, 10000); // 10000 milliseconds = 10 seconds
+});
+// Add the event listener for the toggle change
+document.addEventListener('DOMContentLoaded', () => {
+    // Add a 10-second delay before simulating a click on the toggle button
+    setTimeout(() => {
+        const themeToggle = document.getElementById('submitRegion');
+        if (themeToggle) {
+            themeToggle.click(); // Simulate a click on the toggle
+        }
+    }, 10000); // 10000 milliseconds = 10 seconds
+});
 document.addEventListener('DOMContentLoaded', () => {
     // Add a 10-second delay before simulating a click on the toggle button
     setTimeout(() => {
@@ -5658,16 +5676,16 @@ let isDay = true; // Track whether it's currently day or night
     
     // Set the content dynamically
     newsOverlay.innerHTML = `
-        <div class="blog-post">
-    <h2>Hidden Gems in Morocco for Budget Travellers</h2>
-    <img src="js/morocco-hidden-gems.jpg" alt="Hidden Gems in Morocco">
-    <p>Explore Morocco beyond Marrakech! These hidden spots will make your trip unforgettable and affordable.</p>
+        <div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; position: relative; top: 65px; max-height: 74%;">
+    <h2 style="margin-bottom: 20px; color: rgba(255, 255, 255, 1);">Hidden Gems in Morocco for Budget Travellers</h2>
+    <img src="js/morocco-hidden-gems.jpg" alt="Hidden Gems in Morocco" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px;">
+    <p style="margin-bottom: 20px;">Explore Morocco beyond Marrakech! These hidden spots will make your trip unforgettable and affordable.</p>
 
-    <h3>Chefchaouen</h3>
-    <p>This stunning blue-washed town in the Rif Mountains offers <strong>affordable guesthouses</strong> and breathtaking views.</p>
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Chefchaouen</h3>
+    <p style="margin-bottom: 15px;">This stunning blue-washed town in the Rif Mountains offers <strong>affordable guesthouses</strong> and breathtaking views.</p>
 
-    <h3>Essaouira</h3>
-    <p>A laid-back beach town with <strong>budget-friendly seafood</strong> and charming medinas.</p>
+    <h3 style="margin-bottom: 15px; color: rgba(255, 255, 255, 1);">Essaouira</h3>
+    <p style="margin-bottom: 15px;">A laid-back beach town with <strong>budget-friendly seafood</strong> and charming medinas.</p>
 </div>
     `;
 
@@ -7870,13 +7888,6 @@ document.getElementById('clearFiltersBtn').addEventListener('click', () => {
     // Add a 10-second delay before simulating a click on the toggle button
     setTimeout(() => {
       const themeToggle2 = document.getElementById('themeToggle2');
-        if (themeToggle2) {
-            themeToggle2.click(); // Simulate a click on the toggle
-        }
-    }, 10000); // 10000 milliseconds = 10 seconds
-
-    setTimeout(() => {
-      const themeToggle2 = document.getElementById('newsButton');
         if (themeToggle2) {
             themeToggle2.click(); // Simulate a click on the toggle
         }
