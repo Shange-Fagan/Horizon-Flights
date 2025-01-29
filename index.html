@@ -3395,21 +3395,20 @@ margin-bottom: 1px;
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-  <!-- Vertical three-dots button -->
-  <div class="menu-container" style="position: absolute; display: flex; top: 30px; right: 30px;">
-    <button id="menuButton" style="border: none; display: flex; background: transparent; cursor: pointer;">
-      &#x22EE; <!-- Vertical three-dots icon -->
+    <div id="overlayContainer" style="resize: both; overflow: auto;">
+        <div class="drag-handle" style="cursor: grab; background: lightgray; padding: 10px; border-radius: 5px;">
+            Drag to minimize or maximize
+        </div>
+        <!-- Vertical three-dots button -->
+  <div class="menu-container" style="position: absolute; display: flex; top: 160px; right: 600px;">
+    <button id="menuButton" style="border: none; display: flex; background: transparent; cursor: pointer; color: white">
+      <strong>&#x22EE;</strong> <!-- Vertical three-dots icon -->
     </button>
     <div id="dropdownMenu" style="display: none; position: absolute; right: 0; background: white; border: 1px solid lightgray; border-radius: 5px; z-index: 1000;">
       <button id="airbnbOption" style="display: block; width: 100%; padding: 10px; border: none; background: none; text-align: left;">Airbnb Posts</button>
       <button id="expediaOption" style="display: block; width: 100%; padding: 10px; border: none; background: none; text-align: left;">Expedia Posts</button>
     </div>
   </div>
-    <div id="overlayContainer" style="resize: both; overflow: auto;">
-        <div class="drag-handle" style="cursor: grab; background: lightgray; padding: 10px; border-radius: 5px;">
-            Drag to minimize or maximize
-        </div>
-        
     <button id="closeBtn" style="display: block;"class="close-btn">X</button>
     <div class="drag-handle" style="display: block;">
       <div class="line" style="display: block;"></div>
