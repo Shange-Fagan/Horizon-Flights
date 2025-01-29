@@ -8556,12 +8556,13 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
     console.error("Menu button with ID 'menuButton' not found in the DOM.");
     return; // Exit the script if the button doesn't exist
   }
-
+menuButton.style.display = "flex";
   // Check if the dropdown menu exists
   if (!dropdownMenu) {
     console.error("Dropdown menu with ID 'dropdownMenu' not found in the DOM.");
     return; // Exit the script if the menu doesn't exist
   }
+  //dropdownMenu.style.display = "flex";
 
   console.log("Menu button found:", menuButton);
   console.log("Dropdown menu found:", dropdownMenu);
