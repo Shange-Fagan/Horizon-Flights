@@ -4201,7 +4201,7 @@ document.getElementById("loginButton").addEventListener("click", () => {
             signupForm.innerHTML = `
                 <input type="email" id="signupEmailInput" placeholder="Enter your email" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-left: -1.5%;" required>
                 <input type="password" id="signupPasswordInput" placeholder="Enter your password" style="display: block; width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-left: -1.5%;" required>
-                <button type="submit" style="background-color: #00aaff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Sign Up</button>
+                <button type="submit" id="signupSubmitBtn"style="background-color: #00aaff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Sign Up</button>
             `;
 
             signupForm.addEventListener("submit", (e) => {
@@ -4651,7 +4651,8 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
   const gotItBtn = document.getElementById('gotItBtn');
   const calendaricon2 = document.querySelector('.calendar-icon2');
   const calendaricon = document.querySelector('.calendar-icon');
-
+  const emailLoginButton = document.getElementById('emailLoginButton');
+  const signupSubmitBtn = document.getElementById('signupSubmitBtn');
 
 
 
@@ -4679,6 +4680,8 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
     gotItBtn.style.backgroundColor = '#00aaff';
     popupClosebtn.style.backgroundColor = '#0780B3';
     clearFiltersBtn.style.backgroundColor = '#00aaff';
+    emailLoginButton.style.backgroundColor = '#00aaff';
+    signupSubmitBtn.style.backgroundColor = '#00aaff';
     header.style.display = "flex";
     calendaricon2.style.right="59.25%";
     calendaricon.style.right="47.3%";
@@ -4718,6 +4721,8 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
     popupSavebtn.style.setProperty('background-color', '#0780B3', 'important');
     gotItBtn.style.setProperty('background-color', '#0780B3', 'important');
     searchBtn22.style.setProperty('background-color', '#0780B3', 'important');
+    emailLoginButton.style.setProperty('background-color', '#0780B3', 'important');
+    signupSubmitBtn.style.setProperty('background-color', '#0780B3', 'important');
     const hoverStyle = document.createElement('style');
     hoverStyle.innerHTML = `
       #searchBtn:hover {
