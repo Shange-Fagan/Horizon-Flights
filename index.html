@@ -9086,7 +9086,7 @@ const monthlyEndDate = new Date(today.getFullYear(), today.getMonth() + 3, 0); /
 const monthlyStart = monthlyStartDate.toISOString().split('T')[0];  // First day of current month
 const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of the month 3 months from now
     // Construct Expedia search URL
-let expediaSearchUrl = `https://www.expedia.com/Hotel-Search?destination=${encodeURIComponent(location)}&startDate=${checkin}&endDate=${checkout}&adults=${guests}&sort=RECOMMENDED`;
+let expediaSearchUrl = `https://www.expedia.co.uk/Hotel-Search?destination=${encodeURIComponent(location)}&startDate=${checkin}&endDate=${checkout}&adults=${guests}&sort=RECOMMENDED`;
 
 if (priceMin && priceMin.trim() !== "") {
     expediaSearchUrl += `&priceMin=${priceMin}`;
