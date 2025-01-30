@@ -4773,8 +4773,8 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
       #searchBtn:hover {
         animation: pulseShadow3 0.6s ease-in-out infinite alternate !important;
       }
-    `;    popupClosebtn.style.backgroundColor = '#00aaff';
-    clearFiltersBtn.style.backgroundColor = '#0780B3';
+    `;    popupClosebtn.style.setProperty('background-color', '#00aaff', 'important');
+    clearFiltersBtn.style.setProperty('background-color', '#0780B3', 'important');
     calendaricon2.style.right="59.9%";
     calendaricon.style.right="48%";
     document.getElementById("cabinClassContainer").style.display = "flex"
@@ -8262,7 +8262,7 @@ function populateFlightOverlay(flights) {
 
         // Book Button
         const bookButton = document.createElement('a');
-        //bookButton.href = flight.link || '#';
+        bookButton.href = flight.link || '#';
         bookButton.target = '_blank';
         bookButton.textContent = 'Book Now';
         bookButton.classList.add('book-button');
