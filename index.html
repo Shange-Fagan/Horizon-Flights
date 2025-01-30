@@ -8765,7 +8765,36 @@ if (overlayContainer) {
   // Handle dropdown options
 document.getElementById('airbnbOption').addEventListener('click', () => {
   dropdownMenu.style.display = 'none'; // Close the dropdown
+  const location = document.getElementById('where').value;
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const guests = document.getElementById('adults').value;
+    const priceMin = document.getElementById('price_min').value;
+    const priceMax = document.getElementById('price_max').value;
+    const today = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(today.getDate() + 1);
+ // Get the first day of the current month
+const monthlyStartDate = new Date(today.getFullYear(), today.getMonth(), 1);
+
+// Get the end date three months from the current month
+const monthlyEndDate = new Date(today.getFullYear(), today.getMonth() + 3, 0); // 0 gives the last day of the previous month
+// Format the dates to YYYY-MM-DD
+const monthlyStart = monthlyStartDate.toISOString().split('T')[0];  // First day of current month
+const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of the month 3 months from now
+    let searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=2&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&adults=${guests}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
+
+    // Only add price_min and price_max if they have values
+    if (priceMin && priceMin.trim() !== "") {
+        searchUrl += `&price_min=${priceMin}`;
+    }
+    if (priceMax && priceMax.trim() !== "") {
+        searchUrl += `&price_max=${priceMax}`;
+    }
+    // Debug the search URL (you can remove this after confirming it works)
+    console.log('Generated searchUrl:', searchUrl);
   fetchAirbnbPosts(searchUrl);// Load Airbnb posts
+  hideSpinnerContainer();
 });
 
 document.getElementById('expediaOption').addEventListener('click', () => {
