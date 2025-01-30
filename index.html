@@ -8724,7 +8724,7 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
     Powered by Expedia⚡️`);
 
     // Fetch Airbnb posts and display them
-    await fetchAirbnbPosts(searchUrl);
+    fetchAirbnbPosts(searchUrl);
 	console.log('Generated searchUrl:', searchUrl);
 	console.log('Generated searchUrl:location', location);
 	console.log('Generated searchUrl:checkin', checkin);
@@ -9115,7 +9115,7 @@ console.log('Generated Expedia Search URL:', expediaSearchUrl);
 
     // Fetch Airbnb posts and display them
     fetchExpediaPosts(expediaSearchUrl);
-	console.log('Generated searchUrl:', searchUrl);
+	console.log('Generated searchUrl:', expediaSearchUrl);
 	console.log('Generated searchUrl:location', location);
 	console.log('Generated searchUrl:checkin', checkin);
 	console.log('Generated searchUrl:checkout', checkout);
