@@ -8956,7 +8956,6 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 	console.log('Generated searchUrl:priceMin', priceMin);
 	console.log('Generated searchUrl:priceMax', priceMax);
 	console.log('Fetching data from:', `https://0c1c-136-148-37-3.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
-  hideSpinnerContainer();
 });
 
 document.getElementById('expediaOption').addEventListener('click', () => {
