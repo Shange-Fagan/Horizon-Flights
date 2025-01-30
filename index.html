@@ -8699,7 +8699,7 @@ const menuContainer = document.querySelector('.menu-container');
 
 // Function to check and update menu button visibility
 function updateMenuButtonVisibility() {
-    if (overlayContainer && window.getComputedStyle(overlayContainer).display === 'flex') {
+    if (overlayContainer && window.getComputedStyle(overlayContainer).display === 'grid') {
         if (menuButton) {
             menuButton.style.display = "flex"; // Show the menu button
             console.log("Menu button set to display: flex");
