@@ -2433,12 +2433,30 @@ left: -8px !important;
     justify-content: center;
   }
 }
-@supports (-webkit-appearance: none) {
+/* Default padding for all browsers */
+.like-button {
+    padding: 17px 20px !important;
+    padding-bottom: 17px !important;
+}
+
+/* Apply different padding for non-Safari browsers */
+@supports not (-webkit-appearance: none) {
     .like-button {
         padding: 16.5px 20px !important;
         padding-bottom: 15.5px !important;
     }
 }
+
+/* Apply Safari-specific padding using a media query */
+@media not all and (min-resolution:.001dpcm) { 
+    @supports (-webkit-appearance: none) { 
+        .like-button {
+            padding: 17px 20px !important;
+            padding-bottom: 17px !important;
+        }
+    }
+}
+
 
 #cityBtn {
   color: rgba(255, 255, 255, 0.75);
