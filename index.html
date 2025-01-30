@@ -3493,11 +3493,6 @@ margin-bottom: 1px;
   <div class="instruction-step hidden" id="dragInstruction">
     <img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 60%; left: 55%;"></div>
-    <p class="instruction-text">Click the blue buttons to view the latest hotels & airbnb's in each region</p>
-  </div>
-  <div class="instruction-step hidden" id="dragInstruction">
-    <img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
-    <div class="pulsating-dot" style="top: 60%; left: 55%;"></div>
     <p class="instruction-text">Click outside the blue buttons to close the airbnb widgets</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
@@ -8568,32 +8563,6 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
 
     // Ensure menu is positioned correctly
     document.querySelector('.menu-container').style.display = 'flex';
-
-  // Add click event listener to toggle the dropdown menu
-  menuButton.addEventListener('click', () => {
-    console.log("Menu button clicked.");
-    const currentDisplay = window.getComputedStyle(dropdownMenu).display;
-    dropdownMenu.style.display = currentDisplay === 'none' ? 'block' : 'none';
-    console.log("Dropdown menu toggled. New display:", dropdownMenu.style.display);
-  });
-
-  // Optional: Close the dropdown menu if clicking outside of it
-  document.addEventListener('click', (event) => {
-    if (event.target !== menuButton && !dropdownMenu.contains(event.target)) {
-      dropdownMenu.style.display = 'none'; // Hide the dropdown menu
-      console.log("Clicked outside. Dropdown menu closed.");
-    }
-  });
-  // Handle dropdown options
-document.getElementById('airbnbOption').addEventListener('click', () => {
-  dropdownMenu.style.display = 'none'; // Close the dropdown
-  fetchAirbnbPosts(searchUrl);// Load Airbnb posts
-});
-
-document.getElementById('expediaOption').addEventListener('click', () => {
-  dropdownMenu.style.display = 'none'; // Close the dropdown
-  //displayExpediaPosts(); // Load Expedia posts
-});
     // Ensure all required fields are filled out
     if (!location || !checkin || !checkout || !guests) {
         alert('Please fill out all required fields.');
@@ -8733,6 +8702,31 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 	console.log('Fetching data from:', `https://0c1c-136-148-37-3.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
   hideSpinnerContainer();
 
+});
+// Add click event listener to toggle the dropdown menu
+  menuButton.addEventListener('click', () => {
+    console.log("Menu button clicked.");
+    const currentDisplay = window.getComputedStyle(dropdownMenu).display;
+    dropdownMenu.style.display = currentDisplay === 'none' ? 'block' : 'none';
+    console.log("Dropdown menu toggled. New display:", dropdownMenu.style.display);
+  });
+
+  // Optional: Close the dropdown menu if clicking outside of it
+  document.addEventListener('click', (event) => {
+    if (event.target !== menuButton && !dropdownMenu.contains(event.target)) {
+      dropdownMenu.style.display = 'none'; // Hide the dropdown menu
+      console.log("Clicked outside. Dropdown menu closed.");
+    }
+  });
+  // Handle dropdown options
+document.getElementById('airbnbOption').addEventListener('click', () => {
+  dropdownMenu.style.display = 'none'; // Close the dropdown
+  fetchAirbnbPosts(searchUrl);// Load Airbnb posts
+});
+
+document.getElementById('expediaOption').addEventListener('click', () => {
+  dropdownMenu.style.display = 'none'; // Close the dropdown
+  //displayExpediaPosts(); // Load Expedia posts
 });
 //const overlayContainer = document.getElementById('overlayContainer');
 //const dragHandle = document.querySelector('.drag-handle');
