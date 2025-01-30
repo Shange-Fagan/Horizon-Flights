@@ -3399,11 +3399,11 @@ margin-bottom: 1px;
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <!-- Vertical three-dots button -->
-<div class="menu-container" style="position: absolute; z-index: 99999 !important; display: flex; top: 160px; right: 600px;">
+<div class="menu-container" style="position: absolute; z-index: 99999 !important; display: flex; top: 165px; left: 13px;">
   <button id="menuButton" style="border: none; display: flex; background: transparent; cursor: pointer; color: white">
     <strong>&#x22EE;</strong> <!-- Vertical three-dots icon -->
   </button>
-  <div id="dropdownMenu" style="display: none; position: absolute; right: 0; background: white; border: 1px solid lightgray; border-radius: 5px; z-index: 1000;">
+  <div id="dropdownMenu" style="display: none; position: absolute; left: 0; background: white; width: 120px; border: 1px solid lightgray; border-radius: 5px; z-index: 1000;">
     <button id="airbnbOption" style="display: block; width: 100%; padding: 10px; border: none; background: none; text-align: left;">Airbnb Posts</button>
     <button id="expediaOption" style="display: block; width: 100%; padding: 10px; border: none; background: none; text-align: left;">Expedia Posts</button>
   </div>
@@ -8546,23 +8546,6 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
     // Show the close button
     //document.getElementById('closeBtn').style.display = 'flex';
   // Ensure menu button is displayed
-  const menuButton = document.getElementById('menuButton');
-    if (menuButton) {
-        menuButton.style.display = "flex"; // Make sure it is visible
-        console.log("Menu button set to display: flex");
-    } else {
-        console.error("Menu button not found!");
-    }
-
-    // Ensure dropdown menu exists
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    if (!dropdownMenu) {
-        console.error("Dropdown menu with ID 'dropdownMenu' not found in the DOM.");
-        return; // Exit the script if the menu doesn't exist
-    }
-
-    // Ensure menu is positioned correctly
-    document.querySelector('.menu-container').style.display = 'flex';
     // Ensure all required fields are filled out
     if (!location || !checkin || !checkout || !guests) {
         alert('Please fill out all required fields.');
@@ -8703,6 +8686,48 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
   hideSpinnerContainer();
 
 });
+// Select elements
+//const overlayContainer = document.getElementById('overlayContainer');
+const menuButton = document.getElementById('menuButton');
+const dropdownMenu = document.getElementById('dropdownMenu');
+const menuContainer = document.querySelector('.menu-container');
+
+// Function to check and update menu button visibility
+function updateMenuButtonVisibility() {
+    if (overlayContainer && window.getComputedStyle(overlayContainer).display === 'flex') {
+        if (menuButton) {
+            menuButton.style.display = "flex"; // Show the menu button
+            console.log("Menu button set to display: flex");
+        } else {
+            console.error("Menu button not found!");
+        }
+
+        if (menuContainer) {
+            menuContainer.style.display = 'flex'; // Ensure the menu container is visible
+            console.log("Menu container set to display: flex");
+        } else {
+            console.error("Menu container not found!");
+        }
+    } else {
+        console.log("Overlay container is not set to flex, hiding menu button.");
+        if (menuButton) {
+            menuButton.style.display = "none"; // Hide the menu button if overlay is not flex
+        }
+        if (menuContainer) {
+            menuContainer.style.display = 'none'; // Hide the menu container as well
+        }
+    }
+}
+
+// Check visibility when the page loads
+document.addEventListener("DOMContentLoaded", updateMenuButtonVisibility);
+
+// Optional: Check visibility changes dynamically
+const observer = new MutationObserver(updateMenuButtonVisibility);
+if (overlayContainer) {
+    observer.observe(overlayContainer, { attributes: true, attributeFilter: ['style'] });
+}
+
 // Add click event listener to toggle the dropdown menu
   menuButton.addEventListener('click', () => {
     console.log("Menu button clicked.");
