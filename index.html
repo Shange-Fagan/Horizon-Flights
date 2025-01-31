@@ -4774,7 +4774,8 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
         animation: pulseShadow3 0.6s ease-in-out infinite alternate !important;
       }
     `;    popupClosebtn.style.backgroundColor = '#00aaff';
-    clearFiltersBtn.style.backgroundColor = '#0780B3';
+    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+    clearFiltersBtn.style.setProperty('background-color', '#0780B3', 'important');
     calendaricon2.style.right="59.9%";
     calendaricon.style.right="48%";
     document.getElementById("cabinClassContainer").style.display = "flex"
@@ -8723,8 +8724,7 @@ console.log('Generated Expedia Search URL:', expediaSearchUrl);
     Thank you for your patience! 🙏🏽
     Powered by Expedia⚡️`);
 
-    // Fetch Airbnb posts and display them
-    fetchExpediaPosts(expediaSearchUrl);
+    await fetchExpediaPosts(expediaSearchUrl);
 	console.log('Generated searchUrl:', expediaSearchUrl);
 	console.log('Generated searchUrl:location', location);
 	console.log('Generated searchUrl:checkin', checkin);
@@ -8947,7 +8947,7 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
     Powered by Expedia⚡️`);
 
     // Fetch Airbnb posts and display them
-    fetchAirbnbPosts(searchUrl);
+  fetchAirbnbPosts(searchUrl);
 	console.log('Generated searchUrl:', searchUrl);
 	console.log('Generated searchUrl:location', location);
 	console.log('Generated searchUrl:checkin', checkin);
