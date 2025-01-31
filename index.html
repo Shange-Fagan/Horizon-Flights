@@ -4675,7 +4675,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-document.getElementById('themeToggle').addEventListener('change', (event) => {
+  document.getElementById('themeToggle').addEventListener('change', (event) => {
   const isChecked = event.target.checked;
 
   const airbnbLogos = document.getElementsByClassName("logo-airbnb");
@@ -4696,7 +4696,8 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
   const gotItBtn = document.getElementById('gotItBtn');
   const calendaricon2 = document.querySelector('.calendar-icon2');
   const calendaricon = document.querySelector('.calendar-icon');
-
+  const emailLoginButton = document.getElementById('emailLoginButton');
+  const signupSubmitBtn = document.getElementById('signupSubmitBtn');
 
 
 
@@ -4722,8 +4723,10 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
     regionPopupbutton.style.backgroundColor = '#00aaff';
     popupSavebtn.style.backgroundColor = '#00aaff';
     gotItBtn.style.backgroundColor = '#00aaff';
-    popupClosebtn.style.backgroundColor = '#003580';
+    popupClosebtn.style.backgroundColor = '#0780B3';
     clearFiltersBtn.style.backgroundColor = '#00aaff';
+    emailLoginButton.style.backgroundColor = '#00aaff';
+    signupSubmitBtn.style.backgroundColor = '#00aaff';
     header.style.display = "flex";
     calendaricon2.style.right="59.25%";
     calendaricon.style.right="47.3%";
@@ -4755,21 +4758,23 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
         currentTicker.style.display = "block";
     Array.from(trivagoLogos).forEach(logo => logo.style.display = "block");
     Array.from(airbnbLogos).forEach(logo => logo.style.display = "none");
-    searchBtn.style.backgroundColor = '#003580';
-    loginButton.style.backgroundColor = '#003580';
-    topLeftLabel.style.setProperty('background-color', '#003580', 'important');
-    likedPostsButton.style.setProperty('background-color', '#003580', 'important');
-    regionPopupbutton.style.setProperty('background-color', '#003580', 'important');
-    popupSavebtn.style.setProperty('background-color', '#003580', 'important');
-    gotItBtn.style.setProperty('background-color', '#003580', 'important');
-    searchBtn22.style.setProperty('background-color', '#003580', 'important');
+    searchBtn.style.backgroundColor = '#0780B3';
+    loginButton.style.backgroundColor = '#0780B3';
+    topLeftLabel.style.setProperty('background-color', '#0780B3', 'important');
+    likedPostsButton.style.setProperty('background-color', '#0780B3', 'important');
+    regionPopupbutton.style.setProperty('background-color', '#0780B3', 'important');
+    popupSavebtn.style.setProperty('background-color', '#0780B3', 'important');
+    gotItBtn.style.setProperty('background-color', '#0780B3', 'important');
+    searchBtn22.style.setProperty('background-color', '#0780B3', 'important');
+    emailLoginButton.style.setProperty('background-color', '#0780B3', 'important');
+    signupSubmitBtn.style.setProperty('background-color', '#0780B3', 'important');
     const hoverStyle = document.createElement('style');
     hoverStyle.innerHTML = `
       #searchBtn:hover {
         animation: pulseShadow3 0.6s ease-in-out infinite alternate !important;
       }
-    `;    popupClosebtn.style.backgroundColor = '#00aaff';
-    clearFiltersBtn.style.backgroundColor = '#003580';
+    `;    popupClosebtn.style.setProperty('background-color', '#00aaff', 'important');
+    clearFiltersBtn.style.backgroundColor = '#0780B3';
     calendaricon2.style.right="59.9%";
     calendaricon.style.right="48%";
     document.getElementById("cabinClassContainer").style.display = "flex"
