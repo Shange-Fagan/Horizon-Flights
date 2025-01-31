@@ -8589,51 +8589,6 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
 	
     // Show the close button
     //document.getElementById('closeBtn').style.display = 'flex';
-    document.addEventListener('DOMContentLoaded', () => {
-  const menuButton = document.getElementById('menuButton'); // Select the menu button
-  const dropdownMenu = document.getElementById('dropdownMenu'); // Select the dropdown menu
-
-  // Check if the menu button exists
-  if (!menuButton) {
-    console.error("Menu button with ID 'menuButton' not found in the DOM.");
-    return; // Exit the script if the button doesn't exist
-  }
-
-  // Check if the dropdown menu exists
-  if (!dropdownMenu) {
-    console.error("Dropdown menu with ID 'dropdownMenu' not found in the DOM.");
-    return; // Exit the script if the menu doesn't exist
-  }
-
-  console.log("Menu button found:", menuButton);
-  console.log("Dropdown menu found:", dropdownMenu);
-
-  // Add click event listener to toggle the dropdown menu
-  menuButton.addEventListener('click', () => {
-    console.log("Menu button clicked.");
-    const currentDisplay = window.getComputedStyle(dropdownMenu).display;
-    dropdownMenu.style.display = currentDisplay === 'none' ? 'block' : 'none';
-    console.log("Dropdown menu toggled. New display:", dropdownMenu.style.display);
-  });
-
-  // Optional: Close the dropdown menu if clicking outside of it
-  document.addEventListener('click', (event) => {
-    if (event.target !== menuButton && !dropdownMenu.contains(event.target)) {
-      dropdownMenu.style.display = 'none'; // Hide the dropdown menu
-      console.log("Clicked outside. Dropdown menu closed.");
-    }
-  });
-  // Handle dropdown options
-document.getElementById('airbnbOption').addEventListener('click', () => {
-  dropdownMenu.style.display = 'none'; // Close the dropdown
-  fetchAirbnbPosts(searchUrl);// Load Airbnb posts
-});
-
-document.getElementById('expediaOption').addEventListener('click', () => {
-  dropdownMenu.style.display = 'none'; // Close the dropdown
-  //displayExpediaPosts(); // Load Expedia posts
-});
-});
     // Ensure all required fields are filled out
     if (!location || !checkin || !checkout || !guests) {
         alert('Please fill out all required fields.');
@@ -8773,6 +8728,394 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 	console.log('Fetching data from:', `https://0c1c-136-148-37-3.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
   hideSpinnerContainer();
 
+});
+// Select elements
+//const overlayContainer = document.getElementById('overlayContainer');
+const menuButton = document.getElementById('menuButton');
+const dropdownMenu = document.getElementById('dropdownMenu');
+const menuContainer = document.querySelector('.menu-container');
+
+// Function to check and update menu button visibility
+function updateMenuButtonVisibility() {
+    if (overlayContainer && window.getComputedStyle(overlayContainer).display === 'grid') {
+        if (menuButton) {
+            menuButton.style.display = "flex"; // Show the menu button
+            console.log("Menu button set to display: flex");
+        } else {
+            console.error("Menu button not found!");
+        }
+
+        if (menuContainer) {
+            menuContainer.style.display = 'flex'; // Ensure the menu container is visible
+            console.log("Menu container set to display: flex");
+        } else {
+            console.error("Menu container not found!");
+        }
+    } else {
+        console.log("Overlay container is not set to flex, hiding menu button.");
+        if (menuButton) {
+            menuButton.style.display = "none"; // Hide the menu button if overlay is not flex
+        }
+        if (menuContainer) {
+            menuContainer.style.display = 'none'; // Hide the menu container as well
+        }
+    }
+}
+
+// Check visibility when the page loads
+document.addEventListener("DOMContentLoaded", updateMenuButtonVisibility);
+
+// Optional: Check visibility changes dynamically
+const observer = new MutationObserver(updateMenuButtonVisibility);
+if (overlayContainer) {
+    observer.observe(overlayContainer, { attributes: true, attributeFilter: ['style'] });
+}
+
+// Add click event listener to toggle the dropdown menu
+  menuButton.addEventListener('click', () => {
+    console.log("Menu button clicked.");
+    const currentDisplay = window.getComputedStyle(dropdownMenu).display;
+    dropdownMenu.style.display = currentDisplay === 'none' ? 'block' : 'none';
+    console.log("Dropdown menu toggled. New display:", dropdownMenu.style.display);
+  });
+
+  // Optional: Close the dropdown menu if clicking outside of it
+  document.addEventListener('click', (event) => {
+    if (event.target !== menuButton && !dropdownMenu.contains(event.target)) {
+      dropdownMenu.style.display = 'none'; // Hide the dropdown menu
+      console.log("Clicked outside. Dropdown menu closed.");
+    }
+  });
+  // Handle dropdown options
+document.getElementById('airbnbOption').addEventListener('click', () => {
+  dropdownMenu.style.display = 'none'; // Close the dropdown
+  const carouselContainer1 = document.getElementById('carousel-container');
+  const carouselContainer2 = document.getElementById('carousel-container2');
+  
+  carouselContainer1.style.display = 'none';
+  carouselContainer2.style.display = 'none';
+    console.log("Airbnb search button clicked.");
+    // Your flight search logic here
+    const location = document.getElementById('where').value;
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const guests = document.getElementById('adults').value;
+    const priceMin = document.getElementById('price_min').value;
+    const priceMax = document.getElementById('price_max').value;
+	
+    /*const inputs = document.querySelectorAll('#header input');
+    inputs.forEach(input => {
+        input.style.color = 'darkgrey';  // Change placeholder text to dark grey
+    });*/
+    //document.getElementById('header').style.backgroundColor = 'white';  // Change header background to white
+	
+    // Show the close button
+    //document.getElementById('closeBtn').style.display = 'flex';
+  // Ensure menu button is displayed
+    // Ensure all required fields are filled out
+    if (!location || !checkin || !checkout || !guests) {
+        alert('Please fill out all required fields.');
+        return;
+    }
+// JavaScript to close the left-container and show the Three.js canvas
+// Function to handle the close button click
+//document.getElementById('closeBtn').addEventListener('click', function () {
+    // Hide the close button and the left container
+    //document.getElementById('closeBtn').style.display = 'none';
+    //document.getElementById('overlayContainer').style.display = 'none';
+//});
+
+// Show spinner and transition to split screen mode
+    /*const leftContainer = document.getElementById('left-container');*/
+    const globeContainer = document.getElementById('globeContainer');
+    const overlay = document.getElementById('overlayContainer2');
+    // Check if the overlayContainer exists
+    if (!overlay) {
+        console.error("Overlay container not found!");
+        return;
+    }
+    // Log to confirm the visibility change
+    console.log("Displaying overlay...");
+
+    // Use requestAnimationFrame to force a repaint
+    /*requestAnimationFrame(() => {
+        overlay.style.display = 'grid';
+        overlay.classList.add('show');
+    });*/
+    overlay.style.display = 'grid';
+    overlay.style.width= '46%';
+    overlay.style.height= '75%';
+    overlay.classList.add('show');
+    
+        overlay.innerHTML = `
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <p class="spinner-text">Starting the process...</p>
+            </div>
+        `;
+        function hideSpinnerContainer() {
+    const spinnerContainer = document.querySelector('.spinner-container');
+    if (spinnerContainer) {
+        spinnerContainer.style.display = 'none';  // Hide the spinner container
+    }
+}
+
+  
+    // Show the spinner inside the left container
+    /*leftContainer.innerHTML = `
+        <div class="spinner-container">
+            <div class="spinner"></div>
+            <p class="spinner-text">Starting the process...</p>
+        </div>
+    `;
+    leftContainer.style.display = 'block'; // Ensure the left container is visible
+    
+
+    // Shrink the globe-container to take only half the screen
+    globeContainer.classList.add('split');
+    leftContainer.classList.add('show'); // Show the left container
+	// Switch to split-screen layout
+    leftContainer.style.width = '50%';
+    globeContainer.style.width = '50%';*/
+
+    // Call the resize function for Three.js
+    //resizeThreeJS(); // Ensure Three.js canvas is resized properly
+
+	// Ensure Three.js globe resizes after the DOM update is complete
+    //setTimeout(resizeThreeJS, 500); // Delay to ensure layout transition has completed
+
+	// Function to resize the Three.js globe
+    /*function resizeThreeJS() {
+        if (window.renderer && window.camera) {
+            const newWidth = globeContainer.clientWidth;
+            const newHeight = globeContainer.clientHeight;
+            window.renderer.setSize(newWidth, newHeight);
+            window.camera.aspect = newWidth / newHeight;
+            window.camera.updateProjectionMatrix();
+        }
+    }*/
+
+    // Update the spinner text to indicate visiting Airbnb
+    updateSpinnerText("Visiting Airbnb site...");
+
+    // Generate the Airbnb search URL
+    // Base URL for Airbnb search
+    // Construct the initial Airbnb URL (without map bounds)
+  // Get today's date
+const today = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(today.getDate() + 1);
+ // Get the first day of the current month
+const monthlyStartDate = new Date(today.getFullYear(), today.getMonth(), 1);
+
+// Get the end date three months from the current month
+const monthlyEndDate = new Date(today.getFullYear(), today.getMonth() + 3, 0); // 0 gives the last day of the previous month
+// Format the dates to YYYY-MM-DD
+const monthlyStart = monthlyStartDate.toISOString().split('T')[0];  // First day of current month
+const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of the month 3 months from now
+    let searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=2&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&adults=${guests}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
+
+    // Only add price_min and price_max if they have values
+    if (priceMin && priceMin.trim() !== "") {
+        searchUrl += `&price_min=${priceMin}`;
+    }
+    if (priceMax && priceMax.trim() !== "") {
+        searchUrl += `&price_max=${priceMax}`;
+    }
+    // Debug the search URL (you can remove this after confirming it works)
+    console.log('Generated searchUrl:', searchUrl);
+
+	// Disable globe interactions when the left container is scrolled
+    /*overlay.addEventListener('mouseenter', () => {
+        globeContainer.classList.add('disable-interaction');
+    });
+
+    overlay.addEventListener('mouseleave', () => {
+        globeContainer.classList.remove('disable-interaction');
+    });*/
+
+    // Update spinner text to indicate fetching data
+    updateSpinnerText(`We’re searching for the best hotel deals for you… 🙌 Sit back, relax, and browse while we find your perfect stay! 🏨✨
+    Thank you for your patience! 🙏🏽
+    Powered by Expedia⚡️`);
+
+    // Fetch Airbnb posts and display them
+    fetchAirbnbPosts(searchUrl);
+	console.log('Generated searchUrl:', searchUrl);
+	console.log('Generated searchUrl:location', location);
+	console.log('Generated searchUrl:checkin', checkin);
+	console.log('Generated searchUrl:checkout', checkout);
+	console.log('Generated searchUrl:guests', guests);
+	console.log('Generated searchUrl:priceMin', priceMin);
+	console.log('Generated searchUrl:priceMax', priceMax);
+	console.log('Fetching data from:', `https://0c1c-136-148-37-3.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+});
+
+document.getElementById('expediaOption').addEventListener('click', () => {
+  dropdownMenu.style.display = 'none'; // Close the dropdown
+  //displayExpediaPosts(); // Load Expedia posts
+  const carouselContainer1 = document.getElementById('carousel-container');
+  const carouselContainer2 = document.getElementById('carousel-container2');
+  
+  carouselContainer1.style.display = 'none';
+  carouselContainer2.style.display = 'none';
+    console.log("Airbnb search button clicked.");
+    // Your flight search logic here
+    const location = document.getElementById('where').value;
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const guests = document.getElementById('adults').value;
+    const priceMin = document.getElementById('price_min').value;
+    const priceMax = document.getElementById('price_max').value;
+	
+    /*const inputs = document.querySelectorAll('#header input');
+    inputs.forEach(input => {
+        input.style.color = 'darkgrey';  // Change placeholder text to dark grey
+    });*/
+    //document.getElementById('header').style.backgroundColor = 'white';  // Change header background to white
+	
+    // Show the close button
+    //document.getElementById('closeBtn').style.display = 'flex';
+  // Ensure menu button is displayed
+    // Ensure all required fields are filled out
+    if (!location || !checkin || !checkout || !guests) {
+        alert('Please fill out all required fields.');
+        return;
+    }
+// JavaScript to close the left-container and show the Three.js canvas
+// Function to handle the close button click
+//document.getElementById('closeBtn').addEventListener('click', function () {
+    // Hide the close button and the left container
+    //document.getElementById('closeBtn').style.display = 'none';
+    //document.getElementById('overlayContainer').style.display = 'none';
+//});
+
+// Show spinner and transition to split screen mode
+    /*const leftContainer = document.getElementById('left-container');*/
+    const globeContainer = document.getElementById('globeContainer');
+    const overlay = document.getElementById('overlayContainer');
+    // Check if the overlayContainer exists
+    if (!overlay) {
+        console.error("Overlay container not found!");
+        return;
+    }
+    // Log to confirm the visibility change
+    console.log("Displaying overlay...");
+
+    // Use requestAnimationFrame to force a repaint
+    /*requestAnimationFrame(() => {
+        overlay.style.display = 'grid';
+        overlay.classList.add('show');
+    });*/
+    overlay.style.display = 'grid';
+    overlay.style.width= '46%';
+    overlay.style.height= '75%';
+    overlay.classList.add('show');
+    
+        overlay.innerHTML = `
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <p class="spinner-text">Starting the process...</p>
+            </div>
+        `;
+        function hideSpinnerContainer() {
+    const spinnerContainer = document.querySelector('.spinner-container');
+    if (spinnerContainer) {
+        spinnerContainer.style.display = 'none';  // Hide the spinner container
+    }
+}
+
+  
+    // Show the spinner inside the left container
+    /*leftContainer.innerHTML = `
+        <div class="spinner-container">
+            <div class="spinner"></div>
+            <p class="spinner-text">Starting the process...</p>
+        </div>
+    `;
+    leftContainer.style.display = 'block'; // Ensure the left container is visible
+    
+
+    // Shrink the globe-container to take only half the screen
+    globeContainer.classList.add('split');
+    leftContainer.classList.add('show'); // Show the left container
+	// Switch to split-screen layout
+    leftContainer.style.width = '50%';
+    globeContainer.style.width = '50%';*/
+
+    // Call the resize function for Three.js
+    //resizeThreeJS(); // Ensure Three.js canvas is resized properly
+
+	// Ensure Three.js globe resizes after the DOM update is complete
+    //setTimeout(resizeThreeJS, 500); // Delay to ensure layout transition has completed
+
+	// Function to resize the Three.js globe
+    /*function resizeThreeJS() {
+        if (window.renderer && window.camera) {
+            const newWidth = globeContainer.clientWidth;
+            const newHeight = globeContainer.clientHeight;
+            window.renderer.setSize(newWidth, newHeight);
+            window.camera.aspect = newWidth / newHeight;
+            window.camera.updateProjectionMatrix();
+        }
+    }*/
+
+    // Update the spinner text to indicate visiting Airbnb
+    updateSpinnerText("Visiting Airbnb site...");
+
+    // Generate the Airbnb search URL
+    // Base URL for Airbnb search
+    // Construct the initial Airbnb URL (without map bounds)
+  // Get today's date
+const today = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(today.getDate() + 1);
+ // Get the first day of the current month
+const monthlyStartDate = new Date(today.getFullYear(), today.getMonth(), 1);
+
+// Get the end date three months from the current month
+const monthlyEndDate = new Date(today.getFullYear(), today.getMonth() + 3, 0); // 0 gives the last day of the previous month
+// Format the dates to YYYY-MM-DD
+const monthlyStart = monthlyStartDate.toISOString().split('T')[0];  // First day of current month
+const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of the month 3 months from now
+    // Construct Expedia search URL
+let expediaSearchUrl = `https://www.expedia.co.uk/Hotel-Search?destination=${encodeURIComponent(location)}&startDate=${checkin}&endDate=${checkout}&adults=${guests}&sort=RECOMMENDED`;
+
+if (priceMin && priceMin.trim() !== "") {
+    expediaSearchUrl += `&priceMin=${priceMin}`;
+}
+if (priceMax && priceMax.trim() !== "") {
+    expediaSearchUrl += `&priceMax=${priceMax}`;
+}
+
+// Log for debugging
+console.log('Generated Expedia Search URL:', expediaSearchUrl);
+
+	// Disable globe interactions when the left container is scrolled
+    /*overlay.addEventListener('mouseenter', () => {
+        globeContainer.classList.add('disable-interaction');
+    });
+
+    overlay.addEventListener('mouseleave', () => {
+        globeContainer.classList.remove('disable-interaction');
+    });*/
+
+    // Update spinner text to indicate fetching data
+    updateSpinnerText(`We’re searching for the best hotel deals for you… 🙌 Sit back, relax, and browse while we find your perfect stay! 🏨✨
+    Thank you for your patience! 🙏🏽
+    Powered by Expedia⚡️`);
+
+    // Fetch Airbnb posts and display them
+    fetchExpediaPosts(expediaSearchUrl);
+	console.log('Generated searchUrl:', expediaSearchUrl);
+	console.log('Generated searchUrl:location', location);
+	console.log('Generated searchUrl:checkin', checkin);
+	console.log('Generated searchUrl:checkout', checkout);
+	console.log('Generated searchUrl:guests', guests);
+	console.log('Generated searchUrl:priceMin', priceMin);
+	console.log('Generated searchUrl:priceMax', priceMax);
+	console.log('Fetching data from:', `https://0c1c-136-148-37-3.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+  hideSpinnerContainer();
 });
 //const overlayContainer = document.getElementById('overlayContainer');
 //const dragHandle = document.querySelector('.drag-handle');
