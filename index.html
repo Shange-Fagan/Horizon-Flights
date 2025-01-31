@@ -4675,7 +4675,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  document.getElementById('themeToggle').addEventListener('change', (event) => {
+document.getElementById('themeToggle').addEventListener('change', (event) => {
   const isChecked = event.target.checked;
 
   const airbnbLogos = document.getElementsByClassName("logo-airbnb");
@@ -4696,8 +4696,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gotItBtn = document.getElementById('gotItBtn');
   const calendaricon2 = document.querySelector('.calendar-icon2');
   const calendaricon = document.querySelector('.calendar-icon');
-  const emailLoginButton = document.getElementById('emailLoginButton');
-  const signupSubmitBtn = document.getElementById('signupSubmitBtn');
+
 
 
 
@@ -4725,8 +4724,6 @@ document.addEventListener('DOMContentLoaded', () => {
     gotItBtn.style.backgroundColor = '#00aaff';
     popupClosebtn.style.backgroundColor = '#0780B3';
     clearFiltersBtn.style.backgroundColor = '#00aaff';
-    emailLoginButton.style.backgroundColor = '#00aaff';
-    signupSubmitBtn.style.backgroundColor = '#00aaff';
     header.style.display = "flex";
     calendaricon2.style.right="59.25%";
     calendaricon.style.right="47.3%";
@@ -4766,14 +4763,12 @@ document.addEventListener('DOMContentLoaded', () => {
     popupSavebtn.style.setProperty('background-color', '#0780B3', 'important');
     gotItBtn.style.setProperty('background-color', '#0780B3', 'important');
     searchBtn22.style.setProperty('background-color', '#0780B3', 'important');
-    emailLoginButton.style.setProperty('background-color', '#0780B3', 'important');
-    signupSubmitBtn.style.setProperty('background-color', '#0780B3', 'important');
     const hoverStyle = document.createElement('style');
     hoverStyle.innerHTML = `
       #searchBtn:hover {
         animation: pulseShadow3 0.6s ease-in-out infinite alternate !important;
       }
-    `;    popupClosebtn.style.setProperty('background-color', '#00aaff', 'important');
+    `;    popupClosebtn.style.backgroundColor = '#00aaff';
     clearFiltersBtn.style.backgroundColor = '#0780B3';
     calendaricon2.style.right="59.9%";
     calendaricon.style.right="48%";
