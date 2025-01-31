@@ -8697,17 +8697,17 @@ const monthlyEndDate = new Date(today.getFullYear(), today.getMonth() + 3, 0); /
 // Format the dates to YYYY-MM-DD
 const monthlyStart = monthlyStartDate.toISOString().split('T')[0];  // First day of current month
 const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of the month 3 months from now
-    let searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=2&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&adults=${guests}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
+let expediaSearchUrl = `https://www.expedia.com/Hotel-Search?destination=${encodeURIComponent(location)}&startDate=${checkin}&endDate=${checkout}&adults=${guests}&sort=RECOMMENDED`;
 
-    // Only add price_min and price_max if they have values
-    if (priceMin && priceMin.trim() !== "") {
-        searchUrl += `&price_min=${priceMin}`;
-    }
-    if (priceMax && priceMax.trim() !== "") {
-        searchUrl += `&price_max=${priceMax}`;
-    }
-    // Debug the search URL (you can remove this after confirming it works)
-    console.log('Generated searchUrl:', searchUrl);
+if (priceMin && priceMin.trim() !== "") {
+    expediaSearchUrl += `&priceMin=${priceMin}`;
+}
+if (priceMax && priceMax.trim() !== "") {
+    expediaSearchUrl += `&priceMax=${priceMax}`;
+}
+
+// Log for debugging
+console.log('Generated Expedia Search URL:', expediaSearchUrl);
 
 	// Disable globe interactions when the left container is scrolled
     /*overlay.addEventListener('mouseenter', () => {
@@ -8724,8 +8724,8 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
     Powered by Expedia⚡️`);
 
     // Fetch Airbnb posts and display them
-    await fetchAirbnbPosts(searchUrl);
-	console.log('Generated searchUrl:', searchUrl);
+    fetchExpediaPosts(expediaSearchUrl);
+	console.log('Generated searchUrl:', expediaSearchUrl);
 	console.log('Generated searchUrl:location', location);
 	console.log('Generated searchUrl:checkin', checkin);
 	console.log('Generated searchUrl:checkout', checkout);
@@ -9115,7 +9115,7 @@ console.log('Generated Expedia Search URL:', expediaSearchUrl);
 
     // Fetch Airbnb posts and display them
     fetchExpediaPosts(expediaSearchUrl);
-	console.log('Generated searchUrl:', searchUrl);
+	console.log('Generated searchUrl:', expediaSearchUrl);
 	console.log('Generated searchUrl:location', location);
 	console.log('Generated searchUrl:checkin', checkin);
 	console.log('Generated searchUrl:checkout', checkout);
