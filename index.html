@@ -1170,17 +1170,20 @@ input[type="number"] {
   max-width: 400px; /* Limit the width for smaller screens */
   width: 100%;
 }
-
-#regionPopup h1, #regionPopup h2, #regionPopup p {
-  /*color: #333;*/ /* Darker text color for better readability */
+#regionPopup h1, #regionPopup h2 {
   color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 50px; /* Add space between title and content */
+}
+#regionPopup p {
+/* color: #333; */
+color: rgba(255, 255, 255, 0.75);
+margin-bottom: 60px;
+margin-top: -15px;
 }
 
 	#regionPopup select {
   font-size: 16px;
   padding: 10px;
-  top: 100px;
+  top: 120px;
   right: 30px;
   border-radius: 10px;
   border: 1px solid #e0e0e0;
@@ -2090,7 +2093,7 @@ overflow: hidden;
 
 .like-button {
     margin-top: 10px; /* Space above the button */
-    padding: 16.4px 20px; /* Add padding for better clickability */
+    padding: 17px 20px; /* Add padding for better clickability */
     background-color: #00aaff; /* Button background color */
     color: #fff; /* Button text color */
     border: none; /* Remove border */
@@ -2098,7 +2101,7 @@ overflow: hidden;
     cursor: pointer; /* Change cursor to pointer */
     font-size: 16px;
     border-radius: 0 25px 25px 0;
-    padding-bottom: 15.4px;
+    padding-bottom: 17px;
     padding: top 17px;
 }
 
@@ -2108,7 +2111,6 @@ overflow: hidden;
 .like-button:hover, .post .view-link:hover {
       box-shadow: 0 0 9px rgb(22, 194, 252) /* Red outline for focus similar to Airbnb */
 }
-
 
 /* Button or link for each post */
 /*.post .view-link {
@@ -2390,10 +2392,6 @@ left: -8px !important;
   .post .view-link {
     padding: 17px 57px !important;
   }
-  .like-button {
-    padding: 17px 20px !important;
-    padding-bottom: 17px !important;
-  }
   .flight-time {
     right: 135px !important;
   }
@@ -2431,6 +2429,27 @@ left: -8px !important;
     justify-content: center;
   }
 }
+.like-button {
+            padding: 17px 20px !important;
+            padding-bottom: 17px !important;
+        }
+/* Apply different padding for non-Safari browsers */
+@supports not (-webkit-appearance: none) {
+    .like-button {
+        padding: 16.5px 20px !important;
+        padding-bottom: 15.5px !important;
+    }
+}
+
+/* Apply Safari-specific padding using a media query */
+@media not all and (min-resolution:.001dpcm) { 
+    @supports (-webkit-appearance: none) { 
+        .like-button {
+            padding: 17px 20px !important;
+            padding-bottom: 17px !important;
+        }
+    }
+}
 
 
 #cityBtn {
@@ -2464,7 +2483,7 @@ left: -8px !important;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #003580;
+  background-color: #0780B3;
   transition: 0.4s;
   border-radius: 40px;
 }
@@ -2595,7 +2614,7 @@ left: -8px !important;
     background-color: #00aaff;
   }
 .airbnb-button22 {
-  background-color: #003580; /* Airbnb red color */
+  background-color: #0780B3; /* Airbnb red color */
     border: none;
     padding: 10px 20px; /* Slightly smaller padding */
     border-radius: 50px; /* Fully rounded button */
@@ -3280,6 +3299,20 @@ margin-top: 13.9999999px;
 /* bottom: 30px; */
 margin-bottom: 1px;
 }
+#dropdownMenu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: white;
+    text-align: left;
+    transition: background 0.3s ease-in-out; /* Smooth transition */
+}
+
+#dropdownMenu button:hover {
+    background: lightgrey; /* Light grey background on hover */
+    cursor: pointer;
+}
 
 </style>
 <script>
@@ -3391,23 +3424,34 @@ margin-bottom: 1px;
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-  
+<!-- Vertical three-dots button -->
+<div class="menu-container" style="position: absolute; z-index: 9999999; display: none; top: 165px; left: -4px;">
+  <button id="menuButton" style="
+    border: none;
+    display: none;
+    background: transparent;
+    cursor: pointer;
+    color: white;
+    font-size: 24px; /* Increase icon size */
+    padding: 12px; /* Add spacing around icon */
+    width: 50px; /* Increase clickable area */
+    height: 50px; /* Increase clickable area */
+    border-radius: 50%; /* Make it circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+">
+    <strong style="z-index: 9999999;">&#x22EE;</strong> <!-- Vertical three-dots icon -->
+</button>
+  <div id="dropdownMenu" style="display: none; position: absolute; left: 10px; background: white; width: 120px; border: 1px solid lightgray; border-radius: 5px; z-index: 9999999;">
+    <button id="airbnbOption" style="display: block; width: 100%; padding: 10px; border: none; background: none; text-align: left;">Airbnb Posts</button>
+    <button id="expediaOption" style="display: block; width: 100%; padding: 10px; border: none; background: none; text-align: left;">Expedia Posts</button>
+  </div>
+</div>
     <div id="overlayContainer" style="resize: both; overflow: auto;">
         <div class="drag-handle" style="cursor: grab; background: lightgray; padding: 10px; border-radius: 5px;">
             Drag to minimize or maximize
         </div>
-        
-    <!-- Vertical three-dots button -->
-  <div class="menu-container" style="position: absolute; display: flex; top: 30px; right: 30px;">
-    <button id="menuButton" style="border: none; display: flex; background: transparent; cursor: pointer;">
-      &#x22EE; <!-- Vertical three-dots icon -->
-    </button>
-    <div id="dropdownMenu" style="display: none; position: absolute; right: 0; background: white; border: 1px solid lightgray; border-radius: 5px; z-index: 1000;">
-      <button id="airbnbOption" style="display: block; width: 100%; padding: 10px; border: none; background: none; text-align: left;">Airbnb Posts</button>
-      <button id="expediaOption" style="display: block; width: 100%; padding: 10px; border: none; background: none; text-align: left;">Expedia Posts</button>
-    </div>
-  </div>
     <button id="closeBtn" style="display: block;"class="close-btn">X</button>
     <div class="drag-handle" style="display: block;">
       <div class="line" style="display: block;"></div>
@@ -3489,12 +3533,7 @@ margin-bottom: 1px;
   <div class="instruction-step hidden" id="dragInstruction">
     <img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 60%; left: 55%;"></div>
-    <p class="instruction-text">Click the blue buttons to view the latest hotels & airbnb's in each region</p>
-  </div>
-  <div class="instruction-step hidden" id="dragInstruction">
-    <img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
-    <div class="pulsating-dot" style="top: 60%; left: 55%;"></div>
-    <p class="instruction-text">Click outside the blue buttons to close the airbnb widgets</p>
+    <p class="instruction-text">Click anywhere outside the blue buttons to close the airbnb widgets</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/day-and-night-2.png" alt="Button Click" class="glove-hand">
@@ -3512,9 +3551,14 @@ margin-bottom: 1px;
     <p class="instruction-text">Use the search bar to search for cities and countries with flight mapping!</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
+    <img src="js/dots.png" alt="Button Click" class="glove-hand"><img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
+    <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
+    <p class="instruction-text">Click the three-dot button on the search results to switch between hotels and airbnb listings</p>
+  </div>
+  <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/page-refresh.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
-    <p class="instruction-text">Clear Filters to clear the search bar and hide search results <br>or<br> refresh the page to perform a new search</p>
+    <p class="instruction-text">Use the Clear Filters button to refresh the page and perform a new search</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/travel-4.png" alt="Button Click" class="glove-hand">
@@ -3531,7 +3575,7 @@ margin-bottom: 1px;
     </form>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
-    <img src="js/login--2.png" alt="Button Click" class="glove-hand">
+    <img src="js/login--2.png" alt="Button Click" class="glove-hand"><img src="js/likebutton.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
     <p class="instruction-text">Login to view saved and liked posts</p>
   </div>
@@ -3726,6 +3770,7 @@ margin-bottom: 1px;
 	
 <div id="regionPopup">
   <h2>Welcome to Horizon Flights</h2>
+  <p>Powered by Expedia – Your Trusted Travel Partner</p>
   <p>Please select your region</p>
   <select id="regionSelect">
     <option value="africa">Africa</option>
