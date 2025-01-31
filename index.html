@@ -1619,7 +1619,7 @@ select option {
   right: 15px;
   top:145px;
   padding: 7px 7px;
-  background-color: #00aaff; /* Airbnb red */
+  /*background-color: #00aaff;*/ /* Airbnb red */
   color: white;
   border: none;
   /*border-radius: 50px;*/
@@ -4724,7 +4724,7 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
     popupSavebtn.style.backgroundColor = '#00aaff';
     gotItBtn.style.backgroundColor = '#00aaff';
     popupClosebtn.style.backgroundColor = '#0780B3';
-    clearFiltersBtn.style.backgroundColor = '#00aaff';
+    clearFiltersBtn.style.setProperty('background-color', '#00aaff', 'important');
     emailLoginButton.style.backgroundColor = '#00aaff';
     signupSubmitBtn.style.backgroundColor = '#00aaff';
     header.style.display = "flex";
