@@ -9170,8 +9170,210 @@ overlayContainer.addEventListener('click', () => {
 });
 
 
+// Function to fetch Expedia posts from your backend and display them on the webpage
+async function fetchExpediaPosts(expediaSearchUrl) {
+    try {
+        // Update spinner text to indicate scraping started
+        updateSpinnerText(`We’re searching for the best hotel deals for you… 🙌 Sit back, relax, and browse while we find your perfect stay! 🏨✨
+    Thank you for your patience! 🙏🏽
+    Powered by Expedia⚡️`);
+
+        const response = await fetch(`https://0c1c-136-148-37-3.ngrok-free.app/scrape-expedia-posts?expediasearchUrl=${encodeURIComponent(expediaSearchUrl)}`, {
+          headers: {
+        'ngrok-skip-browser-warning': 'true',
+    },
+        });
+        const data = await response.json();
+         // Ensure that 'posts2' is an array before mapping
+         const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
+
+        console.log('Fetched posts:', data);
+
+        // Update spinner text to indicate posts fetched
+        updateSpinnerText("Displaying fetched listings...");
+// Call populateOverlay to display posts
+populateOverlay(posts2);
+
+        // Display the posts on the webpage
+       /* const container = document.getElementById('left-container');
+        container.style.display = 'block';
+        container.innerHTML = posts2.map(post => `
+            <div class="post">
+      	      <img src="${post.image}" alt="${post.title}" />
+      	      <h3>${post.title}</h3>
+	      <p>${post.subtitle}</p>
+	      <p>Price: ${post.listing_price_details}</p>
+	      <p>Rating: ${post.rating_out_of_5_stars}</p>
+	      <a href="${post.link}" target="_blank" class="view-link">View Listing</a>
+	    </div>
+        `).join('');*/
+
+/*function populateOverlay(posts2) {
+          const overlay = document.getElementById('overlayContainer');
+  overlay.innerHTML = '';  // Clear previous posts
+
+  posts2.forEach(post => {
+    const postDiv = document.createElement('div');
+    postDiv.classList.add('post');
+
+    // Add image
+    const img = document.createElement('img');
+    img.src = post.images;
+    img.alt = post.title;
+
+    // Add title
+    const title = document.createElement('h3');
+    title.textContent = post.title;
+
+    // Add subtitle
+    const details = document.createElement('p');
+    title.textContent = post.subtitle;
+
+    // Add details
+    const price = document.createElement('p');
+    details.textContent = post.listing_price_details; // Adjust this depending on the post structure
+
+    // Add title
+    const rating = document.createElement('p');
+    title.textContent = post.rating_out_of_5_stars;
+    // Append all elements to the postDiv
+    postDiv.appendChild(img);
+    postDiv.appendChild(title);
+    postDiv.appendChild(details);
+
+    // Append the postDiv to the overlay
+    overlay.appendChild(postDiv);
+  });
+}
+
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        // Update spinner text to indicate an error occurred
+        updateSpinnerText("Error fetching Airbnb listings. Please try again.");
+    }
+}
+document.querySelectorAll('.post-grid').forEach((item, index) => {
+    // Make sure `index` matches the corresponding marker
+    item.addEventListener('mouseover', function() {
+        if (markers[index]) {  // Check if the marker exists
+            markers[index].material.color.set(0x00ff00);  // Highlight the marker in green
+        }
+    });
+    
+    item.addEventListener('mouseout', function() {
+        if (markers[index]) {
+            markers[index].material.color.set(0xffffff);  // Reset the color when mouse leaves (default color)
+        }
+    });
+
+    item.addEventListener('click', function() {
+        if (markers[index]) {
+            markers[index].material.color.set(0x00aaff);  // Set the marker color to red on click
+        }
+    });
+});*/
+function extractPriceInfo(priceDetails) {
+    // Example: "109 €77 night €77 per night"
+    const regex = /(\d+\s?[€$£])\s+night\s+(\d+\s?[€$£])/;
+    const match = priceDetails.match(regex);
+
+    if (match) {
+        return {
+            totalPrice: match[1],         // Total price (e.g., "109 €")
+            pricePerNight: match[2]      // Price per night (e.g., "77 €")
+        };
+    } else {
+        console.warn('Price details format not recognized:', priceDetails);
+        return { totalPrice: 'N/A', pricePerNight: 'N/A' };
+    }
+}
+
+function populateOverlay(posts2) {
+    const overlay = document.getElementById('overlayContainer');
+    overlay.innerHTML = ''; // Clear previous posts
+    const overlay2 = document.getElementById('overlayContainer2');
+    overlay2.innerHTML = ''; // Clear previous listings
+    overlay2.style.display = 'none';
+
+    posts2.forEach((post, index) => {
+        const postDiv = document.createElement('div');
+        postDiv.classList.add('post');
+
+        // Add image
+        const img = document.createElement('img');
+        img.src = post.images || ''; // Use default image if not provided
+        img.alt = post.title || 'Airbnb Listing';
+
+        // Add title
+        const title = document.createElement('h3');
+        title.textContent = post.title || 'No title available';
+
+        // Add subtitle
+        const subtitle = document.createElement('p');
+        subtitle.textContent = post.subtitle || 'No subtitle available';
+
+        // Extract and separate price details
+        const priceDetails = document.createElement('p');
+        priceDetails.textContent = `Price: ${post.listing_price_details} per night`|| 'N/A';
+        //const priceInfo = extractPriceInfo(priceDetails);
+
+        // Add total price
+        //const price = document.createElement('p');
+        //price.textContent = `Total Price: ${priceInfo.totalPrice || 'N/A'}`;
+
+        // Add price per night
+        //const pricePerNight = document.createElement('p');
+        //pricePerNight.textContent = `Price per Night: ${priceInfo.pricePerNight || 'N/A'}`;
+
+        // Add rating
+        const rating = document.createElement('p');
+        rating.textContent = `Rating: ★${post.rating_out_of_5_stars} stars`|| 'N/A';
+
+        // Add "View Listing" link
+        const viewLink = document.createElement('a');
+        viewLink.href = post.link || '#';
+        viewLink.target = '_blank';
+        viewLink.textContent = 'View Listing';
+        viewLink.classList.add('view-link');
+
+        // Add Like button
+        const likeButton = document.createElement('button');
+        likeButton.textContent = '🤍 Like';
+        likeButton.classList.add('like-button');
+        likeButton.addEventListener('click', () => saveToLikes(post));
+
+        // Append elements to the postDiv
+        postDiv.appendChild(img);
+        postDiv.appendChild(title);
+        postDiv.appendChild(subtitle);
+        postDiv.appendChild(priceDetails);
+        postDiv.appendChild(rating);
+        postDiv.appendChild(viewLink);
+        postDiv.appendChild(likeButton);
+
+        // Append the postDiv to the overlay
+        overlay.appendChild(postDiv);
+        // Map post to marker events
+        postDiv.addEventListener('mouseover', () => {
+            if (markers[index]) {
+                markers[index].material.color.set(0x00aaff);
+            }
+        });
+
+        postDiv.addEventListener('mouseout', () => {
+            if (markers[index]) {
+                markers[index].material.color.set(0x00ff00);
+            } });
+    });
+}
 
 
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        // Update spinner text to indicate an error occurred
+        updateSpinnerText("Error fetching Expedia listings. Please try again.");
+    }
+}
 // Function to fetch Airbnb posts from your backend and display them on the webpage
 async function fetchAirbnbPosts(searchUrl) {
     try {
