@@ -3533,7 +3533,7 @@ margin-bottom: 1px;
   <div class="instruction-step hidden" id="dragInstruction">
     <img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 60%; left: 55%;"></div>
-    <p class="instruction-text">Click anywhere outside the blue buttons to close the airbnb widgets</p>
+    <p class="instruction-text">Click outside the blue buttons to close the airbnb widgets</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/day-and-night-2.png" alt="Button Click" class="glove-hand">
@@ -3551,9 +3551,9 @@ margin-bottom: 1px;
     <p class="instruction-text">Use the search bar to search for cities and countries with flight mapping!</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
-    <img src="js/dots.png" alt="Button Click" class="glove-hand"><img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
+    <img src="js/dots.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
-    <p class="instruction-text">Click the three-dot button on the search results to switch between hotels and airbnb listings</p>
+    <p class="instruction-text">Use the three dots button on the seach results to filter between hotels and airbnb's</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/page-refresh.png" alt="Button Click" class="glove-hand">
@@ -3575,7 +3575,7 @@ margin-bottom: 1px;
     </form>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
-    <img src="js/login--2.png" alt="Button Click" class="glove-hand"><img src="js/likebutton.png" alt="Button Click" class="glove-hand">
+    <img src="js/login--2.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
     <p class="instruction-text">Login to view saved and liked posts</p>
   </div>
@@ -4773,7 +4773,7 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
       #searchBtn:hover {
         animation: pulseShadow3 0.6s ease-in-out infinite alternate !important;
       }
-    `;    popupClosebtn.style.setProperty('background-color', '#00aaff', 'important');
+    `;    popupClosebtn.style.backgroundColor = '#00aaff';
     clearFiltersBtn.style.backgroundColor = '#0780B3';
     calendaricon2.style.right="59.9%";
     calendaricon.style.right="48%";
@@ -8262,7 +8262,7 @@ function populateFlightOverlay(flights) {
 
         // Book Button
         const bookButton = document.createElement('a');
-        bookButton.href = flight.link || '#';
+        //bookButton.href = flight.link || '#';
         bookButton.target = '_blank';
         bookButton.textContent = 'Book Now';
         bookButton.classList.add('book-button');
@@ -8724,7 +8724,7 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
     Powered by Expedia⚡️`);
 
     // Fetch Airbnb posts and display them
-    fetchAirbnbPosts(searchUrl);
+    await fetchAirbnbPosts(searchUrl);
 	console.log('Generated searchUrl:', searchUrl);
 	console.log('Generated searchUrl:location', location);
 	console.log('Generated searchUrl:checkin', checkin);
@@ -8835,7 +8835,7 @@ document.getElementById('airbnbOption').addEventListener('click', () => {
 // Show spinner and transition to split screen mode
     /*const leftContainer = document.getElementById('left-container');*/
     const globeContainer = document.getElementById('globeContainer');
-    const overlay = document.getElementById('overlayContainer2');
+    const overlay = document.getElementById('overlayContainer');
     // Check if the overlayContainer exists
     if (!overlay) {
         console.error("Overlay container not found!");
@@ -8956,6 +8956,7 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 	console.log('Generated searchUrl:priceMin', priceMin);
 	console.log('Generated searchUrl:priceMax', priceMax);
 	console.log('Fetching data from:', `https://0c1c-136-148-37-3.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+  hideSpinnerContainer();
 });
 
 document.getElementById('expediaOption').addEventListener('click', () => {
@@ -9086,7 +9087,7 @@ const monthlyEndDate = new Date(today.getFullYear(), today.getMonth() + 3, 0); /
 const monthlyStart = monthlyStartDate.toISOString().split('T')[0];  // First day of current month
 const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of the month 3 months from now
     // Construct Expedia search URL
-let expediaSearchUrl = `https://www.expedia.co.uk/Hotel-Search?destination=${encodeURIComponent(location)}&startDate=${checkin}&endDate=${checkout}&adults=${guests}&sort=RECOMMENDED`;
+let expediaSearchUrl = `https://www.expedia.com/Hotel-Search?destination=${encodeURIComponent(location)}&startDate=${checkin}&endDate=${checkout}&adults=${guests}&sort=RECOMMENDED`;
 
 if (priceMin && priceMin.trim() !== "") {
     expediaSearchUrl += `&priceMin=${priceMin}`;
@@ -9114,7 +9115,7 @@ console.log('Generated Expedia Search URL:', expediaSearchUrl);
 
     // Fetch Airbnb posts and display them
     fetchExpediaPosts(expediaSearchUrl);
-	console.log('Generated searchUrl:', expediaSearchUrl);
+	console.log('Generated searchUrl:', searchUrl);
 	console.log('Generated searchUrl:location', location);
 	console.log('Generated searchUrl:checkin', checkin);
 	console.log('Generated searchUrl:checkout', checkout);
@@ -9376,7 +9377,7 @@ function populateOverlay(posts2) {
       } catch (error) {
         console.error('Error fetching posts:', error);
         // Update spinner text to indicate an error occurred
-        updateSpinnerText("Error fetching Expedia listings. Please try again.");
+        updateSpinnerText("Error fetching Airbnb listings. Please try again.");
     }
 }
 // Function to fetch Airbnb posts from your backend and display them on the webpage
