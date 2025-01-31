@@ -7958,8 +7958,8 @@ document.getElementById('clearFiltersBtn').addEventListener('click', () => {
   document.getElementById('price_max').value = '';
   const overlay = document.getElementById('overlayContainer');
   const overlay2 = document.getElementById('overlayContainer2');
-    overlay.style.display = "none"; // Clear previous posts
-    overlay2.style.display = "none"; // Clear previous posts
+  overlay.style.setProperty("display", "none", "important");
+  overlay2.style.setProperty("display", "none", "important");
     //overlay2.style.width = "0px";
     //overlay2.style.height = "0px";
    //overlay.style.width = "0px";
