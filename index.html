@@ -6800,7 +6800,13 @@ async function handlePremiumSignup() {
     }, 2000);
 }
 
+// Function to zoom out smoothly
+function zoomOutGlobe() {
+    const zoomOutLevel = 0.5; // Adjust zoom level for desired zoom out effect
+    const targetPosition = { x: 0, y: 0, z: 10 }; // Position for zooming out
 
+    animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomOutLevel);
+}
 // Event Listener for the "Blue Theme" button
 document.getElementById('addLightsbutton').addEventListener('click', () => {
     const lightsButton = document.getElementById('addLightsbutton');
@@ -6815,6 +6821,10 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
 
         earthMaterial.uniforms.map.value = LightsTexture;
         markerMaterial.color.set(lightsmarkerMaterial);
+
+        // Zoom out the globe
+        zoomOutGlobe();
+        
         lightsButton.textContent = "Undo";
     } else {
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
