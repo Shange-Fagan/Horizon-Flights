@@ -6766,41 +6766,40 @@ function removePremiumPopup() {
 }
 
 // Function to check if the user is premium (Firebase)
-function isUserPremium() {
+async function isUserPremium() {
     if (!firebase.apps.length) {
         console.error("Firebase is not initialized!");
         return false;
     }
-
-    const user = firebase.auth().currentUser;
+    const user = auth.currentUser;
     if (!user) return false;
 
-    return firebase.firestore().collection("users").doc(user.uid)
-        .get()
-        .then(doc => doc.exists && doc.data().isPremium)
-        .catch(() => false);
+    const userRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(userRef);
+
+    return docSnap.exists() && docSnap.data().isPremium;
 }
 
+
 // Function to handle premium upgrade via Firebase Payment
-function handlePremiumSignup() {
-    const user = firebase.auth().currentUser;
+async function handlePremiumSignup() {
+    const user = auth.currentUser;
     if (!user) {
         alert("Please log in to upgrade.");
         return;
     }
 
-    // Simulating payment processing
     alert("Processing payment...");
 
-    setTimeout(() => {
-        firebase.firestore().collection("users").doc(user.uid).set({
-            isPremium: true
-        }, { merge: true }).then(() => {
-            alert("✅ Premium Activated! Enjoy the Premium Theme!");
-            removePremiumPopup(); // Remove overlay and allow user to interact
-        });
+    setTimeout(async () => {
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(userRef, { isPremium: true }, { merge: true });
+
+        alert("✅ Premium Activated! Enjoy the Premium Theme!");
+        removePremiumPopup();
     }, 2000);
 }
+
 
 // Event Listener for the "Blue Theme" button
 document.getElementById('addLightsbutton').addEventListener('click', () => {
