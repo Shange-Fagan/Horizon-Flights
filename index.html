@@ -6788,7 +6788,7 @@ function zoomOutGlobe() {
 }
 // Function to zoom in smoothly (restore default zoom)
 function zoomInGlobe() {
-    const zoomInLevel = 1; // Adjust zoom level to return to original state
+    const zoomInLevel = 1.25; // Adjust zoom level to return to original state
     const targetPosition = { x: 0, y: 0, z: 5 }; // Default position for zooming in
 
     animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomInLevel);
