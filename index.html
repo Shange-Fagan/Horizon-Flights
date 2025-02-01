@@ -3990,7 +3990,7 @@ gl_FragColor = vec4(glowColor, intensity);
 
 	
 <button id="toggleButton">Day Theme</button>
-<button id="addLightsbutton" style="display: block;">Jetsetter</button>
+<button id="addLightsbutton" style="display: block;">Jetsetter Theme</button>
 <button id="addLightsbutton2">Atmosphere</button>
 <button id="toggleChristmastheme" style="display:none">Christmas</button>
 
@@ -6655,7 +6655,7 @@ function toggleLightstheme() {
  // Define the textures globally
 // Function to show the premium popup and grey out screen
 function showPremiumPopup() {
-    //if (document.getElementById("premiumPopup")) return; // Prevent duplicates
+    if (document.getElementById("premiumPopup")) return; // Prevent duplicates
 
     // Greyed-out overlay to prevent interactions
     const overlay = document.createElement("div");
@@ -6735,6 +6735,27 @@ function showPremiumPopup() {
 let previousTheme = "day"; // Default to "day" or dynamically detect current theme
 let previousMarker = "day"; // Default to "day" or detect current marker state
 
+// Function to revert back to previous theme if user cancels upgrade
+function revertToPreviousTheme() {
+    const lightsButton = document.getElementById('addLightsbutton');
+
+    if (previousTheme === "day") {
+        earthMaterial.uniforms.map.value = dayTexture;
+    } else if (previousTheme === "night") {
+        earthMaterial.uniforms.map.value = nightTexture;
+    }
+
+    if (previousMarker === "day") {
+        markerMaterial.color.set(daymarkerMaterial);
+    } else if (previousMarker === "night") {
+        markerMaterial.color.set(nightmarkerMaterial);
+    }
+
+    lightsButton.textContent = "Jetsetter Theme";
+
+    removePremiumPopup(); // Remove the popup and overlay
+}
+
 // Function to remove the premium popup and overlay
 function removePremiumPopup() {
     const overlay = document.getElementById("premiumOverlay");
@@ -6779,43 +6800,7 @@ async function handlePremiumSignup() {
     }, 2000);
 }
 
-// Function to zoom out smoothly
-function zoomOutGlobe() {
-    const zoomOutLevel = 0.65; // Adjust zoom level for desired zoom out effect
-    const targetPosition = { x: 0, y: 0, z: 7 }; // Position for zooming out
 
-    animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomOutLevel);
-}
-// Function to zoom in smoothly (restore default zoom)
-function zoomInGlobe() {
-    const zoomInLevel = 1.25; // Adjust zoom level to return to original state
-    const targetPosition = { x: 0, y: 0, z: 1.74}; // Default position for zooming in
-
-    animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomInLevel);
-}
-// Function to revert back to previous theme if user cancels upgrade
-function revertToPreviousTheme() {
-    const lightsButton = document.getElementById('addLightsbutton');
-
-    if (previousTheme === "day") {
-        earthMaterial.uniforms.map.value = dayTexture;
-    } else if (previousTheme === "night") {
-        earthMaterial.uniforms.map.value = nightTexture;
-    }
-
-    if (previousMarker === "day") {
-        markerMaterial.color.set(daymarkerMaterial);
-    } else if (previousMarker === "night") {
-        markerMaterial.color.set(nightmarkerMaterial);
-    }
-
-    // Zoom in the globe when reverting theme
-    zoomInGlobe();
-
-    lightsButton.textContent = "Jetsetter";
-
-    removePremiumPopup(); // Remove the popup and overlay
-}
 // Event Listener for the "Blue Theme" button
 document.getElementById('addLightsbutton').addEventListener('click', () => {
     const lightsButton = document.getElementById('addLightsbutton');
@@ -6823,17 +6808,13 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     previousTheme = currentTexture; // Store previous theme
     previousMarker = currentmarkerMaterial; // Store previous marker
 
-    if (lightsButton.textContent === "Jetsetter") {
+    if (lightsButton.textContent === "Jetsetter Theme") {
         if (!isUserPremium()) {
             showPremiumPopup(); // Show popup but still apply theme
         }
 
         earthMaterial.uniforms.map.value = LightsTexture;
         markerMaterial.color.set(lightsmarkerMaterial);
-
-        // Zoom out the globe
-        zoomOutGlobe();
-
         lightsButton.textContent = "Undo";
     } else {
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
