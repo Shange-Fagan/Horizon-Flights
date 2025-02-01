@@ -4020,6 +4020,33 @@ gl_FragColor = vec4(glowColor, intensity);
 
   <!-- Main JavaScript -->
   <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { addDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithPopup,
+    GoogleAuthProvider,
+    signOut,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    // Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBP9WtBgIHmpavBQHnG0LxXcyfK7GM5_Q4",
+    authDomain: "horizon-flights.firebaseapp.com",
+    projectId: "horizon-flights",
+    storageBucket: "horizon-flights.appspot.com",
+    messagingSenderId: "173542786157",
+    appId: "1:173542786157:web:073fb82c209555d9432b64",
+    measurementId: "G-4KJF5LVT0R"
+};
+if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome')) {
+    document.body.classList.add('safari');
+}
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
     // JavaScript code will go here
     import * as THREE from "https://unpkg.com/three@0.136.0/build/three.module.js";
   import { OrbitControls } from "https://unpkg.com/three@0.136.0/examples/jsm/controls/OrbitControls";
@@ -4039,34 +4066,7 @@ gl_FragColor = vec4(glowColor, intensity);
   /*const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);*/
   let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
   camera.position.set(20, 0.5, 15).setLength(25);
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-import { addDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";import {
-    getAuth,
-    onAuthStateChanged,
-    signInWithPopup,
-    GoogleAuthProvider,
-    signOut,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyBP9WtBgIHmpavBQHnG0LxXcyfK7GM5_Q4",
-    authDomain: "horizon-flights.firebaseapp.com",
-    projectId: "horizon-flights",
-    storageBucket: "horizon-flights.appspot.com",
-    messagingSenderId: "173542786157",
-    appId: "1:173542786157:web:073fb82c209555d9432b64",
-    measurementId: "G-4KJF5LVT0R"
-};
-if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome')) {
-    document.body.classList.add('safari');
-}
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
 // Initialize Firestore
 const db = getFirestore(app);
 
@@ -6761,6 +6761,11 @@ function removePremiumPopup() {
 
 // Function to check if the user is premium (Firebase)
 function isUserPremium() {
+    if (!firebase.apps.length) {
+        console.error("Firebase is not initialized!");
+        return false;
+    }
+
     const user = firebase.auth().currentUser;
     if (!user) return false;
 
