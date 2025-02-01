@@ -6735,27 +6735,6 @@ function showPremiumPopup() {
 let previousTheme = "day"; // Default to "day" or dynamically detect current theme
 let previousMarker = "day"; // Default to "day" or detect current marker state
 
-// Function to revert back to previous theme if user cancels upgrade
-function revertToPreviousTheme() {
-    const lightsButton = document.getElementById('addLightsbutton');
-
-    if (previousTheme === "day") {
-        earthMaterial.uniforms.map.value = dayTexture;
-    } else if (previousTheme === "night") {
-        earthMaterial.uniforms.map.value = nightTexture;
-    }
-
-    if (previousMarker === "day") {
-        markerMaterial.color.set(daymarkerMaterial);
-    } else if (previousMarker === "night") {
-        markerMaterial.color.set(nightmarkerMaterial);
-    }
-
-    lightsButton.textContent = "Jetsetter Theme";
-
-    removePremiumPopup(); // Remove the popup and overlay
-}
-
 // Function to remove the premium popup and overlay
 function removePremiumPopup() {
     const overlay = document.getElementById("premiumOverlay");
@@ -6802,10 +6781,40 @@ async function handlePremiumSignup() {
 
 // Function to zoom out smoothly
 function zoomOutGlobe() {
-    const zoomOutLevel = 0.5; // Adjust zoom level for desired zoom out effect
+    const zoomOutLevel = 1; // Adjust zoom level for desired zoom out effect
     const targetPosition = { x: 0, y: 0, z: 10 }; // Position for zooming out
 
     animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomOutLevel);
+}
+// Function to zoom in smoothly (restore default zoom)
+function zoomInGlobe() {
+    const zoomInLevel = 1.5; // Adjust zoom level to return to original state
+    const targetPosition = { x: 0, y: 0, z: 5 }; // Default position for zooming in
+
+    animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomInLevel);
+}
+// Function to revert back to previous theme if user cancels upgrade
+function revertToPreviousTheme() {
+    const lightsButton = document.getElementById('addLightsbutton');
+
+    if (previousTheme === "day") {
+        earthMaterial.uniforms.map.value = dayTexture;
+    } else if (previousTheme === "night") {
+        earthMaterial.uniforms.map.value = nightTexture;
+    }
+
+    if (previousMarker === "day") {
+        markerMaterial.color.set(daymarkerMaterial);
+    } else if (previousMarker === "night") {
+        markerMaterial.color.set(nightmarkerMaterial);
+    }
+
+    // Zoom in the globe when reverting theme
+    zoomInGlobe();
+
+    lightsButton.textContent = "Jetsetter Theme";
+
+    removePremiumPopup(); // Remove the popup and overlay
 }
 // Event Listener for the "Blue Theme" button
 document.getElementById('addLightsbutton').addEventListener('click', () => {
@@ -6824,7 +6833,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
 
         // Zoom out the globe
         zoomOutGlobe();
-        
+
         lightsButton.textContent = "Undo";
     } else {
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
