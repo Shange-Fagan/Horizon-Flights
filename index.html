@@ -6633,6 +6633,17 @@ function handleThemeChange(theme) {
     post.style.justifySelf = "center";
   });
 }
+
+/*function toggleLightstheme() {
+  earthMaterial.uniforms.map.value = LightsTexture;
+}
+function toggleLightstheme() {
+  if (getElementById('addLightsbutton').isChecked) {
+    earthMaterial.uniforms.map.value = LightsTexture;
+    } else {
+      earthMaterial.uniforms.map.value = LightsTexture;
+        }
+    }*/
   // Get the button element and check if it's checked  
  // Define the textures globally
 // Function to show the premium popup and grey out screen
@@ -6714,6 +6725,8 @@ function showPremiumPopup() {
     document.body.appendChild(overlay);
     document.body.appendChild(premiumPopup);
 }
+let previousTheme = "day"; // Default to "day" or dynamically detect current theme
+let previousMarker = "day"; // Default to "day" or detect current marker state
 
 // Function to revert back to previous theme if user cancels upgrade
 function revertToPreviousTheme() {
