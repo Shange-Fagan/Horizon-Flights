@@ -3990,7 +3990,7 @@ gl_FragColor = vec4(glowColor, intensity);
 
 	
 <button id="toggleButton">Day Theme</button>
-<button id="addLightsbutton" style="display: block;">Jetsetter💎</button>
+<button id="addLightsbutton" style="display: block;">Jetsetter</button>
 <button id="addLightsbutton2">Atmosphere</button>
 <button id="toggleChristmastheme" style="display:none">Christmas</button>
 
@@ -6751,7 +6751,7 @@ function revertToPreviousTheme() {
         markerMaterial.color.set(nightmarkerMaterial);
     }
 
-    lightsButton.textContent = "Jetsetter💎";
+    lightsButton.textContent = "Jetsetter";
 
     removePremiumPopup(); // Remove the popup and overlay
 }
@@ -6766,39 +6766,37 @@ function removePremiumPopup() {
 }
 
 // Function to check if the user is premium (Firebase)
-function isUserPremium() {
+// Function to check if the user is premium (Firebase)
+async function isUserPremium() {
     if (!firebase.apps.length) {
         console.error("Firebase is not initialized!");
         return false;
     }
-
-    const user = firebase.auth().currentUser;
+    const user = auth.currentUser;
     if (!user) return false;
 
-    return firebase.firestore().collection("users").doc(user.uid)
-        .get()
-        .then(doc => doc.exists && doc.data().isPremium)
-        .catch(() => false);
+    const userRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(userRef);
+
+    return docSnap.exists() && docSnap.data().isPremium;
 }
 
 // Function to handle premium upgrade via Firebase Payment
 function handlePremiumSignup() {
-    const user = firebase.auth().currentUser;
+    const user = auth.currentUser;
     if (!user) {
         alert("Please log in to upgrade.");
         return;
     }
 
-    // Simulating payment processing
     alert("Processing payment...");
 
-    setTimeout(() => {
-        firebase.firestore().collection("users").doc(user.uid).set({
-            isPremium: true
-        }, { merge: true }).then(() => {
-            alert("✅ Premium Activated! Enjoy the Jetsetter Theme!");
-            removePremiumPopup(); // Remove overlay and allow user to interact
-        });
+    setTimeout(async () => {
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(userRef, { isPremium: true }, { merge: true });
+
+        alert("✅ Premium Activated! Enjoy the Jetsetter Theme!");
+        removePremiumPopup();
     }, 2000);
 }
 
@@ -6809,7 +6807,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     previousTheme = currentTexture; // Store previous theme
     previousMarker = currentmarkerMaterial; // Store previous marker
 
-    if (lightsButton.textContent === "Jetsetter💎") {
+    if (lightsButton.textContent === "Jetsetter") {
         if (!isUserPremium()) {
             showPremiumPopup(); // Show popup but still apply theme
         }
@@ -8610,7 +8608,8 @@ import {
     doc,
     setDoc,
     collection,
-    getDocs
+    getDocs,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 /*function saveToLikes(post) {
     const user = auth.currentUser;
