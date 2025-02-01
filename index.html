@@ -4047,6 +4047,12 @@ if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chr
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+// Initialize Firebase (Add this line before any authentication calls)
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+} else {
+    firebase.app(); // Use existing app if already initialized
+}
     // JavaScript code will go here
     import * as THREE from "https://unpkg.com/three@0.136.0/build/three.module.js";
   import { OrbitControls } from "https://unpkg.com/three@0.136.0/examples/jsm/controls/OrbitControls";
