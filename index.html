@@ -6773,10 +6773,10 @@ function removePremiumPopup() {
     if (overlay) document.body.removeChild(overlay);
     if (popup) document.body.removeChild(popup);
 }
+import { getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-// Function to check if the user is premium (Firebase)
-function isUserPremium() {
-  if (!firebase.apps.length) {
+async function isUserPremium() {
+    if (!firebase.apps.length) {
         console.error("Firebase is not initialized!");
         return false;
     }
@@ -6784,14 +6784,13 @@ function isUserPremium() {
     if (!user) return false;
 
     const userRef = doc(db, "users", user.uid);
-    const docSnap = getDocs(userRef);
+    const docSnap = await getDoc(userRef); // Use getDoc for a single document
 
     return docSnap.exists() && docSnap.data().isPremium;
 }
 
-// Function to handle premium upgrade via Firebase Payment
-function handlePremiumSignup() {
-  const user = auth.currentUser;
+async function handlePremiumSignup() {
+    const user = auth.currentUser;
     if (!user) {
         alert("Please log in to upgrade.");
         return;
@@ -6801,12 +6800,13 @@ function handlePremiumSignup() {
 
     setTimeout(async () => {
         const userRef = doc(db, "users", user.uid);
-        await setDocs(userRef, { isPremium: true }, { merge: true });
+        await setDoc(userRef, { isPremium: true }, { merge: true }); // Use setDoc correctly
 
         alert("✅ Premium Activated! Enjoy the Jetsetter Theme!");
         removePremiumPopup();
     }, 2000);
 }
+
 // Function to zoom out smoothly
 function zoomOutGlobe() {
     const zoomOutLevel = 0.65; // Adjust zoom level for desired zoom out effect
