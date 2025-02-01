@@ -3990,7 +3990,7 @@ gl_FragColor = vec4(glowColor, intensity);
 
 	
 <button id="toggleButton">Day Theme</button>
-<button id="addLightsbutton" style="display: block;">Jetsetter Theme💎</button>
+<button id="addLightsbutton" style="display: block;">Jetsetter Theme</button>
 <button id="addLightsbutton2">Atmosphere</button>
 <button id="toggleChristmastheme" style="display:none">Christmas</button>
 
@@ -6760,7 +6760,7 @@ function revertToPreviousTheme() {
     // Zoom in the globe when reverting theme
     zoomInGlobe();
 
-    lightsButton.textContent = "Jetsetter Theme💎";
+    lightsButton.textContent = "Jetsetter Theme";
 
     removePremiumPopup(); // Remove the popup and overlay
 }
@@ -6824,14 +6824,14 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     previousTheme = currentTexture; // Store previous theme
     previousMarker = currentmarkerMaterial; // Store previous marker
 
-    if (lightsButton.textContent === "Jetsetter Theme💎") {
+    if (lightsButton.textContent === "Jetsetter Theme") {
         if (!isUserPremium()) {
             showPremiumPopup(); // Show popup but still apply theme
         }
 
         earthMaterial.uniforms.map.value = LightsTexture;
         markerMaterial.color.set(lightsmarkerMaterial);
-        
+
         // Zoom out the globe
         zoomOutGlobe();
 
