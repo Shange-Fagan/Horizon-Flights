@@ -6825,7 +6825,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
 
     if (lightsButton.textContent === "Jetsetter") {
         if (!isUserPremium()) {
-            //showPremiumPopup(); // Show popup but still apply theme
+            showPremiumPopup(); // Show popup but still apply theme
         }
 
         earthMaterial.uniforms.map.value = LightsTexture;
