@@ -6665,7 +6665,7 @@ function showPremiumPopup() {
     overlay.style.left = "0";
     overlay.style.width = "100vw";
     overlay.style.height = "100vh";
-    overlay.style.backgroundColor = "rgba(255, 255, 255, 0.0)"; // Dark overlay
+    overlay.style.backgroundColor = "rgba(255, 255, 255, 0.10)"; // Dark overlay
     overlay.style.zIndex = "22012";
 
     // Premium Popup
@@ -6776,38 +6776,35 @@ function removePremiumPopup() {
 
 // Function to check if the user is premium (Firebase)
 function isUserPremium() {
-    if (!firebase.apps.length) {
+  if (!firebase.apps.length) {
         console.error("Firebase is not initialized!");
         return false;
     }
-
-    const user = firebase.auth().currentUser;
+    const user = auth.currentUser;
     if (!user) return false;
 
-    return firebase.firestore().collection("users").doc(user.uid)
-        .get()
-        .then(doc => doc.exists && doc.data().isPremium)
-        .catch(() => false);
+    const userRef = doc(db, "users", user.uid);
+    const docSnap = getDocs(userRef);
+
+    return docSnap.exists() && docSnap.data().isPremium;
 }
 
 // Function to handle premium upgrade via Firebase Payment
 function handlePremiumSignup() {
-    const user = firebase.auth().currentUser;
+  const user = auth.currentUser;
     if (!user) {
         alert("Please log in to upgrade.");
         return;
     }
 
-    // Simulating payment processing
     alert("Processing payment...");
 
-    setTimeout(() => {
-        firebase.firestore().collection("users").doc(user.uid).set({
-            isPremium: true
-        }, { merge: true }).then(() => {
-            alert("✅ Premium Activated! Enjoy the Jetsetter Theme!");
-            removePremiumPopup(); // Remove overlay and allow user to interact
-        });
+    setTimeout(async () => {
+        const userRef = doc(db, "users", user.uid);
+        await setDocs(userRef, { isPremium: true }, { merge: true });
+
+        alert("✅ Premium Activated! Enjoy the Jetsetter Theme!");
+        removePremiumPopup();
     }, 2000);
 }
 // Function to zoom out smoothly
