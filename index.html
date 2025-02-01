@@ -6654,7 +6654,175 @@ function toggleLightstheme() {
   // Get the button element and check if it's checked  
  // Define the textures globally
 // Function to show the premium popup and grey out screen
+function showPremiumPopup() {
+    if (document.getElementById("premiumPopup")) return; // Prevent duplicates
 
+    // Greyed-out overlay to prevent interactions
+    const overlay = document.createElement("div");
+    overlay.setAttribute("id", "premiumOverlay");
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100vw";
+    overlay.style.height = "100vh";
+    overlay.style.backgroundColor = "rgba(255, 255, 255, 0.079)"; // Dark overlay
+    overlay.style.zIndex = "22012";
+
+    // Premium Popup
+    const premiumPopup = document.createElement("div");
+    premiumPopup.setAttribute("id", "premiumPopup");
+    premiumPopup.style.position = "fixed";
+    premiumPopup.style.top = "50%";
+    premiumPopup.style.left = "50%";
+    premiumPopup.style.transform = "translate(-50%, -50%)";
+    premiumPopup.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+    premiumPopup.style.padding = "20px";
+    premiumPopup.style.borderRadius = "10px";
+    premiumPopup.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+    premiumPopup.style.textAlign = "center";
+    premiumPopup.style.zIndex = "22013";
+    premiumPopup.style.width = "350px";
+
+    // Close Button
+    const closeButton = document.createElement("span");
+    closeButton.innerHTML = "&times;";
+    closeButton.style.position = "absolute";
+    closeButton.style.top = "5px";
+    closeButton.style.right = "10px";
+    closeButton.style.cursor = "pointer";
+    closeButton.style.fontSize = "20px";
+    closeButton.style.color = "#FFFFFF";
+
+    closeButton.addEventListener("click", () => {
+        revertToPreviousTheme(); // Revert theme if closed
+    });
+
+    premiumPopup.appendChild(closeButton);
+
+    // Title
+    const title = document.createElement("h3");
+    title.innerText = "Upgrade to Premium";
+    title.style.color = "#FFFFFF";
+    premiumPopup.appendChild(title);
+
+    // Description
+    const description = document.createElement("p");
+    description.innerText = "Unlock the premium theme and other premium features by upgrading to a premium plan!";
+    description.style.fontSize = "14px";
+    description.style.color = "#FFFFFF";
+    premiumPopup.appendChild(description);
+
+    // Upgrade Button
+    const upgradeButton = document.createElement("button");
+    upgradeButton.innerText = "Upgrade Now";
+    upgradeButton.style.backgroundColor = "#00aaff";
+    upgradeButton.style.color = "white";
+    upgradeButton.style.border = "none";
+    upgradeButton.style.padding = "10px 20px";
+    upgradeButton.style.borderRadius = "5px";
+    upgradeButton.style.cursor = "pointer";
+    upgradeButton.style.marginTop = "10px";
+
+    upgradeButton.addEventListener("click", () => {
+        handlePremiumSignup(); // Handle upgrade
+    });
+
+    premiumPopup.appendChild(upgradeButton);
+
+    document.body.appendChild(overlay);
+    document.body.appendChild(premiumPopup);
+}
+let previousTheme = "day"; // Default to "day" or dynamically detect current theme
+let previousMarker = "day"; // Default to "day" or detect current marker state
+
+// Function to revert back to previous theme if user cancels upgrade
+function revertToPreviousTheme() {
+    const lightsButton = document.getElementById('addLightsbutton');
+
+    if (previousTheme === "day") {
+        earthMaterial.uniforms.map.value = dayTexture;
+    } else if (previousTheme === "night") {
+        earthMaterial.uniforms.map.value = nightTexture;
+    }
+
+    if (previousMarker === "day") {
+        markerMaterial.color.set(daymarkerMaterial);
+    } else if (previousMarker === "night") {
+        markerMaterial.color.set(nightmarkerMaterial);
+    }
+
+    lightsButton.textContent = "Premium Theme";
+
+    removePremiumPopup(); // Remove the popup and overlay
+}
+
+// Function to remove the premium popup and overlay
+function removePremiumPopup() {
+    const overlay = document.getElementById("premiumOverlay");
+    const popup = document.getElementById("premiumPopup");
+
+    if (overlay) document.body.removeChild(overlay);
+    if (popup) document.body.removeChild(popup);
+}
+
+// Function to check if the user is premium (Firebase)
+function isUserPremium() {
+    if (!firebase.apps.length) {
+        console.error("Firebase is not initialized!");
+        return false;
+    }
+
+    const user = firebase.auth().currentUser;
+    if (!user) return false;
+
+    return firebase.firestore().collection("users").doc(user.uid)
+        .get()
+        .then(doc => doc.exists && doc.data().isPremium)
+        .catch(() => false);
+}
+
+// Function to handle premium upgrade via Firebase Payment
+function handlePremiumSignup() {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+        alert("Please log in to upgrade.");
+        return;
+    }
+
+    // Simulating payment processing
+    alert("Processing payment...");
+
+    setTimeout(() => {
+        firebase.firestore().collection("users").doc(user.uid).set({
+            isPremium: true
+        }, { merge: true }).then(() => {
+            alert("✅ Premium Activated! Enjoy the Premium Theme!");
+            removePremiumPopup(); // Remove overlay and allow user to interact
+        });
+    }, 2000);
+}
+
+// Event Listener for the "Blue Theme" button
+document.getElementById('addLightsbutton').addEventListener('click', () => {
+    const lightsButton = document.getElementById('addLightsbutton');
+
+    previousTheme = currentTexture; // Store previous theme
+    previousMarker = currentmarkerMaterial; // Store previous marker
+
+    if (lightsButton.textContent === "Premium Theme") {
+        if (!isUserPremium()) {
+            showPremiumPopup(); // Show popup but still apply theme
+        }
+
+        earthMaterial.uniforms.map.value = LightsTexture;
+        markerMaterial.color.set(lightsmarkerMaterial);
+        lightsButton.textContent = "Undo";
+    } else {
+        revertToPreviousTheme(); // Revert theme if "Undo" is clicked
+    }
+
+    earthMaterial.uniforms.map.needsUpdate = true;
+});
 /*function toggleLightstheme() {
   // Get the button element
   const lightsButton = document.getElementById('addLightsbutton');
