@@ -6781,14 +6781,14 @@ async function handlePremiumSignup() {
 
 // Function to zoom out smoothly
 function zoomOutGlobe() {
-    const zoomOutLevel = 1; // Adjust zoom level for desired zoom out effect
+    const zoomOutLevel = 0.65; // Adjust zoom level for desired zoom out effect
     const targetPosition = { x: 0, y: 0, z: 10 }; // Position for zooming out
 
     animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomOutLevel);
 }
 // Function to zoom in smoothly (restore default zoom)
 function zoomInGlobe() {
-    const zoomInLevel = 1.5; // Adjust zoom level to return to original state
+    const zoomInLevel = 1; // Adjust zoom level to return to original state
     const targetPosition = { x: 0, y: 0, z: 5 }; // Default position for zooming in
 
     animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomInLevel);
