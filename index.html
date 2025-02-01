@@ -3990,7 +3990,7 @@ gl_FragColor = vec4(glowColor, intensity);
 
 	
 <button id="toggleButton">Day Theme</button>
-<button id="addLightsbutton" style="display: block;">Premium Theme</button>
+<button id="addLightsbutton" style="display: block;">Jetsetter Theme</button>
 <button id="addLightsbutton2">Atmosphere</button>
 <button id="toggleChristmastheme" style="display:none">Christmas</button>
 
@@ -6707,7 +6707,7 @@ function showPremiumPopup() {
 
     // Description
     const description = document.createElement("p");
-    description.innerText = "Unlock the premium theme and other premium features by upgrading to a premium plan!";
+    description.innerText = "Unlock the Jetsetter theme and other premium features by upgrading to a premium plan!";
     description.style.fontSize = "14px";
     description.style.color = "#FFFFFF";
     premiumPopup.appendChild(description);
@@ -6751,7 +6751,7 @@ function revertToPreviousTheme() {
         markerMaterial.color.set(nightmarkerMaterial);
     }
 
-    lightsButton.textContent = "Premium Theme";
+    lightsButton.textContent = "Jetsetter Theme";
 
     removePremiumPopup(); // Remove the popup and overlay
 }
@@ -6795,7 +6795,7 @@ async function handlePremiumSignup() {
         const userRef = doc(db, "users", user.uid);
         await setDoc(userRef, { isPremium: true }, { merge: true });
 
-        alert("✅ Premium Activated! Enjoy the Premium Theme!");
+        alert("✅ Premium Activated! Enjoy the Jetsetter Theme!");
         removePremiumPopup();
     }, 2000);
 }
@@ -6808,7 +6808,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     previousTheme = currentTexture; // Store previous theme
     previousMarker = currentmarkerMaterial; // Store previous marker
 
-    if (lightsButton.textContent === "Premium Theme") {
+    if (lightsButton.textContent === "Jetsetter Theme") {
         if (!isUserPremium()) {
             showPremiumPopup(); // Show popup but still apply theme
         }
