@@ -3990,7 +3990,7 @@ gl_FragColor = vec4(glowColor, intensity);
 
 	
 <button id="toggleButton">Day Theme</button>
-<button id="addLightsbutton" style="display: block;">Blue Theme</button>
+<button id="addLightsbutton" style="display: block;">Premium Theme</button>
 <button id="addLightsbutton2">Atmosphere</button>
 <button id="toggleChristmastheme" style="display:none">Christmas</button>
 
@@ -6707,7 +6707,7 @@ function showPremiumPopup() {
 
     // Description
     const description = document.createElement("p");
-    description.innerText = "Unlock the blue theme and other premium features by upgrading to a premium plan!";
+    description.innerText = "Unlock the premium theme and other premium features by upgrading to a premium plan!";
     description.style.fontSize = "14px";
     description.style.color = "#FFFFFF";
     premiumPopup.appendChild(description);
@@ -6751,7 +6751,7 @@ function revertToPreviousTheme() {
         markerMaterial.color.set(nightmarkerMaterial);
     }
 
-    lightsButton.textContent = "Blue Theme";
+    lightsButton.textContent = "Premium Theme";
 
     removePremiumPopup(); // Remove the popup and overlay
 }
@@ -6796,7 +6796,7 @@ function handlePremiumSignup() {
         firebase.firestore().collection("users").doc(user.uid).set({
             isPremium: true
         }, { merge: true }).then(() => {
-            alert("✅ Premium Activated! Enjoy the Blue ⚡️ Theme!");
+            alert("✅ Premium Activated! Enjoy the Premium Theme!");
             removePremiumPopup(); // Remove overlay and allow user to interact
         });
     }, 2000);
@@ -6809,7 +6809,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     previousTheme = currentTexture; // Store previous theme
     previousMarker = currentmarkerMaterial; // Store previous marker
 
-    if (lightsButton.textContent === "Blue Theme") {
+    if (lightsButton.textContent === "Premium Theme") {
         if (!isUserPremium()) {
             showPremiumPopup(); // Show popup but still apply theme
         }
