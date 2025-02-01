@@ -5937,7 +5937,7 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
   map: cloudTexture2, // Use a high-quality cloud texture with transparency
   transparent: true,
   color: new THREE.Color('#FFFFFF'),
-  opacity: 0.17 // Adjust for subtle effect
+  opacity: 0.23 // Adjust for subtle effect
 });
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 //scene.add(cloudMesh2);
@@ -6695,7 +6695,7 @@ function toggleLightstheme2() {
     // If the lights button is clicked, overlay the lights texture on top of the current state
     if (currentTexture === "day") {
       scene.add(cloudMesh2); // Apply lights texture (day + lights)
-      scene.add(cloudMesh);
+      //scene.add(cloudMesh);
       console.log("clouds added activated on day texture");
     } else if (currentTexture === "night") {
       scene.add(cloudMesh2); // Apply lights texture (night + lights)
@@ -6708,7 +6708,7 @@ function toggleLightstheme2() {
     // If the lights button is toggled off, revert to the current texture (day or night)
     if (currentTexture === "day") {
       scene.remove(cloudMesh2); // Apply lights texture (day + lights)
-      scene.remove(cloudMesh);
+      //scene.remove(cloudMesh);
       earthMaterial.uniforms.map.value = dayTexture; // Revert to day texture
       console.log("Reverted to day texture");
     } else if (currentTexture === "night") {
