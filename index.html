@@ -3352,7 +3352,7 @@ margin-bottom: 1px;
 <body>
   <div id="globeViz" style="display:none"></div>
   <div class="carousel-header">
-    <button id="minimizeCarouselBtn">Hide Ads</button>
+    <button id="minimizeCarouselBtn">Hide Ads🚫</button>
   </div>
   <div class="carousel-header2">
     <button id="showPromoCodesBtn" style="display:none">Promo Codes</button>
@@ -4536,7 +4536,7 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         carouselContainer1.style.display = 'flex';
       }
-      minimizeButton.textContent = 'Hide Ads';
+      minimizeButton.textContent = 'Hide Ads🚫';
     }
   });
 });
@@ -4736,7 +4736,7 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
   const header = document.getElementById('header');
   const header2 = document.querySelector('header2');
   const theme = document.querySelector('.theme-switch2');
-  const themebtn = document.querySelector('.theme-switch');
+  const themebtn = document.querySelector('.slider');
   const gotItBtn = document.getElementById('gotItBtn');
   const calendaricon2 = document.querySelector('.calendar-icon2');
   const calendaricon = document.querySelector('.calendar-icon');
@@ -4871,7 +4871,12 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
 
   // Get the current state of the toggle
   const themeToggleChecked = document.getElementById('themeToggle').checked;
-const pinkButton = document.getElementById('addLightsbutton3').checked;
+  const pinkButton = document.getElementById('addLightsbutton3'); // Ensure this element exists
+
+if (!pinkButton) {
+    console.error("Pink Theme Button not found!");
+    return;
+}
   // Change button text
   if (pinkThemeActive) {
         pinkButton.textContent = "Undo"; // Change to Undo when activated
