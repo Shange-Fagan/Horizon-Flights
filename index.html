@@ -3352,7 +3352,7 @@ margin-bottom: 1px;
 <body>
   <div id="globeViz" style="display:none"></div>
   <div class="carousel-header">
-    <button id="minimizeCarouselBtn">Hide Ads</button>
+    <button id="minimizeCarouselBtn">Hide Ads🚫</button>
   </div>
   <div class="carousel-header2">
     <button id="showPromoCodesBtn" style="display:none">Promo Codes</button>
@@ -4536,7 +4536,7 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         carouselContainer1.style.display = 'flex';
       }
-      minimizeButton.textContent = 'Hide Ads';
+      minimizeButton.textContent = 'Hide Ads🚫';
     }
   });
 });
@@ -4872,17 +4872,27 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
   // Get the current state of the toggle
   const themeToggleChecked = document.getElementById('themeToggle').checked;
   const pinkButton = document.getElementById('addLightsbutton3'); // Ensure this element exists
+  const airbnbLogos = document.getElementsByClassName("logo-airbnb"); // Get all elements with class "logo-airbnb"
 
 if (!pinkButton) {
     console.error("Pink Theme Button not found!");
     return;
 }
   // Change button text
-  /*if (pinkThemeActive) {
-        pinkButton.textContent = "Undo"; // Change to Undo when activated
+  if (pinkThemeActive) {
+        //pinkButton.textContent = "Undo"; // Change to Undo when activated
+        pinkButton.textContent = "Pink Theme💖"; // Revert when deactivated
+// Change all Airbnb logos to hotel-8.png when Pink Theme is activated
+Array.from(airbnbLogos).forEach(logo => {
+            logo.src = "js/hotel-8.png";
+        });
     } else {
         pinkButton.textContent = "Pink Theme💖"; // Revert when deactivated
-    }*/
+        // Change all Airbnb logos back to hotel-7.png when Pink Theme is deactivated
+        Array.from(airbnbLogos).forEach(logo => {
+            logo.src = "js/hotel-7.png";
+        });
+    }
 
     // Apply marker color logic
     if (pinkThemeActive) {
