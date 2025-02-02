@@ -3851,7 +3851,7 @@ margin-bottom: 1px;
 </div>
 
 <!-- Region Select button -->
-<button id="regionSelectBtn">Select Region</button>
+<button id="regionSelectBtn">Select Region📍</button>
 
 <div id="topLeftLabel">
   <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" alt="Profile Icon" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;">Horizon Flights
@@ -4022,13 +4022,13 @@ gl_FragColor = vec4(glowColor, intensity);
 
 
 	
-<button id="toggleButton">Day Theme</button>
-<button id="addLightsbutton" style="display: block;">Jetsetter Theme</button>
-<button id="addLightsbutton3" style="display: block;">Pink Theme</button>
-<button id="addLightsbutton2">Atmosphere</button>
+<button id="toggleButton">Day Theme🌥️</button>
+<button id="addLightsbutton" style="display: block;">Jetsetter Theme💎</button>
+<button id="addLightsbutton3" style="display: block;">Pink Theme💖</button>
+<button id="addLightsbutton2">Atmosphere💨</button>
 <button id="toggleChristmastheme" style="display:none">Christmas</button>
 
-<button id="newsButton">Travel Blog</button>
+<button id="newsButton">Travel Blog🏝️</button>
   <!-- The iframe containers will be added dynamically -->
   <!-- X Button to close the iframe -->
 <button id="closeNewsButton">×</button>
@@ -4528,7 +4528,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Hide both carousels
       carouselContainer1.style.display = 'none';
       carouselContainer2.style.display = 'none';
-      minimizeButton.textContent = 'Show Ads';
+      minimizeButton.textContent = 'Show Ads💸';
     } else {
       // Show the appropriate carousel (default is carousel 1)
       if (showPromoCodesBtn.textContent === 'Hide Promo Codes') {
@@ -4876,7 +4876,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
   if (pinkThemeActive) {
         pinkButton.textContent = "Undo"; // Change to Undo when activated
     } else {
-        pinkButton.textContent = "Pink Theme"; // Revert when deactivated
+        pinkButton.textContent = "Pink Theme💖"; // Revert when deactivated
     }
   // Simulate the toggle change to apply new colors
   document.getElementById('themeToggle').dispatchEvent(new Event('change'));
@@ -6108,6 +6108,7 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 //const nightmarkerMaterial = new THREE.Color('#FE8C02');
 	  let daymarkerMaterial = new THREE.Color('#00BFFF');
     let lightsmarkerMaterial = new THREE.Color('#00eeff');
+    let pinkthememarkerMaterial = new THREE.Color('#FF6CDA');
 let nightmarkerMaterial = new THREE.Color('#00BFFF');
 	  //const daymarkerMaterial = new THREE.Color('#00FF00');
 //const nightmarkerMaterial = new THREE.Color('#FFFFFF');
@@ -6561,7 +6562,7 @@ inputsAndSelects.forEach((element) => {
   });
 });
     // Update button text to switch back to Day
-    document.getElementById("toggleButton").textContent = "Day Theme";
+    document.getElementById("toggleButton").textContent = "Day Theme🌥️";
   } else {
     // Switching from Night to Day
     if (window.innerWidth <= 768) {  // Mobile device
@@ -6639,7 +6640,7 @@ inputsAndSelects.forEach((element) => {
 });
 
     // Update button text to switch back to Night
-    document.getElementById("toggleButton").textContent = "Night Theme";
+    document.getElementById("toggleButton").textContent = "Night Theme🌃";
   }
 
   // Ensure globe material updates
@@ -6812,7 +6813,7 @@ function revertToPreviousTheme() {
     // Zoom in the globe when reverting theme
     zoomInGlobe();
 
-    lightsButton.textContent = "Jetsetter Theme";
+    lightsButton.textContent = "Jetsetter Theme💎";
 
     removePremiumPopup(); // Remove the popup and overlay
 }
@@ -6876,7 +6877,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     previousTheme = currentTexture; // Store previous theme
     previousMarker = currentmarkerMaterial; // Store previous marker
 
-    if (lightsButton.textContent === "Jetsetter Theme") {
+    if (lightsButton.textContent === "Jetsetter Theme💎") {
         if (!isUserPremium()) {
             showPremiumPopup(); // Show popup but still apply theme
         }
@@ -6943,7 +6944,7 @@ function toggleLightstheme2() {
   // Get the button element
   const lightsButton = document.getElementById('addLightsbutton2');
 
-  if (lightsButton.textContent === "Atmosphere") {
+  if (lightsButton.textContent === "Atmosphere💨") {
     // If the lights button is clicked, overlay the lights texture on top of the current state
     if (currentTexture === "day") {
       scene.add(cloudMesh2); // Apply lights texture (day + lights)
@@ -6975,7 +6976,7 @@ function toggleLightstheme2() {
       markerMaterial.color.set(nightmarkerMaterial);
       console.log("Reverted to night texture");
     }
-    lightsButton.textContent = "Atmosphere";
+    lightsButton.textContent = "Atmosphere💨";
   }
 
   // Ensure uniforms update
