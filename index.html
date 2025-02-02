@@ -3553,7 +3553,7 @@ margin-bottom: 1px;
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/travel-4.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
-    <p class="instruction-text">The globe is interactive! Use your mouse or trackpad to zoom in and out & drag around and click on the markers to view the latest hotels & airbnb's in each region!</p>
+    <p class="instruction-text">The globe is interactive! Use your mouse or trackpad to zoom in and out or drag around and click on the markers to view the latest hotels & airbnb's in each region!</p>
   </div>
   <div class="instruction-step hidden" id="dragInstruction">
     <img src="js/left-click.png" alt="Drag Gesture" class="glove-hand">
@@ -3583,7 +3583,7 @@ margin-bottom: 1px;
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/dots.png" alt="Button Click" class="glove-hand"><img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
-    <p class="instruction-text">Click the three-dot button on the search results page to switch between hotel and airbnb results</p>
+    <p class="instruction-text">Click the three-dot button on the search results page to filter between hotel and airbnb results</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/page-refresh.png" alt="Button Click" class="glove-hand">
@@ -4866,6 +4866,7 @@ guestPopup.appendChild(div);
   //document.getElementById('dayTicker').classList.toggle('hidden', isChecked);
   //document.getElementById('trivagoIframeContainer').classList.toggle('hidden', !isChecked);
 });
+let fromVec = fromVec || [0, 0]; // Default value
 document.getElementById('addLightsbutton3').addEventListener('click', () => {
     pinkThemeActive = !pinkThemeActive;  // Toggle pink theme mode
 
@@ -11291,6 +11292,11 @@ import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/
 // Create the flight path curve
 // Adjust distance handling in `createFlightPath` and Plane Animation
 function createFlightPath(fromVec, toVec, altitude) {
+  if (!fromVec) {
+        console.warn("fromVec is undefined, using default.");
+        fromVec = [0, 0]; // Use a placeholder or default coordinates
+    }
+    // Continue with function execution
     const distance = fromVec.distanceTo(toVec); // Calculate the distance between the two points
 
     // Dynamically adjust the altitude based on distance
