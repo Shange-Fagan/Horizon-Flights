@@ -5809,7 +5809,12 @@ let isDay = true; // Track whether it's currently day or night
     document.getElementById('newsButton').addEventListener('click', function () {
     const newsOverlay = document.getElementById('newsOverlay');
     const closeNewsButton = document.getElementById('closeNewsButton');
-    
+    const newsButton = document.getElementById('newsButton');
+    if (newsButton.textContent === "Travel Blog🏝️") {
+      newsButton.textContent = "Travel Blog✅";
+    } else {
+      newsButton.textContent = "Travel Blog🏝️";
+    }
     // Set the content dynamically
     newsOverlay.innerHTML = `
         <div class="blog-container" style="padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 800px; margin: auto; color: rgba(255, 255, 255, 1); overflow-y: auto; position: relative; top: 65px; max-height: 74%;">
