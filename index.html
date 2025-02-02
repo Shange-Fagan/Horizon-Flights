@@ -4873,7 +4873,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
   const themeToggleChecked = document.getElementById('themeToggle').checked;
   const pinkButton = document.getElementById('addLightsbutton3'); // Ensure this element exists
   const airbnbLogos = document.getElementsByClassName("logo-airbnb"); // Get all elements with class "logo-airbnb"
-
+  const calendardaytheme = document.querySelectorAll(".flatpickr-calendar .flatpickr-day.selected"); // Get all elements with class "logo-airbnb"
+  const calendardaythemehover = document.querySelectorAll(".flatpickr-calendar .flatpickr-day:hover"); // Get all elements with class "logo-airbnb"
 if (!pinkButton) {
     console.error("Pink Theme Button not found!");
     return;
@@ -4885,13 +4886,16 @@ if (!pinkButton) {
 // Change all Airbnb logos to hotel-8.png when Pink Theme is activated
 Array.from(airbnbLogos).forEach(logo => {
             logo.src = "js/hotel-8.png";
-        });
+        });calendardaytheme.style.setProperty('background-color', '#FF6CDA', 'important');
+        calendardaythemehover.style.setProperty('background-color', '#FF6CDA', 'important');
+
     } else {
         pinkButton.textContent = "Pink Theme💖"; // Revert when deactivated
         // Change all Airbnb logos back to hotel-7.png when Pink Theme is deactivated
         Array.from(airbnbLogos).forEach(logo => {
             logo.src = "js/hotel-7.png";
-        });
+        });calendardaytheme.style.setProperty('background-color', '#5fcaff', 'important');
+        calendardaythemehover.style.setProperty('background-color', '#00aaff', 'important');
     }
 
     // Apply marker color logic
