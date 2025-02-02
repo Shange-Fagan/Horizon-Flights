@@ -4906,7 +4906,16 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
         calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
     }
-
+// Apply marker color logic
+if (pinkThemeActive) {
+        markerMaterial.color.set(pinkthememarkerMaterial);
+    } else {
+        if (currentmarkerMaterial === "day") {
+            markerMaterial.color.set(daymarkerMaterial);
+        } else if (currentmarkerMaterial === "night") {
+            markerMaterial.color.set(nightmarkerMaterial);
+        }
+    }
     document.getElementById('themeToggle').dispatchEvent(new Event('change'));
 });
 
