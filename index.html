@@ -4867,52 +4867,67 @@ guestPopup.appendChild(div);
   //document.getElementById('trivagoIframeContainer').classList.toggle('hidden', !isChecked);
 });
 document.getElementById('addLightsbutton3').addEventListener('click', () => {
-  pinkThemeActive = !pinkThemeActive;  // Toggle pink theme mode
+    pinkThemeActive = !pinkThemeActive;  // Toggle pink theme mode
 
-  // Get the current state of the toggle
-  const themeToggleChecked = document.getElementById('themeToggle').checked;
-  const pinkButton = document.getElementById('addLightsbutton3'); // Ensure this element exists
-  const airbnbLogos = document.getElementsByClassName("logo-airbnb"); // Get all elements with class "logo-airbnb"
-  const calendardaytheme = document.querySelectorAll(".flatpickr-calendar .flatpickr-day.selected"); // Get all elements with class "logo-airbnb"
-  const calendardaythemehover = document.querySelectorAll(".flatpickr-calendar .flatpickr-day:hover"); // Get all elements with class "logo-airbnb"
-if (!pinkButton) {
-    console.error("Pink Theme Button not found!");
-    return;
-}
-  // Change button text
-  if (pinkThemeActive) {
-        //pinkButton.textContent = "Undo"; // Change to Undo when activated
-        pinkButton.textContent = "Pink Theme✅"; // Revert when deactivated
-// Change all Airbnb logos to hotel-8.png when Pink Theme is activated
-Array.from(airbnbLogos).forEach(logo => {
+    const themeToggleChecked = document.getElementById('themeToggle').checked;
+    const pinkButton = document.getElementById('addLightsbutton3');
+    const airbnbLogos = document.getElementsByClassName("logo-airbnb");
+    const calendardaytheme = document.querySelectorAll(".flatpickr-calendar .flatpickr-day.selected");
+    const calendardaythemehover = document.querySelectorAll(".flatpickr-calendar .flatpickr-day:hover");
+
+    // Get flight-related materials
+    const flightpathMaterial = createFlightPath().pathMaterial;
+    const flightpathPattern = createWaveMesh().material;
+    const flightpathPatternwave = createPointMesh().material;
+
+    // Ensure the button exists
+    if (!pinkButton) {
+        console.error("Pink Theme Button not found!");
+        return;
+    }
+
+    if (pinkThemeActive) {
+        pinkButton.textContent = "Pink Theme✅";
+
+        // Change all Airbnb logos
+        Array.from(airbnbLogos).forEach(logo => {
             logo.src = "js/hotel-8.png";
-        });// Apply pink color to calendar selected days
-      calendardaytheme.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
-      calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
+        });
+
+        // Apply pink color to calendar selected days
+        calendardaytheme.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
+        calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
+
+        // Change the flight path and wave materials
+        flightpathMaterial.color.set(0xFF6CDA);
+        flightpathPattern.color.set(0xFF6CDA);
+        flightpathPatternwave.color.set(0xFF6CDA);
 
     } else {
-        pinkButton.textContent = "Pink Theme💖"; // Revert when deactivated
-        // Change all Airbnb logos back to hotel-7.png when Pink Theme is deactivated
+        pinkButton.textContent = "Pink Theme💖";
+
+        // Change all Airbnb logos back
         Array.from(airbnbLogos).forEach(logo => {
             logo.src = "js/hotel-7.png";
-        });// Apply blue color back to calendar selected days
-      calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
-      calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
-  }
+        });
 
-    // Apply marker color logic
-    if (pinkThemeActive) {
-        markerMaterial.color.set(pinkthememarkerMaterial);
-    } else {
-        if (currentmarkerMaterial === "day") {
-            markerMaterial.color.set(daymarkerMaterial);
-        } else if (currentmarkerMaterial === "night") {
-            markerMaterial.color.set(nightmarkerMaterial);
-        }
+        // Revert colors
+        calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
+        calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
+
+        flightpathMaterial.color.set(0x46dff0);
+        flightpathPattern.color.set(0x82eaed);
+        flightpathPatternwave.color.set(0x82eaed);
     }
-  // Simulate the toggle change to apply new colors
-  document.getElementById('themeToggle').dispatchEvent(new Event('change'));
+
+    // Ensure the changes take effect in the scene
+    flightpathMaterial.needsUpdate = true;
+    flightpathPattern.needsUpdate = true;
+    flightpathPatternwave.needsUpdate = true;
+
+    document.getElementById('themeToggle').dispatchEvent(new Event('change'));
 });
+
 
 document.getElementById('themeToggle2').addEventListener('change', (event) => {
   const isChecked = event.target.checked;
@@ -11284,7 +11299,7 @@ function createFlightPath(fromVec, toVec, altitude) {
 
     // Create the tube geometry for the path
     const pathGeometry = new THREE.TubeGeometry(curve, 64, 0.02, 8, false);
-    const pathMaterial = new THREE.MeshBasicMaterial({ color: 0x46dff0 });
+    let pathMaterial = new THREE.MeshBasicMaterial({ color: 0x46dff0 });
     const flightPath = new THREE.Mesh(pathGeometry, pathMaterial);
 
     scene.add(flightPath);
