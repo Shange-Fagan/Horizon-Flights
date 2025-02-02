@@ -4886,17 +4886,19 @@ if (!pinkButton) {
 // Change all Airbnb logos to hotel-8.png when Pink Theme is activated
 Array.from(airbnbLogos).forEach(logo => {
             logo.src = "js/hotel-8.png";
-        });calendardaytheme.style.setProperty('background-color', '#FF6CDA', 'important');
-        calendardaythemehover.style.setProperty('background-color', '#FF6CDA', 'important');
+        });// Apply pink color to calendar selected days
+      calendardaytheme.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
+      calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
 
     } else {
         pinkButton.textContent = "Pink Theme💖"; // Revert when deactivated
         // Change all Airbnb logos back to hotel-7.png when Pink Theme is deactivated
         Array.from(airbnbLogos).forEach(logo => {
             logo.src = "js/hotel-7.png";
-        });calendardaytheme.style.setProperty('background-color', '#5fcaff', 'important');
-        calendardaythemehover.style.setProperty('background-color', '#00aaff', 'important');
-    }
+        });// Apply blue color back to calendar selected days
+      calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
+      calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
+  }
 
     // Apply marker color logic
     if (pinkThemeActive) {
