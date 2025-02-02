@@ -3352,7 +3352,7 @@ margin-bottom: 1px;
 <body>
   <div id="globeViz" style="display:none"></div>
   <div class="carousel-header">
-    <button id="minimizeCarouselBtn">Hide Ads🚫</button>
+    <button id="minimizeCarouselBtn"> Hide Ads🚫</button>
   </div>
   <div class="carousel-header2">
     <button id="showPromoCodesBtn" style="display:none">Promo Codes</button>
@@ -3851,7 +3851,7 @@ margin-bottom: 1px;
 </div>
 
 <!-- Region Select button -->
-<button id="regionSelectBtn">Select Region📍</button>
+<button id="regionSelectBtn">  Select Region📍</button>
 
 <div id="topLeftLabel">
   <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" alt="Profile Icon" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;">Horizon Flights
@@ -4022,13 +4022,13 @@ gl_FragColor = vec4(glowColor, intensity);
 
 
 	
-<button id="toggleButton">Day Theme🌥️</button>
+<button id="toggleButton">  Day Theme🌥️</button>
 <button id="addLightsbutton" style="display: block;">Jetsetter Theme💎</button>
-<button id="addLightsbutton3" style="display: block;">Pink Theme💖</button>
-<button id="addLightsbutton2">Atmosphere💨</button>
+<button id="addLightsbutton3" style="display: block;">  Pink Theme💖</button>
+<button id="addLightsbutton2">  Atmosphere💨</button>
 <button id="toggleChristmastheme" style="display:none">Christmas</button>
 
-<button id="newsButton">Travel Blog🏝️</button>
+<button id="newsButton">  Travel Blog🏝️</button>
   <!-- The iframe containers will be added dynamically -->
   <!-- X Button to close the iframe -->
 <button id="closeNewsButton">×</button>
@@ -4528,7 +4528,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Hide both carousels
       carouselContainer1.style.display = 'none';
       carouselContainer2.style.display = 'none';
-      minimizeButton.textContent = 'Show Ads💸';
+      minimizeButton.textContent = ' Show Ads💸';
     } else {
       // Show the appropriate carousel (default is carousel 1)
       if (showPromoCodesBtn.textContent === 'Hide Promo Codes') {
@@ -4536,7 +4536,7 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         carouselContainer1.style.display = 'flex';
       }
-      minimizeButton.textContent = 'Hide Ads🚫';
+      minimizeButton.textContent = ' Hide Ads🚫';
     }
   });
 });
@@ -4888,7 +4888,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
     }
 
     if (pinkThemeActive) {
-        pinkButton.textContent = "Pink Theme✅";
+        pinkButton.textContent = "  Pink Theme✅";
 
         // Change all Airbnb logos
         Array.from(airbnbLogos).forEach(logo => {
@@ -4905,7 +4905,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         flightpathPatternwave.color.set(0xFF6CDA);
 
     } else {
-        pinkButton.textContent = "Pink Theme💖";
+        pinkButton.textContent = "  Pink Theme💖";
 
         // Change all Airbnb logos back
         Array.from(airbnbLogos).forEach(logo => {
@@ -5811,10 +5811,10 @@ let isDay = true; // Track whether it's currently day or night
     const newsOverlay = document.getElementById('newsOverlay');
     const closeNewsButton = document.getElementById('closeNewsButton');
     const newsButton = document.getElementById('newsButton');
-    if (newsButton.textContent === "Travel Blog🏝️") {
-      newsButton.textContent = "Travel Blog✅";
+    if (newsButton.textContent === "  Travel Blog🏝️") {
+      newsButton.textContent = "  Travel Blog✅";
     } else {
-      newsButton.textContent = "Travel Blog🏝️";
+      newsButton.textContent = "  Travel Blog🏝️";
     }
     // Set the content dynamically
     newsOverlay.innerHTML = `
@@ -5893,10 +5893,10 @@ let isDay = true; // Track whether it's currently day or night
 document.getElementById('closeNewsButton').addEventListener('click', function () {
     const newsOverlay = document.getElementById('newsOverlay');
     const closeNewsButton = document.getElementById('closeNewsButton');
-    if (newsButton.textContent === "Travel Blog✅") {
-      newsButton.textContent = "Travel Blog🏝️";
+    if (newsButton.textContent === "  Travel Blog✅") {
+      newsButton.textContent = "  Travel Blog🏝️";
     } else {
-      newsButton.textContent = "Travel Blog✅";
+      newsButton.textContent = "  Travel Blog✅";
     }
     // Hide the overlay and close button
     newsOverlay.style.display = 'none';
@@ -6619,7 +6619,7 @@ inputsAndSelects.forEach((element) => {
   });
 });
     // Update button text to switch back to Day
-    document.getElementById("toggleButton").textContent = "Day Theme🌥️";
+    document.getElementById("toggleButton").textContent = " . Day Theme🌥️";
   } else {
     // Switching from Night to Day
     if (window.innerWidth <= 768) {  // Mobile device
@@ -6697,7 +6697,7 @@ inputsAndSelects.forEach((element) => {
 });
 
     // Update button text to switch back to Night
-    document.getElementById("toggleButton").textContent = "Night Theme🌃";
+    document.getElementById("toggleButton").textContent = "  Night Theme🌃";
   }
 
   // Ensure globe material updates
@@ -7001,7 +7001,7 @@ function toggleLightstheme2() {
   // Get the button element
   const lightsButton = document.getElementById('addLightsbutton2');
 
-  if (lightsButton.textContent === "Atmosphere💨") {
+  if (lightsButton.textContent === "  Atmosphere💨") {
     // If the lights button is clicked, overlay the lights texture on top of the current state
     if (currentTexture === "day") {
       scene.add(cloudMesh2); // Apply lights texture (day + lights)
@@ -7013,7 +7013,7 @@ function toggleLightstheme2() {
       console.log("clouds added activated on night texture");
     }
     //markerMaterial.color.set(lightsmarkerMaterial);
-    lightsButton.textContent = "Atmosphere✅";
+    lightsButton.textContent = "  Atmosphere✅";
   } else {
     // If the lights button is toggled off, revert to the current texture (day or night)
     if (currentTexture === "day") {
@@ -7033,7 +7033,7 @@ function toggleLightstheme2() {
       markerMaterial.color.set(nightmarkerMaterial);
       console.log("Reverted to night texture");
     }
-    lightsButton.textContent = "Atmosphere💨";
+    lightsButton.textContent = "  Atmosphere💨";
   }
 
   // Ensure uniforms update
