@@ -4736,6 +4736,7 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
   const header = document.getElementById('header');
   const header2 = document.querySelector('header2');
   const theme = document.querySelector('.theme-switch2');
+  const themebtn = document.querySelector('.theme-switch');
   const gotItBtn = document.getElementById('gotItBtn');
   const calendaricon2 = document.querySelector('.calendar-icon2');
   const calendaricon = document.querySelector('.calendar-icon');
@@ -4765,6 +4766,7 @@ const flightColor = pinkThemeActive ? '#C950AB' : '#0780B3';  // Dark pink or da
     gotItBtn.style.backgroundColor = hotelColor;
     popupClosebtn.style.backgroundColor = flightColor;
     clearFiltersBtn.style.backgroundColor = hotelColor;
+    themebtn.style.backgroundColor = hotelColor;
     header.style.display = "flex";
     calendaricon2.style.right="59.25%";
     calendaricon.style.right="47.3%";
@@ -4804,6 +4806,7 @@ const flightColor = pinkThemeActive ? '#C950AB' : '#0780B3';  // Dark pink or da
     popupSavebtn.style.setProperty('background-color', flightColor, 'important');
     gotItBtn.style.setProperty('background-color', flightColor, 'important');
     searchBtn22.style.setProperty('background-color', flightColor, 'important');
+    themebtn.style.setProperty('background-color', flightColor, 'important');
     const hoverStyle = document.createElement('style');
     hoverStyle.innerHTML = `
       #searchBtn:hover {
@@ -4869,6 +4872,12 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
   // Get the current state of the toggle
   const themeToggleChecked = document.getElementById('themeToggle').checked;
 
+  // Change button text
+  if (pinkThemeActive) {
+        pinkButton.textContent = "Undo"; // Change to Undo when activated
+    } else {
+        pinkButton.textContent = "Pink Theme"; // Revert when deactivated
+    }
   // Simulate the toggle change to apply new colors
   document.getElementById('themeToggle').dispatchEvent(new Event('change'));
 });
