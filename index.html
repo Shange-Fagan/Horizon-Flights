@@ -4908,11 +4908,6 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
         calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
 
-        // Change the flight path and wave materials
-        flightpathMaterial.color.set(0xFF6CDA);
-        flightpathPattern.color.set(0xFF6CDA);
-        flightpathPatternwave.color.set(0xFF6CDA);
-
     } else {
         pinkButton.textContent = "   Pink Theme💖";
 
@@ -4924,16 +4919,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         // Revert colors
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
         calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
-
-        flightpathMaterial.color.set(0x46dff0);
-        flightpathPattern.color.set(0x82eaed);
-        flightpathPatternwave.color.set(0x82eaed);
     }
-
-    // Ensure the changes take effect in the scene
-    flightpathMaterial.needsUpdate = true;
-    flightpathPattern.needsUpdate = true;
-    flightpathPatternwave.needsUpdate = true;
 
     document.getElementById('themeToggle').dispatchEvent(new Event('change'));
 });
