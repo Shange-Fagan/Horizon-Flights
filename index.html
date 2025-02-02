@@ -4878,6 +4878,17 @@ const pinkButton = document.getElementById('addLightsbutton3').checked;
     } else {
         pinkButton.textContent = "Pink Theme💖"; // Revert when deactivated
     }
+
+    // Apply marker color logic
+    if (pinkThemeActive) {
+        markerMaterial.color.set(pinkthememarkerMaterial);
+    } else {
+        if (currentmarkerMaterial === "day") {
+            markerMaterial.color.set(daymarkerMaterial);
+        } else if (currentmarkerMaterial === "night") {
+            markerMaterial.color.set(nightmarkerMaterial);
+        }
+    }
   // Simulate the toggle change to apply new colors
   document.getElementById('themeToggle').dispatchEvent(new Event('change'));
 });
