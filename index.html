@@ -5893,7 +5893,11 @@ let isDay = true; // Track whether it's currently day or night
 document.getElementById('closeNewsButton').addEventListener('click', function () {
     const newsOverlay = document.getElementById('newsOverlay');
     const closeNewsButton = document.getElementById('closeNewsButton');
-    
+    if (newsButton.textContent === "Travel Blog✅") {
+      newsButton.textContent = "Travel Blog🏝️";
+    } else {
+      newsButton.textContent = "Travel Blog✅";
+    }
     // Hide the overlay and close button
     newsOverlay.style.display = 'none';
     closeNewsButton.style.display = 'none';
