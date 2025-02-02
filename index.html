@@ -4876,17 +4876,6 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
     const calendardaytheme = document.querySelectorAll(".flatpickr-calendar .flatpickr-day.selected");
     const calendardaythemehover = document.querySelectorAll(".flatpickr-calendar .flatpickr-day:hover");
 
-    // Ensure flight path, wave pattern, and flight wave pattern exist before modifying them
-    if (typeof flightPath !== "undefined" && flightPath.material) {
-        flightPath.material.color.set(pinkThemeActive ? 0xFF6CDA : 0x46dff0); // Change color
-    }
-    if (typeof waveMesh !== "undefined" && waveMesh.material) {
-        waveMesh.material.color.set(pinkThemeActive ? 0xFF6CDA : 0x82eaed); // Change color
-    }
-    if (typeof pointMesh !== "undefined" && pointMesh.material) {
-        pointMesh.material.color.set(pinkThemeActive ? 0xFF6CDA : 0x82eaed); // Change color
-    }
-
     // Ensure the button exists
     if (!pinkButton) {
         console.error("Pink Theme Button not found!");
