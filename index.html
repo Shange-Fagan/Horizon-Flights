@@ -11302,12 +11302,6 @@ import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/
 // Create the flight path curve
 // Adjust distance handling in `createFlightPath` and Plane Animation
 function createFlightPath(fromVec, toVec, altitude) {
-  if (!fromVec || !toVec) {
-        console.warn("Missing fromVec or toVec. Setting default values.");
-        fromVec = new THREE.Vector3(0, 0, 0);
-        toVec = new THREE.Vector3(10, 10, 10);
-    }
-    // Continue with function execution
     const distance = fromVec.distanceTo(toVec); // Calculate the distance between the two points
 
     // Dynamically adjust the altitude based on distance
