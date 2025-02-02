@@ -4710,6 +4710,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentIndex = (currentIndex - 1 + cabinClasses.length) % cabinClasses.length; // Cycle backward
     updateCabinClass(currentIndex, "down");
   });
+  let pinkThemeActive = false; // Track if the pink theme is active
 
 
 document.getElementById('themeToggle').addEventListener('change', (event) => {
@@ -4734,12 +4735,10 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
   const calendaricon2 = document.querySelector('.calendar-icon2');
   const calendaricon = document.querySelector('.calendar-icon');
 
-
-
-
-
-
-
+// Colors based on theme mode
+const flightColor = pinkThemeActive ? '#C950AB' : '#0780B3';  // Dark pink or dark blue
+  const hotelColor = pinkThemeActive ? '#FF6CDA' : '#00aaff';  // Light pink or light blue
+  
   //let currentTicker = document.getElementById('dayTicker');
   if (isChecked) {
     //searchBtn.classList.remove('airbnb-button');
@@ -4752,15 +4751,15 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
   Array.from(airbnbLogos).forEach(logo => logo.style.display = "block");
   Array.from(trivagoLogos).forEach(logo => logo.style.display = "none");
     document.getElementById("trivagoIframeContainer").style.display = "block";
-    searchBtn.style.backgroundColor = '#00aaff';
-    loginButton.style.backgroundColor = '#00aaff';
-    topLeftLabel.style.backgroundColor = '#00aaff';
-    likedPostsButton.style.backgroundColor = '#00aaff';
-    regionPopupbutton.style.backgroundColor = '#00aaff';
-    popupSavebtn.style.backgroundColor = '#00aaff';
-    gotItBtn.style.backgroundColor = '#00aaff';
-    popupClosebtn.style.backgroundColor = '#0780B3';
-    clearFiltersBtn.style.backgroundColor = '#00aaff';
+    searchBtn.style.backgroundColor = hotelColor;
+    loginButton.style.backgroundColor = hotelColor;
+    topLeftLabel.style.backgroundColor = hotelColor;
+    likedPostsButton.style.backgroundColor = hotelColor;
+    regionPopupbutton.style.backgroundColor = hotelColor;
+    popupSavebtn.style.backgroundColor = hotelColor;
+    gotItBtn.style.backgroundColor = hotelColor;
+    popupClosebtn.style.backgroundColor = flightColor;
+    clearFiltersBtn.style.backgroundColor = hotelColor;
     header.style.display = "flex";
     calendaricon2.style.right="59.25%";
     calendaricon.style.right="47.3%";
@@ -4792,21 +4791,21 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
         currentTicker.style.display = "block";
     Array.from(trivagoLogos).forEach(logo => logo.style.display = "block");
     Array.from(airbnbLogos).forEach(logo => logo.style.display = "none");
-    searchBtn.style.backgroundColor = '#0780B3';
-    loginButton.style.backgroundColor = '#0780B3';
-    topLeftLabel.style.setProperty('background-color', '#0780B3', 'important');
-    likedPostsButton.style.setProperty('background-color', '#0780B3', 'important');
-    regionPopupbutton.style.setProperty('background-color', '#0780B3', 'important');
-    popupSavebtn.style.setProperty('background-color', '#0780B3', 'important');
-    gotItBtn.style.setProperty('background-color', '#0780B3', 'important');
-    searchBtn22.style.setProperty('background-color', '#0780B3', 'important');
+    searchBtn.style.backgroundColor = flightColor;
+    loginButton.style.backgroundColor = flightColor;
+    topLeftLabel.style.setProperty('background-color', flightColor, 'important');
+    likedPostsButton.style.setProperty('background-color', flightColor, 'important');
+    regionPopupbutton.style.setProperty('background-color', flightColor, 'important');
+    popupSavebtn.style.setProperty('background-color', flightColor, 'important');
+    gotItBtn.style.setProperty('background-color', flightColor, 'important');
+    searchBtn22.style.setProperty('background-color', flightColor, 'important');
     const hoverStyle = document.createElement('style');
     hoverStyle.innerHTML = `
       #searchBtn:hover {
         animation: pulseShadow3 0.6s ease-in-out infinite alternate !important;
       }
-    `;    popupClosebtn.style.backgroundColor = '#00aaff';
-    clearFiltersBtn.style.backgroundColor = '#0780B3';
+    `;    popupClosebtn.style.backgroundColor = hotelColor;
+    clearFiltersBtn.style.backgroundColor = flightColor;
     calendaricon2.style.right="59.9%";
     calendaricon.style.right="48%";
     document.getElementById("cabinClassContainer").style.display = "flex"
@@ -4859,6 +4858,16 @@ guestPopup.appendChild(div);
   //document.getElementById('dayTicker').classList.toggle('hidden', isChecked);
   //document.getElementById('trivagoIframeContainer').classList.toggle('hidden', !isChecked);
 });
+document.getElementById('addLightsbutton3').addEventListener('click', () => {
+  pinkThemeActive = !pinkThemeActive;  // Toggle pink theme mode
+
+  // Get the current state of the toggle
+  const themeToggleChecked = document.getElementById('themeToggle').checked;
+
+  // Simulate the toggle change to apply new colors
+  document.getElementById('themeToggle').dispatchEvent(new Event('change'));
+});
+
 document.getElementById('themeToggle2').addEventListener('change', (event) => {
   const isChecked = event.target.checked;
 
