@@ -4866,7 +4866,7 @@ guestPopup.appendChild(div);
   //document.getElementById('dayTicker').classList.toggle('hidden', isChecked);
   //document.getElementById('trivagoIframeContainer').classList.toggle('hidden', !isChecked);
 });
-let fromVec = fromVec || [0, 0]; // Default value
+let fromVec = null; // Declare globally with a default value
 document.getElementById('addLightsbutton3').addEventListener('click', () => {
     pinkThemeActive = !pinkThemeActive;  // Toggle pink theme mode
 
@@ -11296,9 +11296,10 @@ import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/
 // Create the flight path curve
 // Adjust distance handling in `createFlightPath` and Plane Animation
 function createFlightPath(fromVec, toVec, altitude) {
-  if (!fromVec) {
-        console.warn("fromVec is undefined, using default.");
-        fromVec = [0, 0]; // Use a placeholder or default coordinates
+  if (!fromVec || !toVec) {
+        console.warn("Missing fromVec or toVec. Setting default values.");
+        fromVec = new THREE.Vector3(0, 0, 0);
+        toVec = new THREE.Vector3(10, 10, 10);
     }
     // Continue with function execution
     const distance = fromVec.distanceTo(toVec); // Calculate the distance between the two points
