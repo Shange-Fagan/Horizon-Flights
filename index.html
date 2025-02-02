@@ -4893,6 +4893,11 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         // Apply pink color to calendar selected days
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#ED85D2', 'important'));
         calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#ED85D2', 'important'));
+        if (!isUserPremium()) {
+            showPinkPremiumPopup(); // Show popup but still apply theme
+        }
+        // Zoom out the globe
+        zoomOutGlobe();
 
     } else {
         pinkButton.textContent = "   Pink Theme💖";
@@ -4905,6 +4910,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         // Revert colors
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
         calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
+        revertToPreviousTheme(); // Revert theme if "Undo" is clicked
+
     }
 // Apply marker color logic
 if (pinkThemeActive) {
@@ -4918,85 +4925,6 @@ if (pinkThemeActive) {
     }
     document.getElementById('themeToggle').dispatchEvent(new Event('change'));
 });
-function showPinkPremiumPopup() {
-    if (document.getElementById("pinkPremiumPopup")) return; // Prevent duplicates
-
-    // Greyed-out overlay to prevent interactions
-    const overlay = document.createElement("div");
-    overlay.setAttribute("id", "pinkPremiumOverlay");
-    overlay.style.position = "fixed";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100vw";
-    overlay.style.height = "100vh";
-    overlay.style.backgroundColor = "rgba(255, 182, 193, 0.2)"; // Light pink overlay
-    overlay.style.zIndex = "22012";
-
-    // Premium Popup
-    const pinkPremiumPopup = document.createElement("div");
-    pinkPremiumPopup.setAttribute("id", "pinkPremiumPopup");
-    pinkPremiumPopup.style.position = "fixed";
-    pinkPremiumPopup.style.top = "50%";
-    pinkPremiumPopup.style.left = "50%";
-    pinkPremiumPopup.style.transform = "translate(-50%, -50%)";
-    pinkPremiumPopup.style.backgroundColor = "rgba(255, 192, 203, 0.2)"; // Light pink background
-    pinkPremiumPopup.style.padding = "20px";
-    pinkPremiumPopup.style.borderRadius = "10px";
-    pinkPremiumPopup.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
-    pinkPremiumPopup.style.textAlign = "center";
-    pinkPremiumPopup.style.zIndex = "22013";
-    pinkPremiumPopup.style.width = "350px";
-
-    // Close Button
-    const closeButton = document.createElement("span");
-    closeButton.innerHTML = "&times;";
-    closeButton.style.position = "absolute";
-    closeButton.style.top = "5px";
-    closeButton.style.right = "10px";
-    closeButton.style.cursor = "pointer";
-    closeButton.style.fontSize = "20px";
-    closeButton.style.color = "#FFFFFF";
-
-    closeButton.addEventListener("click", () => {
-        revertToPreviousTheme(); // Revert theme if closed
-    });
-
-    pinkPremiumPopup.appendChild(closeButton);
-
-    // Title
-    const title = document.createElement("h3");
-    title.innerText = "Unlock the Pink Theme 💖";
-    title.style.color = "#FFFFFF";
-    pinkPremiumPopup.appendChild(title);
-
-    // Description
-    const description = document.createElement("p");
-    description.innerText = "For frequent flyers who love to travel with us, unlock this super snazzy Pink Theme and other premium features by upgrading to a premium plan! ✈️💎";
-    description.style.fontSize = "14px";
-    description.style.color = "#FFFFFF";
-    pinkPremiumPopup.appendChild(description);
-
-    // Upgrade Button
-    const upgradeButton = document.createElement("button");
-    upgradeButton.innerText = "Upgrade Now";
-    upgradeButton.style.backgroundColor = "#FF69B4";
-    upgradeButton.style.color = "white";
-    upgradeButton.style.border = "none";
-    upgradeButton.style.padding = "10px 20px";
-    upgradeButton.style.borderRadius = "5px";
-    upgradeButton.style.cursor = "pointer";
-    upgradeButton.style.marginTop = "10px";
-
-    upgradeButton.addEventListener("click", () => {
-        handlePinkPremiumSignup(); // Handle upgrade
-    });
-
-    pinkPremiumPopup.appendChild(upgradeButton);
-
-    document.body.appendChild(overlay);
-    document.body.appendChild(pinkPremiumPopup);
-}
-
 
 document.getElementById('themeToggle2').addEventListener('change', (event) => {
   const isChecked = event.target.checked;
@@ -6910,6 +6838,84 @@ function showPremiumPopup() {
     document.body.appendChild(overlay);
     document.body.appendChild(premiumPopup);
 }
+function showPinkPremiumPopup() {
+    if (document.getElementById("pinkPremiumPopup")) return; // Prevent duplicates
+
+    // Greyed-out overlay to prevent interactions
+    const overlay = document.createElement("div");
+    overlay.setAttribute("id", "pinkPremiumOverlay");
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100vw";
+    overlay.style.height = "100vh";
+    overlay.style.backgroundColor = "rgba(255, 182, 193, 0.2)"; // Light pink overlay
+    overlay.style.zIndex = "22012";
+
+    // Premium Popup
+    const pinkPremiumPopup = document.createElement("div");
+    pinkPremiumPopup.setAttribute("id", "pinkPremiumPopup");
+    pinkPremiumPopup.style.position = "fixed";
+    pinkPremiumPopup.style.top = "50%";
+    pinkPremiumPopup.style.left = "50%";
+    pinkPremiumPopup.style.transform = "translate(-50%, -50%)";
+    pinkPremiumPopup.style.backgroundColor = "rgba(255, 192, 203, 0.2)"; // Light pink background
+    pinkPremiumPopup.style.padding = "20px";
+    pinkPremiumPopup.style.borderRadius = "10px";
+    pinkPremiumPopup.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+    pinkPremiumPopup.style.textAlign = "center";
+    pinkPremiumPopup.style.zIndex = "22013";
+    pinkPremiumPopup.style.width = "350px";
+
+    // Close Button
+    const closeButton = document.createElement("span");
+    closeButton.innerHTML = "&times;";
+    closeButton.style.position = "absolute";
+    closeButton.style.top = "5px";
+    closeButton.style.right = "10px";
+    closeButton.style.cursor = "pointer";
+    closeButton.style.fontSize = "20px";
+    closeButton.style.color = "#FFFFFF";
+
+    closeButton.addEventListener("click", () => {
+        revertToPreviousTheme(); // Revert theme if closed
+    });
+
+    pinkPremiumPopup.appendChild(closeButton);
+
+    // Title
+    const title = document.createElement("h3");
+    title.innerText = "Unlock the Pink Theme 💖";
+    title.style.color = "#FFFFFF";
+    pinkPremiumPopup.appendChild(title);
+
+    // Description
+    const description = document.createElement("p");
+    description.innerText = "For frequent flyers who love to travel with us, unlock this super snazzy Pink Theme and other premium features by upgrading to a premium plan! ✈️💎";
+    description.style.fontSize = "14px";
+    description.style.color = "#FFFFFF";
+    pinkPremiumPopup.appendChild(description);
+
+    // Upgrade Button
+    const upgradeButton = document.createElement("button");
+    upgradeButton.innerText = "Upgrade Now";
+    upgradeButton.style.backgroundColor = "#FF69B4";
+    upgradeButton.style.color = "white";
+    upgradeButton.style.border = "none";
+    upgradeButton.style.padding = "10px 20px";
+    upgradeButton.style.borderRadius = "5px";
+    upgradeButton.style.cursor = "pointer";
+    upgradeButton.style.marginTop = "10px";
+
+    upgradeButton.addEventListener("click", () => {
+        handlePinkPremiumSignup(); // Handle upgrade
+    });
+
+    pinkPremiumPopup.appendChild(upgradeButton);
+
+    document.body.appendChild(overlay);
+    document.body.appendChild(pinkPremiumPopup);
+}
 let previousTheme = "day"; // Default to "day" or dynamically detect current theme
 let previousMarker = "day"; // Default to "day" or detect current marker state
 // Function to zoom in smoothly (restore default zoom)
@@ -6941,6 +6947,7 @@ function revertToPreviousTheme() {
     lightsButton.textContent = "Jetsetter Theme💎";
 
     removePremiumPopup(); // Remove the popup and overlay
+    removePinkPremiumPopup(); // Remove the popup and overlay
 }
 
 // Function to remove the premium popup and overlay
@@ -6951,7 +6958,14 @@ function removePremiumPopup() {
     if (overlay) document.body.removeChild(overlay);
     if (popup) document.body.removeChild(popup);
 }
+// Function to remove the premium popup and overlay
+function removePinkPremiumPopup() {
+    const overlay = document.getElementById("pinkPremiumOverlay");
+    const popup = document.getElementById("pinkPremiumPopup");
 
+    if (overlay) document.body.removeChild(overlay);
+    if (popup) document.body.removeChild(popup);
+}
 // Function to check if the user is premium (Firebase)
 // Function to check if the user is premium (Firebase)
 function isUserPremium() {
