@@ -7381,7 +7381,11 @@ document.getElementById('customButton').addEventListener('click', function() {
 
 // Open Custom Background Menu
 function openCustomBackgroundMenu() {
-  document.getElementById('customBackgroundMenu').classList.remove('hidden');
+    if (isUserPremium()) {
+        document.getElementById('customBackgroundMenu').classList.remove('hidden');
+    } else {
+        showPremiumPaywall();
+    }
 }
 
 // Apply Custom HDRI Background
