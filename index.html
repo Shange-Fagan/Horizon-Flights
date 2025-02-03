@@ -2188,6 +2188,7 @@ overflow: hidden;
 .dropdown-menu {
     position: absolute;
     background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.75);
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
@@ -2196,6 +2197,24 @@ overflow: hidden;
     display: flex;
     flex-direction: column;
     z-index: 22022;
+}
+.dropdown-menu2 {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.75);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    top: 382px;
+    right: 144px;
+    display: flex;
+    flex-direction: column;
+    z-index: 22022;
+}
+
+#customHDRI select{
+    top: 390px;
+    right: 144px;
 }
 
 .background-option {
@@ -4119,7 +4138,7 @@ gl_FragColor = vec4(glowColor, intensity);
     <button id="customButton" class="background-option">🎨 Custom</button>
 </div>
 <!-- Custom Background Selection (Hidden Initially) -->
-<div id="customBackgroundMenu" class="dropdown-menu hidden">
+<div id="customBackgroundMenu" class="dropdown-menu2 hidden">
   <label for="customHDRI">Choose a custom backdrop:</label>
   <select id="customHDRI">
       <option value="js/TCom_Aerials0006_3_L.jpg">Aerial sky background 🌅</option>
