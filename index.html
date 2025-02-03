@@ -5012,7 +5012,10 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
 
     if (pinkThemeActive) {
         pinkButton.textContent = "\u00A0\u00A0\u00A0Pink Theme✅";
-
+        // Remove the main globe from the scene
+        if (scene.getObjectByName('globe')) {
+                    scene.remove(globe);
+                }
         // Change all Airbnb logos
         Array.from(airbnbLogos).forEach(logo => {
             logo.src = "js/hotel-8.png";
@@ -5040,7 +5043,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         globe2.material = new THREE.MeshPhysicalMaterial({
             metalness: 1,         // Fully metallic for reflectivity
             roughness: 0,         // Smooth to reflect environment
-            transmission: 0.85,   // High transparency for glass effect
+            transmission: 0.9,   // High transparency for glass effect
             opacity: 0.3,         // Semi-transparent
             transparent: true,    // Enable transparency
             envMap: scene.background, // Reflect the current HDRI sky
@@ -5068,13 +5071,18 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
         //scene.background = nightbackgroundTexture;
         earthMaterial.uniforms.map.value = nightTexture;
+        // Restore the original globe
+        scene.add(globe);
         // Reset globe2 material to normal
-        globe2.material = new THREE.MeshStandardMaterial({
-            color: 0xffffff,
-            metalness: 0.5, 
-            roughness: 0.5, 
-            opacity: 1, 
-            transparent: false
+        globe2.material = new THREE.MeshPhongMaterial({
+            shininess: 15,
+            map: dayTexture, // Default to day texture
+            specularMap: specularMap,
+            bumpMap: bumpMap,
+            bumpScale: 0.05,
+            normalMap: normalMap,
+            blending: THREE.AdditiveBlending,
+            specular: new THREE.Color('grey'),
         });
         globe2.geometry.computeBoundingSphere();
         globe2.geometry.computeVertexNormals();
