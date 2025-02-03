@@ -2142,7 +2142,7 @@ overflow: hidden;
 .pink-theme-active .airbnb-button:hover, 
 .pink-theme-active .airbnb-button22:hover, 
 .pink-theme-active .airbnb-button23:hover, 
-.pink-theme-active .airbnb-button2:hover, 
+.pink-theme-active #loginButton:hover, 
 .pink-theme-active #likedPostsButton:hover {
     background-color: #FF6CDA !important; /* Light Pink Background */
     box-shadow: 0 0 12px rgba(255, 108, 218, 0.8), 0 0 4px rgba(255, 108, 218, 0.5) !important; /* Pink Glow */
@@ -4055,6 +4055,7 @@ gl_FragColor = vec4(glowColor, intensity);
 
 	
 <button id="toggleButton">   Day Theme🌥️</button>
+<button id="toggleButton3">   Background🏙️</button>
 <button id="addLightsbutton" style="display: block;">Jetsetter Theme💎</button>
 <button id="addLightsbutton3" style="display: block;">   Pink Theme💖</button>
 <button id="addLightsbutton2">   Atmosphere💨</button>
@@ -4760,6 +4761,7 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
   const searchBtn22 = document.querySelector('.airbnb-button22');
   const regionPopupbutton = document.getElementById('submitRegion');
   const loginButton = document.getElementById('loginButton');
+  const loginButton2 = document.querySelector('.airbnb-button2');
   const likedPostsButton = document.getElementById('likedPostsButton');
   const topLeftLabel = document.getElementById('topLeftLabel');
   const popupSavebtn = document.querySelector('.popup-save-btn');
@@ -7283,6 +7285,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Add Event Listener to the Toggle Button
 document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
+function toggleBackground() {
+  if (/*togglebutton3 is clicked*/) {
+    scene.background = nightbackgroundTexture;
+    // Update button text to switch back to Day
+    document.getElementById("toggleButton").textContent = "   Background🏙️";
+  } else {
+    scene.background = daybackgroundTexture;
+    // Update button text to switch back to Night
+    document.getElementById("toggleButton3").textContent = "   Background🌃";
+}
+}
+document.getElementById('toggleButton3').addEventListener('click', toggleBackground);
+
 //document.getElementById('toggleButton').addEventListener('click', () => {
     //isDay = !isDay; // Toggle the state
     //toggleDayNight(isDay); // Update theme based on new state
