@@ -383,6 +383,25 @@ a, button, input, select, iframe {
     #addLightsbutton2 {
       position: absolute;
       right: 15px;
+      top: 299px;
+      padding: 4px 7px;
+      font-size: 12px;
+      /*background-color: rgba(255, 255, 255, 0.2);*/
+      /*border: 1px solid rgba(255, 255, 255, 0.25);*/
+      /*border-radius: 8px;*/
+      color: rgba(255, 255, 255, 0.75);
+      z-index: 22011;
+      cursor: pointer;
+	    border: 0px solid #e0e0e0; /* Border similar to Airbnb */
+       background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 25px; /* Rounded corners for inputs */
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 0px 0px 0px 0px;
+      width: 125px;
+    }
+    #toggleButton3 {
+      position: absolute;
+      right: 15px;
       top: 275px;
       padding: 4px 7px;
       font-size: 12px;
@@ -398,6 +417,10 @@ a, button, input, select, iframe {
 	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       border-radius: 0px 0px 0px 0px;
       width: 125px;
+    }
+    #toggleButton3:hover {
+      background-color: rgba(225, 225, 225, 0.35);
+	    border-color: #00aaff; /* Red border on hover for consistency with Airbnb style */
     }
 
     #addLightsbutton2:hover {
@@ -1374,7 +1397,7 @@ iframe::-webkit-scrollbar {
 	  #newsButton {
     position: absolute;
       right: 15px;
-      top: 299px;
+      top: 324px;
       padding: 4.5px 7px;
       font-size: 12px;
       /*background-color: rgba(255, 255, 255, 0.2);*/
@@ -2158,6 +2181,35 @@ overflow: hidden;
 .pink-theme-active #likedPostsButton {
     background-color: #FF6CDA !important; /* Light Pink Background */
 }
+.hidden {
+    display: none;
+}
+
+.dropdown-menu {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    top: 50px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.background-option {
+    background: #FF6CDA;
+    border: none;
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.background-option:hover {
+    background: #d94cbb;
+}
+
 
 /* Keyframes for Pink Glow Animation */
 @keyframes pulseShadowPink {
@@ -2418,7 +2470,7 @@ margin-right: -53px;
   right: 15px;
   width: 80px;
   height: 40px;
-  top: 365px;
+  top: 375px;
   z-index: 22011;
 }
 .theme-switch2 {
@@ -3154,7 +3206,7 @@ crossorigin="anonymous"></script>
   z-index: 22011;
   left: 0px;
   right: 15px;
-  top: 324px;
+  top: 350px;
 }
 
 #minimizeCarouselBtn {
@@ -4055,7 +4107,24 @@ gl_FragColor = vec4(glowColor, intensity);
 
 	
 <button id="toggleButton">   Day Theme🌥️</button>
-<button id="toggleButton3">   Background🏙️</button>
+<!-- Background Toggle Button -->
+<button id="toggleButton3" class="theme-button">   Background🌎</button>
+<!-- Dropdown Menu for Background Selection -->
+<div id="backgroundDropdown" class="dropdown-menu hidden">
+    <button class="background-option" onclick="setBackground('day')">🌞 Day</button>
+    <button class="background-option" onclick="setBackground('night')">🌙 Night</button>
+    <button class="background-option" onclick="openCustomBackgroundMenu()">🎨 Custom</button>
+</div>
+<!-- Custom Background Selection (Hidden Initially) -->
+<div id="customBackgroundMenu" class="dropdown-menu hidden">
+  <label for="customHDRI">Choose a custom backdrop:</label>
+  <select id="customHDRI">
+      <option value="js/TCom_Aerials0006_3_L.jpg">Aerial sky background 🌅</option>
+      <option value="js/TCom_Sky001_2_L.jpg">Blue sky background 🏙️</option>
+      <option value="js/TCom_Space005_1_L.jpg">Space background 🌌</option>
+  </select>
+  <button onclick="applyCustomBackground()">Apply</button>
+</div>
 <button id="addLightsbutton" style="display: block;">Jetsetter Theme💎</button>
 <button id="addLightsbutton3" style="display: block;">   Pink Theme💖</button>
 <button id="addLightsbutton2">   Atmosphere💨</button>
@@ -7285,18 +7354,90 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Add Event Listener to the Toggle Button
 document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
-function toggleBackground() {
-  if (/*togglebutton3 is clicked*/) {
-    scene.background = nightbackgroundTexture;
-    // Update button text to switch back to Day
-    document.getElementById("toggleButton").textContent = "   Background🏙️";
-  } else {
-    scene.background = daybackgroundTexture;
-    // Update button text to switch back to Night
-    document.getElementById("toggleButton3").textContent = "   Background🌃";
+let currentBackground = "night"; // Default background
+const loader = new THREE.TextureLoader();
+
+// Show/Hide Dropdown Menu
+document.getElementById('toggleButton3').addEventListener('click', () => {
+    document.getElementById('backgroundDropdown').classList.toggle('hidden');
+});
+
+// Function to Change Background
+function setBackground(mode) {
+    if (mode === "day") {
+        loadHDRIBackground("textures/day_texture.jpg"); // Path to Day texture
+        currentBackground = "day";
+        document.getElementById("toggleButton3").textContent = "   Background🌃";
+    } else if (mode === "night") {
+        loadHDRIBackground("textures/night_texture.jpg"); // Path to Night texture
+        currentBackground = "night";
+        document.getElementById("toggleButton3").textContent = "   Background🏙️";
+    }
+    document.getElementById('backgroundDropdown').classList.add('hidden');
 }
+
+// Open Custom Background Menu
+function openCustomBackgroundMenu() {
+    if (isUserPremium()) {
+        document.getElementById('customBackgroundMenu').classList.remove('hidden');
+    } else {
+        showPremiumPaywall();
+    }
 }
-document.getElementById('toggleButton3').addEventListener('click', toggleBackground);
+
+// Apply Custom HDRI Background
+function applyCustomBackground() {
+    const selectedHDRI = document.getElementById('customHDRI').value;
+
+    loader.load(selectedHDRI, function(texture) {
+        const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+        rt.fromEquirectangularTexture(renderer, texture);
+        scene.background = rt.texture;
+    });
+
+    document.getElementById("toggleButton3").textContent = "   Background✅";
+    document.getElementById('customBackgroundMenu').classList.add('hidden');
+}
+
+
+// Function to Load HDRI Background
+function loadHDRIBackground(texturePath) {
+    loader.load(texturePath, function(texture) {
+        const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+        rt.fromEquirectangularTexture(renderer, texture);
+        scene.background = rt.texture;
+    });
+}
+
+// Check if User is Premium
+function isUserPremium() {
+    return localStorage.getItem("userPremium") === "true"; // Example check
+}
+
+// Show Paywall Popup
+function showPremiumPaywall() {
+    const popup = document.createElement("div");
+    popup.innerHTML = `
+        <div class="premium-popup">
+            <h2>Upgrade to Premium</h2>
+            <p>Custom HDRI backgrounds are a premium feature. Subscribe to access! ✨</p>
+            <button onclick="subscribeToPremium()">Upgrade Now</button>
+            <button onclick="closePremiumPopup()">Close</button>
+        </div>
+    `;
+    document.body.appendChild(popup);
+}
+
+// Function to Subscribe (Example)
+function subscribeToPremium() {
+    localStorage.setItem("userPremium", "true");
+    closePremiumPopup();
+}
+
+// Function to Close Paywall Popup
+function closePremiumPopup() {
+    document.querySelector(".premium-popup").remove();
+}
 
 //document.getElementById('toggleButton').addEventListener('click', () => {
     //isDay = !isDay; // Toggle the state
