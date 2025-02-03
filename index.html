@@ -5037,7 +5037,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
             rt.fromEquirectangularTexture(renderer, texture);
             scene.background = rt.texture;
         });*/
-        scene.background = nightbackgroundTexture;
+        //scene.background = nightbackgroundTexture;
         earthMaterial.uniforms.map.value = dayTexture;
 
     } else {
@@ -5054,7 +5054,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         postLikeBtn.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         postViewLink.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
-        scene.background = nightbackgroundTexture;
+        //scene.background = nightbackgroundTexture;
         earthMaterial.uniforms.map.value = nightTexture;
     }
 // Apply marker color logic
