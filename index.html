@@ -7411,7 +7411,16 @@ function loadHDRIBackground(texturePath) {
         scene.background = rt.texture;
     });
 }
-
+// Function to hide the region select dropdown when clicking outside of it
+document.addEventListener('click', function(event) {
+    var regionSelect = document.getElementById('backgroundDropdown');
+    var regionSelectBtn = document.getElementById('toggleButton3');
+    
+    // Check if the click happened outside the dropdown and button
+    if (regionSelect && !regionSelect.contains(event.target) && !regionSelectBtn.contains(event.target)) {
+      regionSelect.style.display = 'none';
+    }
+  });
 // Show Paywall Popup
 function showPremiumPaywall() {
     const popup = document.createElement("div");
