@@ -5036,16 +5036,19 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
             rt.fromEquirectangularTexture(renderer, texture);
             scene.background = rt.texture;
         });
-        // Modify the globe2 parameters for transparency and reflectivity
-        if (typeof globe2 !== 'undefined') {
-            globe2.material.metalness = 1;      // Fully metallic for reflectivity
-            globe2.material.roughness = 0;      // Perfectly smooth to reflect environment
-            globe2.material.transmission = 0.9; // High transparency for a glass effect
-            globe2.material.opacity = 0.3;      // Adjust transparency level
-            globe2.material.transparent = true; // Enable transparency
-            globe2.material.envMap = scene.background; // Use HDRI as the environment map
-            globe2.material.needsUpdate = true; // Ensure material updates
-        }
+        // Create Transparent Reflective Material for globe2
+        globe2.material = new THREE.MeshPhysicalMaterial({
+            metalness: 1,         // Fully metallic for reflectivity
+            roughness: 0,         // Smooth to reflect environment
+            transmission: 0.85,   // High transparency for glass effect
+            opacity: 0.3,         // Semi-transparent
+            transparent: true,    // Enable transparency
+            envMap: scene.background, // Reflect the current HDRI sky
+            clearcoat: 1,         // Add glossy effect
+            clearcoatRoughness: 0 // Max smoothness
+        });
+        globe2.geometry.computeBoundingSphere();
+        globe2.geometry.computeVertexNormals();
         //scene.background = nightbackgroundTexture;
         earthMaterial.uniforms.map.value = dayTexture;
 
@@ -5065,15 +5068,16 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
         //scene.background = nightbackgroundTexture;
         earthMaterial.uniforms.map.value = nightTexture;
-        // Reset globe2 properties to default
-        if (typeof globe2 !== 'undefined') {
-            globe2.material.metalness = 0.5;   // Adjust to default reflectivity
-            globe2.material.roughness = 0.8;   // Less reflective
-            globe2.material.transmission = 0;  // Make it opaque again
-            globe2.material.opacity = 1;       // Fully visible
-            globe2.material.transparent = false;
-            globe2.material.needsUpdate = true;
-        }
+        // Reset globe2 material to normal
+        globe2.material = new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            metalness: 0.5, 
+            roughness: 0.5, 
+            opacity: 1, 
+            transparent: false
+        });
+        globe2.geometry.computeBoundingSphere();
+        globe2.geometry.computeVertexNormals();
     }
 // Apply marker color logic
 if (pinkThemeActive) {
