@@ -2213,8 +2213,11 @@ overflow: hidden;
 }
 
 #customBackgroundMenu select{
-    top: 390px;
-    right: 144px;
+    top: 59px;
+    right: 14px;
+    background-position: right 10px;
+    background-position-x: 96.5%;
+    background-size: 12px;
 }
 
 .background-option {
@@ -4130,7 +4133,7 @@ gl_FragColor = vec4(glowColor, intensity);
 	
 <button id="toggleButton">   Day Theme🌥️</button>
 <!-- Background Toggle Button -->
-<button id="toggleButton3" class="theme-button">   Background🌅</button>
+<button id="toggleButton3" class="theme-button">   Background🏙️</button>
 <!-- Dropdown Menu for Background Selection -->
 <div id="backgroundDropdown" class="dropdown-menu hidden">
     <button id="dayButton" class="background-option">🌞 Day</button>
@@ -7391,7 +7394,7 @@ document.getElementById('dayButton').addEventListener('click', function() {
 });
 document.getElementById('nightButton').addEventListener('click', function() {
       scene.background = nightbackgroundTexture;
-      document.getElementById("toggleButton3").textContent = "   Background🌅";
+      document.getElementById("toggleButton3").textContent = "   Background🏙️";
 });
 document.getElementById('customButton').addEventListener('click', function() {
     openCustomBackgroundMenu();
