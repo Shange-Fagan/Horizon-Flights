@@ -5013,6 +5013,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
     if (pinkThemeActive) {
         pinkButton.textContent = "\u00A0\u00A0\u00A0Pink Theme✅";
         // Remove the main globe from the scene
+        globe.geometry.computeBoundingSphere();
+        globe.geometry.computeVertexNormals();
         if (scene.getObjectByName('globe')) {
                     scene.remove(globe);
                 }
@@ -5086,6 +5088,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         });
         globe2.geometry.computeBoundingSphere();
         globe2.geometry.computeVertexNormals();
+        globe.geometry.computeBoundingSphere();
+        globe.geometry.computeVertexNormals();
         earthMaterial.uniforms.map.value = dayTexture;
     }
 // Apply marker color logic
