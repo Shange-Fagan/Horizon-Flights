@@ -5030,13 +5030,14 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         }
         // Zoom out the globe
         zoomOutGlobe();
-        const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg'
+        /*const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg'
 
         loader.load(selectedHDRI, function(texture) {
             const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
             rt.fromEquirectangularTexture(renderer, texture);
             scene.background = rt.texture;
-        });
+        });*/
+        scene.background = nightbackgroundTexture;
         earthMaterial.uniforms.map.value = dayTexture;
 
     } else {
