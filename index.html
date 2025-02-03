@@ -5053,7 +5053,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         globe2.geometry.computeBoundingSphere();
         globe2.geometry.computeVertexNormals();
         //scene.background = nightbackgroundTexture;
-        earthMaterial.uniforms.map.value = dayTexture;
+        //earthMaterial.uniforms.map.value = dayTexture;
 
     } else {
         pinkButton.textContent = "\u00A0\u00A0\u00A0Pink Theme💖";
@@ -5070,7 +5070,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         postViewLink.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
         //scene.background = nightbackgroundTexture;
-        earthMaterial.uniforms.map.value = nightTexture;
+        //earthMaterial.uniforms.map.value = nightTexture;
         // Restore the original globe
         scene.add(globe);
         // Reset globe2 material to normal
@@ -5086,6 +5086,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         });
         globe2.geometry.computeBoundingSphere();
         globe2.geometry.computeVertexNormals();
+        earthMaterial.uniforms.map.value = dayTexture;
     }
 // Apply marker color logic
 if (pinkThemeActive) {
