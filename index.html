@@ -7039,8 +7039,10 @@ function showPinkPremiumPopup() {
     closeButton.style.color = "#FFFFFF";
 
     closeButton.addEventListener("click", () => {
+      const pinkButton = document.getElementById('addLightsbutton3');
+      pinkButton.textContent = "   Pink Theme💖";
         revertToPreviousTheme(); // Revert theme if closed
-        let pinkThemeActive = false; // Revert theme if closed
+        pinkThemeActive = false; // Revert theme if closed
         scene.background = nightbackgroundTexture;
         earthMaterial.uniforms.map.value = nightTexture;
     });
