@@ -6949,6 +6949,7 @@ function showPremiumPopup() {
 
     closeButton.addEventListener("click", () => {
         revertToPreviousTheme(); // Revert theme if closed
+        scene.background = nightbackgroundTexture;
     });
 
     premiumPopup.appendChild(closeButton);
@@ -7028,6 +7029,7 @@ function showPinkPremiumPopup() {
     closeButton.addEventListener("click", () => {
         revertToPreviousTheme(); // Revert theme if closed
         let pinkThemeActive = false; // Revert theme if closed
+        scene.background = nightbackgroundTexture;
     });
 
     pinkPremiumPopup.appendChild(closeButton);
