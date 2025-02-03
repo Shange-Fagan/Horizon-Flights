@@ -6792,15 +6792,15 @@ inputsAndSelects.forEach((element) => {
     currentTexture = "day"; // Update the current texture state
     //globe2.material.map = dayTexture;
 
-    //scene.background = daybackgroundTexture;
+    scene.background = daybackgroundTexture;
 
-    const selectedHDRI = 'js/autumn_field_puresky.jpg'
+    /*const selectedHDRI = 'js/autumn_field_puresky.jpg'
 
         loader.load(selectedHDRI, function(texture) {
             const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
             rt.fromEquirectangularTexture(renderer, texture);
             scene.background = rt.texture;
-        });
+        });*/
     //scene.add(cloudMesh);  // Add clouds for day
   markerMaterial.color.set(daymarkerMaterial);
   currentmarkerMaterial = "day";
