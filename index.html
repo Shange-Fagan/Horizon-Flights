@@ -2187,19 +2187,21 @@ overflow: hidden;
 
 .dropdown-menu {
     position: absolute;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-    top: 50px;
-    right: 10px;
+    top: 235px;
+    right: 144px;
     display: flex;
     flex-direction: column;
+    z-index: 22022;
 }
 
 .background-option {
-    background: #FF6CDA;
+    background: rgba(255,255,255,0.2);
     border: none;
+    border-radius: 10px;
     padding: 8px 12px;
     margin: 5px;
     cursor: pointer;
@@ -2207,7 +2209,7 @@ overflow: hidden;
 }
 
 .background-option:hover {
-    background: #d94cbb;
+  background: rgba(255,255,255,0.4);
 }
 
 
@@ -7361,7 +7363,7 @@ const loader = new THREE.TextureLoader();
 document.getElementById('toggleButton3').addEventListener('click', () => {
     document.getElementById('backgroundDropdown').classList.toggle('hidden');
 });
-
+document.addEventListener("DOMContentLoaded", function() {
 // Function to Change Background
 function setBackground(mode) {
     if (mode === "day") {
@@ -7433,7 +7435,7 @@ function subscribeToPremium() {
 function closePremiumPopup() {
     document.querySelector(".premium-popup").remove();
 }
-
+});
 //document.getElementById('toggleButton').addEventListener('click', () => {
     //isDay = !isDay; // Toggle the state
     //toggleDayNight(isDay); // Update theme based on new state
