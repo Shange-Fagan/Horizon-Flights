@@ -4875,6 +4875,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
     const airbnbLogos = document.getElementsByClassName("logo-airbnb");
     const calendardaytheme = document.querySelectorAll(".flatpickr-calendar .flatpickr-day.selected");
     const calendardaythemehover = document.querySelectorAll(".flatpickr-calendar .flatpickr-day:hover");
+    const postLikeBtn = document.querySelectorAll(".post .view-link");
+    const postViewLink = document.querySelectorAll(".like-button");
 
     // Ensure the button exists
     if (!pinkButton) {
@@ -4893,6 +4895,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         // Apply pink color to calendar selected days
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#ED85D2', 'important'));
         calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
+        postLikeBtn.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
+        postViewLink.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
         if (!isUserPremium()) {
             showPinkPremiumPopup(); // Show popup but still apply theme
         }
@@ -4910,6 +4914,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         // Revert colors
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
         calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
+        postLikeBtn.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
+        postViewLink.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
 
     }
@@ -6879,7 +6885,7 @@ function showPinkPremiumPopup() {
 
     closeButton.addEventListener("click", () => {
         revertToPreviousTheme(); // Revert theme if closed
-        let pinkThemeActive = false; // Revert theme if closed
+        //let pinkThemeActive = false; // Revert theme if closed
     });
 
     pinkPremiumPopup.appendChild(closeButton);
