@@ -5013,11 +5013,10 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
     if (pinkThemeActive) {
         pinkButton.textContent = "\u00A0\u00A0\u00A0Pink Theme✅";
         // Remove the main globe from the scene
-        globe.geometry.computeBoundingSphere();
-        globe.geometry.computeVertexNormals();
-        if (scene.getObjectByName('globe')) {
-                    scene.remove(globe);
-                }
+        // Remove the original `globe` object from the scene
+        if (scene.children.includes(globe)) {
+            scene.remove(globe);
+        }
         // Change all Airbnb logos
         Array.from(airbnbLogos).forEach(logo => {
             logo.src = "js/hotel-8.png";
@@ -5041,6 +5040,10 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
             rt.fromEquirectangularTexture(renderer, texture);
             scene.background = rt.texture;
         });
+        if (!globe2.geometry.attributes.position || globe2.geometry.attributes.position.count === 0) {
+    console.warn("Globe2 geometry has invalid position attributes. Skipping material update.");
+    return;
+}
         // Create Transparent Reflective Material for globe2
         globe2.material = new THREE.MeshPhysicalMaterial({
             metalness: 1,         // Fully metallic for reflectivity
