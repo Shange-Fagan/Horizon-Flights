@@ -2149,6 +2149,16 @@ overflow: hidden;
     animation: pulseShadowPink 0.6s ease-in-out infinite alternate !important;
 }
 
+.pink-theme-active .like-button, 
+.pink-theme-active .post .view-link, 
+.pink-theme-active .airbnb-button, 
+.pink-theme-active .airbnb-button22, 
+.pink-theme-active .airbnb-button23, 
+.pink-theme-active .airbnb-button2, 
+.pink-theme-active #likedPostsButton {
+    background-color: #FF6CDA !important; /* Light Pink Background */
+}
+
 /* Keyframes for Pink Glow Animation */
 @keyframes pulseShadowPink {
   0% {
@@ -4897,8 +4907,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
     const airbnbLogos = document.getElementsByClassName("logo-airbnb");
     const calendardaytheme = document.querySelectorAll(".flatpickr-calendar .flatpickr-day.selected");
     const calendardaythemehover = document.querySelectorAll(".flatpickr-calendar .flatpickr-day:hover");
-    const postLikeBtn = document.querySelectorAll(".post .view-link");
-    const postViewLink = document.querySelectorAll(".like-button");
+    const postViewLink = document.querySelectorAll(".post .view-link");
+    const postLikeBtn = document.querySelectorAll(".like-button");
 
     // Ensure the button exists
     if (!pinkButton) {
