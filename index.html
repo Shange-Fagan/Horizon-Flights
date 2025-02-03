@@ -2136,6 +2136,28 @@ overflow: hidden;
 .like-button:hover, .post .view-link:hover {
       box-shadow: 0 0 9px rgb(22, 194, 252) /* Red outline for focus similar to Airbnb */
 }
+/* Override hover effects when Pink Theme is active */
+.pink-theme-active .like-button:hover, 
+.pink-theme-active .post .view-link:hover, 
+.pink-theme-active .airbnb-button:hover, 
+.pink-theme-active .airbnb-button22:hover, 
+.pink-theme-active .airbnb-button23:hover, 
+.pink-theme-active .airbnb-button2:hover, 
+.pink-theme-active #likedPostsButton:hover {
+    background-color: #FF6CDA !important; /* Light Pink Background */
+    box-shadow: 0 0 12px rgba(255, 108, 218, 0.8), 0 0 4px rgba(255, 108, 218, 0.5) !important; /* Pink Glow */
+    animation: pulseShadowPink 0.6s ease-in-out infinite alternate !important;
+}
+
+/* Keyframes for Pink Glow Animation */
+@keyframes pulseShadowPink {
+  0% {
+    box-shadow: 0 0 12px rgba(255, 108, 218, 0.8), 0 0 4px rgba(255, 108, 218, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 12px rgb(255, 108, 218), 0 0 4px rgba(255, 85, 200, 0.75);
+  }
+}
 
 /* Button or link for each post */
 /*.post .view-link {
@@ -4874,7 +4896,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
     const pinkButton = document.getElementById('addLightsbutton3');
     const airbnbLogos = document.getElementsByClassName("logo-airbnb");
     const calendardaytheme = document.querySelectorAll(".flatpickr-calendar .flatpickr-day.selected");
-    const calendardaythemehover = document.querySelectorAll(".flatpickr-calendar .flatpickr-day:hover");
+    const calendardaythemehover = document.querySelector(".flatpickr-calendar .flatpickr-day:hover");
     const postLikeBtn = document.querySelectorAll(".post .view-link");
     const postViewLink = document.querySelectorAll(".like-button");
 
@@ -4894,7 +4916,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
 
         // Apply pink color to calendar selected days
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#ED85D2', 'important'));
-        calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
+        calendardaytheme.forEach(day => day.style.setProperty('background', '#FF6CDA', 'important'));
+        calendardaythemehover.style.setProperty('background-color', '#FF6CDA', 'important');
         postLikeBtn.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
         postViewLink.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
         if (!isUserPremium()) {
@@ -4929,6 +4952,12 @@ if (pinkThemeActive) {
             markerMaterial.color.set(nightmarkerMaterial);
         }
     }
+    if (pinkThemeActive) {
+    document.body.classList.add('pink-theme-active'); // Activate Pink Theme
+} else {
+    document.body.classList.remove('pink-theme-active'); // Remove Pink Theme
+}
+
     document.getElementById('themeToggle').dispatchEvent(new Event('change'));
 });
 
