@@ -7185,6 +7185,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
         lightsButton.textContent = "Jetsetter Theme✅";
     } else {
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
+        scene.background = nightbackgroundTexture;
     }
 
     earthMaterial.uniforms.map.needsUpdate = true;
