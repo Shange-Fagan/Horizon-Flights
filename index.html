@@ -4145,7 +4145,7 @@ gl_FragColor = vec4(glowColor, intensity);
       <option value="js/TCom_Sky001_2_L.jpg">Blue sky background 🏙️</option>
       <option value="js/TCom_Space005_1_L.jpg">Space background 🌌</option>
   </select>
-  <button onclick="applyCustomBackground()">Apply</button>
+  <button id="applycustomHDRI">Apply</button>
 </div>
 <button id="addLightsbutton" style="display: block;">Jetsetter Theme💎</button>
 <button id="addLightsbutton3" style="display: block;">   Pink Theme💖</button>
@@ -7396,8 +7396,9 @@ document.getElementById('nightButton').addEventListener('click', function() {
 document.getElementById('customButton').addEventListener('click', function() {
     openCustomBackgroundMenu();
 });
-
-
+document.getElementById('applycustomHDRI').addEventListener('click', function() {
+  applyCustomBackground();
+});
 // Open Custom Background Menu
 function openCustomBackgroundMenu() {
         document.getElementById('customBackgroundMenu').classList.remove('hidden');
