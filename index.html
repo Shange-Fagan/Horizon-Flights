@@ -3563,7 +3563,7 @@ margin-bottom: 1px;
   <div class="instruction-step hidden" id="dragInstruction">
     <img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 60%; left: 55%;"></div>
-    <p class="instruction-text">Click anywhere outside the blue buttons to close the airbnb widgets</p>
+    <p class="instruction-text">Click anywhere outside the blue buttons to close the hotel listings</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/day-and-night-2.png" alt="Button Click" class="glove-hand">
@@ -3605,7 +3605,7 @@ margin-bottom: 1px;
     </form>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
-    <img src="js/login--2.png" alt="Button Click" class="glove-hand"><img src="js/rating.png" alt="Button Click" class="glove-hand">
+    <img src="js/login--2.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
     <p class="instruction-text">Lastly, Phew😮‍💨, Login to view saved and liked posts</p>
   </div>
@@ -6879,6 +6879,7 @@ function showPinkPremiumPopup() {
 
     closeButton.addEventListener("click", () => {
         revertToPreviousTheme(); // Revert theme if closed
+        let pinkThemeActive = false; // Revert theme if closed
     });
 
     pinkPremiumPopup.appendChild(closeButton);
