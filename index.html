@@ -5039,6 +5039,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
             rt.fromEquirectangularTexture(renderer, texture);
             scene.background = rt.texture;
         });
+        earthMaterial.uniforms.map.value = dayTexture;
+
     } else {
         pinkButton.textContent = "   Pink Theme💖";
 
@@ -5054,6 +5056,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         postViewLink.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
         scene.background = nightbackgroundTexture;
+        earthMaterial.uniforms.map.value = nightTexture;
     }
 // Apply marker color logic
 if (pinkThemeActive) {
@@ -6789,7 +6792,16 @@ inputsAndSelects.forEach((element) => {
     earthMaterial.uniforms.map.value = dayTexture;
     currentTexture = "day"; // Update the current texture state
     //globe2.material.map = dayTexture;
-    scene.background = daybackgroundTexture;
+
+    //scene.background = daybackgroundTexture;
+
+    const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg'
+
+        loader.load(selectedHDRI, function(texture) {
+            const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+            rt.fromEquirectangularTexture(renderer, texture);
+            scene.background = rt.texture;
+        });
     //scene.add(cloudMesh);  // Add clouds for day
   markerMaterial.color.set(daymarkerMaterial);
   currentmarkerMaterial = "day";
@@ -7030,6 +7042,7 @@ function showPinkPremiumPopup() {
         revertToPreviousTheme(); // Revert theme if closed
         let pinkThemeActive = false; // Revert theme if closed
         scene.background = nightbackgroundTexture;
+        earthMaterial.uniforms.map.value = nightTexture;
     });
 
     pinkPremiumPopup.appendChild(closeButton);
