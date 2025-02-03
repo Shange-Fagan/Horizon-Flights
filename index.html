@@ -7038,13 +7038,38 @@ function showPinkPremiumPopup() {
     closeButton.style.color = "#FFFFFF";
 
     closeButton.addEventListener("click", () => {
-      const pinkButton = document.getElementById('addLightsbutton3');
-      pinkButton.textContent = "\u00A0\u00A0\u00A0Pink Theme💖";
-        revertToPreviousTheme(); // Revert theme if closed
-        pinkThemeActive = false; // Revert theme if closed
-        scene.background = nightbackgroundTexture;
-        earthMaterial.uniforms.map.value = nightTexture;
-    });
+    const pinkButton = document.getElementById('addLightsbutton3');
+    pinkButton.textContent = "\u00A0\u00A0\u00A0Pink Theme💖";
+
+    pinkThemeActive = false; // Revert theme flag
+    document.body.classList.remove('pink-theme-active'); // Remove pink theme styles
+
+    revertToPreviousTheme(); // Revert other styles
+    scene.background = nightbackgroundTexture;
+    earthMaterial.uniforms.map.value = nightTexture;
+    
+    // Reset UI elements that were styled by the pink theme
+    const calendardaytheme = document.querySelectorAll(".flatpickr-calendar .flatpickr-day.selected");
+    const calendardaythemehover = document.querySelector(".flatpickr-calendar .flatpickr-day:hover");
+    const postLikeBtn = document.querySelectorAll(".post .view-link");
+    const postViewLink = document.querySelectorAll(".like-button");
+
+    calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
+    calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
+    postLikeBtn.forEach(btn => btn.style.setProperty('background-color', '#00aaff', 'important'));
+    postViewLink.forEach(link => link.style.setProperty('background-color', '#00aaff', 'important'));
+
+    // Reset marker colors
+    if (currentmarkerMaterial === "day") {
+        markerMaterial.color.set(daymarkerMaterial);
+    } else if (currentmarkerMaterial === "night") {
+        markerMaterial.color.set(nightmarkerMaterial);
+    }
+
+    // Ensure theme changes are reflected immediately
+    document.getElementById('themeToggle').dispatchEvent(new Event('change'));
+});
+
 
     pinkPremiumPopup.appendChild(closeButton);
 
