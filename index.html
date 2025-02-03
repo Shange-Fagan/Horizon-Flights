@@ -7171,6 +7171,13 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
 
         earthMaterial.uniforms.map.value = LightsTexture;
         markerMaterial.color.set(lightsmarkerMaterial);
+        const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg'
+
+        loader.load(selectedHDRI, function(texture) {
+            const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+            rt.fromEquirectangularTexture(renderer, texture);
+            scene.background = rt.texture;
+        });
 
         // Zoom out the globe
         zoomOutGlobe();
