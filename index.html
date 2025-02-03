@@ -7050,14 +7050,23 @@ function showPinkPremiumPopup() {
     
     // Reset UI elements that were styled by the pink theme
     const calendardaytheme = document.querySelectorAll(".flatpickr-calendar .flatpickr-day.selected");
-    const calendardaythemehover = document.querySelector(".flatpickr-calendar .flatpickr-day:hover");
+    const calendardaythemehover = document.querySelectorAll(".flatpickr-calendar .flatpickr-day:hover"); // Changed to querySelectorAll
     const postLikeBtn = document.querySelectorAll(".post .view-link");
     const postViewLink = document.querySelectorAll(".like-button");
 
-    calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
-    calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
-    postLikeBtn.forEach(btn => btn.style.setProperty('background-color', '#00aaff', 'important'));
-    postViewLink.forEach(link => link.style.setProperty('background-color', '#00aaff', 'important'));
+    // Check if elements exist before calling forEach
+    if (calendardaytheme.length > 0) {
+        calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
+    }
+    if (calendardaythemehover.length > 0) {
+        calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
+    }
+    if (postLikeBtn.length > 0) {
+        postLikeBtn.forEach(btn => btn.style.setProperty('background-color', '#00aaff', 'important'));
+    }
+    if (postViewLink.length > 0) {
+        postViewLink.forEach(link => link.style.setProperty('background-color', '#00aaff', 'important'));
+    }
 
     // Reset marker colors
     if (currentmarkerMaterial === "day") {
@@ -7068,7 +7077,10 @@ function showPinkPremiumPopup() {
 
     // Ensure theme changes are reflected immediately
     document.getElementById('themeToggle').dispatchEvent(new Event('change'));
+
+    console.log("Pink Theme Active:", pinkThemeActive); // Debugging log
 });
+
 
 
     pinkPremiumPopup.appendChild(closeButton);
