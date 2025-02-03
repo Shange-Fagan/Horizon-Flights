@@ -4936,7 +4936,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
 
         // Revert colors
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#5fcaff', 'important'));
-        calendardaythemehover.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
+        calendardaythemehover.style.setProperty('background-color', '#00aaff', 'important');
         postLikeBtn.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         postViewLink.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
