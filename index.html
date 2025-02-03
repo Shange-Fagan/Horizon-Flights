@@ -5032,7 +5032,13 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         }
         // Zoom out the globe
         zoomOutGlobe();
+        const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg'
 
+        loader.load(selectedHDRI, function(texture) {
+            const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+            rt.fromEquirectangularTexture(renderer, texture);
+            scene.background = rt.texture;
+        });
     } else {
         pinkButton.textContent = "   Pink Theme💖";
 
@@ -5047,7 +5053,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         postLikeBtn.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         postViewLink.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
-
+        scene.background = nightbackgroundTexture;
     }
 // Apply marker color logic
 if (pinkThemeActive) {
