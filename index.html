@@ -7039,8 +7039,12 @@ function showPinkPremiumPopup() {
 
     closeButton.addEventListener("click", () => {
     const pinkButton = document.getElementById('addLightsbutton3');
+    const airbnbLogos = document.getElementsByClassName("logo-airbnb");
     pinkButton.textContent = "\u00A0\u00A0\u00A0Pink Theme💖";
-
+    // Change all Airbnb logos back
+    Array.from(airbnbLogos).forEach(logo => {
+                logo.src = "js/hotel-7.png";
+            });
     pinkThemeActive = false; // Revert theme flag
     document.body.classList.remove('pink-theme-active'); // Remove pink theme styles
 
