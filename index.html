@@ -4113,9 +4113,9 @@ gl_FragColor = vec4(glowColor, intensity);
 <button id="toggleButton3" class="theme-button">   Background🌎</button>
 <!-- Dropdown Menu for Background Selection -->
 <div id="backgroundDropdown" class="dropdown-menu hidden">
-    <button class="background-option" onclick="setBackground('day')">🌞 Day</button>
-    <button class="background-option" onclick="setBackground('night')">🌙 Night</button>
-    <button class="background-option" onclick="openCustomBackgroundMenu()">🎨 Custom</button>
+    <button id="dayButton" class="background-option">🌞 Day</button>
+    <button id="nightButton" class="background-option">🌙 Night</button>
+    <button id="customButton" class="background-option">🎨 Custom</button>
 </div>
 <!-- Custom Background Selection (Hidden Initially) -->
 <div id="customBackgroundMenu" class="dropdown-menu hidden">
@@ -7364,19 +7364,19 @@ document.getElementById('toggleButton3').addEventListener('click', () => {
     document.getElementById('backgroundDropdown').classList.toggle('hidden');
 });
 document.addEventListener("DOMContentLoaded", function() {
-// Function to Change Background
-function setBackground(mode) {
-    if (mode === "day") {
-        loadHDRIBackground("textures/day_texture.jpg"); // Path to Day texture
-        currentBackground = "day";
-        document.getElementById("toggleButton3").textContent = "   Background🌃";
-    } else if (mode === "night") {
-        loadHDRIBackground("textures/night_texture.jpg"); // Path to Night texture
-        currentBackground = "night";
-        document.getElementById("toggleButton3").textContent = "   Background🏙️";
-    }
-    document.getElementById('backgroundDropdown').classList.add('hidden');
-}
+
+document.getElementById('dayButton').addEventListener('click', function() {
+      scene.background = daybackgroundTexture;
+      document.getElementById("toggleButton3").textContent = "   Background🌃";
+});
+document.getElementById('nightButton').addEventListener('click', function() {
+      scene.background = nightbackgroundTexture;
+      document.getElementById("toggleButton3").textContent = "   Background🏙️";
+});
+document.getElementById('customButton').addEventListener('click', function() {
+    openCustomBackgroundMenu();
+});
+
 
 // Open Custom Background Menu
 function openCustomBackgroundMenu() {
