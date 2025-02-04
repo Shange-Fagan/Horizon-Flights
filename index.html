@@ -7254,6 +7254,7 @@ function revertToPreviousTheme() {
 
     removePremiumPopup(); // Remove the popup and overlay
     removePinkPremiumPopup(); // Remove the popup and overlay
+    removebluePremiumPopup();
 }
 
 // Function to remove the premium popup and overlay
@@ -7268,6 +7269,14 @@ function removePremiumPopup() {
 function removePinkPremiumPopup() {
     const overlay = document.getElementById("pinkPremiumOverlay");
     const popup = document.getElementById("pinkPremiumPopup");
+
+    if (overlay) document.body.removeChild(overlay);
+    if (popup) document.body.removeChild(popup);
+}
+// Function to remove the premium popup and overlay
+function removebluePremiumPopup() {
+    const overlay = document.getElementById("bluePremiumOverlay");
+    const popup = document.getElementById("bluePremiumPopup");
 
     if (overlay) document.body.removeChild(overlay);
     if (popup) document.body.removeChild(popup);
