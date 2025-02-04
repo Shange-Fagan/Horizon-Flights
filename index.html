@@ -7670,7 +7670,7 @@ function resetGlobeTheme() {
         }
     globe2.material = new THREE.MeshPhongMaterial({ // Reset to default material
         shininess: 15,
-        map: dayTexture,
+        map: earthMaterial.uniforms.map.value,
         specularMap: specularMap,
         bumpMap: bumpMap,
         bumpScale: 0.05,
@@ -7678,7 +7678,7 @@ function resetGlobeTheme() {
         blending: THREE.AdditiveBlending,
         specular: new THREE.Color('grey'),
     });
-
+    earthMaterial.uniforms.map.value = dayTexture;
     document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme🌍"; // Reset button text
     isCustomGlobeActive = false; // Mark theme as inactive
 }
