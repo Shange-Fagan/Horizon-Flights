@@ -8605,37 +8605,12 @@ function addCountryOutlines() {
         .then(response => response.json())
         .then(data => {
             data.features.forEach(feature => {
-                if (feature.geometry.type === "MultiPolygon" || feature.geometry.type === "Polygon") {
-                    const coords = feature.geometry.coordinates;
-
-                    coords.forEach(polygon => {
-                        const points = [];
-                        polygon.forEach(coord => {
-                            const lon = coord[0];
-                            const lat = coord[1];
-                            const position = latLngToVector3(lat, lon, earthRadius + 0.01); // Offset for visibility
-                            points.push(position);
-                        });
-
-                        // **OUTLINE MATERIAL**
-                        const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-                        const lineMaterial = new THREE.LineBasicMaterial({ color: 0xff69b4, linewidth: 2 }); // Pink outline
-                        const lineMesh = new THREE.LineLoop(lineGeometry, lineMaterial);
-                        countryLinesGroup.add(lineMesh);
-
-                        // **FILLED MATERIAL**
-                        const shape = new THREE.Shape(points.map(p => new THREE.Vector2(p.x, p.y)));
-                        const extrudeSettings = { depth: 0.001, bevelEnabled: false };
-                        const fillGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-                        const fillMaterial = new THREE.MeshBasicMaterial({
-                            color: 0xff69b4,
-                            transparent: true,
-                            opacity: 0.3,
-                            side: THREE.DoubleSide
-                        });
-                        const fillMesh = new THREE.Mesh(fillGeometry, fillMaterial);
-                        countryLinesGroup.add(fillMesh);
+                if (feature.geometry.type === "MultiPolygon") {
+                    feature.geometry.coordinates.forEach(polygon => {
+                        polygon.forEach(drawOutline);
                     });
+                } else if (feature.geometry.type === "Polygon") {
+                    feature.geometry.coordinates.forEach(drawOutline);
                 }
             });
 
@@ -8643,6 +8618,26 @@ function addCountryOutlines() {
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
+
+// Function to draw country outlines
+function drawOutline(polygon) {
+    const points = [];
+    
+    polygon.forEach(coord => {
+        const lon = coord[0];
+        const lat = coord[1];
+        const position = latLngToVector3(lat, lon, earthRadius + 0.01);
+        points.push(position);
+    });
+
+    if (points.length < 3) return; // Ignore invalid polygons
+
+    const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffd700, linewidth: 2 }); // Gold outline
+    const lineMesh = new THREE.LineLoop(lineGeometry, lineMaterial);
+    countryLinesGroup.add(lineMesh);
+}
+
 
 // Function to remove the country outlines when the pink theme is off
 function removeCountryOutlines() {
