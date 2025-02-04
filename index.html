@@ -7238,16 +7238,16 @@ function zoomInGlobe() {
 function revertToPreviousTheme() {
     const lightsButton = document.getElementById('addLightsbutton');
 
-    /*if (previousTheme === "day") {
+    if (previousTheme === "day") {
         earthMaterial.uniforms.map.value = dayTexture;
     } else if (previousTheme === "night") {
         earthMaterial.uniforms.map.value = nightTexture;
-    }*/
+    }
 
     // Restore the globe to the default texture (day or night)
-    const defaultTexture = isNightMode ? nightTexture : dayTexture; 
+    /*const defaultTexture = isNightMode ? nightTexture : dayTexture; 
     earthMaterial.uniforms.map.value = defaultTexture;
-    earthMaterial.uniforms.map.needsUpdate = true;
+    earthMaterial.uniforms.map.needsUpdate = true;*/
 
     if (previousMarker === "day") {
         markerMaterial.color.set(daymarkerMaterial);
