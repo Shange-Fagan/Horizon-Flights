@@ -7620,7 +7620,7 @@ function updateGlobeMaterial(color, metalness, roughness, transparency, envMapIn
     }
     var envMap = new THREE.TextureLoader().load('envmap.png');
 envMap.mapping = THREE.SphericalReflectionMapping;
-    globe2.material = new THREE.MeshStandardMaterial({
+    globe2.material = new THREE.MeshPhysicalMaterial({
         color: color,              // Set color based on theme
         metalness: metalness,      // Controls reflectivity
         roughness: roughness,      // Controls smoothness
