@@ -7255,6 +7255,21 @@ function revertToPreviousTheme() {
     removePremiumPopup(); // Remove the popup and overlay
     removePinkPremiumPopup(); // Remove the popup and overlay
     removebluePremiumPopup();
+    //scene.add(globe); // Bring back main globe
+    removeCountryOutlines(); // Clear all outlines
+    /*globe2.material = new THREE.MeshPhongMaterial({ // Reset to default material
+        shininess: 15,
+        map: earthMaterial.uniforms.map.value,
+        specularMap: specularMap,
+        bumpMap: bumpMap,
+        bumpScale: 0.05,
+        normalMap: normalMap,
+        blending: THREE.AdditiveBlending,
+        specular: new THREE.Color('grey'),
+    });*/
+    earthMaterial.uniforms.map.value = dayTexture;
+    document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme🌍"; // Reset button text
+    isCustomGlobeActive = false; // Mark theme as inactive
 }
 
 // Function to remove the premium popup and overlay
