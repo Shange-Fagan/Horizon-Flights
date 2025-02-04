@@ -7834,44 +7834,44 @@ function showcustomblueglobethemePremiumPopup() {
   closeButton.style.color = "#FFFFFF";
 
   closeButton.addEventListener("click", () => {
-    revertToPreviousTheme(); // Revert theme if closed
-    scene.background = nightbackgroundTexture;
-  });
+        revertToPreviousTheme(); // Revert theme if closed
+        scene.background = nightbackgroundTexture;
+    });
 
-  bluePremiumPopup.appendChild(closeButton);
+    bluePremiumPopup.appendChild(closeButton);
 
-  // Title
-  const title = document.createElement("h3");
-  title.innerText = "Upgrade to Premium";
-  title.style.color = "#FFFFFF";
-  bluePremiumPopup.appendChild(title);
+    // Title
+    const title = document.createElement("h3");
+    title.innerText = "Upgrade to Premium";
+    title.style.color = "#FFFFFF";
+    bluePremiumPopup.appendChild(title);
 
-  // Description
-  const description = document.createElement("p");
-  description.innerText = "Custom backdrops 🏙️ are a premium feature. Subscribe to access! ✨.";
-  description.style.fontSize = "14px";
-  description.style.color = "#FFFFFF";
-  bluePremiumPopup.appendChild(description);
+    // Description
+    const description = document.createElement("p");
+    description.innerText = "Custom backdrops 🏙️ are a premium feature. Subscribe to access! ✨.";
+    description.style.fontSize = "14px";
+    description.style.color = "#FFFFFF";
+    bluePremiumPopup.appendChild(description);
 
-  // Upgrade Button
-  const upgradeButton = document.createElement("button");
-  upgradeButton.innerText = "Upgrade Now";
-  upgradeButton.style.backgroundColor = "#0077ff"; // Deep blue button
-  upgradeButton.style.color = "white";
-  upgradeButton.style.border = "none";
-  upgradeButton.style.padding = "10px 20px";
-  upgradeButton.style.borderRadius = "5px";
-  upgradeButton.style.cursor = "pointer";
-  upgradeButton.style.marginTop = "10px";
+    // Upgrade Button
+    const upgradeButton = document.createElement("button");
+    upgradeButton.innerText = "Upgrade Now";
+    upgradeButton.style.backgroundColor = "#00aaff";
+    upgradeButton.style.color = "white";
+    upgradeButton.style.border = "none";
+    upgradeButton.style.padding = "10px 20px";
+    upgradeButton.style.borderRadius = "5px";
+    upgradeButton.style.cursor = "pointer";
+    upgradeButton.style.marginTop = "10px";
 
-  upgradeButton.addEventListener("click", () => {
-    handlePremiumSignup(); // Handle upgrade
-  });
+    upgradeButton.addEventListener("click", () => {
+        handlePremiumSignup(); // Handle upgrade
+    });
 
-  bluePremiumPopup.appendChild(upgradeButton);
+    bluePremiumPopup.appendChild(upgradeButton);
 
-  document.body.appendChild(overlay);
-  document.body.appendChild(bluePremiumPopup);
+    document.body.appendChild(overlay);
+    document.body.appendChild(bluePremiumPopup);
 }
 
 // ** Apply Pink Theme - Glossy Pink Globe **
