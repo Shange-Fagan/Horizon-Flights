@@ -5046,15 +5046,18 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
 }
         // Create Transparent Reflective Material for globe2
         globe2.material = new THREE.MeshPhysicalMaterial({
-            metalness: 1,         // Fully metallic for reflectivity
-            roughness: 0,         // Smooth to reflect environment
-            transmission: 0.9,   // High transparency for glass effect
-            opacity: 0.3,         // Semi-transparent
-            transparent: true,    // Enable transparency
-            envMap: scene.background, // Reflect the current HDRI sky
-            clearcoat: 1,         // Add glossy effect
-            clearcoatRoughness: 0 // Max smoothness
+            metalness: 1,
+            roughness: 0,
+            transmission: 1, // Fully transparent
+            opacity: 0.15, // More transparency
+            transparent: true,
+            envMap: scene.background, // Ensures HDRI is reflected
+            envMapIntensity: 2.5, // Boost reflection intensity
+            clearcoat: 1,
+            clearcoatRoughness: 0,
+            reflectivity: 1 // Ensures max reflectivity
         });
+        scene.environment = scene.background;
         globe2.geometry.computeBoundingSphere();
         globe2.geometry.computeVertexNormals();
         //scene.background = nightbackgroundTexture;
@@ -5081,19 +5084,22 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         // Reset globe2 material to normal
         globe2.material = new THREE.MeshPhongMaterial({
             shininess: 15,
-            map: dayTexture, // Default to day texture
+            map: earthMaterial.uniforms.map.value, // Ensure it uses the correct texture
             specularMap: specularMap,
             bumpMap: bumpMap,
             bumpScale: 0.05,
             normalMap: normalMap,
             blending: THREE.AdditiveBlending,
-            specular: new THREE.Color('grey'),
+            specular: new THREE.Color('grey')
         });
+
         globe2.geometry.computeBoundingSphere();
         globe2.geometry.computeVertexNormals();
         globe.geometry.computeBoundingSphere();
         globe.geometry.computeVertexNormals();
         earthMaterial.uniforms.map.value = dayTexture;
+        scene.environment = scene.background;
+
     }
 // Apply marker color logic
 if (pinkThemeActive) {
@@ -8047,32 +8053,22 @@ fetch('js/ne_110m_admin_0_countries.geojson')
                     polygon.forEach(coord => {
                         const lon = coord[0];
                         const lat = coord[1];
-
-                        // Convert lat/lon to 3D space (spherical coordinates)
-                        const radius = 5.01; // Slightly above globe surface to avoid z-fighting
-                        const phi = (90 - lat) * (Math.PI / 180);
-                        const theta = (lon + 180) * (Math.PI / 180);
-
-                        const x = radius * Math.sin(phi) * Math.cos(theta);
-                        const y = radius * Math.cos(phi);
-                        const z = radius * Math.sin(phi) * Math.sin(theta);
-
-                        points.push(new THREE.Vector3(x, y, z));
+                        const position = latLngToVector3(lat, lon, earthRadius + 0.01); // Offset for visibility
+                        points.push(position);
                     });
 
-                    // Create a geometry for the country outline
-                    const geometry = new THREE.BufferGeometry().setFromPoints(points);
-                    const material = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 });
-                    const line = new THREE.LineLoop(geometry, material);
-
-                    countryLines.add(line);
+                    const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+                    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 1.5 }); // White lines for visibility
+                    const lineMesh = new THREE.LineLoop(lineGeometry, lineMaterial);
+                    countryLines.add(lineMesh);
                 });
             }
         });
 
-        scene.add(countryLines);
+        globe2.add(countryLines);
     })
-    .catch(error => console.error("Error loading GeoJSON:", error));
+    .catch(error => console.error('Error loading GeoJSON:', error));
+
 
   createEarthGlow();
   createEarthAperture();
