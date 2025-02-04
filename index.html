@@ -3745,8 +3745,8 @@ margin-bottom: 1px;
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
     <p class="instruction-text">Sign Up for Exclusive Offers! Subscribe to our email list and get access to exclusive promotions and deals.</p>
     <form id="emailForm" onsubmit="submitEmail(event)">
-      <input style="justify-content: center; justify-items: center; align-items: center;"type="email" id="emailInput" placeholder="Enter your email" required />
-      <button style="justify-content: center; justify-items: center; align-items: center; margin-left: 42.5px;"type="submit" class="popup-submit-btn">Sign Up</button>
+      <input style="justify-content: center; justify-items: center; align-items: center; margin-left: 14px;"type="email" id="emailInput" placeholder="Enter your email" required />
+      <button style="justify-content: center; justify-items: center; align-items: center; margin-left: 56.5px;"type="submit" class="popup-submit-btn">Sign Up</button>
     </form>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
@@ -4193,7 +4193,7 @@ gl_FragColor = vec4(glowColor, intensity);
 <!-- Dropdown Menu for Background Selection -->
 <div id="backgroundDropdown2" class="dropdown-menu3 hidden">
   <button id="glassButton" class="background-option">🏆 Gold</button>
-  <button id="blueButton" class="background-option">🥶 Blue</button>
+  <button id="blueButton" class="background-option">💎 Blue</button>
   <button id="pinkButton" class="background-option">💖 Pink</button>
 </div>
 <button id="toggleChristmastheme" style="display:none">Christmas</button>
@@ -7238,11 +7238,16 @@ function zoomInGlobe() {
 function revertToPreviousTheme() {
     const lightsButton = document.getElementById('addLightsbutton');
 
-    if (previousTheme === "day") {
+    /*if (previousTheme === "day") {
         earthMaterial.uniforms.map.value = dayTexture;
     } else if (previousTheme === "night") {
         earthMaterial.uniforms.map.value = nightTexture;
-    }
+    }*/
+
+    // Restore the globe to the default texture (day or night)
+    const defaultTexture = isNightMode ? nightTexture : dayTexture; 
+    earthMaterial.uniforms.map.value = defaultTexture;
+    earthMaterial.uniforms.map.needsUpdate = true;
 
     if (previousMarker === "day") {
         markerMaterial.color.set(daymarkerMaterial);
