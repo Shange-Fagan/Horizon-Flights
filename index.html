@@ -1420,7 +1420,7 @@ iframe::-webkit-scrollbar {
 	  #newsButton {
     position: absolute;
       right: 15px;
-      top: 348px;
+      top: 347px;
       padding: 4.5px 7px;
       font-size: 12px;
       /*background-color: rgba(255, 255, 255, 0.2);*/
@@ -2517,7 +2517,7 @@ margin-right: -53px;
   right: 15px;
   width: 80px;
   height: 40px;
-  top: 430px;
+  top: 412px;
   z-index: 22011;
 }
 .theme-switch2 {
@@ -3253,7 +3253,7 @@ crossorigin="anonymous"></script>
   z-index: 22011;
   left: 0px;
   right: 15px;
-  top: 400px;
+  top: 372px;
 }
 
 #minimizeCarouselBtn {
@@ -4174,7 +4174,15 @@ gl_FragColor = vec4(glowColor, intensity);
 <button id="addLightsbutton" style="display: block;">Jetsetter Theme💎</button>
 <button id="addLightsbutton3" style="display: block;">&nbsp;&nbsp;&nbsp;Pink Theme💖</button>
 <button id="addLightsbutton2">&nbsp;&nbsp;&nbsp;Atmosphere💨</button>
-<button id="toggleButton4">&nbsp;&nbsp;&nbsp;Globe Theme🌍</button>
+<!-- Globe Style Toggle Button -->
+<button id="toggleButton4" class="theme-button2">&nbsp;&nbsp;&nbsp;Globe Theme🌍</button>
+<!-- Dropdown Menu for Background Selection -->
+<div id="backgroundDropdown2" class="dropdown-menu3 hidden">
+  <button id="pinkButton" class="background-option">💖 Pink</button>
+  <button id="glassButton" class="background-option">💎 Glass</button>
+  <button id="blueButton" class="background-option">🥶 Blue</button>
+  <button id="marbleButton" class="background-option">☑️ Marble</button>
+</div>
 <button id="toggleChristmastheme" style="display:none">Christmas</button>
 
 <button id="newsButton">&nbsp;&nbsp;&nbsp;Travel Blog🏝️</button>
@@ -7523,6 +7531,28 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 let currentBackground = "night"; // Default background
 const loader = new THREE.TextureLoader();
+// Show/Hide Dropdown Menu
+document.getElementById('toggleButton4').addEventListener('click', () => {
+    document.getElementById('backgroundDropdown2').classList.toggle('hidden');
+});
+document.getElementById('pinkButton').addEventListener('click', function() {
+      globe texture = glossy pink
+      globe country lines = pink
+      document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅";
+});
+document.getElementById('glassButton').addEventListener('click', function() {
+      globe texture = glossy transparent
+      document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅";
+});
+document.getElementById('blueButton').addEventListener('click', function() {
+      globe texture = glossy blue 
+      globe country lines = blue
+      document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅";
+});
+document.getElementById('marbleButton').addEventListener('click', function() {
+      globe texture = marble
+      document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅";
+});
 
 // Show/Hide Dropdown Menu
 document.getElementById('toggleButton3').addEventListener('click', () => {
