@@ -4742,6 +4742,9 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         const minimizeCarouselBtn = document.querySelector('.carousel-header');
         const carouselContainer = document.getElementById('carousel-container');
         const loadingScreen = document.getElementById('loadingScreen');
+        const pinkthemeBtn = document.getElementById('addLightsbutton3');
+        const backgroundthemeBtn = document.getElementById('toggleButton3');
+        const globethemeBtn = document.getElementById('toggleButton4');
         topLeftLabel.innerHTML = `
   <img src="js/40462-5-earth-globe-free-transparent-image-hd-2.png" style="width: 28px; display:flex; align-items: center; height: 28px; margin-right: 4px; margin-top: 0px;" alt="Earth Globe" />
   Search Hotels
@@ -4763,6 +4766,9 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         minimizeCarouselBtn.style.top = "55px";
         minimizeCarouselBtn.style.right = "0px";
         carouselContainer.style.display = "none";
+        pinkthemeBtn.style.display = "none";
+        backgroundthemeBtn.style.display = "none";
+        globethemeBtn.style.display = "none";
         nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
         dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
         // Optionally, disable other content
