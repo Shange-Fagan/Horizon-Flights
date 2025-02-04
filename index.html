@@ -4914,7 +4914,7 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
 
 // Colors based on theme mode
 const flightColor = pinkThemeActive ? '#C950AB' : '#0780B3';  // Dark pink or dark blue
-  const hotelColor = pinkThemeActive ? '#FF6CDA' : '#00aaff';  // Light pink or light blue
+  const hotelColor = pinkThemeActive ? '#C950AB' : '#00aaff';  // Light pink or light blue
   
   //let currentTicker = document.getElementById('dayTicker');
   if (isChecked) {
@@ -5069,10 +5069,10 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
 
         // Apply pink color to calendar selected days
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#ED85D2', 'important'));
-        calendardaytheme.forEach(day => day.style.setProperty('background', '#FF6CDA', 'important'));
-        calendardaythemehover.forEach(day => day.style.setProperty('background', '#FF6CDA', 'important'));
-        postLikeBtn.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
-        postViewLink.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
+        calendardaytheme.forEach(day => day.style.setProperty('background', '#C950AB', 'important'));
+        calendardaythemehover.forEach(day => day.style.setProperty('background', '#C950AB', 'important'));
+        postLikeBtn.forEach(day => day.style.setProperty('background-color', '#C950AB', 'important'));
+        postViewLink.forEach(day => day.style.setProperty('background-color', '#C950AB', 'important'));
         if (!isUserPremium()) {
             showPinkPremiumPopup(); // Show popup but still apply theme
         }
@@ -7689,7 +7689,7 @@ function showcustomglobethemePremiumPopup() {
 
     // Description
     const description = document.createElement("p");
-    description.innerText = "Custom backdrops 🏙️ are a premium feature. Subscribe to access! ✨.";
+    description.innerText = "Custom globe themes are a premium feature. Subscribe to access! ✨.";
     description.style.fontSize = "14px";
     description.style.color = "#FFFFFF";
     premiumPopup.appendChild(description);
@@ -7769,7 +7769,7 @@ closeButton.style.color = "#FFFFFF";
 
     // Description
     const description = document.createElement("p");
-    description.innerText = "Custom backdrops 🏙️ are a premium feature. Subscribe to access! ✨.";
+    description.innerText = "Custom globe themes are a premium feature. Subscribe to access! ✨.";
     description.style.fontSize = "14px";
     description.style.color = "#FFFFFF";
     pinkPremiumPopup.appendChild(description);
@@ -7848,7 +7848,7 @@ function showcustomblueglobethemePremiumPopup() {
 
     // Description
     const description = document.createElement("p");
-    description.innerText = "Custom backdrops 🏙️ are a premium feature. Subscribe to access! ✨.";
+    description.innerText = "Custom globe themes are a premium feature. Subscribe to access! ✨.";
     description.style.fontSize = "14px";
     description.style.color = "#FFFFFF";
     bluePremiumPopup.appendChild(description);
