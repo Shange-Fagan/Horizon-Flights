@@ -5927,6 +5927,9 @@ const sphere = new THREE.SphereGeometry(
   
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.outputEncoding = THREE.sRGBEncoding; // Corrected version for newer Three.js
+renderer.toneMapping = THREE.ACESFilmicToneMapping; // Optional for better lighting
+renderer.toneMappingExposure = 1.0; // Adjust exposure if needed
   //renderer.setSize(innerWidth, innerHeight);
   //renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -7615,14 +7618,15 @@ function updateGlobeMaterial(color, metalness, roughness, transparency, envMapIn
         console.warn("Globe2 geometry has invalid position attributes. Skipping material update.");
         return;
     }
-
-    globe2.material = new THREE.MeshPhysicalMaterial({
+    var envMap = new THREE.TextureLoader().load('envmap.png');
+envMap.mapping = THREE.SphericalReflectionMapping;
+    globe2.material = new THREE.MeshStandardMaterial({
         color: color,              // Set color based on theme
         metalness: metalness,      // Controls reflectivity
         roughness: roughness,      // Controls smoothness
         transparent: transparency > 0, // Enable transparency if needed
         opacity: transparency,     // Adjust transparency
-        envMap: scene.background,  // Use HDRI for reflections
+        envMap: envMap,  // Use HDRI for reflections
         envMapIntensity: envMapIntensity, // Strength of reflections
         clearcoat: 1,              // Glossy effect
         clearcoatRoughness: 0       // Ensure max smoothness
