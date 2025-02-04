@@ -5044,18 +5044,19 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
     console.warn("Globe2 geometry has invalid position attributes. Skipping material update.");
     return;
 }
+        addCountryOutlines(); // Add the country outlines
+
         // Create Transparent Reflective Material for globe2
         globe2.material = new THREE.MeshPhysicalMaterial({
-            metalness: 1,
-            roughness: 0,
-            transmission: 1, // Fully transparent
-            opacity: 0.15, // More transparency
+            color: new THREE.Color(0xffffff), // Neutral white to allow reflections
             transparent: true,
-            envMap: scene.background, // Ensures HDRI is reflected
-            envMapIntensity: 2.5, // Boost reflection intensity
-            clearcoat: 1,
-            clearcoatRoughness: 0,
-            reflectivity: 1 // Ensures max reflectivity
+            opacity: 0.3, // Semi-transparent like glass
+            metalness: 1.0, // Fully metallic for high reflectivity
+            roughness: 0.1, // Slight roughness to give a realistic feel
+            envMapIntensity: 1.5, // Enhances reflections
+            clearcoat: 1.0, // Extra glossy surface
+            clearcoatRoughness: 0.1,
+            reflectivity: 1.0 // Maximum reflectivity
         });
         scene.environment = scene.background;
         globe2.geometry.computeBoundingSphere();
@@ -5081,6 +5082,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         //earthMaterial.uniforms.map.value = nightTexture;
         // Restore the original globe
         scene.add(globe);
+        removeCountryOutlines(); // Remove the country outlines
         // Reset globe2 material to normal
         globe2.material = new THREE.MeshPhongMaterial({
             shininess: 15,
@@ -8039,35 +8041,61 @@ globe2 = new THREE.Mesh(geometry, earthMaterial);
   //globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
 // Load GeoJSON and add country outlines to the transparent globe
-fetch('js/ne_110m_admin_0_countries.geojson')
-    .then(response => response.json())
-    .then(data => {
-        const countryLines = new THREE.Group();
+let countryLinesGroup = new THREE.Group(); // Store country outlines globally
 
-        data.features.forEach(feature => {
-            if (feature.geometry.type === "MultiPolygon" || feature.geometry.type === "Polygon") {
-                const coords = feature.geometry.coordinates;
+function addCountryOutlines() {
+    if (countryLinesGroup.children.length > 0) return; // Prevent duplicate outlines
 
-                coords.forEach(polygon => {
-                    const points = [];
-                    polygon.forEach(coord => {
-                        const lon = coord[0];
-                        const lat = coord[1];
-                        const position = latLngToVector3(lat, lon, earthRadius + 0.01); // Offset for visibility
-                        points.push(position);
+    fetch('js/ne_110m_admin_0_countries.geojson')
+        .then(response => response.json())
+        .then(data => {
+            data.features.forEach(feature => {
+                if (feature.geometry.type === "MultiPolygon" || feature.geometry.type === "Polygon") {
+                    const coords = feature.geometry.coordinates;
+
+                    coords.forEach(polygon => {
+                        const points = [];
+                        polygon.forEach(coord => {
+                            const lon = coord[0];
+                            const lat = coord[1];
+                            const position = latLngToVector3(lat, lon, earthRadius + 0.01); // Offset for visibility
+                            points.push(position);
+                        });
+
+                        // **OUTLINE MATERIAL**
+                        const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+                        const lineMaterial = new THREE.LineBasicMaterial({ color: 0xff69b4, linewidth: 2 }); // Pink outline
+                        const lineMesh = new THREE.LineLoop(lineGeometry, lineMaterial);
+                        countryLinesGroup.add(lineMesh);
+
+                        // **FILLED MATERIAL**
+                        const shape = new THREE.Shape(points.map(p => new THREE.Vector2(p.x, p.y)));
+                        const extrudeSettings = { depth: 0.001, bevelEnabled: false };
+                        const fillGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+                        const fillMaterial = new THREE.MeshBasicMaterial({
+                            color: 0xff69b4,
+                            transparent: true,
+                            opacity: 0.3,
+                            side: THREE.DoubleSide
+                        });
+                        const fillMesh = new THREE.Mesh(fillGeometry, fillMaterial);
+                        countryLinesGroup.add(fillMesh);
                     });
+                }
+            });
 
-                    const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-                    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 1.5 }); // White lines for visibility
-                    const lineMesh = new THREE.LineLoop(lineGeometry, lineMaterial);
-                    countryLines.add(lineMesh);
-                });
-            }
-        });
+            globe2.add(countryLinesGroup);
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
 
-        globe2.add(countryLines);
-    })
-    .catch(error => console.error('Error loading GeoJSON:', error));
+// Function to remove the country outlines when the pink theme is off
+function removeCountryOutlines() {
+    if (countryLinesGroup) {
+        globe2.remove(countryLinesGroup);
+        countryLinesGroup.children = []; // Clear the group
+    }
+}
 
 
   createEarthGlow();
