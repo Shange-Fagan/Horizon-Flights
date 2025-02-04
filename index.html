@@ -6403,6 +6403,7 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 	  let daymarkerMaterial = new THREE.Color('#00BFFF');
     let lightsmarkerMaterial = new THREE.Color('#00eeff');
     let pinkthememarkerMaterial = new THREE.Color('#FF6CDA');
+    let GlassthememarkerMaterial = new THREE.Color('#FFFFFF');
 let nightmarkerMaterial = new THREE.Color('#00BFFF');
 	  //const daymarkerMaterial = new THREE.Color('#00FF00');
 //const nightmarkerMaterial = new THREE.Color('#FFFFFF');
@@ -7633,11 +7634,13 @@ function updateGlobeMaterial(color, metalness, roughness, transparency, envMapIn
 
 // ** Apply Pink Theme - Glossy Pink Globe **
 document.getElementById('pinkButton').addEventListener('click', function () {
+  markerMaterial.color.set(pinkthememarkerMaterial);
     applyGlobeTheme(0xFF69B4, 0.9, 0.2, 1.0, 1.5, 0xFF69B4); // Glossy Pink with Pink Outlines
 });
 
 // ** Apply Glass Theme - Transparent Reflective Globe **
 document.getElementById('glassButton').addEventListener('click', function () {
+  markerMaterial.color.set(GlassthememarkerMaterial);
     applyGlobeTheme(0xFFFFFF, 1.0, 0.0, 0.3, 2.0, 0xFFFFFF); // Transparent Glass with White Outlines
 });
 
@@ -7660,7 +7663,11 @@ function applyGlobeTheme(globeColor, metalness, roughness, transparency, envMapI
 function resetGlobeTheme() {
     scene.add(globe); // Bring back main globe
     removeCountryOutlines(); // Clear all outlines
-
+    if (currentmarkerMaterial === "day") {
+            markerMaterial.color.set(daymarkerMaterial);
+        } else if (currentmarkerMaterial === "night") {
+            markerMaterial.color.set(nightmarkerMaterial);
+        }
     globe2.material = new THREE.MeshPhongMaterial({ // Reset to default material
         shininess: 15,
         map: dayTexture,
