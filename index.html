@@ -2234,6 +2234,20 @@ overflow: hidden;
     z-index: 22022;
 }
 
+.dropdown-menu3 {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.75);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    top: 376px;
+    right: 144px;
+    display: flex;
+    flex-direction: column;
+    z-index: 22022;
+}
+
 #customBackgroundMenu select{
     top: 59px;
     right: 14px;
@@ -4181,7 +4195,6 @@ gl_FragColor = vec4(glowColor, intensity);
   <button id="pinkButton" class="background-option">💖 Pink</button>
   <button id="glassButton" class="background-option">💎 Glass</button>
   <button id="blueButton" class="background-option">🥶 Blue</button>
-  <button id="marbleButton" class="background-option">☑️ Marble</button>
 </div>
 <button id="toggleChristmastheme" style="display:none">Christmas</button>
 
@@ -7532,27 +7545,139 @@ document.getElementById('toggleButton').addEventListener('click', toggleDayNight
 let currentBackground = "night"; // Default background
 const loader = new THREE.TextureLoader();
 // Show/Hide Dropdown Menu
+let isCustomGlobeActive = false; // Track if a custom globe theme is applied
+
+// Show/Hide Dropdown Menu on Globe Theme Button Click
 document.getElementById('toggleButton4').addEventListener('click', () => {
-    document.getElementById('backgroundDropdown2').classList.toggle('hidden');
+    if (isCustomGlobeActive) {
+        resetGlobeTheme(); // If a theme is active, reset it
+    } else {
+        document.getElementById('backgroundDropdown2').classList.toggle('hidden'); // Show menu
+    }
 });
-document.getElementById('pinkButton').addEventListener('click', function() {
-      globe texture = glossy pink
-      globe country lines = pink
-      document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅";
+
+// Function to Remove Main Globe
+function removeMainGlobe() {
+    if (scene.children.includes(globe)) {
+        scene.remove(globe);
+    }
+}
+
+// Function to Apply Country Outlines with Fill
+function applyCountryOutlines(color) {
+    removeCountryOutlines(); // Clear any previous outlines
+    fetch('js/ne_110m_admin_0_countries.geojson')
+        .then(response => response.json())
+        .then(data => {
+            data.features.forEach(feature => {
+                if (feature.geometry.type === "MultiPolygon" || feature.geometry.type === "Polygon") {
+                    const coords = feature.geometry.coordinates;
+                    coords.forEach(polygon => {
+                        const points = [];
+                        polygon.forEach(coord => {
+                            const lon = coord[0];
+                            const lat = coord[1];
+                            const position = latLngToVector3(lat, lon, earthRadius + 0.01); // Offset for visibility
+                            points.push(position);
+                        });
+
+                        // **OUTLINE MATERIAL**
+                        const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+                        const lineMaterial = new THREE.LineBasicMaterial({ color: color, linewidth: 2 });
+                        const lineMesh = new THREE.LineLoop(lineGeometry, lineMaterial);
+                        countryLinesGroup.add(lineMesh);
+
+                        // **FILLED MATERIAL**
+                        const shape = new THREE.Shape(points.map(p => new THREE.Vector2(p.x, p.y)));
+                        const extrudeSettings = { depth: 0.001, bevelEnabled: false };
+                        const fillGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+                        const fillMaterial = new THREE.MeshBasicMaterial({
+                            color: color,
+                            transparent: true,
+                            opacity: 0.3,
+                            side: THREE.DoubleSide
+                        });
+                        const fillMesh = new THREE.Mesh(fillGeometry, fillMaterial);
+                        countryLinesGroup.add(fillMesh);
+                    });
+                }
+            });
+
+            globe2.add(countryLinesGroup);
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+// Function to Update Globe2 Material
+function updateGlobeMaterial(color, metalness, roughness, transparency, envMapIntensity) {
+    if (!globe2.geometry.attributes.position || globe2.geometry.attributes.position.count === 0) {
+        console.warn("Globe2 geometry has invalid position attributes. Skipping material update.");
+        return;
+    }
+
+    globe2.material = new THREE.MeshPhysicalMaterial({
+        color: color,              // Set color based on theme
+        metalness: metalness,      // Controls reflectivity
+        roughness: roughness,      // Controls smoothness
+        transparent: transparency > 0, // Enable transparency if needed
+        opacity: transparency,     // Adjust transparency
+        envMap: scene.background,  // Use HDRI for reflections
+        envMapIntensity: envMapIntensity, // Strength of reflections
+        clearcoat: 1,              // Glossy effect
+        clearcoatRoughness: 0       // Ensure max smoothness
+    });
+
+    globe2.geometry.computeBoundingSphere();
+    globe2.geometry.computeVertexNormals();
+}
+
+// ** Apply Pink Theme - Glossy Pink Globe **
+document.getElementById('pinkButton').addEventListener('click', function () {
+    applyGlobeTheme(0xFF69B4, 0.9, 0.2, 1.0, 1.5, 0xFF69B4); // Glossy Pink with Pink Outlines
 });
-document.getElementById('glassButton').addEventListener('click', function() {
-      globe texture = glossy transparent
-      document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅";
+
+// ** Apply Glass Theme - Transparent Reflective Globe **
+document.getElementById('glassButton').addEventListener('click', function () {
+    applyGlobeTheme(0xFFFFFF, 1.0, 0.0, 0.3, 2.0, 0xFFFFFF); // Transparent Glass with White Outlines
 });
-document.getElementById('blueButton').addEventListener('click', function() {
-      globe texture = glossy blue 
-      globe country lines = blue
-      document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅";
+
+// ** Apply Blue Theme - Glossy Blue Globe **
+document.getElementById('blueButton').addEventListener('click', function () {
+    applyGlobeTheme(0x00BFFF, 0.9, 0.2, 1.0, 1.5, 0x00BFFF); // Glossy Blue with Blue Outlines
 });
-document.getElementById('marbleButton').addEventListener('click', function() {
-      globe texture = marble
-      document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅";
-});
+
+// Function to Apply a Globe Theme
+function applyGlobeTheme(globeColor, metalness, roughness, transparency, envMapIntensity, outlineColor) {
+    removeMainGlobe(); // Remove the original globe
+    updateGlobeMaterial(globeColor, metalness, roughness, transparency, envMapIntensity);
+    applyCountryOutlines(outlineColor); // Apply outlines with the chosen color
+    isCustomGlobeActive = true; // Mark theme as active
+    document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅"; // Update button text
+    document.getElementById('backgroundDropdown2').classList.add('hidden'); // Hide dropdown after selection
+}
+
+// ** Reset Globe to Default when Clicking "Globe Theme ✅" Again **
+function resetGlobeTheme() {
+    scene.add(globe); // Bring back main globe
+    removeCountryOutlines(); // Clear all outlines
+
+    globe2.material = new THREE.MeshPhongMaterial({ // Reset to default material
+        shininess: 15,
+        map: dayTexture,
+        specularMap: specularMap,
+        bumpMap: bumpMap,
+        bumpScale: 0.05,
+        normalMap: normalMap,
+        blending: THREE.AdditiveBlending,
+        specular: new THREE.Color('grey'),
+    });
+
+    document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme🌍"; // Reset button text
+    isCustomGlobeActive = false; // Mark theme as inactive
+}
+
+
+
 
 // Show/Hide Dropdown Menu
 document.getElementById('toggleButton3').addEventListener('click', () => {
