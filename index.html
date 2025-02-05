@@ -7615,14 +7615,16 @@ function removeMainGlobe() {
 }
 
 // Function to Apply Country Outlines with Fill
-function applyCountryOutlines(color) {
-    removeCountryOutlines(); // Clear any previous outlines
+function addCountryOutlines(color, fillOpacity) {
+    if (countryLinesGroup.children.length > 0) return; // Prevent duplicate outlines
+
     fetch('js/ne_110m_admin_0_countries.geojson')
         .then(response => response.json())
         .then(data => {
             data.features.forEach(feature => {
                 if (feature.geometry.type === "MultiPolygon" || feature.geometry.type === "Polygon") {
                     const coords = feature.geometry.coordinates;
+
                     coords.forEach(polygon => {
                         const points = [];
                         polygon.forEach(coord => {
@@ -7634,7 +7636,10 @@ function applyCountryOutlines(color) {
 
                         // **OUTLINE MATERIAL**
                         const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-                        const lineMaterial = new THREE.LineBasicMaterial({ color: color, linewidth: 2 });
+                        const lineMaterial = new THREE.LineBasicMaterial({
+                            color: color, 
+                            linewidth: 2 // Adjust width for better visibility
+                        });
                         const lineMesh = new THREE.LineLoop(lineGeometry, lineMaterial);
                         countryLinesGroup.add(lineMesh);
 
@@ -7645,7 +7650,7 @@ function applyCountryOutlines(color) {
                         const fillMaterial = new THREE.MeshBasicMaterial({
                             color: color,
                             transparent: true,
-                            opacity: 0.3,
+                            opacity: fillOpacity,
                             side: THREE.DoubleSide
                         });
                         const fillMesh = new THREE.Mesh(fillGeometry, fillMaterial);
@@ -7658,6 +7663,7 @@ function applyCountryOutlines(color) {
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
+
 
 // Function to Update Globe2 Material
 function updateGlobeMaterial(color, metalness, roughness, transparency, envMapIntensity) {
