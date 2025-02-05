@@ -7937,6 +7937,7 @@ document.getElementById('pinkButton').addEventListener('click', function () {
   if (!isUserPremium()) {
     showcustompinkglobethemePremiumPopup(); // Show popup but still apply theme
         }
+        addCountryOutlines(0xff69b4, 0.3); // Pink with semi-transparent fill
   // Zoom out the globe
   zoomOutGlobe();
     applyGlobeTheme(0xFF69B4, 0.9, 0.2, 1.0, 1.5, 0xFF69B4); // Glossy Pink with Pink Outlines
@@ -7950,6 +7951,7 @@ document.getElementById('glassButton').addEventListener('click', function () {
         }
   // Zoom out the globe
   zoomOutGlobe();
+  addCountryOutlines(0xff69b4, 0.3); // Pink with semi-transparent fill
     // Apply Gold Theme: Reflective metallic gold with glowing country outlines
     applyGlobeTheme(0xFFD700, 0.9, 0.2, 1.0, 1.5, 0xFFD700); // Gold Reflective
 });
@@ -7961,6 +7963,7 @@ document.getElementById('blueButton').addEventListener('click', function () {
         }
   // Zoom out the globe
   zoomOutGlobe();
+  addCountryOutlines(0x00BFFF, 0.3); // Blue with semi-transparent fill
     applyGlobeTheme(0x00BFFF, 0.9, 0.2, 1.0, 1.5, 0x00BFFF); // Glossy Blue with Blue Outlines
 });
 
@@ -7968,7 +7971,7 @@ document.getElementById('blueButton').addEventListener('click', function () {
 function applyGlobeTheme(globeColor, metalness, roughness, transparency, envMapIntensity, outlineColor) {
     removeMainGlobe(); // Remove the original globe
     updateGlobeMaterial(globeColor, metalness, roughness, transparency, envMapIntensity);
-    applyCountryOutlines(outlineColor); // Apply outlines with the chosen color
+    //applyCountryOutlines(outlineColor); // Apply outlines with the chosen color
     isCustomGlobeActive = true; // Mark theme as active
     document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅"; // Update button text
     document.getElementById('backgroundDropdown2').classList.add('hidden'); // Hide dropdown after selection
@@ -8632,19 +8635,47 @@ globe2 = new THREE.Mesh(geometry, earthMaterial);
 // Load GeoJSON and add country outlines to the transparent globe
 let countryLinesGroup = new THREE.Group(); // Store country outlines globally
 
-function addCountryOutlines() {
+function addCountryOutlines(color, fillOpacity) {
     if (countryLinesGroup.children.length > 0) return; // Prevent duplicate outlines
 
     fetch('js/ne_110m_admin_0_countries.geojson')
         .then(response => response.json())
         .then(data => {
             data.features.forEach(feature => {
-                if (feature.geometry.type === "MultiPolygon") {
-                    feature.geometry.coordinates.forEach(polygon => {
-                        polygon.forEach(drawOutline);
+                if (feature.geometry.type === "MultiPolygon" || feature.geometry.type === "Polygon") {
+                    const coords = feature.geometry.coordinates;
+
+                    coords.forEach(polygon => {
+                        const points = [];
+                        polygon.forEach(coord => {
+                            const lon = coord[0];
+                            const lat = coord[1];
+                            const position = latLngToVector3(lat, lon, earthRadius + 0.01); // Offset for visibility
+                            points.push(position);
+                        });
+
+                        // **OUTLINE MATERIAL**
+                        const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+                        const lineMaterial = new THREE.LineBasicMaterial({
+                            color: color, 
+                            linewidth: 2 // Adjust width for better visibility
+                        });
+                        const lineMesh = new THREE.LineLoop(lineGeometry, lineMaterial);
+                        countryLinesGroup.add(lineMesh);
+
+                        // **FILLED MATERIAL**
+                        const shape = new THREE.Shape(points.map(p => new THREE.Vector2(p.x, p.y)));
+                        const extrudeSettings = { depth: 0.001, bevelEnabled: false };
+                        const fillGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+                        const fillMaterial = new THREE.MeshBasicMaterial({
+                            color: color,
+                            transparent: true,
+                            opacity: fillOpacity,
+                            side: THREE.DoubleSide
+                        });
+                        const fillMesh = new THREE.Mesh(fillGeometry, fillMaterial);
+                        countryLinesGroup.add(fillMesh);
                     });
-                } else if (feature.geometry.type === "Polygon") {
-                    feature.geometry.coordinates.forEach(drawOutline);
                 }
             });
 
@@ -8652,6 +8683,7 @@ function addCountryOutlines() {
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
+
 
 // Function to draw country outlines
 function drawOutline(polygon) {
