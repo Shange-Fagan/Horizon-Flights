@@ -7249,7 +7249,8 @@ function zoomInGlobe() {
 function revertToPreviousTheme() {
   scene.add(globe); // Bring back main globe
     const lightsButton = document.getElementById('addLightsbutton');
-
+    previousTheme = currentTexture; // Store previous theme
+    previousMarker = currentmarkerMaterial; // Store previous marker
     // Restore the globe to the default texture (day or night)
     /*const defaultTexture = isNightMode ? nightTexture : dayTexture; 
     earthMaterial.uniforms.map.value = defaultTexture;
