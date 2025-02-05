@@ -7272,14 +7272,21 @@ function revertToPreviousTheme() {
     //scene.add(globe); // Bring back main globe
     removeCountryOutlines(); // Clear all outlines
     globe2.material = new THREE.MeshPhongMaterial({ // Reset to default material
-        map: earthMaterial.uniforms.map.value 
+      shininess: 15,
+        map: nightTexture,
+        specularMap: specularMap,
+        bumpMap: bumpMap,
+        bumpScale: 0.05,
+        normalMap: normalMap,
+        blending: THREE.AdditiveBlending,
+        specular: new THREE.Color('grey'),
     });
     if (previousTheme === "day") {
         earthMaterial.uniforms.map.value = dayTexture;
     } else if (previousTheme === "night") {
         earthMaterial.uniforms.map.value = nightTexture;
     }
-    earthMaterial.uniforms.map.value = dayTexture;
+    earthMaterial.uniforms.map.value = nightTexture;
     document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme🌍"; // Reset button text
     isCustomGlobeActive = false; // Mark theme as inactive
 }
