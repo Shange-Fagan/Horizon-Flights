@@ -7474,7 +7474,13 @@ function toggleLightstheme2() {
     if (currentTexture === "day") {
       scene.remove(cloudMesh2); // Apply lights texture (day + lights)
       //scene.remove(cloudMesh);
-      earthMaterial.uniforms.map.value = dayTexture; // Revert to day texture
+      //earthMaterial.uniforms.map.value = dayTexture; // Revert to day texture
+      previousTheme = currentTexture; // Store previous theme
+      if (previousTheme === "day") {
+        earthMaterial.uniforms.map.value = dayTexture;
+    } else if (previousTheme === "night") {
+        earthMaterial.uniforms.map.value = nightTexture;
+    }
       console.log("Reverted to day texture");
     } else if (currentTexture === "night") {
       scene.remove(cloudMesh2); // Apply lights texture (day + lights)
