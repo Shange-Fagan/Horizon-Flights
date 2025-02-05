@@ -2190,7 +2190,7 @@ overflow: hidden;
 .pink-theme-active .airbnb-button23:hover, 
 .pink-theme-active #loginButton:hover, 
 .pink-theme-active #likedPostsButton:hover {
-    background-color: #C950AB !important; /* Light Pink Background */
+    background-color: #FF6CDA !important; /* Light Pink Background */
     box-shadow: 0 0 12px rgba(255, 108, 218, 0.8), 0 0 4px rgba(255, 108, 218, 0.5) !important; /* Pink Glow */
     animation: pulseShadowPink 0.6s ease-in-out infinite alternate !important;
 }
@@ -2201,7 +2201,7 @@ overflow: hidden;
 .pink-theme-active .airbnb-button22, 
 .pink-theme-active .airbnb-button23, 
 .pink-theme-active #likedPostsButton {
-    background-color: #C950AB !important; /* Light Pink Background */
+    background-color: #FF6CDA !important; /* Light Pink Background */
 }
 .hidden {
     display: none;
@@ -4927,7 +4927,7 @@ document.getElementById('themeToggle').addEventListener('change', (event) => {
 
 // Colors based on theme mode
 const flightColor = pinkThemeActive ? '#C950AB' : '#0780B3';  // Dark pink or dark blue
-  const hotelColor = pinkThemeActive ? '#C950AB' : '#00aaff';  // Light pink or light blue
+  const hotelColor = pinkThemeActive ? '#FF6CDA' : '#00aaff';  // Light pink or light blue
   
   //let currentTicker = document.getElementById('dayTicker');
   if (isChecked) {
@@ -5082,10 +5082,10 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
 
         // Apply pink color to calendar selected days
         calendardaytheme.forEach(day => day.style.setProperty('background-color', '#ED85D2', 'important'));
-        calendardaytheme.forEach(day => day.style.setProperty('background', '#C950AB', 'important'));
-        calendardaythemehover.forEach(day => day.style.setProperty('background', '#C950AB', 'important'));
-        postLikeBtn.forEach(day => day.style.setProperty('background-color', '#C950AB', 'important'));
-        postViewLink.forEach(day => day.style.setProperty('background-color', '#C950AB', 'important'));
+        calendardaytheme.forEach(day => day.style.setProperty('background', '#FF6CDA', 'important'));
+        calendardaythemehover.forEach(day => day.style.setProperty('background', '#FF6CDA', 'important'));
+        postLikeBtn.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
+        postViewLink.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
         if (!isUserPremium()) {
             showPinkPremiumPopup(); // Show popup but still apply theme
         }
