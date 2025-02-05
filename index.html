@@ -7247,13 +7247,8 @@ function zoomInGlobe() {
 }
 // Function to revert back to previous theme if user cancels upgrade
 function revertToPreviousTheme() {
+  scene.add(globe); // Bring back main globe
     const lightsButton = document.getElementById('addLightsbutton');
-
-    if (previousTheme === "day") {
-        earthMaterial.uniforms.map.value = dayTexture;
-    } else if (previousTheme === "night") {
-        earthMaterial.uniforms.map.value = nightTexture;
-    }
 
     // Restore the globe to the default texture (day or night)
     /*const defaultTexture = isNightMode ? nightTexture : dayTexture; 
@@ -7276,16 +7271,15 @@ function revertToPreviousTheme() {
     removebluePremiumPopup();
     //scene.add(globe); // Bring back main globe
     removeCountryOutlines(); // Clear all outlines
-    /*globe2.material = new THREE.MeshPhongMaterial({ // Reset to default material
-        shininess: 15,
-        map: earthMaterial.uniforms.map.value,
-        specularMap: specularMap,
-        bumpMap: bumpMap,
-        bumpScale: 0.05,
-        normalMap: normalMap,
-        blending: THREE.AdditiveBlending,
-        specular: new THREE.Color('grey'),
-    });*/
+    globe2.material = new THREE.MeshPhongMaterial({ // Reset to default material
+        map: earthMaterial.uniforms.map.value 
+    });
+    if (previousTheme === "day") {
+        earthMaterial.uniforms.map.value = dayTexture;
+    } else if (previousTheme === "night") {
+        earthMaterial.uniforms.map.value = nightTexture;
+    }
+    earthMaterial.uniforms.map.value = dayTexture;
     document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme🌍"; // Reset button text
     isCustomGlobeActive = false; // Mark theme as inactive
 }
@@ -8015,6 +8009,7 @@ function resetGlobeTheme() {
     } else if (previousTheme === "night") {
         earthMaterial.uniforms.map.value = nightTexture;
     }
+    earthMaterial.uniforms.map.value = dayTexture;
     document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme🌍"; // Reset button text
     isCustomGlobeActive = false; // Mark theme as inactive
 }
