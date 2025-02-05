@@ -7271,7 +7271,7 @@ function revertToPreviousTheme() {
     removebluePremiumPopup();
     //scene.add(globe); // Bring back main globe
     removeCountryOutlines(); // Clear all outlines
-    globe2.earthMaterial = new THREE.ShaderMaterial({
+    /*globe2.earthMaterial = new THREE.ShaderMaterial({
   uniforms: {
     // Day texture, bump map, normal map, specular map, etc.
     map: { value: dayTexture },
@@ -7291,13 +7291,13 @@ function revertToPreviousTheme() {
   },
       vertexShader: document.getElementById('vertexShader').textContent,
       fragmentShader: document.getElementById('fragmentShader').textContent,
-    });
+    });*/
     if (previousTheme === "day") {
         earthMaterial.uniforms.map.value = dayTexture;
     } else if (previousTheme === "night") {
         earthMaterial.uniforms.map.value = nightTexture;
     }
-    earthMaterial.uniforms.map.value = nightTexture;
+    //earthMaterial.uniforms.map.value = nightTexture;
     document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme🌍"; // Reset button text
     isCustomGlobeActive = false; // Mark theme as inactive
 }
