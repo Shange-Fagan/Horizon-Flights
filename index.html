@@ -8643,7 +8643,7 @@ globe2 = new THREE.Mesh(geometry, earthMaterial);
 // Load GeoJSON and add country outlines to the transparent globe
 let countryLinesGroup = new THREE.Group(); // Store country outlines globally
 
-function addCountryOutlines(color, fillOpacity) {
+/*function addCountryOutlines(color, fillOpacity) {
     if (countryLinesGroup.children.length > 0) return; // Prevent duplicate outlines
 
     fetch('js/ne_110m_admin_0_countries.geojson')
@@ -8690,7 +8690,7 @@ function addCountryOutlines(color, fillOpacity) {
             globe2.add(countryLinesGroup);
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
-}
+}*/
 
 
 // Function to draw country outlines
