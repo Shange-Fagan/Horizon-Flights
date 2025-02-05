@@ -7696,7 +7696,7 @@ loader.load('js/kloofendal_48d_partly_cloudy_puresky.jpg', function (texture) {
 });
     var envMap = new THREE.TextureLoader().load('envMap.png');
 envMap.mapping = THREE.SphericalReflectionMapping;
-    globe2.material = new THREE.MeshPhysicalMaterial({
+    globe2.earthMaterial = new THREE.MeshPhysicalMaterial({
         color: color,              // Set color based on theme
         metalness: 1.0,      // Controls reflectivity
         roughness: 0.0,      // Controls smoothness
