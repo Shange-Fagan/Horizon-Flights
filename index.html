@@ -7972,6 +7972,9 @@ function applyGlobeTheme(globeColor, metalness, roughness, transparency, envMapI
     removeMainGlobe(); // Remove the original globe
     updateGlobeMaterial(globeColor, metalness, roughness, transparency, envMapIntensity);
     //applyCountryOutlines(outlineColor); // Apply outlines with the chosen color
+    // Update country outlines with the theme's outline color
+    removeCountryOutlines();
+    addCountryOutlines(outlineColor, 0.3);
     isCustomGlobeActive = true; // Mark theme as active
     document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme✅"; // Update button text
     document.getElementById('backgroundDropdown2').classList.add('hidden'); // Hide dropdown after selection
