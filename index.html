@@ -7680,16 +7680,17 @@ function updateGlobeMaterial(color, metalness, roughness, transparency, envMapIn
 envMap.mapping = THREE.SphericalReflectionMapping;
     globe2.material = new THREE.MeshPhysicalMaterial({
         color: color,              // Set color based on theme
-        metalness: metalness,      // Controls reflectivity
-        roughness: roughness,      // Controls smoothness
+        metalness: 1.0,      // Controls reflectivity
+        roughness: 0.0,      // Controls smoothness
         transparent: transparency > 0, // Enable transparency if needed
         opacity: transparency,     // Adjust transparency
         envMap: envMap,  // Use HDRI for reflections
-        envMapIntensity: envMapIntensity, // Strength of reflections
+        envMapIntensity: 5.0, // Strength of reflections
         clearcoat: 1,              // Glossy effect
         clearcoatRoughness: 0,       // Ensure max smoothness
         reflectivity: 1,           // Max reflections
-        transmission: 0.2          // For a slight glass-like effect
+        transmission: 0.2,          // For a slight glass-like effect
+        side: THREE.DoubleSide     // Ensure reflections on both sides
     });
     globe2.material.needsUpdate = true;
     globe2.geometry.computeBoundingSphere();
@@ -7952,7 +7953,7 @@ document.getElementById('pinkButton').addEventListener('click', function () {
         addCountryOutlines(0xff69b4, 0xff69b4, 0.5); // Pink outlines and semi-transparent fill
   // Zoom out the globe
   zoomOutGlobe();
-    applyGlobeTheme(0xFF69B4, 0, 0.0, 1.0, 5, 0xFF69B4); // Glossy Pink with Pink Outlines
+  applyGlobeTheme(0xFF69B4, 1.0, 0.0, 1.0, 5.0, 0xFF69B4); // Glossy Pink with Pink Outlines
 });
 
 // ** Apply Glass Theme - Transparent Reflective Globe **
@@ -7965,7 +7966,7 @@ document.getElementById('glassButton').addEventListener('click', function () {
   zoomOutGlobe();
   addCountryOutlines(0xFFD700, 0xFFD700, 0.6); // Gold outlines and semi-transparent fill
     // Apply Gold Theme: Reflective metallic gold with glowing country outlines
-    applyGlobeTheme(0xFFD700, 0, 0.0, 1.0, 5, 0xFFD700); // Gold Reflective
+    applyGlobeTheme(0xFFD700, 1.0, 0.0, 1.0, 5.0, 0xFFD700); // Gold Reflective
 });
 
 // ** Apply Blue Theme - Glossy Blue Globe **
@@ -7976,7 +7977,7 @@ document.getElementById('blueButton').addEventListener('click', function () {
   // Zoom out the globe
   zoomOutGlobe();
   addCountryOutlines(0x00BFFF, 0x00BFFF, 0.6); // Bright blue outlines and semi-transparent fill
-    applyGlobeTheme(0x00BFFF, 0, 0.0, 1.0, 5, 0x00BFFF); // Glossy Blue with Blue Outlines
+  applyGlobeTheme(0x00BFFF, 1.0, 0.0, 1.0, 5.0, 0x00BFFF); // Glossy Blue with Blue Outlines
 });
 
 // Function to Apply a Globe Theme
