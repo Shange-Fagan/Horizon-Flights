@@ -7271,7 +7271,7 @@ function revertToPreviousTheme() {
     removebluePremiumPopup();
     //scene.add(globe); // Bring back main globe
     removeCountryOutlines(); // Clear all outlines
-    earthMaterial = new THREE.ShaderMaterial({
+    globe2.earthMaterial = new THREE.ShaderMaterial({
   uniforms: {
     // Day texture, bump map, normal map, specular map, etc.
     map: { value: dayTexture },
@@ -7694,15 +7694,15 @@ loader.load('js/kloofendal_48d_partly_cloudy_puresky.jpg', function (texture) {
     rt.fromEquirectangularTexture(renderer, texture);
     scene.background = rt.texture; // Set HDRI as background
 });
-    //var envMap = new THREE.TextureLoader().load('envMap.png');
-//envMap.mapping = THREE.SphericalReflectionMapping;
+    var envMap = new THREE.TextureLoader().load('envMap.png');
+envMap.mapping = THREE.SphericalReflectionMapping;
     globe2.material = new THREE.MeshPhysicalMaterial({
         color: color,              // Set color based on theme
         metalness: 1.0,      // Controls reflectivity
         roughness: 0.0,      // Controls smoothness
         transparent: transparency > 0, // Enable transparency if needed
         opacity: transparency,     // Adjust transparency
-        envMap: scene.background,  // Use HDRI for reflections
+        envMap: envMap,  // Use HDRI for reflections
         envMapIntensity: 5.0, // Strength of reflections
         clearcoat: 1,              // Glossy effect
         clearcoatRoughness: 0,       // Ensure max smoothness
@@ -7984,7 +7984,7 @@ document.getElementById('glassButton').addEventListener('click', function () {
   zoomOutGlobe();
   addCountryOutlines(0xFFD700, 0xFFD700, 0.6); // Gold outlines and semi-transparent fill
     // Apply Gold Theme: Reflective metallic gold with glowing country outlines
-    applyGlobeTheme(0xFFD700, 1.0, 0.2, 0.5, 2.0, 0xFFD700); // Gold Reflective
+    applyGlobeTheme(0xFFD700, 1.0, 0.2, 1.0, 2.0, 0xFFD700); // Gold Reflective
 });
 
 // ** Apply Blue Theme - Glossy Blue Globe **
