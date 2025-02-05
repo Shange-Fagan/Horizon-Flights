@@ -5868,7 +5868,7 @@ const LightsTexture = textureLoader.load("js/earth.jpg");
 const bumpMap = textureLoader.load("js/Earth-16K-Bump.png");
 const normalMap = textureLoader.load('js/Earth_Normal.jpg'); // Use a realistic normal map
 const specularMap = textureLoader.load("js/Earth_Specular.jpg");
-const earthMaterial = new THREE.ShaderMaterial({
+let earthMaterial = new THREE.ShaderMaterial({
   uniforms: {
     // Day texture, bump map, normal map, specular map, etc.
     map: { value: dayTexture },
@@ -7271,15 +7271,26 @@ function revertToPreviousTheme() {
     removebluePremiumPopup();
     //scene.add(globe); // Bring back main globe
     removeCountryOutlines(); // Clear all outlines
-    globe2.material = new THREE.MeshPhongMaterial({ // Reset to default material
-      shininess: 15,
-        map: nightTexture,
-        specularMap: specularMap,
-        bumpMap: bumpMap,
-        bumpScale: 0.05,
-        normalMap: normalMap,
-        blending: THREE.AdditiveBlending,
-        specular: new THREE.Color('grey'),
+    earthMaterial = new THREE.ShaderMaterial({
+  uniforms: {
+    // Day texture, bump map, normal map, specular map, etc.
+    map: { value: dayTexture },
+    bumpMap: { value: bumpMap },
+    normalMap: { value: normalMap },
+    specularMap: { value: specularMap },
+    bumpScale: { value: 0.05 },
+    specularColor: { value: new THREE.Color('grey') },  // Specular color
+    shininess: { value: 15 },
+    // Custom uniforms for glow, scale, bias, etc.
+    glowColor: { value: new THREE.Color(0x0cd1eb) },  // Glow color
+    scale: { type: "f", value: -1.0 },  // Scale for glow
+    bias: { type: "f", value: 1.0 },  // Bias for glow effect
+    power: { type: "f", value: 3.3 },  // Power of glow intensity
+    time: { type: "f", value: 0 },  // Time for animation effects
+    isHover: { value: false },  // Whether the globe is being hovered over
+  },
+      vertexShader: document.getElementById('vertexShader').textContent,
+      fragmentShader: document.getElementById('fragmentShader').textContent,
     });
     if (previousTheme === "day") {
         earthMaterial.uniforms.map.value = dayTexture;
@@ -8009,7 +8020,7 @@ function resetGlobeTheme() {
         } else if (currentmarkerMaterial === "night") {
             markerMaterial.color.set(nightmarkerMaterial);
         }
-    globe2.material = new THREE.MeshPhongMaterial({ // Reset to default material
+    globe2.earthMaterial = new THREE.MeshPhongMaterial({ // Reset to default material
         shininess: 15,
         map: earthMaterial.uniforms.map.value,
         specularMap: specularMap,
