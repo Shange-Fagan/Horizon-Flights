@@ -7044,7 +7044,7 @@ function showPremiumPopup() {
     overlay.style.left = "0";
     overlay.style.width = "100vw";
     overlay.style.height = "100vh";
-    overlay.style.backgroundColor = "rgba(255, 255, 255, 0.10)"; // Dark overlay
+    overlay.style.backgroundColor = "rgba(173, 216, 230, 0.2)"; // Dark overlay
     overlay.style.zIndex = "22012";
 
     // Premium Popup
@@ -7054,7 +7054,7 @@ function showPremiumPopup() {
     premiumPopup.style.top = "50%";
     premiumPopup.style.left = "50%";
     premiumPopup.style.transform = "translate(-50%, -50%)";
-    premiumPopup.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+    premiumPopup.style.backgroundColor = "rgba(0, 128, 255, 0.2)";
     premiumPopup.style.padding = "20px";
     premiumPopup.style.borderRadius = "10px";
     premiumPopup.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
@@ -7081,13 +7081,15 @@ function showPremiumPopup() {
 
     // Title
     const title = document.createElement("h3");
-    title.innerText = "Upgrade to Premium";
+    title.innerText = "Upgrade to Premium✨";
     title.style.color = "#FFFFFF";
     premiumPopup.appendChild(title);
 
     // Description
     const description = document.createElement("p");
-    description.innerText = "Unlock the Jetsetter Theme and other premium features by upgrading to a premium plan!💎🔓.";
+    description.innerText = "Transform your travel experience with the Jetsetter Theme and other exclusive perks!<br><br>"
+                       + "Unlock stunning visuals and luxury themes that make booking flights a first-class experience.<br><br>"
+                       + "🚀 Upgrade now and travel in style!";
     description.style.fontSize = "14px";
     description.style.color = "#FFFFFF";
     premiumPopup.appendChild(description);
@@ -7211,7 +7213,9 @@ function showPinkPremiumPopup() {
 
     // Description
     const description = document.createElement("p");
-    description.innerText = "Unlock the Pink Theme and other premium features by upgrading to a premium plan! ✈️💎";
+    description.innerText = "Transform your travel experience with the Pink Theme and other exclusive perks!<br><br>"
+                       + "Unlock stunning visuals and luxury themes that make booking flights a first-class experience.<br><br>"
+                       + "🚀 Upgrade now and travel in style!";
     description.style.fontSize = "14px";
     description.style.color = "#FFFFFF";
     pinkPremiumPopup.appendChild(description);
