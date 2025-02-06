@@ -4198,12 +4198,14 @@ gl_FragColor = vec4(glowColor, intensity);
 	
 <button id="toggleButton">&nbsp;&nbsp;&nbsp;Day Theme🌥️</button>
 <!-- Background Toggle Button -->
+<div class="background-dropdown-container">
 <button id="toggleButton3" class="theme-button">&nbsp;&nbsp;&nbsp;Background🌃</button>
 <!-- Dropdown Menu for Background Selection -->
 <div id="backgroundDropdown" class="dropdown-menu hidden">
     <button id="dayButton" class="background-option">🌞 Day</button>
     <button id="nightButton" class="background-option">🌙 Night</button>
     <button id="customButton" class="background-option">🎨 Custom</button>
+</div>
 </div>
 <!-- Custom Background Selection (Hidden Initially) -->
 <div id="customBackgroundMenu" class="dropdown-menu2 hidden">
@@ -4346,6 +4348,19 @@ const auth = getAuth(app);
             alert("There was an error submitting your email. Please try again later.");
         });
 });
+// JavaScript to Toggle and Close Dropdown
+document.addEventListener("DOMContentLoaded", () => {
+    const dropdownBtn = document.getElementById("toggleButton3");
+    const dropdown = document.getElementById("backgroundDropdown");
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (event) => {
+        if (!dropdown.contains(event.target) && event.target !== dropdownBtn) {
+            dropdown.style.display = "none"
+        }
+    });
+});
+
 
 
 
