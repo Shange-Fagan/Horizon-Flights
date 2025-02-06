@@ -7298,6 +7298,7 @@ function revertToPreviousTheme() {
     } else if (previousTheme === "night") {
         earthMaterial.uniforms.map.value = nightTexture;
     }
+    earthMaterial.uniforms.map.needsUpdate = true;
     //earthMaterial.uniforms.map.value = nightTexture;
     document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme🌍"; // Reset button text
     isCustomGlobeActive = false; // Mark theme as inactive
