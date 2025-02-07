@@ -4198,7 +4198,7 @@ gl_FragColor = vec4(glowColor, intensity);
 	
 <button id="toggleButton">&nbsp;&nbsp;&nbsp;Day Theme🌥️</button>
 <!-- Background Toggle Button -->
-<button id="toggleButton3" class="theme-button">&nbsp;&nbsp;&nbsp;Background🌃</button>
+<button id="toggleButton3" class="theme-button">&nbsp;&nbsp;&nbsp;Background🌃
 <!-- Dropdown Menu for Background Selection -->
 <div id="backgroundDropdown" class="dropdown-menu hidden">
     <button id="dayButton" class="background-option">🌞 Day</button>
@@ -4214,6 +4214,7 @@ gl_FragColor = vec4(glowColor, intensity);
   </select>
   <button id="applycustomHDRI">Apply</button>
 </div>
+</button>
 <button id="addLightsbutton" style="display: block;">Jetsetter Theme💎</button>
 <button id="addLightsbutton3" style="display: block;">&nbsp;&nbsp;&nbsp;Pink Theme💖</button>
 <button id="addLightsbutton2">&nbsp;&nbsp;&nbsp;Atmosphere💨</button>
@@ -5324,6 +5325,13 @@ document.addEventListener('click', function (event) {
 document.addEventListener('click', function (event) {
   const button = document.getElementById('openGuestPopup');
   const dropdown = document.getElementById('openGuestPopup');
+  if (!button.contains(event.target) && dropdown.style.display === 'block') {
+    dropdown.style.display = 'none';
+  }
+});
+document.addEventListener('click', function (event) {
+  const button = document.getElementById('toggleButton3');
+  const dropdown = document.getElementById('backgroundDropdown');
   if (!button.contains(event.target) && dropdown.style.display === 'block') {
     dropdown.style.display = 'none';
   }
