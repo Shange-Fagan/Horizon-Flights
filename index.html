@@ -3767,7 +3767,7 @@ margin-bottom: 1px;
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
     <p class="instruction-text"> 
       🌍 Enjoy <strong>premium themes</strong> and book flights like a VIP 
-      💎 Explore the world in <strong>first-class</strong> style! ✈️</p>
+      💎 <strong>Sign Up</strong> for a premium subscription to explore the world in <strong>first-class</strong> style! ✈️</p>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/resort-2.png" alt="Button Click" class="glove-hand"><img src="js/luxury.png" alt="Button Click" class="glove-hand">
@@ -5126,7 +5126,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         postLikeBtn.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
         postViewLink.forEach(day => day.style.setProperty('background-color', '#FF6CDA', 'important'));
         if (!isUserPremium()) {
-            //showPinkPremiumPopup(); // Show popup but still apply theme
+            showPinkPremiumPopup(); // Show popup but still apply theme
         }
         regionPopup.style.display = "none";
         // Zoom out the globe
@@ -7439,7 +7439,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
 
     if (lightsButton.textContent === "Jetsetter Theme💎") {
         if (!isUserPremium()) {
-            //showPremiumPopup(); // Show popup but still apply theme
+            showPremiumPopup(); // Show popup but still apply theme
         }
         regionPopup.style.display = "none";
         earthMaterial.uniforms.map.value = LightsTexture;
