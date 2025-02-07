@@ -5099,6 +5099,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
     const calendardaythemehover = document.querySelectorAll(".flatpickr-calendar .flatpickr-day:hover");
     const postViewLink = document.querySelectorAll(".post .view-link");
     const postLikeBtn = document.querySelectorAll(".like-button");
+    const regionPopup = document.getElementById('regionPopup');
 
     // Ensure the button exists
     if (!pinkButton) {
@@ -5127,6 +5128,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         if (!isUserPremium()) {
             showPinkPremiumPopup(); // Show popup but still apply theme
         }
+        regionPopup.style.display = "none";
         // Zoom out the globe
         zoomOutGlobe();
         const selectedHDRI = 'js/kloppenheim_06_puresky.jpg'
@@ -7431,7 +7433,7 @@ function zoomOutGlobe() {
 // Event Listener for the "Blue Theme" button
 document.getElementById('addLightsbutton').addEventListener('click', () => {
     const lightsButton = document.getElementById('addLightsbutton');
-
+    const regionPopup = document.getElementById('regionPopup');
     previousTheme = currentTexture; // Store previous theme
     previousMarker = currentmarkerMaterial; // Store previous marker
 
@@ -7439,7 +7441,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
         if (!isUserPremium()) {
             showPremiumPopup(); // Show popup but still apply theme
         }
-
+        regionPopup.style.display = "none";
         earthMaterial.uniforms.map.value = LightsTexture;
         markerMaterial.color.set(lightsmarkerMaterial);
         const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg'
