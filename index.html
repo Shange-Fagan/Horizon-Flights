@@ -8229,10 +8229,13 @@ function showcustombackdropPremiumPopup() {
     document.body.appendChild(premiumPopup);
 }
 document.getElementById('applycustomHDRI').addEventListener('click', function() {
+  const regionPopup = document.getElementById('regionPopup');
   applyCustomBackground();
   if (!isUserPremium()) {
     showcustombackdropPremiumPopup(); // Show popup but still apply theme
         }
+        regionPopup.style.display = "none";
+
   // Zoom out the globe
   zoomOutGlobe();
 });
