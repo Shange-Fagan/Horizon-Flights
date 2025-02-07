@@ -5202,6 +5202,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         earthMaterial.uniforms.map.value = nightTexture;
     }
         //scene.environment = scene.background;
+        scene.background = nightbackgroundTexture;
+        earthMaterial.uniforms.map.value = dayTexture;
 
     }
 // Apply marker color logic
@@ -7352,6 +7354,7 @@ function revertToPreviousTheme() {
     //earthMaterial.uniforms.map.value = nightTexture;
     document.getElementById("toggleButton4").textContent = "\u00A0\u00A0\u00A0Globe Theme🌍"; // Reset button text
     isCustomGlobeActive = false; // Mark theme as inactive
+    earthMaterial.uniforms.map.value = dayTexture;
 }
 
 // Function to remove the premium popup and overlay
@@ -7455,6 +7458,8 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     } else {
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
         scene.background = nightbackgroundTexture;
+        earthMaterial.uniforms.map.value = dayTexture;
+
     }
 
     earthMaterial.uniforms.map.needsUpdate = true;
