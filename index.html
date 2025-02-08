@@ -9742,9 +9742,14 @@ Powered by Expedia⚡️`);
 }
 // Function to fetch Airbnb posts from your backend and display them on the webpage
 function populateFlightOverlay(flights) {
-    const overlay = document.getElementById('overlayContainer2');
+    const overlay = document.getElementById('overlayContainer');
     overlay.innerHTML = ''; // Clear previous listings
 
+    if (!flights || flights.length === 0) {
+        console.error("No flights data received to display.");
+        overlay.innerHTML = "<p>No flights available.</p>";
+        return;
+    }
     const airlineLogos = {
         "EasyJet": "js/EasyJet_logo.svg.png",
         "British Airways": "js/British_Airways_Logo.svg.png",
