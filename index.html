@@ -4213,10 +4213,6 @@ gl_FragColor = vec4(glowColor, intensity);
       <option value="js/autumn_field_puresky.jpg">Clear sky background 💧</option>
       <option value="js/kloppenheim_06_puresky.jpg">Cloudy sunset 🌅☁️</option>
       <option value="js/kiara_1_dawn.jpg">Sierra Mountains 🌄</option>
-      <option value="js/AdobeStock_107693691_Preview.jpg">Cloudy sunset 🌄</option>
-      <option value="js/AdobeStock_326440523_Preview.jpg">Starry space 🌌</option>
-      <option value="js/AdobeStock_251280688_Preview.jpg">Sky + sea ☁️🌊</option>
-      <option value="js/AdobeStock_656811857_Preview.jpg">Futuristic city ☁️🏙️</option>
   </select>
   <button id="applycustomHDRI">Apply</button>
 </div>
@@ -10633,10 +10629,10 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 let expediaSearchUrl = `https://www.expedia.co.uk/Hotel-Search?destination=${encodeURIComponent(location)}&startDate=${checkin}&endDate=${checkout}&adults=${guests}&sort=RECOMMENDED`;
 
 if (priceMin && priceMin.trim() !== "") {
-    expediaSearchUrl += `&priceMin=${priceMin}`;
+    expediaSearchUrl += `&price=${priceMin}`;
 }
 if (priceMax && priceMax.trim() !== "") {
-    expediaSearchUrl += `&priceMax=${priceMax}`;
+    expediaSearchUrl += `&price=${priceMax}`;
 }
 
 // Log for debugging
