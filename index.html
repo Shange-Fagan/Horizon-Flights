@@ -9797,7 +9797,7 @@ function populateFlightOverlay(flights) {
         const details = document.createElement('div');
         details.classList.add('flight-details');
         const layover = document.createElement('p');
-        layover.textContent = `Layover: ${flight.layoverTime || 'N/A'}`;
+        layover.textContent = `Layover Time: ${flight.layoverTime || 'N/A'}`;
 
         const price = document.createElement('p');
         price.textContent = `Price: ${flight.price || 'N/A'}`;
