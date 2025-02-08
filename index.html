@@ -5131,6 +5131,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         regionPopup.style.display = "none";
         // Zoom out the globe
         zoomOutGlobe();
+        controls.enableZoom = true;
         const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg'
 
         loader.load(selectedHDRI, function(texture) {
@@ -7455,7 +7456,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
 
         // Zoom out the globe
         zoomOutGlobe();
-
+        controls.enableZoom = true;
         lightsButton.textContent = "Jetsetter Theme✅";
     } else {
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
@@ -8239,6 +8240,7 @@ document.getElementById('applycustomHDRI').addEventListener('click', function() 
 
   // Zoom out the globe
   zoomOutGlobe();
+  controls.enableZoom = true;
 });
 // Open Custom Background Menu
 function openCustomBackgroundMenu() {
