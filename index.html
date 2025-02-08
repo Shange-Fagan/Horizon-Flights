@@ -5131,6 +5131,8 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         // Zoom out the globe
         zoomOutGlobe();
         controls.enableZoom = true;
+        controls.minDistance = 15;
+        //controls.maxDistance = 30;
         const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg'
 
         loader.load(selectedHDRI, function(texture) {
@@ -7426,8 +7428,10 @@ function handlePremiumSignup() {
 // Function to zoom out smoothly
 function zoomOutGlobe() {
     const zoomOutLevel = 0.65; // Adjust zoom level for desired zoom out effect
-    const targetPosition = { x: 0, y: 0, z: 7 }; // Position for zooming out
-
+    const targetPosition = { x: 7, y: 0, z: 7 }; // Position for zooming out
+    controls.enableZoom = true;
+    controls.minDistance = 15;
+  //controls.maxDistance = 30;
     animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomOutLevel);
 }
 // Event Listener for the "Blue Theme" button
@@ -7455,6 +7459,8 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
         // Zoom out the globe
         zoomOutGlobe();
         controls.enableZoom = true;
+        controls.minDistance = 15;
+        //controls.maxDistance = 30;
         lightsButton.textContent = "Jetsetter Theme✅";
     } else {
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
@@ -8239,6 +8245,8 @@ document.getElementById('applycustomHDRI').addEventListener('click', function() 
   // Zoom out the globe
   zoomOutGlobe();
   controls.enableZoom = true;
+  controls.minDistance = 15;
+  //controls.maxDistance = 30;
 });
 // Open Custom Background Menu
 function openCustomBackgroundMenu() {
