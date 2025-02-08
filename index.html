@@ -9796,8 +9796,8 @@ function populateFlightOverlay(flights) {
         // Flight details
         const details = document.createElement('div');
         details.classList.add('flight-details');
-        const airline = document.createElement('p');
-        airline.textContent = `${flight.airline || 'N/A'}`;
+        const layover = document.createElement('p');
+        layover.textContent = `Layover: ${flight.layoverTime || 'N/A'}`;
 
         const price = document.createElement('p');
         price.textContent = `Price: ${flight.price || 'N/A'}`;
@@ -9807,7 +9807,7 @@ function populateFlightOverlay(flights) {
 
         // Book Button
         const bookButton = document.createElement('a');
-        //bookButton.href = flight.link || '#';
+        bookButton.href = flight.link || '#';
         bookButton.target = '_blank';
         bookButton.textContent = 'Book Now';
         bookButton.classList.add('book-button');
