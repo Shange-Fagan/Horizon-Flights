@@ -4213,7 +4213,6 @@ gl_FragColor = vec4(glowColor, intensity);
       <option value="js/autumn_field_puresky.jpg">Clear sky background 💧</option>
       <option value="js/kloppenheim_06_puresky.jpg">Cloudy sunset 🌅☁️</option>
       <option value="js/kiara_1_dawn.jpg">Sierra Mountains 🌄</option>
-      <option value="js/HdrOutdoorBeachSunsetClear001_JPG_8K.jpg">Beach sunset 🏝️🌅</option>
   </select>
   <button id="applycustomHDRI">Apply</button>
 </div>
@@ -8233,7 +8232,7 @@ document.getElementById('applycustomHDRI').addEventListener('click', function() 
   const regionPopup = document.getElementById('regionPopup');
   applyCustomBackground();
   if (!isUserPremium()) {
-    //showcustombackdropPremiumPopup(); // Show popup but still apply theme
+    showcustombackdropPremiumPopup(); // Show popup but still apply theme
         }
         regionPopup.style.display = "none";
 
