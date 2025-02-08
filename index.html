@@ -9577,7 +9577,7 @@ if (missingFields.length > 0) {
     // Show spinner and transition to split screen mode
     /*const leftContainer = document.getElementById('left-container');*/
     const globeContainer = document.getElementById('globeContainer');
-    const overlay = document.getElementById('overlayContainer');
+    const overlay = document.getElementById('overlayContainer2');
     // Check if the overlayContainer exists
     if (!overlay) {
         console.error("Overlay container not found!");
@@ -9742,7 +9742,7 @@ Powered by Expedia⚡️`);
 }
 // Function to fetch Airbnb posts from your backend and display them on the webpage
 function populateFlightOverlay(flights) {
-    const overlay = document.getElementById('overlayContainer');
+    const overlay = document.getElementById('overlayContainer2');
     overlay.innerHTML = ''; // Clear previous listings
 
     if (!flights || flights.length === 0) {
