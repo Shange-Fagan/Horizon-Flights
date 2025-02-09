@@ -4455,7 +4455,7 @@ document.getElementById("loginButton").addEventListener("click", () => {
         emailForm.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            const email = document.getElementById("emailInput").value;
+            const email = document.getElementById("emailInput").value.trim();
             const password = document.getElementById("passwordInput").value;
 
             signInWithEmailAndPassword(auth, email, password)
@@ -4508,7 +4508,7 @@ document.getElementById("loginButton").addEventListener("click", () => {
             signupForm.addEventListener("submit", (e) => {
                 e.preventDefault();
 
-                const email = document.getElementById("signupEmailInput").value;
+                const email = document.getElementById("signupEmailInput").value.trim();
                 const password = document.getElementById("signupPasswordInput").value;
 
                 createUserWithEmailAndPassword(auth, email, password)
