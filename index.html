@@ -7411,7 +7411,7 @@ async function handlePremiumSignup(theme) {
     try {
         const response = await fetch("https://lately-loyal-urchin.ngrok-free.app/create-checkout-session", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json",  'ngrok-skip-browser-warning': 'true',},
             body: JSON.stringify({ theme: theme })
         });
 
@@ -9135,7 +9135,9 @@ async function getDetailedMarkersForRegion(region) {
     const response = await fetch(`https://up-gecko-pleasantly.ngrok-free.app/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
-  
+  headers: {
+        'ngrok-skip-browser-warning': 'true',
+    },
 }).then(response => response.json())
   .then(markerLatLngs => {
     // Assume 'map' is your initialized Google Map or Mapbox map object
@@ -9717,7 +9719,9 @@ Thank you for your patience! 🙏🏽 Feel free to browse while we find your per
 Powered by Expedia⚡️`);
 
         const response = await fetch(`https://up-gecko-pleasantly.ngrok-free.app/scrape-expedia-flights?url=${encodeURIComponent(url)}`, {
-          
+          headers: {
+        'ngrok-skip-browser-warning': 'true',
+    },
         });
         const data = await response.json();
 
@@ -10731,7 +10735,9 @@ async function fetchExpediaPosts(expediaSearchUrl) {
     Powered by Expedia⚡️`);
 
         const response = await fetch(`https://up-gecko-pleasantly.ngrok-free.app/scrape-expedia-posts?expediasearchUrl=${encodeURIComponent(expediaSearchUrl)}`, {
-          
+          headers: {
+        'ngrok-skip-browser-warning': 'true',
+    },
         });
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
@@ -10933,7 +10939,9 @@ async function fetchAirbnbPosts(searchUrl) {
     Powered by Expedia⚡️`);
 
         const response = await fetch(`https://up-gecko-pleasantly.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
-          
+          headers: {
+        'ngrok-skip-browser-warning': 'true',
+    },
         });
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
@@ -13262,7 +13270,9 @@ async function fetchMarkers(location, category) {
 
     // Fetch markers from your backend
     const response = await fetch(`https://up-gecko-pleasantly.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
-      
+      headers: {
+        'ngrok-skip-browser-warning': 'true',
+    },
     });
     // Extract posts and markers from the response
     const { markers } = await response.json(); 
@@ -13644,7 +13654,9 @@ async function fetchAirbnbPosts(searchUrl) {
     Powered by Expedia⚡️`);
 
         const response = await fetch(`https://up-gecko-pleasantly.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
-          
+          headers: {
+        'ngrok-skip-browser-warning': 'true',
+    },
         });
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
@@ -14007,7 +14019,9 @@ async function loadMarkersForRegionAndCategory(region, category) {
         const response = await fetch(`https://up-gecko-pleasantly.ngrok-free.app/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
-  
+  headers: {
+        'ngrok-skip-browser-warning': 'true',
+    },
     });
         const markersData = await response.json();  // Assuming the backend returns a JSON array of markers
         console.log(`Fetching markers from: ${url}`);
@@ -14038,7 +14052,9 @@ async function loadMarkersForRegionAndCategory(region, category) {
 async function fetchMarkers(region, category) {
   try {
     const response = await fetch(`https://up-gecko-pleasantly.ngrok-free.app/get-markers?region=${region}&category=${category}`, {
-      
+      headers: {
+        'ngrok-skip-browser-warning': 'true',
+    },
     });
     const markers = await response.json();
      // Clear the existing markers before adding new ones
