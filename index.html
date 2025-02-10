@@ -7157,7 +7157,7 @@ function showPremiumPopup() {
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-        handlePremiumSignup(); // Handle upgrade
+      handlePremiumSignup('Jetsetter Theme');
     });
 
     premiumPopup.appendChild(upgradeButton);
@@ -7283,7 +7283,7 @@ function showPinkPremiumPopup() {
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-        handlePinkPremiumSignup(); // Handle upgrade
+      handlePremiumSignup('Pink Theme');
     });
 
     pinkPremiumPopup.appendChild(upgradeButton);
@@ -7406,25 +7406,26 @@ function isUserPremium() {
 
 
 // Function to handle premium upgrade via Firebase Payment
-function handlePremiumSignup() {
-    const user = firebase.auth().currentUser;
-    if (!user) {
-        alert("Please log in to upgrade.");
-        return;
-    }
-
-    // Simulating payment processing
-    alert("Processing payment...");
-
-    setTimeout(() => {
-        firebase.firestore().collection("users").doc(user.uid).set({
-            isPremium: true
-        }, { merge: true }).then(() => {
-            alert("✅ Premium Activated! Enjoy the Jetsetter Theme!");
-            removePremiumPopup(); // Remove overlay and allow user to interact
+async function handlePremiumSignup(theme) {
+    try {
+        const response = await fetch("https://3dfa-2a02-c7c-3945-5100-2999-316c-6edc-66c6.ngrok-free.app/create-checkout-session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ theme: theme })
         });
-    }, 2000);
+
+        const session = await response.json();
+        if (session.url) {
+            window.location.href = session.url; // Redirect user to Stripe Checkout
+        } else {
+            alert("Payment failed. Please try again.");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred. Please try again later.");
+    }
 }
+
 // Function to zoom out smoothly
 function zoomOutGlobe() {
     const zoomOutLevel = 0.65; // Adjust zoom level for desired zoom out effect
@@ -7870,7 +7871,7 @@ function showcustomglobethemePremiumPopup() {
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-        handlePremiumSignup(); // Handle upgrade
+        //handlePremiumSignup(); // Handle upgrade
     });
 
     premiumPopup.appendChild(upgradeButton);
@@ -7953,7 +7954,7 @@ closeButton.style.color = "#FFFFFF";
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-        handlePremiumSignup(); // Handle upgrade
+        //handlePremiumSignup(); // Handle upgrade
     });
 
     pinkPremiumPopup.appendChild(upgradeButton);
@@ -8035,7 +8036,7 @@ function showcustomblueglobethemePremiumPopup() {
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-        handlePremiumSignup(); // Handle upgrade
+        //handlePremiumSignup(); // Handle upgrade
     });
 
     bluePremiumPopup.appendChild(upgradeButton);
@@ -8226,7 +8227,7 @@ function showcustombackdropPremiumPopup() {
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-        handlePremiumSignup(); // Handle upgrade
+      handlePremiumSignup('Custom Backdrops');
     });
 
     premiumPopup.appendChild(upgradeButton);
