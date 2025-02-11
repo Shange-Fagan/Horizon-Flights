@@ -5124,9 +5124,11 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         calendardaythemehover.forEach(day => day.style.setProperty('background', '#F56ED3', 'important'));
         postLikeBtn.forEach(day => day.style.setProperty('background-color', '#F56ED3', 'important'));
         postViewLink.forEach(day => day.style.setProperty('background-color', '#F56ED3', 'important'));
-        if (!isUserPremium()) {
-            showPinkPremiumPopup(); // Show popup but still apply theme
+        isUserPremium().then(isPremium => {
+        if (!isPremium) {
+            showPremiumPopup(); // Show popup but still apply theme
         }
+    });
         regionPopup.style.display = "none";
         // Zoom out the globe
         zoomOutGlobe();
@@ -7446,9 +7448,11 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     previousMarker = currentmarkerMaterial; // Store previous marker
 
     if (lightsButton.textContent === "Jetsetter Theme💎") {
-        if (!isUserPremium()) {
+      isUserPremium().then(isPremium => {
+        if (!isPremium) {
             showPremiumPopup(); // Show popup but still apply theme
         }
+    });
         regionPopup.style.display = "none";
         earthMaterial.uniforms.map.value = LightsTexture;
         markerMaterial.color.set(lightsmarkerMaterial);
@@ -8052,7 +8056,7 @@ function showcustomblueglobethemePremiumPopup() {
 document.getElementById('pinkButton').addEventListener('click', function () {
   markerMaterial.color.set(pinkthememarkerMaterial);
   if (!isUserPremium()) {
-    showcustompinkglobethemePremiumPopup(); // Show popup but still apply theme
+    //showcustompinkglobethemePremiumPopup(); // Show popup but still apply theme
         }
         addCountryOutlines(0xff69b4, 0xff69b4, 0.5); // Pink outlines and semi-transparent fill
   // Zoom out the globe
@@ -8064,7 +8068,7 @@ document.getElementById('pinkButton').addEventListener('click', function () {
 document.getElementById('glassButton').addEventListener('click', function () {
   markerMaterial.color.set(GlassthememarkerMaterial);
   if (!isUserPremium()) {
-    showcustomglobethemePremiumPopup(); // Show popup but still apply theme
+    //showcustomglobethemePremiumPopup(); // Show popup but still apply theme
         }
   // Zoom out the globe
   zoomOutGlobe();
@@ -8076,7 +8080,7 @@ document.getElementById('glassButton').addEventListener('click', function () {
 // ** Apply Blue Theme - Glossy Blue Globe **
 document.getElementById('blueButton').addEventListener('click', function () {
   if (!isUserPremium()) {
-    showcustomblueglobethemePremiumPopup(); // Show popup but still apply theme
+    //showcustomblueglobethemePremiumPopup(); // Show popup but still apply theme
         }
   // Zoom out the globe
   zoomOutGlobe();
@@ -8241,9 +8245,11 @@ function showcustombackdropPremiumPopup() {
 document.getElementById('applycustomHDRI').addEventListener('click', function() {
   const regionPopup = document.getElementById('regionPopup');
   applyCustomBackground();
-  if (!isUserPremium()) {
-    showcustombackdropPremiumPopup(); // Show popup but still apply theme
+  isUserPremium().then(isPremium => {
+        if (!isPremium) {
+            showPremiumPopup(); // Show popup but still apply theme
         }
+    });
         regionPopup.style.display = "none";
 
   // Zoom out the globe
