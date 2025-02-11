@@ -9748,6 +9748,10 @@ Powered by Expedia⚡️`);
 function populateFlightOverlay(flights) {
     const overlay = document.getElementById('overlayContainer2');
     overlay.innerHTML = ''; // Clear previous listings
+    const overlayairbnbposts = document.getElementById('overlayContainer');
+    overlayairbnbposts.style.width = '0px'; // Clear previous listings
+    overlayairbnbposts.style.height = '0px'; // Clear previous listings
+
 
     if (!flights || flights.length === 0) {
         console.error("No flights data received to display.");
