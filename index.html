@@ -4306,15 +4306,18 @@ if (!firebase.apps.length) {
 	  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
   const supabaseUrl = "https://dfnkvkljdqfbpcydzfsx.supabase.co";
-  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmbmt2a2xqcWZicGN5ZHh6ZnN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NjUwNDksImV4cCI6MjA1ODI0MTA0OX0.F1w0-15aUmRQAhPJoJu-LwcMLyRgE0LlJFH7OPKU1Yg"; // Replace this with the anon key
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmbmt2a2xqcWZicGN5ZHh6ZnN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NjUwNDksImV4cCI6MjA1ODI0MTA0OX0.F1w0-15aUmRQAhPJoJu-LwcMLyRgE0LlJFH7OPKU1Yg";
   const supabase = createClient(supabaseUrl, supabaseKey);
 
-let userId;
+  let userId;
 
-const { data: { user } } = await supabase.auth.getUser();
-if (user) {
-  userId = user.id;
-}
+  const { data: { user } } = await supabase.auth.getUser();
+  if (user) {
+    userId = user.id;
+    console.log("✅ Supabase user ID:", userId);
+  } else {
+    console.warn("⚠️ No user logged in.");
+  }
     //import { RGBELoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/RGBELoader.js';
 	  // Import necessary post-processing modules
 //import { EffectComposer } from 'https://unpkg.com/three@0.136.0/examples/jsm/postprocessing/EffectComposer.js?v=1';
