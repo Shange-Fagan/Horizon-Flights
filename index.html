@@ -7421,7 +7421,7 @@ async function isUserPremium() {
 // Function to handle premium upgrade via Firebase Payment
 async function handlePremiumSignup(theme) {
     try {
-        const response = await fetch("https://us-central1-horizon-flights.cloudfunctions.net/flightSearchAPI", {
+        const response = await fetch("https://6d53-2a02-c7c-3945-5100-7cc0-4629-688d-b0db.ngrok-free.app", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ theme: theme })
