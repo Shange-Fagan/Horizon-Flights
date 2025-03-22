@@ -4303,6 +4303,18 @@ if (!firebase.apps.length) {
     CSS2DRenderer,
     CSS2DObject,
   } from "https://unpkg.com/three@0.136.0/examples/jsm/renderers/CSS2DRenderer.js";
+	  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+  const supabaseUrl = "https://dfnkvkljdqfbpcydzfsx.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmbmt2a2xqcWZicGN5ZHh6ZnN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NjUwNDksImV4cCI6MjA1ODI0MTA0OX0.F1w0-15aUmRQAhPJoJu-LwcMLyRgE0LlJFH7OPKU1Yg"; // Replace this with the anon key
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+let userId;
+
+const { data: { user } } = await supabase.auth.getUser();
+if (user) {
+  userId = user.id;
+}
     //import { RGBELoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/RGBELoader.js';
 	  // Import necessary post-processing modules
 //import { EffectComposer } from 'https://unpkg.com/three@0.136.0/examples/jsm/postprocessing/EffectComposer.js?v=1';
@@ -7167,8 +7179,12 @@ function showPremiumPopup() {
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-      handlePremiumSignup('Jetsetter Theme');
-    });
+  if (userId) {
+      handlePremiumSignup('Jetsetter Theme', userId);
+	  } else {
+    alert("Please log in first.");
+  }
+});
 
     premiumPopup.appendChild(upgradeButton);
 
@@ -7291,10 +7307,14 @@ function showPinkPremiumPopup() {
     upgradeButton.style.borderRadius = "5px";
     upgradeButton.style.cursor = "pointer";
     upgradeButton.style.marginTop = "10px";
-
-    upgradeButton.addEventListener("click", () => {
-      handlePremiumSignup('Pink Theme');
-    });
+	
+	upgradeButton.addEventListener("click", () => {
+  if (userId) {
+      handlePremiumSignup('Pink Theme', userId);
+	  } else {
+    alert("Please log in first.");
+  }
+});
 
     pinkPremiumPopup.appendChild(upgradeButton);
 
@@ -7419,14 +7439,16 @@ async function isUserPremium() {
 
 
 // Function to handle premium upgrade via Firebase Payment
-async function handlePremiumSignup(theme) {
+async function handlePremiumSignup(theme, userId) {
     try {
         const response = await fetch("https://7b2c-2a02-c7c-3945-5100-7cc0-4629-688d-b0db.ngrok-free.app/create-checkout-session", {
             method: "POST",
 		headers: {
         'ngrok-skip-browser-warning': 'true', "Content-Type": "application/json" 
     },
-            body: JSON.stringify({ theme: theme })
+            body: JSON.stringify({ theme,
+                		userId
+				 })
         });
 
         const session = await response.json();
@@ -8242,10 +8264,14 @@ function showcustombackdropPremiumPopup() {
     upgradeButton.style.borderRadius = "5px";
     upgradeButton.style.cursor = "pointer";
     upgradeButton.style.marginTop = "10px";
-
-    upgradeButton.addEventListener("click", () => {
-      handlePremiumSignup('Custom Backdrops');
-    });
+	
+	upgradeButton.addEventListener("click", () => {
+  if (userId) {
+      handlePremiumSignup('Custom Backdrops', userId);
+	  } else {
+    alert("Please log in first.");
+  }
+});
 
     premiumPopup.appendChild(upgradeButton);
 
