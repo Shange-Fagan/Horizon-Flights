@@ -7097,12 +7097,11 @@ function toggleLightstheme() {
 	  //const supabaseUrl = "https://dfnkvkljqfbpcydxzfsx.supabase.co";
   //const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmbmt2a2xqcWZicGN5ZHh6ZnN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NjUwNDksImV4cCI6MjA1ODI0MTA0OX0.F1w0-15aUmRQAhPJoJu-LwcMLyRgE0LlJFH7OPKU1Yg";
   //const supabase = createClient(supabaseUrl, supabaseKey);
-let userId = null; // declare outside so it's globally accessible
+let userId = firebaseUser.uid;
 
 const firebaseUser = firebase.auth().currentUser;
 
 if (firebaseUser) {
-  userId = firebaseUser.uid;
 
   const { error } = await supabase
     .from('users')
