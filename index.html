@@ -7451,32 +7451,24 @@ function removebluePremiumPopup() {
     }
 }*/
 async function isUserPremium() {
-  const firebaseUser = firebase.auth().currentUser;
-
-  if (!firebaseUser) {
-    console.warn("⚠️ No Firebase user logged in");
-    return false;
-  }
-
-  const userId = firebaseUser.uid;
-
-  try {
-    const { data, error } = await supabase
-      .from("users")
-      .select("isPremium, stripePaymentStatus")
-      .eq("id", userId)
-      .single();
-
-    if (error || !data) {
-      console.warn("⚠️ Supabase user not found or error:", error?.message);
-      return false;
+    if (!firebase.apps.length) {
+        console.error("🔥 Firebase is not initialized!");
+        return false;
     }
 
-    return data.isPremium === true || data.stripePaymentStatus === 'paid';
-  } catch (err) {
-    console.error("❌ Supabase premium check failed:", err);
-    return false;
-  }
+    const user = firebase.auth().currentUser;
+    if (!user) return false;
+
+    try {
+        const doc = await firebase.firestore().collection("users").doc(user.uid).get();
+        if (!doc.exists) return false;
+
+        const data = doc.data();
+        return data.isPremium === true || data.stripePaymentStatus === 'paid'; 
+    } catch (error) {
+        console.error("⚠️ Error checking premium status:", error);
+        return false;
+    }
 }
 
 
