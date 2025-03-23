@@ -7450,23 +7450,25 @@ function removebluePremiumPopup() {
         return false;
     }
 }*/
-async function isUserPremium(supabase) {
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+async function isUserPremium() {
+  const firebaseUser = firebase.auth().currentUser;
 
-  if (authError || !user) {
-    console.warn("⚠️ No user logged in or auth error:", authError?.message);
+  if (!firebaseUser) {
+    console.warn("⚠️ No Firebase user logged in");
     return false;
   }
+
+  const userId = firebaseUser.uid;
 
   try {
     const { data, error } = await supabase
       .from("users")
       .select("isPremium, stripePaymentStatus")
-      .eq("id", user.id)
+      .eq("id", userId)
       .single();
 
     if (error || !data) {
-      console.warn("⚠️ Could not fetch user data:", error?.message);
+      console.warn("⚠️ Supabase user not found or error:", error?.message);
       return false;
     }
 
@@ -7476,6 +7478,7 @@ async function isUserPremium(supabase) {
     return false;
   }
 }
+
 
 
 
