@@ -7094,9 +7094,9 @@ function toggleLightstheme() {
   // Get the button element and check if it's checked  
  // Define the textures globally
 // Function to show the premium popup and grey out screen
-	  //const supabaseUrl = "https://dfnkvkljqfbpcydxzfsx.supabase.co";
-  //const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmbmt2a2xqcWZicGN5ZHh6ZnN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NjUwNDksImV4cCI6MjA1ODI0MTA0OX0.F1w0-15aUmRQAhPJoJu-LwcMLyRgE0LlJFH7OPKU1Yg";
-  //const supabase = createClient(supabaseUrl, supabaseKey);
+	  const supabaseUrl = "https://dfnkvkljqfbpcydxzfsx.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmbmt2a2xqcWZicGN5ZHh6ZnN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NjUwNDksImV4cCI6MjA1ODI0MTA0OX0.F1w0-15aUmRQAhPJoJu-LwcMLyRgE0LlJFH7OPKU1Yg";
+  const supabase = createClient(supabaseUrl, supabaseKey);
 	const firebaseUser = firebase.auth().currentUser;
 let userId = firebaseUser.uid;
 
@@ -7423,7 +7423,7 @@ function removebluePremiumPopup() {
 }
 // Function to check if the user is premium (Firebase)
 // Function to check if the user is premium (Firebase)
-async function isUserPremium() {
+/*async function isUserPremium() {
     if (!firebase.apps.length) {
         console.error("🔥 Firebase is not initialized!");
         return false;
@@ -7442,7 +7442,34 @@ async function isUserPremium() {
         console.error("⚠️ Error checking premium status:", error);
         return false;
     }
+}*/
+async function isUserPremium(supabase) {
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    console.warn("⚠️ No user logged in or auth error:", authError?.message);
+    return false;
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from("users")
+      .select("isPremium, stripePaymentStatus")
+      .eq("id", user.id)
+      .single();
+
+    if (error || !data) {
+      console.warn("⚠️ Could not fetch user data:", error?.message);
+      return false;
+    }
+
+    return data.isPremium === true || data.stripePaymentStatus === 'paid';
+  } catch (err) {
+    console.error("❌ Supabase premium check failed:", err);
+    return false;
+  }
 }
+
 
 
 // Function to handle premium upgrade via Firebase Payment
