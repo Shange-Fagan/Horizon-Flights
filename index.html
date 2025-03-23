@@ -4205,7 +4205,7 @@ gl_FragColor = vec4(glowColor, intensity);
 	
 <button id="toggleButton">&nbsp;&nbsp;&nbsp;Day Theme🌥️</button>
 <!-- Background Toggle Button -->
-<button id="toggleButton3" class="theme-button">&nbsp;&nbsp;&nbsp;Background🌃</button>
+<button id="toggleButton3" class="theme-button">&nbsp;&nbsp;&nbsp;Background🎨</button>
 <!-- Dropdown Menu for Background Selection -->
 <div id="backgroundDropdown" class="dropdown-menu hidden">
     <button id="dayButton" class="background-option">🌞 Day</button>
@@ -8170,11 +8170,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.getElementById('dayButton').addEventListener('click', function() {
       scene.background = daybackgroundTexture;
-      document.getElementById("toggleButton3").textContent = "\u00A0\u00A0\u00A0Background🏙️";
+      document.getElementById("toggleButton3").textContent = "\u00A0\u00A0\u00A0Background✅";
 });
 document.getElementById('nightButton').addEventListener('click', function() {
       scene.background = nightbackgroundTexture;
-      document.getElementById("toggleButton3").textContent = "\u00A0\u00A0\u00A0Background🌃";
+      document.getElementById("toggleButton3").textContent = "\u00A0\u00A0\u00A0Background✅";
 });
 document.getElementById('customButton').addEventListener('click', function() {
     openCustomBackgroundMenu();
@@ -8295,7 +8295,7 @@ function applyCustomBackground() {
         scene.background = rt.texture;
     });
 
-    document.getElementById("toggleButton3").textContent = "\u00A0\u00A0\u00A0Background🎨";
+    document.getElementById("toggleButton3").textContent = "\u00A0\u00A0\u00A0Background✅";
     document.getElementById('customBackgroundMenu').classList.add('hidden');
 }
 
