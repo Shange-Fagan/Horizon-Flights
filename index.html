@@ -4773,7 +4773,16 @@ function showMobileDesktopView() {
     // Close button functionality
 document.querySelector('.close-btn2').addEventListener('click', function () {
     const closeNewsButton = document.getElementById('.close-btn2');
-    
+    / Add the event listener for the toggle change
+document.addEventListener('DOMContentLoaded', () => {
+    // Add a 10-second delay before simulating a click on the toggle button
+    setTimeout(() => {
+        const themeToggle = document.getElementById('minimizeCarouselBtn');
+        if (themeToggle) {
+            themeToggle.click(); // Simulate a click on the toggle
+        }
+    }, 10000); // 10000 milliseconds = 10 seconds
+});
     // Hide the overlay and close button
     mobileDesktopView.style.display = 'none';
     closeNewsButton.style.display = 'none';
