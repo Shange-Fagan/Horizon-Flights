@@ -7417,7 +7417,7 @@ function removebluePremiumPopup() {
         return false;
     }
 }*/
-async function isUserPremium() {
+/*async function isUserPremium() {
     try {
         const res = await fetch("https://db97-2a02-c7c-3945-5100-7cc0-4629-688d-b0db.ngrok-free.app/user-status", {
             method: "GET",
@@ -7433,7 +7433,25 @@ async function isUserPremium() {
         console.error("Failed to check premium status:", err);
         return false;
     }
+}*/
+  async function isUserPremium(email) {
+    try {
+        const res = await fetch(`https://db97-2a02-c7c-3945-5100-7cc0-4629-688d-b0db.ngrok-free.app/user-status?email=${encodeURIComponent(email)}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "ngrok-skip-browser-warning": "true"
+            }
+        });
+
+        const data = await res.json();
+        return data.isPremium === true;
+    } catch (err) {
+        console.error("Failed to check premium status:", err);
+        return false;
+    }
 }
+
 
 // Function to handle premium upgrade via Firebase Payment
 async function handlePremiumSignup(theme) {
