@@ -12764,7 +12764,7 @@ addMarkupPoints(fromLatLng, toLatLng);
     console.log('markupPointGroup added to globe2:', addMarkupPoints);
     // Fetch and update markers based on the selected category
     const selectedCategory = document.getElementById('priceCategorySelect').value;
-    fetchMarkers(location, selectedCategory);
+    //fetchMarkers(location, selectedCategory);
 
     // Resize and update all markers
     // Resize and update all markers with animation
@@ -12953,7 +12953,7 @@ addMarkupPoints(fromLatLng, toLatLng);
     console.log('markupPointGroup added to globe2:', addMarkupPoints);
     // Fetch and update markers based on the selected category
     const selectedCategory = document.getElementById('priceCategorySelect').value;
-    fetchMarkers(location, selectedCategory);
+    //fetchMarkers(location, selectedCategory);
 
     // Resize and update all markers
     // Resize and update all markers with animation
@@ -13666,8 +13666,8 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
       let selectedRegion = this.value;
       const selectedCategory = document.getElementById('priceCategorySelect').value;
 	// Load appropriate markers for the selected region and category
-    loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
-    fetchMarkers(selectedRegion, selectedCategory);
+    //loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
+    //fetchMarkers(selectedRegion, selectedCategory);
       panToRegion(selectedRegion);
       console.log("Region button clicked. Resizing all markers.");
       const overlay = document.getElementById('overlayContainer');
