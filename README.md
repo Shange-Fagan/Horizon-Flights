@@ -28,7 +28,6 @@ The goal of Horizon Flights is to make travel booking not just easier, but beaut
 ## 📄 License
 
 This project is licensed under the Apache License 2.0.
-You are free to use, distribute, and modify this software, provided that you include proper attribution.
 
 ## Copyright 2024 Shange Fagan
 
