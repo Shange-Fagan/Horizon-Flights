@@ -13277,14 +13277,14 @@ baseMesh.scale.set(size, size, size);
 
     // Create light pillar for the start point
     const lightPillar = createLightPillar({
-        radius: 4.4,
+        radius: 4.0,
         lon: lng,
         lat,
         index: 0,
         textures,
         punctuation,
     });
-    //markupPointGroup.add(lightPillar);
+    markupPointGroup.add(lightPillar);
     console.log('Creating light pillar with options:', { radius: 5.1, lon: lng, lat, index: 0, textures, punctuation });
 
     console.log('Light pillar created:', lightPillar);
@@ -13304,14 +13304,14 @@ baseMesh.scale.set(size, size, size);
 
         // Create light pillar for the end point
         const endLightPillar = createLightPillar({
-            radius: 4.4,
+            radius: 4.0,
             lon: endLon,
             lat: endLat,
             index: 1,
             textures,
             punctuation,
         });
-        //markupPointGroup.add(endLightPillar);
+        markupPointGroup.add(endLightPillar);
 
         // Create wave mesh for the end point
         const endWaveMesh = createWaveMesh({ radius: 5.1, lon: endLon, lat: endLat, textures });
