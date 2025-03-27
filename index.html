@@ -2619,16 +2619,6 @@ left: -8px !important;
     }
 }
 
-/* Safari-only CSS */
-@media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-    .like-button {
-      padding: 17px 20px !important;
-      padding-bottom: 17px !important;
-    }
-  }
-}
-
 	  @media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
   .like-button {
     padding: 16.5px 20px !important;
@@ -2644,7 +2634,15 @@ left: -8px !important;
     }
   }
 }
-
+/* Safari-only CSS */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    .like-button {
+      padding: 17px 20px !important;
+      padding-bottom: 17px !important;
+    }
+  }
+}
 
 
 #cityBtn {
