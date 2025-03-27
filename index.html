@@ -5165,7 +5165,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         postViewLink.forEach(day => day.style.setProperty('background-color', '#F56ED3', 'important'));
         isUserPremium().then(isPremium => {
         if (!isPremium) {
-          //showPinkPremiumPopup(); // Show popup but still apply theme
+          showPinkPremiumPopup(); // Show popup but still apply theme
         }
     });
         regionPopup.style.display = "none";
@@ -7528,7 +7528,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     if (lightsButton.textContent === "Jetsetter Theme💎") {
       isUserPremium().then(isPremium => {
         if (!isPremium) {
-            //showPremiumPopup(); // Show popup but still apply theme
+            showPremiumPopup(); // Show popup but still apply theme
         }
     });
         regionPopup.style.display = "none";
@@ -8324,7 +8324,7 @@ document.getElementById('applycustomHDRI').addEventListener('click', function() 
   applyCustomBackground();
   isUserPremium().then(isPremium => {
         if (!isPremium) {
-          //showcustombackdropPremiumPopup(); // Show popup but still apply theme
+          showcustombackdropPremiumPopup(); // Show popup but still apply theme
         }
     });
         regionPopup.style.display = "none";
