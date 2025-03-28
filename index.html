@@ -15336,6 +15336,16 @@ const toggleButton = document.getElementById(`toggleAirbnbPrices-${data.id}`);
       priceCategorySelect.style.display = priceSelectVisible ? 'none' : 'block';
       airbnbSelector.style.display = airbnbSelectVisible ? 'none' : 'block';
     });
+// Bind dropdown change events to dynamic elements
+priceCategorySelect.addEventListener('change', function () {
+  const selectedCategory = this.value;
+  loadMarkers(selectedCategory);
+});
+
+airbnbSelector.addEventListener('change', function () {
+  const selectedCategory = this.value;
+  loadMarkers(selectedCategory);
+});
 
     // Close both dropdowns when clicking outside
     document.addEventListener('click', function (event) {
