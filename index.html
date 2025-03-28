@@ -4400,6 +4400,7 @@ const auth = getAuth(app);
 
 
 
+let markers;
 
 
 // Handle Login/Logout when the login button is clicked
@@ -9131,7 +9132,7 @@ function removeCountryOutlines() {
       );
     },
   });
-    const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+     markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 // Function to load generic markers
 function loadGenericMarkers(markersData) {
   // Check if the scene, marker data, and necessary variables are available
@@ -9192,7 +9193,7 @@ if (window.innerWidth <= 768) {
 }
 
 // Creating Markers
-const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+ markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 
 const dummy = new THREE.Object3D();
 markersData.forEach((data, index) => {
@@ -9283,7 +9284,7 @@ if (window.innerWidth <= 768) {
 // Load detailed markers for a specific region (use regular Mesh for dynamic marker count)
 	   // Function to clear existing markers
 function clearExistingMarkers() {
-  const markers = scene.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
+   markers = scene.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
 
   markers.forEach(marker => {
     // Dispose of the geometry and material to free up memory
@@ -12900,7 +12901,7 @@ addMarkupPoints(fromLatLng, toLatLng);
     // Resize and update all markers with animation
 // Function to adjust marker sizes dynamically based on zoom level
 Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+     markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -12968,7 +12969,7 @@ Object.keys(genericMarkers).forEach(region => {
 
 // Function to update marker sizes dynamically as zoomLevel changes
 Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+     markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13089,7 +13090,7 @@ addMarkupPoints(fromLatLng, toLatLng);
     // Resize and update all markers with animation
 // Function to adjust marker sizes dynamically based on zoom level
 Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+     markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13157,7 +13158,7 @@ Object.keys(genericMarkers).forEach(region => {
 
 // Function to update marker sizes dynamically as zoomLevel changes
 Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+     markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13726,7 +13727,7 @@ document.addEventListener('click', function (event) {
     // Resize and update all markers with animation
 // Resize and update all markers with animation
 Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+     markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -14177,7 +14178,7 @@ document.querySelectorAll('.post .view-link').forEach((item, index) => {
 });
   // Iterate through all regions in the genericMarkers object
   Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+     markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -14267,7 +14268,7 @@ async function fetchMarkers(region, category) {
         'ngrok-skip-browser-warning': 'true',
     },
     });
-    const markers = await response.json();
+     markers = await response.json();
      // Clear the existing markers before adding new ones
      clearExistingMarkers();
     //addMarkersToGlobe(markers);  // Call the function to add markers
@@ -15298,7 +15299,6 @@ cheapest2: markersData4,
 
 let activeMarkersData = markersData; // Default to markersData
 let activeLabel = null; // Keep track of open iframe
-let markers; // Declare it outside, so it is accessible globally.
 
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
