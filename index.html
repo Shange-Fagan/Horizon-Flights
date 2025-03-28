@@ -15298,7 +15298,7 @@ cheapest2: markersData4,
 
 let activeMarkersData = markersData; // Default to markersData
 let activeLabel = null; // Keep track of open iframe
-//let markers; // Declare it outside, so it is accessible globally.
+let markers; // Declare it outside, so it is accessible globally.
 
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
@@ -15524,8 +15524,9 @@ document.getElementById('airbnbSelector').addEventListener('change', function() 
 });
 
 // Load markers for default category on page load
+	  window.addEventListener('load', () => {
 loadMarkers('general');
-
+});
 controls.minDistance = 15;
   controls.maxDistance = 30;
 		    
