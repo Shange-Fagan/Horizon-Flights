@@ -4400,7 +4400,6 @@ const auth = getAuth(app);
 
 
 
-let markers;
 
 
 // Handle Login/Logout when the login button is clicked
@@ -9132,7 +9131,7 @@ function removeCountryOutlines() {
       );
     },
   });
-     markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+    const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 // Function to load generic markers
 function loadGenericMarkers(markersData) {
   // Check if the scene, marker data, and necessary variables are available
@@ -9193,7 +9192,7 @@ if (window.innerWidth <= 768) {
 }
 
 // Creating Markers
- markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 
 const dummy = new THREE.Object3D();
 markersData.forEach((data, index) => {
@@ -9225,6 +9224,8 @@ scene.add(markers);
 
   
   //loadGenericMarkers(markersData);
+// Load markers for default category on page load
+loadMarkers('general');
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
 // Assuming each marker has a reference in the HTML list and vice versa
 function highlightMarker(markerId) {
@@ -9284,7 +9285,7 @@ if (window.innerWidth <= 768) {
 // Load detailed markers for a specific region (use regular Mesh for dynamic marker count)
 	   // Function to clear existing markers
 function clearExistingMarkers() {
-   markers = scene.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
+  const markers = scene.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
 
   markers.forEach(marker => {
     // Dispose of the geometry and material to free up memory
@@ -12901,7 +12902,7 @@ addMarkupPoints(fromLatLng, toLatLng);
     // Resize and update all markers with animation
 // Function to adjust marker sizes dynamically based on zoom level
 Object.keys(genericMarkers).forEach(region => {
-     markers = genericMarkers[region];
+    const markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -12969,7 +12970,7 @@ Object.keys(genericMarkers).forEach(region => {
 
 // Function to update marker sizes dynamically as zoomLevel changes
 Object.keys(genericMarkers).forEach(region => {
-     markers = genericMarkers[region];
+    const markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13090,7 +13091,7 @@ addMarkupPoints(fromLatLng, toLatLng);
     // Resize and update all markers with animation
 // Function to adjust marker sizes dynamically based on zoom level
 Object.keys(genericMarkers).forEach(region => {
-     markers = genericMarkers[region];
+    const markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13158,7 +13159,7 @@ Object.keys(genericMarkers).forEach(region => {
 
 // Function to update marker sizes dynamically as zoomLevel changes
 Object.keys(genericMarkers).forEach(region => {
-     markers = genericMarkers[region];
+    const markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13727,7 +13728,7 @@ document.addEventListener('click', function (event) {
     // Resize and update all markers with animation
 // Resize and update all markers with animation
 Object.keys(genericMarkers).forEach(region => {
-     markers = genericMarkers[region];
+    const markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -14178,7 +14179,7 @@ document.querySelectorAll('.post .view-link').forEach((item, index) => {
 });
   // Iterate through all regions in the genericMarkers object
   Object.keys(genericMarkers).forEach(region => {
-     markers = genericMarkers[region];
+    const markers = genericMarkers[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -14268,7 +14269,7 @@ async function fetchMarkers(region, category) {
         'ngrok-skip-browser-warning': 'true',
     },
     });
-     markers = await response.json();
+    const markers = await response.json();
      // Clear the existing markers before adding new ones
      clearExistingMarkers();
     //addMarkersToGlobe(markers);  // Call the function to add markers
@@ -15299,48 +15300,11 @@ cheapest2: markersData4,
 
 let activeMarkersData = markersData; // Default to markersData
 let activeLabel = null; // Keep track of open iframe
+//let markers; // Declare it outside, so it is accessible globally.
+
 function loadMarkers(selectedCategory) {
-	const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
-    const markerMaterial = new THREE.MeshBasicMaterial({
-    color: daymarkerMaterial,
-    onBeforeCompile: (shader) => {
-      shader.uniforms.time = globalUniforms.time;
-      shader.vertexShader = `
-      	attribute float phase;
-        varying float vPhase;
-        ${shader.vertexShader}
-      `.replace(
-        `#include <begin_vertex>`,
-        `#include <begin_vertex>
-        	vPhase = phase; // de-synch of ripples
-        `
-      );
-      shader.fragmentShader = `
-      	uniform float time;
-        varying float vPhase;
-      	${shader.fragmentShader}
-      `.replace(
-        `vec4 diffuseColor = vec4( diffuse, opacity );`,
-        `
-        vec2 lUv = (vUv - 0.5) * 2.;
-        float val = 0.;
-        float lenUv = length(lUv);
-        val = max(val, 1. - step(0.25, lenUv)); // central circle
-        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
-
-        float tShift = fract(time * 0.5 + vPhase);
-        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
-
-        if (val < 0.5) discard;
-
-        vec4 diffuseColor = vec4( diffuse, opacity );`
-      );
-    },
-  });
-  markerMaterial.defines = { USE_UV: '' };
-	
   // Remove existing markers from the scene
-  scene.remove(markers);
+  //scene.remove(markers);
 	console.log('Selected category:', selectedCategory);
   console.log('Available categories:', markersDataSets);
   console.log('Markers Data Sets:', markersDataSets);
@@ -15350,11 +15314,15 @@ function loadMarkers(selectedCategory) {
     console.error(`No markers data found for category: ${selectedCategory}`);
     activeMarkersData = []; // Set it to an empty array to prevent further errors
   }
+	// CLEAR EXISTING MARKERS
+  if (markers) {
+    scene.remove(markers);
+  }
   // Create new markers for the selected category
-  const markerCount = activeMarkersData.length;
-  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  //const markerCount = activeMarkersData.length;
+  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
   //const dummy = new THREE.Object3D();
-const dummy = new THREE.Object3D();
+//const dummy = new THREE.Object3D();
   activeMarkersData.forEach((data, index) => {
     const [radius, phi, theta] = data.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
@@ -15558,7 +15526,6 @@ document.getElementById('airbnbSelector').addEventListener('change', function() 
 });
 
 // Load markers for default category on page load
-	  
 loadMarkers('general');
 
 controls.minDistance = 15;
