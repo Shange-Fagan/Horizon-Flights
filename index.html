@@ -15299,10 +15299,137 @@ cheapest2: markersData4,
 
 let activeMarkersData = markersData; // Default to markersData
 let activeLabel = null; // Keep track of open iframe
+// Function to load generic markers
+function loadGenericMarkers(markersData) {
+  // Check if the scene, marker data, and necessary variables are available
+  if (!scene || !markersData || markersData.length === 0) {
+    console.warn('Scene or markers data not available');
+    return;
+  }
+  console.log('Loading generic markers...');
+// Marker Geometry and Material
+// Adjust marker size dynamically based on zoom level
 
+  // Create the marker geometry and material
+  //const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1);
+//const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
+/*const markerMaterial = new THREE.MeshBasicMaterial({
+    color: daymarkerMaterial,
+    onBeforeCompile: (shader) => {
+      shader.uniforms.time = globalUniforms.time;
+      shader.vertexShader = `
+      	attribute float phase;
+        varying float vPhase;
+        ${shader.vertexShader}
+      `.replace(
+        `#include <begin_vertex>`,
+        `#include <begin_vertex>
+        	vPhase = phase; // de-synch of ripples
+        `
+      );
+      shader.fragmentShader = `
+      	uniform float time;
+        varying float vPhase;
+      	${shader.fragmentShader}
+      `.replace(
+        `vec4 diffuseColor = vec4( diffuse, opacity );`,
+        `
+        vec2 lUv = (vUv - 0.5) * 2.;
+        float val = 0.;
+        float lenUv = length(lUv);
+        val = max(val, 1. - step(0.25, lenUv)); // central circle
+        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+
+        float tShift = fract(time * 0.5 + vPhase);
+        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+
+        if (val < 0.5) discard;
+
+        vec4 diffuseColor = vec4( diffuse, opacity );`
+      );
+    },
+  });*/
+  markerMaterial.defines = { USE_UV: '' };
+  console.log('Creating generic markers...');
+  // Create an object to keep track of generic markers for each region
+  window.genericMarkers = window.genericMarkers || {};
+
+if (window.innerWidth <= 768) {
+  markerGeometry.scale(1.25, 1.25, 1.25); // Scale for mobile
+}
+
+// Creating Markers
+ markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+
+const dummy = new THREE.Object3D();
+markersData.forEach((data, index) => {
+  const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
+
+  // Use setFromSphericalCoords for spherical positioning on the globe
+  dummy.position.setFromSphericalCoords(radius, phi, theta);
+  dummy.lookAt(dummy.position.clone().setLength(radius + 1)); // Ensure marker faces outward
+  dummy.updateMatrix();
+  markers.setMatrixAt(index, dummy.matrix);
+// Log marker data
+console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}`);
+
+  data.worldPosition = dummy.position.clone(); // Store position for interaction (optional)
+});
+// Log region and saving marker
+const region = markersData[0]?.region; // Assuming markersData has region info
+  if (region) {
+    console.log(`Saving generic markers for region: ${region}`);
+    window.genericMarkers[region] = markers;
+  } else {
+    console.warn('Region data not found in markersData');
+  }
+// Save the marker to the genericMarkers object based on region
+genericMarkers[markersData.region] = markers;
+// Add the markers to the scene
+scene.add(markers);
+}
 function loadMarkers(selectedCategory) {
+	const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
+    const markerMaterial = new THREE.MeshBasicMaterial({
+    color: daymarkerMaterial,
+    onBeforeCompile: (shader) => {
+      shader.uniforms.time = globalUniforms.time;
+      shader.vertexShader = `
+      	attribute float phase;
+        varying float vPhase;
+        ${shader.vertexShader}
+      `.replace(
+        `#include <begin_vertex>`,
+        `#include <begin_vertex>
+        	vPhase = phase; // de-synch of ripples
+        `
+      );
+      shader.fragmentShader = `
+      	uniform float time;
+        varying float vPhase;
+      	${shader.fragmentShader}
+      `.replace(
+        `vec4 diffuseColor = vec4( diffuse, opacity );`,
+        `
+        vec2 lUv = (vUv - 0.5) * 2.;
+        float val = 0.;
+        float lenUv = length(lUv);
+        val = max(val, 1. - step(0.25, lenUv)); // central circle
+        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+
+        float tShift = fract(time * 0.5 + vPhase);
+        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+
+        if (val < 0.5) discard;
+
+        vec4 diffuseColor = vec4( diffuse, opacity );`
+      );
+    },
+  });
+  markerMaterial.defines = { USE_UV: '' };
+	
   // Remove existing markers from the scene
-  //scene.remove(markers);
+  scene.remove(markers);
 	console.log('Selected category:', selectedCategory);
   console.log('Available categories:', markersDataSets);
   console.log('Markers Data Sets:', markersDataSets);
@@ -15311,10 +15438,6 @@ function loadMarkers(selectedCategory) {
   if (!activeMarkersData) {
     console.error(`No markers data found for category: ${selectedCategory}`);
     activeMarkersData = []; // Set it to an empty array to prevent further errors
-  }
-	// CLEAR EXISTING MARKERS
-  if (markers) {
-    scene.remove(markers);
   }
   // Create new markers for the selected category
   const markerCount = activeMarkersData.length;
