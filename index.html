@@ -15314,10 +15314,7 @@ function loadMarkers(selectedCategory) {
     console.error(`No markers data found for category: ${selectedCategory}`);
     activeMarkersData = []; // Set it to an empty array to prevent further errors
   }
-	// CLEAR EXISTING MARKERS
-  if (markers) {
-    scene.remove(markers);
-  }
+
   // Create new markers for the selected category
   //const markerCount = activeMarkersData.length;
   //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
@@ -15332,7 +15329,7 @@ function loadMarkers(selectedCategory) {
     data.worldPosition = dummy.position.clone();
   });
 
-  scene.add(markers);
+  //scene.add(markers);
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
