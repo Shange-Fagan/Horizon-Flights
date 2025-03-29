@@ -9223,7 +9223,7 @@ scene.add(markers);
 }
 
   
-  //loadGenericMarkers(markersData);
+  loadGenericMarkers(markersData);
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
 // Assuming each marker has a reference in the HTML list and vice versa
 function highlightMarker(markerId) {
@@ -15175,11 +15175,7 @@ contentDiv.style.zIndex = '22009'; // Adjust the value as needed
 
   // CSS2DObject
   const labelObject = new CSS2DObject(labelDiv);
-	if (data.worldPosition) {
   labelObject.position.copy(data.worldPosition);
-		} else {
-  console.warn(`worldPosition not yet defined for marker ${data.id}`);
-}
   scene.add(labelObject);
 
   // Store label object for interaction
@@ -15302,13 +15298,11 @@ cheapest2: markersData4,
 
 let activeMarkersData = markersData; // Default to markersData
 let activeLabel = null; // Keep track of open iframe
-let markers; // Declare it outside, so it is accessible globally.
+//let markers; // Declare it outside, so it is accessible globally.
 
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
-	if (markers) {
-  scene.remove(markers);
-	}
+  //scene.remove(markers);
 	console.log('Selected category:', selectedCategory);
   console.log('Available categories:', markersDataSets);
   console.log('Markers Data Sets:', markersDataSets);
@@ -15319,10 +15313,10 @@ function loadMarkers(selectedCategory) {
     activeMarkersData = []; // Set it to an empty array to prevent further errors
   }
   // Create new markers for the selected category
-  const markerCount = activeMarkersData.length;
-  markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  //const markerCount = activeMarkersData.length;
+  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
   //const dummy = new THREE.Object3D();
-const dummy = new THREE.Object3D();
+//const dummy = new THREE.Object3D();
   activeMarkersData.forEach((data, index) => {
     const [radius, phi, theta] = data.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
@@ -15332,7 +15326,7 @@ const dummy = new THREE.Object3D();
     data.worldPosition = dummy.position.clone();
   });
 
-  scene.add(markers);
+  //scene.add(markers);
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
@@ -15416,7 +15410,7 @@ setTimeout(() => {
       "right:30px !important;"
       >
         <optgroup label="Filter by Ratings">
-          <option value="disabled">Sort by Rating🌟🌟🌟🌟🌟</option>
+          <option value="disabled">Sort by Ratings🌟🌟🌟🌟🌟</option>
           <option value="general">Most Popular in Region🏆</option>
           <option value="cheapest">3 star rating🌟🌟🌟</option>
           <option value="midPrice">4 star rating🌟🌟🌟🌟</option>
