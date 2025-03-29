@@ -9781,6 +9781,7 @@ if (missingFields.length > 0) {
     /*const leftContainer = document.getElementById('left-container');*/
     const globeContainer = document.getElementById('globeContainer');
     const overlay = document.getElementById('overlayContainer2');
+    const overlay2 = document.getElementById('overlayContainer');
     // Check if the overlayContainer exists
     if (!overlay) {
         console.error("Overlay container not found!");
@@ -9798,6 +9799,11 @@ if (missingFields.length > 0) {
     overlay.style.width= '46%';
     overlay.style.height= '77%';
     overlay.classList.add('show');
+
+	overlay2.style.display = 'none';
+    overlay2.style.width= '0%';
+    overlay2.style.height= '0%';
+    overlay2.classList.add('hide');
     
         overlay.innerHTML = `
             <div class="spinner-container">
@@ -10369,6 +10375,8 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
     /*const leftContainer = document.getElementById('left-container');*/
     const globeContainer = document.getElementById('globeContainer');
     const overlay = document.getElementById('overlayContainer');
+    const overlay2 = document.getElementById('overlayContainer2');
+
     // Check if the overlayContainer exists
     if (!overlay) {
         console.error("Overlay container not found!");
@@ -10386,6 +10394,11 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
     overlay.style.width= '46%';
     overlay.style.height= '75%';
     overlay.classList.add('show');
+
+	overlay2.style.display = 'none';
+    overlay2.style.width= '0%';
+    overlay2.style.height= '0%';
+    overlay2.classList.add('hide');
     
         overlay.innerHTML = `
             <div class="spinner-container">
@@ -10592,6 +10605,8 @@ document.getElementById('airbnbOption').addEventListener('click', () => {
     /*const leftContainer = document.getElementById('left-container');*/
     const globeContainer = document.getElementById('globeContainer');
     const overlay = document.getElementById('overlayContainer');
+    const overlay2 = document.getElementById('overlayContainer2');
+
     // Check if the overlayContainer exists
     if (!overlay) {
         console.error("Overlay container not found!");
@@ -10609,6 +10624,10 @@ document.getElementById('airbnbOption').addEventListener('click', () => {
     overlay.style.width= '46%';
     overlay.style.height= '75%';
     overlay.classList.add('show');
+	overlay2.style.display = 'none';
+    overlay2.style.width= '0%';
+    overlay2.style.height= '0%';
+    overlay2.classList.add('hide');
     
         overlay.innerHTML = `
             <div class="spinner-container">
@@ -10758,6 +10777,8 @@ document.getElementById('expediaOption').addEventListener('click', () => {
     /*const leftContainer = document.getElementById('left-container');*/
     const globeContainer = document.getElementById('globeContainer');
     const overlay = document.getElementById('overlayContainer');
+    const overlay2 = document.getElementById('overlayContainer2');
+
     // Check if the overlayContainer exists
     if (!overlay) {
         console.error("Overlay container not found!");
@@ -10775,6 +10796,10 @@ document.getElementById('expediaOption').addEventListener('click', () => {
     overlay.style.width= '46%';
     overlay.style.height= '75%';
     overlay.classList.add('show');
+	overlay2.style.display = 'none';
+    overlay2.style.width= '0%';
+    overlay2.style.height= '0%';
+    overlay2.classList.add('hide');
     
         overlay.innerHTML = `
             <div class="spinner-container">
@@ -13803,6 +13828,7 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
       panToRegion(selectedRegion);
       console.log("Region button clicked. Resizing all markers.");
       const overlay = document.getElementById('overlayContainer');
+      const overlay2 = document.getElementById('overlayContainer2');
     // Check if the overlayContainer exists
     if (!overlay) {
         console.error("Overlay container not found!");
@@ -13820,6 +13846,11 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
     overlay.style.width= '46%';
     overlay.style.height= '75%';
     overlay.classList.add('show');
+
+	    overlay2.style.display = 'none';
+    overlay2.style.width= '0%';
+    overlay2.style.height= '0%';
+    overlay2.classList.add('hide');
 // Ensure the active plane animation continues
     overlay.innerHTML = `
             <div class="spinner-container">
