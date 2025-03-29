@@ -15298,11 +15298,13 @@ cheapest2: markersData4,
 
 let activeMarkersData = markersData; // Default to markersData
 let activeLabel = null; // Keep track of open iframe
-//let markers; // Declare it outside, so it is accessible globally.
+let markers; // Declare it outside, so it is accessible globally.
 
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
+	if (markers) {
   scene.remove(markers);
+	}
 	console.log('Selected category:', selectedCategory);
   console.log('Available categories:', markersDataSets);
   console.log('Markers Data Sets:', markersDataSets);
@@ -15314,7 +15316,7 @@ function loadMarkers(selectedCategory) {
   }
   // Create new markers for the selected category
   const markerCount = activeMarkersData.length;
-  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
   //const dummy = new THREE.Object3D();
 const dummy = new THREE.Object3D();
   activeMarkersData.forEach((data, index) => {
