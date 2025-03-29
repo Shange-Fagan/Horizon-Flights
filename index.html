@@ -15175,7 +15175,11 @@ contentDiv.style.zIndex = '22009'; // Adjust the value as needed
 
   // CSS2DObject
   const labelObject = new CSS2DObject(labelDiv);
+	if (data.worldPosition) {
   labelObject.position.copy(data.worldPosition);
+		} else {
+  console.warn(`worldPosition not yet defined for marker ${data.id}`);
+}
   scene.add(labelObject);
 
   // Store label object for interaction
