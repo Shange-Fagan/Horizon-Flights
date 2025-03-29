@@ -9223,7 +9223,7 @@ scene.add(markers);
 }
 
   
-  loadGenericMarkers(markersData);
+  //loadGenericMarkers(markersData);
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
 // Assuming each marker has a reference in the HTML list and vice versa
 function highlightMarker(markerId) {
@@ -15302,7 +15302,7 @@ let activeLabel = null; // Keep track of open iframe
 
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
-  //scene.remove(markers);
+  scene.remove(markers);
 	console.log('Selected category:', selectedCategory);
   console.log('Available categories:', markersDataSets);
   console.log('Markers Data Sets:', markersDataSets);
@@ -15313,10 +15313,10 @@ function loadMarkers(selectedCategory) {
     activeMarkersData = []; // Set it to an empty array to prevent further errors
   }
   // Create new markers for the selected category
-  //const markerCount = activeMarkersData.length;
-  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  const markerCount = activeMarkersData.length;
+  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
   //const dummy = new THREE.Object3D();
-//const dummy = new THREE.Object3D();
+const dummy = new THREE.Object3D();
   activeMarkersData.forEach((data, index) => {
     const [radius, phi, theta] = data.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
@@ -15326,7 +15326,7 @@ function loadMarkers(selectedCategory) {
     data.worldPosition = dummy.position.clone();
   });
 
-  //scene.add(markers);
+  scene.add(markers);
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
