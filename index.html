@@ -3506,6 +3506,39 @@ margin-bottom: 1px;
     background: lightgrey; /* Light grey background on hover */
     cursor: pointer;
 }
+	#rolexClock {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.2rem;
+  color: gold;
+  background: rgba(0,0,0,0.6);
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255,215,0,0.5);
+		z-index: 999999;
+}
+	#timezoneSelector {
+		position: absolute;
+    bottom: 20px;
+      right: 20px;
+      padding: 4px 7px;
+      font-size: 12px;
+      /*background-color: rgba(255, 255, 255, 0.2);*/
+      /*border: 1px solid rgba(255, 255, 255, 0.25);*/
+      /*border-radius: 8px;*/
+      color: rgba(255, 255, 255, 0.75);
+      z-index: 22011;
+      cursor: pointer;
+	    border: 0px solid #e0e0e0; /* Border similar to Airbnb */
+       background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 25px; /* Rounded corners for inputs */
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 12px 0px 0px 12px;
+      width: 125px;
+	}
+
 
 </style>
 <script>
@@ -4286,6 +4319,40 @@ gl_FragColor = vec4(glowColor, intensity);
     }
   });
 </script>
+	<div id="rolexClock"></div>
+	<select id="timezoneSelector">
+  <option value="UTC">UTC</option>
+  <option value="Europe/London">London</option>
+  <option value="America/New_York">New York</option>
+  <option value="Asia/Dubai">Dubai</option>
+  <!-- Add more as needed -->
+</select>
+
+<script>
+  document.getElementById('timezoneSelector').addEventListener('change', function() {
+    selectedZone = this.value;
+    updateClock(selectedZone);
+    updateThemeForTimezone(selectedZone);
+  });
+</script>
+
+<script>
+  function updateClock(timezone = 'UTC') {
+    const now = new Date();
+    const options = {
+      timeZone: timezone,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    };
+    const timeString = new Intl.DateTimeFormat('en-GB', options).format(now);
+    document.getElementById('rolexClock').innerText = timeString;
+  }
+
+  setInterval(() => updateClock(selectedZone), 1000);
+  let selectedZone = 'UTC'; // default
+</script>
+
   <!-- Scripts -->
   <!-- Include Three.js and other dependencies here -->
 
@@ -4400,6 +4467,23 @@ const auth = getAuth(app);
 
 
 
+function updateThemeForTimezone(tz) {
+  const now = new Date();
+  const hour = new Intl.DateTimeFormat('en-GB', {
+    timeZone: tz,
+    hour: '2-digit',
+    hour12: false
+  }).format(now);
+  
+  if (hour >= 7 && hour < 18) {
+    earthMaterial.uniforms.map.value = dayTexture;
+    currentTexture = "day"; // Update the current texture state
+    scene.background = daybackgroundTexture;  } else {
+    earthMaterial.uniforms.map.value = nightTexture;
+    currentTexture = "night";
+    scene.background = nightbackgroundTexture;
+  }
+}
 
 
 // Handle Login/Logout when the login button is clicked
