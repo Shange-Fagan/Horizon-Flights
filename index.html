@@ -4483,6 +4483,11 @@ function updateThemeForTimezone(tz) {
   }
 }
 
+  document.getElementById('timezoneSelector').addEventListener('change', function() {
+    selectedZone = this.value;
+    updateClock(selectedZone);
+    updateThemeForTimezone(selectedZone);
+  });
 
 // Handle Login/Logout when the login button is clicked
 document.getElementById("loginButton").addEventListener("click", () => {
@@ -15715,13 +15720,6 @@ animate();*/
   window.addEventListener('mouseup', () => {
     isDragging = false;
     document.body.style.userSelect = ''; // Restore text selection
-  });
-</script>
-<script>
-  document.getElementById('timezoneSelector').addEventListener('change', function() {
-    selectedZone = this.value;
-    updateClock(selectedZone);
-    updateThemeForTimezone(selectedZone);
   });
 </script>
 </body>
