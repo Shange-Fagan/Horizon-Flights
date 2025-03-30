@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="./js/favicon.ico" type="image/x-icon">
   <!-- Stylesheets and scripts will be included here -->
-<link href="https://fonts.cdnfonts.com/css/digital-7" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
   /* Global Styles */
 html, body {
@@ -3513,7 +3513,7 @@ margin-bottom: 1px;
   right: 20px;
   width: 180px;
   height: 72px;
-  font-family: 'Digital-7', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.8rem;
   color: gold;
   background: rgba(0, 0, 0, 0.55);
@@ -3529,7 +3529,9 @@ margin-bottom: 1px;
   align-items: center;
   z-index: 999999;
 }
-#timezoneSelector {
+
+
+	#timezoneSelector {
 		position: absolute;
 		top:660px;
     bottom: 78px;
@@ -4495,15 +4497,6 @@ function updateThemeForTimezone(tz) {
     updateClock(selectedZone);
     updateThemeForTimezone(selectedZone);
   });
-
-  function updateRolexTime() {
-    const now = new Date();
-    const formatted = now.toLocaleTimeString('en-GB', { hour12: false });
-    document.getElementById('rolexTime').textContent = formatted;
-  }
-  setInterval(updateRolexTime, 1000);
-  updateRolexTime(); // Initial call
-
 
 // Handle Login/Logout when the login button is clicked
 document.getElementById("loginButton").addEventListener("click", () => {
