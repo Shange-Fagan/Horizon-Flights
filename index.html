@@ -4334,15 +4334,6 @@ gl_FragColor = vec4(glowColor, intensity);
   <option value="Asia/Dubai">Dubai</option>
   <!-- Add more as needed -->
 </select>
-
-<script>
-  document.getElementById('timezoneSelector').addEventListener('change', function() {
-    selectedZone = this.value;
-    updateClock(selectedZone);
-    updateThemeForTimezone(selectedZone);
-  });
-</script>
-
 <script>
   function updateClock(timezone = 'UTC') {
     const now = new Date();
@@ -15726,7 +15717,13 @@ animate();*/
     document.body.style.userSelect = ''; // Restore text selection
   });
 </script>
-
+<script>
+  document.getElementById('timezoneSelector').addEventListener('change', function() {
+    selectedZone = this.value;
+    updateClock(selectedZone);
+    updateThemeForTimezone(selectedZone);
+  });
+</script>
 </body>
 </html>
 
