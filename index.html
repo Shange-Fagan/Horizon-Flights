@@ -3510,20 +3510,24 @@ margin-bottom: 1px;
   position: fixed;
   bottom: 20px;
   right: 20px;
-  font-size: 1.4rem; /* Bigger text */
-  padding: 15px 25px; /* Bigger bezel */
-  background: rgba(255, 255, 255, 0.05); /* Translucent */
-  color: #fff;
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow:
-    inset 0 0 5px rgba(255, 255, 255, 0.3),
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    0 0 12px rgba(0, 255, 255, 0.05); /* Glowy finish */
-  backdrop-filter: blur(12px); /* Glassy feel */
+  width: 250px; /* Adjusted to fill yellow border */
+  height: 90px; /* Approx based on your outline */
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.8rem;
+  color: gold;
+  background: rgba(0, 0, 0, 0.55); /* Glassy dark */
+  backdrop-filter: blur(8px); /* Frosted glass effect */
+  padding: 15px 20px;
+  border-radius: 20px;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1), 0 0 25px rgba(255, 215, 0, 0.4);
+  border: 2px solid rgba(255, 215, 0, 0.2); /* Gold subtle bezel */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   z-index: 999999;
-  transition: all 0.3s ease;
 }
+
 
 	#timezoneSelector {
 		position: absolute;
