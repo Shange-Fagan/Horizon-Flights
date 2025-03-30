@@ -4525,6 +4525,15 @@ function updateThemeForTimezone(tz) {
     updateThemeForTimezone(selectedZone);
   });
 
+  function updateRolexTime() {
+    const now = new Date();
+    const formatted = now.toLocaleTimeString('en-GB', { hour12: false });
+    document.getElementById('rolexTime').textContent = formatted;
+  }
+  setInterval(updateRolexTime, 1000);
+  updateRolexTime(); // Initial call
+
+
 // Handle Login/Logout when the login button is clicked
 document.getElementById("loginButton").addEventListener("click", () => {
     const user = auth.currentUser;
