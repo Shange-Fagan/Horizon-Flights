@@ -9691,8 +9691,10 @@ if (missingFields.length > 0) {
     overlay.style.width= '46%';
     overlay.style.height= '77%';
     overlay.classList.add('show');
+    overlay2.style.setProperty("display", "none", "important");
     overlay2.style.width= '0%';
     overlay2.style.height= '0%';
+    overlay2.classList.add('hide');
     
         overlay.innerHTML = `
             <div class="spinner-container">
@@ -10283,9 +10285,10 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
     overlay.style.width= '46%';
     overlay.style.height= '75%';
     overlay.classList.add('show');
-
+    overlay2.style.setProperty("display", "none", "important");
     overlay2.style.width= '0%';
     overlay2.style.height= '0%';
+    overlay2.classList.add('hide');
     
         overlay.innerHTML = `
             <div class="spinner-container">
@@ -10511,8 +10514,10 @@ document.getElementById('airbnbOption').addEventListener('click', () => {
     overlay.style.width= '46%';
     overlay.style.height= '75%';
     overlay.classList.add('show');
+    overlay2.style.setProperty("display", "none", "important");
     overlay2.style.width= '0%';
     overlay2.style.height= '0%';
+    overlay2.classList.add('hide');
     
         overlay.innerHTML = `
             <div class="spinner-container">
@@ -10681,8 +10686,10 @@ document.getElementById('expediaOption').addEventListener('click', () => {
     overlay.style.width= '46%';
     overlay.style.height= '75%';
     overlay.classList.add('show');
+    overlay2.style.setProperty("display", "none", "important");
     overlay2.style.width= '0%';
     overlay2.style.height= '0%';
+    overlay2.classList.add('hide');
     
         overlay.innerHTML = `
             <div class="spinner-container">
@@ -13729,8 +13736,10 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
     overlay.style.width= '46%';
     overlay.style.height= '75%';
     overlay.classList.add('show');    
+    overlay2.style.setProperty("display", "none", "important");
     overlay2.style.width= '0%';
     overlay2.style.height= '0%';
+    overlay2.classList.add('hide');
 // Ensure the active plane animation continues
     overlay.innerHTML = `
             <div class="spinner-container">
