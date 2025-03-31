@@ -3534,10 +3534,15 @@ margin-bottom: 1px;
   text-align: center; /* this helps with multiline centering */
   z-index: 999999;
 }.rolex-logo {
+  position: fixed;
+  top: 20px;
   width: 35px;        /* clean and proportional */
   height: 35px;       /* square aspect ratio */
-  margin-top: 5px;    /* space from the top of the clock box */
-  filter: brightness(1.5) saturate(1.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; /* this is key */
+  text-align: center; /* this helps with multiline centering */
   z-index: 999999999;
 }
 
