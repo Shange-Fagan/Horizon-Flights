@@ -3507,13 +3507,22 @@ margin-bottom: 1px;
     background: lightgrey; /* Light grey background on hover */
     cursor: pointer;
 }
+	@font-face {
+  font-family: 'Digital-7';
+  src: url('/fonts/Digital7.ttf') format('truetype');
+}
+
+#rolexClock {
+  font-family: 'Digital-7', monospace;
+}
+
 	#rolexClock {
   position: fixed;
   bottom: 20px;
   right: 20px;
   width: 180px;
   height: 72px;
-  font-family: 'Digital-7', sans-serif;
+  font-family: 'Digital-7', monospace;
   font-size: 1.8rem;
   color: gold;
   background: rgba(0, 0, 0, 0.55);
