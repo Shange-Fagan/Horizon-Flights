@@ -3508,7 +3508,11 @@ margin-bottom: 1px;
     cursor: pointer;
 }
 	@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap'); /* Digital Clock Style */
-
+.rolex-logo {
+  height: 20px;
+  margin-bottom: 8px;
+  filter: brightness(1.5) saturate(1.2);
+}
 	#rolexClock {
   position: fixed;
   bottom: 20px;
@@ -4343,7 +4347,9 @@ gl_FragColor = vec4(glowColor, intensity);
   });
 </script>
 	<div id="rolexClock">
+	<div class="rolex-logo">
 	 <img src="js/Logo_da_Rolex.png" alt="Google Icon" style="width: 10px; height: 10px;">
+	</div>
 	</div>
 	<select id="timezoneSelector">
   <option value="UTC">UTC</option>
