@@ -3533,15 +3533,14 @@ margin-bottom: 1px;
   text-align: center; /* this helps with multiline centering */
   z-index: 999999;
 }.rolex-logo {
-  position: fixed;
+  width: 35px;
+  height: 35px;
   top: 10px;
-  width: 35px;        /* clean and proportional */
-  height: 25px;       /* square aspect ratio */
-  display: block;
-  flex-direction: column;
-  align-items: center; /* this is key */
-  text-align: center; /* this helps with multiline centering */
-  z-index: 999999999;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  filter: brightness(1.5) saturate(1.2);
+  z-index: 9999999;
+  display: block !important;
 }
 
 
@@ -4352,7 +4351,12 @@ gl_FragColor = vec4(glowColor, intensity);
   });
 </script>
 <div id="rolexClock">
-	 <img class="rolex-logo" src="js/Logo_da_Rolex.png" alt="Google Icon">
+	 <img
+	       class="rolex-logo" 
+	       src="js/Logo_da_Rolex.png"
+	       alt="Google Icon"
+	       style="width: 35px; height: 35px; margin-top: 5px; margin-bottom: 5px;"
+	/>
 </div>
 	<select id="timezoneSelector">
   <option value="UTC">UTC</option>
