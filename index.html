@@ -4356,6 +4356,7 @@ gl_FragColor = vec4(glowColor, intensity);
 	       alt="Google Icon"
 	       style="width: 35px; height: 35px; margin-top: 5px; margin-bottom: 5px;"
 	  />
+	<div id="clockText">00:00:00</div> <!-- This gets updated -->
 </div>
 	<select id="timezoneSelector">
   <option value="UTC">UTC</option>
@@ -4366,19 +4367,28 @@ gl_FragColor = vec4(glowColor, intensity);
 </select>
 <script>
   function updateClock(timezone = 'UTC') {
-    const now = new Date();
-    const options = {
-      timeZone: timezone,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    };
-    const timeString = new Intl.DateTimeFormat('en-GB', options).format(now);
-    document.getElementById('rolexClock').innerText = timeString;
-  }
+  const now = new Date();
+  const options = {
+    timeZone: timezone,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  };
+  const timeString = new Intl.DateTimeFormat('en-GB', options).format(now);
+  document.getElementById('clockText').innerText = timeString; // only update time
+}
 
-  setInterval(() => updateClock(selectedZone), 1000);
-  let selectedZone = 'UTC'; // default
+let selectedZone = 'UTC'; // default
+
+document.getElementById('timezoneSelector').addEventListener('change', (e) => {
+  selectedZone = e.target.value;
+  updateClock(selectedZone);
+});
+
+setInterval(() => updateClock(selectedZone), 1000);
+updateClock(selectedZone); // run once on page load
+
 </script>
 
   <!-- Scripts -->
