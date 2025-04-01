@@ -3367,8 +3367,20 @@ crossorigin="anonymous"></script>
   cursor: pointer;
   font-size: 16px;
 }
+.popup-submit-btn2 {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
 .popup-submit-btn:hover {
+  background-color: #007acc;
+}
+	.popup-submit-btn2:hover {
   background-color: #007acc;
 }
 
@@ -3868,7 +3880,7 @@ margin-bottom: 1px;
     <p class="instruction-text"> 
       🌍 Enjoy <strong>premium themes</strong> and book flights like a VIP 
       💎 <strong>Sign Up</strong> for our <strong>premium subscription</strong> to explore the world in <strong>first-class</strong> style! ✈️</p>
-	        <button style="justify-content: center; justify-items: center; align-items: center; margin-left: 56.5px;"type="submit" class="popup-submit-btn">Upgrade Now</button>
+	        <button style="justify-content: center; justify-items: center; align-items: center; margin-left: 56.5px;"type="submit" class="popup-submit-btn2">Upgrade Now</button>
   </div>
   <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/login--2.png" alt="Button Click" class="glove-hand">
@@ -4504,8 +4516,10 @@ const auth = getAuth(app);
     });
 });*/
 
-
-
+const upgradetoChristButton = document.querySelector('.popup-submit-btn2')
+upgradetoChristButton.addEventListener("click", () => {
+  handlePremiumSignup('Jetsetter Theme');
+	  })
 function updateThemeForTimezone(tz) {
   const now = new Date();
   const hour = new Intl.DateTimeFormat('en-GB', {
