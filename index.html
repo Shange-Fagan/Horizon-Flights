@@ -6984,6 +6984,7 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
 */
 let currentTexture = "night"; // Initialize with the default texture state ("day" or "night")
 let currentmarkerMaterial = "night";
+const logo = document.querySelector('.rolex-logo');
 	  function toggleDayNight() {
   // Ensure `isDay` is properly toggled
   if (isDay) {
@@ -7060,6 +7061,7 @@ let currentmarkerMaterial = "night";
   currentmarkerMaterial = "night";
   // Switching from Day to Night
   handleThemeChange("night");
+logo.style.filter = 'brightness(1.5) saturate(1.2)';
   /*const searchBtn = document.getElementById('searchBtn');
   searchBtn.style.backgroundColor = '#00aaff';
     const regionPopupButton = document.querySelector('#regionPopup button'); // Selects the button inside #regionPopup
@@ -7146,6 +7148,7 @@ inputsAndSelects.forEach((element) => {
   currentmarkerMaterial = "day";
  // Switching from Night to Day
  handleThemeChange("day");
+logo.style.filter = 'brightness(0.8) saturate(1)';
   /*const searchBtn = document.getElementById('searchBtn');
   searchBtn.style.backgroundColor = '#00aaff';
     const regionPopupButton = document.querySelector('#regionPopup button'); // Selects the button inside #regionPopup
