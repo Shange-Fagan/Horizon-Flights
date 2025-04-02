@@ -4454,7 +4454,6 @@ if (!firebase.apps.length) {
 //import  Luxon from 'https://cdnjs.cloudflare.com/ajax/libs/luxon/3.3.0/luxon.min.js'; //(if using modules)
 //import { MeshLine, MeshLineMaterial } from './js/THREE.MeshLine.js';
 // Scene Setup
-	  import { DateTime } from "https://cdn.skypack.dev/luxon"; // or include via script tag
   const scene = new THREE.Scene();
   /*const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);*/
   let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
@@ -4545,8 +4544,7 @@ function updateThemeForTimezone(tz) {
 window.addEventListener("load", () => {
   const selectedZone = document.getElementById("timezoneSelector").value;
   updateThemeByTimezone(selectedZone);
-});
-
+});	  import { DateTime } from "https://cdn.skypack.dev/luxon"; // or include via script tag
 function updateThemeByTimezone(timezone) {
   const hour = DateTime.now().setZone(timezone).hour;
 
