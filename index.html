@@ -5274,7 +5274,7 @@ guestPopup.appendChild(div);
 });
 
 document.getElementById('addLightsbutton3').addEventListener('click', () => {
-    pinkThemeActive = !pinkThemeActive;  // Toggle pink theme mode
+    /*pinkThemeActive = !pinkThemeActive;  // Toggle pink theme mode
 
     const themeToggleChecked = document.getElementById('themeToggle').checked;
     const pinkButton = document.getElementById('addLightsbutton3');
@@ -5293,11 +5293,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
 
     if (pinkThemeActive) {
         pinkButton.textContent = "\u00A0\u00A0\u00A0Pink Theme✅";
-        // Remove the main globe from the scene
-        // Remove the original `globe` object from the scene
-        /*if (scene.children.includes(globe)) {
-            scene.remove(globe);
-        }*/
+        
         // Change all Airbnb logos
         Array.from(airbnbLogos).forEach(logo => {
             logo.src = "js/hotel-8.png";
@@ -5327,29 +5323,6 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
             rt.fromEquirectangularTexture(renderer, texture);
             scene.background = rt.texture;
         });
-        /*if (!globe2.geometry.attributes.position || globe2.geometry.attributes.position.count === 0) {
-    console.warn("Globe2 geometry has invalid position attributes. Skipping material update.");
-    return;
-}*/
-        //addCountryOutlines(); // Add the country outlines
-
-        // Create Transparent Reflective Material for globe2
-        /*globe2.material = new THREE.MeshPhysicalMaterial({
-            color: new THREE.Color(0xffffff), // Neutral white to allow reflections
-            transparent: true,
-            opacity: 0.3, // Semi-transparent like glass
-            metalness: 1.0, // Fully metallic for high reflectivity
-            roughness: 0.1, // Slight roughness to give a realistic feel
-            envMapIntensity: 1.5, // Enhances reflections
-            clearcoat: 1.0, // Extra glossy surface
-            clearcoatRoughness: 0.1,
-            reflectivity: 1.0 // Maximum reflectivity
-        });
-        scene.environment = scene.background;
-        globe2.geometry.computeBoundingSphere();
-        globe2.geometry.computeVertexNormals();*/
-        //scene.background = nightbackgroundTexture;
-        //earthMaterial.uniforms.map.value = dayTexture;
 
     } else {
         pinkButton.textContent = "\u00A0\u00A0\u00A0Blue Theme✅";
@@ -5365,27 +5338,7 @@ document.getElementById('addLightsbutton3').addEventListener('click', () => {
         postLikeBtn.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         postViewLink.forEach(day => day.style.setProperty('background-color', '#00aaff', 'important'));
         revertToPreviousTheme(); // Revert theme if "Undo" is clicked
-        //scene.background = nightbackgroundTexture;
-        //earthMaterial.uniforms.map.value = nightTexture;
-        // Restore the original globe
-        //scene.add(globe);
-        removeCountryOutlines(); // Remove the country outlines
-        // Reset globe2 material to normal
-        /*globe2.material = new THREE.MeshPhongMaterial({
-            shininess: 15,
-            map: earthMaterial.uniforms.map.value, // Ensure it uses the correct texture
-            specularMap: specularMap,
-            bumpMap: bumpMap,
-            bumpScale: 0.05,
-            normalMap: normalMap,
-            blending: THREE.AdditiveBlending,
-            specular: new THREE.Color('grey')
-        });
-
-        globe2.geometry.computeBoundingSphere();
-        globe2.geometry.computeVertexNormals();
-        globe.geometry.computeBoundingSphere();
-        globe.geometry.computeVertexNormals();*/
+        
         if (previousTheme === "day") {
         earthMaterial.uniforms.map.value = dayTexture;
     } else if (previousTheme === "night") {
@@ -5413,6 +5366,7 @@ if (pinkThemeActive) {
 }
 
     document.getElementById('themeToggle').dispatchEvent(new Event('change'));
+*/
 });
 
 document.getElementById('themeToggle2').addEventListener('change', (event) => {
