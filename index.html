@@ -4545,13 +4545,20 @@ window.addEventListener("load", () => {
   const selectedZone = document.getElementById("timezoneSelector").value;
   updateThemeByTimezone(selectedZone);
 });	  import { DateTime } from "https://cdn.skypack.dev/luxon"; // or include via script tag
+let currentTexture; // Initialize with the default texture state ("day" or "night")
 function updateThemeByTimezone(timezone) {
   const hour = DateTime.now().setZone(timezone).hour;
 
   if (hour >= 6 && hour < 18) {
     earthMaterial.uniforms.map.value = dayTexture;
+	      currentTexture = "day"; // Update the current texture state
+	      scene.background = daybackgroundTexture;
+
   } else {
     earthMaterial.uniforms.map.value = nightTexture;
+	      currentTexture = "night";
+	      scene.background = nightbackgroundTexture;
+
   }
     earthMaterial.uniforms.map.needsUpdate = true;
 }
@@ -6971,7 +6978,7 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
 	// Add Event Listener to the Toggle Button
 	    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 */
-let currentTexture = ""; // Initialize with the default texture state ("day" or "night")
+//let currentTexture; // Initialize with the default texture state ("day" or "night")
 let currentmarkerMaterial = "night";
 const logo = document.querySelector('.rolex-logo');
 	  function toggleDayNight() {
