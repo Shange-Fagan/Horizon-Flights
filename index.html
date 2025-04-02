@@ -4492,6 +4492,14 @@ const auth = getAuth(app);
             alert("Thank you for subscribing!");
             // Reset the input field
             document.getElementById("emailInput").value = "";
+	    fetch("https://a7ba-2a02-c7c-3945-5100-60ae-5176-a852-da6d.ngrok-free.app/send-welcome-email", {
+	    method: "POST",
+	    headers: { "Content-Type": "application/json" },
+	    body: JSON.stringify({ email }),
+	})
+	.then(res => res.json())
+	.then(data => console.log("Welcome email response:", data))
+	.catch(err => console.error("Error sending welcome email:", err));
         })
         .catch((error) => {
             console.error("Error storing email in Firestore: ", error);
