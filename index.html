@@ -9148,7 +9148,7 @@ function removeCountryOutlines() {
   createEarthGlow();
   createEarthAperture();
 	 //const dummy = new THREE.Object3D();
-	  /*const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
+	  const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
     const markerMaterial = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
     onBeforeCompile: (shader) => {
@@ -9186,7 +9186,8 @@ function removeCountryOutlines() {
     },
   });
   markerMaterial.defines = { USE_UV: '' };
-	  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);*/
+	  let markers
+	  markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
     // Creating Markers
     const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);
     const markerMaterial = new THREE.MeshBasicMaterial({
@@ -15457,7 +15458,7 @@ cheapest2: markersData4,
 
 let activeMarkersData = markersData; // Default to markersData
 let activeLabel = null; // Keep track of open iframe
-let markers; // Declare it outside, so it is accessible globally.
+//let markers; // Declare it outside, so it is accessible globally.
 
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
