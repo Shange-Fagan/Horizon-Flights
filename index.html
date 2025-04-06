@@ -9148,7 +9148,7 @@ function removeCountryOutlines() {
   createEarthGlow();
   createEarthAperture();
 	 const dummy = new THREE.Object3D();
-	  const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
+	  /*const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
     const markerMaterial = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
     onBeforeCompile: (shader) => {
@@ -9186,7 +9186,7 @@ function removeCountryOutlines() {
     },
   });
   markerMaterial.defines = { USE_UV: '' };
-	  let markers
+	  let markers*/
 	  //markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
     // Creating Markers
     const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);
