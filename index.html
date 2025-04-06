@@ -9147,7 +9147,8 @@ function removeCountryOutlines() {
 
   createEarthGlow();
   createEarthAperture();
-	 const dummy = new THREE.Object3D();
+	  let dummy;
+	 dummy = new THREE.Object3D();
 	  /*const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
     const markerMaterial = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
@@ -15461,35 +15462,39 @@ let activeLabel = null; // Keep track of open iframe
 //let markers; // Declare it outside, so it is accessible globally.
 
 function loadMarkers(selectedCategory) {
-  // Remove existing markers from the scene
   scene.remove(markers);
-	console.log('Selected category:', selectedCategory);
-  console.log('Available categories:', markersDataSets);
-  console.log('Markers Data Sets:', markersDataSets);
-// Set active markers data
   activeMarkersData = markersDataSets[selectedCategory];
+
   if (!activeMarkersData) {
     console.error(`No markers data found for category: ${selectedCategory}`);
-    activeMarkersData = []; // Set it to an empty array to prevent further errors
+    activeMarkersData = [];
   }
-  // Create new markers for the selected category
+
   const markerCount = activeMarkersData.length;
-   markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-  //const dummy = new THREE.Object3D();
+  markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+
+  dummy = new THREE.Object3D(); // 🛠️ This was missing
+
   activeMarkersData.forEach((data, index) => {
-    const [radius, phi, theta] = data.position;
-    dummy.position.setFromSphericalCoords(radius, phi, theta);
-    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
-    dummy.updateMatrix();
-    markers.setMatrixAt(index, dummy.matrix);
-    data.worldPosition = dummy.position.clone();
-  });
+  if (!data || !Array.isArray(data.position) || data.position.length < 3) {
+    console.warn(`Invalid marker at index ${index}:`, data);
+    return;
+  }
+
+  const [radius, phi, theta] = data.position;
+
+  dummy.position.setFromSphericalCoords(radius, phi, theta);
+  dummy.lookAt(dummy.position.clone().setLength(radius + 1));
+  dummy.updateMatrix();
+  markers.setMatrixAt(index, dummy.matrix);
+  data.worldPosition = dummy.position.clone(); // safe now
+});
+
 
   scene.add(markers);
-
-  // Add interactivity to the new markers
   setupMarkerInteraction();
 }
+
 	
 // Set up marker click event
 function setupMarkerInteraction() {
