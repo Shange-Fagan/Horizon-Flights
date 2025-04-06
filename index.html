@@ -15457,11 +15457,11 @@ cheapest2: markersData4,
 
 let activeMarkersData = markersData; // Default to markersData
 let activeLabel = null; // Keep track of open iframe
-//let markers; // Declare it outside, so it is accessible globally.
+let markers; // Declare it outside, so it is accessible globally.
 
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
-  //scene.remove(markers);
+  scene.remove(markers);
 	console.log('Selected category:', selectedCategory);
   console.log('Available categories:', markersDataSets);
   console.log('Markers Data Sets:', markersDataSets);
@@ -15472,10 +15472,10 @@ function loadMarkers(selectedCategory) {
     activeMarkersData = []; // Set it to an empty array to prevent further errors
   }
   // Create new markers for the selected category
-  //const markerCount = activeMarkersData.length;
-  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-  //const dummy = new THREE.Object3D();
-//const dummy = new THREE.Object3D();
+  const markerCount = activeMarkersData.length;
+  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  const dummy = new THREE.Object3D();
+const dummy = new THREE.Object3D();
   activeMarkersData.forEach((data, index) => {
     const [radius, phi, theta] = data.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
@@ -15485,12 +15485,12 @@ function loadMarkers(selectedCategory) {
     data.worldPosition = dummy.position.clone();
   });
 
-  //scene.add(markers);
+  scene.add(markers);
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
 }
-	  
+	
 // Set up marker click event
 function setupMarkerInteraction() {
   window.addEventListener('pointerdown', (event) => {
