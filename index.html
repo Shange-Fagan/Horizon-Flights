@@ -15475,7 +15475,6 @@ function loadMarkers(selectedCategory) {
   const markerCount = activeMarkersData.length;
   const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
   const dummy = new THREE.Object3D();
-const dummy = new THREE.Object3D();
   activeMarkersData.forEach((data, index) => {
     const [radius, phi, theta] = data.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
