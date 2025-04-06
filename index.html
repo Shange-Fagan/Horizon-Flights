@@ -9147,7 +9147,7 @@ function removeCountryOutlines() {
 
   createEarthGlow();
   createEarthAperture();
-	 const dummy = new THREE.Object3D();
+	 //const dummy = new THREE.Object3D();
 	  /*const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
     const markerMaterial = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
@@ -9288,7 +9288,7 @@ if (window.innerWidth <= 768) {
 // Creating Markers
 //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 
-const dummy = new THREE.Object3D();
+//const dummy = new THREE.Object3D();
 markersData.forEach((data, index) => {
   const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
 
