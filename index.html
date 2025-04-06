@@ -8787,7 +8787,7 @@ function loadGenericMarkers() {
 
     // Set position using spherical coordinates
     dummy.position.set(x, y, z);
-
+  
     // Make the marker face outward from the globe (normal vector)
     dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(5)); // Assuming radius 5 for the globe
 
@@ -9147,8 +9147,7 @@ function removeCountryOutlines() {
 
   createEarthGlow();
   createEarthAperture();
-	  let dummy;
-	 dummy = new THREE.Object3D();
+	 const dummy = new THREE.Object3D();
 	  /*const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
     const markerMaterial = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
@@ -9186,8 +9185,8 @@ function removeCountryOutlines() {
       );
     },
   });
-  markerMaterial.defines = { USE_UV: '' };*/
-	  //markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+  markerMaterial.defines = { USE_UV: '' };
+	  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);*/
     // Creating Markers
     const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);
     const markerMaterial = new THREE.MeshBasicMaterial({
@@ -9226,8 +9225,7 @@ function removeCountryOutlines() {
       );
     },
   });
-	let markers;
-    //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+    const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 // Function to load generic markers
 function loadGenericMarkers(markersData) {
   // Check if the scene, marker data, and necessary variables are available
@@ -9288,22 +9286,22 @@ if (window.innerWidth <= 768) {
 }
 
 // Creating Markers
-//const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 
-//const dummy = new THREE.Object3D();
-//markersData.forEach((data, index) => {
-  //const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
+const dummy = new THREE.Object3D();
+markersData.forEach((data, index) => {
+  const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
 
   // Use setFromSphericalCoords for spherical positioning on the globe
-  //dummy.position.setFromSphericalCoords(radius, phi, theta);
-  //dummy.lookAt(dummy.position.clone().setLength(radius + 1)); // Ensure marker faces outward
-  //dummy.updateMatrix();
-  //markers.setMatrixAt(index, dummy.matrix);
+  dummy.position.setFromSphericalCoords(radius, phi, theta);
+  dummy.lookAt(dummy.position.clone().setLength(radius + 1)); // Ensure marker faces outward
+  dummy.updateMatrix();
+  markers.setMatrixAt(index, dummy.matrix);
 // Log marker data
-//console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}`);
+console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}`);
 
-  //data.worldPosition = dummy.position.clone(); // Store position for interaction (optional)
-//});
+  data.worldPosition = dummy.position.clone(); // Store position for interaction (optional)
+});
 // Log region and saving marker
 const region = markersData[0]?.region; // Assuming markersData has region info
   if (region) {
@@ -9318,7 +9316,8 @@ genericMarkers[markersData.region] = markers;
 scene.add(markers);
 }
 
-   //loadGenericMarkers(markersData);
+  
+  loadGenericMarkers(markersData);
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
 // Assuming each marker has a reference in the HTML list and vice versa
 function highlightMarker(markerId) {
@@ -13647,7 +13646,6 @@ async function fetchMarkers(location, category) {
     console.error("Failed to fetch markers:", error);
   }
 }
-	/*  
 let activeMarkersData2 = markers; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
 // Function to add markers to the globe
@@ -13683,7 +13681,7 @@ function addMarkersToGlobe(markers) {
     markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
 
     // Add the marker to the scene
-    //scene.add(markerMesh);
+    scene.add(markerMesh);
     setupMarkerInteraction2();
   });
 }
@@ -13817,7 +13815,7 @@ function createMarkerMesh(lat, lng) {
 
   return markerMesh;
 }
-*/
+
 	  // Clear the existing markers and add new ones based on the category
     clearExistingMarkers();
     markersData.forEach(markers => {
@@ -15449,11 +15447,11 @@ window.addEventListener('pointerdown', (event) => {
 	  // Define different markers data sets
 const markersDataSets = {
     general: markersData,
-  cheapest: markersData2,
-  midPrice: markersData3,
+  cheapest: markersData,
+  midPrice: markersData,
   expensive: markersData,
-cheapest2: markersData4,
-  midPrice2: markersData5,
+cheapest2: markersData,
+  midPrice2: markersData,
   expensive2: markersData,
 };
 
@@ -15462,40 +15460,37 @@ let activeLabel = null; // Keep track of open iframe
 //let markers; // Declare it outside, so it is accessible globally.
 
 function loadMarkers(selectedCategory) {
-  scene.remove(markers);
+  // Remove existing markers from the scene
+  //scene.remove(markers);
+	console.log('Selected category:', selectedCategory);
+  console.log('Available categories:', markersDataSets);
+  console.log('Markers Data Sets:', markersDataSets);
+// Set active markers data
   activeMarkersData = markersDataSets[selectedCategory];
-
   if (!activeMarkersData) {
     console.error(`No markers data found for category: ${selectedCategory}`);
-    activeMarkersData = [];
+    activeMarkersData = []; // Set it to an empty array to prevent further errors
   }
-
-  const markerCount = activeMarkersData.length;
-  markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-
-  dummy = new THREE.Object3D(); // 🛠️ This was missing
-
+  // Create new markers for the selected category
+  //const markerCount = activeMarkersData.length;
+  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  //const dummy = new THREE.Object3D();
+//const dummy = new THREE.Object3D();
   activeMarkersData.forEach((data, index) => {
-  if (!data || !Array.isArray(data.position) || data.position.length < 3) {
-    console.warn(`Invalid marker at index ${index}:`, data);
-    return;
-  }
+    const [radius, phi, theta] = data.position;
+    dummy.position.setFromSphericalCoords(radius, phi, theta);
+    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
+    dummy.updateMatrix();
+    markers.setMatrixAt(index, dummy.matrix);
+    data.worldPosition = dummy.position.clone();
+  });
 
-  const [radius, phi, theta] = data.position;
+  //scene.add(markers);
 
-  dummy.position.setFromSphericalCoords(radius, phi, theta);
-  dummy.lookAt(dummy.position.clone().setLength(radius + 1));
-  dummy.updateMatrix();
-  markers.setMatrixAt(index, dummy.matrix);
-  data.worldPosition = dummy.position.clone(); // safe now
-});
-
-
-  scene.add(markers);
+  // Add interactivity to the new markers
   setupMarkerInteraction();
 }
-
-	
+	  
 // Set up marker click event
 function setupMarkerInteraction() {
   window.addEventListener('pointerdown', (event) => {
@@ -15565,11 +15560,11 @@ setTimeout(() => {
         border: none; 
         color: rgba(255, 255, 255, 0.65); 
         cursor: pointer;
-        display: flex;">
+        display: none;">
         ● ● ●
       </button>
       <select id="priceCategorySelect-${data.id}" style=
-      "display: none;"
+      "display:none;"
       "top: 350px !important;"
       "right:30px !important;"
       >
@@ -15879,4 +15874,3 @@ animate();*/
 </script>
 </body>
 </html>
-
