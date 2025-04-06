@@ -9313,7 +9313,7 @@ const region = markersData[0]?.region; // Assuming markersData has region info
 // Save the marker to the genericMarkers object based on region
 genericMarkers[markersData.region] = markers;
 // Add the markers to the scene
-//scene.add(markers);
+scene.add(markers);
 }
 
    //loadGenericMarkers(markersData);
@@ -13645,7 +13645,7 @@ async function fetchMarkers(location, category) {
     console.error("Failed to fetch markers:", error);
   }
 }
-	  /*
+	/*  
 let activeMarkersData2 = markers; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
 // Function to add markers to the globe
@@ -13681,7 +13681,7 @@ function addMarkersToGlobe(markers) {
     markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
 
     // Add the marker to the scene
-    scene.add(markerMesh);
+    //scene.add(markerMesh);
     setupMarkerInteraction2();
   });
 }
@@ -13756,7 +13756,7 @@ function openMarkerLabel2(data) {
     activeLabel2 = null;
   }
 }
-*/
+
 // Function to create marker mesh for the globe
 function createMarkerMesh(lat, lng) {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
@@ -13815,7 +13815,7 @@ function createMarkerMesh(lat, lng) {
 
   return markerMesh;
 }
-
+*/
 	  // Clear the existing markers and add new ones based on the category
     clearExistingMarkers();
     markersData.forEach(markers => {
