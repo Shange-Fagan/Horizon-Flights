@@ -9225,7 +9225,7 @@ function removeCountryOutlines() {
       );
     },
   });
-    const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+    //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 // Function to load generic markers
 function loadGenericMarkers(markersData) {
   // Check if the scene, marker data, and necessary variables are available
@@ -9286,7 +9286,7 @@ if (window.innerWidth <= 768) {
 }
 
 // Creating Markers
-const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+//const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 
 const dummy = new THREE.Object3D();
 markersData.forEach((data, index) => {
