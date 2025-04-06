@@ -8787,7 +8787,7 @@ function loadGenericMarkers() {
 
     // Set position using spherical coordinates
     dummy.position.set(x, y, z);
-  
+
     // Make the marker face outward from the globe (normal vector)
     dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(5)); // Assuming radius 5 for the globe
 
@@ -9289,19 +9289,19 @@ if (window.innerWidth <= 768) {
 //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 
 //const dummy = new THREE.Object3D();
-markersData.forEach((data, index) => {
-  const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
+//markersData.forEach((data, index) => {
+  //const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
 
   // Use setFromSphericalCoords for spherical positioning on the globe
-  dummy.position.setFromSphericalCoords(radius, phi, theta);
-  dummy.lookAt(dummy.position.clone().setLength(radius + 1)); // Ensure marker faces outward
-  dummy.updateMatrix();
-  markers.setMatrixAt(index, dummy.matrix);
+  //dummy.position.setFromSphericalCoords(radius, phi, theta);
+  //dummy.lookAt(dummy.position.clone().setLength(radius + 1)); // Ensure marker faces outward
+  //dummy.updateMatrix();
+  //markers.setMatrixAt(index, dummy.matrix);
 // Log marker data
-console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}`);
+//console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}`);
 
-  data.worldPosition = dummy.position.clone(); // Store position for interaction (optional)
-});
+  //data.worldPosition = dummy.position.clone(); // Store position for interaction (optional)
+//});
 // Log region and saving marker
 const region = markersData[0]?.region; // Assuming markersData has region info
   if (region) {
