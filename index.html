@@ -9225,7 +9225,8 @@ function removeCountryOutlines() {
       );
     },
   });
-    const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+	  let markers = null;
+    //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 // Function to load generic markers
 function loadGenericMarkers(markersData) {
   // Check if the scene, marker data, and necessary variables are available
@@ -15461,9 +15462,10 @@ let activeLabel = null; // Keep track of open iframe
 	  function loadMarkers(selectedCategory) {
   if (markers) {
     scene.remove(markers);
+    markers.geometry.dispose();
+    markers.material.dispose();
   }
 
-  console.log('Selected category:', selectedCategory);
   activeMarkersData = markersDataSets[selectedCategory];
 
   if (!activeMarkersData) {
