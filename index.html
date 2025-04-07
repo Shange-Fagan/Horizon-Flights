@@ -7634,8 +7634,8 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
         }
     });
         regionPopup.style.display = "none";
-        earthMaterial.uniforms.map.value = LightsTexture;
-        markerMaterial.color.set(lightsmarkerMaterial);
+        earthMaterial.uniforms.map.value = dayTexture;
+        markerMaterial.color.set(daymarkerMaterial);
         const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg'
 
         loader.load(selectedHDRI, function(texture) {
