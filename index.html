@@ -15458,38 +15458,40 @@ cheapest2: markersData,
 let activeMarkersData = markersData; // Default to markersData
 let activeLabel = null; // Keep track of open iframe
 //let markers; // Declare it outside, so it is accessible globally.
+	  function loadMarkers(selectedCategory) {
+  if (markers) {
+    scene.remove(markers);
+  }
 
-function loadMarkers(selectedCategory) {
-  // Remove existing markers from the scene
-  //scene.remove(markers);
-	console.log('Selected category:', selectedCategory);
-  console.log('Available categories:', markersDataSets);
-  console.log('Markers Data Sets:', markersDataSets);
-// Set active markers data
+  console.log('Selected category:', selectedCategory);
   activeMarkersData = markersDataSets[selectedCategory];
+
   if (!activeMarkersData) {
     console.error(`No markers data found for category: ${selectedCategory}`);
-    activeMarkersData = []; // Set it to an empty array to prevent further errors
+    activeMarkersData = [];
   }
-  // Create new markers for the selected category
-  //const markerCount = activeMarkersData.length;
-  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-  //const dummy = new THREE.Object3D();
-//const dummy = new THREE.Object3D();
+
+  const markerCount = activeMarkersData.length;
+  markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  const dummy = new THREE.Object3D();
+
   activeMarkersData.forEach((data, index) => {
-    const [radius, phi, theta] = data.position;
-    dummy.position.setFromSphericalCoords(radius, phi, theta);
-    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
-    dummy.updateMatrix();
-    markers.setMatrixAt(index, dummy.matrix);
-    data.worldPosition = dummy.position.clone();
+    if (data && data.position) {
+      const [radius, phi, theta] = data.position;
+      dummy.position.setFromSphericalCoords(radius, phi, theta);
+      dummy.lookAt(dummy.position.clone().setLength(radius + 1));
+      dummy.updateMatrix();
+      markers.setMatrixAt(index, dummy.matrix);
+      data.worldPosition = dummy.position.clone();
+    } else {
+      console.warn(`Missing position data at index ${index}`, data);
+    }
   });
 
   //scene.add(markers);
-
-  // Add interactivity to the new markers
   setupMarkerInteraction();
 }
+
 	  
 // Set up marker click event
 function setupMarkerInteraction() {
