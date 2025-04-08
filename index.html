@@ -4450,10 +4450,12 @@ const auth = getAuth(app);
 
 const upgradetoChristButton = document.querySelector('.popup-submit-btn2')
 upgradetoChristButton.addEventListener("click", () => {
-firebase.auth().onAuthStateChanged(user => {
+const user = firebase.auth().currentUser;
   if (user) {
-handlePremiumSignup('Jetsetter Theme');  }
-})
+    handlePremiumSignup("Jetsetter Theme");
+  } else {
+    alert("Please log in to upgrade.");
+  }
 })
 function updateThemeForTimezone(tz) {
   const now = new Date();
@@ -7322,11 +7324,13 @@ function showPremiumPopup() {
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-  firebase.auth().onAuthStateChanged(user => {
+  const user = firebase.auth().currentUser;
   if (user) {
-handlePremiumSignup('Jetsetter Theme');  }
+    handlePremiumSignup("Jetsetter Theme");
+  } else {
+    alert("Please log in to upgrade.");
+  }
 })
-	  })
     premiumPopup.appendChild(upgradeButton);
 
     document.body.appendChild(overlay);
@@ -8441,10 +8445,12 @@ function showcustombackdropPremiumPopup() {
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-      firebase.auth().onAuthStateChanged(user => {
-	  if (user) {
-	handlePremiumSignup('Custom Backdrops');  }
-	})
+      const user = firebase.auth().currentUser;
+	if (user) {
+	    handlePremiumSignup("Custom Backdrops");
+	 } else {
+	    alert("Please log in to upgrade.");
+	  }
     })
     premiumPopup.appendChild(upgradeButton);
 
