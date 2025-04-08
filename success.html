@@ -48,6 +48,32 @@
 
   gtag('config', 'AW-16857735506');
 </script>
+    <script>
+        async function checkPremiumOnSuccessPage() {
+  const user = firebase.auth().currentUser;
+  if (!user) return;
+
+  const response = await fetch(`https://a7ba-2a02-c7c-3945-5100-60ae-5176-a852-da6d.ngrok-free.app/user-status?email=${user.email}`);
+  const data = await response.json();
+
+  if (data.isPremium) {
+    // Remove popup manually if it exists
+    document.getElementById("premiumPopup")?.remove();
+    document.getElementById("premiumOverlay")?.remove();
+    console.log("✅ User is now premium!");
+  } else {
+    console.log("⚠️ User is not premium yet.");
+  }
+}
+
+// Run this if URL includes /success (redirect from Stripe)
+if (window.location.pathname.includes("/success")) {
+  firebase.auth().onAuthStateChanged(() => {
+    setTimeout(checkPremiumOnSuccessPage, 2000); // slight delay to ensure Firebase loads
+  });
+}
+
+    </script>
 <body>
     <div class="container">
         <h1>🎉 Payment Successful! 🎉</h1>
