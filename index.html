@@ -7257,6 +7257,7 @@ function toggleLightstheme() {
 // Function to show the premium popup and grey out screen
 
 function showPremiumPopup() {
+    if (isPremiumUser) return; // ← block if premium
     if (document.getElementById("premiumPopup")) return; // Prevent duplicates
 
     // Greyed-out overlay to prevent interactions
@@ -8389,6 +8390,7 @@ document.getElementById('customButton').addEventListener('click', function() {
     openCustomBackgroundMenu();
 });
 function showcustombackdropPremiumPopup() {
+    if (isPremiumUser) return; // ← block if premium
     if (document.getElementById("premiumPopup")) return; // Prevent duplicates
 
     // Greyed-out overlay to prevent interactions
