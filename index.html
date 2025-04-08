@@ -4903,6 +4903,8 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
 	const from = document.getElementById('from');
 	const where = document.getElementById('where');
 	const togglecontainer2 = document.getElementById('toggle-container2');
+	const checkin = document.getElementById('checkin');
+	const header = document.getElementById('header');
 	const regionSelect2 = document.getElementById('regionSelect');
         const clearFiltersBtn = document.getElementById('clearFiltersBtn');
         const regionSelect = document.getElementById('regionSelectBtn');
@@ -4933,7 +4935,9 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
 	where.style.right = "-38.5px";
 	togglecontainer2.style.marginRight = "-430px";
 	togglecontainer2.style.marginTop = "-78px";
-        clearFiltersBtn.style.display = "block";
+	checkin.style.marginRight = "290px";
+	header.style.backgroundColor = "rgba(255, 255, 255, 0)";
+	clearFiltersBtn.style.display = "block";
         regionSelect.style.display = "block";
         toggleButton.style.display = "block";
         addLightsbutton.style.display = "block";
