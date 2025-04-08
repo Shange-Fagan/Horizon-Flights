@@ -7449,11 +7449,7 @@ function showPinkPremiumPopup() {
     upgradeButton.style.cursor = "pointer";
     upgradeButton.style.marginTop = "10px";
 
-    upgradeButton.addEventListener("click", () => {
-  
-      handlePremiumSignup('Pink Theme');
-	  
-    })
+    
     pinkPremiumPopup.appendChild(upgradeButton);
 
     document.body.appendChild(overlay);
@@ -8095,10 +8091,7 @@ function showcustomglobethemePremiumPopup() {
     upgradeButton.style.cursor = "pointer";
     upgradeButton.style.marginTop = "10px";
 
-    upgradeButton.addEventListener("click", () => {
-        //handlePremiumSignup(); // Handle upgrade
-    });
-
+    
     premiumPopup.appendChild(upgradeButton);
 
     document.body.appendChild(overlay);
@@ -8178,9 +8171,7 @@ closeButton.style.color = "#FFFFFF";
     upgradeButton.style.cursor = "pointer";
     upgradeButton.style.marginTop = "10px";
 
-    upgradeButton.addEventListener("click", () => {
-        //handlePremiumSignup(); // Handle upgrade
-    });
+    
 
     pinkPremiumPopup.appendChild(upgradeButton);
 
@@ -8260,9 +8251,7 @@ function showcustomblueglobethemePremiumPopup() {
     upgradeButton.style.cursor = "pointer";
     upgradeButton.style.marginTop = "10px";
 
-    upgradeButton.addEventListener("click", () => {
-        //handlePremiumSignup(); // Handle upgrade
-    });
+    
 
     bluePremiumPopup.appendChild(upgradeButton);
 
@@ -8454,7 +8443,7 @@ function showcustombackdropPremiumPopup() {
     upgradeButton.addEventListener("click", () => {
       firebase.auth().onAuthStateChanged(user => {
 	  if (user) {
-	handlePremiumSignup('Jetsetter Theme');  }
+	handlePremiumSignup('Custom Backdrops');  }
 	})
     })
     premiumPopup.appendChild(upgradeButton);
