@@ -2898,12 +2898,7 @@ input[type="date"]::-webkit-datetime-edit {
  /* Added mobile-specific styles */
  /* Mobile-specific styles */
 @media (max-width: 768px) {
-  .overlayContainer, .loadingScreen, .toggle-container, .instructionsOverlay {
-    width: 90%;
-    height: auto;
-    margin: 10px auto;
-  }
-  .overlayContainer2 {
+  .loadingScreen, .toggle-container, .instructionsOverlay {
     width: 90%;
     height: auto;
     margin: 10px auto;
@@ -4986,10 +4981,10 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
 	likedPostsButton.style.marginLeft = "-135px";
 	likedPostsButton.style.marginTop = "-40px";
         cabinClassContainer.style.marginRight = "200px";
-	overlayContainer.style.width = "85%";
-	overlayContainer.style.marginTop = "40px";
-	overlayContainer2.style.width = "85%";
-	overlayContainer2.style.marginTop = "40px";
+	overlayContainer.style.setProperty("width", "85%", "important");
+	overlayContainer.style.setProperty("margin-top", "40px", "important");
+	overlayContainer2.style.setProperty("width", "85%", "important");
+        overlayContainer2.style.setProperty("margin-top", "40px", "important");
 	clearFiltersBtn.style.display = "block";
         regionSelect.style.display = "block";
         toggleButton.style.display = "block";
