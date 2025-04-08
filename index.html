@@ -4696,6 +4696,19 @@ function updateLoginButton(user) {
             <img src="js/profile-icon.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;"> Login`;
     }
 }
+firebase.auth().onAuthStateChanged(async (user) => {
+  if (user) {
+    const response = await fetch(`https://a7ba-2a02-c7c-3945-5100-60ae-5176-a852-da6d.ngrok-free.app/user-status?email=${user.email}`);
+    const data = await response.json();
+
+    if (data.isPremium) {
+      const upgradePopup = document.getElementById("premiumPopup");
+      if (upgradePopup) {
+        upgradePopup.style.display = "none";
+      }
+    }
+  }
+});
 
 //Track Authentication State Changes
 onAuthStateChanged(auth, (user) => {
