@@ -7636,7 +7636,15 @@ async function handlePremiumSignup(theme) {
             body: JSON.stringify({ theme, email })  // ✅ Dynamically send email
         });
 
-        const session = await response.json();
+        if (!response.ok) {
+	  const text = await response.text(); // read the error body for logs
+	  console.error("❌ Backend error response:", response.status, text);
+	  alert("Something went wrong with payment setup.");
+	  return;
+	}
+	
+	const session = await response.json();
+
 
         if (session.url) {
             window.location.href = session.url;
