@@ -4719,7 +4719,7 @@ function updatelikedPostsButton(user) {
         dateFormat: "Y-m-d",
         minDate: "today",
         defaultDate: "today",
-	disableMobile: true  // <-- this is key to force desktop version on mobile
+	disableMobile: true,  // <-- this is key to force desktop version on mobile
         onChange: function(selectedDates, dateStr, instance) {
             // Update the checkout field's minDate
             const checkoutPicker = flatpickr("#checkout");
@@ -4730,7 +4730,7 @@ function updatelikedPostsButton(user) {
     flatpickr("#checkout", {
         dateFormat: "Y-m-d",
         minDate: "today",
-	disableMobile: true  // <-- this is key to force desktop version on mobile
+	disableMobile: true,  // <-- this is key to force desktop version on mobile
     });
 });
 // Get the input element
