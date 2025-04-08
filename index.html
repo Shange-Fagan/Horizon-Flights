@@ -607,29 +607,6 @@ a, button, input, select, iframe {
     cursor: default;
     /*border-left: 1px solid rgba(255, 255, 255, 0.5); /* Grey line on the left side */
   }
-  #cruiseDestinations {
-  font-size: 16px; /* Slightly smaller font size */
-    padding: 10px 15px; /* Padding inside inputs */
-    position: relative;
-    right: 146px;
-    top: 0px !important;
-    border: 0px solid #ddd; /* Light gray border */
-    background-color: rgba(255, 255, 255, 0.15);
-    border-radius: 50px; /* Fully rounded corners for inputs */
-    border-radius: 0 25px 25px 0;
-    margin-right: 10px; /* Spacing between input fields */
-    width: 220px; /* Slightly smaller width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
-	color: rgba(255, 255, 255, 0.75);
-    width: 105px; /* Set width to auto */
-    max-width: max-content; /* Ensure it adjusts based on the placeholder or content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    white-space: nowrap; /* Prevent wrapping */
-    cursor: default;
-    background: none;
-background-color: rgba(255,255,255,0.15);
-    /*border-left: 1px solid rgba(255, 255, 255, 0.5); /* Grey line on the left side */
-  }
   /* Styling for other inputs (optional) */
 #checkin {
   display: flex;
@@ -3493,6 +3470,84 @@ margin-bottom: 1px;
 #ezPrivacyCenter {
   display: none !important;
 }
+	@media (max-width: 768px) {
+  #header {
+    top: 98px; /* Slightly below the 'Search Hotels' bar */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 6px 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE/Edge */
+  }
+
+  #header::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  #header input,
+  #header select,
+  #header button,
+  .toggle-container2,
+  .date-picker-wrapper,
+  #guestSelector,
+  #cabinClassContainer,
+  .languageSelect-btn,
+  .dropdown,
+  #likedPostsButton {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    max-width: none !important;
+  }
+
+  #cabinClassInput,
+  #cabinClassLabel {
+    margin-top: 0 !important;
+  }
+
+  #guestSelector {
+    min-width: 90px;
+  }
+
+  .date-picker-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .calendar-icon,
+  .calendar-icon2 {
+    display: none; /* Optionally hide calendar icons on mobile */
+  }
+
+  #checkin,
+  #checkout {
+    width: 100px;
+  }
+
+  #from,
+  #where,
+  #adults,
+  #price_min,
+  #price_max,
+  #cabinClassInput {
+    width: 90px;
+  }
+
+  #searchBtn {
+    min-width: 85px;
+  }
+
+  .airbnb-button2,
+  #likedPostsButton {
+    min-width: 50px;
+  }
+}
+
 .expedia-affiliate-banner {
   text-align: center;
     background: rgba(255, 255, 255, 0.12);
