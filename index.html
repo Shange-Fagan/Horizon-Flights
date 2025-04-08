@@ -2947,12 +2947,15 @@ input[type="date"]::-webkit-datetime-edit {
 }
 
 .flatpickr-input {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px 15px;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: rgba(255,255, 255, 0.75); /* Set the text color to white */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd !important;
+  border-radius: 8px !important;
+  padding: 10px 15px !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  font-family: 'Roboto', sans-serif !important;
 }@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
 
 .flatpickr-calendar {
