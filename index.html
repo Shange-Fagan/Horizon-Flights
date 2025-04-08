@@ -4439,8 +4439,11 @@ const auth = getAuth(app);
 
 const upgradetoChristButton = document.querySelector('.popup-submit-btn2')
 upgradetoChristButton.addEventListener("click", () => {
-  handlePremiumSignup('Jetsetter Theme');
-	  })
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+handlePremiumSignup('Jetsetter Theme');  }
+})
+})
 function updateThemeForTimezone(tz) {
   const now = new Date();
   const hour = new Intl.DateTimeFormat('en-GB', {
@@ -7308,7 +7311,10 @@ function showPremiumPopup() {
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-  handlePremiumSignup('Jetsetter Theme');
+  firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+handlePremiumSignup('Jetsetter Theme');  }
+})
 	  })
     premiumPopup.appendChild(upgradeButton);
 
@@ -8435,7 +8441,10 @@ function showcustombackdropPremiumPopup() {
     upgradeButton.style.marginTop = "10px";
 
     upgradeButton.addEventListener("click", () => {
-      handlePremiumSignup('Custom Backdrops');
+      firebase.auth().onAuthStateChanged(user => {
+	  if (user) {
+	handlePremiumSignup('Jetsetter Theme');  }
+	})
     })
     premiumPopup.appendChild(upgradeButton);
 
