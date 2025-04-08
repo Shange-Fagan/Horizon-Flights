@@ -4580,8 +4580,8 @@ document.getElementById("loginButton").addEventListener("click", () => {
         emailForm.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            const email = document.getElementById("emailInput").value.trim();
-            const password = document.getElementById("passwordInput").value;
+            const email = document.getElementById("emailInput").value;
+    const password = document.getElementById("passwordInput").value;
 
             signInWithEmailAndPassword(auth, email, password)
                 .then((result) => {
