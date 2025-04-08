@@ -3470,83 +3470,6 @@ margin-bottom: 1px;
 #ezPrivacyCenter {
   display: none !important;
 }
-	@media (max-width: 768px) {
-  #header {
-    top: 98px; /* Slightly below the 'Search Hotels' bar */
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    padding: 6px 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* IE/Edge */
-  }
-
-  #header::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-  }
-
-  #header input,
-  #header select,
-  #header button,
-  .toggle-container2,
-  .date-picker-wrapper,
-  #guestSelector,
-  #cabinClassContainer,
-  .languageSelect-btn,
-  .dropdown,
-  #likedPostsButton {
-    flex: 0 0 auto;
-    margin-right: 10px;
-    max-width: none !important;
-  }
-
-  #cabinClassInput,
-  #cabinClassLabel {
-    margin-top: 0 !important;
-  }
-
-  #guestSelector {
-    min-width: 90px;
-  }
-
-  .date-picker-wrapper {
-    display: flex;
-    align-items: center;
-  }
-
-  .calendar-icon,
-  .calendar-icon2 {
-    display: none; /* Optionally hide calendar icons on mobile */
-  }
-
-  #checkin,
-  #checkout {
-    width: 100px;
-  }
-
-  #from,
-  #where,
-  #adults,
-  #price_min,
-  #price_max,
-  #cabinClassInput {
-    width: 90px;
-  }
-
-  #searchBtn {
-    min-width: 85px;
-  }
-
-  .airbnb-button2,
-  #likedPostsButton {
-    min-width: 50px;
-  }
-}
 
 .expedia-affiliate-banner {
   text-align: center;
@@ -3568,6 +3491,87 @@ margin-bottom: 1px;
 
 #timezoneSelector {
 	display:none;
+}
+
+
+
+
+
+
+	/* you need jesus*/
+	@media (max-width: 768px) {
+  #header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    right: 10px;
+    width: calc(100% - 20px);
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 10px;
+    border-radius: 15px;
+    z-index: 10000;
+  }
+
+  #header input,
+  #header button,
+  #header select {
+    width: 100%;
+    margin-bottom: 8px;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .airbnb-button,
+  .airbnb-button2,
+  .airbnb-button22,
+  .airbnb-button23 {
+    width: 100%;
+    text-align: center;
+  }
+
+  #likedPostsButton {
+    display: none; /* Hide heart on mobile or move it below */
+  }
+
+  #loginButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  #cabinClassContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #cabinClassInput,
+  #cabinClassLabel {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  #guestSelector {
+    width: 100%;
+  }
+
+  .languageSelect-btn {
+    width: 100%;
+  }
+
+  #price_min,
+  #price_max {
+    width: 48%;
+    display: inline-block;
+    margin-right: 2%;
+  }
+
+  #price_max {
+    margin-right: 0;
+  }
 }
 
 </style>
