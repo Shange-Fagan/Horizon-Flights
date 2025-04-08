@@ -8434,17 +8434,17 @@ function showcustombackdropPremiumPopup() {
     premiumPopup.appendChild(description);
 
     // Upgrade Button
-    const upgradeButton = document.createElement("button");
-    upgradeButton.innerText = "Upgrade Now";
-    upgradeButton.style.backgroundColor = "#00aaff";
-    upgradeButton.style.color = "white";
-    upgradeButton.style.border = "none";
-    upgradeButton.style.padding = "10px 20px";
-    upgradeButton.style.borderRadius = "5px";
-    upgradeButton.style.cursor = "pointer";
-    upgradeButton.style.marginTop = "10px";
+    const upgradeButton2 = document.createElement("button");
+    upgradeButton2.innerText = "Upgrade Now";
+    upgradeButton2.style.backgroundColor = "#00aaff";
+    upgradeButton2.style.color = "white";
+    upgradeButton2.style.border = "none";
+    upgradeButton2.style.padding = "10px 20px";
+    upgradeButton2.style.borderRadius = "5px";
+    upgradeButton2.style.cursor = "pointer";
+    upgradeButton2.style.marginTop = "10px";
 
-    upgradeButton.addEventListener("click", () => {
+    upgradeButton2.addEventListener("click", () => {
       const user = firebase.auth().currentUser;
 	if (user) {
 	    handlePremiumSignup("Custom Backdrops");
@@ -8452,7 +8452,7 @@ function showcustombackdropPremiumPopup() {
 	    alert("Please log in to upgrade.");
 	  }
     })
-    premiumPopup.appendChild(upgradeButton);
+    premiumPopup.appendChild(upgradeButton2);
 
     document.body.appendChild(overlay);
     document.body.appendChild(premiumPopup);
