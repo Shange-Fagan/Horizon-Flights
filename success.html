@@ -38,6 +38,23 @@
             background: #0056b3;
         }
     </style>
+    <!-- Firebase App (core) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+
+<!-- Firebase Auth -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "YOUR_FIREBASE_API_KEY",
+    authDomain: "YOUR_FIREBASE_AUTH_DOMAIN",
+    projectId: "YOUR_FIREBASE_PROJECT_ID",
+    appId: "YOUR_FIREBASE_APP_ID"
+    // any other config you use in the main app
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+
 </head>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16857735506"></script>
