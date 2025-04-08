@@ -1427,7 +1427,7 @@ iframe::-webkit-scrollbar {
       /*border: 1px solid rgba(255, 255, 255, 0.25);*/
       /*border-radius: 8px;*/
       color: rgba(255, 255, 255, 0.75);
-      z-index: 22011; /* Higher than the iframe */
+      z-index: 22012; /* Higher than the iframe */
       cursor: pointer;
 	/*z-index: 9999;*/
      /*cursor: pointer;*/
@@ -1727,7 +1727,11 @@ background-size: 10px;
 	/* Responsive Design */
     @media (max-width: 768px) {
       /* Adjust the size and placement of the globe on mobile */
-      
+      #toggleButton {
+        font-size: 10px;
+        padding: 3px 7px;
+        top: 55px;
+      }
 	    select {
     padding: 3px 7px;
     top: 75px;    
@@ -1735,6 +1739,12 @@ background-size: 10px;
     background-color: rgba(255, 255, 255, 0.2);
 overflow: hidden;    
   }
+	    
+	    #newsButton {
+        font-size: 10px;
+        padding: 3px 7px;
+        top: 55px;
+      }
 
       /*#dayTicker, #nightTicker {
         height: 60px;*/ /* Reduce height for mobile */
@@ -4924,7 +4934,7 @@ function showMobileDesktopView() {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
-      mobileDesktopView.style.display = "none";
+      mobileDesktopView.style.display = "block";
     // Close button functionality
 document.querySelector('.close-btn2').addEventListener('click', function () {
     const closeNewsButton = document.getElementById('.close-btn2');
@@ -4940,13 +4950,11 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         const trivagoIframeContainer = document.getElementById('trivagoIframeContainer');
         const searchTicker = document.getElementById('searchTicker');
         const submitRegion = document.getElementById('regionPopup');
-	const regionSelect2 = document.getElementById('regionSelect');
         const clearFiltersBtn = document.getElementById('clearFiltersBtn');
         const regionSelect = document.getElementById('regionSelectBtn');
         const toggleButton = document.getElementById('toggleButton');
         const addLightsbutton = document.getElementById('addLightsbutton');
         const addLightsbutton2 = document.getElementById('addLightsbutton2');
-	const addLightsbutton3 = document.getElementById('addLightsbutton3');
         const newsButton = document.getElementById('newsButton');
         const minimizeCarouselBtn = document.querySelector('.carousel-header');
         const carouselContainer = document.getElementById('carousel-container');
@@ -4964,32 +4972,34 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         nightthemeiframe.style.display = "none";
         trivagoIframeContainer.style.display = "none";
         searchTicker.style.display = "none";
-        submitRegion.style.display = "block";
-	submitRegion.style.width = "70%";
-	regionSelect2.style.top = "139px";
-        clearFiltersBtn.style.display = "block";
-        regionSelect.style.display = "block";
-        toggleButton.style.display = "block";
-        addLightsbutton.style.display = "block";
-        addLightsbutton2.style.display = "block";
-	addLightsbutton3.style.display = "block";
-        newsButton.style.display = "block";
+        submitRegion.style.display = "none";
+        clearFiltersBtn.style.display = "none";
+        regionSelect.style.display = "none";
+        toggleButton.style.display = "none";
+        addLightsbutton.style.display = "none";
+        addLightsbutton2.style.display = "none";
+        newsButton.style.display = "none";
         minimizeCarouselBtn.style.display = "block";
-        //minimizeCarouselBtn.style.top = "55px";
-        minimizeCarouselBtn.style.right = "10px";
+        minimizeCarouselBtn.style.top = "55px";
+        minimizeCarouselBtn.style.right = "0px";
         carouselContainer.style.display = "none";
         pinkthemeBtn.style.display = "none";
-        backgroundthemeBtn.style.display = "block";
+        backgroundthemeBtn.style.display = "none";
         globethemeBtn.style.display = "none";
         nightTexture = textureLoader.load("js/Earth-Night-16K.png");
         dayTexture = textureLoader.load("js/Earth_Diffuse.jpg");
         // Optionally, disable other content
         document.body.style.overflow = "hidden"; // Prevent scrolling
 	    // Add the event listener for the toggle change
+document.addEventListener('DOMContentLoaded', () => {
+    // Add a 10-second delay before simulating a click on the toggle button
+    setTimeout(() => {
         const themeToggle = document.getElementById('minimizeCarouselBtn');
         if (themeToggle) {
             themeToggle.click(); // Simulate a click on the toggle
         }
+    }, 10000); // 10000 milliseconds = 10 seconds
+});
     }
 }
 
