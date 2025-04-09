@@ -4464,52 +4464,6 @@ const user = firebase.auth().currentUser;
     alert("Please log in to upgrade.");
   }
 })
-function updateThemeForTimezone(tz) {
-  const now = new Date();
-  const hour = new Intl.DateTimeFormat('en-GB', {
-    timeZone: tz,
-    hour: '2-digit',
-    hour12: false
-  }).format(now);
-  
-  if (hour >= 7 && hour < 18) {
-    earthMaterial.uniforms.map.value = dayTexture;
-    currentTexture = "day"; // Update the current texture state
-    scene.background = daybackgroundTexture;  } else {
-    earthMaterial.uniforms.map.value = nightTexture;
-    currentTexture = "night";
-    scene.background = nightbackgroundTexture;
-  }
-}
-window.addEventListener("load", () => {
-  const selectedZone = document.getElementById("timezoneSelector").value;
-  updateThemeByTimezone(selectedZone);
-});	  import { DateTime } from "https://cdn.skypack.dev/luxon"; // or include via script tag
-let currentTexture; // Initialize with the default texture state ("day" or "night")
-function updateThemeByTimezone(timezone) {
-  const hour = DateTime.now().setZone(timezone).hour;
-
-  if (hour >= 6 && hour < 18) {
-    earthMaterial.uniforms.map.value = dayTexture;
-	      currentTexture = "day"; // Update the current texture state
-	      scene.background = daybackgroundTexture;
-
-  } else {
-    earthMaterial.uniforms.map.value = nightTexture;
-	      currentTexture = "night";
-	      scene.background = nightbackgroundTexture;
-
-  }
-    earthMaterial.uniforms.map.needsUpdate = true;
-}
-
-
-  document.getElementById('timezoneSelector').addEventListener('change', function() {
-    selectedZone = this.value;
-    updateClock(selectedZone);
-    updateThemeForTimezone(selectedZone);
-  });
-
 // Handle Login/Logout when the login button is clicked
 document.getElementById("loginButton").addEventListener("click", () => {
     const user = auth.currentUser;
@@ -6250,6 +6204,52 @@ renderer.domElement.addEventListener('mouseup', function() {
     }
 });
 let isDay = true; // Track whether it's currently day or night
+	  function updateThemeForTimezone(tz) {
+  const now = new Date();
+  const hour = new Intl.DateTimeFormat('en-GB', {
+    timeZone: tz,
+    hour: '2-digit',
+    hour12: false
+  }).format(now);
+  
+  if (hour >= 7 && hour < 18) {
+    earthMaterial.uniforms.map.value = dayTexture;
+    currentTexture = "day"; // Update the current texture state
+    scene.background = daybackgroundTexture;  } else {
+    earthMaterial.uniforms.map.value = nightTexture;
+    currentTexture = "night";
+    scene.background = nightbackgroundTexture;
+  }
+}
+window.addEventListener("load", () => {
+  const selectedZone = document.getElementById("timezoneSelector").value;
+  updateThemeByTimezone(selectedZone);
+});	  import { DateTime } from "https://cdn.skypack.dev/luxon"; // or include via script tag
+let currentTexture; // Initialize with the default texture state ("day" or "night")
+function updateThemeByTimezone(timezone) {
+  const hour = DateTime.now().setZone(timezone).hour;
+
+  if (hour >= 6 && hour < 18) {
+    earthMaterial.uniforms.map.value = dayTexture;
+	      currentTexture = "day"; // Update the current texture state
+	      scene.background = daybackgroundTexture;
+
+  } else {
+    earthMaterial.uniforms.map.value = nightTexture;
+	      currentTexture = "night";
+	      scene.background = nightbackgroundTexture;
+
+  }
+    earthMaterial.uniforms.map.needsUpdate = true;
+}
+
+
+  document.getElementById('timezoneSelector').addEventListener('change', function() {
+    selectedZone = this.value;
+    updateClock(selectedZone);
+    updateThemeForTimezone(selectedZone);
+  });
+
 	  //let dayTexture, nightTexture;
 	  let rt;
 
