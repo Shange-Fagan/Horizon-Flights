@@ -6042,8 +6042,14 @@ overlay.style.pointerEvents = 'auto'; // Allow interaction if needed
 
 
 const earthRadius = 5.1; // Adjust this to match your globe's size
-	  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-const isSlow = connection && (connection.effectiveType.includes("2g") || connection.effectiveType.includes("3g") || connection.type === "cellular");
+	  let isSlow = true; // default to slow
+
+if ('connection' in navigator) {
+  const type = navigator.connection.effectiveType || navigator.connection.type;
+  if (type) {
+    isSlow = type.includes("2g") || type.includes("3g") || type === "cellular";
+  }
+}
 
 // Choose texture set
 const texturePaths = {
