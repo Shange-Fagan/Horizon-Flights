@@ -4935,6 +4935,29 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
     mobileDesktopView.style.display = 'none';
     closeNewsButton.style.display = 'none';
 });
+	    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+const isSlow = connection && (connection.effectiveType.includes("2g") || connection.effectiveType.includes("3g") || connection.type === "cellular");
+
+// Choose texture set
+const texturePaths = {
+  diffuse: isSlow ? "js/Earth_Diffuse.webp" : "js/Earth_Diffuse.jpg",
+night: isSlow ? "js/Earth-Night-16K.webp" : "js/Earth-Night-16K.png",
+  bump: isSlow ? "js/Earth-16k-Bump.webp" : "js/Earth-16k-Bump.png",
+  normal: isSlow ? "js/Earth_Normal.webp" : "js/Earth_Normal.jpg",
+  specular: isSlow ? "js/Earth_Specular.webp" : "js/Earth_Specular.jpg",
+  cloud: isSlow ? "js/Earth_Cloud.webp" : "js/Earth_Cloud.jpg"
+};
+
+// Then load like:
+const textureLoader = new THREE.TextureLoader();
+
+//const earthTexture = textureLoader.load(texturePaths.diffuse);
+//const earthTexture = textureLoader.load(texturePaths.night);
+//const bumpMap = textureLoader.load(texturePaths.bump);
+//const normalMap = textureLoader.load(texturePaths.normal);
+//const specularMap = textureLoader.load(texturePaths.specular);
+//const cloudTexture = textureLoader.load(texturePaths.cloud);
+
     const topLeftLabel = document.getElementById('topLeftLabel');
         const iframe = document.getElementById('mobileTicker');
         const daythemeiframe = document.getElementById('dayTicker');
@@ -5026,8 +5049,8 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         pinkthemeBtn.style.display = "none";
         backgroundthemeBtn.style.display = "block";
         globethemeBtn.style.display = "none";
-        nightTexture = textureLoader.load("js/Earth-Night-16K.webp");
-        dayTexture = textureLoader.load("js/Earth_Diffuse.webp");
+        nightTexture = textureLoader.load(texturePaths.night);
+        dayTexture = textureLoader.load(texturePaths.diffuse);
         // Optionally, disable other content
         document.body.style.overflow = "hidden"; // Prevent scrolling
 	    // Add the event listener for the toggle change
@@ -6087,12 +6110,12 @@ overlay.style.pointerEvents = 'auto'; // Allow interaction if needed
 
 
 const earthRadius = 5.1; // Adjust this to match your globe's size
-const textureLoader = new THREE.TextureLoader();
-let dayTexture = textureLoader.load("js/Earth_Diffuse.webp");
+/*const textureLoader = new THREE.TextureLoader();*/
+let dayTexture = textureLoader.load(texturePaths.diffuse);
 const LightsTexture = textureLoader.load("js/earth.jpg");
-const bumpMap = textureLoader.load("js/Earth-16K-Bump.webp");
-const normalMap = textureLoader.load('js/Earth_Normal.webp'); // Use a realistic normal map
-const specularMap = textureLoader.load("js/Earth_Specular.webp");
+const bumpMap = textureLoader.load(texturePaths.bump);
+const normalMap = textureLoader.load(texturePaths.normal); // Use a realistic normal map
+const specularMap = textureLoader.load(texturePaths.specular);
 let earthMaterial = new THREE.ShaderMaterial({
   uniforms: {
     // Day texture, bump map, normal map, specular map, etc.
@@ -6527,7 +6550,7 @@ function animateCameraPan(x, y, z, zoomLevel) {
 //const earthRadius = 5.1; // Adjust this to match your globe's size
 //const textureLoader = new THREE.TextureLoader();
 
-	  const cloudTexture2 = textureLoader.load("js/Earth_Cloud.webp");
+	  const cloudTexture2 = textureLoader.load(texturePaths.cloud);
 	  const cloudGeometry = new THREE.SphereGeometry(earthRadius * 1.005, 64, 64);
 const cloudMaterial2 = new THREE.MeshPhongMaterial({
   map: cloudTexture2, // Use a high-quality cloud texture with transparency
@@ -6817,7 +6840,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 //const dayTexture = textureLoader.load("https://github.com/Shange-Fagan/Airbnb-Assistant/releases/download/pictures_for_earth_texture_high_res/world_shaded_43k.jpg");
     //const dayTexture = textureLoader.load("textures/earth-blue-marble-with-clouds.jpeg");
 //const dayTexture = textureLoader.load("textures/8k_earth_daymap.jpg");
-  let nightTexture = textureLoader.load("js/Earth-Night-16K.png");
+  let nightTexture = textureLoader.load(texturePaths.night);
   
 /*if (maxTextureSize >= 16384) {
   nightTexture = textureLoader.load("./earth-night-12k.jpg"); // Use 16K if supported
@@ -6828,9 +6851,9 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
   //const bumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
   //const specularMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png");
 	  //const specularMap = textureLoader.load("js/Earth_Specular.jpg");
-const dayBumpMap = textureLoader.load("js/Earth-16K-Bump.webp");
+const dayBumpMap = textureLoader.load(texturePaths.bump);
 	  //const normalMap = textureLoader.load('js/Earth_Normal.jpg'); // Use a realistic normal map
-const nightBumpMap = textureLoader.load("js/Earth-16K-Bump.webp");
+const nightBumpMap = textureLoader.load(texturePaths.bump);
 
 	  //const textureLoader = new THREE.TextureLoader();
 
