@@ -4464,6 +4464,14 @@ document.getElementById("loginButton").addEventListener("click", () => {
                 alert("Logged out successfully.");
                 updateLoginButton(null); // Update the button to show "Login"
                 updatelikedPostsButton(null);
+		    // 🔥 Clear premium state
+	    isPremiumUser = false;
+	    localStorage.removeItem("isPremiumUser");
+	
+	    // 🔁 Optionally update the UI theme back to default
+	    lightsButton.textContent = "Jetsetter Theme💎"; // or whatever your default is
+	    revertToPreviousTheme(); // If you have a fallback
+	    scene.background = nightbackgroundTexture; // Optional reset
             })
             .catch((error) => console.error("Error during logout:", error));
     } else {
