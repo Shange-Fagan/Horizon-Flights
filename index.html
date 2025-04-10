@@ -7763,11 +7763,19 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     previousMarker = currentmarkerMaterial; // Store previous marker
 
     if (lightsButton.textContent === "Jetsetter Theme💎") {
-  isUserPremium(firebase.auth().currentUser.email).then(isPremium => {
+  const user = firebase.auth().currentUser;
+if (user) {
+  isUserPremium(user.email).then(isPremium => {
     if (!isPremium) {
       showPremiumPopup(); // Show popup if not premium
     }
-  })
+  }).catch(error => {
+    console.error("Error checking premium status:", error);
+  });
+} else {
+  alert("Please log in first to access premium features.");
+}
+
         regionPopup.style.display = "none";
         earthMaterial.uniforms.map.value = dayTexture;
         markerMaterial.color.set(daymarkerMaterial);
@@ -8564,11 +8572,19 @@ async function showcustombackdropPremiumPopup() {
 document.getElementById('applycustomHDRI').addEventListener('click', function() {
   const regionPopup = document.getElementById('regionPopup');
   applyCustomBackground();
-  isUserPremium(firebase.auth().currentUser.email).then(isPremium => {
-  if (!isPremium) {
-    showcustombackdropPremiumPopup(); // Show popup if not premium
-  }
-});
+  const user = firebase.auth().currentUser;
+if (user) {
+  isUserPremium(user.email).then(isPremium => {
+    if (!isPremium) {
+      showPremiumPopup(); // Show popup if not premium
+    }
+  }).catch(error => {
+    console.error("Error checking premium status:", error);
+  });
+} else {
+  alert("Please log in first to access premium features.");
+}
+
         regionPopup.style.display = "none";
 
   // Zoom out the globe
