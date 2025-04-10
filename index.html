@@ -4568,16 +4568,19 @@ document.getElementById("loginButton").addEventListener("click", () => {
 	    emailForm.addEventListener("submit", (e) => {
 	  e.preventDefault();
 	
-	  const email = document.getElementById("emailInput").value.trim();
-	  const password = document.getElementById("passwordInput").value;
+	  const emailInput = document.getElementById("emailInput");
+	  const passwordInput = document.getElementById("passwordInput");
 	
-	  if (!email || !email.includes("@")) {
-	    alert("Please enter a valid email.");
+	  if (!emailInput || !passwordInput) {
+	    alert("Login form is not ready.");
 	    return;
 	  }
 	
-	  if (!password || password.length < 6) {
-	    alert("Password must be at least 6 characters.");
+	  const email = emailInput.value.trim();
+	  const password = passwordInput.value;
+	
+	  if (!email || !email.includes("@")) {
+	    alert("Please enter a valid email.");
 	    return;
 	  }
 	
@@ -4586,14 +4589,14 @@ document.getElementById("loginButton").addEventListener("click", () => {
 	      alert(`Logged in as ${result.user.email}`);
 	      updateLoginButton(result.user);
 	      updatelikedPostsButton(result.user);
-	      document.body.removeChild(loginContainer); // Remove modal
-	      console.log(email)
+	      document.body.removeChild(loginContainer);
 	    })
 	    .catch((error) => {
 	      console.error("Login error:", error);
-	      alert("Login failed. Please check your credentials.");
+	      alert("Login failed. Check your email and password.");
 	    });
 	});
+
 
         // Signup Button
         const signupButton = document.createElement("button");
