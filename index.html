@@ -7294,7 +7294,7 @@ function toggleLightstheme() {
 
 function showPremiumPopup() {
     if (isPremiumUser) return; // ← block if premium
-    const isPremium = await isUserPremium(user.email);
+    const isPremium = await isUserPremium(user.email); // ✅ correct
     if (isPremium) return; // ✅ User is already premium, don't show popup
     if (document.getElementById("premiumPopup")) return; // Prevent duplicates
 
@@ -8430,7 +8430,7 @@ document.getElementById('customButton').addEventListener('click', function() {
 });
 function showcustombackdropPremiumPopup() {
     if (isPremiumUser) return; // ← block if premium
-    const isPremium = await isUserPremium(user.email);
+    const isPremium = await isUserPremium(user.email); // ✅ correct
     if (isPremium) return; // ✅ User is already premium, don't show popup
     if (document.getElementById("premiumPopup")) return; // Prevent duplicates
 
