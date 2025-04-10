@@ -7715,7 +7715,7 @@ function zoomOutGlobe() {
   //controls.maxDistance = 30;
     animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomOutLevel);
 }
-// Event Listener for the "Blue Theme" button
+
 document.getElementById('addLightsbutton').addEventListener('click', () => {
     const lightsButton = document.getElementById('addLightsbutton');
     const regionPopup = document.getElementById('regionPopup');
@@ -7728,7 +7728,6 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
       showPremiumPopup(); // Show popup if not premium
     }
   })
-});
         regionPopup.style.display = "none";
         earthMaterial.uniforms.map.value = dayTexture;
         markerMaterial.color.set(daymarkerMaterial);
