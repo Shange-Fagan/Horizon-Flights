@@ -4566,36 +4566,35 @@ document.getElementById("loginButton").addEventListener("click", () => {
                 });
         });*/
 	    emailForm.addEventListener("submit", (e) => {
-	  e.preventDefault();
+	    e.preventDefault();
 	
-	  const emailInput = document.getElementById("emailInput");
-	  const passwordInput = document.getElementById("passwordInput");
+	    const emailInput = document.getElementById("emailInput");
+	    const passwordInput = document.getElementById("passwordInput");
 	
-	  if (!emailInput || !passwordInput) {
-	    alert("Login form is not ready.");
-	    return;
-	  }
+	    // Trim values and re-set them
+	    const email = emailInput.value.trim();
+	    const password = passwordInput.value;
 	
-	  const email = emailInput.value.trim();
-	  const password = passwordInput.value;
+	    emailInput.value = email; // Important to update the field to remove hidden spaces
 	
-	  if (!email || !email.includes("@")) {
-	    alert("Please enter a valid email.");
-	    return;
-	  }
+	    if (!email || !password) {
+	        alert("Please fill in both email and password.");
+	        return;
+	    }
 	
-	  signInWithEmailAndPassword(auth, email, password)
-	    .then((result) => {
-	      alert(`Logged in as ${result.user.email}`);
-	      updateLoginButton(result.user);
-	      updatelikedPostsButton(result.user);
-	      document.body.removeChild(loginContainer);
-	    })
-	    .catch((error) => {
-	      console.error("Login error:", error);
-	      alert("Login failed. Check your email and password.");
-	    });
+	    signInWithEmailAndPassword(auth, email, password)
+	        .then((result) => {
+	            alert(`Logged in as ${result.user.email}`);
+	            updateLoginButton(result.user);
+	            updatelikedPostsButton(result.user);
+	            document.body.removeChild(loginContainer);
+	        })
+	        .catch((error) => {
+	            console.error("Login error:", error);
+	            alert("Login failed. Please check your email and password.");
+	        });
 	});
+
 
 
         // Signup Button
