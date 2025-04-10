@@ -4938,6 +4938,7 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         const trivagoIframeContainer = document.getElementById('trivagoIframeContainer');
         const searchTicker = document.getElementById('searchTicker');
         const submitRegion = document.getElementById('regionPopup');
+	const instructionsOverlay = document.getElementById('instructionsOverlay');
 	const from = document.getElementById('from');
 	const where = document.getElementById('where');
 	const togglecontainer2 = document.getElementById('toggle-container2');
@@ -4978,8 +4979,9 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         nightthemeiframe.style.display = "none";
         trivagoIframeContainer.style.display = "none";
         searchTicker.style.display = "none";
-        submitRegion.style.display = "none";
+        submitRegion.style.display = "block";
 	submitRegion.style.width = "70%";
+	instructionsOverlay.style.top = "60%";
 	regionSelect2.style.top = "138px";
 	from.style.marginRight = "18px";
 	where.style.marginRight = "-232px";
