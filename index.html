@@ -7766,7 +7766,10 @@ if (user) {
     console.error("Error checking premium status:", error);
   });
 } else {
-  showPremiumPopup(); // Show popup if not premium
+alert("Please log in first to access premium features.");
+	revertToPreviousTheme(); // Revert theme if "Undo" is clicked
+        scene.background = nightbackgroundTexture;
+        earthMaterial.uniforms.map.value = dayTexture;
 }
 
         regionPopup.style.display = "none";
@@ -8578,7 +8581,10 @@ document.getElementById('applycustomHDRI').addEventListener('click', function() 
       console.error("Error checking premium status:", error);
     });
   } else {
-    showPremiumPopup(); // Show popup if not premium
+    alert("Please log in first to access premium features.");
+	revertToPreviousTheme(); // Revert theme if "Undo" is clicked
+        scene.background = nightbackgroundTexture;
+        earthMaterial.uniforms.map.value = dayTexture;
   }
 
         regionPopup.style.display = "none";
