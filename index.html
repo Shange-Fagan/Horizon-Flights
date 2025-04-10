@@ -4659,7 +4659,7 @@ function updateLoginButton(user) {
             <img src="js/profile-icon.png" alt="Profile Icon" style="width: 24px; height: 24px; margin-right: 8px;"> Login`;
     }
 }
-let isPremiumUser = false;
+/*let isPremiumUser = false;
 
 firebase.auth().onAuthStateChanged(async (user) => {
   if (user) {
@@ -4675,8 +4675,27 @@ firebase.auth().onAuthStateChanged(async (user) => {
       document.getElementById("premiumOverlay")?.remove();
     }
   }
-});
+});*/
 
+let isPremiumUser = localStorage.getItem("isPremiumUser") === "true";
+
+firebase.auth().onAuthStateChanged(async (user) => {
+  if (user) {
+    const response = await fetch(`https://a7ba-2a02-c7c-3945-5100-60ae-5176-a852-da6d.ngrok-free.app/user-status?email=${user.email}`);
+    const data = await response.json();
+
+    isPremiumUser = data.isPremium === true;
+    localStorage.setItem("isPremiumUser", isPremiumUser ? "true" : "false");
+
+    // Remove popup if needed
+    const popup = document.getElementById("premiumPopup");
+    if (isPremiumUser && popup) {
+      popup.remove();
+      popup.style.setProperty("display", "none", "important");
+      document.getElementById("premiumOverlay")?.remove();
+    }
+  }
+});
 
 //Track Authentication State Changes
 onAuthStateChanged(auth, (user) => {
@@ -7275,6 +7294,8 @@ function toggleLightstheme() {
 
 function showPremiumPopup() {
     if (isPremiumUser) return; // ← block if premium
+    const isPremium = await isUserPremium(user.email);
+    if (isPremium) return; // ✅ User is already premium, don't show popup
     if (document.getElementById("premiumPopup")) return; // Prevent duplicates
 
     // Greyed-out overlay to prevent interactions
@@ -7700,11 +7721,12 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     previousMarker = currentmarkerMaterial; // Store previous marker
 
     if (lightsButton.textContent === "Jetsetter Theme💎") {
-      isUserPremium().then(isPremium => {
-        if (!isPremium) {
-            showPremiumPopup(); // Show popup but still apply theme
-        }
-    });
+  isUserPremium(firebase.auth().currentUser.email).then(isPremium => {
+    if (!isPremium) {
+      showPremiumPopup(); // Show popup if not premium
+    }
+  });
+}
         regionPopup.style.display = "none";
         earthMaterial.uniforms.map.value = dayTexture;
         markerMaterial.color.set(daymarkerMaterial);
@@ -8408,6 +8430,8 @@ document.getElementById('customButton').addEventListener('click', function() {
 });
 function showcustombackdropPremiumPopup() {
     if (isPremiumUser) return; // ← block if premium
+    const isPremium = await isUserPremium(user.email);
+    if (isPremium) return; // ✅ User is already premium, don't show popup
     if (document.getElementById("premiumPopup")) return; // Prevent duplicates
 
     // Greyed-out overlay to prevent interactions
@@ -8497,11 +8521,11 @@ function showcustombackdropPremiumPopup() {
 document.getElementById('applycustomHDRI').addEventListener('click', function() {
   const regionPopup = document.getElementById('regionPopup');
   applyCustomBackground();
-  isUserPremium().then(isPremium => {
-        if (!isPremium) {
-          showcustombackdropPremiumPopup(); // Show popup but still apply theme
-        }
-    });
+  isUserPremium(firebase.auth().currentUser.email).then(isPremium => {
+  if (!isPremium) {
+    showcustombackdropPremiumPopup(); // Show popup if not premium
+  }
+});
         regionPopup.style.display = "none";
 
   // Zoom out the globe
