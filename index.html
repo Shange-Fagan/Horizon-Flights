@@ -7292,8 +7292,10 @@ function toggleLightstheme() {
  // Define the textures globally
 // Function to show the premium popup and grey out screen
 
-function showPremiumPopup() {
+async function showPremiumPopup() {
     if (isPremiumUser) return; // ← block if premium
+    const user = firebase.auth().currentUser;
+    if (!user) return;
     const isPremium = await isUserPremium(user.email); // ✅ correct
     if (isPremium) return; // ✅ User is already premium, don't show popup
     if (document.getElementById("premiumPopup")) return; // Prevent duplicates
@@ -8428,8 +8430,10 @@ document.getElementById('nightButton').addEventListener('click', function() {
 document.getElementById('customButton').addEventListener('click', function() {
     openCustomBackgroundMenu();
 });
-function showcustombackdropPremiumPopup() {
+async function showcustombackdropPremiumPopup() {
     if (isPremiumUser) return; // ← block if premium
+    const user = firebase.auth().currentUser;
+    if (!user) return;
     const isPremium = await isUserPremium(user.email); // ✅ correct
     if (isPremium) return; // ✅ User is already premium, don't show popup
     if (document.getElementById("premiumPopup")) return; // Prevent duplicates
