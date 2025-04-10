@@ -4540,7 +4540,7 @@ document.getElementById("loginButton").addEventListener("click", () => {
             <button type="submit" id="emailLoginButton" style="background-color: #00aaff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Login</button>
         `;
 
-        emailForm.addEventListener("submit", (e) => {
+        /*emailForm.addEventListener("submit", (e) => {
             e.preventDefault();
 
             const email = document.getElementById("emailInput").value;
@@ -4556,7 +4556,36 @@ document.getElementById("loginButton").addEventListener("click", () => {
                 .catch((error) => {
                     console.error("Login error:", error);
                 });
-        });
+        });*/
+	    emailForm.addEventListener("submit", (e) => {
+	  e.preventDefault();
+	
+	  const email = document.getElementById("emailInput").value.trim();
+	  const password = document.getElementById("passwordInput").value;
+	
+	  if (!email || !email.includes("@")) {
+	    alert("Please enter a valid email.");
+	    return;
+	  }
+	
+	  if (!password || password.length < 6) {
+	    alert("Password must be at least 6 characters.");
+	    return;
+	  }
+	
+	  signInWithEmailAndPassword(auth, email, password)
+	    .then((result) => {
+	      alert(`Logged in as ${result.user.email}`);
+	      updateLoginButton(result.user);
+	      updatelikedPostsButton(result.user);
+	      document.body.removeChild(loginContainer); // Remove modal
+	      console.log(email)
+	    })
+	    .catch((error) => {
+	      console.error("Login error:", error);
+	      alert("Login failed. Please check your credentials.");
+	    });
+	});
 
         // Signup Button
         const signupButton = document.createElement("button");
