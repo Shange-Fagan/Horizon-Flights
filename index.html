@@ -4565,7 +4565,7 @@ document.getElementById("loginButton").addEventListener("click", () => {
                     console.error("Login error:", error);
                 });
         });*/
-	    emailForm.addEventListener("submit", (e) => {
+	   emailForm.addEventListener("submit", async (e) => {
 	  e.preventDefault();
 	
 	  const email = document.getElementById("emailInput").value.trim();
@@ -4576,17 +4576,33 @@ document.getElementById("loginButton").addEventListener("click", () => {
 	    return;
 	  }
 	
-	  signInWithEmailAndPassword(auth, email, password)
-	    .then((result) => {
-	      alert(`Logged in as ${result.user.email}`);
-	      updateLoginButton(result.user);
-	      updatelikedPostsButton(result.user);
-	      document.body.removeChild(loginContainer); // Close modal
-	    })
-	    .catch((error) => {
-	      console.error("Login error:", error);
-	    });
+	  // ✅ Validate email format manually before calling Firebase
+	  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	  if (!emailPattern.test(email)) {
+	    alert("Please enter a valid email address.");
+	    return;
+	  }
+	
+	  try {
+	    const result = await signInWithEmailAndPassword(auth, email, password);
+	    alert(`Logged in as ${result.user.email}`);
+	    updateLoginButton(result.user);
+	    updatelikedPostsButton(result.user);
+	    document.body.removeChild(loginContainer); // ✅ Close modal
+	  } catch (error) {
+	    console.error("Login error:", error);
+	    if (error.code === "auth/invalid-email") {
+	      alert("Invalid email format. Please double-check.");
+	    } else if (error.code === "auth/user-not-found") {
+	      alert("No account found with that email.");
+	    } else if (error.code === "auth/wrong-password") {
+	      alert("Incorrect password.");
+	    } else {
+	      alert("Login failed. Please try again.");
+	    }
+	  }
 	});
+
 
 
 
