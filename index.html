@@ -7752,7 +7752,7 @@ function zoomOutGlobe() {
     animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomOutLevel);
 }
 
-document.getElementById('addLightsbutton').addEventListener('click', () => {
+/*document.getElementById('addLightsbutton').addEventListener('click', () => {
     const lightsButton = document.getElementById('addLightsbutton');
     const regionPopup = document.getElementById('regionPopup');
     previousTheme = currentTexture; // Store previous theme
@@ -7800,7 +7800,60 @@ alert("Please log in first to access premium features.");
     }
 
     earthMaterial.uniforms.map.needsUpdate = true;
+});*/
+document.getElementById('addLightsbutton').addEventListener('click', () => {
+  const lightsButton = document.getElementById('addLightsbutton');
+  const regionPopup = document.getElementById('regionPopup');
+  previousTheme = currentTexture; // Store previous theme
+  previousMarker = currentmarkerMaterial; // Store previous marker
+
+  if (lightsButton.textContent === "Jetsetter Theme💎") {
+    const user = firebase.auth().currentUser;
+
+    if (user) {
+      isUserPremium(user.email).then(isPremium => {
+        if (isPremium) {
+          // ✅ Apply Jetsetter Theme only if user is premium
+          regionPopup.style.display = "none";
+          earthMaterial.uniforms.map.value = dayTexture;
+          markerMaterial.color.set(daymarkerMaterial);
+
+          const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg';
+          loader.load(selectedHDRI, function (texture) {
+            const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+            rt.fromEquirectangularTexture(renderer, texture);
+            scene.background = rt.texture;
+          });
+
+          zoomOutGlobe();
+          controls.enableZoom = true;
+          controls.minDistance = 15;
+          lightsButton.textContent = "Jetsetter Theme✅";
+        } else {
+          // ❌ Not premium — show upgrade prompt
+          showPremiumPopup();
+        }
+      }).catch(error => {
+        console.error("Error checking premium status:", error);
+      });
+    } else {
+      // ❌ Not logged in
+      alert("Please log in first to access premium features.");
+      revertToPreviousTheme();
+      scene.background = nightbackgroundTexture;
+      earthMaterial.uniforms.map.value = dayTexture;
+    }
+
+  } else {
+    // Handle revert when Jetsetter is turned off
+    revertToPreviousTheme();
+    scene.background = nightbackgroundTexture;
+    earthMaterial.uniforms.map.value = dayTexture;
+  }
+
+  earthMaterial.uniforms.map.needsUpdate = true;
 });
+
 /*function toggleLightstheme() {
   // Get the button element
   const lightsButton = document.getElementById('addLightsbutton');
