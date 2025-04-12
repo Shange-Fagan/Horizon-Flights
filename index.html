@@ -8642,7 +8642,7 @@ document.getElementById('applycustomHDRI').addEventListener('click', function() 
         applyCustomBackground(); // ✅ Only apply if premium
         regionPopup.style.display = "none";
       } else {
-        showPremiumPopup(); // Show upgrade prompt
+        showcustombackdropPremiumPopup(); // Show upgrade prompt
       }
     }).catch(error => {
       console.error("Error checking premium status:", error);
