@@ -7854,9 +7854,9 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
     } else {
       // ❌ Not logged in
       alert("Please log in first to access premium features.");
-      revertToPreviousTheme();
-      scene.background = nightbackgroundTexture;
-      earthMaterial.uniforms.map.value = dayTexture;
+      //revertToPreviousTheme();
+      //scene.background = daybackgroundTexture;
+      //earthMaterial.uniforms.map.value = dayTexture;
     }
 
   } else {
@@ -8655,9 +8655,9 @@ document.getElementById('applycustomHDRI').addEventListener('click', function() 
     });
   } else {
     alert("Please log in first to access premium features.");
-	revertToPreviousTheme(); // Revert theme if "Undo" is clicked
-        scene.background = nightbackgroundTexture;
-        earthMaterial.uniforms.map.value = dayTexture;
+	//revertToPreviousTheme(); // Revert theme if "Undo" is clicked
+        //scene.background = daybackgroundTexture;
+        //earthMaterial.uniforms.map.value = dayTexture;
   }
 
         regionPopup.style.display = "none";
