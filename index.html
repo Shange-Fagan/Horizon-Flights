@@ -5526,8 +5526,12 @@ document.addEventListener('click', function (event) {
 document.addEventListener('click', function (event) {
   const button = document.getElementById('backgroundDropdown');
   const dropdown = document.getElementById('backgroundDropdown');
+  const popup = document.getElementById('customBackgroundMenu');
+  const popup2 = document.getElementById('customHDRI');
   if (!button.contains(event.target) && dropdown.style.display === 'block') {
     dropdown.style.display = 'none';
+    popup.style.display = 'none';
+    popup2.style.display = 'none';
   }
 });
 
@@ -8526,6 +8530,8 @@ function resetGlobeTheme() {
 // Show/Hide Dropdown Menu
 document.getElementById('toggleButton3').addEventListener('click', () => {
     document.getElementById('backgroundDropdown').classList.toggle('hidden');
+    document.getElementById('customBackgroundMenu').classList.toggle('hidden');
+    document.getElementById('customHDRI').classList.toggle('hidden');
 });
 document.addEventListener("DOMContentLoaded", function() {
 
