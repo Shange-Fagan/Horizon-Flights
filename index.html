@@ -11119,11 +11119,12 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
     // Construct Expedia search URL
 let expediaSearchUrl = `https://www.expedia.co.uk/Hotel-Search?destination=${encodeURIComponent(location)}&startDate=${checkin}&endDate=${checkout}&adults=${guests}&sort=RECOMMENDED`;
 
-if (priceMin && priceMin.trim() !== "") {
-    expediaSearchUrl += `&price=${priceMin}`;
-}
-if (priceMax && priceMax.trim() !== "") {
-    expediaSearchUrl += `&price=${priceMax}`;
+if (priceMin && priceMax) {
+  expediaSearchUrl += `&price=${priceMin}-${priceMax}`;
+} else if (priceMin) {
+  expediaSearchUrl += `&price=${priceMin}-`;
+} else if (priceMax) {
+  expediaSearchUrl += `&price=0-${priceMax}`;
 }
 
 // Log for debugging
