@@ -7864,7 +7864,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
   } else {
     // Handle revert when Jetsetter is turned off
     revertToPreviousTheme();
-    scene.background = nightbackgroundTexture;
+    scene.background = daybackgroundTexture;
     earthMaterial.uniforms.map.value = dayTexture;
   }
 
