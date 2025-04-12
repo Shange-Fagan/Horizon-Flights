@@ -8529,8 +8529,20 @@ function resetGlobeTheme() {
 
 // Show/Hide Dropdown Menu
 document.getElementById('toggleButton3').addEventListener('click', () => {
-    document.getElementById('backgroundDropdown').classList.toggle('hidden');
+    const backgroundMenu = document.getElementById('backgroundDropdown');
+    const customMenu = document.getElementById('customBackgroundMenu');
+    const customHDRI = document.getElementById('customHDRI');
+
+    // Toggle the background dropdown
+    backgroundMenu.classList.toggle('hidden');
+
+    // Always hide the custom menu when toggling background dropdown
+    customMenu.classList.add('hidden');
+
+    // Always hide the custom menu when toggling background dropdown
+    customHDRI.classList.add('hidden');
 });
+
 document.addEventListener("DOMContentLoaded", function() {
 
 document.getElementById('dayButton').addEventListener('click', function() {
