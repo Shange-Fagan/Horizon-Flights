@@ -1,5 +1,5 @@
 //process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer';
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const path = require('path');
 const axios = require('axios');
 const puppeteerExtra = require('puppeteer-extra');
@@ -13,6 +13,8 @@ const cheerio = require('cheerio');
 const fs = require("fs");
 const sharp = require('sharp');
 const admin = require("firebase-admin");
+const nodemailer = require('nodemailer');
+require("dotenv").config();
 
 admin.initializeApp();
 /*app.use(cors({
@@ -49,9 +51,9 @@ app.use((req, res, next) => {
         res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         res.setHeader(
-            "Access-Control-Allow-Headers",
-            "Content-Type, Authorization, ngrok-skip-browser-warning"
-        );
+          "Access-Control-Allow-Headers",
+          "Content-Type, Authorization, ngrok-skip-browser-warning"
+      );
         res.setHeader("Access-Control-Allow-Credentials", "true");
     }
     if (req.method === "OPTIONS") {
@@ -127,6 +129,50 @@ app.options('*', (req, res) => {
     res.status(200).end();
   });
 app.options('*', corsConfig);*/
+const transporter = nodemailer.createTransport({
+  service: 'gmail', // or your email provider
+  auth: {
+    user: 'horizonflights.co@gmail.com',
+    pass: 'Jesusisgreat123' // not your main password if you're using Gmail!
+  }
+});
+app.post('/send-welcome-email', async (req, res) => {
+  const { email } = req.body;
+
+  const mailOptions = {
+    from: 'horizonflights.co@gmail.com',
+    to: email,
+    subject: 'Welcome to Horizon Flights ✈️',
+    html: `<h2>Welcome aboard!</h2><p>Thanks for signing up. Exciting deals await 🌍</p>`
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).send('Welcome email sent!');
+  } catch (err) {
+    console.error('Email error:', err);
+    res.status(500).send('Error sending welcome email');
+  }
+});
+// 📅 Weekly Campaign Email
+app.post("/send-regular-email", async (req, res) => {
+  const { email, subject, message } = req.body;
+
+  const mailOptions = {
+    from: 'horizonflights.co@gmail.com',
+    to: email,
+    subject: subject || "This Week's Deals!",
+    text: message || "Here are the best flights and hotel offers this week.",
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Weekly email sent successfully" });
+  } catch (error) {
+    console.error("Failed to send regular email:", error);
+    res.status(500).json({ error: "Failed to send email" });
+  }
+});
 function waitForTimeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -224,6 +270,42 @@ async function solveCaptcha(page) {
         }
     }
   }
+
+async function launchBrowser() {
+  const browser = await puppeteer.launch({
+    headless: true,
+    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage'
+        ]
+  });
+  return browser;
+}
+async function launchBrowser2() {
+  const browser = await puppeteer.launch({
+    headless: true,
+    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-extensions',
+      '--disable-background-networking',
+      '--disable-default-apps',
+      '--disable-sync',
+      '--metrics-recording-only',
+      '--mute-audio',
+      '--no-first-run',
+      '--safebrowsing-disable-auto-update',
+      '--proxy-server=http://pr.oxylabs.io:7777',  // ✅ Apply proxy
+    ],
+    ignoreHTTPSErrors: true,
+  });
+  return browser;
+}
+
 // Helper function to map locations to Expedia format
 const locationMapper = (location) => {
   const locationMap = {
@@ -470,9 +552,8 @@ app.use(express.json());
       while (attempts < maxRetries) {
         try {
           console.log(`🌀 Attempt ${attempts + 1} to start Puppeteer`);
-      browser = await puppeteerExtra.launch({
+      /*browser = await puppeteerExtra.launch({
         args: [
-      ...chromium.args,
       '--no-sandbox',
     '--disable-gpu',
     '--disable-setuid-sandbox',
@@ -484,7 +565,8 @@ app.use(express.json());
     //executablePath: await chromium.executablePath || "/usr/bin/chromium-browser",
     headless: true,
     ignoreHTTPSErrors: true,
-  });
+  });*/
+  browser = await launchBrowser2();
       page = await browser.newPage();
       await page.authenticate({
         username: 'JFlock_SMoney_Ghly4',
@@ -540,7 +622,7 @@ if (cabinClassParam) {
     timeout: 60000 // Set timeout to 60 seconds
 });
 // Wait for flight results to load
-await page.waitForSelector('[data-test-id="listings"] li', { timeout: 77000 });
+await page.waitForSelector('[data-test-id="listings"] li', { timeout: 10000 });
 console.log("✅ Flight listings loaded successfully!");
 pageLoaded = true;
           break; // Exit retry loop if successful
@@ -568,7 +650,7 @@ pageLoaded = true;
 
 //page.mouse.move(100, 100);
 //page.mouse.click(100, 100);
-/*          await page.evaluate(() => {
+/*        await page.evaluate(() => {
             // CJ Deep Link bookmarklet code
             console.log("Injecting CJ Deep Link bookmarklet...");
             (function() {
@@ -1139,7 +1221,7 @@ async function scrapeExpediaPosts(req, res) {
           if (browser) await browser.close();
 
           // **Launch Puppeteer**
-          browser = await puppeteerExtra.launch({
+          /*browser = await puppeteerExtra.launch({
               args: [
         '--no-sandbox',
     '--disable-gpu',
@@ -1152,8 +1234,8 @@ async function scrapeExpediaPosts(req, res) {
     //executablePath: await chromium.executablePath || "/usr/bin/chromium-browser",
     headless: true,
     ignoreHTTPSErrors: true,
-  });
-
+  });*/
+  browser = await launchBrowser2();
           page = await browser.newPage();
           await page.authenticate({
               username: 'JFlock_SMoney_Ghly4',
@@ -1171,7 +1253,7 @@ async function scrapeExpediaPosts(req, res) {
           console.log("🌍 Navigating to:", expediasearchUrl);
 
           // **Wait for hotel listings to load**
-          await page.waitForSelector('[data-stid="property-listing-results"]', { timeout: 77000 });
+          await page.waitForSelector('[data-stid="property-listing-results"]', { timeout: 35000 });
           console.log("✅ Page loaded successfully!");
           pageLoaded = true;
           break; // Exit retry loop on success
@@ -1220,7 +1302,7 @@ async function scrapeExpediaPosts(req, res) {
     await smoothScrollToBottom();
 });
 
-  await page.waitForSelector('.uitk-gallery-carousel-item-current figure img.uitk-image-media', { timeout: 30000 });
+  await page.waitForSelector('.uitk-gallery-carousel-item-current figure img.uitk-image-media', { timeout: 77000 });
 
   //await new Promise(resolve => setTimeout(resolve, 10000));
 
@@ -1539,11 +1621,28 @@ await browser.close();
     res.status(500).json({ success: false, error: "Failed to scrape flights" });
   }
 });
+exports.scrapeAirbnbPosts = functions.https.onRequest(async (req, res) => {
+  try {
+    const searchUrl = req.query.url; // Get searchUrl from query parameter
+
+    if (!searchUrl) {
+      return res.status(400).send("Missing searchUrl parameter.");
+    }
+
+    // Call your scraping function here
+    const data = await scrapeAirbnbPosts(searchUrl);
+
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    console.error("Error scraping:", error);
+    res.status(500).send("Error scraping Airbnb posts.");
+  }
+});
 
 // Airbnb Scraping based on searchUrl (Original code)
 async function scrapeAirbnbPosts(searchUrl) {
   try {
-    const browser = await chromium.puppeteer.launch({
+    /*const browser = await chromium.puppeteer.launch({
       args: [...chromium.args,'--no-sandbox',
     '--disable-gpu',
     '--disable-setuid-sandbox',
@@ -1553,7 +1652,9 @@ async function scrapeAirbnbPosts(searchUrl) {
       //executablePath: await chromium.executablePath || "/usr/bin/chromium-browser",
       headless: true, // or false for debugging
       ignoreHTTPSErrors: true,
-    });
+    });*/
+    const browser = await launchBrowser();
+
     
     const page = await browser.newPage();
 
@@ -1657,13 +1758,13 @@ console.log(`Generated URL: ${finalSearchUrl}`);
       // No additional filter needed for 'popular', just return regular search results
       break;
     case 'cheapest':
-      searchUrl += `&price_min=1`; // This is a placeholder for cheapest filter
+      finalSearchUrl += `&price_min=1`; // This is a placeholder for cheapest filter
       break;
       case 'mid-price':
-      searchUrl += `&price_min=50&price_max=200`; // Mid-price range (adjust as needed)
+        finalSearchUrl += `&price_min=50&price_max=200`; // Mid-price range (adjust as needed)
       break;
     case 'expensive':
-      searchUrl += `&price_max=10000`; // Placeholder for expensive filter (you might need to modify this)
+      finalSearchUrl += `&price_max=10000`; // Placeholder for expensive filter (you might need to modify this)
       break;
     // Add other categories as necessary
     default:
@@ -1777,134 +1878,78 @@ async function clickAcceptCookiesButton(page) {
 
 // Function to scrape location information from Airbnb and fetch bounds from Google Maps
 async function extractBoundsFromUrl(searchUrl) {
-  const browser = await chromium.puppeteer.launch({
-    args: [...chromium.args,'--no-sandbox',
-    '--disable-gpu',
-    '--disable-setuid-sandbox',
-    '--single-process',
-    '--disable-dev-shm-usage',
-    '--remote-debugging-port=9222'],
-      //executablePath: await chromium.executablePath || "/usr/bin/chromium-browser",
-      headless: true, // or false for debugging
+  let browser;
+  try {
+    browser = await chromium.puppeteer.launch({
+      executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', // Mac path
+      args: [
+        ...chromium.args,
+        '--no-sandbox',
+        '--disable-gpu',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+      ],
+      headless: true,
       ignoreHTTPSErrors: true,
     });
-  const page = await browser.newPage();
 
-  
-  // Call the retry function to navigate to the page
-  await navigateToPageWithRetry(page, searchUrl);
-  await page.evaluate(() => {
-  // Select the popup container
-const popup = document.querySelector('div.c8qah1m.atm_9s_11p5wf0.atm_h_1h6ojuz');
+    const page = await browser.newPage();
 
-// Select the close button within the popup using its class
-const closeButton = popup ? popup.querySelector('button.cd570ix.atm_d2_1bvjyxt.atm_gz_exct8b.atm_j_v2br90') : null;
+    await navigateToPageWithRetry(page, searchUrl);
 
-// Click the close button
-if (closeButton) {
-    closeButton.click();
-    console.log('Popup closed successfully.');
-} else {
-    console.log('Close button not found.');
-}
-  })
-  await page.evaluate(() => {
-    // Select the popup container
-  const popup2 = document.querySelector('div.tw5hock atm_c8_2x1prs atm_g3_1jbyh58 atm_fr_11a07z3 atm_cs_wp830q dir dir-ltr');
-  
-  // Select the close button within the popup using its class
-  const closeButton = popup2 ? popup2.querySelector('button.b1rrt7c2 atm_mk_h2mmj6 atm_vy_l52nlx atm_e2_l52nlx atm_gi_idpfg4 atm_l8_idpfg4 atm_3f_glywfm atm_5j_1ssbidh atm_26_1j28jx2 atm_9j_tlke0l atm_tl_1gw4zv3 atm_7l_3ha9i4 atm_kd_glywfm atm_92_1yyfdc7_vmtskl atm_9s_1ulexfb_vmtskl atm_mk_stnw88_vmtskl atm_tk_1ssbidh_vmtskl atm_fq_1ssbidh_vmtskl atm_tr_pryxvc_vmtskl atm_vy_1tcgj5g_vmtskl atm_e2_1tcgj5g_vmtskl atm_5j_1ssbidh_vmtskl atm_3f_glywfm_jo46a5 atm_l8_idpfg4_jo46a5 atm_gi_idpfg4_jo46a5 atm_3f_glywfm_1icshfk atm_kd_glywfm_19774hq atm_uc_aaiy6o_1w3cfyq atm_uc_glywfm_1w3cfyq_1rrf6b5 atm_70_13xi5zr_9xuho3 atm_uc_aaiy6o_pfnrn2_1oszvuo atm_uc_glywfm_pfnrn2_1o31aam atm_70_13xi5zr_1buez3b_1oszvuo dir dir-ltr') : null;
-  
-  // Click the close button
-  if (closeButton) {
-      closeButton.click();
-      console.log('Popup closed successfully.');
-  } else {
-      console.log('Close button not found.');
+    // Close popups
+    await page.evaluate(() => {
+      const popup = document.querySelector('div.c8qah1m.atm_9s_11p5wf0.atm_h_1h6ojuz');
+      const closeButton = popup?.querySelector('button.cd570ix.atm_d2_1bvjyxt.atm_gz_exct8b.atm_j_v2br90');
+      if (closeButton) closeButton.click();
+    });
+
+    // Accept cookies
+    await clickAcceptCookiesButton(page);
+
+    const buttons = await page.$$eval('button', btns => btns.map(b => b.innerText.trim()));
+    const showMapButtonIndex = buttons.findIndex(t => t.includes('Show map'));
+
+    if (showMapButtonIndex !== -1) {
+      const allButtons = await page.$$('button');
+      await allButtons[showMapButtonIndex].click();
+      await waitForTimeout(30000);
+    }
+
+    await page.waitForSelector('div[data-testid="map/GoogleMap"]', { visible: true });
+
+    // Simulate map drag to force URL update
+    await simulateMouseDrag(page, 300, 200, 305, 215);
+    await simulateMouseDrag(page, 305, 215, 310, 230);
+    await waitForTimeout(5000);
+
+    const newUrl = page.url();
+    const parsedUrl = new URL(newUrl);
+
+    const mapBounds = {
+      northeast: {
+        lat: parseFloat(parsedUrl.searchParams.get("ne_lat")),
+        lng: parseFloat(parsedUrl.searchParams.get("ne_lng")),
+      },
+      southwest: {
+        lat: parseFloat(parsedUrl.searchParams.get("sw_lat")),
+        lng: parseFloat(parsedUrl.searchParams.get("sw_lng")),
+      },
+    };
+
+    const zoomLevel = parseFloat(parsedUrl.searchParams.get("zoom"));
+    return { mapBounds, zoomLevel };
+
+  } catch (err) {
+    console.error("❌ Error during map scraping:", err);
+    throw err;
+  } finally {
+    if (browser) {
+      await browser.close().catch(err => console.warn("⚠️ Error closing browser:", err));
+    }
   }
-    })
-  // Targeting the button by its visible text 'Show map'
-  await page.waitForSelector('button', { visible: true });
-  console.log("'Accept all' button clicked successfully.");
-  const buttons = await page.$$eval('button', buttons => 
-    buttons.map(button => button.innerText.trim())
-  );
-  const acceptCookiesButtonIndex = buttons.findIndex(button => button.includes('Accept all'));
-
-  /*if (acceptCookiesButtonIndex !== -1) {
-    // Click on the button that contains 'Show map' text
-    const buttonsSelector = await page.$$('button');
-    console.log('Clicking "Accept Cookies" button');
-    await buttonsSelector[acceptCookiesButtonIndex].click();
-    await waitForTimeout(5000); // Wait for the map to load after clicking
-  }*/
- // Click the "Accept Cookies" button
- await clickAcceptCookiesButton(page);
-
-  const showMapButtonIndex = buttons.findIndex(button => button.includes('Show map'));
-  
-  if (showMapButtonIndex !== -1) {
-    // Click on the button that contains 'Show map' text
-    const buttonsSelector = await page.$$('button');
-    console.log('Clicking "Show map" button');
-    await buttonsSelector[showMapButtonIndex].click();
-    await waitForTimeout(30000); // Wait for the map to load after clicking
-  } else {
-    console.log('Could not find "Show map" button.');
-  }
-  await waitForTimeout(5000);
-  // Simulate dragging the map (moving it slightly)
-  // Wait for the map container to be visible
-  await page.waitForSelector('div[data-testid="map/GoogleMap"]', { visible: true });
-
-  // Simulate dragging the map (start and end coordinates)
-  await simulateMouseDrag(page, 300, 200, 305, 215); // Adjust coordinates based on map size
-  await simulateMouseDrag(page, 305, 215, 300, 215);
-  await simulateMouseDrag(page, 300, 215, 310, 215);
-  await simulateMouseDrag(page, 300, 215, 310, 230);
-  // Wait for the map to update
-  await waitForTimeout(5000);
-
-  // Extract the updated URL
-  const newUrl = page.url();
-  console.log('New URL after dragging the map:', newUrl);
-  // Targeting the button by its visible text 'Show map'
-
-  // Step 2: Use Google Maps to search for the same location
-// Function to scrape Google Maps for bounds based on a centered location
-
- // Function to get the map bounds from the Airbnb map (without Google Maps API)
- // Wait for the map container with data-testid="map/GoogleMap"
- //await page.waitForSelector('div[data-testid="map/GoogleMap"]');
-
-// Execute script to access the map object and get bounds
-// Create a URL object
-// Function to scrape Airbnb for generated URL based on region
-// Automatically click on the first marker
-// Wait for the marker divs to load
-  // Extract bounds and zoom from the generated URL
-  const parsedUrl = new URL(newUrl);
-
-  // Extract map bounds and zoom level
-  const mapBounds = {
-    northeast: {
-      lat: parseFloat(parsedUrl.searchParams.get("ne_lat")),
-      lng: parseFloat(parsedUrl.searchParams.get("ne_lng")),
-    },
-    southwest: {
-      lat: parseFloat(parsedUrl.searchParams.get("sw_lat")),
-      lng: parseFloat(parsedUrl.searchParams.get("sw_lng")),
-    },
-  };
-
-  const zoomLevel = parseFloat(parsedUrl.searchParams.get("zoom"));
-
-  console.log('Map Bounds:', mapBounds);
-  console.log('Zoom Level:', zoomLevel);
-  await browser.close();
-  // Return the map bounds and zoom level
-  return { mapBounds, zoomLevel };
 }
+
 // Function to scrape pixel positions of Airbnb markers
 async function scrapeAirbnbMapMarkers(searchUrl) {
   const browser = await chromium.puppeteer.launch({
