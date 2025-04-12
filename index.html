@@ -4565,7 +4565,10 @@ document.getElementById("loginButton").addEventListener("click", () => {
                     console.error("Login error:", error);
                 });
         });*/
-	   emailForm.addEventListener("submit", (e) => {
+	   document.addEventListener('DOMContentLoaded', () => {
+  const emailForm = document.getElementById('emailForm');
+  if (emailForm) {
+    emailForm.addEventListener("submit", (e) => {
 	  e.preventDefault();
 	
 	  const emailInput = document.getElementById("emailInput");
@@ -4596,9 +4599,8 @@ document.getElementById("loginButton").addEventListener("click", () => {
 	    .catch((error) => {
 	      console.error("Login error:", error.code, error.message);
 	    });
-	});
-
-
+    });
+  }};
 
 
 
