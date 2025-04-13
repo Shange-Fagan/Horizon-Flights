@@ -3789,7 +3789,7 @@ margin-bottom: 1px;
     <img src="js/email.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
     <p class="instruction-text">Sign Up for Exclusive Offers! Subscribe to our email list and get access to exclusive promotions and deals.</p>
-<form id="emailForm" onsubmit="submitEmail(event)"> <!-- ✅ okay if you're doing it this way -->
+<form id="emailForm"> <!-- ✅ no onsubmit here -->
       <input style="justify-content: center; justify-items: center; align-items: center; margin-left: 14px;"type="email" id="emailInput" placeholder="Enter your email" required />
       <button style="justify-content: center; justify-items: center; align-items: center; margin-left: 56.5px;"type="submit" class="popup-submit-btn">Sign Up</button>
     </form>
@@ -4566,10 +4566,14 @@ document.getElementById("loginButton").addEventListener("click", () => {
                     console.error("Login error:", error);
                 });
         });*/
-	   async function submitEmail(e) {
-	  e.preventDefault();
+	  
+	document.addEventListener('DOMContentLoaded', () => {
+	  const emailForm = document.getElementById('emailForm');
+	  if (!emailForm) return;
 	
-	  const emailInput = document.getElementById("emailInput");
+	  emailForm.addEventListener('submit', async (e) => {
+	    e.preventDefault();
+	    const emailInput = document.getElementById("emailInput");
 	  const passwordInput = document.getElementById("passwordInput");
 	
 	  if (!emailInput || !passwordInput) {
@@ -4591,8 +4595,8 @@ document.getElementById("loginButton").addEventListener("click", () => {
 	    console.error("Login error:", err);
 	    alert("Login failed.");
 	  }
-	}
-
+	  });
+	});
 
 
 
