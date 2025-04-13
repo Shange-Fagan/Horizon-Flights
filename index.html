@@ -4566,41 +4566,45 @@ document.getElementById("loginButton").addEventListener("click", () => {
                     console.error("Login error:", error);
                 });
         });*/
-	   document.addEventListener('DOMContentLoaded', () => {
+	   window.addEventListener('DOMContentLoaded', () => {
   const emailForm = document.getElementById('emailForm');
+
   if (!emailForm) return;
 
   emailForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const emailInput = document.getElementById("emailInput");
+    const passwordInput = document.getElementById("passwordInput");
+
+    if (!emailInput || !passwordInput) {
+      alert("Could not find login input fields.");
+      return;
+    }
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+      alert("Please fill in both email and password.");
+      return;
+    }
+
     try {
-      const emailInput = document.getElementById("emailInput");
-      const passwordInput = document.getElementById("passwordInput");
-
-      if (!emailInput || !passwordInput) {
-        alert("Could not find login input fields.");
-        return;
-      }
-
-      const email = emailInput.value.trim();
-      const password = passwordInput.value;
-
-      if (!email || !password) {
-        alert("Please fill in both email and password.");
-        return;
-      }
-
       const result = await signInWithEmailAndPassword(auth, email, password);
       alert(`Logged in as ${result.user.email}`);
       updateLoginButton(result.user);
       updatelikedPostsButton(result.user);
-      document.body.removeChild(loginContainer); // Close modal
+
+      const loginContainer = document.getElementById('loginContainer');
+      if (loginContainer) document.body.removeChild(loginContainer);
     } catch (error) {
       console.error("Login error:", error.code, error.message);
-      alert("Login failed: " + error.message);
+      alert("Login failed. Please check your details.");
     }
   });
 });
+
 
 
 
