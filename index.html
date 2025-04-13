@@ -4568,11 +4568,12 @@ document.getElementById("loginButton").addEventListener("click", () => {
         });*/
 	   document.addEventListener('DOMContentLoaded', () => {
   const emailForm = document.getElementById('emailForm');
+  if (!emailForm) return;
 
-  if (emailForm) {
-    emailForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  emailForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
+    try {
       const emailInput = document.getElementById("emailInput");
       const passwordInput = document.getElementById("passwordInput");
 
@@ -4589,23 +4590,18 @@ document.getElementById("loginButton").addEventListener("click", () => {
         return;
       }
 
-      try {
-        const result = await signInWithEmailAndPassword(auth, email, password);
-        alert(`Logged in as ${result.user.email}`);
-        updateLoginButton(result.user);
-        updatelikedPostsButton(result.user);
-
-        const loginContainer = document.getElementById("loginContainer");
-        if (loginContainer) {
-          document.body.removeChild(loginContainer);
-        }
-      } catch (error) {
-        console.error("Login error:", error.code, error.message);
-        alert("Login failed: " + error.message);
-      }
-    });
-  }
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      alert(`Logged in as ${result.user.email}`);
+      updateLoginButton(result.user);
+      updatelikedPostsButton(result.user);
+      document.body.removeChild(loginContainer); // Close modal
+    } catch (error) {
+      console.error("Login error:", error.code, error.message);
+      alert("Login failed: " + error.message);
+    }
+  });
 });
+
 
 
 
