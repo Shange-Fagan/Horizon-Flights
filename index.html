@@ -3789,7 +3789,7 @@ margin-bottom: 1px;
     <img src="js/email.png" alt="Button Click" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
     <p class="instruction-text">Sign Up for Exclusive Offers! Subscribe to our email list and get access to exclusive promotions and deals.</p>
-    <form id="emailForm" onsubmit="submitEmail(event)">
+<form id="emailForm" onsubmit="submitEmail(event)"> <!-- ✅ okay if you're doing it this way -->
       <input style="justify-content: center; justify-items: center; align-items: center; margin-left: 14px;"type="email" id="emailInput" placeholder="Enter your email" required />
       <button style="justify-content: center; justify-items: center; align-items: center; margin-left: 56.5px;"type="submit" class="popup-submit-btn">Sign Up</button>
     </form>
@@ -4566,44 +4566,32 @@ document.getElementById("loginButton").addEventListener("click", () => {
                     console.error("Login error:", error);
                 });
         });*/
-	   window.addEventListener('DOMContentLoaded', () => {
-  const emailForm = document.getElementById('emailForm');
-
-  if (!emailForm) return;
-
-  emailForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const emailInput = document.getElementById("emailInput");
-    const passwordInput = document.getElementById("passwordInput");
-
-    if (!emailInput || !passwordInput) {
-      alert("Could not find login input fields.");
-      return;
-    }
-
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-
-    if (!email || !password) {
-      alert("Please fill in both email and password.");
-      return;
-    }
-
-    try {
-      const result = await signInWithEmailAndPassword(auth, email, password);
-      alert(`Logged in as ${result.user.email}`);
-      updateLoginButton(result.user);
-      updatelikedPostsButton(result.user);
-
-      const loginContainer = document.getElementById('loginContainer');
-      if (loginContainer) document.body.removeChild(loginContainer);
-    } catch (error) {
-      console.error("Login error:", error.code, error.message);
-      alert("Login failed. Please check your details.");
-    }
-  });
-});
+	   async function submitEmail(e) {
+	  e.preventDefault();
+	
+	  const emailInput = document.getElementById("emailInput");
+	  const passwordInput = document.getElementById("passwordInput");
+	
+	  if (!emailInput || !passwordInput) {
+	    alert("Missing fields");
+	    return;
+	  }
+	
+	  const email = emailInput.value.trim();
+	  const password = passwordInput.value;
+	
+	  try {
+	    const result = await signInWithEmailAndPassword(auth, email, password);
+	    alert(`Logged in as ${result.user.email}`);
+	    updateLoginButton(result.user);
+	    updatelikedPostsButton(result.user);
+	    const loginContainer = document.getElementById("loginContainer");
+	    if (loginContainer) document.body.removeChild(loginContainer);
+	  } catch (err) {
+	    console.error("Login error:", err);
+	    alert("Login failed.");
+	  }
+	}
 
 
 
