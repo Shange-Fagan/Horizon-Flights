@@ -4628,40 +4628,45 @@ document.getElementById("loginButton").addEventListener("click", () => {
         });*/
 	   document.addEventListener('DOMContentLoaded', () => {
   const emailForm = document.getElementById('emailForm');
+
   if (emailForm) {
-    emailForm.addEventListener("submit", (e) => {
-	  e.preventDefault();
-	
-	  const emailInput = document.getElementById("emailInput");
-	  const passwordInput = document.getElementById("passwordInput");
-	
-	  if (!emailInput || !passwordInput) {
-	    alert("Could not find login input fields.");
-	    return;
-	  }
-	
-	  const email = emailInput.value.trim();
-	  const password = passwordInput.value;
-	
-	  console.log("Captured Email:", email, "Captured Password:", password);
-	
-	  if (!email || !password) {
-	    alert("Please fill in both email and password.");
-	    return;
-	  }
-	
-	  signInWithEmailAndPassword(auth, email, password)
-	    .then((result) => {
-	      alert(`Logged in as ${result.user.email}`);
-	      updateLoginButton(result.user);
-	      updatelikedPostsButton(result.user);
-	      document.body.removeChild(loginContainer); // Remove modal
-	    })
-	    .catch((error) => {
-	      console.error("Login error:", error.code, error.message);
-	    });
+    emailForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const emailInput = document.getElementById("emailInput");
+      const passwordInput = document.getElementById("passwordInput");
+
+      if (!emailInput || !passwordInput) {
+        alert("Could not find login input fields.");
+        return;
+      }
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        alert("Please fill in both email and password.");
+        return;
+      }
+
+      try {
+        const result = await signInWithEmailAndPassword(auth, email, password);
+        alert(`Logged in as ${result.user.email}`);
+        updateLoginButton(result.user);
+        updatelikedPostsButton(result.user);
+
+        const loginContainer = document.getElementById("loginContainer");
+        if (loginContainer) {
+          document.body.removeChild(loginContainer);
+        }
+      } catch (error) {
+        console.error("Login error:", error.code, error.message);
+        alert("Login failed: " + error.message);
+      }
     });
-  }});
+  }
+});
+
 
 
 
