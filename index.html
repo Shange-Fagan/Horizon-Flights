@@ -4566,37 +4566,43 @@ document.getElementById("loginButton").addEventListener("click", () => {
                     console.error("Login error:", error);
                 });
         });*/
-	  
-	document.addEventListener('DOMContentLoaded', () => {
-	  const emailForm = document.getElementById('emailForm');
-	  if (!emailForm) return;
+	  document.addEventListener('DOMContentLoaded', () => {
+	  const loginContainer = document.getElementById("loginContainer");
 	
-	  emailForm.addEventListener('submit', async (e) => {
-	    e.preventDefault();
-	    const emailInput = document.getElementById("emailInput");
-	  const passwordInput = document.getElementById("passwordInput");
+	  // Only run this if the loginContainer exists (login modal is shown)
+	  if (loginContainer) {
+	    const emailForm = loginContainer.querySelector("form");
 	
-	  if (!emailInput || !passwordInput) {
-	    alert("Missing fields");
-	    return;
+	    if (!emailForm) return;
+	
+	    emailForm.addEventListener("submit", async (e) => {
+	      e.preventDefault();
+	
+	      const emailInput = emailForm.querySelector("#emailInput");
+	      const passwordInput = emailForm.querySelector("#passwordInput");
+	
+	      if (!emailInput || !passwordInput) {
+	        alert("Missing login fields.");
+	        return;
+	      }
+	
+	      const email = emailInput.value.trim();
+	      const password = passwordInput.value;
+	
+	      try {
+	        const result = await signInWithEmailAndPassword(auth, email, password);
+	        alert(`Logged in as ${result.user.email}`);
+	        updateLoginButton(result.user);
+	        updatelikedPostsButton(result.user);
+	        document.body.removeChild(loginContainer); // Close the modal
+	      } catch (err) {
+	        console.error("Login error:", err);
+	        alert("Login failed. Please check your email and password.");
+	      }
+	    });
 	  }
-	
-	  const email = emailInput.value.trim();
-	  const password = passwordInput.value;
-	
-	  try {
-	    const result = await signInWithEmailAndPassword(auth, email, password);
-	    alert(`Logged in as ${result.user.email}`);
-	    updateLoginButton(result.user);
-	    updatelikedPostsButton(result.user);
-	    const loginContainer = document.getElementById("loginContainer");
-	    if (loginContainer) document.body.removeChild(loginContainer);
-	  } catch (err) {
-	    console.error("Login error:", err);
-	    alert("Login failed.");
-	  }
-	  });
 	});
+
 
 
 
