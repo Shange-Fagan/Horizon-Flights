@@ -4231,7 +4231,7 @@ gl_FragColor = vec4(glowColor, intensity);
 	
 <button id="toggleButton">&nbsp;&nbsp;&nbsp;Day Theme🌥️</button>
 <!-- Background Toggle Button -->
-<button id="toggleButton3" class="theme-button">&nbsp;&nbsp;&nbsp;Background 🏙️</button>
+<button id="toggleButton3" class="theme-button">&nbsp;&nbsp;&nbsp;Background🏙️</button>
 <!-- Dropdown Menu for Background Selection -->
 <div id="backgroundDropdown" class="dropdown-menu hidden">
     <button id="dayButton" class="background-option">🌞 Day</button>
@@ -4954,8 +4954,6 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
 	const checkin = document.getElementById('checkin');
 	const checkout = document.getElementById('checkout');
 	const header = document.getElementById('header');
-	const cycleup = document.getElementById('cycleUp');
-	const cycledown = document.getElementById('cycleDown');
 	const adults = document.getElementById('adults');
 	const price_min = document.getElementById('price_min');
 	const price_max = document.getElementById('price_max');
@@ -4977,7 +4975,6 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         const minimizeCarouselBtn = document.querySelector('.carousel-header');
         const minimizeCarouselBtn1 = document.querySelector('minimizeCarouselBtn');
 	const themetoggle = document.querySelector('.theme-switch');
-	const spinnerContainer = document.querySelector('.spinner-container');
         const carouselContainer = document.getElementById('carousel-container');
         const loadingScreen = document.getElementById('loadingScreen');
         const pinkthemeBtn = document.getElementById('addLightsbutton3');
@@ -5030,7 +5027,6 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
 	overlayContainer.style.setProperty("margin-top", "40px", "important");
 	overlayContainer2.style.setProperty("width", "85%", "important");
         overlayContainer2.style.setProperty("margin-top", "40px", "important");
-	overlayContainer2.style.setProperty("top", "365px", "important");
 	clearFiltersBtn.style.display = "block";
         regionSelect.style.display = "block";
         toggleButton.style.display = "block";
@@ -5041,9 +5037,6 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         minimizeCarouselBtn.style.top = "323px";
 	minimizeCarouselBtn.style.top = "323px";
 	themetoggle.style.top = "360px";
-	spinnerContainer.style.setProperty("top", "400px", "important");
-	cycleup.style.setProperty("padding", "0px 2.5px", "important");
-	cycledown.style.setProperty("padding", "0px 2.5px", "important");
         //minimizeCarouselBtn.style.right = "0px";
         carouselContainer.style.display = "none";
         pinkthemeBtn.style.display = "none";
@@ -9138,6 +9131,7 @@ function getRegionCoordinates(region) {
   return regions[region] || { lat: 0, lon: 0 };  // Default to world
 }*/
 	  // Markers Data
+// markers data
 const markersData = [
   // Each marker has [radius, phi, theta] format for spherical positioning
   { id: 1, region: 'africa', position: [5.1, 1.2, 1.4], iframeSrc: "https://rss.app/embed/v1/list/aViQy1AA7saqQwdP" },
@@ -9163,6 +9157,110 @@ const markersData = [
   { id: 20, region: 'egypt', position: [5.1, 1.1, 2.025], iframeSrc: "https://rss.app/embed/v1/list/1zENc8xlwLAD9N8j" },
   { id: 21, region: 'kenya', position: [5.1, 1.59, 2.2], iframeSrc: "https://rss.app/embed/v1/list/BheyyzLtzcza5gF7" },
   { id: 22, region: 'south africa', position: [5.1, 2.0, 2.05], iframeSrc: "https://rss.app/embed/v1/list/aGWKlWNxkC26vC5c" },
+];
+	  const markersData2 = [
+  // Each marker has [radius, phi, theta] format for spherical positioning
+  { id: 23, region: 'africa', position: [5.1, 1.2, 1.4], iframeSrc: "" },
+  { id: 24, region: 'europe', position: [5.1, 0.7, 1.8], iframeSrc: "" },
+  // Add other markers here...
+  { id: 25, region: 'america', position: [5.1, 0.9, -0.15], iframeSrc: "" },
+  { id: 26, region: 'south america', position: [5.1, 1.6, 0.4], iframeSrc: "" },
+  { id: 27, region: 'middle east', position: [5.1, 1, 2.3],iframeSrc: "" },
+  { id: 28, region: 'asia', position: [5.1, 0.9, 3], iframeSrc: "" },
+  { id: 29, region: 'japan', position: [5.1, 0.9, 4], iframeSrc: "https://rss.app/embed/v1/list/rP8rNwm2sBGLso5h" },
+  { id: 30, region: 'carribbean', position: [5.1, 1.25, 0.15], iframeSrc: "https://rss.app/embed/v1/list/OkDbf3TSi28P4dPt" },
+  { id: 31, region: 'uk', position: [5.1, 0.64, 1.55], iframeSrc: "https://rss.app/embed/v1/list/VSEBSKYuTV3sAVyJ" },
+  { id: 32, region: 'new york', position: [5.1, 0.9, 0.25], iframeSrc: "https://rss.app/embed/v1/list/Xvg5XIWmSuA4N67Y" },
+  { id: 33, region: 'florida', position: [5.1, 1.077, 0.14], iframeSrc: "https://rss.app/embed/v1/list/RdaoDEr0u537Sikv" },
+  { id: 34, region: 'mexico', position: [5.1, 1.2, -0.2], iframeSrc: "https://rss.app/embed/v1/list/LEt6nlkwwZRaPC65" },
+  { id: 35, region: 'brazil', position: [5.1, 1.8, 0.7], iframeSrc: "" },
+  { id: 36, region: 'argentina', position: [5.1, 2.2, 0.5], iframeSrc: "" },
+  { id: 37, region: 'nigeria', position: [5.1, 1.435, 1.7], iframeSrc: "" },
+  { id: 38, region: 'morocco', position: [5.1, 1.0, 1.65], iframeSrc: "" },
+  { id: 39, region: 'ghana', position: [5.1, 1.42, 1.57], iframeSrc: "" },
+  { id: 40, region: 'ethiopia', position: [5.1, 1.435, 2.25], iframeSrc: "" },
+  { id: 41, region: 'somali', position: [5.1, 1.5, 2.35], iframeSrc: "" },
+  { id: 42, region: 'egypt', position: [5.1, 1.1, 2.025], iframeSrc: "" },
+  { id: 43, region: 'kenya', position: [5.1, 1.59, 2.2], iframeSrc: "" },
+  { id: 44, region: 'south africa', position: [5.1, 2.0, 2.05], iframeSrc: "" },
+];
+	  const markersData3 = [
+  // Each marker has [radius, phi, theta] format for spherical positioning
+  { id: 45, region: 'africa', position: [5.1, 1.2, 1.4], iframeSrc: "" },
+  { id: 46, region: 'europe', position: [5.1, 0.7, 1.8], iframeSrc: "" },
+  // Add other markers here...
+  { id: 47, region: 'america', position: [5.1, 0.9, -0.15], iframeSrc: "" },
+  { id: 48, region: 'south america', position: [5.1, 1.6, 0.4], iframeSrc: "" },
+  { id: 49, region: 'middle east', position: [5.1, 1, 2.3],iframeSrc: "" },
+  { id: 50, region: 'asia', position: [5.1, 0.9, 3], iframeSrc: "" },
+  { id: 51, region: 'japan', position: [5.1, 0.9, 4], iframeSrc: "https://rss.app/embed/v1/list/ri7d6Y1pZg6VC88f" },
+  { id: 52, region: 'carribbean', position: [5.1, 1.25, 0.15], iframeSrc: "https://rss.app/embed/v1/list/kzAPULv19YB28YxX" },
+  { id: 53, region: 'uk', position: [5.1, 0.64, 1.55], iframeSrc: "https://rss.app/embed/v1/list/0rHhd7nr6Mi2Zsft" },
+  { id: 54, region: 'new york', position: [5.1, 0.9, 0.25], iframeSrc: "https://rss.app/embed/v1/list/PdrKGXwl4Fxcwu5w" },
+  { id: 55, region: 'florida', position: [5.1, 1.077, 0.14], iframeSrc: "https://rss.app/embed/v1/list/bwnwTev8Iyvs4Q7W" },
+  { id: 56, region: 'mexico', position: [5.1, 1.2, -0.2], iframeSrc: "https://rss.app/embed/v1/list/yXhzy7hO0GTcmQo5" },
+  { id: 57, region: 'brazil', position: [5.1, 1.8, 0.7], iframeSrc: "" },
+  { id: 58, region: 'argentina', position: [5.1, 2.2, 0.5], iframeSrc: "" },
+  { id: 59, region: 'nigeria', position: [5.1, 1.435, 1.7], iframeSrc: "" },
+  { id: 60, region: 'morocco', position: [5.1, 1.0, 1.65], iframeSrc: "" },
+  { id: 61, region: 'ghana', position: [5.1, 1.42, 1.57], iframeSrc: "" },
+  { id: 62, region: 'ethiopia', position: [5.1, 1.435, 2.25], iframeSrc: "" },
+  { id: 63, region: 'somali', position: [5.1, 1.5, 2.35], iframeSrc: "" },
+  { id: 64, region: 'egypt', position: [5.1, 1.1, 2.025], iframeSrc: "" },
+  { id: 65, region: 'kenya', position: [5.1, 1.59, 2.2], iframeSrc: "" },
+  { id: 66, region: 'south africa', position: [5.1, 2.0, 2.05], iframeSrc: "" },
+];
+	  const markersData4 = [
+  // Each marker has [radius, phi, theta] format for spherical positioning
+  { id: 67, region: 'africa', position: [5.1, 1.2, 1.4], iframeSrc: "" },
+  { id: 68, region: 'europe', position: [5.1, 0.7, 1.8], iframeSrc: "" },
+  // Add other markers here...
+  { id: 69, region: 'america', position: [5.1, 0.9, -0.15], iframeSrc: "" },
+  { id: 70, region: 'south america', position: [5.1, 1.6, 0.4], iframeSrc: "" },
+  { id: 71, region: 'middle east', position: [5.1, 1, 2.3],iframeSrc: "" },
+  { id: 72, region: 'asia', position: [5.1, 0.9, 3], iframeSrc: "" },
+  { id: 73, region: 'japan', position: [5.1, 0.9, 4], iframeSrc: "https://rss.app/embed/v1/list/RPhcfRX29RuFVMw5" },
+  { id: 74, region: 'carribbean', position: [5.1, 1.25, 0.15], iframeSrc: "https://rss.app/embed/v1/list/97erhIzDhVclVDTc" },
+  { id: 75, region: 'uk', position: [5.1, 0.64, 1.55], iframeSrc: "https://rss.app/embed/v1/list/ISqnIpztQjfH0qqJ" },
+  { id: 76, region: 'new york', position: [5.1, 0.9, 0.25], iframeSrc: "https://rss.app/embed/v1/list/X6eJ7BTuz0AWohmg" },
+  { id: 77, region: 'florida', position: [5.1, 1.077, 0.14], iframeSrc: "https://rss.app/embed/v1/list/EKQeYmWMsMsDasiG" },
+  { id: 78, region: 'mexico', position: [5.1, 1.2, -0.2], iframeSrc: "https://rss.app/embed/v1/list/AkqlNluYDdjV0fgn" },
+  { id: 79, region: 'brazil', position: [5.1, 1.8, 0.7], iframeSrc: "" },
+  { id: 80, region: 'argentina', position: [5.1, 2.2, 0.5], iframeSrc: "" },
+  { id: 81, region: 'nigeria', position: [5.1, 1.435, 1.7], iframeSrc: "" },
+  { id: 82, region: 'morocco', position: [5.1, 1.0, 1.65], iframeSrc: "" },
+  { id: 83, region: 'ghana', position: [5.1, 1.42, 1.57], iframeSrc: "" },
+  { id: 84, region: 'ethiopia', position: [5.1, 1.435, 2.25], iframeSrc: "" },
+  { id: 85, region: 'somali', position: [5.1, 1.5, 2.35], iframeSrc: "" },
+  { id: 86, region: 'egypt', position: [5.1, 1.1, 2.025], iframeSrc: "" },
+  { id: 87, region: 'kenya', position: [5.1, 1.59, 2.2], iframeSrc: "" },
+  { id: 88, region: 'south africa', position: [5.1, 2.0, 2.05], iframeSrc: "" },
+];
+	  const markersData5 = [
+  // Each marker has [radius, phi, theta] format for spherical positioning
+  { id: 89, region: 'africa', position: [5.1, 1.2, 1.4], iframeSrc: "" },
+  { id: 90, region: 'europe', position: [5.1, 0.7, 1.8], iframeSrc: "" },
+  // Add other markers here...
+  { id: 91, region: 'america', position: [5.1, 0.9, -0.15], iframeSrc: "" },
+  { id: 92, region: 'south america', position: [5.1, 1.6, 0.4], iframeSrc: "" },
+  { id: 93, region: 'middle east', position: [5.1, 1, 2.3],iframeSrc: "" },
+  { id: 94, region: 'asia', position: [5.1, 0.9, 3], iframeSrc: "" },
+  { id: 95, region: 'japan', position: [5.1, 0.9, 4], iframeSrc: "https://rss.app/embed/v1/list/75OTet5NgUsYm705" },
+  { id: 96, region: 'carribbean', position: [5.1, 1.25, 0.15], iframeSrc: "https://rss.app/embed/v1/list/mUl2NASIGHqrInpI" },
+  { id: 97, region: 'uk', position: [5.1, 0.64, 1.55], iframeSrc: "https://rss.app/embed/v1/list/jB8bmDaTPV9EZWtI" },
+  { id: 98, region: 'new york', position: [5.1, 0.9, 0.25], iframeSrc: "https://rss.app/embed/v1/list/J1seN3JINBuOZchZ" },
+  { id: 99, region: 'florida', position: [5.1, 1.077, 0.14], iframeSrc: "https://rss.app/embed/v1/list/6c9wLJODvKk7jKh4" },
+  { id: 100, region: 'mexico', position: [5.1, 1.2, -0.2], iframeSrc: "https://rss.app/embed/v1/list/Ekvg7z7FaEHZotaP" },
+  { id: 101, region: 'brazil', position: [5.1, 1.8, 0.7], iframeSrc: "" },
+  { id: 102, region: 'argentina', position: [5.1, 2.2, 0.5], iframeSrc: "" },
+  { id: 103, region: 'nigeria', position: [5.1, 1.435, 1.7], iframeSrc: "" },
+  { id: 104, region: 'morocco', position: [5.1, 1.0, 1.65], iframeSrc: "" },
+  { id: 105, region: 'ghana', position: [5.1, 1.42, 1.57], iframeSrc: "" },
+  { id: 106, region: 'ethiopia', position: [5.1, 1.435, 2.25], iframeSrc: "" },
+  { id: 107, region: 'somali', position: [5.1, 1.5, 2.35], iframeSrc: "" },
+  { id: 108, region: 'egypt', position: [5.1, 1.1, 2.025], iframeSrc: "" },
+  { id: 109, region: 'kenya', position: [5.1, 1.59, 2.2], iframeSrc: "" },
+  { id: 110, region: 'south africa', position: [5.1, 2.0, 2.05], iframeSrc: "" },
 ];
 /*const genericMarkers = [
   { id: 1, position: [5.1, 1.2, 1.5], region: 'africa' },
@@ -9288,7 +9386,6 @@ function removeCountryOutlines() {
 
   //createEarthGlow();
   createEarthAperture();
-	 const dummy = new THREE.Object3D();
 	  /*const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
     const markerMaterial = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
@@ -9329,136 +9426,7 @@ function removeCountryOutlines() {
   markerMaterial.defines = { USE_UV: '' };
 	  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);*/
     // Creating Markers
-    const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);
-    const markerMaterial = new THREE.MeshBasicMaterial({
-    color: daymarkerMaterial,
-    onBeforeCompile: (shader) => {
-      shader.uniforms.time = globalUniforms.time;
-      shader.vertexShader = `
-      	attribute float phase;
-        varying float vPhase;
-        ${shader.vertexShader}
-      `.replace(
-        `#include <begin_vertex>`,
-        `#include <begin_vertex>
-        	vPhase = phase; // de-synch of ripples
-        `
-      );
-      shader.fragmentShader = `
-      	uniform float time;
-        varying float vPhase;
-      	${shader.fragmentShader}
-      `.replace(
-        `vec4 diffuseColor = vec4( diffuse, opacity );`,
-        `
-        vec2 lUv = (vUv - 0.5) * 2.;
-        float val = 0.;
-        float lenUv = length(lUv);
-        val = max(val, 1. - step(0.25, lenUv)); // central circle
-        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
-
-        float tShift = fract(time * 0.5 + vPhase);
-        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
-
-        if (val < 0.5) discard;
-
-        vec4 diffuseColor = vec4( diffuse, opacity );`
-      );
-    },
-  });
-    const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 // Function to load generic markers
-function loadGenericMarkers(markersData) {
-  // Check if the scene, marker data, and necessary variables are available
-  if (!scene || !markersData || markersData.length === 0) {
-    console.warn('Scene or markers data not available');
-    return;
-  }
-  console.log('Loading generic markers...');
-// Marker Geometry and Material
-// Adjust marker size dynamically based on zoom level
-
-  // Create the marker geometry and material
-  //const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1);
-//const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
-/*const markerMaterial = new THREE.MeshBasicMaterial({
-    color: daymarkerMaterial,
-    onBeforeCompile: (shader) => {
-      shader.uniforms.time = globalUniforms.time;
-      shader.vertexShader = `
-      	attribute float phase;
-        varying float vPhase;
-        ${shader.vertexShader}
-      `.replace(
-        `#include <begin_vertex>`,
-        `#include <begin_vertex>
-        	vPhase = phase; // de-synch of ripples
-        `
-      );
-      shader.fragmentShader = `
-      	uniform float time;
-        varying float vPhase;
-      	${shader.fragmentShader}
-      `.replace(
-        `vec4 diffuseColor = vec4( diffuse, opacity );`,
-        `
-        vec2 lUv = (vUv - 0.5) * 2.;
-        float val = 0.;
-        float lenUv = length(lUv);
-        val = max(val, 1. - step(0.25, lenUv)); // central circle
-        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
-
-        float tShift = fract(time * 0.5 + vPhase);
-        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
-
-        if (val < 0.5) discard;
-
-        vec4 diffuseColor = vec4( diffuse, opacity );`
-      );
-    },
-  });*/
-  markerMaterial.defines = { USE_UV: '' };
-  console.log('Creating generic markers...');
-  // Create an object to keep track of generic markers for each region
-  window.genericMarkers = window.genericMarkers || {};
-
-if (window.innerWidth <= 768) {
-  markerGeometry.scale(1.25, 1.25, 1.25); // Scale for mobile
-}
-
-// Creating Markers
-const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
-
-const dummy = new THREE.Object3D();
-markersData.forEach((data, index) => {
-  const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
-
-  // Use setFromSphericalCoords for spherical positioning on the globe
-  dummy.position.setFromSphericalCoords(radius, phi, theta);
-  dummy.lookAt(dummy.position.clone().setLength(radius + 1)); // Ensure marker faces outward
-  dummy.updateMatrix();
-  markers.setMatrixAt(index, dummy.matrix);
-// Log marker data
-console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}`);
-
-  data.worldPosition = dummy.position.clone(); // Store position for interaction (optional)
-});
-// Log region and saving marker
-const region = markersData[0]?.region; // Assuming markersData has region info
-  if (region) {
-    console.log(`Saving generic markers for region: ${region}`);
-    window.genericMarkers[region] = markers;
-  } else {
-    console.warn('Region data not found in markersData');
-  }
-// Save the marker to the genericMarkers object based on region
-genericMarkers[markersData.region] = markers;
-// Add the markers to the scene
-scene.add(markers);
-}
-
-  
-  loadGenericMarkers(markersData);
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
 // Assuming each marker has a reference in the HTML list and vice versa
 function highlightMarker(markerId) {
@@ -13193,8 +13161,8 @@ addMarkupPoints(fromLatLng, toLatLng);
     // Resize and update all markers
     // Resize and update all markers with animation
 // Function to adjust marker sizes dynamically based on zoom level
-Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+Object.keys(markersDataSets[selectedCategory]).forEach(region => {
+    const markers = markersDataSets[selectedCategory][region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13261,8 +13229,8 @@ Object.keys(genericMarkers).forEach(region => {
 });
 
 // Function to update marker sizes dynamically as zoomLevel changes
-Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+Object.keys(markersDataSets[selectedCategory]).forEach(region => {
+    const markers = markersDataSets[selectedCategory][region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13299,7 +13267,7 @@ Object.keys(genericMarkers).forEach(region => {
 
         // Remove old markers from the scene once resizing begins
         scene.remove(markers);
-        genericMarkers[region] = markers; // Update the genericMarkers object with resized markers
+        markersDataSets[selectedCategory][region] = markers; // Update the markersDataSets[selectedCategory] object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
@@ -13382,8 +13350,8 @@ addMarkupPoints(fromLatLng, toLatLng);
     // Resize and update all markers
     // Resize and update all markers with animation
 // Function to adjust marker sizes dynamically based on zoom level
-Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+Object.keys(markersDataSets[selectedCategory]).forEach(region => {
+    const markers = markersDataSets[selectedCategory][region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13450,8 +13418,8 @@ Object.keys(genericMarkers).forEach(region => {
 });
 
 // Function to update marker sizes dynamically as zoomLevel changes
-Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+Object.keys(markersDataSets[selectedCategory]).forEach(region => {
+    const markers = markersDataSets[selectedCategory][region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13488,7 +13456,7 @@ Object.keys(genericMarkers).forEach(region => {
 
         // Remove old markers from the scene once resizing begins
         scene.remove(markers);
-        genericMarkers[region] = markers; // Update the genericMarkers object with resized markers
+        markersDataSets[selectedCategory][region] = markers; // Update the markersDataSets[selectedCategory] object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
@@ -13793,7 +13761,7 @@ async function fetchMarkers(location, category) {
     console.error("Failed to fetch markers:", error);
   }
 }
-let activeMarkersData2 = markers; // Default to markersData
+let activeMarkersData2 = null; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
 // Function to add markers to the globe
 function addMarkersToGlobe(markers) {
@@ -14019,8 +13987,8 @@ document.addEventListener('click', function (event) {
     //controls.minDistance = 10;
     // Resize and update all markers with animation
 // Resize and update all markers with animation
-Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+Object.keys(markersData).forEach(region => {
+    const markers = markersData[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -14057,7 +14025,7 @@ Object.keys(genericMarkers).forEach(region => {
 
         // Remove old markers from the scene once resizing begins
         scene.remove(markers);
-        genericMarkers[region] = markers; // Update the genericMarkers object with resized markers
+        markersData[region] = markers; // Update the markersData object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
@@ -14481,9 +14449,9 @@ document.querySelectorAll('.post .view-link').forEach((item, index) => {
         }
     });
 });
-  // Iterate through all regions in the genericMarkers object
-  Object.keys(genericMarkers).forEach(region => {
-    const markers = genericMarkers[region];
+  // Iterate through all regions in the markersData object
+  Object.keys(markersData).forEach(region => {
+    const markers = markersData[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -14520,7 +14488,7 @@ document.querySelectorAll('.post .view-link').forEach((item, index) => {
 
         // Remove old markers from the scene once resizing begins
         scene.remove(markers);
-        genericMarkers[region] = markers; // Update the genericMarkers object with resized markers
+        markersData[region] = markers; // Update the markersData object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
@@ -15443,172 +15411,232 @@ window.addEventListener('mousedown', stopAutoRotateOnUserInteraction);
 //window.addEventListener('mouseup', stopAutoRotateOnUserInteraction);
 window.addEventListener('touchstart', stopAutoRotateOnUserInteraction);
 window.addEventListener('touchend', stopAutoRotateOnUserInteraction);
-  // Create Labels
-markersData.forEach((data) => {
-  // Create Label Div
-  const labelDiv = document.createElement('div');
-  labelDiv.className = 'marker-label';
-  labelDiv.id = `label-${data.id}`;
-// Set the z-index
-labelDiv.style.zIndex = '22009'; // Adjust the value as needed
-  // Close Button
-  const closeButton = document.createElement('button');
-  closeButton.className = 'close-button';
-  closeButton.innerText = '×';
-  labelDiv.appendChild(closeButton);
-  
-  // Close Button Event Listener
-  closeButton.addEventListener('click', (event) => {
-    console.log('Close button clicked'); // Check if this appears in the console
-    event.stopPropagation(); // Stop the event from propagating up the DOM
-    labelDiv.classList.remove('active');
-    
-    // Resume globe autorotation when the label is closed
-    controls.autoRotate = true;
-    
-    // Re-enable the OrbitControls
-    controls.enabled = true;
-  });
-
-  // Content Div
-  const contentDiv = document.createElement('div');
-  contentDiv.className = 'content';
-  labelDiv.appendChild(contentDiv);
-// Set the z-index
-contentDiv.style.zIndex = '22009'; // Adjust the value as needed
-  // Append to Labels Container
-  labelsContainer.appendChild(labelDiv);
-
-  // CSS2DObject
-  const labelObject = new CSS2DObject(labelDiv);
-  labelObject.position.copy(data.worldPosition);
-  scene.add(labelObject);
-
-  // Store label object for interaction
-  data.labelObject = labelObject;
-  labelDiv.addEventListener('mousedown', (event) => {
-    event.stopPropagation();
-  });
-  labelDiv.addEventListener('touchstart', (event) => {
-    event.stopPropagation();
-  });
-});
-
-// Raycaster for Interaction
-const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2();
-	  
-/*let activeLabel = null; // Keep track of the currently open iframe
-	  
-window.addEventListener('pointerdown', (event) => {
-  pointer.x = (event.clientX / innerWidth) * 2 - 1;
-  pointer.y = -(event.clientY / innerHeight) * 2 + 1;
-  raycaster.setFromCamera(pointer, camera);
-
-  const intersects = raycaster.intersectObject(markers).filter((m) => {
-    return m.uv.subScalar(0.5).length() * 2 < 0.25;
-  });
-
-  if (intersects.length > 0) {
-    const instanceId = intersects[0].instanceId;
-    const data = markersData[instanceId];
-	  
-	  // Update Label Content
-    const labelDiv = document.getElementById(`label-${data.id}`);
-    const contentDiv = labelDiv.querySelector('.content');
-	  
-	  // Check if the iframe is related to the marker (specific iframe)
-    if (!contentDiv.querySelector('iframe')) {
-	  // Add loading spinner inside the content div
-    contentDiv.innerHTML = `
-    <div class="loading-spinner" style="pointer-events:none;"></div>
-    <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
-    `;
-
-    const iframe = labelDiv.querySelector('iframe');
-    const spinner = contentDiv.querySelector('.loading-spinner');
-	   
-	    // Show Label
-    labelDiv.classList.add('active');
-	    
-	    iframe.addEventListener('load', () => {
-	console.log('Iframe loaded');
-	    
-	// Hide loading spinner when iframe finishes loading
-      spinner.style.display = 'none';
-      iframe.style.pointerEvents = 'all'; // Enable iframe interaction after loading
-       iframe.contentWindow.addEventListener('blur', () => {
-	console.log('Iframe lost focus');
-        controls.enabled = true; // Re-enable the controls when iframe loses focus
-      });
-		    // Close any previously active label
-      if (activeLabel && activeLabel !== labelDiv) {
-        activeLabel.classList.remove('active');
-      }
-		    // Set the new active label
-      activeLabel = labelDiv;
-	    
-    });
-	  // Show loading spinner
-    //const loadingIcon = document.getElementById('loadingIcon');
-    //loadingIcon.style.display = 'block';
-	  
-    // Add a listener to detect when the iframe loses focus and re-enable the controls
-    console.log(iframe); // Check if the iframe element is being correctly selected
-    }
-  } */
-// Close iframe when clicking outside of it
-	  
-    // Close iframe when clicking outside of it
-   /* document.addEventListener('click', function(event) {
-  if (!labelDiv.contains(event.target)) {
-    // Check if the label is already active, toggle it off
-    if (labelDiv.classList.contains('active')) {
-      labelDiv.classList.remove('active');
-      controls.autoRotate = true;
-      controls.enabled = true;
-    } else {
-      // Re-enable the iframe on click
-      labelDiv.classList.add('active');
-      controls.autoRotate = false;
-      controls.enabled = false;
-    }
-  }
-});
-/*        document.addEventListener('pointerdown', function(event) {
-          if (!labelDiv.contains(event.target)) {
-          labelDiv.classList.remove('active');
-          controls.autoRotate = true;
-          controls.enabled = true;
-          activeLabel = null; // No active label after close
-        }
-      });
-
-	    // Stop the globe's autorotation and disable OrbitControls
-    controls.autoRotate = false;
-    controls.enabled = false; // Disable the controls while interacting with the iframe
-
-  }
-}
-});*/
-	  // Define different markers data sets
+// Define different markers data sets
 const markersDataSets = {
     general: markersData,
-  cheapest: markersData,
-  midPrice: markersData,
+  threestar: markersData2,
+  fourstar: markersData3,
+  fivestar: markersData,
+cheapest: markersData4,
+  midPrice: markersData5,
   expensive: markersData,
-cheapest2: markersData,
-  midPrice2: markersData,
-  expensive2: markersData,
 };
-
+let markers;
+let activeLabel = null;
 let activeMarkersData = markersData; // Default to markersData
-let activeLabel = null; // Keep track of open iframe
-//let markers; // Declare it outside, so it is accessible globally.
+let selectedCategory = 'general'; // global scope
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
 
+const markerGeometry = new THREE.PlaneGeometry(0.65, 0.65);
+const dummy = new THREE.Object3D();
+
+let markerMaterial = new THREE.MeshBasicMaterial({
+    color: daymarkerMaterial,
+    onBeforeCompile: (shader) => {
+      shader.uniforms.time = globalUniforms.time;
+      shader.vertexShader = `
+      	attribute float phase;
+        varying float vPhase;
+        ${shader.vertexShader}
+      `.replace(
+        `#include <begin_vertex>`,
+        `#include <begin_vertex>
+        	vPhase = phase; // de-synch of ripples
+        `
+      );
+      shader.fragmentShader = `
+      	uniform float time;
+        varying float vPhase;
+      	${shader.fragmentShader}
+      `.replace(
+        `vec4 diffuseColor = vec4( diffuse, opacity );`,
+        `
+        vec2 lUv = (vUv - 0.5) * 2.;
+        float val = 0.;
+        float lenUv = length(lUv);
+        val = max(val, 1. - step(0.25, lenUv)); // central circle
+        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+
+        float tShift = fract(time * 0.5 + vPhase);
+        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+
+        if (val < 0.5) discard;
+
+        vec4 diffuseColor = vec4( diffuse, opacity );`
+      );
+    },
+  });
+markerMaterial.defines = { USE_UV: '' };
+function getMaterialByCategory(selectedCategory) {
+  const bronze = new THREE.MeshBasicMaterial({
+    color: 0xC79B88,
+    onBeforeCompile: (shader) => {
+      shader.uniforms.time = globalUniforms.time;
+      shader.vertexShader = `
+      	attribute float phase;
+        varying float vPhase;
+        ${shader.vertexShader}
+      `.replace(
+        `#include <begin_vertex>`,
+        `#include <begin_vertex>
+        	vPhase = phase; // de-synch of ripples
+        `
+      );
+      shader.fragmentShader = `
+      	uniform float time;
+        varying float vPhase;
+      	${shader.fragmentShader}
+      `.replace(
+        `vec4 diffuseColor = vec4( diffuse, opacity );`,
+        `
+        vec2 lUv = (vUv - 0.5) * 2.;
+        float val = 0.;
+        float lenUv = length(lUv);
+        val = max(val, 1. - step(0.25, lenUv)); // central circle
+        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+
+        float tShift = fract(time * 0.5 + vPhase);
+        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+
+        if (val < 0.5) discard;
+
+        vec4 diffuseColor = vec4( diffuse, opacity );`
+      );
+    },
+  });
+  const silver = new THREE.MeshBasicMaterial({
+    color: 0xCFCECA,
+    onBeforeCompile: (shader) => {
+      shader.uniforms.time = globalUniforms.time;
+      shader.vertexShader = `
+      	attribute float phase;
+        varying float vPhase;
+        ${shader.vertexShader}
+      `.replace(
+        `#include <begin_vertex>`,
+        `#include <begin_vertex>
+        	vPhase = phase; // de-synch of ripples
+        `
+      );
+      shader.fragmentShader = `
+      	uniform float time;
+        varying float vPhase;
+      	${shader.fragmentShader}
+      `.replace(
+        `vec4 diffuseColor = vec4( diffuse, opacity );`,
+        `
+        vec2 lUv = (vUv - 0.5) * 2.;
+        float val = 0.;
+        float lenUv = length(lUv);
+        val = max(val, 1. - step(0.25, lenUv)); // central circle
+        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+
+        float tShift = fract(time * 0.5 + vPhase);
+        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+
+        if (val < 0.5) discard;
+
+        vec4 diffuseColor = vec4( diffuse, opacity );`
+      );
+    },
+  });
+  const gold = new THREE.MeshBasicMaterial({
+    color: 0xECC88B,
+    onBeforeCompile: (shader) => {
+      shader.uniforms.time = globalUniforms.time;
+      shader.vertexShader = `
+      	attribute float phase;
+        varying float vPhase;
+        ${shader.vertexShader}
+      `.replace(
+        `#include <begin_vertex>`,
+        `#include <begin_vertex>
+        	vPhase = phase; // de-synch of ripples
+        `
+      );
+      shader.fragmentShader = `
+      	uniform float time;
+        varying float vPhase;
+      	${shader.fragmentShader}
+      `.replace(
+        `vec4 diffuseColor = vec4( diffuse, opacity );`,
+        `
+        vec2 lUv = (vUv - 0.5) * 2.;
+        float val = 0.;
+        float lenUv = length(lUv);
+        val = max(val, 1. - step(0.25, lenUv)); // central circle
+        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+
+        float tShift = fract(time * 0.5 + vPhase);
+        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+
+        if (val < 0.5) discard;
+
+        vec4 diffuseColor = vec4( diffuse, opacity );`
+      );
+    },
+  });
+  function createRippleMaterial(color) {
+  const material = new THREE.MeshBasicMaterial({ color });
+  material.onBeforeCompile = (shader) => {
+    shader.uniforms.time = globalUniforms.time;
+    shader.vertexShader = `
+      attribute float phase;
+      varying float vPhase;
+      ${shader.vertexShader}
+    `.replace(
+      `#include <begin_vertex>`,
+      `#include <begin_vertex>
+        vPhase = phase;
+      `
+    );
+
+    shader.fragmentShader = `
+      uniform float time;
+      varying float vPhase;
+      ${shader.fragmentShader}
+    `.replace(
+      `vec4 diffuseColor = vec4( diffuse, opacity );`,
+      `
+      vec2 lUv = (vUv - 0.5) * 2.;
+      float val = 0.;
+      float lenUv = length(lUv);
+      val = max(val, 1. - step(0.25, lenUv));
+      val = max(val, step(0.4, lenUv) - step(0.5, lenUv));
+      float tShift = fract(time * 0.5 + vPhase);
+      val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv));
+      if (val < 0.5) discard;
+      vec4 diffuseColor = vec4( diffuse, opacity );`
+    );
+  };
+  material.defines = { USE_UV: '' };
+  return material;
+}
+
+  if (selectedCategory === 'cheapest' || selectedCategory === 'threestar') return bronze;
+  if (selectedCategory === 'midPrice' || selectedCategory === 'fourstar') return silver;
+  if (selectedCategory === 'expensive' || selectedCategory === 'fivestar') return gold;
+  return createRippleMaterial(daymarkerMaterial);
+}
 function loadMarkers(selectedCategory) {
+  console.log("Selected category:", selectedCategory);
+  if (!markersDataSets[selectedCategory]) {
+    console.warn(`No data for category: ${selectedCategory}`);
+    return;
+  }
+
+  activeMarkersData = markersDataSets[selectedCategory];
+  // 🛠 Fix: define the material based on selected category
+  markerMaterial = getMaterialByCategory(selectedCategory);
+
+  markerMaterial.defines = { USE_UV: '' };
   // Remove existing markers from the scene
-  //scene.remove(markers);
+if (markers) scene.remove(markers);
+const markerCount = markersDataSets[selectedCategory].length;
+markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+
+
 	console.log('Selected category:', selectedCategory);
   console.log('Available categories:', markersDataSets);
   console.log('Markers Data Sets:', markersDataSets);
@@ -15619,25 +15647,72 @@ function loadMarkers(selectedCategory) {
     activeMarkersData = []; // Set it to an empty array to prevent further errors
   }
   // Create new markers for the selected category
-  //const markerCount = activeMarkersData.length;
-  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-  //const dummy = new THREE.Object3D();
-//const dummy = new THREE.Object3D();
   activeMarkersData.forEach((data, index) => {
-    const [radius, phi, theta] = data.position;
-    dummy.position.setFromSphericalCoords(radius, phi, theta);
-    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
-    dummy.updateMatrix();
-    markers.setMatrixAt(index, dummy.matrix);
-    data.worldPosition = dummy.position.clone();
+  const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
+  const iframeSrc = data.iframeSrc;
+  // Use setFromSphericalCoords for spherical positioning on the globe
+  dummy.position.setFromSphericalCoords(radius, phi, theta);
+  dummy.lookAt(dummy.position.clone().setLength(radius + 1)); // Ensure marker faces outward
+  dummy.updateMatrix();
+  markers.setMatrixAt(index, dummy.matrix);
+// Log marker data
+console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}, iframe=${iframeSrc}`);
+  data.worldPosition = dummy.position.clone();
+});
+// Clear existing labels from DOM
+labelsContainer.innerHTML = '';
+// Also remove label objects from the scene
+scene.children = scene.children.filter(obj => !(obj instanceof CSS2DObject));
+labelsContainer.innerHTML = '';
+activeMarkersData.forEach(data => {
+  if (data.labelObject) {
+    scene.remove(data.labelObject);
+  }
+});
+activeMarkersData.forEach((data) => {
+  if (data.labelObject) {
+    scene.remove(data.labelObject);
+  }
+});
+activeMarkersData.forEach((data) => {
+  const labelDiv = document.createElement('div');
+  labelDiv.className = 'marker-label';
+  labelDiv.id = `label-${data.id}`;
+  labelDiv.style.zIndex = '22009';
+
+  const closeButton = document.createElement('button');
+  closeButton.className = 'close-button';
+  closeButton.innerText = '×';
+  labelDiv.appendChild(closeButton);
+
+  closeButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    labelDiv.classList.remove('active');
+    controls.autoRotate = true;
+    controls.enabled = true;
   });
 
-  //scene.add(markers);
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'content';
+  contentDiv.style.zIndex = '22009';
+  labelDiv.appendChild(contentDiv);
+
+  labelsContainer.appendChild(labelDiv);
+
+  const labelObject = new CSS2DObject(labelDiv);
+  labelObject.position.copy(data.worldPosition);
+  scene.add(labelObject);
+  data.labelObject = labelObject;
+
+  labelDiv.addEventListener('mousedown', (event) => event.stopPropagation());
+  labelDiv.addEventListener('touchstart', (event) => event.stopPropagation());
+});
+  scene.add(markers);
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
 }
-	  
+
 // Set up marker click event
 function setupMarkerInteraction() {
   window.addEventListener('pointerdown', (event) => {
@@ -15655,40 +15730,39 @@ function setupMarkerInteraction() {
 
       // Check if this label is already active and close it
       if (activeLabel && activeLabel === document.getElementById(`label-${data.id}`)) {
-        closeIframe(event); // Close if clicking on the same active label
         return;
       }
+    const labelDiv = document.getElementById(`label-${data.id}`);
+    const isActive = labelDiv && labelDiv.classList.contains('active'); // ✅ this line was missing
 
-      // Otherwise, proceed to open the clicked marker
+      // Always open it again (even if just closed)
+    if (!isActive || activeLabel !== labelDiv) {
       openMarkerLabel(data);
+    }
     }
   });
 }
+document.addEventListener('pointerdown', (event) => {
+  if (activeLabel && !activeLabel.contains(event.target)) {
+    activeLabel.classList.remove('active');
+    controls.autoRotate = true;
+    controls.enabled = true;
+    renderer.domElement.style.pointerEvents = 'all';
+    activeLabel = null;
+  }
+});
 
-function openMarkerLabel(data) {
+/*function openMarkerLabel(data) {
+  data.iframeSrc = data.iframeSrc; // Forces reload of iframe
   const labelDiv = document.getElementById(`label-${data.id}`);
   const contentDiv = labelDiv.querySelector('.content');
-// Wait until the element is created in the DOM
-setTimeout(() => {
-    const saudiIframe = document.querySelector(".iframe-saudi");
-    if (saudiIframe) {
-      saudiIframe.innerHTML = `
-        <a href="https://www.tkqlhce.com/click-101312981-16949818" target="_top">
-          The earlier you book, the more you save – up to 25% savings on stays
-        </a>
-        <img src="https://www.tqlkg.com/image-101312981-16949818" width="1" height="1" border="0"/>
-      `;
-    } else {
-      console.error("The iframe-saudi element does not exist yet!");
-    }
-  }, 500); // Adjust the timeout as needed to ensure the DOM is updated
-
   if (!contentDiv.querySelector('iframe')) {
+    contentDiv.innerHTML = ''; // clear old content first
     // Inject the inner HTML content
     contentDiv.innerHTML = `
       <div class="loading-spinner" style="pointer-events:none;"></div>
       <iframe 
-        src="${data.iframeSrc}" 
+        src="${data.iframeSrc || 'about:blank'}"
         frameborder="0" 
         width="275" 
         height="249" 
@@ -15707,7 +15781,7 @@ setTimeout(() => {
         border: none; 
         color: rgba(255, 255, 255, 0.65); 
         cursor: pointer;
-        display: none;">
+        display: flex;">
         ● ● ●
       </button>
       <select id="priceCategorySelect-${data.id}" style=
@@ -15716,11 +15790,11 @@ setTimeout(() => {
       "right:30px !important;"
       >
         <optgroup label="Filter by Ratings">
-          <option value="disabled">Sort by Ratings🌟🌟🌟🌟🌟</option>
+          <option value="general">Sort by Ratings🌟🌟🌟🌟🌟</option>
           <option value="general">Most Popular in Region🏆</option>
-          <option value="cheapest">3 star rating🌟🌟🌟</option>
-          <option value="midPrice">4 star rating🌟🌟🌟🌟</option>
-          <option value="expensive">5 star rating🌟🌟🌟🌟🌟</option>
+          <option value="threestar">3 star rating🌟🌟🌟</option>
+          <option value="fourstar">4 star rating🌟🌟🌟🌟</option>
+          <option value="fivestar">5 star rating🌟🌟🌟🌟🌟</option>
         </optgroup>
       </select>
       <select id="airbnbSelector-${data.id}" style=
@@ -15729,11 +15803,11 @@ setTimeout(() => {
       "right:30px !important;"
       >
         <optgroup label="Price Filter">
-          <option value="disabled">Sort by Price (Across Region)🌍💸</option>
+          <option value="general">Sort by Price (Across Region)🌍💸</option>
           <option value="general">Most Popular in Region🌎🏆</option>
-          <option value="cheapest2">Low Price💸💸💸</option>
-          <option value="midPrice2">Mid Price💸💸💸💸</option>
-          <option value="expensive2">Expensive💸💸💸💸💸</option>
+          <option value="cheapest">Low Price💸💸💸</option>
+          <option value="midPrice">Mid Price💸💸💸💸</option>
+          <option value="expensive">Expensive💸💸💸💸💸</option>
         </optgroup>
       </select>
     `;
@@ -15801,10 +15875,154 @@ airbnbSelector.addEventListener('change', function () {
   }
 
   activeLabel = labelDiv;
+}*/
+function openMarkerLabel(data) {
+  const labelDiv = document.getElementById(`label-${data.id}`);
+  const contentDiv = labelDiv.querySelector('.content');
 
-  // Add global listener for closing
-  document.addEventListener('pointerdown', closeIframe);
+  // If iframe already exists — just update the src and return
+  let existingIframe = contentDiv.querySelector('iframe');
+  if (existingIframe) {
+    console.log("Updating iframe src while open");
+    const spinner = contentDiv.querySelector('.loading-spinner');
+    if (spinner) spinner.style.display = 'block';
+
+    existingIframe.style.pointerEvents = 'none';
+    existingIframe.src = data.iframeSrc || 'about:blank';
+
+    existingIframe.addEventListener('load', () => {
+      if (spinner) spinner.style.display = 'none';
+      existingIframe.style.pointerEvents = 'all';
+    });
+
+    // Don't recreate UI, just update iframe
+    return;
+  }
+  // Clear old content
+  contentDiv.innerHTML = '';
+
+  // Loading spinner
+  const spinner = document.createElement('div');
+  spinner.className = 'loading-spinner';
+  spinner.style.pointerEvents = 'none';
+  contentDiv.appendChild(spinner);
+
+  // Iframe
+  const iframe = document.createElement('iframe');
+  iframe.src = data.iframeSrc || 'about:blank';
+  iframe.frameBorder = '0';
+  iframe.width = '275';
+  iframe.height = '249';
+  iframe.scrolling = 'yes';
+  iframe.allowFullscreen = true;
+  iframe.loading = 'eager';
+  iframe.sandbox = "allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox";
+  iframe.style.pointerEvents = 'none';
+  contentDiv.appendChild(iframe);
+
+  // Spinner off when iframe is loaded
+  iframe.addEventListener('load', () => {
+    spinner.style.display = 'none';
+    iframe.style.pointerEvents = 'all';
+  });
+
+  // Toggle button
+  const toggleButton = document.createElement('button');
+  toggleButton.id = `toggleAirbnbPrices-${data.id}`;
+  toggleButton.innerText = '● ● ●';
+  toggleButton.style = `
+    font-size: 10px; 
+    letter-spacing: 1px; 
+    position: absolute; 
+    top: 330px; 
+    right: 85px; 
+    background: none; 
+    border: none; 
+    color: rgba(255, 255, 255, 0.65); 
+    cursor: pointer;
+    display: flex;
+  `;
+  contentDiv.appendChild(toggleButton);
+
+  // Rating select
+  const priceSelect = document.createElement('select');
+  priceSelect.id = `priceCategorySelect-${data.id}`;
+  priceSelect.style.display = 'none';
+  priceSelect.innerHTML = `
+    <optgroup label="Filter by Ratings">
+      <option value="general">Sort by Ratings🌟🌟🌟🌟🌟</option>
+      <option value="general">Most Popular in Region🏆</option>
+      <option value="threestar">3 star rating🌟🌟🌟</option>
+      <option value="fourstar">4 star rating🌟🌟🌟🌟</option>
+      <option value="fivestar">5 star rating🌟🌟🌟🌟🌟</option>
+    </optgroup>
+  `;
+  contentDiv.appendChild(priceSelect);
+
+  // Price select
+  const priceFilterSelect = document.createElement('select');
+  priceFilterSelect.id = `airbnbSelector-${data.id}`;
+  priceFilterSelect.style.display = 'none';
+  priceFilterSelect.innerHTML = `
+    <optgroup label="Price Filter">
+      <option value="general">Sort by Price (Across Region)🌍💸</option>
+      <option value="general">Most Popular in Region🌎🏆</option>
+      <option value="cheapest">Low Price💸💸💸</option>
+      <option value="midPrice">Mid Price💸💸💸💸</option>
+      <option value="expensive">Expensive💸💸💸💸💸</option>
+    </optgroup>
+  `;
+  contentDiv.appendChild(priceFilterSelect);
+
+  // Toggle dropdown visibility
+  toggleButton.addEventListener('click', function (event) {
+    event.stopPropagation();
+    const show = priceSelect.style.display === 'none';
+    priceSelect.style.display = show ? 'block' : 'none';
+    priceFilterSelect.style.display = show ? 'block' : 'none';
+  });
+
+  priceSelect.addEventListener('change', function () {
+  const selectedCategory = this.value;
+  const currentRegion = data.region;
+
+  activeMarkersData = markersDataSets[selectedCategory];
+  const newData = activeMarkersData.find(m => m.region === currentRegion);
+
+  if (newData) {
+    openMarkerLabel(newData);
+  }
+});
+
+  priceFilterSelect.addEventListener('change', function () {
+  const selectedCategory = this.value;
+  const currentRegion = data.region;
+
+  // Update the active data set
+  activeMarkersData = markersDataSets[selectedCategory];
+
+  // Find new marker with same region (or id)
+  const newData = activeMarkersData.find(m => m.region === currentRegion);
+
+  if (newData) {
+    openMarkerLabel(newData); // Open the updated iframe
+  }
+});
+
+
+  // Activate label
+  labelDiv.classList.add('active');
+  controls.autoRotate = false;
+  controls.enabled = false;
+  renderer.domElement.style.pointerEvents = 'none';
+
+  if (activeLabel && activeLabel !== labelDiv) {
+    activeLabel.classList.remove('active');
+  }
+
+  activeLabel = labelDiv;
 }
+
 
 	// Function to close the active iframe if clicked outside
   function closeIframe(event) {
@@ -15818,11 +16036,6 @@ airbnbSelector.addEventListener('change', function () {
     activeLabel = null;
   }
 }
-	  // Add event listener for dropdown selection
-document.getElementById('airbnbSelector').addEventListener('change', function() {
-  const selectedCategory = this.value;
-  loadMarkers(selectedCategory);
-});
 
 // Load markers for default category on page load
 loadMarkers('general');
