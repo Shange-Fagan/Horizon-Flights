@@ -15476,7 +15476,7 @@ let markerMaterial = new THREE.MeshBasicMaterial({
 markerMaterial.defines = { USE_UV: '' };
 function getMaterialByCategory(selectedCategory) {
   const bronze = new THREE.MeshBasicMaterial({
-    color: 0xcd7f32,
+    color: 0xc79b88,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
       shader.vertexShader = `
@@ -15512,7 +15512,7 @@ function getMaterialByCategory(selectedCategory) {
     },
   });
   const silver = new THREE.MeshBasicMaterial({
-    color: 0xc0c0c0,
+    color: 0xcfceca,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
       shader.vertexShader = `
@@ -15548,7 +15548,7 @@ function getMaterialByCategory(selectedCategory) {
     },
   });
   const gold = new THREE.MeshBasicMaterial({
-    color: 0xffd700,
+    color: 0xecc88b,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
       shader.vertexShader = `
