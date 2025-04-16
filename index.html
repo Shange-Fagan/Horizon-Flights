@@ -6170,11 +6170,12 @@ night: isSlow ? "js/Earth-Night-16K.webp" : "js/Earth-Night-16K.png",
   bump: isSlow ? "js/Earth-16k-Bump.webp" : "js/Earth-16k-Bump.png",
   normal: isSlow ? "js/Earth_Normal.webp" : "js/Earth_Normal.jpg",
   specular: isSlow ? "js/Earth_Specular.webp" : "js/Earth_Specular.jpg",
-  cloud: isSlow ? "js/Earth_Cloud.webp" : "js/Earth_Cloud.jpg"
+  cloud: isSlow ? "js/Earth_Cloud.webp" : "js/Earth_Cloud.jpg",
+  jetsetter: isSlow ? "js/earth.webp" : "js/earth.jpg"
 };
 const textureLoader = new THREE.TextureLoader();
 let dayTexture = textureLoader.load(texturePaths.diffuse);
-const LightsTexture = textureLoader.load("js/earth.jpg");
+const LightsTexture = textureLoader.load(texturePaths.jetsetter);
 const bumpMap = textureLoader.load(texturePaths.bump);
 const normalMap = textureLoader.load(texturePaths.normal); // Use a realistic normal map
 const specularMap = textureLoader.load(texturePaths.specular);
