@@ -15880,24 +15880,6 @@ function openMarkerLabel(data) {
   const labelDiv = document.getElementById(`label-${data.id}`);
   const contentDiv = labelDiv.querySelector('.content');
 
-  // If iframe already exists — just update the src and return
-  let existingIframe = contentDiv.querySelector('iframe');
-  if (existingIframe) {
-    console.log("Updating iframe src while open");
-    const spinner = contentDiv.querySelector('.loading-spinner');
-    if (spinner) spinner.style.display = 'block';
-
-    existingIframe.style.pointerEvents = 'none';
-    existingIframe.src = data.iframeSrc || 'about:blank';
-
-    existingIframe.addEventListener('load', () => {
-      if (spinner) spinner.style.display = 'none';
-      existingIframe.style.pointerEvents = 'all';
-    });
-
-    // Don't recreate UI, just update iframe
-    return;
-  }
   // Clear old content
   contentDiv.innerHTML = '';
 
@@ -15982,34 +15964,16 @@ function openMarkerLabel(data) {
     priceFilterSelect.style.display = show ? 'block' : 'none';
   });
 
+  // Dropdown change logic
   priceSelect.addEventListener('change', function () {
-  const selectedCategory = this.value;
-  const currentRegion = data.region;
-
-  activeMarkersData = markersDataSets[selectedCategory];
-  const newData = activeMarkersData.find(m => m.region === currentRegion);
-
-  if (newData) {
-    openMarkerLabel(newData);
-  }
-});
-
+    const selectedCategory = this.value;
+    loadMarkers(selectedCategory);
+  });
 
   priceFilterSelect.addEventListener('change', function () {
-  const selectedCategory = this.value;
-  const currentRegion = data.region;
-
-  // Update the active data set
-  activeMarkersData = markersDataSets[selectedCategory];
-
-  // Find new marker with same region (or id)
-  const newData = activeMarkersData.find(m => m.region === currentRegion);
-
-  if (newData) {
-    openMarkerLabel(newData); // Open the updated iframe
-  }
-});
-
+    const selectedCategory = this.value;
+    loadMarkers(selectedCategory);
+  });
 
   // Activate label
   labelDiv.classList.add('active');
