@@ -15773,17 +15773,6 @@ activeMarkersData.forEach((data) => {
   // Add interactivity to the new markers
   setupMarkerInteraction();
 }
-if (activeLabel) {
-  const dataId = activeLabel.id.replace('label-', '');
-  const newData = activeMarkersData.find((d) => d.id == dataId);
-
-  if (newData) {
-    const markerPosition = new THREE.Vector3();
-    markers.getMatrixAt(newData.id, tempMatrix);
-    markerPosition.setFromMatrixPosition(tempMatrix);
-    placeLabelAtMarker(markerPosition, activeLabel);
-  }
-}
 
 // Set up marker click event
 function setupMarkerInteraction() {
@@ -16040,34 +16029,12 @@ function openMarkerLabel(data) {
   priceSelect.addEventListener('change', function () {
     const selectedCategory = this.value;
     loadMarkers(selectedCategory);
-    setTimeout(() => {
-  if (activeLabel) {
-    const data = activeMarkersData.find((d) => `label-${d.id}` === activeLabel.id);
-    if (data) {
-      const markerPosition = new THREE.Vector3();
-      markers.getMatrixAt(data.id, tempMatrix);
-      markerPosition.setFromMatrixPosition(tempMatrix);
-      placeLabelAtMarker(markerPosition, activeLabel);
-    }
-  }
-}, 100); // Small delay to wait for DOM update
 
   });
 
   priceFilterSelect.addEventListener('change', function () {
     const selectedCategory = this.value;
     loadMarkers(selectedCategory);
-    setTimeout(() => {
-  if (activeLabel) {
-    const data = activeMarkersData.find((d) => `label-${d.id}` === activeLabel.id);
-    if (data) {
-      const markerPosition = new THREE.Vector3();
-      markers.getMatrixAt(data.id, tempMatrix);
-      markerPosition.setFromMatrixPosition(tempMatrix);
-      placeLabelAtMarker(markerPosition, activeLabel);
-    }
-  }
-}, 100); // Small delay to wait for DOM update
   });
 
   // Activate label
