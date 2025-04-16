@@ -15773,6 +15773,16 @@ activeMarkersData.forEach((data) => {
   // Add interactivity to the new markers
   setupMarkerInteraction();
 }
+function placeLabelAtMarker(markerPosition, labelElement) {
+  const vector = markerPosition.clone().project(camera);
+
+  const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+  const y = (-(vector.y * 0.5) + 0.5) * window.innerHeight;
+
+  labelElement.style.left = `${x}px`;
+  labelElement.style.top = `${y}px`;
+  labelElement.style.position = 'absolute';
+}
 
 // Set up marker click event
 function setupMarkerInteraction() {
@@ -16029,12 +16039,38 @@ function openMarkerLabel(data) {
   priceSelect.addEventListener('change', function () {
     const selectedCategory = this.value;
     loadMarkers(selectedCategory);
+    setTimeout(() => {
+  if (activeLabel) {
+    const dataId = activeLabel.id.replace('label-', '');
+    const markerData = activeMarkersData.find(d => d.id == dataId);
+    
+    if (markerData) {
+      const markerPosition = new THREE.Vector3();
+      markers.getMatrixAt(markerData.id, tempMatrix);
+      markerPosition.setFromMatrixPosition(tempMatrix);
+      placeLabelAtMarker(markerPosition, activeLabel);
+    }
+  }
+}, 100);
 
   });
 
   priceFilterSelect.addEventListener('change', function () {
     const selectedCategory = this.value;
     loadMarkers(selectedCategory);
+    setTimeout(() => {
+  if (activeLabel) {
+    const dataId = activeLabel.id.replace('label-', '');
+    const markerData = activeMarkersData.find(d => d.id == dataId);
+    
+    if (markerData) {
+      const markerPosition = new THREE.Vector3();
+      markers.getMatrixAt(markerData.id, tempMatrix);
+      markerPosition.setFromMatrixPosition(tempMatrix);
+      placeLabelAtMarker(markerPosition, activeLabel);
+    }
+  }
+}, 100);
   });
 
   // Activate label
