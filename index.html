@@ -4473,6 +4473,10 @@ window.addEventListener('resize', () => {
   document.body.style.height = window.innerHeight + 'px';
 });
 
+let flightPath = null;
+let startCircleMesh = null;
+let endCircleMesh = null;
+
 // Handle Login/Logout when the login button is clicked
 document.getElementById("loginButton").addEventListener("click", () => {
     const user = auth.currentUser;
@@ -4721,7 +4725,7 @@ function updateLoginButton(user) {
 
 firebase.auth().onAuthStateChanged(async (user) => {
   if (user) {
-    const response = await fetch(`https://a58d-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/user-status?email=${user.email}`);
+    const response = await fetch(`https://6c1c-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/user-status?email=${user.email}`);
     const data = await response.json();
 
     isPremiumUser = data.isPremium === true;
@@ -4739,7 +4743,7 @@ let isPremiumUser = localStorage.getItem("isPremiumUser") === "true";
 
 firebase.auth().onAuthStateChanged(async (user) => {
   if (user) {
-    const response = await fetch(`https://a58d-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/user-status?email=${user.email}`);
+    const response = await fetch(`https://6c1c-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/user-status?email=${user.email}`);
     const data = await response.json();
 
     isPremiumUser = data.isPremium === true;
@@ -7737,7 +7741,7 @@ function removebluePremiumPopup() {
 }*/
   async function isUserPremium(email) {
     try {
-        const res = await fetch(`https://a58d-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/user-status?email=${encodeURIComponent(email)}`, {
+        const res = await fetch(`https://6c1c-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/user-status?email=${encodeURIComponent(email)}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -7771,7 +7775,7 @@ async function handlePremiumSignup(theme) {
 	     email
 	     });
 	    console.log("👤 Firebase current user:", user);
-        const response = await fetch("https://a58d-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/create-checkout-session", {
+        const response = await fetch("https://6c1c-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/create-checkout-session", {
             method: "POST",
             headers: {
                 "ngrok-skip-browser-warning": "true",
@@ -15656,6 +15660,13 @@ function getMaterialByCategory(selectedCategory) {
   if (selectedCategory === 'expensive' || selectedCategory === 'fivestar') return gold;
   return createRippleMaterial(daymarkerMaterial);
 }
+function getColorByCategory(category) {
+  if (category === 'cheapest' || category === 'threestar') return 0xc79b88; // bronze
+  if (category === 'midPrice' || category === 'fourstar') return 0xcfceca; // silver
+  if (category === 'expensive' || category === 'fivestar') return 0xecc88b; // gold
+  return 0x00BFFF; // default vibrant blue
+}
+
 function loadMarkers(selectedCategory) {
   console.log("Selected category:", selectedCategory);
   if (!markersDataSets[selectedCategory]) {
@@ -15665,7 +15676,20 @@ function loadMarkers(selectedCategory) {
 
   activeMarkersData = markersDataSets[selectedCategory];
   // 🛠 Fix: define the material based on selected category
-  markerMaterial = getMaterialByCategory(selectedCategory);
+  const lineColor = getColorByCategory(selectedCategory);
+markerMaterial = getMaterialByCategory(selectedCategory);
+
+// Now update flight path and circle mesh materials
+if (flightPath) {
+  flightPath.material.color.setHex(lineColor);
+}
+if (startCircleMesh) {
+  startCircleMesh.material.color.setHex(lineColor);
+}
+if (endCircleMesh) {
+  endCircleMesh.material.color.setHex(lineColor);
+}
+
 
   markerMaterial.defines = { USE_UV: '' };
   // Remove existing markers from the scene
