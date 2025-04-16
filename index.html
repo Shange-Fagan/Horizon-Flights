@@ -3733,7 +3733,7 @@ margin-bottom: 1px;
     <div class="pulsating-dot" style="top: 50%; left: 50%;"></div>
     <p class="instruction-text">To get started, simply select your departure and destination, choose your travel dates, add the number of guests, and set your budget range. You can toggle between flight or hotel search at any time</p>
   </div>
-<div class="instruction-step hidden" id="themeInstruction">
+  <div class="instruction-step hidden" id="themeInstruction">
     <img src="js/dots.png" alt="Button Click" class="glove-hand"><img src="js/white-glove-scroll.png" alt="Drag Gesture" class="glove-hand">
     <div class="pulsating-dot" style="top: 70%; left: 60%;"></div>
     <p class="instruction-text">Tap the ●●● button to access <strong>price filters</strong><br>
@@ -13033,7 +13033,7 @@ function createFlightPath(fromVec, toVec, altitude) {
 
     // Create the tube geometry for the path
     const pathGeometry = new THREE.TubeGeometry(curve, 64, 0.02, 8, false);
-    let pathMaterial = new THREE.MeshBasicMaterial({ color: 0x00aaff });
+    let pathMaterial = new THREE.MeshBasicMaterial({ color: 0x00BFFF });
     const flightPath = new THREE.Mesh(pathGeometry, pathMaterial);
 
     scene.add(flightPath);
@@ -13610,7 +13610,7 @@ async function addMarkupPoints(fromLatLng, toLatLng) {
         }
     )
   },
-  punctuation: { circleColor: 0x00aaff, // A vibrant blue for circles
+  punctuation: { circleColor: 0x00BFFF, // A vibrant blue for circles
   lightColumn: {
     startColor:  0xffffff, // Yellow
     endColor: 0xffffff,   // Orange
