@@ -15470,7 +15470,7 @@ let markerMaterial = new THREE.MeshBasicMaterial({
 markerMaterial.defines = { USE_UV: '' };
 function getMaterialByCategory(selectedCategory) {
   const bronze = new THREE.MeshBasicMaterial({
-    color: 0xC79B88,
+    color: 0xcd7f32,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
       shader.vertexShader = `
@@ -15506,7 +15506,7 @@ function getMaterialByCategory(selectedCategory) {
     },
   });
   const silver = new THREE.MeshBasicMaterial({
-    color: 0xCFCECA,
+    color: 0xc0c0c0,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
       shader.vertexShader = `
@@ -15542,7 +15542,7 @@ function getMaterialByCategory(selectedCategory) {
     },
   });
   const gold = new THREE.MeshBasicMaterial({
-    color: 0xECC88B,
+    color: 0xffd700,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
       shader.vertexShader = `
@@ -15993,6 +15993,7 @@ function openMarkerLabel(data) {
     openMarkerLabel(newData);
   }
 });
+
 
   priceFilterSelect.addEventListener('change', function () {
   const selectedCategory = this.value;
