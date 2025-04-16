@@ -4426,7 +4426,7 @@ const auth = getAuth(app);
             alert("Thank you for subscribing!");
             // Reset the input field
             document.getElementById("emailInput").value = "";
-	    fetch("https://8578-2a00-23ee-1220-314f-84c5-817f-ae4a-2ef4.ngrok-free.app/send-welcome-email", {
+	    fetch("https://horizon-flights-backend.onrender.com/send-welcome-email", {
 	    method: "POST",
 	    headers: { "Content-Type": "application/json" },
 	    body: JSON.stringify({ email }),
