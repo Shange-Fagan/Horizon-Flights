@@ -4392,6 +4392,7 @@ if (!firebase.apps.length) {
   /*const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);*/
   let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
   camera.position.set(20, 0.5, 15).setLength(25);
+  const tempMatrix = new THREE.Matrix4();
 
 // Initialize Firestore
 const db = getFirestore(app);
@@ -15902,6 +15903,17 @@ airbnbSelector.addEventListener('change', function () {
 
   activeLabel = labelDiv;
 }*/
+function placeLabelAtMarker(markerPosition, labelElement) {
+  const vector = markerPosition.clone().project(camera);
+
+  const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+  const y = (-(vector.y * 0.5) + 0.5) * window.innerHeight;
+
+  labelElement.style.left = `${x}px`;
+  labelElement.style.top = `${y}px`;
+  labelElement.style.position = 'absolute';
+}
+
 function openMarkerLabel(data) {
   const labelDiv = document.getElementById(`label-${data.id}`);
   const contentDiv = labelDiv.querySelector('.content');
@@ -16012,6 +16024,12 @@ function openMarkerLabel(data) {
   }
 
   activeLabel = labelDiv;
+  const markerPosition = new THREE.Vector3();
+markers.getMatrixAt(data.id, tempMatrix);
+markerPosition.setFromMatrixPosition(tempMatrix);
+
+placeLabelAtMarker(markerPosition, labelDiv);
+
 }
 
 
