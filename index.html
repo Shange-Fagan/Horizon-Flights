@@ -4711,7 +4711,7 @@ function updateLoginButton(user) {
 
 firebase.auth().onAuthStateChanged(async (user) => {
   if (user) {
-    const response = await fetch(`https://8578-2a00-23ee-1220-314f-84c5-817f-ae4a-2ef4.ngrok-free.app/user-status?email=${user.email}`);
+    const response = await fetch(`https://78b3-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/user-status?email=${user.email}`);
     const data = await response.json();
 
     isPremiumUser = data.isPremium === true;
@@ -4729,7 +4729,7 @@ let isPremiumUser = localStorage.getItem("isPremiumUser") === "true";
 
 firebase.auth().onAuthStateChanged(async (user) => {
   if (user) {
-    const response = await fetch(`https://8578-2a00-23ee-1220-314f-84c5-817f-ae4a-2ef4.ngrok-free.app/user-status?email=${user.email}`);
+    const response = await fetch(`https://78b3-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/user-status?email=${user.email}`);
     const data = await response.json();
 
     isPremiumUser = data.isPremium === true;
@@ -7726,7 +7726,7 @@ function removebluePremiumPopup() {
 }*/
   async function isUserPremium(email) {
     try {
-        const res = await fetch(`https://8578-2a00-23ee-1220-314f-84c5-817f-ae4a-2ef4.ngrok-free.app/user-status?email=${encodeURIComponent(email)}`, {
+        const res = await fetch(`https://78b3-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/user-status?email=${encodeURIComponent(email)}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -7760,7 +7760,7 @@ async function handlePremiumSignup(theme) {
 	     email
 	     });
 	    console.log("👤 Firebase current user:", user);
-        const response = await fetch("https://8578-2a00-23ee-1220-314f-84c5-817f-ae4a-2ef4.ngrok-free.app/create-checkout-session", {
+        const response = await fetch("https://78b3-2a02-c7c-3945-5100-7873-4332-e87c-9fea.ngrok-free.app/create-checkout-session", {
             method: "POST",
             headers: {
                 "ngrok-skip-browser-warning": "true",
