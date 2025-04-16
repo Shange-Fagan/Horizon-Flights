@@ -15,11 +15,17 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
+  overflow-x: hidden;
   overscroll-behavior: none; /* blocks pull-to-refresh in some browsers */
   touch-action: none; /* prevents bounce-scroll */
   /*font-family: "Syne", sans-serif;*/
+  height: 100%;
+  max-height: 100%;
 }
-
+body {
+  position: relative;
+  overflow-y: hidden;
+}
 a, button, input, select, iframe {
   pointer-events: auto;
 }
@@ -4463,6 +4469,10 @@ const user = firebase.auth().currentUser;
     alert("Please log in to upgrade.");
   }
 })
+window.addEventListener('resize', () => {
+  document.body.style.height = window.innerHeight + 'px';
+});
+
 // Handle Login/Logout when the login button is clicked
 document.getElementById("loginButton").addEventListener("click", () => {
     const user = auth.currentUser;
@@ -15738,6 +15748,17 @@ activeMarkersData.forEach((data) => {
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
+}
+if (activeLabel) {
+  const dataId = activeLabel.id.replace('label-', '');
+  const newData = activeMarkersData.find((d) => d.id == dataId);
+
+  if (newData) {
+    const markerPosition = new THREE.Vector3();
+    markers.getMatrixAt(newData.id, tempMatrix);
+    markerPosition.setFromMatrixPosition(tempMatrix);
+    placeLabelAtMarker(markerPosition, activeLabel);
+  }
 }
 
 // Set up marker click event
