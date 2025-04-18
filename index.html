@@ -8736,6 +8736,11 @@ function openCustomBackgroundMenu() {
 function applyCustomBackground() {
     const selectedHDRI = document.getElementById('customHDRI').value;
 
+// If Snow Lakefield is selected, update the earthMaterial texture
+    if (selectedHDRI === "js/passendorf_snow_small.jpg") {
+        earthMaterial.uniforms.map.value = LightsTexture; // Earth retexture for Snow Lakefield
+    }
+
     loader.load(selectedHDRI, function(texture) {
         const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
         rt.fromEquirectangularTexture(renderer, texture);
