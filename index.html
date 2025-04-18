@@ -15712,6 +15712,7 @@ markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
   }
   // Create new markers for the selected category
   activeMarkersData.forEach((data, index) => {
+  data.id = index; // 🔐 force the ID to always match the mesh index
   const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
   const iframeSrc = data.iframeSrc;
   // Use setFromSphericalCoords for spherical positioning on the globe
