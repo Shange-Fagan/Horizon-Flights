@@ -15950,6 +15950,7 @@ airbnbSelector.addEventListener('change', function () {
 
   activeLabel = labelDiv;
 }*/
+const tempMatrix = new THREE.Matrix4();
 function openMarkerLabel(data) {
   const labelDiv = document.getElementById(`label-${data.id}`);
   const contentDiv = labelDiv.querySelector('.content');
