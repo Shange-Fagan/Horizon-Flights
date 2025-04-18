@@ -7884,7 +7884,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
         if (isPremium) {
           // ✅ Apply Jetsetter Theme only if user is premium
           regionPopup.style.display = "none";
-          earthMaterial.uniforms.map.value = LightsTexture;
+          earthMaterial.uniforms.map.value = dayTexture;
           markerMaterial.color.set(daymarkerMaterial);
 
           const selectedHDRI = 'js/kloofendal_48d_partly_cloudy_puresky.jpg';
