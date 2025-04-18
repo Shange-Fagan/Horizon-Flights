@@ -6778,8 +6778,7 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 	  //const daymarkerMaterial = new THREE.Color('#ff3232');
 //const nightmarkerMaterial = new THREE.Color('#FE8C02');
 	  let daymarkerMaterial = new THREE.Color('#00BFFF');
-	      /*let lightsmarkerMaterial = new THREE.Color('#00eeff');*/
-    let lightsmarkerMaterial = new THREE.Color('#ffffff');
+    let lightsmarkerMaterial = new THREE.Color('#00eeff');
     let pinkthememarkerMaterial = new THREE.Color('#F56ED3');
     let GlassthememarkerMaterial = new THREE.Color('#FFFFFF');
 let nightmarkerMaterial = new THREE.Color('#00BFFF');
@@ -8740,7 +8739,6 @@ function applyCustomBackground() {
 // If Snow Lakefield is selected, update the earthMaterial texture
     if (selectedHDRI === "js/passendorf_snow_small.jpg") {
         earthMaterial.uniforms.map.value = LightsTexture; // Earth retexture for Snow Lakefield
-	markerMaterial.color.set(lightsmarkerMaterial);
     }
 
     loader.load(selectedHDRI, function(texture) {
