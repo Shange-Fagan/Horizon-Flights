@@ -3442,6 +3442,14 @@ flex: 1;
         }
     }
 }
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    #cycleUp,
+    #cycleDown {
+      padding: 0px 2.5px !important; /* Safari Mobile-specific padding */
+    }
+  }
+}
 
 
 #cycleDown {
