@@ -15712,19 +15712,19 @@ markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
     activeMarkersData = []; // Set it to an empty array to prevent further errors
   }
   // Create new markers for the selected category
-  activeMarkersData.forEach((data, index) => {
+activeMarkersData.forEach((data, index) => {
   data.id = index; // 🔐 force the ID to always match the mesh index
-  const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
+
+  const [radius, phi, theta] = data.position;
   const iframeSrc = data.iframeSrc;
-  // Use setFromSphericalCoords for spherical positioning on the globe
   dummy.position.setFromSphericalCoords(radius, phi, theta);
-  dummy.lookAt(dummy.position.clone().setLength(radius + 1)); // Ensure marker faces outward
+  dummy.lookAt(dummy.position.clone().setLength(radius + 1));
   dummy.updateMatrix();
   markers.setMatrixAt(index, dummy.matrix);
-// Log marker data
-console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}, iframe=${iframeSrc}`);
   data.worldPosition = dummy.position.clone();
+  console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}, iframe=${iframeSrc}`);
 });
+
 // Clear existing labels from DOM
 labelsContainer.innerHTML = '';
 // Also remove label objects from the scene
