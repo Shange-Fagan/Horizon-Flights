@@ -4780,7 +4780,7 @@ function showMobileDesktopView() {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
-      mobileDesktopView.style.display = "block";
+      mobileDesktopView.style.display = "none";
     // Close button functionality
 document.querySelector('.close-btn2').addEventListener('click', function () {
     const closeNewsButton = document.getElementById('.close-btn2');
@@ -4789,6 +4789,7 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
     mobileDesktopView.style.display = 'none';
     closeNewsButton.style.display = 'none';
 });
+
     const topLeftLabel = document.getElementById('topLeftLabel');
         const iframe = document.getElementById('mobileTicker');
         const daythemeiframe = document.getElementById('dayTicker');
@@ -4796,13 +4797,41 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         const trivagoIframeContainer = document.getElementById('trivagoIframeContainer');
         const searchTicker = document.getElementById('searchTicker');
         const submitRegion = document.getElementById('regionPopup');
+	const jesusrolleykeeper = document.getElementById('rolexClock');
+        const jesusrolleykeeperselector = document.getElementById('timezoneSelector');
+	const instructionsOverlay = document.getElementById('instructionsOverlay');
+	const from = document.getElementById('from');
+	const where = document.getElementById('where');
+	const togglecontainer2 = document.getElementById('toggle-container2');
+	const checkin = document.getElementById('checkin');
+	const checkout = document.getElementById('checkout');
+	const header = document.getElementById('header');
+	const adults = document.getElementById('adults');
+	const price_min = document.getElementById('price_min');
+	const price_max = document.getElementById('price_max');
+	const languageSelectBtn = document.getElementById('languageSelect-btn');
+	const searchBtn = document.querySelector('.airbnb-button');
+        const searchBtn2 = document.querySelector('.airbnb-button22');
+	const loginButton = document.getElementById('loginButton');
+	const likedPostsButton = document.getElementById('likedPostsButton');
+	const cabinClassContainer = document.getElementById('cabinClassContainer');
+	const cabinClassContainer1 = document.getElementById('cycleUp');
+	const cabinClassContainer2 = document.getElementById('cycleDown');
+	const overlayContainer = document.getElementById('overlayContainer');
+	const overlayContainer2 = document.getElementById('overlayContainer2');
+	const regionSelect2 = document.getElementById('regionSelect');
         const clearFiltersBtn = document.getElementById('clearFiltersBtn');
         const regionSelect = document.getElementById('regionSelectBtn');
         const toggleButton = document.getElementById('toggleButton');
         const addLightsbutton = document.getElementById('addLightsbutton');
         const addLightsbutton2 = document.getElementById('addLightsbutton2');
         const newsButton = document.getElementById('newsButton');
+	const closeNewsButton = document.getElementById('closeNewsButton');
         const minimizeCarouselBtn = document.querySelector('.carousel-header');
+        const minimizeCarouselBtn1 = document.querySelector('minimizeCarouselBtn');
+	const priceselect = document.getElementById('priceCategorySelect');
+	const priceselectfilter = document.getElementById('airbnbSelector');
+	const themetoggle = document.querySelector('.theme-switch');
         const carouselContainer = document.getElementById('carousel-container');
         const loadingScreen = document.getElementById('loadingScreen');
         const pinkthemeBtn = document.getElementById('addLightsbutton3');
@@ -4818,37 +4847,102 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         nightthemeiframe.style.display = "none";
         trivagoIframeContainer.style.display = "none";
         searchTicker.style.display = "none";
-        submitRegion.style.display = "none";
-        clearFiltersBtn.style.display = "none";
-        regionSelect.style.display = "none";
-        toggleButton.style.display = "none";
-        addLightsbutton.style.display = "none";
-        addLightsbutton2.style.display = "none";
+        submitRegion.style.display = "block";
+	jesusrolleykeeper.style.display = "none";
+        jesusrolleykeeperselector.style.display = "none";
+	submitRegion.style.width = "70%";
+	instructionsOverlay.style.top = "60%";
+	regionSelect2.style.top = "138px";
+	from.style.marginRight = "18px";
+	from.style.marginTop = "7px";
+	where.style.marginRight = "-232px";
+	where.style.top = "-40px";
+	togglecontainer2.style.marginRight = "-430px";
+	togglecontainer2.style.marginTop = "-79px";
+	checkin.style.marginRight = "280px";
+	checkin.style.marginTop = "-4px";
+	checkin.style.marginBottom = "-2px";
+	checkout.style.marginRight = "260px";
+	checkout.style.marginTop = "-10px";
+	checkout.style.marginBottom = "-2px";
+	header.style.backgroundColor = "rgba(255, 255, 255, 0)";
+	adults.style.marginRight = "300px";
+	price_min.style.marginRight = "315px";
+	price_min.style.marginTop = "7px";
+	price_max.style.marginRight = "315px";
+	price_max.style.marginTop = "7px";
+	languageSelectBtn.style.display = "none";
+	searchBtn.style.marginLeft = "-322px";
+	searchBtn.style.marginTop = "7px";
+	searchBtn2.style.marginLeft = "-322px";
+	searchBtn2.style.marginTop = "-12px";
+	loginButton.style.marginRight = "322px";
+	loginButton.style.marginTop = "7px";
+	likedPostsButton.style.marginLeft = "-135px";
+	likedPostsButton.style.marginTop = "-40px";
+        cabinClassContainer.style.marginRight = "180px";
+	cabinClassContainer.style.marginTop = "-11px";
+	cabinClassContainer.style.marginBottom = "3.25px";
+	cabinClassContainer1.setProperty("padding", "0.5px 2.5px", "important");
+	cabinClassContainer2.setProperty("padding", "0.5px 2.5px", "important");
+	overlayContainer.style.setProperty("width", "85%", "important");
+	overlayContainer.style.setProperty("margin-top", "40px", "important");
+	overlayContainer2.style.setProperty("width", "85%", "important");
+        overlayContainer2.style.setProperty("margin-top", "260px", "important");
+	clearFiltersBtn.style.display = "block";
+        regionSelect.style.display = "block";
+        toggleButton.style.display = "block";
+        addLightsbutton.style.display = "block";
+        addLightsbutton2.style.display = "block";
         newsButton.style.display = "none";
-        minimizeCarouselBtn.style.display = "block";
-        minimizeCarouselBtn.style.top = "55px";
-        minimizeCarouselBtn.style.right = "0px";
+        minimizeCarouselBtn.style.display = "flex";
+        minimizeCarouselBtn.style.top = "323px";
+	minimizeCarouselBtn.style.top = "323px";
+	closeNewsButton.style.top = "145px";
+	closeNewsButton.style.right = "408px";
+	priceselect.style.setProperty("background-position", "right 6.5px", "important");
+	priceselect.style.setProperty("background-size", "12px", "important");
+	priceselectfilter.style.setProperty("background-position", "right 6.5px", "important");
+	priceselectfilter.style.setProperty("background-size", "12px", "important");
+  minimizeCarouselBtn.style.setProperty("z-index", "22012", "important");
+	themetoggle.style.top = "360px";
+        //minimizeCarouselBtn.style.right = "0px";
         carouselContainer.style.display = "none";
         pinkthemeBtn.style.display = "none";
-        backgroundthemeBtn.style.display = "none";
+        backgroundthemeBtn.style.display = "block";
         globethemeBtn.style.display = "none";
-        nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
-        dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+        nightTexture = textureLoader.load(texturePaths.night);
+        dayTexture = textureLoader.load(texturePaths.diffuse);
         // Optionally, disable other content
         document.body.style.overflow = "hidden"; // Prevent scrolling
 	    // Add the event listener for the toggle change
-document.addEventListener('DOMContentLoaded', () => {
-    // Add a 10-second delay before simulating a click on the toggle button
-    setTimeout(() => {
-        const themeToggle = document.getElementById('minimizeCarouselBtn');
-        if (themeToggle) {
-            themeToggle.click(); // Simulate a click on the toggle
-        }
-    }, 10000); // 10000 milliseconds = 10 seconds
-});
+	    // Add a 10-second delay before simulating a click on the toggle button
+	    setTimeout(() => {
+	  const themeToggle = document.getElementById('minimizeCarouselBtn');
+	  const showAdsButton = document.getElementById('showAdsButton');
+	
+	  if (themeToggle) {
+	    // Temporarily lower z-index of theme toggle during the click
+	    themeToggle.style.zIndex = '0';
+	    
+	    // Click the theme toggle
+	    themeToggle.click();
+	
+	    // Restore z-index safely after click
+	    setTimeout(() => {
+	      themeToggle.style.zIndex = ''; // or set to your normal zIndex like '10'
+	    }, 500);
+	  }
+	
+	  // Make sure showAdsButton is visible and clickable
+	  if (showAdsButton) {
+	    showAdsButton.style.pointerEvents = 'auto';
+	    showAdsButton.style.zIndex = '9999'; // put it on top
+	  }
+	}, 10000);
+
     }
 }
-
 // Run the function after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", showMobileDesktopView);
 
