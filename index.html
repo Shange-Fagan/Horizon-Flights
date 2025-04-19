@@ -3425,14 +3425,14 @@ flex: 1;
             padding: 1.5px 2.5px !important; /* Safari-specific padding */
         }
     }
-}.safari #cycleUp {
+}/*.safari #cycleUp {
     padding: 1.25px 2.5px !important;
 }
 
 .safari #cycleDown {
     padding: 1.25px 2.5px !important;
-}
-@media not all and (min-resolution: 0.001dpcm) {
+}*/
+/*@media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) {
         #cycleUp {
             padding: 1.5px 2.5px !important; /* Safari-specific padding */
@@ -3441,16 +3441,20 @@ flex: 1;
             padding: 1.5px 2.5px !important; /* Safari-specific padding */
         }
     }
-}
+}*/
+
+	/* ✅ Safari Desktop (Mac) */
 @media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-    #cycleUp,
-    #cycleDown {
-      padding: 0px 2.5px !important; /* Safari Mobile-specific padding */
+  @supports (-webkit-appearance: none) {
+    .safari #cycleUp,
+    .safari #cycleDown {
+      padding: 1.25px 2.5px !important;
     }
   }
 }
-	@media not all and (min-resolution: 0.001dpcm) {
+
+/* ✅ Safari Mobile (iOS) */
+@media not all and (min-resolution: 0.001dpcm) {
   @supports (-webkit-touch-callout: none) {
     .safari #cycleUp,
     .safari #cycleDown {
@@ -3458,6 +3462,8 @@ flex: 1;
     }
   }
 }
+
+	    
 
 
 
