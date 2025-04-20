@@ -12638,7 +12638,7 @@ function createFlightPath(fromVec, toVec, altitude) {
 
     // Create the tube geometry for the path
     const pathGeometry = new THREE.TubeGeometry(curve, 64, 0.02, 8, false);
-    let pathMaterial = new THREE.MeshBasicMaterial({ color: 0x46dff0 });
+    let pathMaterial = new THREE.MeshBasicMaterial({ color: 0x00BFFF });
     const flightPath = new THREE.Mesh(pathGeometry, pathMaterial);
 
     scene.add(flightPath);
@@ -13215,7 +13215,7 @@ async function addMarkupPoints(fromLatLng, toLatLng) {
         }
     )
   },
-  punctuation: { circleColor: 0x46dff0, // A vibrant blue for circles
+  punctuation: { circleColor: 0x00BFFF, // A vibrant blue for circles
   lightColumn: {
     startColor:  0xffffff, // Yellow
     endColor: 0xffffff,   // Orange
