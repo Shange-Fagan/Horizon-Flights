@@ -14807,52 +14807,102 @@ let position;
 // Pan to region based on dropdown selection
 // Pan to region based on dropdown selection
 function panToRegion(region) {
-  console.log(`Selected region: ${region}`);  // Debug
+  console.log(`Selected region: ${region}`);
+  let position, zoomLevel;
 
   switch (region) {
     case 'africa':
-      // Adjusted x value to pan the camera more to the right
-      position = { x: 16.0, y: 0, z: 1.74 }; 
-      zoomLevel = 1.5;
-      //zoomLevel = 2.5987766446450165;
-      break;
-      
-    case 'europe': 
-      position = { x: 4.0, y: 2.91, z: 0.55 }; 
-      zoomLevel = 1.5;
-      //zoomLevel = 3.352075053253554;
-      break;
-      
-    case 'america': 
-      position = { x: 0, y: 2.55, z: 4.42 }; 
-      //zoomLevel = 2.0;
-      zoomLevel = 1.5; 
-      break;
-      
-    case 'south america': 
-      position = { x: 1.5, y: -0.5, z: 4.3 }; 
-      //zoomLevel = 1.7;
+      position = { x: 16.0, y: 0, z: 1.74 };
       zoomLevel = 1.5;
       break;
-      
-    case 'carribbean': 
-      position = { x: 0.65, y: 2.0, z: 4.6 }; 
-      //zoomLevel = 2.4;
+
+    case 'north-africa':
+      position = { x: 14.5, y: 1.2, z: 0.8 };
+      zoomLevel = 1.7;
+      break;
+
+    case 'west-africa':
+      position = { x: 15.5, y: 0.6, z: 2.0 };
+      zoomLevel = 1.7;
+      break;
+
+    case 'east-africa':
+      position = { x: 17.5, y: -0.2, z: 1.2 };
+      zoomLevel = 1.7;
+      break;
+
+    case 'southern-africa':
+      position = { x: 18.0, y: -2.2, z: 1.4 };
+      zoomLevel = 1.7;
+      break;
+
+    case 'america':
+      position = { x: 0, y: 2.55, z: 4.42 };
+      zoomLevel = 1.5;
+      break;
+
+    case 'canada':
+      position = { x: 0, y: 4.0, z: 4.0 };
+      zoomLevel = 1.6;
+      break;
+
+    case 'south america':
+      position = { x: 1.5, y: -0.5, z: 4.3 };
+      zoomLevel = 1.5;
+      break;
+
+    case 'central-america':
+      position = { x: 0.9, y: 1.5, z: 4.5 };
+      zoomLevel = 2.0;
+      break;
+
+    case 'carribbean':
+      position = { x: 0.65, y: 2.0, z: 4.6 };
       zoomLevel = 2.25;
       break;
-      
-    case 'asia': 
-      position = { x: -0.89, y: 3.28, z: -3.92 }; 
-      //zoomLevel = 1.9;
+
+    case 'europe':
+      position = { x: 4.0, y: 2.91, z: 0.55 };
       zoomLevel = 1.5;
       break;
-      
-    case 'world': 
-      position = { x: 16.0, y: 0, z: 1.74 }; 
-      zoomLevel = 1.4;
-      //zoomLevel = 10.101116854411483;
+
+    case 'western-europe':
+      position = { x: 2.8, y: 2.5, z: 0.9 };
+      zoomLevel = 1.7;
       break;
-    default: return;
+
+    case 'eastern-europe':
+      position = { x: 5.2, y: 2.5, z: 0.3 };
+      zoomLevel = 1.7;
+      break;
+
+    case 'northern-europe':
+      position = { x: 3.5, y: 3.6, z: 0.5 };
+      zoomLevel = 1.6;
+      break;
+
+    case 'southern-europe':
+      position = { x: 4.0, y: 1.9, z: 0.7 };
+      zoomLevel = 1.6;
+      break;
+
+    case 'asia':
+      position = { x: -0.89, y: 3.28, z: -3.92 };
+      zoomLevel = 1.5;
+      break;
+
+    case 'middle-east':
+      position = { x: 6.0, y: 1.5, z: 0.1 };
+      zoomLevel = 1.7;
+      break;
+
+    case 'world':
+      position = { x: 16.0, y: 0, z: 1.74 };
+      zoomLevel = 1.4;
+      break;
+
+    default:
+      return;
   }
   // Ensure zoomLevel is properly set
   if (typeof zoomLevel === 'undefined') {
