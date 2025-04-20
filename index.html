@@ -5121,8 +5121,8 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         pinkthemeBtn.style.display = "none";
         backgroundthemeBtn.style.display = "block";
         globethemeBtn.style.display = "none";
-        dayTexture = textureLoader.load('js/Earth_Diffuse.jpg');
-	nightTexture = textureLoader.load('js/Earth-Night-16K.png');
+        dayTexture = textureLoader.load(texturePaths.diffuse);
+	nightTexture = textureLoader.load(texturePaths.night);
         // Optionally, disable other content
         document.body.style.overflow = "hidden"; // Prevent scrolling
 	    // Add the event listener for the toggle change
