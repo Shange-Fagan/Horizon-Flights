@@ -3990,7 +3990,7 @@ margin-bottom: 1px;
   <button id="likedPostsButton" class="liked-button">
     <img src="js/heart.png" alt="Liked posts Icon" style="width: 24px; display:flex; align-items: center; height: 24px; margin-right: 0px; margin-top: 1.5px;">
   </button>
-  <div>
+  <div id="instagramButton">
   <a href="https://www.instagram.com/horizonflightsofficial/" 
      target="_blank" 
      style="
@@ -5053,6 +5053,7 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
 	const likedPostsButton = document.getElementById('likedPostsButton');
 	const cabinClassContainer = document.getElementById('cabinClassContainer');
 	const cabinClassContainer22 = document.getElementById('cabinClassInput');
+	const instagramButton = document.getElementById('instagramButton');
 	const cabinClassContainer1 = document.getElementById('cycleUp');
 	const cabinClassContainer2 = document.getElementById('cycleDown');
 	const overlayContainer = document.getElementById('overlayContainer');
@@ -5135,6 +5136,7 @@ document.querySelector('.close-btn2').addEventListener('click', function () {
         minimizeCarouselBtn.style.display = "flex";
         minimizeCarouselBtn.style.top = "323px";
 	minimizeCarouselBtn.style.top = "323px";
+	instagramButton.style.display = "none";
 	closeNewsButton.style.top = "145px";
 	closeNewsButton.style.right = "408px";
 	priceselect.style.setProperty("background-position", "right 6.5px", "important");
