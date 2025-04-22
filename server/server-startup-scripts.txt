@@ -1,0 +1,30 @@
+pm2 start server/server.js --watch
+nodemon server/server.js
+nodemon stripecheckoutapi
+pm2 start server/server.js --max-memory-restart 600M
+pm2 start stripecheckoutapi.js --max-memory-restart 600M
+pm2 start server/server.js --name horizon-server --watch --max-memory-restart 600M --restart-delay 3000
+pm2 start stripecheckoutapi.js --name stripe-api --watch --max-memory-restart 600M --restart-delay 3000
+pm2 start server/server.js -i max --name "horizon-api"
+pm2 monit
+pm2 stop server
+pm2 stop horizon-server
+pm2 stop stripecheckoutapi
+node exportEmails.js
+http-server . -p 3005
+cloudflared tunnel run horizonflights-tunnel
+cloudflared tunnel --config ~/.cloudflared/stripecheckout-config.yml run stripecheckout-tunnel
+ngrok config add-authtoken <TOKEN>
+Created tunnel horizonflights-tunnel2 with id d94d2352-3f6d-4a4f-8325-901f566e282f
+1. pm2 start server/server.js --name horizon-api --max-memory-restart 600M --restart-delay 3000 -i max --env production
+pm2 stop horizon-api
+2. pm2 start stripecheckoutapi.js --name horizon-subscription-api --max-memory-restart 600M --restart-delay 3000 -i max --env production
+pm2 stop horizon-subscription-api
+3. cloudflared --config ~/.cloudflared/stripe-config.yml tunnel run
+4. cloudflared tunnel run horizonflights-tunnel2
+cloudflared tunnel --config ~/.cloudflared/config.yml run
+to check frontend purchase themes is running normally:
+https://stripe-api.horizonflights.travel/user-status?email=shangefagan@gmail.com
+https://stripe-api.horizonflights.travel/
+to check frontend flights + hotels search is running normally:
+https://api.horizonflights.travel/
