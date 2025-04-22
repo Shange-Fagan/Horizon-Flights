@@ -4333,7 +4333,7 @@ gl_FragColor = vec4(glowColor, intensity);
 </div>
 <button id="addLightsbutton" style="display: block;">Jetsetter Theme💫</button>
 <button id="addLightsbutton3" style="display: block;">&nbsp;&nbsp;&nbsp;Blue Theme✅</button>
-<button id="addLightsbutton2">&nbsp;&nbsp;&nbsp;Atmosphere☁️</button>
+<button id="addLightsbutton2">&nbsp;&nbsp;&nbsp;Atmosphere⚪️</button>
 <!-- Globe Style Toggle Button -->
 <button id="toggleButton4" style="display:none" class="theme-button2">&nbsp;&nbsp;&nbsp;Globe Theme🌍</button>
 <!-- Dropdown Menu for Background Selection -->
@@ -8053,7 +8053,7 @@ function toggleLightstheme2() {
   // Get the button element
   const lightsButton = document.getElementById('addLightsbutton2');
 
-  if (lightsButton.textContent === "\u00A0\u00A0\u00A0Atmosphere☁️") {
+  if (lightsButton.textContent === "\u00A0\u00A0\u00A0Atmosphere⚪️") {
     // If the lights button is clicked, overlay the lights texture on top of the current state
     if (currentTexture === "day") {
       scene.add(cloudMesh2); // Apply lights texture (day + lights)
@@ -8091,7 +8091,7 @@ function toggleLightstheme2() {
       markerMaterial.color.set(nightmarkerMaterial);
       console.log("Reverted to night texture");
     }
-    lightsButton.textContent = "\u00A0\u00A0\u00A0Atmosphere☁️";
+    lightsButton.textContent = "\u00A0\u00A0\u00A0Atmosphere⚪️";
   }
 
   // Ensure uniforms update
