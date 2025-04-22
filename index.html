@@ -8694,7 +8694,13 @@ async function showcustombackdropPremiumPopup() {
     const isPremium = await isUserPremium(user.email); // ✅ correct
     if (isPremium) return; // ✅ User is already premium, don't show popup
     if (document.getElementById("premiumPopup")) return; // Prevent duplicates
-
+  const button = document.getElementById('backgroundDropdown');
+  const dropdown = document.getElementById('backgroundDropdown');
+  const popup = document.getElementById('customBackgroundMenu');
+  const popup2 = document.getElementById('customHDRI');
+    dropdown.style.display = 'none';
+    popup.style.display = 'none';
+    popup2.style.display = 'none';
     // Greyed-out overlay to prevent interactions
     const overlay = document.createElement("div");
     overlay.setAttribute("id", "premiumOverlay");
