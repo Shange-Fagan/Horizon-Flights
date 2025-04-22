@@ -38,8 +38,8 @@ admin.initializeApp();
 }));*/
 // ✅ Allow Specific Origins (Add your frontend URL here)
 const allowedOrigins = [
-    "https://horizonflights.org", // Production
-    "http://localhost:3000",      // Local Testing
+    "https://horizonflights.travel", // Production
+    "http://localhost:3005",      // Local Testing
     "https://shange-fagan.github.io" // GitHub Pages
 ];
 
