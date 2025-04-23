@@ -4329,7 +4329,7 @@ gl_FragColor = vec4(glowColor, intensity);
   </select>
   <button id="applycustomHDRI">Apply</button>
 </div>
-<button id="addLightsbutton" style="display: block;">Jetsetter Theme💫</button>
+<button id="addLightsbutton" style="display: block;">Jetsetter Theme✈️</button>
 <button id="addLightsbutton3" style="display: block;">&nbsp;&nbsp;&nbsp;Blue Theme✅</button>
 <button id="addLightsbutton2">&nbsp;&nbsp;&nbsp;Atmosphere🌐</button>
 <!-- Globe Style Toggle Button -->
@@ -4559,7 +4559,7 @@ document.getElementById("loginButton").addEventListener("click", () => {
 	    localStorage.removeItem("isPremiumUser");
 	
 	    // 🔁 Optionally update the UI theme back to default
-	    lightsButton.textContent = "Jetsetter Theme💫"; // or whatever your default is
+	    lightsButton.textContent = "Jetsetter Theme✈️"; // or whatever your default is
 	    revertToPreviousTheme(); // If you have a fallback
 	    scene.background = nightbackgroundTexture; // Optional reset
             })
@@ -7532,7 +7532,7 @@ async function showPremiumPopup() {
 
     // Title
     const title = document.createElement("h3");
-    title.innerText = "Upgrade to Premium💫";
+    title.innerText = "Upgrade to Premium✈️";
     title.style.color = "#FFFFFF";
     premiumPopup.appendChild(title);
 
@@ -7721,7 +7721,7 @@ function revertToPreviousTheme() {
     // Zoom in the globe when reverting theme
     zoomInGlobe();
 
-    lightsButton.textContent = "Jetsetter Theme💫";
+    lightsButton.textContent = "Jetsetter Theme✈️";
 
     removePremiumPopup(); // Remove the popup and overlay
     removePinkPremiumPopup(); // Remove the popup and overlay
@@ -7906,7 +7906,7 @@ function zoomOutGlobe() {
     previousTheme = currentTexture; // Store previous theme
     previousMarker = currentmarkerMaterial; // Store previous marker
 
-    if (lightsButton.textContent === "Jetsetter Theme💫") {
+    if (lightsButton.textContent === "Jetsetter Theme✈️") {
   const user = firebase.auth().currentUser;
 if (user) {
   isUserPremium(user.email).then(isPremium => {
@@ -7955,7 +7955,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
   previousTheme = currentTexture; // Store previous theme
   previousMarker = currentmarkerMaterial; // Store previous marker
 
-  if (lightsButton.textContent === "Jetsetter Theme💫") {
+  if (lightsButton.textContent === "Jetsetter Theme✈️") {
     const user = firebase.auth().currentUser;
 
     if (user) {
@@ -8381,7 +8381,7 @@ function showcustomglobethemePremiumPopup() {
 
     // Description
     const description = document.createElement("p");
-    description.innerHTML = "Unlock <b>exclusive globe themes</b> and elevate your travel experience! 💫<br><br><br>"
+    description.innerHTML = "Unlock <b>exclusive globe themes</b> and elevate your travel experience! ✈️<br><br><br>"
                       + "Customize your globe view with <b>luxury designs</b> and <b>immersive visuals</b> <br>"
                       + "that make booking flights even more exciting.<br><br>"
                       + "🚀 <b>Upgrade now to explore the world in style!</b>";
@@ -8461,7 +8461,7 @@ closeButton.style.color = "#FFFFFF";
 
     // Description
     const description = document.createElement("p");
-    description.innerHTML = "Unlock <b>exclusive globe themes</b> and elevate your travel experience! 💫<br><br><br>"
+    description.innerHTML = "Unlock <b>exclusive globe themes</b> and elevate your travel experience! ✈️<br><br><br>"
                       + "Customize your globe view with <b>luxury designs</b> and <b>immersive visuals</b> <br>"
                       + "that make booking flights even more exciting.<br><br>"
                       + "🚀 <b>Upgrade now to explore the world in style!</b>";
@@ -8541,7 +8541,7 @@ function showcustomblueglobethemePremiumPopup() {
 
     // Description
     const description = document.createElement("p");
-    description.innerHTML = "Unlock <b>exclusive globe themes</b> and elevate your travel experience! 💫<br><br><br>"
+    description.innerHTML = "Unlock <b>exclusive globe themes</b> and elevate your travel experience! ✈️<br><br><br>"
                       + "Customize your globe view with <b>luxury designs</b> and <b>immersive visuals</b> <br>"
                       + "that make booking flights even more exciting.<br><br>"
                       + "🚀 <b>Upgrade now to explore the world in style!</b>";
@@ -8746,7 +8746,7 @@ async function showcustombackdropPremiumPopup() {
 
     // Title
     const title = document.createElement("h3");
-    title.innerText = "Upgrade to Premium 💫";
+    title.innerText = "Upgrade to Premium ✈️";
     title.style.color = "#FFFFFF";
     premiumPopup.appendChild(title);
 
@@ -8847,7 +8847,7 @@ function showPremiumPaywall() {
     popup.innerHTML = `
         <div class="premium-popup">
             <h2>Upgrade to Premium</h2>
-            <p>Custom HDRI backgrounds are a premium feature. Subscribe to access! 💫</p>
+            <p>Custom HDRI backgrounds are a premium feature. Subscribe to access! ✈️</p>
             <button onclick="subscribeToPremium()">Upgrade Now</button>
             <button onclick="closePremiumPopup()">Close</button>
         </div>
@@ -10127,7 +10127,7 @@ if (missingFields.length > 0) {
         overlay.innerHTML = `
             <div class="spinner-container">
                 <div class="spinner"></div>
-                <p class="spinner-text">We’re searching for the best flight deals for you… 🙌 Sit back, relax, and browse while we find your perfect flight! ✈️💫
+                <p class="spinner-text">We’re searching for the best flight deals for you… 🙌 Sit back, relax, and browse while we find your perfect flight! ✈️
 	Our website script actually uses our very own in-house Ai to find and fetch the expedia listings from scratch🎉😮‍💨 this can take up to 5 minutes, please be patient!
     Thank you for your patience! 🙏🏽
     Powered by Expedia⚡️</p>
@@ -10226,8 +10226,8 @@ console.log("Requesting URL:", url);
     });*/
 
     // Update spinner text to indicate fetching data
-    updateSpinnerText(`We’re searching for the best flight deals for you… 🙌 Sit back, relax, and browse while we find your perfect flight! ✈️💫
-	Our website script actually uses our very own in-house Ai to find and fetch the expedia listings from scratch🎉😮‍💨 this can take up to 5 minutes, please be patient!
+    updateSpinnerText(`We’re searching for the best flight deals for you… 🙌 Sit back, relax, and browse while we find your perfect flight! ✈️
+	Our website script actually uses our very own in-house Ai to find and fetch the expedia listings from scratch🎉 this can take up to 5 minutes, please be patient!
     Thank you for your patience! 🙏🏽
     Powered by Expedia⚡️`);
 
@@ -10250,8 +10250,8 @@ console.log("Formatted Return Date:", returnDate);
 async function fetchFlightPosts(url) {
     try {
         // Update spinner text to indicate scraping started
-        updateSpinnerText(`We’re searching for the best flight deals for you… 🙌 Sit back, relax, and browse while we find your perfect flight! ✈️💫
-	Our website script actually uses our very own in-house Ai to find and fetch the expedia listings from scratch🎉😮‍💨 this can take up to 5 minutes, please be patient!
+        updateSpinnerText(`We’re searching for the best flight deals for you… 🙌 Sit back, relax, and browse while we find your perfect flight! ✈️
+	Our website script actually uses our very own in-house Ai to find and fetch the expedia listings from scratch🎉 this can take up to 5 minutes, please be patient!
     Thank you for your patience! 🙏🏽
     Powered by Expedia⚡️`);
 
