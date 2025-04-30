@@ -13881,6 +13881,7 @@ let activeMarkersData2 = null; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
 // Function to add markers to the globe
 function addMarkersToGlobe(markers) {
+globeMarkers = []; // Reset
   markers.forEach(marker => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
@@ -14660,7 +14661,7 @@ async function fetchMarkers(region, category) {
     const markers = await response.json();
      // Clear the existing markers before adding new ones
      clearExistingMarkers();
-    addMarkersToGlobe(markers);  // Call the function to add markers
+    //addMarkersToGlobe(markers);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
@@ -14699,7 +14700,7 @@ function addMarkersToGlobe(markers) {
     markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
 
     // Add the marker to the scene
-    scene.add(markerMesh);
+    //scene.add(markerMesh);
   });
 }
 // Function to create marker mesh for the globe
