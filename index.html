@@ -13866,8 +13866,8 @@ async function fetchMarkers(location, category) {
     });
     // Extract posts and markers from the response
 	      const data = await response.json();
-    const { markers } = await response.json(); 
-	      const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
+const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
+	          const markers = Array.isArray(data.markers) ? data.markers : [];
     console.log("Fetched markers:", markers);  // Log the response to check its format
 
     if (!Array.isArray(markers)) {
