@@ -13877,11 +13877,11 @@ async function fetchMarkers(location, category) {
     clearExistingMarkers();
     //addMarkersToGlobe(markers);  // Call the function to add markers
 addMarkersToGlobe(markers, posts2);
+	      	      airbnbPosts = posts2; // store posts globally
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
-	      airbnbPosts = posts2; // store posts globally
 let activeMarkersData2 = null; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
 // Function to add markers to the globe
