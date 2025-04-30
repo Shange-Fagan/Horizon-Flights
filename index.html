@@ -13865,7 +13865,9 @@ async function fetchMarkers(location, category) {
     },
     });
     // Extract posts and markers from the response
+	      const data = await response.json();
     const { markers } = await response.json(); 
+	      const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
     console.log("Fetched markers:", markers);  // Log the response to check its format
 
     if (!Array.isArray(markers)) {
@@ -13874,12 +13876,12 @@ async function fetchMarkers(location, category) {
     // Clear existing markers and add new ones
     clearExistingMarkers();
     //addMarkersToGlobe(markers);  // Call the function to add markers
-	      airbnbPosts = posts2; // store posts globally
-addMarkersToGlobe(markers, airbnbPosts);
+addMarkersToGlobe(markers, posts2);
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
+	      airbnbPosts = posts2; // store posts globally
 let activeMarkersData2 = null; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
 // Function to add markers to the globe
@@ -14271,7 +14273,7 @@ async function fetchAirbnbPosts(searchUrl) {
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
          const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
-
+airbnbPosts = posts2;
         console.log('Fetched posts:', data);
 
         // Update spinner text to indicate posts fetched
