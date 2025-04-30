@@ -13872,7 +13872,7 @@ async function fetchMarkers(location, category) {
     }
     // Clear existing markers and add new ones
     clearExistingMarkers();
-    //addMarkersToGlobe(markers);  // Call the function to add markers
+    addMarkersToGlobe(markers);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
@@ -13992,7 +13992,7 @@ function openMarkerLabel2(data) {
 function createMarkerMesh(lat, lng) {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
   const markerMaterial =  new THREE.MeshBasicMaterial({
-    color: 0x00ff00,
+    color: 0x0000ff,
     side: THREE.DoubleSide,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
@@ -14660,7 +14660,7 @@ async function fetchMarkers(region, category) {
     const markers = await response.json();
      // Clear the existing markers before adding new ones
      clearExistingMarkers();
-    //addMarkersToGlobe(markers);  // Call the function to add markers
+    addMarkersToGlobe(markers);  // Call the function to add markers
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
