@@ -13938,16 +13938,14 @@ function setupMarkerInteraction2() {
 
     if (intersects.length > 0) {
       const instanceId = intersects[0].instanceId;
-      const data = fetchMarkers.markers[instanceId];
-
+      const index = intersects[0].object.userData.index;
+      const data = airbnbPosts[index];
       // Check if this label is already active and close it
       if (activeLabel2 && activeLabel2 === document.getElementById(`label-${data.id}`)) {
         closeIframe2(event); // Close if clicking on the same active label
         return;
       }
-    if (intersects.length > 0) {
-      const index = intersects[0].object.userData.index;
-      const data = airbnbPosts[index];
+    
       // Otherwise, proceed to open the clicked marker
       openMarkerLabel2(data);
     }
