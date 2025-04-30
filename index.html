@@ -13873,7 +13873,9 @@ async function fetchMarkers(location, category) {
     }
     // Clear existing markers and add new ones
     clearExistingMarkers();
-    addMarkersToGlobe(markers);  // Call the function to add markers
+    //addMarkersToGlobe(markers);  // Call the function to add markers
+	      airbnbPosts = posts2; // store posts globally
+addMarkersToGlobe(markers, airbnbPosts);
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
@@ -13881,9 +13883,9 @@ async function fetchMarkers(location, category) {
 let activeMarkersData2 = null; // Default to markersData
 let activeLabel2 = null; // Keep track of open iframe
 // Function to add markers to the globe
-function addMarkersToGlobe(markers) {
+function addMarkersToGlobe(markers, posts2) {
 globeMarkers = []; // Reset
-  markers.forEach(marker => {
+  markers.forEach((marker, i) => {
     // Extract latitude and longitude
     let { lat, lng } = marker;
 
@@ -13913,6 +13915,9 @@ globeMarkers = []; // Reset
     // Ensure the marker faces outward from the globe
     markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
 
+	   // ✅ THIS is where you bind the index of the post
+    markerMesh.userData.index = i;
+
     // Add the marker to the scene
     scene.add(markerMesh);
     setupMarkerInteraction2();
@@ -13938,7 +13943,9 @@ function setupMarkerInteraction2() {
         closeIframe2(event); // Close if clicking on the same active label
         return;
       }
-
+    if (intersects.length > 0) {
+      const index = intersects[0].object.userData.index;
+      const data = airbnbPosts[index];
       // Otherwise, proceed to open the clicked marker
       openMarkerLabel2(data);
     }
