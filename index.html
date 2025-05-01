@@ -14087,7 +14087,7 @@ async function fetchMarkers(location, category) {
     const markers = Array.isArray(data.markers) ? data.markers : [];
     airbnbPosts = posts2;
 
-    clearExistingMarkers();
+    clearExistingMarkers2();
     addMarkersToGlobe(markers, posts2);
   } catch (error) {
     console.error("Failed to fetch markers:", error);
@@ -14172,7 +14172,7 @@ function closeIframe2(event) {
   }
 }
 
-function clearExistingMarkers() {
+function clearExistingMarkers2() {
   globeMarkers.forEach(marker => scene.remove(marker));
   globeMarkers = [];
 }
