@@ -14129,8 +14129,12 @@ function setupMarkerInteraction2() {
     const intersects = raycaster.intersectObjects(globeMarkers);
     if (intersects.length > 0) {
       const index = intersects[0].object.userData.index;
-      const data = airbnbPosts[index];
-      openMarkerLabel2(data, index);
+const data = airbnbPosts[index];
+if (!data) {
+  console.warn("No Airbnb post found at index:", index);
+  return;
+}
+openMarkerLabel2(data, index);
     }
   });
 }
@@ -14456,7 +14460,6 @@ async function fetchAirbnbPosts(searchUrl) {
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
          const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
-airbnbPosts = posts2;
         console.log('Fetched posts:', data);
 
         // Update spinner text to indicate posts fetched
