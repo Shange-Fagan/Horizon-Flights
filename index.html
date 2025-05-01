@@ -11508,6 +11508,7 @@ function populateOverlay(posts2) {
         updateSpinnerText("Error fetching Expedia listings. Please try again.");
     }
 }
+let airbnbPosts = [];
 // Function to fetch Airbnb posts from your backend and display them on the webpage
 async function fetchAirbnbPosts(searchUrl) {
     try {
@@ -11525,7 +11526,7 @@ async function fetchAirbnbPosts(searchUrl) {
          // Ensure that 'posts2' is an array before mapping
          const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
         console.log('Fetched posts:', data);
-
+    airbnbPosts = posts2;
         // Update spinner text to indicate posts fetched
         updateSpinnerText("Displaying fetched listings...");
 // Call populateOverlay to display posts
@@ -14058,8 +14059,7 @@ function createMarkerMesh(lat, lng) {
     markersData.forEach(markers => {
        scene.remove(markers);
     });*/
-// Global storage
-let airbnbPosts = [];
+//let airbnbPosts = [];
 let globeMarkers = [];
 let activeLabel2 = null;
 
@@ -14085,7 +14085,7 @@ async function fetchMarkers(location, category) {
     const data = await response.json();
     const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
     const markers = Array.isArray(data.markers) ? data.markers : [];
-    airbnbPosts = posts2;
+    //airbnbPosts = posts2;
 
     clearExistingMarkers2();
     addMarkersToGlobe(markers, posts2);
@@ -14461,7 +14461,7 @@ async function fetchAirbnbPosts(searchUrl) {
          // Ensure that 'posts2' is an array before mapping
          const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
         console.log('Fetched posts:', data);
-
+    airbnbPosts = posts2;
         // Update spinner text to indicate posts fetched
         updateSpinnerText("Displaying fetched listings...");
 // Call populateOverlay to display posts
@@ -14847,7 +14847,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
         updateSpinnerText("Error loading listings for " + region);
     }
 }
-async function fetchMarkers(region, category) {
+/*async function fetchMarkers(region, category) {
   try {
     const response = await fetch(`https://api.horizonflights.travel/get-markers?region=${region}&category=${category}`, {
       headers: {
@@ -14962,7 +14962,7 @@ function createMarkerMesh(lat, lng) {
     clearExistingMarkers();
     markersData.forEach(markers => {
        scene.add(markers);
-    });
+    }); */
 };
 });
 // Function to adjust marker sizes dynamically based on zoom level
