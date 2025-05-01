@@ -11509,7 +11509,6 @@ function populateOverlay(posts2) {
     }
 }
 // Function to fetch Airbnb posts from your backend and display them on the webpage
-let airbnbPosts = [];
 async function fetchAirbnbPosts(searchUrl) {
     try {
         // Update spinner text to indicate scraping started
@@ -11525,7 +11524,6 @@ async function fetchAirbnbPosts(searchUrl) {
         const data = await response.json();
          // Ensure that 'posts2' is an array before mapping
          const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
-         airbnbPosts = posts2;
         console.log('Fetched posts:', data);
 
         // Update spinner text to indicate posts fetched
@@ -14061,7 +14059,7 @@ function createMarkerMesh(lat, lng) {
        scene.remove(markers);
     });*/
 // Global storage
-//let airbnbPosts = [];
+let airbnbPosts = [];
 let globeMarkers = [];
 let activeLabel2 = null;
 
