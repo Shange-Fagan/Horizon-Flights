@@ -14144,7 +14144,11 @@ function openMarkerLabel2(data, index) {
     labelDiv.classList.add('label');
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('content');
-    contentDiv.innerHTML = generatePostHTML(data);
+    if (!data) {
+  contentDiv.innerHTML = '<p>Listing data not found.</p>';
+  return;
+}
+contentDiv.innerHTML = generatePostHTML(data);
     labelDiv.appendChild(contentDiv);
     document.body.appendChild(labelDiv);
   }
@@ -14231,14 +14235,15 @@ function latLngToVector32(lat, lng, radius) {
 }
 
 function generatePostHTML(post) {
+  if (!post) return '<p>Invalid post data.</p>';
   return `
     <div class="post">
-      <img src="${post.images}" alt="${post.title}" />
-      <h3>${post.title}</h3>
-      <p>${post.subtitle}</p>
-      <p>Price: ${post.listing_price_details}</p>
-      <p>Rating: ${post.rating_out_of_5_stars}</p>
-      <a href="${post.link}" target="_blank" class="view-link">View Listing</a>
+      <img src="${post.images || ''}" alt="${post.title || 'Listing'}" />
+      <h3>${post.title || 'No title'}</h3>
+      <p>${post.subtitle || 'No subtitle available'}</p>
+      <p>Price: ${post.listing_price_details || 'N/A'}</p>
+      <p>Rating: ${post.rating_out_of_5_stars || 'N/A'}</p>
+      <a href="${post.link || '#'}" target="_blank" class="view-link">View Listing</a>
     </div>`;
 }
 
