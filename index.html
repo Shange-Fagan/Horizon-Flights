@@ -14128,16 +14128,20 @@ function setupMarkerInteraction2() {
 
     const intersects = raycaster.intersectObjects(globeMarkers);
     if (intersects.length > 0) {
-      const index = intersects[0].object.userData.index;
-const data = airbnbPosts[index];
-if (!data) {
-  console.warn("No Airbnb post found at index:", index);
-  return;
-}
-openMarkerLabel2(data, index);
+      const marker = intersects[0].object;
+      const data = marker.userData.post;
+      const index = marker.userData.index;
+
+      if (!data) {
+        console.warn("No Airbnb post found for this marker.");
+        return;
+      }
+
+      openMarkerLabel2(data, index);
     }
   });
 }
+
 
 function openMarkerLabel2(data, index) {
   let labelDiv = document.getElementById(`label-${index}`);
