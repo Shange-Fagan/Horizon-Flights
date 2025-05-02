@@ -14132,7 +14132,7 @@ function setupMarkerInteraction2() {
       const marker = intersects[0].object;
       const data = marker.userData.post;
       const index = marker.userData.index;
-
+      console.log('Marker clicked:', index, data); // Debug log
       if (!data) {
         console.warn("No Airbnb post found for this marker.");
         return;
