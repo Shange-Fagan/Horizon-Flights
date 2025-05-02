@@ -14110,6 +14110,8 @@ function addMarkersToGlobe(markers, posts2) {
     const markerMesh = createMarkerMesh();
     markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
     markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
+// Associate each marker directly with its post data
+    markerMesh.userData.post = posts2[i]; 
     markerMesh.userData.index = i;
     globeMarkers.push(markerMesh);
     scene.add(markerMesh);
