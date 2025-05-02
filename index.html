@@ -14245,6 +14245,9 @@ function latLngToVector32(lat, lng, radius) {
 
 function generatePostHTML(post) {
 	console.log('Post being rendered:', post);
+	if (!post || !post.title) {
+  return '<p>⚠️ No valid post data</p>';
+}
   if (!post) return '<p>Invalid post data.</p>';
   return `
     <div class="post">
