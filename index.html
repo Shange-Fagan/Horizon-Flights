@@ -2116,6 +2116,39 @@ overflow: hidden;
   border-radius: 25px 0px 0px 25px;
   font-family: system-ui;
 }
+	  .label {
+  position: fixed;
+  top: 20%;
+  left: 10%;
+  z-index: 9999;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+}
+
+.label.active {
+  display: block;
+}
+
+.label .content img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.label .content h3,
+.label .content p,
+.label .content a {
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.label .content a {
+  color: #007bff;
+  text-decoration: none;
+}
+
 
 /* Button or link for each post */
 /*.post .view-link {
