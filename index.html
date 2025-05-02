@@ -14084,6 +14084,7 @@ async function fetchMarkers(location, category) {
     const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
     const markers = Array.isArray(data.markers) ? data.markers : [];
     airbnbPosts = posts2;
+    console.log('Markers:', markers.length, 'Posts:', posts2.length);
 
     clearExistingMarkers2();
     addMarkersToGlobe(markers, posts2);
