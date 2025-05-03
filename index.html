@@ -14277,20 +14277,20 @@ function latLngToVector32(lat, lng, radius) {
   );
 }
 
-function generatePostHTML(post2) {
-	console.log('Post being rendered:', post2);
-	if (!post2 || !post.title) {
+function generatePostHTML(post) {
+	console.log('Post being rendered:', post);
+	if (!post || !post.title) {
   return '<p>⚠️ No valid post data</p>';
 }
-  if (!post2) return '<p>Invalid post data.</p>';
+  if (!post) return '<p>Invalid post data.</p>';
   return `
     <div class="post2">
-      <img src="${post2.images || ''}" alt="${post2.title || 'Listing'}" />
-      <h3>${post2.title || 'No title'}</h3>
-      <p>${post2.subtitle || 'No subtitle available'}</p>
-      <p>Price: ${post2.listing_price_details || 'N/A'}</p>
-      <p>Rating: ${post2.rating_out_of_5_stars || 'N/A'}</p>
-      <a href="${post2.link || '#'}" target="_blank" class="view-link">View Listing</a>
+      <img src="${post.images || ''}" alt="${post.title || 'Listing'}" />
+      <h3>${post.title || 'No title'}</h3>
+      <p>${post.subtitle || 'No subtitle available'}</p>
+      <p>Price: ${post.listing_price_details || 'N/A'}</p>
+      <p>Rating: ${post.rating_out_of_5_stars || 'N/A'}</p>
+      <a href="${post.link || '#'}" target="_blank" class="view-link">View Listing</a>
     </div>`;
 }
 
