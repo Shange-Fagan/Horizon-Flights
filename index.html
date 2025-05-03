@@ -14175,42 +14175,42 @@ document.body.appendChild(labelsContainer);
 
 function addMarkersToGlobe(markers, posts2) {
   globeMarkers = [];
-
-  markers.forEach((marker, i) => {
-    let { lat, lng } = marker;
+	  markers.forEach((marker, i) => {
+  let { lat, lng } = marker;
 // Apply offsets for shifting down and left
     const latOffset = 0; // Adjust this value for downward movement
     const lngOffset = -15; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
-    lat += (Math.random() - 0.5) * 7;
-    lng += (Math.random() - 0.5) * 7;
+  lat += (Math.random() - 0.5) * 7;
+  lng += (Math.random() - 0.5) * 7;
 
-    const markerVector = latLngToVector32(lat, lng, earthRadius);
-    const markerMesh = createMarkerMesh();
-    markerMesh.position.copy(markerVector);
-    markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
-    markerMesh.userData.index = i;
-    markerMesh.userData.post = posts2[i];
-    globeMarkers.push(markerMesh);
-    scene.add(markerMesh);
+  const markerVector = latLngToVector32(lat, lng, earthRadius);
+  const markerMesh = createMarkerMesh();
+  markerMesh.position.copy(markerVector);
+  markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
 
-    // 📍 Create a CSS2DObject label for each marker
-    const labelDiv = document.createElement('div');
-    labelDiv.className = 'marker-label2';
-    labelDiv.id = `label2-${i}`;
-    labelDiv.innerHTML = generatePostHTML(posts2[i]);
+  const post = posts2[i];
+  markerMesh.userData = { index: i, post };
 
-    const labelObject = new THREE.CSS2DObject(labelDiv);
-    labelObject.position.copy(markerVector);
-    scene.add(labelObject);
+  // 🧠 Create label
+  const labelDiv = document.createElement('div');
+  labelDiv.className = 'marker-label2';
+  labelDiv.id = `label2-${i}`;
+  labelDiv.innerHTML = generatePostHTML(post);
+  labelDiv.style.display = 'none'; // hidden until clicked
 
-    // Optional: Store reference
-    markerMesh.userData.label = labelObject;
-  });
+  const labelObject = new THREE.CSS2DObject(labelDiv);
+  labelObject.position.copy(markerVector);
+  scene.add(labelObject);
 
-  setupMarkerInteraction2();
-}
+  // Attach label reference
+  markerMesh.userData.labelObject = labelObject;
+
+  globeMarkers.push(markerMesh);
+  scene.add(markerMesh);
+});
+
 
 function setupMarkerInteraction2() {
   window.addEventListener('pointerdown', (event) => {
