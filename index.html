@@ -14235,7 +14235,7 @@ function setupMarkerInteraction2() {
 }
 
 
-function openMarkerLabel2(data, index) {
+/*function openMarkerLabel2(data, index) {
   let labelDiv = document.getElementById(`label2-${index}`);
 
   if (!labelDiv) {
@@ -14264,7 +14264,27 @@ contentDiv.innerHTML = generatePostHTML(data);
   renderer.domElement.style.pointerEvents = 'none';
 
   document.addEventListener('pointerdown', closeIframe2);
+}*/
+	function toggleAirbnbLabel(marker) {
+  const label = marker.userData.labelObject;
+  if (!label) return;
+
+  // Hide previously active label
+  if (activeLabel2 && activeLabel2 !== label.element) {
+    activeLabel2.style.display = 'none';
+  }
+
+  // Toggle current one
+  const isVisible = label.element.style.display === 'block';
+  label.element.style.display = isVisible ? 'none' : 'block';
+
+  activeLabel2 = label.element.style.display === 'block' ? label.element : null;
+
+  controls.autoRotate = !activeLabel2;
+  controls.enabled = !activeLabel2;
+  renderer.domElement.style.pointerEvents = activeLabel2 ? 'none' : 'all';
 }
+
 
 function closeIframe2(event) {
   if (activeLabel2 && !activeLabel2.contains(event.target)) {
