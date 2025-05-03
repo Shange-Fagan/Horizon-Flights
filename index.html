@@ -14212,7 +14212,7 @@ function addMarkersToGlobe(markers, posts2) {
 });
 
 
-function setupMarkerInteraction2() {
+/*function setupMarkerInteraction2() {
   window.addEventListener('pointerdown', (event) => {
     pointer.x = (event.clientX / innerWidth) * 2 - 1;
     pointer.y = -(event.clientY / innerHeight) * 2 + 1;
@@ -14230,6 +14230,26 @@ function setupMarkerInteraction2() {
       }
 
       openMarkerLabel2(data, index);
+    }
+  });
+}*/function setupMarkerInteraction2() {
+  window.addEventListener('pointerdown', (event) => {
+    pointer.x = (event.clientX / innerWidth) * 2 - 1;
+    pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+    raycaster.setFromCamera(pointer, camera);
+
+    const intersects = raycaster.intersectObjects(globeMarkers);
+    if (intersects.length > 0) {
+      const marker = intersects[0].object;
+      const data = marker.userData.post;
+      const index = marker.userData.index;
+
+      if (!data) {
+        console.warn("No Airbnb post found for this marker.");
+        return;
+      }
+
+      toggleAirbnbLabel(marker);
     }
   });
 }
