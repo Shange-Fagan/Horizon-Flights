@@ -13355,7 +13355,7 @@ addMarkupPoints(fromLatLng, toLatLng);
 // Function to adjust marker sizes dynamically based on zoom level
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
     const regionMarkers = markersDataSets[selectedCategory][region];
-    if (markers) {
+    if (regionMarkers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
         const animationDuration = 500; // Animation duration in milliseconds
@@ -13363,7 +13363,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
         // Store the new marker meshes in an array for optional later cleanup
         const newMarkerMeshes = [];
 
-        for (let i = 0; i < markers.count; i++) {
+        for (let i = 0; i < regionMarkers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
@@ -13412,7 +13412,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
 
         // Remove the original markers after the new markers have been added
         setTimeout(() => {
-            scene.remove(markers);
+            scene.remove(regionMarkers);
             console.log(`Original markers for region ${region} removed.`);
         }, 3000); // Remove after delay, matching the animation start time
     } else {
@@ -13423,11 +13423,11 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
 // Function to update marker sizes dynamically as zoomLevel changes
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
     const regionMarkers = markersDataSets[selectedCategory][region];
-    if (markers) {
+    if (regionMarkers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
-        for (let i = 0; i < markers.count; i++) {
+        for (let i = 0; i < regionMarkers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
@@ -13458,7 +13458,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
         }
 
         // Remove old markers from the scene once resizing begins
-        scene.remove(markers);
+        scene.remove(regionMarkers);
         markersDataSets[selectedCategory][region] = markers; // Update the markersDataSets[selectedCategory] object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
@@ -13544,7 +13544,7 @@ addMarkupPoints(fromLatLng, toLatLng);
 // Function to adjust marker sizes dynamically based on zoom level
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
     const regionMarkers = markersDataSets[selectedCategory][region];
-    if (markers) {
+    if (regionMarkers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
         const animationDuration = 500; // Animation duration in milliseconds
@@ -13552,7 +13552,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
         // Store the new marker meshes in an array for optional later cleanup
         const newMarkerMeshes = [];
 
-        for (let i = 0; i < markers.count; i++) {
+        for (let i = 0; i < regionMarkers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
@@ -13601,7 +13601,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
 
         // Remove the original markers after the new markers have been added
         setTimeout(() => {
-            scene.remove(markers);
+            scene.remove(regionMarkers);
             console.log(`Original markers for region ${region} removed.`);
         }, 3000); // Remove after delay, matching the animation start time
     } else {
@@ -13612,11 +13612,11 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
 // Function to update marker sizes dynamically as zoomLevel changes
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
     const regionMarkers = markersDataSets[selectedCategory][region];
-    if (markers) {
+    if (regionMarkers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
-        for (let i = 0; i < markers.count; i++) {
+        for (let i = 0; i < regionMarkers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
@@ -13647,8 +13647,8 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
         }
 
         // Remove old markers from the scene once resizing begins
-        scene.remove(markers);
-        markersDataSets[selectedCategory][region] = markers; // Update the markersDataSets[selectedCategory] object with resized markers
+        scene.remove(regionMarkers);
+        markersDataSets[selectedCategory][region] = regionMarkers; // Update the markersDataSets[selectedCategory] object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
@@ -14450,7 +14450,7 @@ document.addEventListener('click', function (event) {
 // Resize and update all markers with animation
 Object.keys(markersData).forEach(region => {
     const regionMarkers = markersData[region];
-    if (markers) {
+    if (regionMarkers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
@@ -14485,8 +14485,8 @@ Object.keys(markersData).forEach(region => {
         }
 
         // Remove old markers from the scene once resizing begins
-        scene.remove(markers);
-        markersData[region] = markers; // Update the markersData object with resized markers
+        scene.remove(regionMarkers);
+        markersData[region] = regionMarkers; // Update the markersData object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
@@ -14911,11 +14911,11 @@ document.querySelectorAll('.post .view-link').forEach((item, index) => {
   // Iterate through all regions in the markersData object
   Object.keys(markersData).forEach(region => {
     const regionMarkers = markersData[region];
-    if (markers) {
+    if (regionMarkers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
-        for (let i = 0; i < markers.count; i++) {
+        for (let i = 0; i < regionMarkers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
@@ -14946,8 +14946,8 @@ document.querySelectorAll('.post .view-link').forEach((item, index) => {
         }
 
         // Remove old markers from the scene once resizing begins
-        scene.remove(markers);
-        markersData[region] = markers; // Update the markersData object with resized markers
+        scene.remove(regionMarkers);
+        markersData[region] = regionMarkers; // Update the markersData object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
