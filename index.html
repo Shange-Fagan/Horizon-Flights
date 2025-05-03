@@ -14154,6 +14154,15 @@ async function fetchMarkers(location, category) {
     console.error("Failed to fetch markers:", error);
   }
 }
+const labelsRenderer = new THREE.CSS2DRenderer();
+labelsRenderer.setSize(window.innerWidth, window.innerHeight);
+labelsRenderer.domElement.style.position = 'absolute';
+labelsRenderer.domElement.style.top = '0px';
+document.body.appendChild(labelsRenderer.domElement);
+
+const labelsContainer = document.createElement('div');
+labelsContainer.id = 'labelsContainer';
+document.body.appendChild(labelsContainer);
 
 function addMarkersToGlobe(markers, posts2) {
   globeMarkers = [];
@@ -14165,19 +14174,30 @@ function addMarkersToGlobe(markers, posts2) {
     const lngOffset = -15; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
-    const offset = 7;
-    lat += (Math.random() - 0.5) * offset;
-    lng += (Math.random() - 0.5) * offset;
+    lat += (Math.random() - 0.5) * 7;
+    lng += (Math.random() - 0.5) * 7;
 
     const markerVector = latLngToVector32(lat, lng, earthRadius);
     const markerMesh = createMarkerMesh();
-    markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
+    markerMesh.position.copy(markerVector);
     markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
-// Associate each marker directly with its post data
-    markerMesh.userData.post = posts2[i]; 
     markerMesh.userData.index = i;
+    markerMesh.userData.post = posts2[i];
     globeMarkers.push(markerMesh);
     scene.add(markerMesh);
+
+    // 📍 Create a CSS2DObject label for each marker
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'marker-label2';
+    labelDiv.id = `label2-${i}`;
+    labelDiv.innerHTML = generatePostHTML(posts2[i]);
+
+    const labelObject = new THREE.CSS2DObject(labelDiv);
+    labelObject.position.copy(markerVector);
+    scene.add(labelObject);
+
+    // Optional: Store reference
+    markerMesh.userData.label = labelObject;
   });
 
   setupMarkerInteraction2();
@@ -16558,6 +16578,7 @@ function animate() {
     // Render the scene
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera); // If you're using labelRenderer
+    labelsRenderer.render(scene, camera);
     if (waveMeshArr.length) {
       waveMeshArr.forEach((mesh) => {
     // Increment the scale value stored in userData
