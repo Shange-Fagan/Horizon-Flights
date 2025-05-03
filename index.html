@@ -9679,9 +9679,9 @@ if (window.innerWidth <= 768) {
 // Load detailed markers for a specific region (use regular Mesh for dynamic marker count)
 	   // Function to clear existing markers
 function clearExistingMarkers() {
-  const markers = scene.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
+  const activeMarkers = scene.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
 
-  markers.forEach(marker => {
+  activeMarkers.forEach(marker => {
     // Dispose of the geometry and material to free up memory
     if (marker.geometry) marker.geometry.dispose();
     if (marker.material) {
@@ -13354,7 +13354,7 @@ addMarkupPoints(fromLatLng, toLatLng);
     // Resize and update all markers with animation
 // Function to adjust marker sizes dynamically based on zoom level
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
-    const markers = markersDataSets[selectedCategory][region];
+    const regionMarkers = markersDataSets[selectedCategory][region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13422,7 +13422,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
 
 // Function to update marker sizes dynamically as zoomLevel changes
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
-    const markers = markersDataSets[selectedCategory][region];
+    const regionMarkers = markersDataSets[selectedCategory][region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13543,7 +13543,7 @@ addMarkupPoints(fromLatLng, toLatLng);
     // Resize and update all markers with animation
 // Function to adjust marker sizes dynamically based on zoom level
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
-    const markers = markersDataSets[selectedCategory][region];
+    const regionMarkers = markersDataSets[selectedCategory][region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -13611,7 +13611,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
 
 // Function to update marker sizes dynamically as zoomLevel changes
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
-    const markers = markersDataSets[selectedCategory][region];
+    const regionMarkers = markersDataSets[selectedCategory][region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -14160,12 +14160,12 @@ async function fetchMarkers(location, category) {
 
     const data = await response.json();
     const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
-    const markers = Array.isArray(data.markers) ? data.markers : [];
+    const markers7 = Array.isArray(data.markers) ? data.markers : [];
     airbnbPosts = posts2;
-    console.log('Markers:', markers.length, 'Posts:', posts2.length);
+    console.log('Markers:', markers7.length, 'Posts:', posts2.length);
 
     clearExistingMarkers2();
-    addMarkersToGlobe(markers, posts2);
+    addMarkersToGlobe(markers7, posts2);
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
@@ -14449,7 +14449,7 @@ document.addEventListener('click', function (event) {
     // Resize and update all markers with animation
 // Resize and update all markers with animation
 Object.keys(markersData).forEach(region => {
-    const markers = markersData[region];
+    const regionMarkers = markersData[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
@@ -14910,7 +14910,7 @@ document.querySelectorAll('.post .view-link').forEach((item, index) => {
 });
   // Iterate through all regions in the markersData object
   Object.keys(markersData).forEach(region => {
-    const markers = markersData[region];
+    const regionMarkers = markersData[region];
     if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
