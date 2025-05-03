@@ -2116,7 +2116,7 @@ overflow: hidden;
   border-radius: 25px 0px 0px 25px;
   font-family: system-ui;
 }
-	  .label {
+	  #label2 {
   position: fixed;
   top: 20%;
   left: 10%;
@@ -2128,23 +2128,23 @@ overflow: hidden;
   max-width: 400px;
 }
 
-.label.active {
+#label2.active {
   display: block;
 }
 
-.label .content img {
+#label2 .content img {
   width: 100%;
   border-radius: 6px;
 }
 
-.label .content h3,
-.label .content p,
-.label .content a {
+#label2 .content h3,
+#label2 .content p,
+#label2 .content a {
   margin: 0.5rem 0;
   color: #333;
 }
 
-.label .content a {
+#label2 .content a {
   color: #007bff;
   text-decoration: none;
 }
@@ -14178,11 +14178,11 @@ function setupMarkerInteraction2() {
 
 
 function openMarkerLabel2(data, index) {
-  let labelDiv = document.getElementById(`label-${index}`);
+  let labelDiv = document.getElementById(`label2-${index}`);
 
   if (!labelDiv) {
     labelDiv = document.createElement('div');
-    labelDiv.id = `label-${index}`;
+    labelDiv.id = `label2-${index}`;
     labelDiv.classList.add('label');
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('content');
