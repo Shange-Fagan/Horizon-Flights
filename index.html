@@ -2720,7 +2720,7 @@ left: -8px !important;
   height: 0;
 }
 .theme-switch2 input {
-  opacity: 0;
+  opacity: 0;let markers;
   width: 0;
   height: 0;
 }
@@ -4539,7 +4539,6 @@ if (!firebase.apps.length) {
   /*const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);*/
   let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
   camera.position.set(20, 0.5, 15).setLength(25);
-	  let markers;
 
 
 // Initialize Firestore
@@ -15881,7 +15880,7 @@ cheapest: markersData4,
   midPrice: markersData5,
   expensive: markersData,
 };
-//let markers;
+let markers;
 let activeLabel = null;
 let activeMarkersData = markersData; // Default to markersData
 let selectedCategory = 'general'; // global scope
