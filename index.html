@@ -14247,7 +14247,7 @@ function addMarkersToGlobe(markers, posts2) {
 
     const intersects = raycaster.intersectObjects(globeMarkers);
     if (intersects.length > 0) {
-      const marker = intersects[0].object;
+      const marker7 = intersects[0].object;
       const data = marker.userData.post;
       const index = marker.userData.index;
 
@@ -14256,7 +14256,7 @@ function addMarkersToGlobe(markers, posts2) {
         return;
       }
 
-      toggleAirbnbLabel(marker);
+      toggleAirbnbLabel(marker7);
     }
   });
 }
