@@ -14179,10 +14179,9 @@ function setupMarkerInteraction2() {
   });
 }
 	  function openMarkerLabel2(data, index) {
-  // Close and remove any existing label
+  // Remove the old label if it exists
   if (activeLabel2) {
-    activeLabel2.classList.remove('active');
-    activeLabel2.remove(); // fully remove from DOM
+    activeLabel2.remove();
     activeLabel2 = null;
   }
 
@@ -14196,22 +14195,28 @@ function setupMarkerInteraction2() {
 
   if (!data) {
     contentDiv.innerHTML = '<p>Listing data not found.</p>';
-    return;
+  } else {
+    contentDiv.innerHTML = generatePostHTML(data);
   }
 
-  contentDiv.innerHTML = generatePostHTML(data);
   labelDiv.appendChild(contentDiv);
   document.body.appendChild(labelDiv);
 
-  labelDiv.classList.add('active');
+  // Set as active label
   activeLabel2 = labelDiv;
+  labelDiv.classList.add('active');
 
+  // Disable controls while open
   controls.autoRotate = false;
   controls.enabled = false;
   renderer.domElement.style.pointerEvents = 'none';
 
-  document.addEventListener('pointerdown', closeIframe2);
+  // Delay adding event listener to avoid immediate self-close
+  setTimeout(() => {
+    document.addEventListener('pointerdown', closeIframe2, { once: true });
+  }, 0);
 }
+
 
 
 function closeIframe2(event) {
