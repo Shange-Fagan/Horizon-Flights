@@ -2116,52 +2116,50 @@ overflow: hidden;
   border-radius: 25px 0px 0px 25px;
   font-family: system-ui;
 }
-.post2 {
-    position: relative;
-    top: 5px;
-    left: 60%;
-    width: 300px;
-    height: 500px;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+	  .post2 {
+  color: white;
+  position: relative;
+  padding: 15px;
     /* display: flex; */
-    flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
     justify-self: center;
+  top: 20%;
+  left: 60%;
+  width: 300px;
+  height: 500px;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post2.active {
+  display: block;
 }
 
 .post2 img {
-    width: 100%; /* Make the image take up the full width of the container */
+  width: 100%; /* Make the image take up the full width of the container */
     height: auto; /* Maintain aspect ratio */
     border-bottom: 1px solid #ddd; /* Separate image from text */
     margin-bottom: 10px; /* Add space below the image */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visuals */
-
 }
 
-.post2 h3, .post p {
-    margin: 5px 0; /* Ensure consistent spacing */
+.post2 h3,
+.post2 p,
+.post2 a {
+   margin: 5px 0; /* Ensure consistent spacing */
     text-align: center; /* Center text */
+  color: #333;
 }
 
-.post2 .guest-favorite {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: white;
-  color: #00aaff;
-  font-weight: bold;
-  font-size: 0.8rem;
-  border-radius: 12px;
-  padding: 5px 10px;
+.post2 a {
+  color: #007bff;
+  text-decoration: none;
 }
-
 .post2 .view-link {
   background-color: #00aaff;
   color: white;
@@ -2174,39 +2172,6 @@ overflow: hidden;
   border-radius: 25px 0px 0px 25px;
   font-family: system-ui;
 }
-	  /*.post2 {
-  position: fixed;
-  top: 20%;
-  left: 60%;
-  z-index: 9999;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  max-width: 400px;
-}
-
-.post2.active {
-  display: block;
-}
-
-.post2 img {
-  width: 100%;
-  border-radius: 6px;
-}
-
-.post2 h3,
-.post2 p,
-.post2 a {
-  margin: 0.5rem 0;
-  color: #333;
-}
-
-.post2 a {
-  color: #007bff;
-  text-decoration: none;
-}*/
-
 
 /* Button or link for each post */
 /*.post .view-link {
