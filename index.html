@@ -14178,38 +14178,41 @@ function setupMarkerInteraction2() {
     }
   });
 }
-
-
-function openMarkerLabel2(data, index) {
-  let labelDiv = document.getElementById(`label2-${index}`);
-
-  if (!labelDiv) {
-    labelDiv = document.createElement('div');
-    labelDiv.id = `label2-${index}`;
-    labelDiv.classList.add('label');
-    const contentDiv = document.createElement('div');
-    contentDiv.classList.add('content');
-    if (!data) {
-  contentDiv.innerHTML = '<p>Listing data not found.</p>';
-  return;
-}
-contentDiv.innerHTML = generatePostHTML(data);
-    labelDiv.appendChild(contentDiv);
-    document.body.appendChild(labelDiv);
-  }
-
-  if (activeLabel2 && activeLabel2 !== labelDiv) {
+	  function openMarkerLabel2(data, index) {
+  // Close and remove any existing label
+  if (activeLabel2) {
     activeLabel2.classList.remove('active');
+    activeLabel2.remove(); // fully remove from DOM
+    activeLabel2 = null;
   }
+
+  // Create and show new label
+  const labelDiv = document.createElement('div');
+  labelDiv.id = `label2-${index}`;
+  labelDiv.classList.add('label');
+
+  const contentDiv = document.createElement('div');
+  contentDiv.classList.add('content');
+
+  if (!data) {
+    contentDiv.innerHTML = '<p>Listing data not found.</p>';
+    return;
+  }
+
+  contentDiv.innerHTML = generatePostHTML(data);
+  labelDiv.appendChild(contentDiv);
+  document.body.appendChild(labelDiv);
 
   labelDiv.classList.add('active');
   activeLabel2 = labelDiv;
+
   controls.autoRotate = false;
   controls.enabled = false;
   renderer.domElement.style.pointerEvents = 'none';
 
   document.addEventListener('pointerdown', closeIframe2);
 }
+
 
 function closeIframe2(event) {
   if (activeLabel2 && !activeLabel2.contains(event.target)) {
