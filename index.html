@@ -15880,7 +15880,7 @@ cheapest: markersData4,
   midPrice: markersData5,
   expensive: markersData,
 };
-let markers;
+let markers4;
 let activeLabel = null;
 let activeMarkersData = markersData; // Default to markersData
 let selectedCategory = 'general'; // global scope
@@ -16113,9 +16113,9 @@ if (endCircleMesh) {
 
   markerMaterial.defines = { USE_UV: '' };
   // Remove existing markers from the scene
-if (markers) scene.remove(markers);
+if (markers4) scene.remove(markers4);
 const markerCount = markersDataSets[selectedCategory].length;
-markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+markers4 = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
 
 
 	console.log('Selected category:', selectedCategory);
@@ -16136,7 +16136,7 @@ activeMarkersData.forEach((data, index) => {
   dummy.position.setFromSphericalCoords(radius, phi, theta);
   dummy.lookAt(dummy.position.clone().setLength(radius + 1));
   dummy.updateMatrix();
-  markers.setMatrixAt(index, dummy.matrix);
+  markers4.setMatrixAt(index, dummy.matrix);
   data.worldPosition = dummy.position.clone();
   console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}, iframe=${iframeSrc}`);
 });
@@ -16189,7 +16189,7 @@ activeMarkersData.forEach((data) => {
   labelDiv.addEventListener('mousedown', (event) => event.stopPropagation());
   labelDiv.addEventListener('touchstart', (event) => event.stopPropagation());
 });
-  scene.add(markers);
+  scene.add(markers4);
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
@@ -16212,7 +16212,7 @@ function setupMarkerInteraction() {
     pointer.y = -(event.clientY / innerHeight) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
 
-    const intersects = raycaster.intersectObject(markers).filter((m) => {
+    const intersects = raycaster.intersectObject(markers4).filter((m) => {
       return m.uv.subScalar(0.5).length() * 2 < 0.25;
     });
 
@@ -16467,7 +16467,7 @@ function openMarkerLabel(data) {
     
     if (markerData) {
       const markerPosition = new THREE.Vector3();
-      markers.getMatrixAt(markerData.id, tempMatrix);
+      markers4.getMatrixAt(markerData.id, tempMatrix);
       markerPosition.setFromMatrixPosition(tempMatrix);
       placeLabelAtMarker(markerPosition, activeLabel);
     }
@@ -16486,7 +16486,7 @@ function openMarkerLabel(data) {
     
     if (markerData) {
       const markerPosition = new THREE.Vector3();
-      markers.getMatrixAt(markerData.id, tempMatrix);
+      markers4.getMatrixAt(markerData.id, tempMatrix);
       markerPosition.setFromMatrixPosition(tempMatrix);
       placeLabelAtMarker(markerPosition, activeLabel);
     }
