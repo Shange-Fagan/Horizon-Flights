@@ -14146,7 +14146,7 @@ function addMarkersToGlobe(markers, posts2) {
   markers.forEach((marker, i) => {
     let { lat, lng } = marker;
 // Apply offsets for shifting down and left
-    const latOffset = 0; // Adjust this value for downward movement
+    const latOffset = -10; // Adjust this value for downward movement
     const lngOffset = -15; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
