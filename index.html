@@ -2116,78 +2116,37 @@ overflow: hidden;
   border-radius: 25px 0px 0px 25px;
   font-family: system-ui;
 }
-	  .post2 {
-    position: relative;
-    top: 5px;
-    left: 5px;
-    width: 300px;
-    height: 500px;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    /* display: flex; */
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    justify-self: center;
-}
-
-.post2 img {
-    width: 100%; /* Make the image take up the full width of the container */
-    height: auto; /* Maintain aspect ratio */
-    border-bottom: 1px solid #ddd; /* Separate image from text */
-    margin-bottom: 10px; /* Add space below the image */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visuals */
-
-}
-
-.post2 h3, .post2 p {
-    margin: 5px 0; /* Ensure consistent spacing */
-    text-align: center; /* Center text */
-}
-
-.post2 .guest-favorite {
-  position: absolute;
-  top: 10px;
-  left: 10px;
+	  #label2 {
+  position: fixed;
+  top: 20%;
+  left: 10%;
+  z-index: 9999;
   background-color: white;
-  color: #00aaff;
-  font-weight: bold;
-  font-size: 0.8rem;
-  border-radius: 12px;
-  padding: 5px 10px;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
 }
 
-.post2 .view-link {
-  background-color: #00aaff;
-  color: white;
-  padding: 17px 55px;
-  text-align: center;
-  border-radius: 20px;
-  margin-top: auto;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 25px 0px 0px 25px;
-  font-family: system-ui;
+#label2.active {
+  display: block;
 }
-.marker-label2 {
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  border-radius: 8px;
-  padding: 10px;
-  max-width: 250px;
-  font-size: 13px;
-  pointer-events: auto;
-  z-index: 99999;
-}
-.marker-label2 img {
-  max-width: 100%;
+
+#label2 .content img {
+  width: 100%;
   border-radius: 6px;
-  margin-bottom: 5px;
+}
+
+#label2 .content h3,
+#label2 .content p,
+#label2 .content a {
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+#label2 .content a {
+  color: #007bff;
+  text-decoration: none;
 }
 
 
@@ -2205,9 +2164,6 @@ overflow: hidden;
 }*/
 
 .post .view-link:hover {
-  background-color: #00aaff;
-}
-.post2 .view-link:hover {
   background-color: #00aaff;
 }
 
@@ -4539,7 +4495,6 @@ if (!firebase.apps.length) {
   /*const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);*/
   let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
   camera.position.set(20, 0.5, 15).setLength(25);
-
 
 // Initialize Firestore
 const db = getFirestore(app);
@@ -9679,9 +9634,9 @@ if (window.innerWidth <= 768) {
 // Load detailed markers for a specific region (use regular Mesh for dynamic marker count)
 	   // Function to clear existing markers
 function clearExistingMarkers() {
-  const activeMarkers = scene.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
+  const markers = scene.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
 
-  activeMarkers.forEach(marker => {
+  markers.forEach(marker => {
     // Dispose of the geometry and material to free up memory
     if (marker.geometry) marker.geometry.dispose();
     if (marker.material) {
@@ -13354,8 +13309,8 @@ addMarkupPoints(fromLatLng, toLatLng);
     // Resize and update all markers with animation
 // Function to adjust marker sizes dynamically based on zoom level
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
-    const regionMarkers = markersDataSets[selectedCategory][region];
-    if (regionMarkers) {
+    const markers = markersDataSets[selectedCategory][region];
+    if (markers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
         const animationDuration = 500; // Animation duration in milliseconds
@@ -13363,7 +13318,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
         // Store the new marker meshes in an array for optional later cleanup
         const newMarkerMeshes = [];
 
-        for (let i = 0; i < regionMarkers.count; i++) {
+        for (let i = 0; i < markers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
@@ -13412,7 +13367,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
 
         // Remove the original markers after the new markers have been added
         setTimeout(() => {
-            scene.remove(regionMarkers);
+            scene.remove(markers);
             console.log(`Original markers for region ${region} removed.`);
         }, 3000); // Remove after delay, matching the animation start time
     } else {
@@ -13422,12 +13377,12 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
 
 // Function to update marker sizes dynamically as zoomLevel changes
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
-    const regionMarkers = markersDataSets[selectedCategory][region];
-    if (regionMarkers) {
+    const markers = markersDataSets[selectedCategory][region];
+    if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
-        for (let i = 0; i < regionMarkers.count; i++) {
+        for (let i = 0; i < markers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
@@ -13458,7 +13413,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
         }
 
         // Remove old markers from the scene once resizing begins
-        scene.remove(regionMarkers);
+        scene.remove(markers);
         markersDataSets[selectedCategory][region] = markers; // Update the markersDataSets[selectedCategory] object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
@@ -13543,8 +13498,8 @@ addMarkupPoints(fromLatLng, toLatLng);
     // Resize and update all markers with animation
 // Function to adjust marker sizes dynamically based on zoom level
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
-    const regionMarkers = markersDataSets[selectedCategory][region];
-    if (regionMarkers) {
+    const markers = markersDataSets[selectedCategory][region];
+    if (markers) {
         const originalMarkerSize = 0.5; // Assume original size
         const targetMarkerSize = 0.5; // Target size (smaller)
         const animationDuration = 500; // Animation duration in milliseconds
@@ -13552,7 +13507,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
         // Store the new marker meshes in an array for optional later cleanup
         const newMarkerMeshes = [];
 
-        for (let i = 0; i < regionMarkers.count; i++) {
+        for (let i = 0; i < markers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
@@ -13601,7 +13556,7 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
 
         // Remove the original markers after the new markers have been added
         setTimeout(() => {
-            scene.remove(regionMarkers);
+            scene.remove(markers);
             console.log(`Original markers for region ${region} removed.`);
         }, 3000); // Remove after delay, matching the animation start time
     } else {
@@ -13611,12 +13566,12 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
 
 // Function to update marker sizes dynamically as zoomLevel changes
 Object.keys(markersDataSets[selectedCategory]).forEach(region => {
-    const regionMarkers = markersDataSets[selectedCategory][region];
-    if (regionMarkers) {
+    const markers = markersDataSets[selectedCategory][region];
+    if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
-        for (let i = 0; i < regionMarkers.count; i++) {
+        for (let i = 0; i < markers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
@@ -13647,8 +13602,8 @@ Object.keys(markersDataSets[selectedCategory]).forEach(region => {
         }
 
         // Remove old markers from the scene once resizing begins
-        scene.remove(regionMarkers);
-        markersDataSets[selectedCategory][region] = regionMarkers; // Update the markersDataSets[selectedCategory] object with resized markers
+        scene.remove(markers);
+        markersDataSets[selectedCategory][region] = markers; // Update the markersDataSets[selectedCategory] object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
@@ -14160,66 +14115,46 @@ async function fetchMarkers(location, category) {
 
     const data = await response.json();
     const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
-    const markers7 = Array.isArray(data.markers) ? data.markers : [];
+    const markers = Array.isArray(data.markers) ? data.markers : [];
     airbnbPosts = posts2;
-    console.log('Markers:', markers7.length, 'Posts:', posts2.length);
+    console.log('Markers:', markers.length, 'Posts:', posts2.length);
 
     clearExistingMarkers2();
-    addMarkersToGlobe(markers7, posts2);
+    addMarkersToGlobe(markers, posts2);
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
-const labelsRenderer = new THREE.CSS2DRenderer();
-labelsRenderer.setSize(window.innerWidth, window.innerHeight);
-labelsRenderer.domElement.style.position = 'absolute';
-labelsRenderer.domElement.style.top = '0px';
-document.body.appendChild(labelsRenderer.domElement);
-
-const labelsContainer = document.createElement('div');
-labelsContainer.id = 'labelsContainer';
-document.body.appendChild(labelsContainer);
 
 function addMarkersToGlobe(markers, posts2) {
   globeMarkers = [];
-	  markers.forEach((marker, i) => {
-  let { lat, lng } = marker;
+
+  markers.forEach((marker, i) => {
+    let { lat, lng } = marker;
 // Apply offsets for shifting down and left
     const latOffset = 0; // Adjust this value for downward movement
     const lngOffset = -15; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
-  lat += (Math.random() - 0.5) * 7;
-  lng += (Math.random() - 0.5) * 7;
+    const offset = 7;
+    lat += (Math.random() - 0.5) * offset;
+    lng += (Math.random() - 0.5) * offset;
 
-  const markerVector = latLngToVector32(lat, lng, earthRadius);
-  const markerMesh = createMarkerMesh();
-  markerMesh.position.copy(markerVector);
-  markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
+    const markerVector = latLngToVector32(lat, lng, earthRadius);
+    const markerMesh = createMarkerMesh();
+    markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
+    markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
+// Associate each marker directly with its post data
+    markerMesh.userData.post = posts2[i]; 
+    markerMesh.userData.index = i;
+    globeMarkers.push(markerMesh);
+    scene.add(markerMesh);
+  });
 
-  const post = posts2[i];
-  markerMesh.userData = { index: i, post };
+  setupMarkerInteraction2();
+}
 
-  // 🧠 Create label
-  const labelDiv = document.createElement('div');
-  labelDiv.className = 'marker-label2';
-  labelDiv.id = `label2-${i}`;
-  labelDiv.innerHTML = generatePostHTML(post);
-  labelDiv.style.display = 'none'; // hidden until clicked
-
-  const labelObject = new THREE.CSS2DObject(labelDiv);
-  labelObject.position.copy(markerVector);
-  scene.add(labelObject);
-
-  // Attach label reference
-  markerMesh.userData.labelObject = labelObject;
-
-  globeMarkers.push(markerMesh);
-  scene.add(markerMesh);
-});
-
-
-/*function setupMarkerInteraction2() {
+function setupMarkerInteraction2() {
   window.addEventListener('pointerdown', (event) => {
     pointer.x = (event.clientX / innerWidth) * 2 - 1;
     pointer.y = -(event.clientY / innerHeight) * 2 + 1;
@@ -14239,30 +14174,10 @@ function addMarkersToGlobe(markers, posts2) {
       openMarkerLabel2(data, index);
     }
   });
-}*/function setupMarkerInteraction2() {
-  window.addEventListener('pointerdown', (event) => {
-    pointer.x = (event.clientX / innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / innerHeight) * 2 + 1;
-    raycaster.setFromCamera(pointer, camera);
-
-    const intersects = raycaster.intersectObjects(globeMarkers);
-    if (intersects.length > 0) {
-      const marker7 = intersects[0].object;
-      const data = marker.userData.post;
-      const index = marker.userData.index;
-
-      if (!data) {
-        console.warn("No Airbnb post found for this marker.");
-        return;
-      }
-
-      toggleAirbnbLabel(marker7);
-    }
-  });
 }
 
 
-/*function openMarkerLabel2(data, index) {
+function openMarkerLabel2(data, index) {
   let labelDiv = document.getElementById(`label2-${index}`);
 
   if (!labelDiv) {
@@ -14291,27 +14206,7 @@ contentDiv.innerHTML = generatePostHTML(data);
   renderer.domElement.style.pointerEvents = 'none';
 
   document.addEventListener('pointerdown', closeIframe2);
-}*/
-	function toggleAirbnbLabel(marker) {
-  const label = marker.userData.labelObject;
-  if (!label) return;
-
-  // Hide previously active label
-  if (activeLabel2 && activeLabel2 !== label.element) {
-    activeLabel2.style.display = 'none';
-  }
-
-  // Toggle current one
-  const isVisible = label.element.style.display === 'block';
-  label.element.style.display = isVisible ? 'none' : 'block';
-
-  activeLabel2 = label.element.style.display === 'block' ? label.element : null;
-
-  controls.autoRotate = !activeLabel2;
-  controls.enabled = !activeLabel2;
-  renderer.domElement.style.pointerEvents = activeLabel2 ? 'none' : 'all';
 }
-
 
 function closeIframe2(event) {
   if (activeLabel2 && !activeLabel2.contains(event.target)) {
@@ -14388,7 +14283,7 @@ function generatePostHTML(post) {
 }
   if (!post) return '<p>Invalid post data.</p>';
   return `
-    <div class="post2">
+    <div class="post">
       <img src="${post.images || ''}" alt="${post.title || 'Listing'}" />
       <h3>${post.title || 'No title'}</h3>
       <p>${post.subtitle || 'No subtitle available'}</p>
@@ -14449,8 +14344,8 @@ document.addEventListener('click', function (event) {
     // Resize and update all markers with animation
 // Resize and update all markers with animation
 Object.keys(markersData).forEach(region => {
-    const regionMarkers = markersData[region];
-    if (regionMarkers) {
+    const markers = markersData[region];
+    if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
@@ -14485,8 +14380,8 @@ Object.keys(markersData).forEach(region => {
         }
 
         // Remove old markers from the scene once resizing begins
-        scene.remove(regionMarkers);
-        markersData[region] = regionMarkers; // Update the markersData object with resized markers
+        scene.remove(markers);
+        markersData[region] = markers; // Update the markersData object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
@@ -14910,12 +14805,12 @@ document.querySelectorAll('.post .view-link').forEach((item, index) => {
 });
   // Iterate through all regions in the markersData object
   Object.keys(markersData).forEach(region => {
-    const regionMarkers = markersData[region];
-    if (regionMarkers) {
+    const markers = markersData[region];
+    if (markers) {
         const originalMarkerSize = 0.5; // Assume original size was 0.5
         const targetMarkerSize = 0.5; // Target size (smaller)
 
-        for (let i = 0; i < regionMarkers.count; i++) {
+        for (let i = 0; i < markers.count; i++) {
             const instanceMatrix = new THREE.Matrix4();
             markers.getMatrixAt(i, instanceMatrix);
 
@@ -14946,8 +14841,8 @@ document.querySelectorAll('.post .view-link').forEach((item, index) => {
         }
 
         // Remove old markers from the scene once resizing begins
-        scene.remove(regionMarkers);
-        markersData[region] = regionMarkers; // Update the markersData object with resized markers
+        scene.remove(markers);
+        markersData[region] = markers; // Update the markersData object with resized markers
     } else {
         console.warn(`No markers found for the region: ${region}`);
     }
@@ -15880,7 +15775,7 @@ cheapest: markersData4,
   midPrice: markersData5,
   expensive: markersData,
 };
-let markers4;
+let markers;
 let activeLabel = null;
 let activeMarkersData = markersData; // Default to markersData
 let selectedCategory = 'general'; // global scope
@@ -16113,9 +16008,9 @@ if (endCircleMesh) {
 
   markerMaterial.defines = { USE_UV: '' };
   // Remove existing markers from the scene
-if (markers4) scene.remove(markers4);
+if (markers) scene.remove(markers);
 const markerCount = markersDataSets[selectedCategory].length;
-markers4 = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
 
 
 	console.log('Selected category:', selectedCategory);
@@ -16136,7 +16031,7 @@ activeMarkersData.forEach((data, index) => {
   dummy.position.setFromSphericalCoords(radius, phi, theta);
   dummy.lookAt(dummy.position.clone().setLength(radius + 1));
   dummy.updateMatrix();
-  markers4.setMatrixAt(index, dummy.matrix);
+  markers.setMatrixAt(index, dummy.matrix);
   data.worldPosition = dummy.position.clone();
   console.log(`Marker ${index}: radius=${radius}, phi=${phi}, theta=${theta}, iframe=${iframeSrc}`);
 });
@@ -16189,7 +16084,7 @@ activeMarkersData.forEach((data) => {
   labelDiv.addEventListener('mousedown', (event) => event.stopPropagation());
   labelDiv.addEventListener('touchstart', (event) => event.stopPropagation());
 });
-  scene.add(markers4);
+  scene.add(markers);
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
@@ -16212,7 +16107,7 @@ function setupMarkerInteraction() {
     pointer.y = -(event.clientY / innerHeight) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
 
-    const intersects = raycaster.intersectObject(markers4).filter((m) => {
+    const intersects = raycaster.intersectObject(markers).filter((m) => {
       return m.uv.subScalar(0.5).length() * 2 < 0.25;
     });
 
@@ -16467,7 +16362,7 @@ function openMarkerLabel(data) {
     
     if (markerData) {
       const markerPosition = new THREE.Vector3();
-      markers4.getMatrixAt(markerData.id, tempMatrix);
+      markers.getMatrixAt(markerData.id, tempMatrix);
       markerPosition.setFromMatrixPosition(tempMatrix);
       placeLabelAtMarker(markerPosition, activeLabel);
     }
@@ -16486,7 +16381,7 @@ function openMarkerLabel(data) {
     
     if (markerData) {
       const markerPosition = new THREE.Vector3();
-      markers4.getMatrixAt(markerData.id, tempMatrix);
+      markers.getMatrixAt(markerData.id, tempMatrix);
       markerPosition.setFromMatrixPosition(tempMatrix);
       placeLabelAtMarker(markerPosition, activeLabel);
     }
@@ -16633,8 +16528,7 @@ function animate() {
 
     // Render the scene
     renderer.render(scene, camera);
-    labelRenderer.render(scene, camera);
-    labelsRenderer.render(scene, camera);
+    labelRenderer.render(scene, camera); // If you're using labelRenderer
     if (waveMeshArr.length) {
       waveMeshArr.forEach((mesh) => {
     // Increment the scale value stored in userData
