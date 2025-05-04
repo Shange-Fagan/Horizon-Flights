@@ -2116,24 +2116,18 @@ overflow: hidden;
   border-radius: 25px 0px 0px 25px;
   font-family: system-ui;
 }
+
 	  .post2 {
-  color: white;
-  position: relative;
-  padding: 15px;
-    /* display: flex; */
-    align-items: center;
-    margin-bottom: 20px;
-    justify-self: center;
+  position: fixed;
   top: 20%;
   left: 60%;
-  width: 300px;
-  height: 500px;
   z-index: 9999;
-  background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.15);
   padding: 1rem;
-  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
 }
 
 .post2.active {
@@ -2141,18 +2135,14 @@ overflow: hidden;
 }
 
 .post2 img {
-  width: 100%; /* Make the image take up the full width of the container */
-    height: auto; /* Maintain aspect ratio */
-    border-bottom: 1px solid #ddd; /* Separate image from text */
-    margin-bottom: 10px; /* Add space below the image */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visuals */
+  width: 100%;
+  border-radius: 6px;
 }
 
 .post2 h3,
 .post2 p,
 .post2 a {
-   margin: 5px 0; /* Ensure consistent spacing */
-    text-align: center; /* Center text */
+  margin: 0.5rem 0;
   color: #333;
 }
 
@@ -2160,18 +2150,7 @@ overflow: hidden;
   color: #007bff;
   text-decoration: none;
 }
-.post2 .view-link {
-  background-color: #00aaff;
-  color: white;
-  padding: 17px 55px;
-  text-align: center;
-  border-radius: 20px;
-  margin-top: auto;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 25px 0px 0px 25px;
-  font-family: system-ui;
-}
+
 
 /* Button or link for each post */
 /*.post .view-link {
@@ -2187,9 +2166,6 @@ overflow: hidden;
 }*/
 
 .post .view-link:hover {
-  background-color: #00aaff;
-}
-.post2 .view-link:hover {
   background-color: #00aaff;
 }
 
