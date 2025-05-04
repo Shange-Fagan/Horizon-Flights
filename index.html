@@ -14190,32 +14190,42 @@ function setupMarkerInteraction2() {
   labelDiv.id = `label2-${index}`;
   labelDiv.classList.add('label');
 
+  // Create close button
+  const closeBtn = document.createElement('button');
+  closeBtn.classList.add('close-label-btn');
+  closeBtn.innerHTML = '✖';
+  closeBtn.onclick = (e) => {
+    e.stopPropagation();
+    labelDiv.remove();
+    activeLabel2 = null;
+    controls.autoRotate = true;
+    controls.enabled = true;
+    renderer.domElement.style.pointerEvents = 'all';
+  };
+  labelDiv.appendChild(closeBtn);
+
+  // Content
   const contentDiv = document.createElement('div');
   contentDiv.classList.add('content');
-
-  if (!data) {
-    contentDiv.innerHTML = '<p>Listing data not found.</p>';
-  } else {
-    contentDiv.innerHTML = generatePostHTML(data);
-  }
-
+  contentDiv.innerHTML = data ? generatePostHTML(data) : '<p>Listing data not found.</p>';
   labelDiv.appendChild(contentDiv);
-  document.body.appendChild(labelDiv);
 
-  // Set as active label
+  // Show on page
+  document.body.appendChild(labelDiv);
   activeLabel2 = labelDiv;
   labelDiv.classList.add('active');
 
-  // Disable controls while open
+  // Disable controls while label is open
   controls.autoRotate = false;
   controls.enabled = false;
   renderer.domElement.style.pointerEvents = 'none';
 
-  // Delay adding event listener to avoid immediate self-close
+  // Close on outside click
   setTimeout(() => {
     document.addEventListener('pointerdown', closeIframe2, { once: true });
   }, 0);
 }
+
 
 
 
