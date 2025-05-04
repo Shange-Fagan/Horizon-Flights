@@ -2116,10 +2116,11 @@ overflow: hidden;
   border-radius: 25px 0px 0px 25px;
   font-family: system-ui;
 }
-	  #label2 {
+
+	  .post2 {
   position: fixed;
   top: 20%;
-  left: 10%;
+  left: 70%;
   z-index: 9999;
   background-color: white;
   padding: 1rem;
@@ -2128,23 +2129,23 @@ overflow: hidden;
   max-width: 400px;
 }
 
-#label2.active {
+.post2.active {
   display: block;
 }
 
-#label2 .content img {
+.post2 img {
   width: 100%;
   border-radius: 6px;
 }
 
-#label2 .content h3,
-#label2 .content p,
-#label2 .content a {
+.post2 h3,
+.post2 p,
+.post2 a {
   margin: 0.5rem 0;
   color: #333;
 }
 
-#label2 .content a {
+.post2 a {
   color: #007bff;
   text-decoration: none;
 }
@@ -14283,7 +14284,7 @@ function generatePostHTML(post) {
 }
   if (!post) return '<p>Invalid post data.</p>';
   return `
-    <div class="post">
+    <div class="post2">
       <img src="${post.images || ''}" alt="${post.title || 'Listing'}" />
       <h3>${post.title || 'No title'}</h3>
       <p>${post.subtitle || 'No subtitle available'}</p>
