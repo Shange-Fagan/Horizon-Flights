@@ -2118,7 +2118,7 @@ overflow: hidden;
 }
 
 	  .post2 {
-  position: fixed;
+  position: relative;
   top: 20%;
   left: 60%;
   z-index: 9999;
@@ -2134,6 +2134,9 @@ border: 1px solid #ddd;
 
 .post2.active {
   display: block;
+}
+.post2.active {
+  position: relative; /* key to bounding the absolute child */
 }
 
 .post2 img {
@@ -2164,8 +2167,8 @@ border: 1px solid #ddd;
 
 .close-label-btn {
   position: absolute;
-  top: 149px;
-  right: 151.99px;
+  top: 10px;
+  right: 10px;
   background: transparent;
   border: none;
   font-size: 18px;
@@ -2173,6 +2176,10 @@ border: 1px solid #ddd;
   cursor: pointer;
   z-index: 99999;
 }
+.close-label-btn:hover {
+  background: rgba(255, 0, 0, 0.8);
+}
+
 
 /* Button or link for each post */
 /*.post .view-link {
