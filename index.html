@@ -14131,6 +14131,13 @@ async function fetchMarkers(location, category) {
   try {
     const location = document.getElementById('where').value;
     const normalizedLocation = normalizeLocation(location);
+    const center = Locationsfixed[normalizedLocation]; // ✅ Move this higher
+
+    if (!center) {
+      console.warn('Center location not found in Locationsfixed');
+      return;
+    }
+
     const today = new Date();
     const monthlyStart = new Date(today.getFullYear(), today.getMonth(), 1).toISOString().split('T')[0];
     const monthlyEnd = new Date(today.getFullYear(), today.getMonth() + 3, 0).toISOString().split('T')[0];
@@ -14149,20 +14156,20 @@ async function fetchMarkers(location, category) {
     const data = await response.json();
     const posts2 = Array.isArray(data.posts2) ? data.posts2 : [];
     const markers = Array.isArray(data.markers) ? data.markers : [];
-    airbnbPosts = posts2;
     console.log('Markers:', markers.length, 'Posts:', posts2.length);
 
-    clearExistingMarkers2();
-    const center = Locationsfixed[normalizedLocation]; // Correct location key
-    if (center) {
-      addMarkersToGlobe(markers, posts2, center.lat, center.lng);
-    } else {
-      console.warn('Center location not found in Locationsfixed');
-    }
+    // ✅ Deduplication logic
+    const existingTitles = new Set(airbnbPosts.map(post => post.title));
+    const newPosts = posts2.filter(p => !existingTitles.has(p.title));
+    const newMarkers = markers.slice(0, newPosts.length); // sync with posts2
+
+    airbnbPosts.push(...newPosts);
+    addMarkersToGlobe(newMarkers, newPosts, center.lat, center.lng); // ✅ Only called once
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
+
 
 function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
   globeMarkers = [];
