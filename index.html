@@ -14153,14 +14153,18 @@ async function fetchMarkers(location, category) {
     console.log('Markers:', markers.length, 'Posts:', posts2.length);
 
     clearExistingMarkers2();
-    const center = Locationsfixed[toLocation]; // This is the target location
-    addMarkersToGlobe(markers, posts2, center.lat, center.lng);
+    const center = Locationsfixed[normalizedLocation]; // Correct location key
+    if (center) {
+      addMarkersToGlobe(markers, posts2, center.lat, center.lng);
+    } else {
+      console.warn('Center location not found in Locationsfixed');
+    }
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
 }
 
-function addMarkersToGlobe(markers, posts2) {
+function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
   globeMarkers = [];
 
   markers.forEach((marker, i) => {
