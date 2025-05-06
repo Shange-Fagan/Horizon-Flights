@@ -14153,7 +14153,8 @@ async function fetchMarkers(location, category) {
     console.log('Markers:', markers.length, 'Posts:', posts2.length);
 
     clearExistingMarkers2();
-    addMarkersToGlobe(markers, posts2);
+    const center = Locationsfixed[toLocation]; // This is the target location
+    addMarkersToGlobe(markers, posts2, center.lat, center.lng);
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
@@ -14163,7 +14164,9 @@ function addMarkersToGlobe(markers, posts2) {
   globeMarkers = [];
 
   markers.forEach((marker, i) => {
-    let { lat, lng } = marker;
+    let lat = centerLat;
+    let lng = centerLng;
+
 // Apply offsets for shifting down and left
     const latOffset = 0; // Adjust this value for downward movement
     const lngOffset = 0; // Adjust this value for leftward movement
