@@ -14174,7 +14174,8 @@ async function fetchMarkers(location, category) {
 
 
 function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
-  globeMarkers = [];
+  // Don’t clear globeMarkers; just append new ones
+  //globeMarkers = [];
 
   markers.forEach((marker, i) => {
     let lat = centerLat;
