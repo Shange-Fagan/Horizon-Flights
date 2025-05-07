@@ -2130,6 +2130,7 @@ border: 1px solid #ddd;
   color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   max-width: 400px;
+  max-height: 80vh; /* limit height for scroll */
 }
 
 .post2.active {
@@ -2162,7 +2163,7 @@ border: 1px solid #ddd;
   border-radius: 5px;
 }
 
-.close-label-btn {
+/*.close-label-btn {
   position: absolute;
   top: 149px;
   right: 151.99px;
@@ -2172,7 +2173,19 @@ border: 1px solid #ddd;
   color: #fff;
   cursor: pointer;
   z-index: 99999;
+}*/
+	  .close-label-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10000;
 }
+
 
 /* Button or link for each post */
 /*.post .view-link {
