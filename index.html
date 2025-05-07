@@ -14313,7 +14313,7 @@ function clearExistingMarkers2() {
 function createMarkerMesh() {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
   const markerMaterial =  new THREE.MeshBasicMaterial({
-    color: 0x00aaff,
+    color: 0x0000ff,
     side: THREE.DoubleSide,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
