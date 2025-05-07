@@ -14192,7 +14192,7 @@ async function fetchMarkers(location, category) {
 function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
   // Don’t clear globeMarkers; just append new ones
   //globeMarkers = [];
-  const offsetStep = 0.2; // degrees of spacing
+  const offsetStep = 10; // degrees of spacing
   let row = 0;
   let col = 0;
   markers.forEach((marker, i) => {
@@ -14320,8 +14320,7 @@ function clearExistingMarkers2() {
 function createMarkerMesh() {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
   const markerMaterial =  new THREE.MeshBasicMaterial({
-    color: 0x0000ff,
-    //color: 0x569ff7,
+    color: 0x569ff7,
     side: THREE.DoubleSide,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
