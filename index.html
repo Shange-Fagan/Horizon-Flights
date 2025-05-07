@@ -14179,7 +14179,7 @@ async function fetchMarkers(location, category) {
     const existingTitles = new Set(airbnbPosts.map(post => post.title));
     const newPosts = posts2.filter(p => !existingTitles.has(p.title));
     const newMarkers = markers.slice(0, newPosts.length); // sync with posts2
-    controls.minDistance = 7;
+    controls.minDistance = 10;
     controls.maxDistance = 30;
     airbnbPosts.push(...newPosts);
     addMarkersToGlobe(newMarkers, newPosts, center.lat, center.lng); // ✅ Only called once
@@ -14198,14 +14198,15 @@ function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
     let lng = centerLng;
 
 // Apply offsets for shifting down and left
-    const latOffset = 0; // Adjust this value for downward movement
+    /*const latOffset = 0; // Adjust this value for downward movement
     const lngOffset = 0; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
-    const offset = 15;
+    */
+    /*const offset = 15;
     lat += (Math.random() - 0.5) * offset;
     lng += (Math.random() - 0.5) * offset;
-
+    */
     const markerVector = latLngToVector32(lat, lng, earthRadius);
     const markerMesh = createMarkerMesh();
     markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
