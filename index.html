@@ -14179,7 +14179,7 @@ async function fetchMarkers(location, category) {
     const existingTitles = new Set(airbnbPosts.map(post => post.title));
     const newPosts = posts2.filter(p => !existingTitles.has(p.title));
     const newMarkers = markers.slice(0, newPosts.length); // sync with posts2
-    controls.minDistance = 7;
+    controls.minDistance = 10;
     controls.maxDistance = 30;
     airbnbPosts.push(...newPosts);
     addMarkersToGlobe(newMarkers, newPosts, center.lat, center.lng); // ✅ Only called once
