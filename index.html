@@ -14192,10 +14192,12 @@ async function fetchMarkers(location, category) {
 function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
   // Don’t clear globeMarkers; just append new ones
   //globeMarkers = [];
-
+  const offsetStep = 0.2; // degrees of spacing
+  let row = 0;
+  let col = 0;
   markers.forEach((marker, i) => {
-    let lat = centerLat;
-    let lng = centerLng;
+    let lat = centerLat + row * offsetStep;
+    let lng = centerLng + col * offsetStep;
 
 // Apply offsets for shifting down and left
     /*const latOffset = 0; // Adjust this value for downward movement
@@ -14216,8 +14218,12 @@ function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
     markerMesh.userData.index = i;
     globeMarkers.push(markerMesh);
     scene.add(markerMesh);
-  });
 
+    col++;
+    if (col % 5 === 0) {
+    col = 0;
+    row++;
+  });
   setupMarkerInteraction2();
 }
 
