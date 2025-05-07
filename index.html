@@ -14179,7 +14179,7 @@ async function fetchMarkers(location, category) {
     const existingTitles = new Set(airbnbPosts.map(post => post.title));
     const newPosts = posts2.filter(p => !existingTitles.has(p.title));
     const newMarkers = markers.slice(0, newPosts.length); // sync with posts2
-    controls.minDistance = 10;
+    controls.minDistance = 7;
     controls.maxDistance = 30;
     airbnbPosts.push(...newPosts);
     addMarkersToGlobe(newMarkers, newPosts, center.lat, center.lng); // ✅ Only called once
@@ -14192,23 +14192,20 @@ async function fetchMarkers(location, category) {
 function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
   // Don’t clear globeMarkers; just append new ones
   //globeMarkers = [];
-  const offsetStep = 10; // degrees of spacing
-  let row = 0;
-  let col = 0;
+
   markers.forEach((marker, i) => {
-    let lat = centerLat + row * offsetStep;
-    let lng = centerLng + col * offsetStep;
+    let lat = centerLat;
+    let lng = centerLng;
 
 // Apply offsets for shifting down and left
-    /*const latOffset = 0; // Adjust this value for downward movement
+    const latOffset = 0; // Adjust this value for downward movement
     const lngOffset = 0; // Adjust this value for leftward movement
     lat += latOffset;
     lng += lngOffset;
-    */
-    /*const offset = 15;
+    const offset = 15;
     lat += (Math.random() - 0.5) * offset;
     lng += (Math.random() - 0.5) * offset;
-    */
+
     const markerVector = latLngToVector32(lat, lng, earthRadius);
     const markerMesh = createMarkerMesh();
     markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
@@ -14218,13 +14215,8 @@ function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
     markerMesh.userData.index = i;
     globeMarkers.push(markerMesh);
     scene.add(markerMesh);
-
-    col++;
-    if (col % 5 === 0) {
-    col = 0;
-    row++;
-  }
   });
+
   setupMarkerInteraction2();
 }
 
@@ -14320,7 +14312,7 @@ function clearExistingMarkers2() {
 function createMarkerMesh() {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
   const markerMaterial =  new THREE.MeshBasicMaterial({
-    color: 0x569ff7,
+    color: 0x00aaff,
     side: THREE.DoubleSide,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
