@@ -14150,6 +14150,8 @@ async function fetchMarkers(location, category) {
     const checkin = document.getElementById('checkin').value;
     const checkout = document.getElementById('checkout').value;
     const guests = document.getElementById('adults').value;
+    const toInput = document.getElementById('where').value;
+
 
     const searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=${guests}&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
 
@@ -14172,6 +14174,7 @@ async function fetchMarkers(location, category) {
     controls.maxDistance = 30;
     airbnbPosts.push(...newPosts);
     addMarkersToGlobe(newMarkers, newPosts, center.lat, center.lng); // ✅ Only called once
+    panToLocation(toInput);
   } catch (error) {
     console.error("Failed to fetch markers:", error);
   }
