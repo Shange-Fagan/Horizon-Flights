@@ -6276,7 +6276,6 @@ const loader = new GLTFLoader();
     const plane = gltf.scene;
     scene.add(plane);
 		  plane.scale.set(0.1, 0.1, 0.1);
-});
 
     if (animatePlane(plane, curve, 5000, distance)) {
         // Ensure the animation is running
@@ -13313,7 +13312,7 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
 
     // Load and animate the plane
     const loader = new GLTFLoader();
-    loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
+    /*loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
         const plane = gltf.scene;
         scene.add(plane);
         //plane.scale.set(0.1, 0.1, 0.1);
@@ -13329,7 +13328,11 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
                 if (materialName === 'glass') child.material.color.set(0x000000);
                 if (materialName === 'Jet__0') child.material.color.set(0xaaaaaa);
             }
-        });
+        });*/
+	loader.load('js/icon-a5-resized.glb', function (gltf) {
+    const plane = gltf.scene;
+    scene.add(plane);
+		  plane.scale.set(0.1, 0.1, 0.1);
 
         // Animate plane along the flight path
         animatePlane(plane, curve, 5000, distance);
@@ -13502,7 +13505,7 @@ document.querySelector('#searchBtn.airbnb-button22').addEventListener('click', a
 
     // Load and animate the plane
     const loader = new GLTFLoader();
-    loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
+    /*loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
         const plane = gltf.scene;
         scene.add(plane);
         //plane.scale.set(0.1, 0.1, 0.1);
@@ -13518,7 +13521,11 @@ document.querySelector('#searchBtn.airbnb-button22').addEventListener('click', a
                 if (materialName === 'glass') child.material.color.set(0x000000);
                 if (materialName === 'Jet__0') child.material.color.set(0xaaaaaa);
             }
-        });
+        });*/
+	loader.load('js/icon-a5-resized.glb', function (gltf) {
+    const plane = gltf.scene;
+    scene.add(plane);
+		  plane.scale.set(0.1, 0.1, 0.1);
 
         // Animate plane along the flight path
         animatePlane(plane, curve, 5000, distance);
