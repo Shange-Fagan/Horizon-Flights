@@ -6497,7 +6497,7 @@ let isDay = true; // Track whether it's currently day or night
 window.addEventListener("load", () => {
   const selectedZone = document.getElementById("timezoneSelector").value;
   updateThemeByTimezone(selectedZone);
-});
+}); import { DateTime } from "https://cdn.skypack.dev/luxon"; // or include via script tag
 let currentTexture; // Initialize with the default texture state ("day" or "night")
 function updateThemeByTimezone(timezone) {
   const hour = DateTime.now().setZone(timezone).hour;
