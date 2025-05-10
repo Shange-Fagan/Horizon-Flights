@@ -6275,6 +6275,7 @@ const loader = new GLTFLoader();
 	  loader.load('js/icon-a5-resized.glb', function (gltf) {
     const plane = gltf.scene;
     scene.add(plane);
+		  plane.scale.set(0.1, 0.1, 0.1);
 });
 
     if (animatePlane(plane, curve, 5000, distance)) {
