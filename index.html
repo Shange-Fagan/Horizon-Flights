@@ -6253,8 +6253,7 @@ document.getElementById('submitRegion').addEventListener('click', () => {
     // Create a flight path and animate the plane
     const { flightPath, curve, distance } = createFlightPath(fromVector, toVector, earthRadius * 1.1);
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath('/js/draco/'); // make sure this path matches your file structure
-
+dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
 // Load and animate the plane
 const loader = new GLTFLoader();
 	  loader.setDRACOLoader(dracoLoader);
@@ -13313,7 +13312,7 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
     // Create a flight path and animate the plane
     const { flightPath, curve, distance } = createFlightPath(fromVector, toVector, earthRadius * 1.1);
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath('/js/draco/'); // make sure this path matches your file structure
+dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
 
     // Load and animate the plane
     const loader = new GLTFLoader();
@@ -13509,7 +13508,7 @@ document.querySelector('#searchBtn.airbnb-button22').addEventListener('click', a
     // Create a flight path and animate the plane
     const { flightPath, curve, distance } = createFlightPath(fromVector, toVector, earthRadius * 1.1);
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath('/js/draco/'); // make sure this path matches your file structure
+dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
 
 	// Load and animate the plane
     const loader = new GLTFLoader();
