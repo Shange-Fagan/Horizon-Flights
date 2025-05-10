@@ -6255,7 +6255,7 @@ document.getElementById('submitRegion').addEventListener('click', () => {
 
 // Load and animate the plane
 const loader = new GLTFLoader();
-loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
+/*loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
     const plane = gltf.scene;
     scene.add(plane);
     //plane.scale.set(0.1, 0.1, 0.1);
@@ -6271,7 +6271,12 @@ loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
             if (materialName === 'glass') child.material.color.set(0x000000);
             if (materialName === 'Jet__0') child.material.color.set(0xaaaaaa);
         }
-    });
+    });*/
+	  loader.load('js/icon-a5-resized.glb', function (gltf) {
+    const plane = gltf.scene;
+    scene.add(plane);
+});
+
     if (animatePlane(plane, curve, 5000, distance)) {
         // Ensure the animation is running
         animatePlane(plane, curve, 5000, distance).start();
