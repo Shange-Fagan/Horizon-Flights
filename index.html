@@ -6257,7 +6257,7 @@ dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5
 // Load and animate the plane
 const loader = new GLTFLoader();
 	  loader.setDRACOLoader(dracoLoader);
-/*loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
+loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
     const plane = gltf.scene;
     scene.add(plane);
     //plane.scale.set(0.1, 0.1, 0.1);
@@ -6273,12 +6273,12 @@ const loader = new GLTFLoader();
             if (materialName === 'glass') child.material.color.set(0x000000);
             if (materialName === 'Jet__0') child.material.color.set(0xaaaaaa);
         }
-    });*/
-	  loader.load('js/icon-a5-resized1.glb', function (gltf) {
+    });
+	  /*loader.load('js/icon-a5-resized1.glb', function (gltf) {
     const plane = gltf.scene;
     scene.add(plane);
 		  plane.scale.set(0.1, 0.1, 0.1);
-	  });
+	  });*/
     if (animatePlane(plane, curve, 5000, distance)) {
         // Ensure the animation is running
         animatePlane(plane, curve, 5000, distance).start();
@@ -13317,7 +13317,7 @@ dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5
     // Load and animate the plane
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
-    /*loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
+    loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
         const plane = gltf.scene;
         scene.add(plane);
         //plane.scale.set(0.1, 0.1, 0.1);
@@ -13333,12 +13333,12 @@ dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5
                 if (materialName === 'glass') child.material.color.set(0x000000);
                 if (materialName === 'Jet__0') child.material.color.set(0xaaaaaa);
             }
-        });*/
-	loader.load('js/icon-a5-resized1.glb', function (gltf) {
+        });
+	/*loader.load('js/icon-a5-resized1.glb', function (gltf) {
     const plane = gltf.scene;
     scene.add(plane);
 		  plane.scale.set(0.1, 0.1, 0.1);
-
+	});*/
         // Animate plane along the flight path
         animatePlane(plane, curve, 5000, distance);
     });
@@ -13513,7 +13513,7 @@ dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5
 	// Load and animate the plane
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
-    /*loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
+    loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
         const plane = gltf.scene;
         scene.add(plane);
         //plane.scale.set(0.1, 0.1, 0.1);
@@ -13529,12 +13529,12 @@ dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5
                 if (materialName === 'glass') child.material.color.set(0x000000);
                 if (materialName === 'Jet__0') child.material.color.set(0xaaaaaa);
             }
-        });*/
-	loader.load('js/icon-a5-resized1.glb', function (gltf) {
+        });
+	/*loader.load('js/icon-a5-resized1.glb', function (gltf) {
     const plane = gltf.scene;
     scene.add(plane);
 		  plane.scale.set(0.1, 0.1, 0.1);
-
+	});*/
         // Animate plane along the flight path
         animatePlane(plane, curve, 5000, distance);
     });
