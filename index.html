@@ -6204,7 +6204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadingScreen.style.display = 'none';
   }, 10000);
 });
-
+import { DRACOLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/DRACOLoader.js';
 // Show instructions after clicking the Submit Region button
 document.getElementById('submitRegion').addEventListener('click', () => {
   const instructionsOverlay = document.getElementById('instructionsOverlay');
@@ -6252,9 +6252,12 @@ document.getElementById('submitRegion').addEventListener('click', () => {
     confirmationMessage.style.display = 'none'; // Show confirmation message
     // Create a flight path and animate the plane
     const { flightPath, curve, distance } = createFlightPath(fromVector, toVector, earthRadius * 1.1);
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('/js/draco/'); // make sure this path matches your file structure
 
 // Load and animate the plane
 const loader = new GLTFLoader();
+	  loader.setDRACOLoader(dracoLoader);
 /*loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
     const plane = gltf.scene;
     scene.add(plane);
@@ -13309,9 +13312,12 @@ document.querySelector('#searchBtn:not(:is(.airbnb-button22, .airbnb-button23))'
 
     // Create a flight path and animate the plane
     const { flightPath, curve, distance } = createFlightPath(fromVector, toVector, earthRadius * 1.1);
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('/js/draco/'); // make sure this path matches your file structure
 
     // Load and animate the plane
     const loader = new GLTFLoader();
+    loader.setDRACOLoader(dracoLoader);
     /*loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
         const plane = gltf.scene;
         scene.add(plane);
@@ -13502,9 +13508,12 @@ document.querySelector('#searchBtn.airbnb-button22').addEventListener('click', a
 
     // Create a flight path and animate the plane
     const { flightPath, curve, distance } = createFlightPath(fromVector, toVector, earthRadius * 1.1);
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('/js/draco/'); // make sure this path matches your file structure
 
-    // Load and animate the plane
+	// Load and animate the plane
     const loader = new GLTFLoader();
+    loader.setDRACOLoader(dracoLoader);
     /*loader.load('js/cartoon_low_poly_private_jet/scene.gltf', function (gltf) {
         const plane = gltf.scene;
         scene.add(plane);
