@@ -7962,7 +7962,7 @@ function zoomOutGlobe() {
     const zoomOutLevel = 0.65; // Adjust zoom level for desired zoom out effect
     const targetPosition = { x: 7, y: 0, z: 7 }; // Position for zooming out
     controls.enableZoom = true;
-    controls.minDistance = 15;
+    controls.minDistance = 10;
   //controls.maxDistance = 30;
     animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomOutLevel);
 }
@@ -8042,7 +8042,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
 
           zoomOutGlobe();
           controls.enableZoom = true;
-          controls.minDistance = 15;
+          controls.minDistance = 10;
           lightsButton.textContent = "Jetsetter Theme✅";
         } else {
           // ❌ Not premium — show upgrade prompt
