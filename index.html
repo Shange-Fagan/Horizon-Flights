@@ -4172,7 +4172,12 @@ margin-bottom: 1px;
   <select id="regionSelect">
     <option value="disabled">Select Region</option>
     <!-- more regions -->
+    <option value="africa">Africa 🇬🇭</option>
     <option value="america">America 🇺🇸</option>
+    <option value="south america">South America 🇧🇷</option>
+    <option value="carribbean">Carribbean 🇯🇲</option>
+    <option value="europe">Europe 🇪🇺</option>
+    <option value="maldives">Maldives 🇲🇻</option>
     <option value="world">World🌍</option>
   </select>
   <button id="submitRegion">Submit</button>
@@ -15198,7 +15203,7 @@ function panToRegion(region) {
       zoomLevel = 2.25;
       break;
 
-    case 'asia': 
+    case 'maldives': 
       position = { x: 0.0, y: 1.28, z: -3.92 }; 
       //zoomLevel = 1.9;
       zoomLevel = 1.5;
