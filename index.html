@@ -3608,6 +3608,10 @@ margin-bottom: 1px;
   margin-bottom: 10px;
 }
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap'); /* Digital Clock Style */
+	#rolex_retailer_clock {
+		bottom: 15px;
+		right:15px;
+	}
 	#rolexClock {
   position: fixed;
   bottom: 15px;
@@ -3618,7 +3622,7 @@ margin-bottom: 1px;
   font-size: 2.7rem;
   padding: 15px 35px;
   color: #fff;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
@@ -3669,6 +3673,15 @@ margin-bottom: 1px;
 
 
 </style>
+	<iframe 
+  id="rolex_retailer_clock"
+  title="Rolex Official Retailer"
+  src="https://static.rolex.com/retailers/clock/?colour=gold&apiKey=28b8d807822715c6de50059f6c46afae&lang=en"
+  style="width: 150px; height: 70px; border: 0; margin: 0; padding: 0; overflow: hidden; z-index: 0; position: relative;"
+  scrolling="no"
+  frameborder="0"
+></iframe>
+
 <script>
   // Check the user agent for Windows OS
   if (navigator.userAgent.includes('Windows')) {
