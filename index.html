@@ -4423,7 +4423,7 @@ gl_FragColor = vec4(glowColor, intensity);
   </select>
   <button id="applycustomHDRI">Apply</button>
 </div>
-<button id="addLightsbutton" style="display: block;">Jetsetter Theme✈️</button>
+<button id="addLightsbutton" style="display: block;">Jetsetter Theme💎</button>
 <button id="addLightsbutton3" style="display: block;">&nbsp;&nbsp;&nbsp;Blue Theme✅</button>
 <button id="addLightsbutton2">&nbsp;&nbsp;&nbsp;Atmosphere🌍</button>
 <!-- Globe Style Toggle Button -->
@@ -4653,7 +4653,7 @@ document.getElementById("loginButton").addEventListener("click", () => {
 	    localStorage.removeItem("isPremiumUser");
 	
 	    // 🔁 Optionally update the UI theme back to default
-	    lightsButton.textContent = "Jetsetter Theme✈️"; // or whatever your default is
+	    lightsButton.textContent = "Jetsetter Theme💎"; // or whatever your default is
 	    revertToPreviousTheme(); // If you have a fallback
 	    scene.background = nightbackgroundTexture; // Optional reset
             })
@@ -7824,7 +7824,7 @@ function revertToPreviousTheme() {
     // Zoom in the globe when reverting theme
     zoomInGlobe();
 
-    lightsButton.textContent = "Jetsetter Theme✈️";
+    lightsButton.textContent = "Jetsetter Theme💎";
 
     removePremiumPopup(); // Remove the popup and overlay
     removePinkPremiumPopup(); // Remove the popup and overlay
@@ -8058,7 +8058,7 @@ document.getElementById('addLightsbutton').addEventListener('click', () => {
   previousTheme = currentTexture; // Store previous theme
   previousMarker = currentmarkerMaterial; // Store previous marker
 
-  if (lightsButton.textContent === "Jetsetter Theme✈️") {
+  if (lightsButton.textContent === "Jetsetter Theme💎") {
     const user = firebase.auth().currentUser;
 
     if (user) {
