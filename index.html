@@ -6397,13 +6397,13 @@ if ('connection' in navigator) {
 
 // Choose texture set
 const texturePaths = {
-  diffuse: isSlow ? "js/Earth_Diffuse.webp" : "js/Earth_Diffuse.jpg",
-night: isSlow ? "js/Earth-Night-16K.webp" : "js/Earth-Night-16K.png",
-  bump: isSlow ? "js/Earth-16k-Bump.webp" : "js/Earth-16k-Bump.png",
-  normal: isSlow ? "js/Earth_Normal.webp" : "js/Earth_Normal.jpg",
-  specular: isSlow ? "js/Earth_Specular.webp" : "js/Earth_Specular.jpg",
-  cloud: isSlow ? "js/Earth_Cloud.webp" : "js/Earth_Cloud.jpg",
-  jetsetter: isSlow ? "js/earth.webp" : "js/earth.jpg"
+  diffuse: isSlow ? "js/Earth_Diffuse.jpg" : "js/Earth_Diffuse.jpg",
+night: isSlow ? "js/Earth-Night-16K.jpg" : "js/Earth-Night-16K.png",
+  bump: isSlow ? "js/Earth-16k-Bump.jpg" : "js/Earth-16k-Bump.png",
+  normal: isSlow ? "js/Earth_Normal.jpg" : "js/Earth_Normal.jpg",
+  specular: isSlow ? "js/Earth_Specular.jpg" : "js/Earth_Specular.jpg",
+  cloud: isSlow ? "js/Earth_Cloud.jpg" : "js/Earth_Cloud.jpg",
+  jetsetter: isSlow ? "js/earth.jpg" : "js/earth.jpg"
 };
 const textureLoader = new THREE.TextureLoader();
 let dayTexture = textureLoader.load(texturePaths.diffuse);
