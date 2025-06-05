@@ -299,7 +299,7 @@ async function launchBrowser2() {
       '--mute-audio',
       '--no-first-run',
       '--safebrowsing-disable-auto-update',
-      '--proxy-server=http://pr.oxylabs.io:80',
+      '--proxy-server=http://pr.oxylabs.io:7777',
     ],
     ignoreHTTPSErrors: true,
   });
@@ -570,7 +570,7 @@ app.use(express.json());
       page = await browser.newPage();
       await page.authenticate({
         username: 'JFlock_SMoney_Ghly4',
-        password: 'Jesus123',
+        password: 'Jesusis14me__120120',
       });
       const userAgents = [
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
@@ -1239,7 +1239,7 @@ async function scrapeExpediaPosts(req, res) {
           page = await browser.newPage();
           await page.authenticate({
               username: 'JFlock_SMoney_Ghly4',
-              password: 'Jesus123',
+              password: 'Jesusis14me__120120',
           });
 
           const userAgents = [
