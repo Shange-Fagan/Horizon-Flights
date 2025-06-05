@@ -274,7 +274,7 @@ async function solveCaptcha(page) {
 async function launchBrowser() {
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    executablePath: '/Users/shangefagan/.cache/puppeteer/chrome/mac_arm-131.0.6778.204/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -286,7 +286,7 @@ async function launchBrowser() {
 async function launchBrowser2() {
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    executablePath: '/Users/shangefagan/.cache/puppeteer/chrome/mac_arm-131.0.6778.204/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -299,7 +299,7 @@ async function launchBrowser2() {
       '--mute-audio',
       '--no-first-run',
       '--safebrowsing-disable-auto-update',
-      '--proxy-server=http://pr.oxylabs.io:7777',  // ✅ Apply proxy
+      '--proxy-server=http://pr.oxylabs.io:80',
     ],
     ignoreHTTPSErrors: true,
   });
@@ -570,7 +570,7 @@ app.use(express.json());
       page = await browser.newPage();
       await page.authenticate({
         username: 'JFlock_SMoney_Ghly4',
-        password: 'Jesusis14me__120120',
+        password: 'Jesus123',
       });
       const userAgents = [
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
@@ -619,7 +619,7 @@ if (cabinClassParam) {
 
   console.log(`🌍 Navigating to: ${searchUrl} (Attempt ${attempts + 1})`);
   await page.goto(searchUrl, {
-    timeout: 60000 // Set timeout to 60 seconds
+    timeout: 120000 // Set timeout to 60 seconds
 });
 // Wait for flight results to load
 await page.waitForSelector('[data-test-id="listings"] li', { timeout: 10000 });
@@ -1239,7 +1239,7 @@ async function scrapeExpediaPosts(req, res) {
           page = await browser.newPage();
           await page.authenticate({
               username: 'JFlock_SMoney_Ghly4',
-              password: 'Jesusis14me__120120',
+              password: 'Jesus123',
           });
 
           const userAgents = [
@@ -1248,7 +1248,7 @@ async function scrapeExpediaPosts(req, res) {
           ];
 
           await page.setUserAgent(userAgents[Math.floor(Math.random() * userAgents.length)]);
-          await page.goto(expediasearchUrl, { waitUntil: 'networkidle2', timeout: 60000 });
+          await page.goto(expediasearchUrl, { waitUntil: 'networkidle2', timeout: 120000 });
 
           console.log("🌍 Navigating to:", expediasearchUrl);
 
@@ -1773,21 +1773,21 @@ console.log(`Generated URL: ${finalSearchUrl}`);
 
 console.log(`Generated URL: ${finalSearchUrl}`);
   // Extract the map bounds and zoom level from the initial Airbnb URL
-  /**
+  
    
    
   const { mapBounds, zoomLevel } = await extractBoundsFromUrl(finalSearchUrl);
   
   
-  * */
+  
   // Scrape the pixel coordinates of the markers
 
-  /** 
+  
    
   const markers = await scrapeAirbnbMapMarkers(finalSearchUrl);
 
-  **/
-  /**  if (!Array.isArray(markers)) {
+  
+    if (!Array.isArray(markers)) {
     console.error("Markers is not an array:", markers);
     return res.status(500).json({ error: "Markers is not an array" });
   }
@@ -1816,14 +1816,14 @@ console.log('Converted Marker Lat/Lng with Scaling:', markerLatLngs);
 console.log('Scraping completed, posts fetched: ', posts2.length);
   // Send the lat/lng markers as JSON response
   //res.json(markerLatLngs);
-  **/
+
   
     if (!Array.isArray(posts2)) {
         throw new Error('Posts should be an array');
     }
   res.json({
     posts2,       // The Airbnb posts
-    /** markers: markerLatLngs  **/ // The converted marker coordinates
+    markers: markerLatLngs // The converted marker coordinates
   })
 });
 // Airbnb Scraping based on region and category (New functionality)
@@ -1952,7 +1952,7 @@ async function extractBoundsFromUrl(searchUrl) {
 
 // Function to scrape pixel positions of Airbnb markers
 async function scrapeAirbnbMapMarkers(searchUrl) {
-  const browser = await chromium.puppeteer.launch({
+  /*const browser = await chromium.puppeteer.launch({
     args: [...chromium.args,'--no-sandbox',
     '--disable-gpu',
     '--disable-setuid-sandbox',
@@ -1962,7 +1962,8 @@ async function scrapeAirbnbMapMarkers(searchUrl) {
       //executablePath: await chromium.executablePath || "/usr/bin/chromium-browser",
       headless: true, // or false for debugging
       ignoreHTTPSErrors: true,
-    });
+    });*/
+    const browser = await launchBrowser();
   const page = await browser.newPage();
 
   // Navigate to Airbnb map page
