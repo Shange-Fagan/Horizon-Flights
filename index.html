@@ -11650,16 +11650,20 @@ function populateOverlay(posts2) {
         // Append the postDiv to the overlay
         overlay.appendChild(postDiv);
         // Map post to marker events
-        postDiv.addEventListener('mouseover', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00aaff);
-            }
-        });
+	 postDiv.addEventListener('mouseover', () => {
+    const marker = globeMarkers[index];
+    if (marker && marker.material && marker.material.color) {
+        marker.material.color.set(0x40E0D0); // 💠 Light turquoise
+    }
+});
 
-        postDiv.addEventListener('mouseout', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00ff00);
-            } });
+postDiv.addEventListener('mouseout', () => {
+    const marker = globeMarkers[index];
+    if (marker && marker.material && marker.material.color) {
+        marker.material.color.set(0x00aaff); // 🔵 Default blue
+    }
+});
+
     });
 }
 
@@ -11853,15 +11857,19 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
         postDiv.addEventListener('mouseover', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00aaff);
-            }
-        });
+    const marker = globeMarkers[index];
+    if (marker && marker.material && marker.material.color) {
+        marker.material.color.set(0x40E0D0); // 💠 Light turquoise
+    }
+});
 
-        postDiv.addEventListener('mouseout', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00ff00);
-            } });
+postDiv.addEventListener('mouseout', () => {
+    const marker = globeMarkers[index];
+    if (marker && marker.material && marker.material.color) {
+        marker.material.color.set(0x00aaff); // 🔵 Default blue
+    }
+});
+
     });
 }
 
@@ -14784,15 +14792,19 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
         postDiv.addEventListener('mouseover', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00aaff);
-            }
-        });
+    const marker = globeMarkers[index];
+    if (marker && marker.material && marker.material.color) {
+        marker.material.color.set(0x40E0D0); // 💠 Light turquoise
+    }
+});
 
-        postDiv.addEventListener('mouseout', () => {
-            if (markers[index]) {
-                markers[index].material.color.set(0x00ff00);
-            } });
+postDiv.addEventListener('mouseout', () => {
+    const marker = globeMarkers[index];
+    if (marker && marker.material && marker.material.color) {
+        marker.material.color.set(0x00aaff); // 🔵 Default blue
+    }
+});
+
     });
 }
 
