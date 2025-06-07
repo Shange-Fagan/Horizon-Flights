@@ -11651,14 +11651,14 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
 	 postDiv.addEventListener('mouseover', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x40E0D0); // 💠 Light turquoise
     }
 });
 
 postDiv.addEventListener('mouseout', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x00aaff); // 🔵 Default blue
     }
@@ -11857,14 +11857,14 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
         postDiv.addEventListener('mouseover', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x40E0D0); // 💠 Light turquoise
     }
 });
 
 postDiv.addEventListener('mouseout', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x00aaff); // 🔵 Default blue
     }
@@ -14316,10 +14316,11 @@ function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
     markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
     markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
 // Associate each marker directly with its post data
-    markerMesh.userData.post = posts2[i]; 
-    markerMesh.userData.index = i;
-    globeMarkers.push(markerMesh);
-    scene.add(markerMesh);
+    markerMesh.userData.post = posts2[i];         // 🔗 Link post data
+    markerMesh.userData.index = i;                // 🔢 Index for label / debug
+    posts2[i].__globeMarker = markerMesh;         // 🔗 Link post to marker
+    globeMarkers.push(markerMesh);                // 📍 Add to globe
+    scene.add(markerMesh);                        // 🌍 Add to scene
   });
 
   setupMarkerInteraction2();
@@ -14409,10 +14410,44 @@ function closeIframe2(event) {
   }
 }
 
-function clearExistingMarkers2() {
+/*function clearExistingMarkers2() {
   globeMarkers.forEach(marker => scene.remove(marker));
   globeMarkers = [];
+}*/
+	  /*function clearExistingMarkers2() {
+  globeMarkers.forEach(marker => {
+    if (marker.material && marker.material.color) {
+      marker.material.color.set(0x00aaff); // Reset to default
+    }
+    scene.remove(marker);
+  });
+  globeMarkers = [];
+}*/
+/*function clearExistingMarkers2() {
+  globeMarkers.forEach(marker => scene.remove(marker));
+  globeMarkers = [];
+}*/
+	  function clearExistingMarkers2() {
+  globeMarkers.forEach(marker => {
+    scene.remove(marker); // Remove from Three.js scene
+    marker.geometry.dispose(); // Cleanup memory
+    marker.material.dispose(); // Cleanup memory
+  });
+
+  globeMarkers = [];
+
+  // Clear __globeMarker references in posts
+  airbnbPosts.forEach(post => {
+    if (post.__globeMarker) {
+      delete post.__globeMarker;
+    }
+  });
+
+  airbnbPosts = []; // Reset the post list too
 }
+
+
+
 
 function createMarkerMesh() {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
@@ -14792,14 +14827,14 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
         postDiv.addEventListener('mouseover', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x40E0D0); // 💠 Light turquoise
     }
 });
 
 postDiv.addEventListener('mouseout', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x00aaff); // 🔵 Default blue
     }
