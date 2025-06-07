@@ -11651,14 +11651,14 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
 	 postDiv.addEventListener('mouseover', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x40E0D0); // 💠 Light turquoise
     }
 });
 
 postDiv.addEventListener('mouseout', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x00aaff); // 🔵 Default blue
     }
@@ -11857,14 +11857,14 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
         postDiv.addEventListener('mouseover', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x40E0D0); // 💠 Light turquoise
     }
 });
 
 postDiv.addEventListener('mouseout', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x00aaff); // 🔵 Default blue
     }
@@ -14802,14 +14802,14 @@ function populateOverlay(posts2) {
         overlay.appendChild(postDiv);
         // Map post to marker events
         postDiv.addEventListener('mouseover', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x40E0D0); // 💠 Light turquoise
     }
 });
 
 postDiv.addEventListener('mouseout', () => {
-    const marker = globeMarkers[index];
+    const marker = post.__globeMarker;
     if (marker && marker.material && marker.material.color) {
         marker.material.color.set(0x00aaff); // 🔵 Default blue
     }
