@@ -14316,8 +14316,8 @@ function addMarkersToGlobe(markers, posts2, centerLat, centerLng) {
     markerMesh.position.set(markerVector.x, markerVector.y, markerVector.z);
     markerMesh.lookAt(new THREE.Vector3(0, 0, 0));
 // Associate each marker directly with its post data
-    markerMesh.userData.post = posts2[i]; 
-    markerMesh.userData.index = i;
+    markerMesh.userData.post = posts2[i];
+    posts2[i].__globeMarker = markerMesh; // 👈 store marker reference in post
     globeMarkers.push(markerMesh);
     scene.add(markerMesh);
   });
