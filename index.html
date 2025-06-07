@@ -14409,10 +14409,20 @@ function closeIframe2(event) {
   }
 }
 
-function clearExistingMarkers2() {
+/*function clearExistingMarkers2() {
   globeMarkers.forEach(marker => scene.remove(marker));
   globeMarkers = [];
+}*/
+	  function clearExistingMarkers2() {
+  globeMarkers.forEach(marker => {
+    if (marker.material && marker.material.color) {
+      marker.material.color.set(0x00aaff); // Reset to default
+    }
+    scene.remove(marker);
+  });
+  globeMarkers = [];
 }
+
 
 function createMarkerMesh() {
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);
