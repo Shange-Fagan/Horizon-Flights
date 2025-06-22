@@ -4610,7 +4610,7 @@ const auth = getAuth(app);
             alert("Thank you for subscribing!");
             // Reset the input field
             document.getElementById("emailInput").value = "";
-	    fetch("https://ab62-31-94-64-248.ngrok-free.app/send-welcome-email", {
+	    fetch("https://9500-212-250-30-11.ngrok-free.app/send-welcome-email", {
 	    method: "POST",
 	    headers: { "Content-Type": "application/json" },
 	    body: JSON.stringify({ email }),
@@ -9780,7 +9780,7 @@ async function loadDetailedMarkers(regionCoordinates) {
 async function getDetailedMarkersForRegion(region) {
   try {
     // Make an API request to fetch the markers data for the specific region
-    const response = await fetch(`https://ab62-31-94-64-248.ngrok-free.app/get-markers?region=${region}&category=${category}`, {
+    const response = await fetch(`https://9500-212-250-30-11.ngrok-free.app/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
   headers: {
@@ -10368,7 +10368,7 @@ console.log("Requesting URL:", url);
 	console.log('Generated searchUrl:checkout', returnDate);
 	console.log('Generated searchUrl:guests', passengers);
 	console.log('Generated searchUrl:cabinClass', cabinClass);
-	console.log('Fetching data from:', `https://ab62-31-94-64-248.ngrok-free.app/scrape-expedia-flights?url=${encodeURIComponent(url)}`);
+	console.log('Fetching data from:', `https://9500-212-250-30-11.ngrok-free.app/scrape-expedia-flights?url=${encodeURIComponent(url)}`);
   hideSpinnerContainer();
   console.log("Formatted Departure Date:", departureDate);
 console.log("Formatted Return Date:", returnDate);
@@ -10383,7 +10383,7 @@ async function fetchFlightPosts(url) {
     Thank you for your patience! 🙏🏽
     Powered by Expedia⚡️`);
 
-        const response = await fetch(`https://ab62-31-94-64-248.ngrok-free.app/scrape-expedia-flights?url=${encodeURIComponent(url)}`, {
+        const response = await fetch(`https://9500-212-250-30-11.ngrok-free.app/scrape-expedia-flights?url=${encodeURIComponent(url)}`, {
           headers: {
         'ngrok-skip-browser-warning': 'true',
     },
@@ -10961,7 +10961,7 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 	console.log('Generated searchUrl:guests', guests);
 	console.log('Generated searchUrl:priceMin', priceMin);
 	console.log('Generated searchUrl:priceMax', priceMax);
-	console.log('Fetching data from:', `https://ab62-31-94-64-248.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+	console.log('Fetching data from:', `https://9500-212-250-30-11.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
   hideSpinnerContainer();
 
 });
@@ -11197,7 +11197,7 @@ const monthlyEnd = monthlyEndDate.toISOString().split('T')[0];  // Last day of t
 	console.log('Generated searchUrl:guests', guests);
 	console.log('Generated searchUrl:priceMin', priceMin);
 	console.log('Generated searchUrl:priceMax', priceMax);
-	console.log('Fetching data from:', `https://ab62-31-94-64-248.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+	console.log('Fetching data from:', `https://9500-212-250-30-11.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
   hideSpinnerContainer();
 });
 
@@ -11378,7 +11378,7 @@ console.log('Generated Expedia Search URL:', expediaSearchUrl);
 	console.log('Generated searchUrl:guests', guests);
 	console.log('Generated searchUrl:priceMin', priceMin);
 	console.log('Generated searchUrl:priceMax', priceMax);
-	console.log('Fetching data from:', `https://ab62-31-94-64-248.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+	console.log('Fetching data from:', `https://9500-212-250-30-11.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
   hideSpinnerContainer();
 });
 //const overlayContainer = document.getElementById('overlayContainer');
@@ -11442,7 +11442,7 @@ async function fetchExpediaPosts(expediaSearchUrl) {
     Thank you for your patience! 🙏🏽
     Powered by Expedia⚡️`);
 
-        const response = await fetch(`https://ab62-31-94-64-248.ngrok-free.app/scrape-expedia-posts?expediasearchUrl=${encodeURIComponent(expediaSearchUrl)}`, {
+        const response = await fetch(`https://9500-212-250-30-11.ngrok-free.app/scrape-expedia-posts?expediasearchUrl=${encodeURIComponent(expediaSearchUrl)}`, {
           headers: {
         'ngrok-skip-browser-warning': 'true',
     },
@@ -11650,7 +11650,7 @@ async function fetchAirbnbPosts(searchUrl) {
     Thank you for your patience! 🙏🏽
     Powered by Expedia⚡️`);
 
-        const response = await fetch(`https://ab62-31-94-64-248.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
+        const response = await fetch(`https://9500-212-250-30-11.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
           headers: {
         'ngrok-skip-browser-warning': 'true',
     },
@@ -14009,7 +14009,7 @@ baseMesh.scale.set(size, size, size);
     let searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=2&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&adults=${guests}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
 
     // Fetch markers from your backend
-    const response = await fetch(`https://ab62-31-94-64-248.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
+    const response = await fetch(`https://9500-212-250-30-11.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
       headers: {
         'ngrok-skip-browser-warning': 'true',
     },
@@ -14236,7 +14236,7 @@ async function fetchMarkers(location, category) {
 
     const searchUrl = `https://www.airbnb.com/s/${location}/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&adults=${guests}&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=${monthlyStart}&monthly_length=3&monthly_end_date=${monthlyEnd}&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&checkin=${checkin}&checkout=${checkout}&source=structured_search_input_header&search_type=unknown&price_filter_num_nights=1&drawer_open=true`;
 
-    const response = await fetch(`https://ab62-31-94-64-248.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
+    const response = await fetch(`https://9500-212-250-30-11.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
       headers: {
         'ngrok-skip-browser-warning': 'true',
       },
@@ -14653,7 +14653,7 @@ async function fetchAirbnbPosts(searchUrl) {
     Thank you for your patience!🙏🏽
     Powered by Expedia⚡️`);
 
-        const response = await fetch(`https://ab62-31-94-64-248.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
+        const response = await fetch(`https://9500-212-250-30-11.ngrok-free.app/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`, {
           headers: {
         'ngrok-skip-browser-warning': 'true',
     },
@@ -15018,7 +15018,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
         updateSpinnerText("Fetching listings for " + region + "...");
 
         // Fetch the listings data from your backend based on region and category
-        const response = await fetch(`https://ab62-31-94-64-248.ngrok-free.app/get-markers?region=${region}&category=${category}`, {
+        const response = await fetch(`https://9500-212-250-30-11.ngrok-free.app/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
   headers: {
@@ -15027,7 +15027,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
     });
         const markersData = await response.json();  // Assuming the backend returns a JSON array of markers
         console.log(`Fetching markers from: ${url}`);
-	    console.log(`Fetching markers from: https://ab62-31-94-64-248.ngrok-free.app/get-markers?region=${region}&category=${category}`);
+	    console.log(`Fetching markers from: https://9500-212-250-30-11.ngrok-free.app/get-markers?region=${region}&category=${category}`);
 
         // Clear the existing markers before adding new ones
         clearExistingMarkers();
@@ -15043,7 +15043,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
 
         // Update spinner text once loading is complete
         updateSpinnerText("Listings loaded for " + region);
-	    console.log(`Fetching markers from: https://ab62-31-94-64-248.ngrok-free.app/get-markers?region=${region}&category=${category}`);
+	    console.log(`Fetching markers from: https://9500-212-250-30-11.ngrok-free.app/get-markers?region=${region}&category=${category}`);
 
 
     } catch (error) {
@@ -15053,7 +15053,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
 }
 /*async function fetchMarkers(region, category) {
   try {
-    const response = await fetch(`https://ab62-31-94-64-248.ngrok-free.app/get-markers?region=${region}&category=${category}`, {
+    const response = await fetch(`https://9500-212-250-30-11.ngrok-free.app/get-markers?region=${region}&category=${category}`, {
       headers: {
         'ngrok-skip-browser-warning': 'true',
     },
